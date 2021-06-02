@@ -1,0 +1,411 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Structures}
+\label{ch:structures}
+
+\newtopic{W}{e have looked at} sets, functions, and relations. \vocab{Sets} are collections of items, \vocab{functions} map each item in one set with an item in another (possibly the same) set, and \vocab{relations} are any pairing of elements between two sets (possibly the same set). 
+
+These are the basic building blocks that \mathers/ use to build what are called \mathical/ \vocab{structures}. In this chapter, we will introduce the concept of structures.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Building Structures}
+
+\begin{terminology}
+  A \vocab{structure} is one or more sets equipped with any number of functions and relations. The functions and relations give the sets extra structure.
+\end{terminology}
+
+\newthought{To construct} a \vocab{structure}, we take one or more sets, and we add to them whatever functions and relations we like. The functions and relations give the sets extra structure. That's all a structure really is. It is a set (or a bundle of sets), equipped with some functions and relations.
+
+\begin{aside}
+  \begin{remark}
+    If you like, you can think of the \emph{sets} as big bags full of nails, screws, boards, and other building materials. There is no structure inside these bags. They're just unorganized bags of items. Adding \emph{functions} and \emph{relations} to the sets is like taking pieces from the bags, and putting them together, in some particular way. The pieces in the bags go from being loose items, to standing in structured relationships with each other.
+  \end{remark}
+\end{aside}
+
+Recall that a set by itself has no \emph{internal} structure. It is just a bag of items, with no order or repetition inside of it. Functions and relations can \emph{add} structure to sets, by pairing up elements inside them. Adding a function or relation lets us say, ``these two elements have a line between them, and those two elements have a line between them,'' and so on. 
+
+As a simple visual example, suppose we have a set $\set{A}$:
+
+\begin{diagram}
+
+  \node (domain) at (0, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (0, 0.75) [label=above:{$a$}] {};
+  \node[dot] (k2) at (-0.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (0, -0.75) [label=below:{$c$}] {};
+  \node[dot] (k4) at (0.75, 0) [label=right:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (1.5cm and 1.5cm);
+
+\end{diagram}
+
+Now suppose we add a function $\funcsig{f}{\set{A}}{\set{A}}$, e.g.:
+
+
+\begin{diagram}
+
+  \node (domain) at (0, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (0, 0.75) [label=above:{$a$}] {};
+  \node[dot] (k2) at (-0.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (0, -0.75) [label=below:{$c$}] {};
+  \node[dot] (k4) at (0.75, 0) [label=right:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (4, 0) {equipped with $\func{f}$};
+  
+  \draw[->,space] (k1) to[out=180, in=90] (k2);
+  \draw[->,space] (k2) to[out=270, in=180] (k3);
+  \draw[->,space] (k3) to[out=0, in=270] (k4);
+  \draw[->,space] (k4) to[out=90, in=0] (k1);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    The function $\funcsig{f}{\set{A}}{\set{A}}$ pictured here consists of the following mappings: $\func{f}(a) = b$, $\func{f}(b) = c$, $\func{f}(c) = d$, and $\func{f}(d) = a$.
+  \end{remark}
+\end{aside}
+
+We can see that just by adding this one function, we add a lot of structure to the set. Suppose we add a relation $\Rsig{R}{\set{A}}{\set{A}}$ as well (I'll draw it with dashed arrows):
+
+\begin{diagram}
+
+  \node (domain) at (0, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (0, 0.75) [label=above:{$a$}] {};
+  \node[dot] (k2) at (-0.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (0, -0.75) [label=below:{$c$}] {};
+  \node[dot] (k4) at (0.75, 0) [label=right:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (4, 0) {equipped with $\func{f, R}$};
+  
+  \draw[->,space] (k1) to[out=180, in=90] (k2);
+  \draw[->,space] (k2) to[out=270, in=180] (k3);
+  \draw[->,space] (k3) to[out=0, in=270] (k4);
+  \draw[->,space] (k4) to[out=90, in=0] (k1);
+  
+  \draw[->,space, dashed] (k1) to (k3);
+  \draw[->,space, dashed] (k2) to (k4);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    The relation $\Rsig{R}{\set{A}}{\set{A}}$ pictured here consists of the following mappings: $\R{R}(a, c)$, and $\R{R}(b, d)$.
+  \end{remark}
+\end{aside}
+
+We can see that we have added even more structure now. So this is the basic idea behind adding structure to sets. We start with one or more sets, and we add functions and relations in order to endow the sets with whatever structure we need. 
+
+\begin{aside}
+  \begin{remark}
+    We can add whatever functions and/or relations we like to sets, to give them the structure we need. 
+  \end{remark}
+\end{aside}
+
+There are no restrictions on which sets, functions, or relations we want to use, to build up a structure. We can pick whichever sets, functions, and relations we like. We can start with one, two, or 15 sets. We can add one, two, or 10 functions. We can add one, two, or 20 relations. We can just add functions and no relations, or we can just add relations and no functions. It is really up to us.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Definition and Notation}
+
+Once we have constructed a structure, we need a way to write it down, so that we can communicate about it with our peers. Like most \mathical/ entities, we can give names to our structures too. Let's use bolded capital letters. E.g., $\struct{S}$, $\struct{T}$, and so on.
+
+We will refer to the sets as the \vocab{base sets} or synonymously, as the \vocab{carrier sets}. The idea here is simply that the sets are the ``bases'' on which we build the structure. It is the sets that ``carry'' the structure.
+
+To denote a structure, we will take the base sets, and whatever functions and relations we have equipped them with, and we will put them all into a \vocab{tuple}. We will list the sets first, then the functions, and then the relations. Here is the basic format:
+
+\begin{aside}
+  \begin{remark}
+    Recall from \sectionref{sec:tuples} that a \vocab{tuple} is an ordered list of items surrounded by round braces. A pair $(x, y)$ is a 2-tuple, a triple $(x, y, z)$ is a 3-tuple, a quadruple $(x, y, z, w)$ is a 4-tuple, and so on.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+    \struct{S} = (\set{A}_{1}, \set{A}_{2}, \ldots, \func{f}_{1}, \func{f}_{2}, \ldots, \R{R}_{1}, \R{R}_{2}, \ldots)
+\end{equation*}
+
+This is just a template. I have written $\set{A}_{1}, \set{A}_{2}, \ldots$ to indicate that there might be any number of sets in a structure, but you should replace that with whichever sets you like. Likewise for the functions $\func{f}_{1}, \func{f}_{2}, \ldots$, and the relations $\R{R}_{1}, \R{R}_{2}, \ldots$
+
+A moment ago, we drew a picture of a simple structure by taking one base set $\set{A}$, and equipping it with a function $\func{f}$ and a relation $\R{R}$. Using our template, we can denote such a structure like this:
+
+\begin{aside}
+  \begin{notation}
+    We will use \vocab{bolded capital letters} as names for structures, and we will specify the contents of the structure with \vocab{tuples}, where we list the base sets first, then the functions, then the relations.
+  \end{notation}
+\end{aside}
+
+\begin{equation*}
+  (\set{A}, \func{f}, \R{R})
+\end{equation*}
+
+Note that we are following the template: we list the sets first, then the functions, then the relations. In this case, there is just one set (namely, $\set{A}$), so that goes first, then there is one function (namely, $\func{f}$), so that goes second, and there is just one relation (namely, $\R{R}$), so that goes last.
+
+We can name this structure. Let's pick $\struct{S}$. Hence, we can write this:
+
+\begin{equation*}
+  \struct{S} = (\set{A}, \func{f}, \R{R})
+\end{equation*}
+
+Read that alound like so: ``$\struct{S}$ is a structure consisting of the tuple $(\set{A}, \func{f}, \R{R})$.'' You could even read it like this: ``$\struct{S}$ is a structure consisting of a base set $\set{A}$, equipped with a function $\func{f}$ and a relation $\R{R}$.''
+
+Of course, your readers need to know what exactly $\set{A}$, $\func{f}$, and $\R{R}$ consist of, so if you have not already specified what those are, you need to do so. It is common in \mathical/ writing to specify a structure in the following way:
+
+\begin{aside}
+  \begin{remark}
+You will notice that this description of a structure is quite hard to understand, just by reading it. If you are reading someone else's \math/ writing, and they specify a structure in this fashion, it is important to pull out a piece of scrap paper, and try to work out on paper what the structure really amounts to. Draw some pictures (like we did above), and scribble out notes for yourself. It takes this kind of active work to fully internalize the idea.
+  \end{remark}
+\end{aside}
+
+\begin{framed}
+  Let $\struct{S} = (\set{A}, \func{f}, \R{R})$ be a structure where:
+  \begin{itemize}
+    \item $\set{A} = \{ a, b, c, d \}$
+    \item $\funcsig{f}{\set{A}}{\set{A}}$ is: $\func{f}(a) = b$, $\func{f}(b) = c$, $\func{f}(c) = d$, and $\func{f}(d) = a$
+    \item $\Rsig{R}{\set{A}}{\set{A}}$ is: $\R{R}(a, c)$, and $\R{R}(b, d)$
+  \end{itemize}
+\end{framed}
+
+Read that aloud like so: ``let $\struct{S}$ be a structure consisting of the tuple $(\set{A}, \func{f}, \R{R})$, where $\set{A}$ is the set $\{ a, b, c, d \}$, $\func{f}$ is a function from $\set{A}$ to $\set{A}$ such that $\func{f}(a) = b$, $\func{f}(b) = c$, $\func{f}(c) = d$, and $\func{f}(d) = a$, and $\R{R}$ is a relation from $\set{A}$ to $\set{A}$ such that $\R{R}(a, c)$, and $\R{R}(b, d)$.''
+
+Notice that, in this case, the relations and functions we use to build this structure are \vocab{self-functions} and \vocab{self-relations}: they are mappings from $\set{A}$ to itself. We are not dealing with mappings from one set to \emph{another} set here. We are dealing with mappings that connects elements in $\set{A}$ to other elements in the same set.
+
+\begin{aside}
+  \begin{remark}
+    When we build a structure with one base set (call it $\set{A}$), the functions and relations that we add to it will go from $\set{A}$ to $\set{A}$. This is because we are adding structure \emph{inside} the set $\set{A}$. If we build a structure with more than one base set, then we can add relations that add structure both \emph{inside} the sets, but also \emph{between} the sets.
+  \end{remark}
+\end{aside}
+
+But this makes sense. We have only one base set in this example, and so any structure we want to add to it will be structure that we add to the \vocab{insides of the set}. So of course the functions and relations we have in this structure are functions and relations that pair up elements in the set with other elements \emph{in the same set}. 
+
+If our structure had more base sets (for example, if it had $\set{A}$ and $\set{B}$ as base sets), then we could add functions and relations that go from $\set{A}$ to $\set{B}$, $\set{B}$ to $\set{A}$, $\set{A}$ to $\set{A}$, or $\set{B}$ to $\set{B}$. With more base sets, we can add structure not only inside the sets, but also between the sets.
+
+Let us take all that we have said here, and let us write it down as a definition for structures.
+
+\begin{fdefinition}[Structures]
+  We will say that a \vocab{structure} consists of one or more sets $\set{A}_{1}$, $\set{A}_{2}$, \ldots equipped with zero or more functions $\func{f}_{1}, \func{f}_{2}, \ldots$ on those sets, and zero or more relations $\R{R}_{1}, \R{R}_{2}, \ldots$ on those sets. We will call the sets the \vocab{base sets} or the \vocab{carrier sets} of the structure. We will use a bolded capital letters (such as $\struct{S}$ or $\struct{T}$) as \vocab{names} for structures, and we will denote a structure as a tuple with this shape: $\struct{S} = (\set{A}_{1}, \set{A}_{2}, \ldots, \func{f}_{1}, \func{f}_{2}, \ldots, \R{R}_{1}, \R{R}_{2}, \ldots)$.
+\end{fdefinition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example}
+
+Let's construct an example that models the structure of a small company. Let's start with a base set $\set{A}$ of employees:
+
+\begin{aside}
+  \begin{remark}
+    We will start with a base set, as an oval filled with some labeled dots. Then we will add relations, which we will depict with arrows. As we proceed, it would be a good exercise to try and write down what the base set is, in \vocab{set-roster notation}. Then try to write down what each relation is, as a \vocab{list of pairs}. 
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (6cm and 3.5cm);
+  
+  \node[dot] (Al) at (-4, 1.5) [label=above:{$\e{Al}$}] {};
+  \node[dot] (Kim) at (-2.5, 1.5) [label=above:{$\e{Kim}$}] {};
+  \node[dot] (Tom) at (-0.75, 1.5) [label=above:{$\e{Tom}$}] {};
+  \node[dot] (Joan) at (0.75, 1.5) [label=above:{$\e{Joan}$}] {};
+  \node[dot] (Sally) at (2.5, 1.5) [label=above:{$\e{Sally}$}] {};
+  \node[dot] (Bob) at (4, 1.5) [label=above:{$\e{Bob}$}] {};
+  
+  \node[dot] (Ginny) at (-3, 0) [label=left:{$\e{Ginny}$}] {};
+  \node[dot] (Ron) at (-1.5, 0) [label=right:{$\e{Ron}$}] {};
+  \node[dot] (Lem) at (1.5, 0) [label=left:{$\e{Lem}$}] {};
+  \node[dot] (Diane) at (3, 0) [label=right:{$\e{Diane}$}] {};
+  
+  \node[dot] (Pat) at (-3.5, -1.5) [label=left:{$\e{Pat}$}] {};
+  \node[dot] (Naan) at (-2, -1.5) [label=right:{$\e{Naan}$}] {};
+  \node[dot] (Cal) at (2, -1.5) [label=left:{$\e{Cal}$}] {};
+  \node[dot] (Mort) at (3.5, -1.5) [label=right:{$\e{Mort}$}] {};
+
+\end{diagram}
+
+Next, let's add a relation $\set{W}$ that indicates who works on projects for whom. Let's suppose it looks like this:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (6cm and 3.5cm);
+  
+  \node[dot] (Al) at (-4, 1.5) [label=above:{$\e{Al}$}] {};
+  \node[dot] (Kim) at (-2.5, 1.5) [label=above:{$\e{Kim}$}] {};
+  \node[dot] (Tom) at (-0.75, 1.5) [label=above:{$\e{Tom}$}] {};
+  \node[dot] (Joan) at (0.75, 1.5) [label=above:{$\e{Joan}$}] {};
+  \node[dot] (Sally) at (2.5, 1.5) [label=above:{$\e{Sally}$}] {};
+  \node[dot] (Bob) at (4, 1.5) [label=above:{$\e{Bob}$}] {};
+  
+  \node[dot] (Ginny) at (-3, 0) [label=left:{$\e{Ginny}$}] {};
+  \node[dot] (Ron) at (-1.5, 0) [label=right:{$\e{Ron}$}] {};
+  \node[dot] (Lem) at (1.5, 0) [label=left:{$\e{Lem}$}] {};
+  \node[dot] (Diane) at (3, 0) [label=right:{$\e{Diane}$}] {};
+  
+  \node[dot] (Pat) at (-3.5, -1.5) [label=left:{$\e{Pat}$}] {};
+  \node[dot] (Naan) at (-2, -1.5) [label=right:{$\e{Naan}$}] {};
+  \node[dot] (Cal) at (2, -1.5) [label=left:{$\e{Cal}$}] {};
+  \node[dot] (Mort) at (3.5, -1.5) [label=right:{$\e{Mort}$}] {};
+
+  \draw[->,space] (Ginny) to (Al);
+  \draw[->,space] (Ginny) to (Kim);
+  \draw[->,space] (Ron) to (Tom);
+  \draw[->,space] (Ron) to (Joan);
+  \draw[->,space] (Lem) to (Tom);
+  \draw[->,space] (Lem) to (Joan);
+  \draw[->,space] (Diane) to (Sally);
+  \draw[->,space] (Diane) to (Bob);
+  \draw[->,space] (Pat) to (Ginny);
+  \draw[->,space] (Pat) to (Ron);
+  \draw[->,space] (Naan) to (Ginny);
+  \draw[->,space] (Naan) to (Ron);
+  \draw[->,space] (Cal) to (Lem);
+  \draw[->,space] (Cal) to (Diane);
+  \draw[->,space] (Mort) to (Lem);
+  \draw[->,space] (Mort) to (Diane);
+
+\end{diagram}
+
+So, Ginny works on projects for Al and Kim, Ron works on projects for Tom and Joan, and so on. 
+
+Finally, let's add a relation called $\set{M}$ that indicates a mentoring relationship. Let's draw this relation with dashed arrows, and it indicates which employees are assigned as mentors to which others: 
+
+\begin{aside}
+  \begin{remark}
+    As we add more lines to our picture, we can see more of the structure that we are adding to our base set. However, the picture need not look exactly like this. In fact, we can draw the dots anywhere on the page, so long as the arrows stay fixed between the same dots. Try drawing this same structure, but lay out the dots on your paper in a different way than the way they are arranged here. Make sure you connect up the dots in the same way though. The arrows in both pictures should connect up the same dots.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (6cm and 3.5cm);
+  
+  \node[dot] (Al) at (-4, 1.5) [label=above:{$\e{Al}$}] {};
+  \node[dot] (Kim) at (-2.5, 1.5) [label=above:{$\e{Kim}$}] {};
+  \node[dot] (Tom) at (-0.75, 1.5) [label=above:{$\e{Tom}$}] {};
+  \node[dot] (Joan) at (0.75, 1.5) [label=above:{$\e{Joan}$}] {};
+  \node[dot] (Sally) at (2.5, 1.5) [label=above:{$\e{Sally}$}] {};
+  \node[dot] (Bob) at (4, 1.5) [label=above:{$\e{Bob}$}] {};
+  
+  \node[dot] (Ginny) at (-3, 0) [label=left:{$\e{Ginny}$}] {};
+  \node[dot] (Ron) at (-1.5, 0) [label=right:{$\e{Ron}$}] {};
+  \node[dot] (Lem) at (1.5, 0) [label=left:{$\e{Lem}$}] {};
+  \node[dot] (Diane) at (3, 0) [label=right:{$\e{Diane}$}] {};
+  
+  \node[dot] (Pat) at (-3.5, -1.5) [label=left:{$\e{Pat}$}] {};
+  \node[dot] (Naan) at (-2, -1.5) [label=right:{$\e{Naan}$}] {};
+  \node[dot] (Cal) at (2, -1.5) [label=left:{$\e{Cal}$}] {};
+  \node[dot] (Mort) at (3.5, -1.5) [label=right:{$\e{Mort}$}] {};
+
+  \draw[->,spaced,dashed] (Al) to (Kim);
+  \draw[->,spaced,dashed] (Tom) to (Joan);
+  \draw[->,spaced,dashed] (Sally) to (Bob);
+  \draw[->,spaced,dashed] (Ginny) to (Ron);
+  \draw[->,spaced,dashed] (Lem) to (Diane);
+  
+  \draw[->,space] (Ginny) to (Al);
+  \draw[->,space] (Ginny) to (Kim);
+  \draw[->,space] (Ron) to (Tom);
+  \draw[->,space] (Ron) to (Joan);
+  \draw[->,space] (Lem) to (Tom);
+  \draw[->,space] (Lem) to (Joan);
+  \draw[->,space] (Diane) to (Sally);
+  \draw[->,space] (Diane) to (Bob);
+  \draw[->,space] (Pat) to (Ginny);
+  \draw[->,space] (Pat) to (Ron);
+  \draw[->,space] (Naan) to (Ginny);
+  \draw[->,space] (Naan) to (Ron);
+  \draw[->,space] (Cal) to (Lem);
+  \draw[->,space] (Cal) to (Diane);
+  \draw[->,space] (Mort) to (Lem);
+  \draw[->,space] (Mort) to (Diane);
+
+  \draw[->,space,dashed] (Pat) to[out=300,in=240] (Cal);
+  \draw[->,space,dashed] (Naan) to[out=300,in=240] (Mort);
+
+\end{diagram}
+
+We can see from the picture that Ginny mentors Ron, Pat mentors Cal, Sally mentors Bob, and so on.
+
+All in all then, we have a structure here. Our base set $\set{A}$ is the set of employees, but we've enriched our set with a relation $\set{W}$ designating who works on projects for whom, and a relation $\set{M}$ which designates who mentors who. 
+
+\begin{aside}
+  \begin{remark}
+     Neither $\R{W}$ nor $\R{M}$ are functions. Can you see why they fail to be functions? $\R{W}$ fails to be a function because a number of points have more than one solid arrow coming out of them. $\R{M}$ fails to be a function because there are a number of points that don't have a dashed arrow coming out of them.
+  \end{remark}
+\end{aside}
+
+Notice that this structure is equipped with no functions. It is constructed only from a base set and relations. This is okay. As we said before, we can build our structures with whatever functions or relations we need, that might suit our purposes. In this case, we didn't need any functions to model the structure of our little company. All we needed were relations, and so we built our structure from just those relations.
+
+Let's call our structure $\struct{S}$, and let's write it all out fully:
+
+\begin{framed}
+  Let $\struct{S} = (\set{A}, \R{W}, \R{M})$ be a structure that models our little company, where:
+  
+  \begin{itemize}
+  
+    \item $\set{A}$ is the set of employees: $\{$ $\e{Al}$, $\e{Pat}$, $\e{Kim}$, $\e{Tom}$, $\e{Joan}$, $\e{Sally}$, $\e{Bob}$, $\e{Ron}$, $\e{Ginny}$, $\e{Lem}$, $\e{Naan}$, $\e{Mort}$, $\e{Cal}$, $\e{Diane}$ $\}$
+    
+    \item $\R{W}$ is a relation donating who works on projects for whom: $\{$ $(\e{Ginny}, \e{Al})$, $(\e{Ginny}, \e{Kim})$, $(\e{Ron}, \e{Tom})$, $(\e{Ron}, \e{Joan})$, $(\e{Lem}, \e{Tom})$, $(\e{Lem}, \e{Joan})$, $(\e{Diane}, \e{Sally})$, $(\e{Diane}, \e{Bob})$, $(\e{Pat}, \e{Ginny})$, $(\e{Pat}, \e{Ron})$, $(\e{Naan}, \e{Ginny})$, $(\e{Naan}, \e{Ron})$, $(\e{Cal}, \e{Lem})$, $(\e{Cal}, \e{Diane})$, $(\e{Mort}, \e{Lem})$, $(\e{Mort}, \e{Diane})$ $\}$
+    
+    \item $\R{M}$ is a relation denoting who mentors who: $\{$ $(\e{Al}, \e{Kim})$, $(\e{Tom}, \e{Joan})$, $(\e{Sally}, \e{Bob})$, $(\e{Ginny}, \e{Ron})$, $(\e{Lem}, \e{Diane})$, $(\e{Pat}, \e{Cal})$, $(\e{Naan}, \e{Mort})$ $\}$
+  \end{itemize}
+\end{framed}
+
+\begin{aside}
+  \begin{remark}
+    It is a good exercise to ``translate'' between the pictures and the formal descriptions of structures. Take one of the pictures of a structure we gave above, and see if you can write it down as a formal description. Then take a formal description of a structure, and see if you can draw a picture.
+  \end{remark}
+\end{aside}
+
+As an exercise, see if you can take this formal description of our structure, and draw a picture of it on scratch paper. Try and make your picture look different from the one we drew above. You can put your dots anywhere on the page. The important thing is that, wherever you draw the points on the page, the arrows connect precisely the points that are specified in our description here.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Empty Structures}
+
+What if we have a structure that has one base set, and it is equipped with zero functions and zero relations. For instance, suppose we have a base set $\set{A}$, with nothing more:
+
+\begin{equation*}
+  \struct{S} = (\set{A})
+\end{equation*}
+
+Notice that there are no $\func{f}$s or $\R{R}$s after the $\set{A}$. This structure is just a 1-tuple, which contains nothing but the base set $\set{A}$. 
+
+\begin{aside}
+  \begin{remark}
+    We have 2-tuples, 3-tuples, 4-tuples, and so on, but we can also have a 1-tuple.
+  \end{remark}
+\end{aside}
+
+Is this a structure? We can say that it is a structure, but it is entirely \vocab{empty} of structure. It is like an abandoned building site where all of the construction materials are lying around, and nobody put any of them together. 
+
+Such a structure is basically equivalent to the set $\set{A}$, since the set $\set{A}$ is a mere set, and like any other set, it has no internal structure. Only when we add functions and relations to the structure do we end up adding any internal structure to the base set.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about structures, and we learned how we build them by taking base sets and equipping them with functions and relations so as to add structure to the base sets.
+
+\begin{itemize}
+
+  \item A \vocab{structure} consists of one or more sets equipped with zero or more functions on the sets, and zero or more relations on the sets. 
+  
+  \item We call the sets the \vocab{base sets} or the \vocab{carrier sets}.
+  
+  \item We will use \vocab{bolded capital letters} like $\struct{S}$ or $\struct{T}$ for the \vocab{names} of structures. 
+  
+  \item We will denote a structure as a \vocab{tuple}, where we list the base sets first, then the functions, and then the relations, using this template: $\struct{S} = (\set{A}_{1}, \set{A}_{2}, \ldots, \func{f}_{1}, \func{f}_{2}, \ldots, \R{R}_{1}, \R{R}_{2}, \ldots)$.
+  
+  \item If we have not specified what the base sets, functions, and relations actually consist in, then when we specify a structure, we need to be sure to \vocab{lay it all out clearly} for the reader, so they know exactly what the structure we have in mind consists of.
+
+\end{itemize}
+
+
+\end{document}

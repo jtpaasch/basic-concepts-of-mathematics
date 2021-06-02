@@ -1,0 +1,547 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Equivalence Classes}
+\label{ch:equivalence-classes}
+
+\newtopic{I}{n \chapterref{ch:equivalence-relations}}, we looked at \vocab{equivalence relations} and \vocab{equivalence structures}. An equivalence relation partitions a base set into cells, and it thoroughly connects up all of the points in a cell. In this chapter, we will continue talking about equivalence structures. But now we will redirect our attention and look inside the cells. We will call the set of points in each cell an \vocab{equivalence class}, and we will call the set of all equivalence classes in the structure a \vocab{quotient set}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Equivalence classes}
+
+\newthought{An equivalence relation} partitions a base set into cells of equivalent items. For each item in the base set, we can put together a list (or rather, a set) of all the other items it is equivalent to. We call this set its \vocab{equivalence class}. So, the equivalence class of any item $x$ is the set of items that $x$ is equivalent to in the given structure. 
+
+\begin{terminology}
+  The \vocab{equivalence class} of an item $x$ is the set of items that $x$ is equivalent to in the given structure. We denote it as $\equivclass{x}$.
+\end{terminology}
+
+We denote the ``equivalence class of $x$'' by putting square brackets around $x$, like this:
+
+\begin{equation*}
+  \equivclass{x}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \sectionref{sec:set-builder-notation} that \vocab{set-builder notation} lets us specify a recipe for building a set. It has the shape: $\{ x \mid \text{ recipe } \}$, which we should read as ``the set containing each $x$ which satisfies the recipe.'' In this case, the set is $\{ y \mid x \equivalence/ y \}$, which we should read as ``each $y$ which is such that $x$ is equivalent to $y$.'' In other words, this recipe tells us to find every $y$ that $x$ is equivalent to, and put each such $y$ into the set.
+  \end{remark}
+\end{aside}
+
+We can use set builder notation to describe the set too:
+
+\begin{equation*}
+  \equivclass{x} = \{ y \mid x \equivalence/ y \}
+\end{equation*}
+
+Read that aloud like this: ``the equivalence class of $x$ is the set that consists of every $y$ which is such that $x$ is equivalent to $y$,'' or more briefly, ``the equivalence class of $x$ is the set containing every $y$ that $x$ is equivalent to.''
+
+Let us write this down as a definition.
+
+\begin{fdefinition}[Equivalence class]
+  \label{def:equivalence-class}
+  Given a structure $\struct{S} = (\set{A}, \equivalence/)$ where $\set{A}$ is any base set and $\equivalence/$ is an equivalence relation, we will say that the \vocab{equivalence class} of each $x \in \set{A}$ is the set $\{ y \mid x \equivalence/ y \}$, i.e., it is the set containing each $y$ that $x$ is equivalent to. We will denote the equivalence class of $x$ like this: $\equivclass{x}$.
+\end{fdefinition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example}
+
+\newthought{Recall the structure} $\struct{S} = (\set{A}, \equivalence/)$ from \chapterref{ch:equivalence}. In this structure, we have two red marbles ($r_{1}$ and $r_{2}$), four green marbles ($g_{1}$, $g_{2}$, $g_{3}$, and $g_{4}$), and two blue marbles ($b_{1}$, $b_{2}$), which are divided into cells by their color:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (4cm and 1.25cm);
+  
+  \node[dot] (r1) at (-2.75, 0.25) [label=left:$r_{1}$] {};
+  \node[dot] (r2) at (-2.1, -0.35) [label=right:$r_{2}$] {};
+  \node[dot] (g1) at (-0.5, 0.65) [label=above:$g_{1}$] {};
+  \node[dot] (g2) at (0.75, 0.6) [label=above right:$g_{2}$] {};
+  \node[dot] (g3) at (-0.5, -0.45) [label=below:$g_{3}$] {};
+  \node[dot] (g4) at (1.15, -0.45) [label=below right:$g_{4}$] {};
+  \node[dot] (b1) at (2.25, 0.25) [label=above right:$b_{1}$] {};
+  \node[dot] (b2) at (3, -0.15) [label=right:$b_{2}$] {};
+
+  \draw[->,spaced] (r1) to[looseness=40,out=120,in=230] (r1);
+  \draw[->,spaced] (r2) to[looseness=40,out=290,in=50] (r2);
+  \draw[->,spaced] (g1) to[looseness=40,out=45,in=140] (g1);
+  \draw[->,spaced] (g2) to[looseness=40,out=5,in=90] (g2);
+  \draw[->,spaced] (g3) to[looseness=40,out=320,in=220] (g3);
+  \draw[->,spaced] (g4) to[looseness=40,out=280,in=0] (g4);
+  \draw[->,spaced] (b1) to[looseness=40,out=10,in=90] (b1);
+  \draw[->,spaced] (b2) to[looseness=40,out=45,in=310] (b2);
+
+  \draw[->,space] (r1) to[out=330,in=120] (r2);
+  \draw[->,space] (r2) to[out=180,in=280] (r1);
+  
+  \draw[->,space] (g1) to[out=30,in=140] (g2);
+  \draw[->,space] (g2) to[out=170,in=10] (g1);
+  \draw[->,space] (g2) to[out=230,in=30] (g3);
+  \draw[->,space] (g3) to[out=50,in=210] (g2);
+  \draw[->,space] (g1) to[out=260,in=100] (g3);
+  \draw[->,space] (g3) to[out=130,in=240] (g1);
+  \draw[->,space] (g3) to[out=330,in=210] (g4);
+  \draw[->,space] (g4) to[out=190,in=350] (g3);
+  \draw[->,space] (g2) to[looseness=1.5,out=0,in=30] (g4);
+  \draw[->,space] (g4) to[looseness=1.25,out=60,in=330] (g2);
+  \draw[->,space] (g4) to (g1);
+  \draw[->,space] (g1) to[out=310,in=160] (g4);
+  
+  \draw[->,space] (b1) to[out=360,in=120] (b2);
+  \draw[->,space] (b2) to[out=180,in=310] (b1);
+  
+  \draw[dashed] (-1.45,1) to[out=300,in=60] (-1.25, -1);
+  \draw[dashed] (1.95,1) to[out=250,in=120] (2.5,-1);
+
+\end{diagram}%
+%
+\begin{aside}
+  \begin{remark}
+    In our picture, we have a cell for red marbles, a cell for green marbles, and a cell for blue marbles. In each cell, the items are equivalent to each other in color.
+  \end{remark}
+\end{aside}
+
+
+To build the equivalence class for any item in this structure, we just put together a list of all of the items it is equivalent to, and we dump that list into a set. 
+
+For instance, let's take $r_{1}$, and build its equivalence class. It is equivalent to the following items:
+
+\begin{equation*}
+  r_{1}, r_{2}
+\end{equation*}
+
+We can figure this out just by following the arrows. We can see that $r_{1}$ has an arrow pointing to itself, and another arrow pointing to $r_{2}$, so our list includes $r_{1}$ and $r_{2}$. Hence, the equivalence class of $r_{1}$ (which we write as ``$[r_{1}]$'') is the set containing $r_{1}$ and $r_{2}$:
+
+\begin{equation*}
+  \equivclass{r_{1}} = \{ r_{1}, r_{2} \}
+\end{equation*}
+
+Read that aloud like this: ``the equivalence class of $r_{1}$ is the set containing $r_{1}$ and $r_{2}$.''
+
+\begin{aside}
+  \begin{remark}
+    Notice that $r_{1}$ is equivalent to each of the red marbles, including itself. Hence, the equivalence class of $r_{1}$ is just the set of all red marbles. And notice that the same goes for $r_{2}$.
+  \end{remark}
+\end{aside}
+
+We can follow the same procedure to build the equivalence class of $r_{2}$. And we can see by following the arrows coming out of $r_{2}$ that its equivalent class is this:
+
+\begin{equation*}
+  \equivclass{r_{2}} = \{ r_{1}, r_{2} \}
+\end{equation*}
+
+Notice that the equivalence class of $r_{2}$ is also just the set of red marbles, since $r_{2}$ is equivalent to each of them (including itself). So $r_{1}$ and $r_{2}$ are the same set. Hence:
+
+\begin{equation*}
+  \equivclass{r_{1}} = \equivclass{r_{2}}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \sectionref{ch:set-equality} that two \vocab{sets are equal} if they have the \vocab{same members}. In this case, we cans see that $\equivclass{r_{1}}$ and $\equivclass{r_{2}}$ have the same members, so they are equal.
+  \end{remark}
+\end{aside}
+
+Read that like this: ``the equivalence class of $r_{1}$ is equal to the equivalence class of $r_{2}$,'' or even `` the equivalence class of $r_{1}$ is identical to that of $r_{2}$.''
+
+We can do the same thing for all of the green marbles. The equivalence class of $g_{1}$ is the set of items it is equivalent to, which is $g_{1}$, $g_{2}$, $g_{3}$, and $g_{4}$ (in other words, it is equivalent to all of the green marbles, including itself):
+
+\begin{equation*}
+  \equivclass{g_{1}} = \{ g_{1}, g_{2}, g_{3}, g_{4} \}
+\end{equation*}
+
+We can build the equivalence class for $g_{2}$, $g_{3}$, and $g_{4}$ in the same way:
+
+\begin{align*}
+  \equivclass{g_{1}} &= \{ g_{1}, g_{2}, g_{3}, g_{4} \} \\
+  \equivclass{g_{2}} &= \{ g_{1}, g_{2}, g_{3}, g_{4} \} \\
+  \equivclass{g_{3}} &= \{ g_{1}, g_{2}, g_{3}, g_{4} \}
+\end{align*}
+
+\begin{aside}
+  \begin{remark}
+    We can construct the equivalence class for each item in an equivalence structure by putting together the list of items it is equivalent to, and putting that list into a set. Moreover, equivalent items will have identical equivalence classes.
+  \end{remark}
+\end{aside}
+
+Notice that all of these equivalence classes are identical. This is because the green marbles are equivalent to each other, so they are all equivalent to the same set of marbles. Hence:
+
+\begin{equation*}
+  \equivclass{g_{1}} = \equivclass{g_{2}} = \equivclass{g_{3}} = \equivclass{g_{4}}
+\end{equation*}
+
+We could do the same for each blue marble:
+
+\begin{align*}
+  \equivclass{b_{1}} &= \{ b_{1}, b_{2} \} \\
+  \equivclass{b_{2}} &= \{ b_{1}, b_{2} \}
+\end{align*}
+
+Which are also the same set, and hence:
+
+\begin{equation*}
+  \equivclass{b_{1}} = \equivclass{b_{2}}
+\end{equation*}
+
+So, to sum up, we can see from this that for each item $x$ in the structure, we can build its equivalence class $\equivclass{x}$ by putting together the list of items it is equivalent to, and dumping that into a set. Moreover, we can see that all of the items that are equivalent will have identical equivalence classes.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Quotient Sets}
+
+\begin{terminology}
+  A \vocab{quotient set} of a structure $\struct{S} = (\set{A}, \equivalence/)$ is the set of all equivalence classes of $\struct{S}$.
+\end{terminology}
+
+\newthought{If we collect together} all the equivalence classes from a structure, and then put them into a set, we call that set a \vocab{quotient set} of the original base set $\set{A}$.
+
+Recall our marbles example. The red marbles belong to one equivalence class (namely, $\{ r_{1}, r_{2} \}$, the green marbles belong to another equivalence class (namely, $\{ g_{1}, g_{2}, g_{3}, g_{4} \}$, and the blue marbles belong to a third equivalence class (namely, $\{ b_{1}, b_{2} \}$. So we have three equivalence classes in our structure:
+
+\begin{aside}
+  \begin{remark}
+    There are three equivalence classes here, but each one has more than one name. The first one can go by name $\equivclass{r_{1}}$ or $\equivclass{r_{2}}$, the second one can go by the name $\equivclass{g_{1}}$, $\equivclass{g_{2}}$, $\equivclass{g_{3}}$, or $\equivclass{g_{4}}$, and the third one can go by the name $\equivclass{b_{1}}$ or $\equivclass{b_{2}}$.
+  \end{remark}
+\end{aside}
+
+\begin{align*}
+  \{ r_{1}&, r_{2} \} \\
+  \{ g_{1}, g_{2}&, g_{3}, g_{4} \} \\
+  \{ b_{1}&, b_{2} \}
+\end{align*}
+
+If we put these into a set, we get this:
+
+\begin{equation*}
+  \{ \{ r_{1}, r_{2} \},
+  \{ g_{1}, g_{2}, g_{3}, g_{4} \},
+  \{ b_{1}, b_{2} \} \}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    In casual English, the word ``quotient'' usually refers to the result of dividing something up (e.g., dividing one number by another). That's roughly what an equivalence relation does to a set: it divides it up into equivalence classes.
+  \end{remark}
+\end{aside}
+
+We call this set the \vocab{quotient set} of $\set{A}$ under $\equivalence/$. The word ``quotient'' in casual English conveys some idea of division, or dividing up, and you can use that to remember the idea here. Basically, we are saying that the equivalence relation $\equivalence/$ divides the base set $\set{A}$ up into equivalence classes. The result of dividing it up is the set of equivalence classes we have here, so that's why we call it the ``quotient'' set.
+
+To denote the quotient set, we write this:
+
+\begin{equation*}
+  \quotientset{\set{A}}{\equivalence/}
+\end{equation*}
+
+\begin{aside}
+  \begin{notation}
+    To denote the \vocab{quotient set} of a structure $(\set{A}, \equivalence/)$, we write this: $\quotientset{\set{A}}{\equivalence/}$.
+  \end{notation}
+\end{aside}
+
+Read that aloud like this: ``the quotient set of $\set{A}$ under $\equivalence/$,'' or if you like, you can even read it like this: ``the quotient set of $\set{A}$ divided up by $\equivalence/$.'' Hence, we can write out the full quotient set for the marbles example like this:
+
+\begin{equation*}
+  \quotientset{\set{A}}{\equivalence/}~~=~
+    \{ \{ r_{1}, r_{2} \},
+    \{ g_{1}, g_{2}, g_{3}, g_{4} \},
+    \{ b_{1}, b_{2} \} \}
+\end{equation*}
+
+Let's put down a definition for a quotient set. 
+
+\begin{fdefinition}[Quotient set]
+  \label{def:quotient-set}
+  Given a structure $\struct{S} = (\set{A}, \equivalence/)$ where $\set{A}$ is any base set and $\equivalence/$ is an equivalence relation, we will say that the \vocab{quotient set} of $\set{A}$ under $\equivalence/$ is the set of all equivalence classes of $\struct{S}$. We will denote the quotient set of $(\set{A}, \equivalence/)$ like this: $\quotientset{\set{A}}{\equivalence/}$.
+\end{fdefinition}
+
+As a matter of notation, it can be a little cumbersome to write out all of the equivalence classes in full, when we list out the contents of a quotient set. But recall that we can refer to an equivalence class by putting the name of one of its element in square brackets. For instance, to refer to the equivalence class of $r_{1}$, we can write this: 
+
+\begin{aside}
+  \begin{notation}
+    The equilavence class $\{ r_{1}, r_{2} \}$ has two names: $\equivclass{r_{1}}$ and $\equivclass{r_{2}}$. Either one of those names can be used when we want to refer to the set $\{ r_{1}, r_{2} \}$.
+  \end{notation}
+\end{aside}
+
+\begin{equation*}
+  \equivclass{r_{1}}
+\end{equation*}
+
+We could also write $\equivclass{r_{2}}$, since that is another name for the same equivalence class:
+
+\begin{equation*}
+  \equivclass{r_{1}} = \{ r_{1}, r_{2} \} \hskip 2cm \equivclass{r_{2}} = \{ r_{1}, r_{2} \}
+\end{equation*}
+
+So, instead of denoting the quotient set like this:
+
+\begin{equation*}
+  \quotientset{\set{A}}{\equivalence/}~~=~
+    \{ \{ r_{1}, r_{2} \},
+    \{ g_{1}, g_{2}, g_{3}, g_{4} \},
+    \{ b_{1}, b_{2} \} \}
+\end{equation*}
+
+We can use any of the bracketed names to refer to the equivalence classes. For instance, we could write it like this:
+
+\begin{equation*}
+  \quotientset{\set{A}}{\equivalence/}~~=~
+    \{ \equivclass{r_{2}}, \equivclass{g_{3}}, \equivclass{b_{1}} \}
+\end{equation*}
+
+We can pick any of the bracketed names we like when we write out a quotient set. For instance, we could also write this, to refer to the same quotient set:
+
+\begin{equation*}
+  \quotientset{\set{A}}{\equivalence/}~~=~
+    \{ \equivclass{r_{1}}, \equivclass{g_{4}}, \equivclass{b_{2}} \}
+\end{equation*}
+
+\begin{terminology}
+  Given a set of equal equivalence class names $\equivclass{x} = \equivclass{y} = \equivclass{z} = \ldots$ , we can pick any one of them and designate it as the \vocab{representative} for this set.
+\end{terminology}
+
+However, we usually pick one of the names as a \vocab{representative}, and then we always just use that name. In our case, we can just pick $\equivclass{r_{1}}$, $\equivclass{g_{1}}$, and $\equivclass{b_{1}}$ as our representatives. Then we can say that the quotient set is this:
+
+\begin{equation*}
+  \quotientset{\set{A}}{\equivalence/}~~=~
+    \{ \equivclass{r_{1}}, \equivclass{g_{1}}, \equivclass{b_{1}} \}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{More Examples}
+
+\begin{fexample}
+
+Let's consider a limit case: where every item in a base set belongs in its own, separate equivalence class. E.g.:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (4cm and 1.25cm);
+  
+  \node[dot] (p1) at (-2.5, 0.25) [label=left:$p_{1}$] {};
+  \node[dot] (p2) at (-1.75, -0.35) [label=right:$p_{2}$] {};
+  \node[dot] (p3) at (0.15, -0.15) [label=above:$p_{3}$] {};
+  \node[dot] (p4) at (1.25, 0.5) [label=above right:$p_{4}$] {};
+  \node[dot] (p5) at (2.5, 0.25) [label=below:$p_{5}$] {};
+
+  \draw[->,spaced] (p1) to[looseness=40,out=120,in=230] (p1);
+  \draw[->,spaced] (p2) to[looseness=40,out=290,in=50] (p2);
+  \draw[->,spaced] (p3) to[looseness=40,out=45,in=140] (p3);
+  \draw[->,spaced] (p4) to[looseness=40,out=5,in=90] (p4);
+  \draw[->,spaced] (p5) to[looseness=40,out=320,in=220] (p5);
+
+\end{diagram}
+
+We can see that this partitions the set into cells that contain one item each:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (4cm and 1.25cm);
+  
+  \node[dot] (p1) at (-2.5, 0.25) [label=left:$p_{1}$] {};
+  \node[dot] (p2) at (-1.75, -0.35) [label=right:$p_{2}$] {};
+  \node[dot] (p3) at (0.15, -0.15) [label=above:$p_{3}$] {};
+  \node[dot] (p4) at (1.25, 0.5) [label=above right:$p_{4}$] {};
+  \node[dot] (p5) at (2.5, 0.25) [label=below:$p_{5}$] {};
+
+  \draw[->,spaced] (p1) to[looseness=40,out=120,in=230] (p1);
+  \draw[->,spaced] (p2) to[looseness=40,out=290,in=50] (p2);
+  \draw[->,spaced] (p3) to[looseness=40,out=45,in=140] (p3);
+  \draw[->,spaced] (p4) to[looseness=40,out=5,in=90] (p4);
+  \draw[->,spaced] (p5) to[looseness=40,out=320,in=220] (p5);
+  
+  \draw[dashed] (-2.25, 1) to[out=300,in=60] (-2.5, -1);
+  \draw[dashed] (-0.5, 1.25) to[out=250,in=120] (-0.25, -1.25);
+  \draw[dashed] (0.5, 1.25) to[out=300,in=60] (1, -1.25);
+  \draw[dashed] (2.5, 1) to[out=250,in=60] (1, -1.25);
+  
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Notice what this relation looks like: each item is connected to itself. This is basically just an \vocab{identity} relation, i.e., it says each item is identical to itself.
+  \end{remark}
+\end{aside}
+
+So we have a base set, let's call it $\set{A}$, with five points in it:
+
+\begin{equation*}
+  \set{A} = \{ p_{1}, p_{2}, p_{3}, p_{4}, p_{5} \}
+\end{equation*}
+
+And we have a relation that connects each item with itself:
+
+\begin{aside}
+  \begin{remark}
+    If we remember that this relation is just an identity relation, then these equivalence classes make sense. For $p_{1}$, which points are identical to it? Just $p_{1}$. Which points are identical to $p_{2}$? Only $p_{2}$. And so on.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \equivalence/~~=~\{ (p_{1}, p_{1}), (p_{2}, p_{2}), (p_{3}, p_{3}), (p_{4}, p_{4}), (p_{5}, p_{5}) \}
+\end{equation*}
+
+Thus, we have five separate equivalence classes, each of which contains only one item:
+
+\begin{equation*}
+  \equivclass{p_{1}} = \{ p_{1} \} \hskip 0.5cm 
+  \equivclass{p_{2}} = \{ p_{2} \} \hskip 0.5cm 
+  \equivclass{p_{3}} = \{ p_{3} \} \hskip 0.5cm 
+  \equivclass{p_{4}} = \{ p_{4} \} \hskip 0.5cm 
+  \equivclass{p_{5}} = \{ p_{5} \}
+\end{equation*}
+
+The quotient set for $\set{A}$ under $\equivalence/$ is therefore this:
+
+\begin{equation*}
+  \quotientset{\set{A}}{\equivalence/}~~=~\{
+    \equivclass{p_{1}}, \equivclass{p_{2}}, \equivclass{p_{3}}, 
+    \equivclass{p_{4}}, \equivclass{p_{5}} \}
+\end{equation*}
+
+\end{fexample}
+
+\begin{example}
+
+Let's consider the opposite extreme: where every item in a base set belongs in one big equivalence class. For example, consider this structure:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (4cm and 1.25cm);
+  
+  \node[dot] (p1) at (-1, 0.5) [label=above:$p_{1}$] {};
+  \node[dot] (p2) at (1, 0.5) [label=above right:$p_{2}$] {};
+  \node[dot] (p3) at (-1, -0.5) [label=below:$p_{3}$] {};
+  \node[dot] (p4) at (1, -0.5) [label=below right:$p_{4}$] {};
+
+  \draw[->,spaced] (p1) to[looseness=40,out=45,in=140] (p1);
+  \draw[->,spaced] (p2) to[looseness=40,out=5,in=90] (p2);
+  \draw[->,spaced] (p3) to[looseness=40,out=320,in=220] (p3);
+  \draw[->,spaced] (p4) to[looseness=40,out=280,in=0] (p4);
+  
+  \draw[->,space] (p1) to[out=30,in=140] (p2);
+  \draw[->,space] (p2) to[out=170,in=10] (p1);
+  \draw[->,space] (p2) to[out=230,in=30] (p3);
+  \draw[->,space] (p3) to[out=50,in=210] (p2);
+  \draw[->,space] (p1) to[out=260,in=100] (p3);
+  \draw[->,space] (p3) to[out=130,in=240] (p1);
+  \draw[->,space] (p3) to[out=330,in=210] (p4);
+  \draw[->,space] (p4) to[out=190,in=350] (p3);
+  \draw[->,space] (p2) to[looseness=1.5,out=0,in=30] (p4);
+  \draw[->,space] (p4) to[looseness=1.25,out=60,in=330] (p2);
+  \draw[->,space] (p4) to (p1);
+  \draw[->,space] (p1) to[out=310,in=160] (p4);
+
+\end{diagram}
+
+We can see that this partitions the set into a single cell, which contains all of the points:
+
+\begin{aside}
+  \begin{remark}
+    Here we have one cell that contains all of the points, and those points are thoroughly connected. This is a limit case: a 1-cell partition.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (4cm and 1.25cm);
+  
+  \node[dot] (p1) at (-1, 0.5) [label=above:$p_{1}$] {};
+  \node[dot] (p2) at (1, 0.5) [label=above right:$p_{2}$] {};
+  \node[dot] (p3) at (-1, -0.5) [label=below:$p_{3}$] {};
+  \node[dot] (p4) at (1, -0.5) [label=below right:$p_{4}$] {};
+
+  \draw[->,spaced] (p1) to[looseness=40,out=45,in=140] (p1);
+  \draw[->,spaced] (p2) to[looseness=40,out=5,in=90] (p2);
+  \draw[->,spaced] (p3) to[looseness=40,out=320,in=220] (p3);
+  \draw[->,spaced] (p4) to[looseness=40,out=280,in=0] (p4);
+  
+  \draw[->,space] (p1) to[out=30,in=140] (p2);
+  \draw[->,space] (p2) to[out=170,in=10] (p1);
+  \draw[->,space] (p2) to[out=230,in=30] (p3);
+  \draw[->,space] (p3) to[out=50,in=210] (p2);
+  \draw[->,space] (p1) to[out=260,in=100] (p3);
+  \draw[->,space] (p3) to[out=130,in=240] (p1);
+  \draw[->,space] (p3) to[out=330,in=210] (p4);
+  \draw[->,space] (p4) to[out=190,in=350] (p3);
+  \draw[->,space] (p2) to[looseness=1.5,out=0,in=30] (p4);
+  \draw[->,space] (p4) to[looseness=1.25,out=60,in=330] (p2);
+  \draw[->,space] (p4) to (p1);
+  \draw[->,space] (p1) to[out=310,in=160] (p4);
+
+  \draw[dashed] (0, 0) ellipse (2.5cm and 2cm);
+
+\end{diagram}
+
+So we have a base set $\set{A}$ with four points in it:
+
+\begin{equation*}
+  \set{A} = \{ p_{1}, p_{2}, p_{3}, p_{4}, \}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    Notice that when we have a cell whose points are \vocab{thoroughly connected}, the equivalence relation includes the \vocab{product} of the points in that cell. This is because the product is the set of all possible pairings of the points, and to be thoroughly connected is exactly that: to make every possible connection between the points.
+  \end{remark}
+\end{aside}
+
+And we have a relation that identifies all the items:
+
+\begin{align*}
+  \equivalence/~~=~\{ 
+    &(p_{1}, p_{1}), (p_{1}, p_{2}), (p_{1}, p_{3}), (p_{1}, p_{4}), \\
+    &(p_{2}, p_{1}), (p_{2}, p_{2}), (p_{2}, p_{3}), (p_{2}, p_{4}), \\
+    &(p_{3}, p_{1}), (p_{3}, p_{2}), (p_{3}, p_{3}), (p_{3}, p_{4}), \\
+    &(p_{4}, p_{1}), (p_{4}, p_{2}), (p_{4}, p_{3}), (p_{4}, p_{4}) \}
+\end{align*}
+
+The equivalence classes for each point are these:
+
+\begin{align*}
+  \equivclass{p_{1}} &= \{ p_{1}, p_{2}, p_{3}, p_{4} \} \\
+  \equivclass{p_{2}} &= \{ p_{2}, p_{2}, p_{3}, p_{4} \} \\
+  \equivclass{p_{3}} &= \{ p_{3}, p_{2}, p_{3}, p_{4} \} \\
+  \equivclass{p_{4}} &= \{ p_{4}, p_{2}, p_{3}, p_{4} \}
+\end{align*}
+
+\begin{aside}
+  \begin{remark}
+    The notation $\quotientset{\set{A}}{\equivalence/}~~=~\{ \equivclass{p_{1}} \}$ makes it obvious what the picture of this structure looks like. Because the quotient set of $\set{A}$ under $\equivalence/$ has just one equivalence class, we know that the picture will depict all of the points thoroughly connected together in one cell.
+  \end{remark}
+\end{aside}
+
+Hence, all of these equivalence classes are identical:
+
+\begin{equation*}
+  \equivclass{p_{1}} = \equivclass{p_{2}} = \equivclass{p_{3}} = \equivclass{p_{4}}
+\end{equation*}
+
+We can pick any one of these as the representative, so let's just pick $\equivclass{p_{1}}$. The quotient set for $\set{A}$ under this relation $\equivalence/$ is thus:
+
+\begin{equation*}
+  \quotientset{\set{A}}{\equivalence/}~~=~\{ \equivclass{p_{1}} \}
+\end{equation*}
+
+\end{example}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about \vocab{equivalence classes} and \vocab{quotient sets}.
+
+\begin{itemize}
+  \item Given a structure $\struct{S} = (\set{A}, \equivalence/)$, the \vocab{equivalence class} for an element $x$ in $\set{A}$ is the set of all elements in $\set{A}$ that $x$ is equivalent too (in symbols: it is $\{ y \mid y \equivalence/ x \}$). We denote the equivalence class of $x$ like this: $\equivclass{x}$.
+  \item The equivalence class of equivalent elements are identical. E.g., if $x \equivalence/ y$, then $\equivclass{x} = \equivclass{y}$. For any set of identical equivalence classes, we can pick any one of them as a \vocab{representative} for the set.
+  \item A \vocab{quotient set} is the set of all equivalence classes for $\set{A}$ under $\equivalence/$. We denote it like this: $\quotientset{\set{A}}{\equivalence/}$.
+\end{itemize} 
+
+\end{document}

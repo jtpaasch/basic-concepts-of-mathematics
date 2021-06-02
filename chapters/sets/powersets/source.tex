@@ -1,0 +1,297 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Powersets}
+
+\newtopic{W}{e can make new sets} out of old sets in lots of ways. In the last chapter, we saw that we can construct the \vocab{union}, \vocab{intersection}, or \vocab{difference} of two other sets, and we can take the \vocab{complement} of a set.
+
+In this chapter, we will talk about another kind of set that we can construct on top of any other set. It is called a \vocab{powerset}, and it is a kind of set that we will encounter again.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Powersets}
+
+\newthought{Suppose you have a set $A$}. For example, $A = \{ 1, 2 \}$. What are all the subsets of this set? Here they are:
+
+\begin{equation*}
+  \emptyset/ \hskip 1cm \{ 1 \} \hskip 1cm \{ 2 \} \hskip 1cm \{ 1, 2 \}
+\end{equation*}
+
+Just to be sure, let's confirm that each of these is indeed a subset of $A$:
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:the-size-of-sets} that the empty set is a subset of every set, and recall from \chapterref{ch:the-composition-of-sets} that every set is always a subset of itself.
+  \end{remark}
+\end{aside}
+
+\begin{itemize}
+  \item $\emptyset/ \subset A$, since the empty set is a subset of every set.
+  \item $\{ 1 \} \subset A$, since $1$ is an element of $A$.
+  \item $\{ 2 \} \subset A$, since $2$ is an element of $A$.
+  \item $\{1, 2 \} \subset A$, since both 1 and 2 are elements of $A$.
+\end{itemize}
+
+Moreover, this list of subsets here is the list of all of the subsets of $A$ that there are. We didn't miss any. We didn't forget to put one on the list.
+
+Now, let's take all of these subsets of $A$, and let's put them into a set of their own:
+
+\begin{equation*}
+  \{ \emptyset/, \{ 1 \}, \{ 2 \}, \{ 1, 2 \} \}
+\end{equation*}
+
+This set, the set of all \vocab{subsets} of $A$, is called the \vocab{powerset} of $A$. To denote it, we write it like this:
+
+\begin{terminology}
+  The \vocab{powerset} of a set $A$ is the set of all \vocab{subsets} of $A$.
+\end{terminology}
+
+\begin{equation*}
+  \powerset{A}
+\end{equation*}
+
+You can read that aloud like so: ``this is the powerset of $A$.'' Let's put this down in a definition:
+
+\begin{fdefinition}[Powerset]
+  For any set $A$, we will say that the \vocab{powerset} of $A$ is the set of all subsets of $A$. We will denote the powerset of $A$ like this: $\powerset{A}$.
+\end{fdefinition}
+
+\begin{example}
+
+Consider this set: $B = \{ 1, 2, 3 \}$. What is its powerset? First, we need to list out all the subsets. We begin with the empty set: 
+
+\begin{equation*}
+  \emptyset/
+\end{equation*}
+
+Then we add every singleton:
+
+\begin{equation*}
+  \emptyset/ \hskip 1cm \{ 1 \} \hskip 1cm \{ 2 \} \hskip 1cm \{ 3 \}
+\end{equation*}
+
+Next, we have all of the subsets of two elements:
+
+\begin{equation*}
+  \{ 1, 2 \} \hskip 1cm \{ 2, 3 \} \hskip 1cm \{ 1, 3 \}
+\end{equation*}
+
+And finally, we have the entire set itself:
+
+\begin{equation*}
+  \{ 1, 2, 3 \}
+\end{equation*}
+
+So, we collect all of these subsets together, to form the powerset of $B$:
+
+\begin{align*}
+  \powerset{B} = \{ &\emptyset/, \{ 1 \}, \{ 2 \}, \{ 3 \}, \\
+                    &\{ 1, 2 \}, \{ 2, 3 \}, \{ 1, 3 \}, \{ 1, 2, 3 \} \}
+\end{align*}
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Cardinality of Powersets}
+
+How many subsets are there for any given set? In other words, what is the cardinality of a powerset? If $n$ is the cardinality of a set, then there will always be 2 to the power of $n$ subsets of it. 
+
+\begin{aside}
+  \begin{remark}
+    To calculate $2^{\cardinality{A}}$, first calculate $\cardinality{A}$ (i.e., the cardinality of $A$). That will give you some number $n$. Then calculate $2^n$. For example, if $A = \{ 1, 2, 3 \}$, then we first calculate $\cardinality{A}$, which is 3. Then we calculate $2^{3}$, which is 8. So $\cardinality{\powerset{A}}$, i.e., the cardinality of the powerset of $A$, is 8.
+  \end{remark}
+\end{aside}
+
+We can write this out as an equation. We can say that the cardinality of the powerset of $A$ is 2 raised to the power of $A$'s cardinality:
+
+\begin{equation*}
+  \cardinality{\powerset{A}} = 2^{\cardinality{A}}
+\end{equation*}
+
+So, if we have a set with 2 elements in it, then the cardinality of its powerset is 4, because $2^{2} = 4$. So, in other words, if a set has two elements in it, then it has 4 subsets. 
+
+Similarly, if we have a set of 3 elements in it, then the cardinality of its powerset is 8, because $2^{3} = 8$. That is to say, a set with 3 elements in it has 8 subsets. A set with 4 items in it has $2^{4} = 16$ items, and so on. The number of subsets grows very quickly, as the original set gets bigger and bigger. For instance, a set with only 10 items in it has 1,024 subsets.
+
+\begin{aside}
+  \begin{notation}
+    Sometimes people write ``$\powerset{A}$'' as ``$2^{A}$,'' because a set with $n$ elements in it always has $2^{n}$ subsets.
+  \end{notation}
+\end{aside}
+
+The powerset of $A$ is sometimes written like this:
+
+\begin{equation*}
+  2^{A}
+\end{equation*}
+
+This is due to the fact that for any given set $A$ that contains $n$ elements, its powerset has $2^{n}$ subsets.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Structure of Powersets}
+
+A powerset is the set of all subsets of a set. Since it includes \emph{all} subsets, it includes the smallest subset (which is the empty set), the biggest subset (which is the entire set), and everything in between.
+
+\begin{aside}
+  \begin{remark}
+    Powersets are built up from successively more complex subsets. We start with the empty set, and from there, we build up more and more complex subsets, until we reach the full set.
+  \end{remark}
+\end{aside}
+
+We can build up the powerset by starting with the empty set, and then building up more and more complex subsets on top of it. As an example, let's take the set $C = \{ a, b, c \}$. Let's draw a picture that shows how the subsets are built up. First, we'll draw the empty set:
+
+\begin{diagram}
+  \node at (0, 0) {$\emptyset/$};
+\end{diagram}
+
+Next, above that, let's draw all of the singleton sets:
+
+\begin{diagram}
+  \node at (-2, 1.5) {$\{ a \}$};
+  \node at (0, 1.5) {$\{ b \}$};
+  \node at (2, 1.5) {$\{ c \}$};
+  \node at (0, 0) {$\emptyset/$};
+\end{diagram}
+
+Notice that the empty set is a subset of each of these singletons (because the empty set is a subset of every set). To represent this, let's draw an arrow from the empty set up to each of the singletons. 
+
+\begin{aside}
+  \begin{remark}
+    The arrows indicate that one set is a subset of another set. E.g., the empty set is a subset of $\{ a \}$, it is a subset of $\{ b \}$, and it is a subset of $\{ c \}$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+  \node (a) at (-2, 1.5) {$\{ a \}$};
+  \node (b) at (0, 1.5) {$\{ b \}$};
+  \node (c) at (2, 1.5) {$\{ c \}$};
+  \node (emptyset) at (0, 0) {$\emptyset/$};
+  \draw[->] (emptyset) -- (a);
+  \draw[->] (emptyset) -- (b);
+  \draw[->] (emptyset) -- (c);
+\end{diagram}
+
+Next, above the singletons, let's draw the subsets that have two elements in them. First, there's $\{ a, b \}$, which is ``composed,'' so to speak, of $\{ a \}$ and $\{ b \}$: 
+
+\begin{diagram}
+  \node (ab) at (-2, 3) {$\{ a, b \}$};
+  \node (a) at (-2, 1.5) {$\{ a \}$};
+  \node (b) at (0, 1.5) {$\{ b \}$};
+  \node (c) at (2, 1.5) {$\{ c \}$};
+  \node (emptyset) at (0, 0) {$\emptyset/$};
+  \draw[->] (emptyset) -- (a);
+  \draw[->] (emptyset) -- (b);
+  \draw[->] (emptyset) -- (c);
+  \draw[->] (a) -- (ab);
+  \draw[->] (b) -- (ab);
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    The set $\{ a \}$ and the set $\{ b \}$ are each a subset of $\{ a, b \}$.
+  \end{remark}
+\end{aside}
+
+Then there's $\{ b, c \}$, which is ``composed'' of $\{ b \}$ and $\{ c \}$:
+
+\begin{diagram}
+  \node (bc) at (2, 3) {$\{ b, c \}$};
+  \node (ab) at (-2, 3) {$\{ a, b \}$};
+  \node (a) at (-2, 1.5) {$\{ a \}$};
+  \node (b) at (0, 1.5) {$\{ b \}$};
+  \node (c) at (2, 1.5) {$\{ c \}$};
+  \node (emptyset) at (0, 0) {$\emptyset/$};
+  \draw[->] (emptyset) -- (a);
+  \draw[->] (emptyset) -- (b);
+  \draw[->] (emptyset) -- (c);
+  \draw[->] (a) -- (ab);
+  \draw[->] (b) -- (ab);
+  \draw[->] (b) -- (bc);
+  \draw[->] (c) -- (bc);
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Notice that the empty set is a subset of $\{ a \}$, \emph{and} it is a subset of $\{ a, b \}$. So the subset arrow goes all the way up, so to speak.
+  \end{remark}
+\end{aside}
+
+And there's also $\{ a, c \}$, which is ``composed'' of $\{ a \}$ and $\{ c \}$:
+
+\begin{diagram}
+  \node (ac) at (0, 3) {$\{ a , c \}$};
+  \node (bc) at (2, 3) {$\{ b, c \}$};
+  \node (ab) at (-2, 3) {$\{ a, b \}$};
+  \node (a) at (-2, 1.5) {$\{ a \}$};
+  \node (b) at (0, 1.5) {$\{ b \}$};
+  \node (c) at (2, 1.5) {$\{ c \}$};
+  \node (emptyset) at (0, 0) {$\emptyset/$};
+  \draw[->] (emptyset) -- (a);
+  \draw[->] (emptyset) -- (b);
+  \draw[->] (emptyset) -- (c);
+  \draw[->] (a) -- (ab);
+  \draw[->] (b) -- (ab);
+  \draw[->] (b) -- (bc);
+  \draw[->] (c) -- (bc);
+  \draw[->] (a) -- (ac);
+  \draw[->] (c) -- (ac);
+\end{diagram}
+
+Finally, at the top of our drawing, let's add the full set, since it's ``composed,'' so to speak, of all the other subsets:
+
+\begin{diagram}
+  \node (abc) at (0, 4.5) {$\{ a, b, c \}$};
+  \node (ac) at (0, 3) {$\{ a , c \}$};
+  \node (bc) at (2, 3) {$\{ b, c \}$};
+  \node (ab) at (-2, 3) {$\{ a, b \}$};
+  \node (a) at (-2, 1.5) {$\{ a \}$};
+  \node (b) at (0, 1.5) {$\{ b \}$};
+  \node (c) at (2, 1.5) {$\{ c \}$};
+  \node (emptyset) at (0, 0) {$\emptyset/$};
+  \draw[->] (emptyset) -- (a);
+  \draw[->] (emptyset) -- (b);
+  \draw[->] (emptyset) -- (c);
+  \draw[->] (a) -- (ab);
+  \draw[->] (b) -- (ab);
+  \draw[->] (b) -- (bc);
+  \draw[->] (c) -- (bc);
+  \draw[->] (a) -- (ac);
+  \draw[->] (c) -- (ac);
+  \draw[->] (ab) -- (abc);
+  \draw[->] (bc) -- (abc);
+  \draw[->] (ac) -- (abc);
+\end{diagram}
+
+Notice that the arrows always indicate a subset relation. At the lowest level, the empty set is a subset of each of the singletons above it. Then, one level up, each of the singletons is a subset of the sets above them that they are connected to with an arrow. And then finally, at the top level, there is the full set, which has each of the sets below it as a subset.
+
+\begin{aside}
+  \begin{remark}
+    When we organize the elements of a powerset into those that are subsets of others, we can see that powersets have a \vocab{lattice} structure.
+  \end{remark}
+\end{aside}
+
+This shows us that powersets have a kind of \vocab{lattice} structure. They are built up successively, starting from the empty set, and adding more and more items into the subsets at each level, until we reach the top.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about powersets.
+
+\begin{itemize}
+  \item The powerset of a set $A$ is the set of all subsets of $A$.
+  \item Powersets are built up in a lattice of progressively more complex subsets, with the simplest subset (the empty set) at the bottom, and the fullest subset (the entire set) at the top.
+\end{itemize}
+
+
+
+
+\end{document}

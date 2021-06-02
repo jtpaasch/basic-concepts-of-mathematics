@@ -1,0 +1,880 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{A First Example}
+\label{ch:algebra-first-example}
+
+\begin{ponder}
+  What do you think ``combining things inside a set'' means? Can you think of any examples? How about combining groups of marbles from a bag? What about adding natural numbers together? 
+\end{ponder}
+
+\newtopic{A}{lgebra is the study of combining things} inside of a set. Before we get too far into the weeds, let's first work through an example, so that we can get a clearer picture of the kind of thing we are talking about.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A Museum}
+
+\newthought{Suppose we are visiting a museum}. It has four separate galleries, with revolving doors between each gallery. The galleries are laid out on a floor plan like this:
+
+\begin{diagram}
+
+  \draw[fill=grey4] (-4, 2) rectangle (-0.05, 0.05);
+  \draw[fill=grey4] (0.05, 0.05) rectangle (4, 2);
+  \draw[fill=grey4] (-4, -0.05) rectangle (-0.05, -2);
+  \draw[fill=grey4] (0.05, -0.05) rectangle (4, -2);
+
+  \draw[fill=white] (-4, 2) rectangle (-2, 1.5);
+  \node at (-3, 1.725) {$\e{Gallery~A}$};
+  \draw[fill=white] (2, 2) rectangle (4, 1.5);
+  \node at (3, 1.725) {$\e{Gallery~B}$};
+  \draw[fill=white] (-4, -2) rectangle (-2, -1.5);
+  \node at (-3, -1.775) {$\e{Gallery~C}$};
+  \draw[fill=white] (2, -2) rectangle (4, -1.5);
+  \node at (3, -1.775) {$\e{Gallery~D}$};
+
+  \draw[fill=grey4] (2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (1.75, 0.525) rectangle (2.25, -0.525);
+  \draw (1.675, 0.325) -- (2.325, -0.325);
+  \draw (1.675, -0.325) -- (2.325, 0.325);
+  
+  \draw[fill=grey4] (-2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-2.25, 0.525) rectangle (-1.75, -0.525);
+  \draw (-1.675, 0.325) -- (-2.325, -0.325);
+  \draw (-1.675, -0.325) -- (-2.325, 0.325);
+
+  \draw[fill=grey4] (0, 1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, 1.5) rectangle (0.525, 1);
+  \draw (-0.25, 1.625) -- (0.25, 0.875);
+  \draw (-0.35, 1) -- (0.35, 1.5);
+  
+  \draw[fill=grey4] (0, -1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, -1.5) rectangle (0.525, -1);
+  \draw (-0.25, -1.625) -- (0.3, -0.9);
+  \draw (-0.35, -1) -- (0.35, -1.5);
+
+\end{diagram}
+
+The doors only rotate one-way, so that patrons always have to walk in the same direction through the galleries. Like this:
+
+\begin{diagram}
+
+  \draw[fill=grey4] (-4, 2) rectangle (-0.05, 0.05);
+  \draw[fill=grey4] (0.05, 0.05) rectangle (4, 2);
+  \draw[fill=grey4] (-4, -0.05) rectangle (-0.05, -2);
+  \draw[fill=grey4] (0.05, -0.05) rectangle (4, -2);
+
+  \draw[fill=white] (-4, 2) rectangle (-2, 1.5);
+  \node at (-3, 1.725) {$\e{Gallery~A}$};
+  \draw[fill=white] (2, 2) rectangle (4, 1.5);
+  \node at (3, 1.725) {$\e{Gallery~B}$};
+  \draw[fill=white] (-4, -2) rectangle (-2, -1.5);
+  \node at (-3, -1.775) {$\e{Gallery~C}$};
+  \draw[fill=white] (2, -2) rectangle (4, -1.5);
+  \node at (3, -1.775) {$\e{Gallery~D}$};
+
+  \draw[fill=grey4] (2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (1.75, 0.525) rectangle (2.25, -0.525);
+  \draw (1.675, 0.325) -- (2.325, -0.325);
+  \draw (1.675, -0.325) -- (2.325, 0.325);
+  
+  \draw[fill=grey4] (-2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-2.25, 0.525) rectangle (-1.75, -0.525);
+  \draw (-1.675, 0.325) -- (-2.325, -0.325);
+  \draw (-1.675, -0.325) -- (-2.325, 0.325);
+
+  \draw[fill=grey4] (0, 1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, 1.5) rectangle (0.525, 1);
+  \draw (-0.25, 1.625) -- (0.25, 0.875);
+  \draw (-0.35, 1) -- (0.35, 1.5);
+  
+  \draw[fill=grey4] (0, -1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, -1.5) rectangle (0.525, -1);
+  \draw (-0.25, -1.625) -- (0.3, -0.9);
+  \draw (-0.35, -1) -- (0.35, -1.5);
+
+  \draw[->,dashed] (0.5, -1.25) to[out=0, in=270] (2, -0.5);
+  \draw[->,dashed] (2, 0.5) to[out=90, in=0] (0.5, 1.25);
+  \draw[->,dashed] (-0.5, 1.25) to[out=180, in=90] (-2, 0.5);
+  \draw[->,dashed] (-2, -0.5) to[out=270,in=180] (-0.5, -1.25);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    The fact that we start in gallery $\e{A}$ is arbitrary. We could put the dot in any of the four galleries. Think of the dot not so much as ``gallery $\e{A}$,'' but rather as ``our current gallery.''
+  \end{remark}
+\end{aside}
+
+Suppose that we are standing in gallery $\e{A}$, at the point marked by a dot: 
+
+\begin{diagram}
+
+  \draw[fill=grey4] (-4, 2) rectangle (-0.05, 0.05);
+  \draw[fill=grey4] (0.05, 0.05) rectangle (4, 2);
+  \draw[fill=grey4] (-4, -0.05) rectangle (-0.05, -2);
+  \draw[fill=grey4] (0.05, -0.05) rectangle (4, -2);
+
+  \draw[fill=white] (-4, 2) rectangle (-2, 1.5);
+  \node at (-3, 1.725) {$\e{Gallery~A}$};
+  \draw[fill=white] (2, 2) rectangle (4, 1.5);
+  \node at (3, 1.725) {$\e{Gallery~B}$};
+  \draw[fill=white] (-4, -2) rectangle (-2, -1.5);
+  \node at (-3, -1.775) {$\e{Gallery~C}$};
+  \draw[fill=white] (2, -2) rectangle (4, -1.5);
+  \node at (3, -1.775) {$\e{Gallery~D}$};
+
+  \draw[fill=grey4] (2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (1.75, 0.525) rectangle (2.25, -0.525);
+  \draw (1.675, 0.325) -- (2.325, -0.325);
+  \draw (1.675, -0.325) -- (2.325, 0.325);
+  
+  \draw[fill=grey4] (-2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-2.25, 0.525) rectangle (-1.75, -0.525);
+  \draw (-1.675, 0.325) -- (-2.325, -0.325);
+  \draw (-1.675, -0.325) -- (-2.325, 0.325);
+
+  \draw[fill=grey4] (0, 1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, 1.5) rectangle (0.525, 1);
+  \draw (-0.25, 1.625) -- (0.25, 0.875);
+  \draw (-0.35, 1) -- (0.35, 1.5);
+  
+  \draw[fill=grey4] (0, -1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, -1.5) rectangle (0.525, -1);
+  \draw (-0.25, -1.625) -- (0.3, -0.9);
+  \draw (-0.35, -1) -- (0.35, -1.5);
+
+  \node[dot] at (-2, 1) {};
+
+\end{diagram}
+
+What kinds of movements can we make from this point, to get to any of the galleries? Perhaps the simplest movement we can make is none at all: just stay in our current gallery! Let's call this movement $m_{0}$, to indicate that we move forward \emph{zero} galleries:
+
+\begin{aside}
+  \begin{remark}
+    In whatever gallery we are in (be it gallery $\e{A}$, or $\e{B}$, or whatever), we can make an $m_{0}$ movement: we can just stay put in that gallery.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw[fill=grey4] (-4, 2) rectangle (-0.05, 0.05);
+  \draw[fill=grey4] (0.05, 0.05) rectangle (4, 2);
+  \draw[fill=grey4] (-4, -0.05) rectangle (-0.05, -2);
+  \draw[fill=grey4] (0.05, -0.05) rectangle (4, -2);
+
+  \draw[fill=white] (-4, 2) rectangle (-2, 1.5);
+  \node at (-3, 1.725) {$\e{Gallery~A}$};
+  \draw[fill=white] (2, 2) rectangle (4, 1.5);
+  \node at (3, 1.725) {$\e{Gallery~B}$};
+  \draw[fill=white] (-4, -2) rectangle (-2, -1.5);
+  \node at (-3, -1.775) {$\e{Gallery~C}$};
+  \draw[fill=white] (2, -2) rectangle (4, -1.5);
+  \node at (3, -1.775) {$\e{Gallery~D}$};
+
+  \draw[fill=grey4] (2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (1.75, 0.525) rectangle (2.25, -0.525);
+  \draw (1.675, 0.325) -- (2.325, -0.325);
+  \draw (1.675, -0.325) -- (2.325, 0.325);
+  
+  \draw[fill=grey4] (-2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-2.25, 0.525) rectangle (-1.75, -0.525);
+  \draw (-1.675, 0.325) -- (-2.325, -0.325);
+  \draw (-1.675, -0.325) -- (-2.325, 0.325);
+
+  \draw[fill=grey4] (0, 1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, 1.5) rectangle (0.525, 1);
+  \draw (-0.25, 1.625) -- (0.25, 0.875);
+  \draw (-0.35, 1) -- (0.35, 1.5);
+  
+  \draw[fill=grey4] (0, -1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, -1.5) rectangle (0.525, -1);
+  \draw (-0.25, -1.625) -- (0.3, -0.9);
+  \draw (-0.35, -1) -- (0.35, -1.5);
+
+  \node[dot] (origin) at (-2, 1) {};
+  \draw[->,space,color=highlight] (origin) to[looseness=35, out=180, in=45] (origin);
+  \node at (-1.25, 1.25) {$m_{0}$};
+
+\end{diagram}
+
+Another thing we can do is move to the next gallery. Let's call this $m_{1}$, to indicate that we move forward \emph{one} gallery:
+
+\begin{aside}
+  \begin{remark}
+    From gallery $\e{A}$, $m_{1}$ takes us to gallery $\e{C}$. But we can do the same move from any other gallery. If we were standing in gallery $\e{D}$, $m_{1}$ would take us to gallery $\e{B}$. An $m_{1}$ move is simply a move that goes from our \vocab{current} gallery, to the \vocab{next} gallery.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw[fill=grey4] (-4, 2) rectangle (-0.05, 0.05);
+  \draw[fill=grey4] (0.05, 0.05) rectangle (4, 2);
+  \draw[fill=grey4] (-4, -0.05) rectangle (-0.05, -2);
+  \draw[fill=grey4] (0.05, -0.05) rectangle (4, -2);
+
+  \draw[fill=white] (-4, 2) rectangle (-2, 1.5);
+  \node at (-3, 1.725) {$\e{Gallery~A}$};
+  \draw[fill=white] (2, 2) rectangle (4, 1.5);
+  \node at (3, 1.725) {$\e{Gallery~B}$};
+  \draw[fill=white] (-4, -2) rectangle (-2, -1.5);
+  \node at (-3, -1.775) {$\e{Gallery~C}$};
+  \draw[fill=white] (2, -2) rectangle (4, -1.5);
+  \node at (3, -1.775) {$\e{Gallery~D}$};
+
+  \draw[fill=grey4] (2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (1.75, 0.525) rectangle (2.25, -0.525);
+  \draw (1.675, 0.325) -- (2.325, -0.325);
+  \draw (1.675, -0.325) -- (2.325, 0.325);
+  
+  \draw[fill=grey4] (-2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-2.25, 0.525) rectangle (-1.75, -0.525);
+  \draw (-1.675, 0.325) -- (-2.325, -0.325);
+  \draw (-1.675, -0.325) -- (-2.325, 0.325);
+
+  \draw[fill=grey4] (0, 1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, 1.5) rectangle (0.525, 1);
+  \draw (-0.25, 1.625) -- (0.25, 0.875);
+  \draw (-0.35, 1) -- (0.35, 1.5);
+  
+  \draw[fill=grey4] (0, -1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, -1.5) rectangle (0.525, -1);
+  \draw (-0.25, -1.625) -- (0.3, -0.9);
+  \draw (-0.35, -1) -- (0.35, -1.5);
+
+  \node[dot] (origin) at (-2, 1) {};
+  \draw[->,space,color=highlight] (origin) to[looseness=35, out=180, in=45] (origin);
+  \node at (-1.25, 1.25) {$m_{0}$};
+  
+  \draw[->,space,color=highlight] 
+    (origin) to[out=260, in=200] (-0.95, -0.5);
+  \node at (-0.65, -0.5) {$m_{1}$};
+
+\end{diagram}
+
+We can also move forward \emph{two} galleries ($m_{2}$):
+
+\begin{diagram}
+
+  \draw[fill=grey4] (-4, 2) rectangle (-0.05, 0.05);
+  \draw[fill=grey4] (0.05, 0.05) rectangle (4, 2);
+  \draw[fill=grey4] (-4, -0.05) rectangle (-0.05, -2);
+  \draw[fill=grey4] (0.05, -0.05) rectangle (4, -2);
+
+  \draw[fill=white] (-4, 2) rectangle (-2, 1.5);
+  \node at (-3, 1.725) {$\e{Gallery~A}$};
+  \draw[fill=white] (2, 2) rectangle (4, 1.5);
+  \node at (3, 1.725) {$\e{Gallery~B}$};
+  \draw[fill=white] (-4, -2) rectangle (-2, -1.5);
+  \node at (-3, -1.775) {$\e{Gallery~C}$};
+  \draw[fill=white] (2, -2) rectangle (4, -1.5);
+  \node at (3, -1.775) {$\e{Gallery~D}$};
+
+  \draw[fill=grey4] (2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (1.75, 0.525) rectangle (2.25, -0.525);
+  \draw (1.675, 0.325) -- (2.325, -0.325);
+  \draw (1.675, -0.325) -- (2.325, 0.325);
+  
+  \draw[fill=grey4] (-2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-2.25, 0.525) rectangle (-1.75, -0.525);
+  \draw (-1.675, 0.325) -- (-2.325, -0.325);
+  \draw (-1.675, -0.325) -- (-2.325, 0.325);
+
+  \draw[fill=grey4] (0, 1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, 1.5) rectangle (0.525, 1);
+  \draw (-0.25, 1.625) -- (0.25, 0.875);
+  \draw (-0.35, 1) -- (0.35, 1.5);
+  
+  \draw[fill=grey4] (0, -1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, -1.5) rectangle (0.525, -1);
+  \draw (-0.25, -1.625) -- (0.3, -0.9);
+  \draw (-0.35, -1) -- (0.35, -1.5);
+
+  \node[dot] (origin) at (-2, 1) {};
+  \draw[->,space,color=highlight] (origin) to[looseness=35, out=180, in=45] (origin);
+  \node at (-1.25, 1.25) {$m_{0}$};
+  
+  \draw[->,space,color=highlight] 
+    (origin) to[out=260, in=200] (-0.95, -0.5);
+  \node at (-0.65, -0.5) {$m_{1}$};
+
+  \draw[->,space,color=highlight]
+    (origin) to[looseness=1.25, out=250, in=210] (1, -1);
+  \node at (1, -0.75) {$m_{2}$};
+
+\end{diagram}
+
+And of course, we can move forward \emph{three} galleries ($m_{3}$):
+
+\begin{aside}
+  \begin{remark}
+    As with $m_{0}$ and $m_{1}$, $m_{2}$ and $m_{3}$ moves can be made from any of the four galleries. If we are standing in gallery $\e{D}$, then $m_{2}$ would take us to gallery $\e{A}$, and $m_{3}$ would take us to gallery $\e{C}$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw[fill=grey4] (-4, 2) rectangle (-0.05, 0.05);
+  \draw[fill=grey4] (0.05, 0.05) rectangle (4, 2);
+  \draw[fill=grey4] (-4, -0.05) rectangle (-0.05, -2);
+  \draw[fill=grey4] (0.05, -0.05) rectangle (4, -2);
+
+  \draw[fill=white] (-4, 2) rectangle (-2, 1.5);
+  \node at (-3, 1.725) {$\e{Gallery~A}$};
+  \draw[fill=white] (2, 2) rectangle (4, 1.5);
+  \node at (3, 1.725) {$\e{Gallery~B}$};
+  \draw[fill=white] (-4, -2) rectangle (-2, -1.5);
+  \node at (-3, -1.775) {$\e{Gallery~C}$};
+  \draw[fill=white] (2, -2) rectangle (4, -1.5);
+  \node at (3, -1.775) {$\e{Gallery~D}$};
+
+  \draw[fill=grey4] (2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (1.75, 0.525) rectangle (2.25, -0.525);
+  \draw (1.675, 0.325) -- (2.325, -0.325);
+  \draw (1.675, -0.325) -- (2.325, 0.325);
+  
+  \draw[fill=grey4] (-2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-2.25, 0.525) rectangle (-1.75, -0.525);
+  \draw (-1.675, 0.325) -- (-2.325, -0.325);
+  \draw (-1.675, -0.325) -- (-2.325, 0.325);
+
+  \draw[fill=grey4] (0, 1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, 1.5) rectangle (0.525, 1);
+  \draw (-0.25, 1.625) -- (0.25, 0.875);
+  \draw (-0.35, 1) -- (0.35, 1.5);
+  
+  \draw[fill=grey4] (0, -1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, -1.5) rectangle (0.525, -1);
+  \draw (-0.25, -1.625) -- (0.3, -0.9);
+  \draw (-0.35, -1) -- (0.35, -1.5);
+
+  \node[dot] (origin) at (-2, 1) {};
+  \draw[->,space,color=highlight] (origin) to[looseness=35, out=180, in=45] (origin);
+  \node at (-1.25, 1.25) {$m_{0}$};
+  
+  \draw[->,space,color=highlight] 
+    (origin) to[out=260, in=200] (-0.95, -0.5);
+  \node at (-0.65, -0.5) {$m_{1}$};
+
+  \draw[->,space,color=highlight]
+    (origin) to[looseness=1.25, out=250, in=210] (1, -1);
+  \node at (1, -0.75) {$m_{2}$};
+
+  \draw[->,space,color=highlight]
+    (origin) to[looseness=2.75, out=245, in=300] (1.75, 1.25);
+  \node at (1.45, 1.35) {$m_{3}$};
+
+\end{diagram}
+
+At this point, we've catalogued four different moves we can make. Let's put them into a set, and let's call it $\set{A}$:
+
+\begin{equation*}
+  \set{A} = \{ m_{0}, m_{1}, m_{2}, m_{3} \}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    We don't need an $m_{5}$ for moving forward five galleries, because that would put us in the same place that $m_{1}$ would. Likewise, $m_{6}$ would put us in the same place as $m_{2}$, and so on.
+  \end{remark}
+\end{aside}
+
+Are these all the movements we need? Should we add $m_{4}$, for moving forward \emph{four} galleries? Well, we actually don't need $m_{4}$, for if we move forward four galleries, we end up back in the same gallery that we started in, and of course, that's exactly where $m_{0}$ (just staying put) puts us too. So we don't actually need any more movements beyond the four we already catalogued.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Combining Movements}
+
+\begin{terminology}
+  In this museum scenario, \vocab{combining} movements means performing the two movements in sequence, one after the other.
+\end{terminology}
+
+\newthought{Now that we have a set of movements} at hand, let's start thinking about combining them. One way to \vocab{combine} them is to just do one after the other. 
+
+For example, from gallery $\e{A}$, we can do $m_{1}$, and then right after that, we can do $m_{2}$. That takes us to gallery $\e{B}$:
+
+\begin{diagram}
+
+  \draw[fill=grey4] (-4, 2) rectangle (-0.05, 0.05);
+  \draw[fill=grey4] (0.05, 0.05) rectangle (4, 2);
+  \draw[fill=grey4] (-4, -0.05) rectangle (-0.05, -2);
+  \draw[fill=grey4] (0.05, -0.05) rectangle (4, -2);
+
+  \draw[fill=white] (-4, 2) rectangle (-2, 1.5);
+  \node at (-3, 1.725) {$\e{Gallery~A}$};
+  \draw[fill=white] (2, 2) rectangle (4, 1.5);
+  \node at (3, 1.725) {$\e{Gallery~B}$};
+  \draw[fill=white] (-4, -2) rectangle (-2, -1.5);
+  \node at (-3, -1.775) {$\e{Gallery~C}$};
+  \draw[fill=white] (2, -2) rectangle (4, -1.5);
+  \node at (3, -1.775) {$\e{Gallery~D}$};
+
+  \draw[fill=grey4] (2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (1.75, 0.525) rectangle (2.25, -0.525);
+  \draw (1.675, 0.325) -- (2.325, -0.325);
+  \draw (1.675, -0.325) -- (2.325, 0.325);
+  
+  \draw[fill=grey4] (-2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-2.25, 0.525) rectangle (-1.75, -0.525);
+  \draw (-1.675, 0.325) -- (-2.325, -0.325);
+  \draw (-1.675, -0.325) -- (-2.325, 0.325);
+
+  \draw[fill=grey4] (0, 1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, 1.5) rectangle (0.525, 1);
+  \draw (-0.25, 1.625) -- (0.25, 0.875);
+  \draw (-0.35, 1) -- (0.35, 1.5);
+  
+  \draw[fill=grey4] (0, -1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, -1.5) rectangle (0.525, -1);
+  \draw (-0.25, -1.625) -- (0.3, -0.9);
+  \draw (-0.35, -1) -- (0.35, -1.5);
+
+  \node[dot] (origin) at (-2, 1) {};
+  
+  \draw[->,space,color=highlight] 
+    (origin) to[out=260, in=145] (-1.5, -0.85);
+  \node at (-1.25, -1) {$m_{1}$};
+
+  \draw[->,space,color=highlight]
+    (-1, -1) to[looseness=1.5, out=330, in=300] (1.75, 1);
+  \node at (1.6, 1.25) {$m_{2}$};
+
+\end{diagram}
+
+To indicate that we combine $m_{1}$ and $m_{2}$ in this way, let's write this:
+
+\begin{aside}
+  \begin{notation}
+    To indicate that we \vocab{combine} the movements $m_{i}$ and $m_{j}$ (where ``$m_{i}$'' and ``$m_{j}$'' are any of our four possible moves), we write this: $m_{i} \opSymbol/ m_{j}$. Read that aloud like this: ``$m_{i}$ combined with $m_{j}$,'' or even ``$m_{i}$ plus $m_{j}$'' or ``$m_{i}$ times $m_{j}$'' so long as we remember that we don't mean the regular ``plus'' and ``times'' here. What we really mean is doing the one movement first, then the other movement immediately after.
+  \end{notation}
+\end{aside}
+
+\begin{equation*}
+  m_{1} \opSymbol/ m_{2}
+\end{equation*}
+
+Here's another combination: $m_{0}$ combined with $m_{1}$.
+
+\begin{equation*}
+  m_{0} \opSymbol/ m_{1}
+\end{equation*}
+
+This means that first we do $m_{0}$ (i.e., we do nothing), then we do $m_{1}$ (i.e., we move to the next gallery). Like this:
+
+\begin{diagram}
+
+  \draw[fill=grey4] (-4, 2) rectangle (-0.05, 0.05);
+  \draw[fill=grey4] (0.05, 0.05) rectangle (4, 2);
+  \draw[fill=grey4] (-4, -0.05) rectangle (-0.05, -2);
+  \draw[fill=grey4] (0.05, -0.05) rectangle (4, -2);
+
+  \draw[fill=white] (-4, 2) rectangle (-2, 1.5);
+  \node at (-3, 1.725) {$\e{Gallery~A}$};
+  \draw[fill=white] (2, 2) rectangle (4, 1.5);
+  \node at (3, 1.725) {$\e{Gallery~B}$};
+  \draw[fill=white] (-4, -2) rectangle (-2, -1.5);
+  \node at (-3, -1.775) {$\e{Gallery~C}$};
+  \draw[fill=white] (2, -2) rectangle (4, -1.5);
+  \node at (3, -1.775) {$\e{Gallery~D}$};
+
+  \draw[fill=grey4] (2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (1.75, 0.525) rectangle (2.25, -0.525);
+  \draw (1.675, 0.325) -- (2.325, -0.325);
+  \draw (1.675, -0.325) -- (2.325, 0.325);
+  
+  \draw[fill=grey4] (-2, 0) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-2.25, 0.525) rectangle (-1.75, -0.525);
+  \draw (-1.675, 0.325) -- (-2.325, -0.325);
+  \draw (-1.675, -0.325) -- (-2.325, 0.325);
+
+  \draw[fill=grey4] (0, 1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, 1.5) rectangle (0.525, 1);
+  \draw (-0.25, 1.625) -- (0.25, 0.875);
+  \draw (-0.35, 1) -- (0.35, 1.5);
+  
+  \draw[fill=grey4] (0, -1.25) circle (0.5cm);
+  \draw[fill=grey4,color=grey4] (-0.525, -1.5) rectangle (0.525, -1);
+  \draw (-0.25, -1.625) -- (0.3, -0.9);
+  \draw (-0.35, -1) -- (0.35, -1.5);
+
+  \node[dot] (origin) at (-2, 1) {};
+  \draw[->,space,color=highlight] (origin) to[looseness=35, out=180, in=45] (origin);
+  \node at (-1.25, 1.25) {$m_{0}$};
+  
+  \draw[->,space,color=highlight] 
+    (origin) to[out=260, in=200] (-0.95, -0.5);
+  \node at (-0.65, -0.5) {$m_{1}$};
+
+\end{diagram}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Movement Arithmetic}
+
+\newthought{Combined movements} are equal to other movements. Think about the combined movement ``$m_{1} \opSymbol/ m_{2}$.'' If we perform $m_{1}$ then $m_{2}$, we advance a total of three galleries. Is there any other move in our set of possible moves that would take us to the same destination? Yes, there is: $m_{3}$ would also advance us three galleries, and so $m_{3}$ would take us to the same location. Hence, we can write this:
+
+\begin{aside}
+  \begin{remark}
+    Combined movements are ``equal'' to other movements in our set of possible movements.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  m_{1} \opSymbol/ m_{2} \text{~~gets us to the same gallery as~~} m_{3}
+\end{equation*}
+
+Let's now use an equals sign (i.e., ``$=$'') as a shorthand for the expression ``gets us to the same gallery as.'' Then we can rewrite the above expression like this:
+
+\begin{equation*}
+  m_{1} \opSymbol/ m_{2} = m_{3}
+\end{equation*}
+
+\begin{aside}
+  \begin{notation}
+    In this museum scenario, we are setting up a special meaning for ``$=$'' (the equals sign). Here, we are stipulating that ``$x = y$'' means ``$x$ gets us to the same gallery as $y$.''
+  \end{notation}
+\end{aside}
+
+Read that aloud like this: ``the gallery we reach by doing $m_{1}$ then $m_{2}$ is the same gallery we reach by just doing $m_{3}$.''
+
+Let's consider another case: $m_{0}$ followed by $m_{1}$.
+
+\begin{equation*}
+  m_{0} \opSymbol/ m_{1}
+\end{equation*}
+
+Since $m_{0}$ essentially is a ``do nothing'' move (it moves us nowhere), following it up with an $m_{1}$ move is the same as just doing $m_{1}$ in the first place. So, we can write this:
+
+\begin{equation*}
+  m_{0} \opSymbol/ m_{1} \text{~~gets us to the same gallery as~~} m_{1}
+\end{equation*}
+
+Or, if we rewrite it with the equals sign:
+
+\begin{equation*}
+  m_{0} \opSymbol/ m_{1} = m_{1}
+\end{equation*}
+
+You can see that we can do a kind of ``arithmetic'' here with these moves. We can combine two of our moves, and that will get us to the same gallery as another one of our moves. 
+
+We can write such equalities down as equations, which have the following shape:
+
+\begin{diagram}
+
+  \node at (-2, 0) {$m_{i}$};
+  \node at (-1.5, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$m_{j}$};
+
+  \node at (1, 0) {$=$};
+  
+  \node at (3.5, 0) {$m_{k}$};
+
+  \draw (-2.5, -0.25) -- (-2.5, -0.5) -- (-0.5, -0.5) -- (-0.5, -0.25);
+  \draw[->] (-1.5, -1.75) -- (-1.5, -0.65);
+  \node at (-1.5, -2) {the gallery};
+  \node at (-1.5, -2.55) {we reach by};
+  \node at (-1.5, -3) {doing $m_{i}$ then $m_{j}$};
+  
+  \node at (1, -2.25) {$=$};
+  
+  \draw (3, -0.25) -- (3, -0.5) -- (4, -0.5) -- (4, -0.25);
+  \draw[->] (3.5, -1.75) -- (3.5, -0.65);
+  \node at (3.5, -2) {the gallery};
+  \node at (3.5, -2.55) {we reach by};
+  \node at (3.5, -3) {doing just $m_{k}$};
+
+\end{diagram}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A Cayley Table}
+
+\begin{terminology}
+  A \vocab{Cayley table} is a kind of ``multiplication table,'' that tells us how to combine things from the same set. We list the elements from the set down the left side, and across the top, and then in each cell, we write what we get when combine the elements from that row and column.
+\end{terminology}
+
+Let's build a kind of ``multiplication table'' for the ``arithmetic'' we are doing here. We call this kind of table a \vocab{Cayley table}. We'll start by listing the available moves down the left side, and also across the top:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline \hline
+    $m_{0}$    & $~$    & $~$     & $~$     & $~$     \\ \hline
+    $m_{1}$    & $~$    & $~$     & $~$     & $~$     \\ \hline
+    $m_{2}$    & $~$    & $~$     & $~$     & $~$     \\ \hline
+    $m_{3}$    & $~$    & $~$     & $~$     & $~$     \\ \hline
+  \end{tabular}
+\end{center}
+
+In each cell, we will fill in what we get when we combine the moves for that row and that column.
+
+First, let's fill in what ``$m_{1} \opSymbol/ m_{2}$'' is equal to. We know from above that ``$m_{1} \opSymbol/ m_{2}$'' is equal to ``$m_{3}$.'' So let's find ``$m_{1}$'' on the left side of the table and ``$m_{2}$'' at the top of the table, and then let's write ``$m_{3}$'' where that row and column meet:
+
+\begin{aside}
+  \begin{remark}
+    In a Caley table, the rows and columns correspond to the two moves that we combine, and the cell where each row/column meets tells us which move the combination of that row/column is equal to. Hence, in this picture, we can see that combining $m_{1}$ and $m_{2}$ is equal to $m_{3}$, i.e., it tells us that ``$m_{1} \opSymbol/ m_{2}$'' equals ``$m_{3}$.''
+  \end{remark}
+\end{aside}
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $m_{0}$ & $m_{1}$ & \cellcolor{grey3} $m_{2}$ & $m_{3}$ \\ \hline \hline
+    $m_{0}$    & $~$    & $~$     & \cellcolor{grey3} $~$     & $~$     \\ \hline
+    \cellcolor{grey3} $m_{1}$    & \cellcolor{grey3} $~$    & \cellcolor{grey3} $~$     & \cellcolor{grey3} $\mathbf{m_{3}}$     & $~$     \\ \hline
+    $m_{2}$    & $~$    & $~$     & $~$     & $~$     \\ \hline
+    $m_{3}$    & $~$    & $~$     & $~$     & $~$     \\ \hline
+  \end{tabular}
+\end{center}
+
+Whenever we want to find out what ``$m_{1} \opSymbol/ m_{2}$'' equals, we can just look it up in this table.
+
+Next, let's fill in what ``$m_{0} \opSymbol/ m_{1}$'' is equal to, since we know this one too. Above, we saw that ``$m_{0} \opSymbol/ m_{1}$'' is equal to ``$m_{1}$,'' so let's add that in:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $m_{0}$ & \cellcolor{grey3} $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline \hline
+    \cellcolor{grey3} $m_{0}$    & \cellcolor{grey3} $~$    & \cellcolor{grey3} $\mathbf{m_{1}}$     & $~$     & $~$     \\ \hline
+    $m_{1}$    & $~$    & $~$     & $m_{3}$     & $~$     \\ \hline
+    $m_{2}$    & $~$    & $~$     & $~$     & $~$     \\ \hline
+    $m_{3}$    & $~$    & $~$     & $~$     & $~$     \\ \hline
+  \end{tabular}
+\end{center}
+
+\begin{aside}
+  \begin{remark}
+    It would be a good exercise to fill out this table for yourself, on a separate piece of paper, then check it against the table here.
+  \end{remark}
+\end{aside}
+
+We can go on like this, filling in every cell. Here is the full table, with everything filled in:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline \hline
+    $m_{0}$    & $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline
+    $m_{1}$    & $m_{1}$ & $m_{2}$ & $m_{3}$ & $m_{0}$ \\ \hline
+    $m_{2}$    & $m_{2}$ & $m_{3}$ & $m_{0}$ & $m_{1}$ \\ \hline
+    $m_{3}$    & $m_{3}$ & $m_{0}$ & $m_{1}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Solving Equations}
+
+\newthought{Now that we have a Caley table}, we can \vocab{solve equations}, by looking up combinations in this table. As an example, consider the following equation:
+
+\begin{aside}
+  \begin{notation}
+    The parentheses in the equation tell us which combination to do first. We always solve \emph{inside} the parentheses first.
+  \end{notation}
+\end{aside}
+
+\begin{equation*}
+  m_{2} \opSymbol/ (m_{3} \opSymbol/ m_{2}) = ??
+\end{equation*}
+
+How do we solve this? Well, we could look at the floor plans of our museum, then figure it out by drawing in the correct number of arrows. But we can also just use our Cayley table. First, we look at ``$m_{3} \opSymbol/ m_{2}$'':
+
+\begin{diagram}
+
+  \node at (-2.5, 0) {$m_{2}$};
+  \node at (-1.5, 0) {$\opSymbol/$};
+  \node at (-0.5, 0) {$($};
+  \node at (0, 0) {$m_{3}$};
+  \node at (1, 0) {$\opSymbol/$};
+  \node at (2, 0) {$m_{2}$};
+  \node at (2.5, 0) {$)$};
+
+  \draw (-0.25, -0.25) -- (-0.25, -0.5) -- (2.25, -0.5) -- (2.25, -0.25);
+  \draw[->] (1, -0.5) -- (1, -1);
+  \node at (1, -1.25) {$??$};
+
+\end{diagram}
+
+To ``solve'' this, we look in our table. We find ``$m_{3}$'' on the left and ``$m_{2}$'' at the top, and we look where they meet:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $m_{0}$ & $m_{1}$ & \cellcolor{grey3} $m_{2}$ & $m_{3}$ \\ \hline \hline
+    $m_{0}$    & $m_{0}$ & $m_{1}$ & \cellcolor{grey3} $m_{2}$ & $m_{3}$ \\ \hline
+    $m_{1}$    & $m_{1}$ & $m_{2}$ & \cellcolor{grey3} $m_{3}$ & $m_{0}$ \\ \hline
+    $m_{2}$    & $m_{2}$ & $m_{3}$ & \cellcolor{grey3} $m_{0}$ & $m_{1}$ \\ \hline
+    \cellcolor{grey3} $m_{3}$    & \cellcolor{grey3} $m_{3}$ & \cellcolor{grey3} $m_{0}$ & \cellcolor{grey3} $\mathbf{m_{1}}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+So the answer to ``$m_{3} \opSymbol/ m_{2}$'' is ``$m_{1}$'':
+
+\begin{diagram}
+
+  \node at (-2.5, 0) {$m_{2}$};
+  \node at (-1.5, 0) {$\opSymbol/$};
+  \node at (-0.5, 0) {$($};
+  \node at (0, 0) {$m_{3}$};
+  \node at (1, 0) {$\opSymbol/$};
+  \node at (2, 0) {$m_{2}$};
+  \node at (2.5, 0) {$)$};
+
+  \draw (-0.25, -0.25) -- (-0.25, -0.5) -- (2.25, -0.5) -- (2.25, -0.25);
+  \draw[->] (1, -0.5) -- (1, -1);
+  
+  \node at (1, -1.25) {$\mathbf{m_{1}}$};
+
+\end{diagram}
+
+Next, we want to figure out ``$m_{2} \opSymbol/ m_{1}$'':
+
+\begin{aside}
+  \begin{remark}
+    Once we have ``solved'' inside the parentheses, we substitute in the answer. Then we solve what remains.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node at (-2.5, 0) {$m_{2}$};
+  \node at (-1.5, 0) {$\opSymbol/$};
+  \node at (-0.5, 0) {$($};
+  \node at (0, 0) {$m_{3}$};
+  \node at (1, 0) {$\opSymbol/$};
+  \node at (2, 0) {$m_{2}$};
+  \node at (2.5, 0) {$)$};
+
+  \draw (-0.25, -0.25) -- (-0.25, -0.5) -- (2.25, -0.5) -- (2.25, -0.25);
+  \draw[->] (1, -0.5) -- (1, -1);
+
+  \draw[->,dotted] (-2.5, -0.5) -- (-2.5, -1);
+  \draw[->,dotted] (-1.5, -0.5) -- (-1.5, -1);
+  
+  \node at (-2.5, -1.25) {$m_{2}$};
+  \node at (-1.5, -1.25) {$\opSymbol/$};
+  \node at (1, -1.25) {$m_{1}$};
+  
+  \draw (-2.75, -1.5) -- (-2.75, -1.75) -- (1.25, -1.75) -- (1.25, -1.5);
+  \draw[->] (-1.5, -1.75) -- (-1.5, -2.25);
+  \node at (-1.5, -2.5) {$??$};
+
+\end{diagram}
+
+To figure out the answer to ``$m_{2} \opSymbol/ m_{1}$,'' we look in our table again. We find ``$m_{2}$'' on the left side and ``$m_{1}$'' at the top, then we look where they meet:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $m_{0}$ & \cellcolor{grey3} $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline \hline
+    $m_{0}$    & $m_{0}$ & \cellcolor{grey3} $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline
+    $m_{1}$    & $m_{1}$ & \cellcolor{grey3} $m_{2}$ & $m_{3}$ & $m_{0}$ \\ \hline
+    \cellcolor{grey3} $m_{2}$    & \cellcolor{grey3} $m_{2}$ & \cellcolor{grey3} $\mathbf{m_{3}}$ & $m_{0}$ & $m_{1}$ \\ \hline
+    $m_{3}$    & $m_{3}$ & $m_{0}$ & $m_{1}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+So the answer to ``$m_{2} \opSymbol/ m_{1}$'' is ``$m_{3}$'':
+
+\begin{diagram}
+
+  \node at (-2.5, 0) {$m_{2}$};
+  \node at (-1.5, 0) {$\opSymbol/$};
+  \node at (-0.5, 0) {$($};
+  \node at (0, 0) {$m_{3}$};
+  \node at (1, 0) {$\opSymbol/$};
+  \node at (2, 0) {$m_{2}$};
+  \node at (2.5, 0) {$)$};
+
+  \draw (-0.25, -0.25) -- (-0.25, -0.5) -- (2.25, -0.5) -- (2.25, -0.25);
+  \draw[->] (1, -0.5) -- (1, -1);
+
+  \draw[->,dotted] (-2.5, -0.5) -- (-2.5, -1);
+  \draw[->,dotted] (-1.5, -0.5) -- (-1.5, -1);
+  
+  \node at (-2.5, -1.25) {$m_{2}$};
+  \node at (-1.5, -1.25) {$\opSymbol/$};
+  \node at (1, -1.25) {$m_{1}$};
+  
+  \draw (-2.75, -1.5) -- (-2.75, -1.75) -- (1.25, -1.75) -- (1.25, -1.5);
+  \draw[->] (-1.5, -1.75) -- (-1.5, -2.25);
+  \node at (-1.5, -2.5) {$\mathbf{m_{3}}$};
+
+\end{diagram}
+
+With that, we have solved our equation:
+
+\begin{equation*}
+  m_{2} \opSymbol/ (m_{3} \opSymbol/ m_{2}) = m_{3}
+\end{equation*}
+
+\begin{example}
+
+As a further example, see if you can figure out if this is true:
+
+\begin{aside}
+  \textbf{Solutions}. The first equation is indeed true. Here's the computation:
+    \begin{align*}
+      m_{2} \opSymbol/ m_{3} &= ((m_{3} \opSymbol/ m_{0}) \opSymbol/ m_{1}) \opSymbol/ m_{1} \\
+      m_{1} &= (m_{3} \opSymbol/ m_{1}) \opSymbol/ m_{1} \\
+      m_{1} &= m_{0} \opSymbol/ m_{1} \\
+      m_{1} &= m_{1}
+    \end{align*}
+    
+    Here's a solution to the second question:
+    
+    \begin{align*}
+      m_{2} \opSymbol/ x &= m_{0} \\
+      m_{2} \opSymbol/ m_{2} &= m_{0} \\
+      \text{ so } x &= m_{2}
+    \end{align*}
+\end{aside}
+    
+\begin{equation*}
+  m_{2} \opSymbol/ m_{3} = ((m_{3} \opSymbol/ m_{0}) \opSymbol/ m_{1}) \opSymbol/ m_{1}
+\end{equation*}
+    
+Would doing the moves on the left side of the equation get us to the same gallery as doing the moves on the right side of the equation? To answer this, use the Cayley table to simplify the left side and the right side of the equation.
+
+Here's a final example. Consider this:
+
+\begin{equation*}
+  m_{2} \opSymbol/ x = m_{0}
+\end{equation*}
+
+Which move ($m_{0}$, $m_{1}$, $m_{2}$, or $m_{3}$) can we put in place of $x$ to make this equation true? To solve this, use the Cayley table.
+
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we looked at an example of ``combining things inside a set.'' In this case, we had a set consisting of four movements that we could do to move through the galleries in a museum: 
+
+\begin{equation*}
+  \{ m_{0}, m_{1}, m_{2}, m_{3} \}
+\end{equation*}
+
+With this, we did the following:
+
+\begin{itemize}
+
+  \item We noted that we can \vocab{combine} movements, in the sense that we can do one movement $m_{i}$ and then immediately follow it up with another movement $m_{j}$ (where $m_{i}$ and $m_{j}$ are any of our four possible moves). To symbolize that we combine the movements $m_{i}$ and $m_{j}$ in this fashion, we write: ``$m_{i} \opSymbol/ m_{j}$.''
+  
+  \item We also noted that when we do combine movements $m_{i}$ and $m_{j}$ in this fashion, the combination movement ``$m_{i} \opSymbol/ m_{j}$'' takes us to the \emph{same location} as another one of our movements $m_{k}$ (where $m_{k}$ is one of our four possible moves). So, we can say that ``$m_{i} \opSymbol/ m_{j}$'' is \vocab{equal} to ``$m_{k}$,'' which we write like this: $\op{m_{i}}{m_{j}} = m_{k}$.
+  
+  \item We can build a \vocab{Caley table}, which records every combination of two movements, and it shows us which other movement each combination is equal to.
+  
+  \item Using a Caley table, we can \vocab{solve equations} about which movements and combinations thereof are equal.
+
+\end{itemize}
+
+\end{document}

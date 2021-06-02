@@ -1,0 +1,259 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Isomorphism}
+\label{ch:function-isomorphism}
+
+\newtopic{I}{n the last chapter} we learned \ldots
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Inverses}
+
+\newthought{An interesting fact} about bijective functions is that they are reversible. For any bijective function $\func{f}$ that goes from $\set{A}$ to $\set{B}$, we can construct another function from $\set{B}$ to $\set{A}$ that takes us right back to the same points we started with. We call such a function the \vocab{inverse} of $\func{f}$, and we denote it like this:
+
+\begin{terminology}
+  A function $\func{f}$ is \vocab{reversible} if we can construct another function that takes us back to $\func{f}$'s starting points. We denote the inverse of $\func{f}$ like this: $\invfunc{f}$.
+\end{terminology}
+
+\begin{equation*}
+  \invfunc{f}
+\end{equation*}
+
+Let's look at a picture of what this looks like, so we can see it in more detail. The following is a picture of a function $\func{f}$ and its inverse $\invfunc{f}$. I've drawn $\func{f}$ with solid lines, and $\invfunc{f}$ with dashed lines, so we can tell them apart:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (0, 1.75) {$\func{f}$};
+  \draw[->,spaced] (k1) to[out=10,in=170] (v1);
+  \draw[->,spaced] (k2) to[out=10,in=170] (v2);
+  \draw[->,spaced] (k3) to[out=10,in=170] (v3);
+
+  \node (finv) at (0, -1.5) {$\invfunc{f}$};
+  \draw[->,spaced,dashed] (v1) to[out=190,in=350] (k1);
+  \draw[->,spaced,dashed] (v2) to[out=190,in=350] (k2);
+  \draw[->,spaced,dashed] (v3) to[out=190,in=350] (k3);
+
+\end{diagram}
+
+The defining feature here is that we can use these two mappings to go back and forth, and we always end up right where we started. Pick any $x$ from $\set{A}$ and follow the arrow to $\func{f}(x)$. Then, use $\invfunc{f}$ to go back. You should end up right back at $x$. We can state that like so:
+
+\begin{aside}
+  \begin{remark}
+    A bijective function and its inverse are characterized by the fact that we can use them to go from one set to the other, then back again, and we will always end up right where we started.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \text{for any $x \in \set{A}$, if } \func{f}(x) = y, \text{ then } \invfunc{f}(y) = x.
+\end{equation*}
+
+Read that aloud like so: ``for any element $x$ in the set $\set{A}$, if the function $\func{f}$ maps $x$ to $y$, then the inverse function $\invfunc{f}$ maps $y$ back to $x$.'' Or, to be more concise, you could say: ``for any $x$ in $\set{A}$, if $\func{f}$ maps $x$ to $y$, then $\invfunc{f}$ maps $y$ to $x$.''
+
+It's the same the other way too, if we start from $\set{B}$. Pick any $y$ from $\set{B}$, and follow the arrow to $\invfunc{f}(y)$. Then, use $\func{f}$ to go back. You should end up right back at $y$. We can state this point too, like so:
+
+\begin{equation*}
+  \text{for any $y \in \set{B}$, if } \invfunc{f}(y) = x, \text{ then } \func{f}(x) = y.
+\end{equation*}
+
+Let's put all of this down in a definition of inverses.
+
+\begin{fdefinition}[Inverses]
+  \label{def:inverses}
+  For any sets $\set{A}$, $\set{B}$ and function $\funcsig{f}{\set{A}}{\set{B}}$, we will say that there is an \vocab{inverse} of $\func{f}$, which we will denote as $\invfunc{f}$, if the following two conditions hold: (i) for any $x \in \set{A}$, if $\func{f}(x) = y$, then $\invfunc{f}(y) = x$, and (ii) for any $y \in \set{B}$, if $\invfunc{f}(y) = x$, then $\func{f}(x) = y$. If $\func{f}$ has an inverse $\invfunc{f}$, we will say that $\func{f}$ is \vocab{reversible}.
+\end{fdefinition}
+
+Here is another bijective function with its inverse:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (0, 1.75) {$\func{f}$};
+  \draw[->,spaced] (k1) to[out=10,in=170] (v2);
+  \draw[->,spaced] (k2) to[out=10,in=170] (v3);
+  \draw[->,spaced] (k3) to[out=10,in=170] (v1);
+
+  \node (finv) at (0, -1.5) {$\invfunc{f}$};
+  \draw[->,spaced,dashed] (v1) to[out=190,in=350] (k3);
+  \draw[->,spaced,dashed] (v2) to[out=190,in=350] (k1);
+  \draw[->,spaced,dashed] (v3) to[out=190,in=350] (k2);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    To check whether a bijective function and a function going the other way truly are inverses, check \vocab{both ways}. That is, check that if you follow the arrows out and then back, you end up right back where you started, for each point on the left side, and then for each point on the right side.
+  \end{remark}
+\end{aside}
+
+This picture looks a little more complicated than the previous one, but this is only because the arrows are crossing each other. But nevertheless, this is a bijection and its inverse. 
+
+We can check that this is so by following the arrows from one side and then back, and confirming that we always end up back at the same starting point. And indeed, if you do this check yourself, you'll find that no matter which side you start on, you'll always end up back at the same point. For instance, $\func{f}(a)$ goes to $2$, and $\invfunc{f}(2)$ goes right back to $a$. Similarly, $\invfunc{f}(3)$ goes to $b$, and $\func{f}(b)$ goes right back to $3$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Isomorphism}
+
+\newthought{If two sets} have a bijection (and hence also have an inverse), then that lets us go back and forth between them. When this is so, we say that the two sets are \vocab{isomorphic} to each other. 
+
+\begin{terminology}
+  If two sets have a bijection and inverse between them, we say they are \vocab{isomorphic}, which means they have the same shape.
+\end{terminology}
+
+The word ``isomorphic'' derives from the Greek words ``iso'' and ``morphe,'' meaning ``same'' and ``shape.'' In essence, if there is a bijection between two sets, then this tells us that those two sets have the \vocab{same shape}. 
+
+Let's think about that for a moment. If we have a bijection (and hence also its inverse), then this tells us that, in fact, the two sets do have exactly the same shape. After all, there is a one-to-one correspondence between them. For each element in the one, there is a corresponding ``twin'' in the other. 
+
+\begin{aside}
+  \begin{remark}
+    If two sets have a bijection, then this means that each element in the one has a ``twin'' in the other. So the two sets are basically just mirror images of each other, as it were.
+  \end{remark}
+\end{aside}
+
+Of course, the \emph{names} of the elements inside the two sets may be different, but given that every element in the one has a twin in the other, it follows that the basic shape of these two sets are completely the same.
+
+As an example, consider these isomorphic sets:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (0, 1.75) {$\func{f}$};
+  \draw[->,spaced] (k1) to[out=10,in=170] (v1);
+  \draw[->,spaced] (k2) to[out=10,in=170] (v2);
+  \draw[->,spaced] (k3) to[out=10,in=170] (v3);
+
+  \node (finv) at (0, -1.5) {$\invfunc{f}$};
+  \draw[->,spaced,dashed] (v1) to[out=190,in=350] (k1);
+  \draw[->,spaced,dashed] (v2) to[out=190,in=350] (k2);
+  \draw[->,spaced,dashed] (v3) to[out=190,in=350] (k3);
+
+\end{diagram}
+
+These two sets have different names for their elements. In $\set{A}$ the elements are named $a$, $b$, and $c$, whereas in $\set{B}$ they are named $1$, $2$, and $3$. But those are just names. 
+
+\begin{aside}
+  \begin{remark}
+    If two sets have the same shape, then the only real difference between them is just the \vocab{names} of the elements.
+  \end{remark}
+\end{aside}
+
+But the fact that we have a bijection and its inverse shows us that we can ``translate'' from one to the other seamlessly. The bijection is basically just a name translator. We might want to call the element ``$a$,'' but we can translate it to ``$1$'' (and we can translate ``$1$'' back to ``$a$''). 
+
+So to say that these two sets are isomorphic, is to say that they have exactly the same shape and they just have different names (which we can translate with the bijection and its inverse). 
+
+\begin{terminology}
+  A bijection (or its inverse) is called an \vocab{isomorphism} because it shows us that the two sets in question are isomorphic. Hence, the terms ``bijection'' and ``isomorphism'' are synonyms.
+\end{terminology}
+
+Because a bijection tells us that the two sets are isomorphic, \mathers/ sometimes call a bijection an \emph{isomorphism}. An \vocab{isomorphism} is just a bijective function that has an inverse.
+
+Let us put all this down as a definition. 
+
+\begin{fdefinition}[Isomorphisms]
+  For any sets $\set{A}$, $\set{B}$ and any function $\funcsig{f}{\set{A}}{\set{B}}$, we will say that $\func{f}$ is an \vocab{isomorphism} if $\func{f}$ is a reversible bijection. If there is an isomporphism $\func{f}$ between $\set{A}$ and $\set{B}$, then we will say that $\set{A}$ and $\set{B}$ are \vocab{isomorphic}, and we will denote that like this: $\set{A} \isomorphic/ \set{B}$. 
+\end{fdefinition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Sameness up to Isomorphism}
+
+Isomorphism gives us another way to talk about how two sets are ``the same.'' Earlier, we learned about \vocab{set equality}: two sets are \emph{equal} if they have exactly the same elements. But often, we don't really care what the elements are called. Really, if the two sets have the same shape, that's good enough. 
+
+\begin{aside}
+  \begin{remark}
+    Set equality is a very strict kind of equality: it requires that the two sets in question have \emph{exactly} the same elements (and that even means that the elements must have the same names). Isomorphism lets us talk about a looser kind of sameness.
+  \end{remark}
+\end{aside}
+
+To look at our last example, suppose we remove the names, and just look at the two sets as bags of dots. The following picture is what that looks like, and we can see that our two sets really do have the same shape:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) {};
+  \node[dot] (k2) at (-3.75, 0) {};
+  \node[dot] (k3) at (-3, -0.75) {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) {};
+  \node[dot] (v2) at (2.25, 0.25) {};
+  \node[dot] (v3) at (3, -0.75) {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+\end{diagram}
+
+To capture the idea that these two sets are ``the same'' in this looser sense (i.e., in the sense that they have the same shape, and they differ only in the names of their elements), we say that they are the same \vocab{up to isomorphism}.
+
+Here we have hit upon a concept in \math/ that occurs over and over again. In \math/, we are interested in structures that have the \emph{same shape}. That is, we are interested in structures that are \emph{isomorphic}. 
+
+How do we determine if two structures have the same shape? We can tell that they are isomorphic if we can construct an isomorphism --- that is, if we can construct a function that maps each part of one to a ``twin'' part of the other, and then we can construct another function that maps them back again to exactly the same starting points. If we can do that, then we know the two structures are isomorphic. 
+
+\begin{aside}
+  \begin{remark}
+    This is a key idea in \math/ that we will see over and over again. In many areas of \math/, we want to establish (a) what the \vocab{structures} that we are studying look like, and (b) what the \vocab{structure preserving maps} look like for these structures.
+  \end{remark}
+\end{aside}
+
+\Mathers/ often call such isomorphisms that ``translate'' from one structure to another and back again \vocab{structure preserving maps} or \vocab{structure preserving functions}, because they are maps that preserve the basic structure of the things they are translating between. We will encounter structure-preserving maps repeatedly as we proceed.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about a new way to think about ``sameness'' of sets. 
+
+\begin{itemize}
+
+  \item If there is a bijection $\func{f}$ that goes from $\set{A}$ to $\set{B}$, then there is an \vocab{inverse} function that goes from $\set{B}$ to $\set{A}$ and takes us right back to where we started. The inverse function of $\func{f}$ is denoted $\invfunc{f}$.
+  
+  \item If two sets have a bijection (and hence an inverse) between them, then we say they are \vocab{isomorphic}. The fact that there is a bijection between them tells us that they have the very same shape, and differ only in the names of their elements.
+  
+  \item Because a bijection translates between isomorphic sets, we can also call a bijection an \vocab{isomorphism}. 
+  
+  \item The idea of \vocab{isomorphic structures} and \vocab{structure preserving maps} that we can use to translate between them is a far-reaching idea that occurs everywhere in \math/.
+
+\end{itemize}
+
+\end{document}

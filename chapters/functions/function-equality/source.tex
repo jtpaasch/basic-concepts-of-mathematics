@@ -1,0 +1,499 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Function Equality}
+
+\newtopic{I}{n the last chapter} we introduced functions. As we saw, a \vocab{function} maps the elements from one set to the elements of another set. To be more exact, a function maps \emph{each} element from the first set to \emph{one} element in the second set. 
+
+In this chapter, we will discuss the question of \vocab{function equality}. When do we consider two functions to be equal?
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Equality}
+
+\newthought{When are two functions the same?} The answer is: they are the same if they map the \vocab{same keys} to the \vocab{same values}. To put it in terms of functions and sets, we consider two functions to be the same if they map the same elements in the domain to the same elements in the codomain.
+
+For example, suppose we have two sets. For the moment, it doesn't matter which sets we're using, so let's just pick a couple of arbitrary sets, and call them $\set{A}$ and $\set{B}$:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) {};
+  \node[dot] (k2) at (-3.75, 0.5) {};
+  \node[dot] (k3) at (-3, -0.25) {};
+  \node[dot] (k4) at (-2.5, -1) {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) {};
+  \node[dot] (v2) at (2.25, 0.25) {};
+  \node[dot] (v3) at (3, -0.75) {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+\end{diagram}
+
+Suppose now that we have a function $\func{f}$ which goes from $\set{A}$ to $\set{B}$. For instance, suppose $\func{f}$ looks like this:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) {};
+  \node[dot] (k2) at (-3.75, 0.5) {};
+  \node[dot] (k3) at (-3, -0.25) {};
+  \node[dot] (k4) at (-2.5, -1) {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) {};
+  \node[dot] (v2) at (2.25, 0.25) {};
+  \node[dot] (v3) at (3, -0.75) {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (-1, 2.5) {$\func{f}$};
+  \draw[->,spaced] (k1) to[out=40,in=130] (v1);
+  \draw[->,spaced] (k2) to[out=10,in=160] (v2);
+  \draw[->,spaced] (k3) to[out=20,in=170] (v2);
+  \draw[->,spaced] (k4) to[out=340,in=200] (v3);
+
+\end{diagram}
+
+Now suppose that we have another function $\func{g}$, which also goes from $\set{A}$ to $\set{B}$. I'll draw $\func{g}$ with dashed lines, so that we can tell it apart from $\func{f}$. So, let's suppose that $\func{g}$ looks like this:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) {};
+  \node[dot] (k2) at (-3.75, 0.5) {};
+  \node[dot] (k3) at (-3, -0.25) {};
+  \node[dot] (k4) at (-2.5, -1) {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) {};
+  \node[dot] (v2) at (2.25, 0.25) {};
+  \node[dot] (v3) at (3, -0.75) {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (-1, 2.5) {$\func{f}$};
+  \draw[->,spaced] (k1) to[out=40,in=130] (v1);
+  \draw[->,spaced] (k2) to[out=10,in=160] (v2);
+  \draw[->,spaced] (k3) to[out=20,in=170] (v2);
+  \draw[->,spaced] (k4) to[out=340,in=200] (v3);
+
+  \node (g) at (1, -2.5) {$\func{g}$};
+  \draw[->,dashed,spaced] (k1) to[out=20,in=160] (v1);
+  \draw[->,dashed,spaced] (k2) to[out=340,in=210] (v2);
+  \draw[->,dashed,spaced] (k3) to[out=330,in=220] (v2);
+  \draw[->,dashed,spaced] (k4) to[out=300,in=220] (v3);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    To check if two functions are equal, check what they do with each element in the domain. If they are equal, they will map each element in the domain to the same element in the codomain.
+  \end{remark}
+\end{aside}
+
+Now we can ask: are $\func{f}$ and $\func{g}$ the same? To determine this, we go through each element of $\set{A}$, and we check to see if $\func{f}$ and $\func{g}$ map each element to the same element in $\set{B}$. In this case, we can follow the arrows, and we can see that both functions do in fact map each element from $\set{A}$ to the same element in $\set{B}$. So we can conclude that $\func{f}$ and $\func{g}$ are the same.
+
+Now consider another function $\func{h}$. I'll draw it with dashed lines as well, so that we can tell it apart from $\func{f}$:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) {};
+  \node[dot] (k2) at (-3.75, 0.5) {};
+  \node[dot] (k3) at (-3, -0.25) {};
+  \node[dot] (k4) at (-2.5, -1) {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) {};
+  \node[dot] (v2) at (2.25, 0.25) {};
+  \node[dot] (v3) at (3, -0.75) {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (-1, 2.5) {$\func{f}$};
+  \draw[->,spaced] (k1) to[out=40,in=130] (v1);
+  \draw[->,spaced] (k2) to[out=10,in=160] (v2);
+  \draw[->,spaced] (k3) to[out=20,in=170] (v2);
+  \draw[->,spaced] (k4) to[out=340,in=200] (v3);
+
+  \node (h) at (1, -2.5) {$\func{h}$};
+  \draw[->,dashed,spaced] (k1) to[out=20,in=120] (v2);
+  \draw[->,dashed,spaced] (k2) to[out=340,in=260] (v1);
+  \draw[->,dashed,spaced] (k3) to[out=330,in=270] (v1);
+  \draw[->,dashed,spaced] (k4) to[out=300,in=220] (v3);
+
+\end{diagram}
+
+Are $\func{f}$ and $\func{h}$ the same? To determine that, we again need to check each point in $\set{A}$, and see if $\func{f}$ and $\func{h}$ map it to the same point in $\func{B}$. From the picture, we can see that $\func{f}$ and $\func{h}$ do not in fact map all the same points in $\set{A}$ to the same points in $\set{B}$. So $\func{f}$ and $\func{h}$ are not the same.
+
+Let us be a little more formal about how we put this. If we have two functions $\func{f}$ and $\func{g}$ that map elements from $\set{A}$ to elements from $\set{B}$, then $\func{f}$ and $\func{g}$ are the same if they map every $x \in \set{A}$ to the same element in $\set{B}$. That is, if:
+
+\begin{terminology}
+  Two functions are \vocab{the same} or \vocab{equal} if they are the same mappings. That is, if they map the same elements in the domain to the same elements in the codomain.
+\end{terminology}
+
+\begin{equation*}
+  \text{for every } x \in \set{A}, \func{f}(x) = \func{g}(x)
+\end{equation*}
+
+Remember that ``$\func{f}(x)$'' is just a synonym for the element that $\func{f}$ maps $x$ to, and ``$\func{g}(x)$'' is just a synonym for the element that $\func{g}$ maps $x$ to. So the expression ``$\func{f}(x) = \func{g}(x)$'' asserts that whatever $\func{f}$ maps $x$ to, it is equal to whatever $\func{g}$ maps $x$ to. And then when we put ``for every $x \in \set{A}$'' in front, we are asserting that whatever $\func{f}$ maps $x$ to is the same as whatever $\func{g}$ maps $x$, to for \emph{each} element $x$ in the set $\set{A}$.
+
+So let's look at that whole expression again:
+
+\begin{equation*}
+  \text{for every } x \in \set{A}, \func{f}(x) = \func{g}(x)
+\end{equation*}
+
+We can read that aloud like this: ``for every element $x$ in the set $\set{A}$, the element that $\func{f}$ maps $x$ to is the same as the element that $\func{g}$ maps $x$ to.'' Alternatively, you can read it like this: ``for every element $x$ in the set $\set{A}$, when $\func{f}$ is applied to $x$ and when $\func{g}$ is applied to $x$, they both yield the same element.'' Or, even more concisely: ``for every element $x$ in the set $\set{A}$, $\func{f}$ of $x$ is the same as $\func{g}$ of $x$.''
+
+\begin{aside}
+  \begin{remark}
+    We use the equals sign to denote that two functions are the same. Hence, you can read ``$\func{f} = \func{g}$`` as ``$\func{f}$ and $\func{g}$ are equal as functions,'' ``$\func{f}$ is equal to $\func{g}$,'' or ``$\func{f}$ is the same as $\func{g}$.''
+  \end{remark}
+\end{aside}
+
+When two functions (say, $\func{f}$ and $\func{g}$) are indeed the same in this way, then we denote that fact by writing this:
+
+\begin{equation*}
+  \func{f} = \func{g}
+\end{equation*}
+
+You can read that aloud like so: ``$\func{f}$ and $\func{g}$ are equal functions,'' or ``$\func{f}$ and $\func{g}$ are the same functions,'' or even just ``$\func{f}$ and $\func{g}$ are equal.'' 
+
+Let's put all of this down into a definition for function equality.
+
+\begin{fdefinition}[Function equality]
+  \label{def:function-equality}
+  For any two sets $\set{A}$ and $\set{B}$ and for any functions $\func{f}: \set{A} \rightarrow \set{B}$ and $\func{g}: \set{A} \rightarrow \set{B}$, we will say that $\func{f}$ is equal to $\func{g}$ (or synonymously, $\func{f}$ is the same as $\func{g}$) when, for every element $x \in \set{A}$, $\func{f}(x) = \func{g}(x)$. If $\func{f}$ and $\func{g}$ are the same, we will denote that like this: $\func{f} = \func{g}$.
+\end{fdefinition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Specifying Functions}
+
+\newthought{How do we specify} a function? When we want to talk about a function, how do we specify the function we mean? Here there are no hard and fast rules. The only requirement is that we need to clearly communicate to other people exactly which elements are mapped to which other elements.
+
+\begin{terminology}
+  When we introduced sets, we said that ``to specify a set'' means to announce to other people which items are in the set we want to talk about. It is similar with functions. If we want to talk to other people about a function, we need to be able to communicate exactly what the internal mappings are that we have in mind. So, to \vocab{specify a function} is to announce to others the details of the internal mapping that we have in mind.
+\end{terminology}
+
+We have seen a few ways to do this already. Earlier, we used lookup tables and association lists to present mappings. So, one way to specify a function is to write out its complete lookup table, or to write out the complete association list. So long as its complete, anybody can go and look at your table or list, and see the full mapping.
+
+Another way we have been specifying functions is by drawing pictures of sets, and then drawing arrows from the points in one set to the points in the other. This is also a valid way to specify a function. If we have a picture, then anybody can look at the picture, to see the full mapping. 
+
+Another way to specify a function is just to write out every individual mapping explicitly. For example, consider this picture of a function:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0.5) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.25) [label=left:{$c$}] {};
+  \node[dot] (k4) at (-2.5, -1) [label=left:{$d$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (0, 1.5) {$\func{f}$};
+  \draw[->,spaced] (k1) to (v1);
+  \draw[->,spaced] (k2) to (v2);
+  \draw[->,spaced] (k3) to (v2);
+  \draw[->,spaced] (k4) to (v3);
+
+\end{diagram}
+
+We can see that the set $\set{A}$ contains four elements, and the set $\set{B}$ contains three elements, like this:
+
+\begin{equation*}
+  \set{A} = \{ a, b, c, d \} \hskip 2cm \set{B} = \{ 1, 2, 3 \}
+\end{equation*}
+
+We can also see that $\func{f}$ maps $a$ to $1$, it maps $b$ and $c$ to $2$, and it maps $c$ to $3$. We can just write out all of these mappings, like this:
+
+\begin{aside}
+  \begin{notation}
+    For functions that deal with small sets like $\set{A}$ and $\set{B}$ here, it is plenty easy to write out all of the internal mappings in this fashion. 
+  \end{notation}
+\end{aside}
+
+\begin{align*}
+  \text{let } &\func{f}: \set{A} \rightarrow \set{B} \text{ be defined as follows:} \\
+  &\func{f}(a) = 1 \hskip 2cm \func{f}(b) = 2 \\
+  &\func{f}(c) = 2 \hskip 2cm \func{f}(d) = 3
+\end{align*}
+
+That is also a valid way to specify a function. The first line gives us the \vocab{signature} of the function, and the rest tells us what $\func{f}$ maps each element of $\set{A}$ to. This gives everybody all the information there is to know about this function.
+
+Another way to specify a function is to write out its \vocab{association list}, as a set. Like this:
+
+\begin{equation*}
+  \func{f} : \set{A} \rightarrow \set{B} = \{ (a, 1), (b, 2), (c, 2), (d, 3) \}
+\end{equation*}
+
+These ways of specifying a function are all plenty easy to do if the domain and codomain are small sets. But what if we are dealing with a really big function, which maps so many elements that there are just too many to list them all out? 
+
+In these situations, \mathers/ usually just write down a \vocab{rule} or \vocab{recipe} that tells you how to compute or figure out for yourself which elements the function gives back, for any given input. 
+
+For example, suppose we have a function that looks something like the following. I'll first write it out as a lookup table:
+
+\begin{center}
+  \begin{tabular}{| l | l |}
+    \hline
+    \textbf{Key} & \textbf{Value} \\ \hline
+    0 & 0 \\ \hline
+    1 & 2 \\ \hline
+    2 & 4 \\ \hline
+    3 & 6 \\ \hline
+    4 & 8 \\ \hline
+    \ldots & \ldots \\ \hline
+  \end{tabular}
+\end{center}
+
+Here we have a function, which we can just call $\func{f}$. It has whole numbers as its domain, and it also has whole numbers as its codomain. So its signature is this:
+
+\begin{equation*}
+  \func{f} : \e{whole~numbers} \rightarrow \e{whole~numbers}
+\end{equation*}
+
+We can see that $\func{f}$ maps $0$ to $0$, $1$ to $2$, $2$ to $4$, and so on. The dots in the bottom row indicate that this pattern keeps going, forever. We can draw this function as a picture:
+
+\begin{diagram}
+
+  \node[dot] (k0) at (-3, 1.5) [label=left:{$0$}] {};
+  \node[dot] (k1) at (-3, 1) [label=left:{$1$}] {};
+  \node[dot] (k2) at (-3, 0.5) [label=left:{$2$}] {};
+  \node[dot] (k3) at (-3, 0) [label=left:{$3$}] {};
+  \node[dot] (k4) at (-3, -0.5) [label=left:{$4$}] {};
+  \node[dot] (k5) at (-3, -1) [label=left:{$5$}] {};
+  \node (kdots) at (-3, -1.5) {$\vdots$};
+
+  \node[dot] (v0) at (3, 1.5) [label=right:{$0$}] {};
+  \node[dot] (v1) at (3, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (3, 0.5) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, 0) [label=right:{$3$}] {};
+  \node[dot] (v4) at (3, -0.5) [label=right:{$4$}] {};
+  \node[dot] (v5) at (3, -1) [label=right:{$5$}] {};
+  \node[dot] (v6) at (3, -1.5) [label=right:{$6$}] {};
+  \node[dot] (v7) at (3, -2) [label=right:{$7$}] {};
+  \node[dot] (v8) at (3, -2.5) [label=right:{$8$}] {};
+  \node (vdots) at (3, -3) {$\vdots$};  
+
+  \node (f) at (0, 2) {$\func{f}$};
+  \draw[->,spaced] (k0) to (v0);
+  \draw[->,spaced] (k1) to (v2);
+  \draw[->,spaced] (k2) to (v4);
+  \draw[->,spaced] (k3) to (v6);
+  \draw[->,spaced] (k4) to (v8);
+  \draw[->,spaced] (k5) -- (0, -2.5);
+
+\end{diagram}
+
+We can specify this function much more concisely by writing down a rule that tells you how to figure out what all the mapped elements are. Notice that each element in the domain is mapped to the number that is twice its size in the codomain. Hence, $1$ is mapped to $2$, and $2$ is mapped to $4$, and so on. We can put this down in a nice little rule:
+
+\begin{equation*}
+  \text{let $\func{f}$ be defined by the rule: }
+  \func{f}(x) = 2x
+\end{equation*}
+
+What this says is that for any element $x$ in the domain of $\func{f}$, the element that $\func{f}$ maps $x$ to can be computed by multiplying $x$ by 2. In other words, for any input $x$, you can figure out what $\func{f}$ maps $x$ to by doubling it. 
+
+So, for example, if you want to know what $\func{f}$ maps $1$ to, double it ($1$ multiplied by $2$ is $2$). If you want to know what $\func{f}$ maps $2$ to, double it ($2$ multiplied by $2$ is $4$). If you want to know what $\func{f}$ maps $3$ to, double it ($3$ multiplied by $2$ is $6$). 
+
+What does $\func{f}$ map $125$ to? We can figure it out by using our rule: we just double it. Indeed, $125$ multiplied by $2$ is $250$, so $\func{f}(125) = 250$. Hence, even though this function is infinitely large (because it keeps going), we can see that it looks something like this:
+
+\begin{align*}
+  \func{f}(0) &= 0 \\
+  \func{f}(1) &= 2 \\
+  \func{f}(2) &= 4 \\
+  \func{f}(3) &= 6 \\
+  \func{f}(4) &= 8 \\
+  \vdots & ~ \\
+  \func{f}(125) &= 250 \\
+  \vdots & ~
+\end{align*}
+
+Here is another example. Let $\func{g}$ be defined by the following rule:
+
+\begin{equation*}
+  \func{g}(x) = x^{2}
+\end{equation*}
+
+This tells us that for any number $x$, $\func{g}$ is going to map it to the square of that number (i.e., $x^{2}$). Hence, we can see that the function looks something like this:
+
+\begin{align*}
+  \func{f}(0) &= 0 \\
+  \func{f}(1) &= 1 \\
+  \func{f}(2) &= 4 \\
+  \func{f}(3) &= 9 \\
+  \func{f}(4) &= 16 \\
+  \vdots & ~ \\
+  \func{f}(125) &= 15,625 \\
+  \vdots & ~
+\end{align*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Equality Again}
+
+\newthought{Functions can differ} in their rules, and still be equal. To see this, consider the following example. Let $\func{f}$ and $\func{g}$ be defined by the following two rules:
+
+\begin{equation*}
+  \func{f}(x) = (x + 1)^{2} \hskip 2cm \func{g}(x) = x^{2} + 2x + 1
+\end{equation*}
+
+Here $\func{f}$ and $\func{g}$ are defined by different rules. But are they different functions? How do we check? As we saw above, two functions are the same if they map the same elements in the domain to the same elements in the codomain. So, let's see what these two functions look like, by computing a couple of mappings:
+
+\begin{center}
+  \begin{tabular}{| l | l |}
+    \hline
+    \multicolumn{2}{| c |}{$\func{f}$} \\ \hline
+    \textbf{Input} & \textbf{Output} \\ \hline
+    0 & 1 \\ \hline
+    1 & 4 \\ \hline
+    2 & 9 \\ \hline
+    \ldots & \ldots \\ \hline
+    7 & 64 \\ \hline
+    \ldots & \ldots \\ \hline
+    24 & 625 \\ \hline
+    \ldots & \ldots \\ \hline
+  \end{tabular}
+  \hskip 4cm
+  \begin{tabular}{| l | l |}
+    \hline
+    \multicolumn{2}{| c |}{$\func{g}$} \\ \hline
+    \textbf{Input} & \textbf{Output} \\ \hline
+    0 & 1 \\ \hline
+    1 & 4 \\ \hline
+    2 & 9 \\ \hline
+    \ldots & \ldots \\ \hline
+    7 & 64 \\ \hline
+    \ldots & \ldots \\ \hline
+    24 & 625 \\ \hline
+    \ldots & \ldots \\ \hline
+  \end{tabular}
+\end{center}
+
+Both of these functions appear to map the same inputs to the same outputs, so these two functions look to be the same. We can also draw these two functions, to see it more visually. I'll use solid arrows for $\func{f}$, and dashed arrows for $\func{g}$:
+
+\begin{ponder}
+  To say that $\func{f}$ and $\func{g}$ are the same functions means that $\func{f}(x) = \func{g}(x)$ for every $x$. In other words, it means that $\func{f}$ and $\func{g}$ map every element from the left side to the same element on the right side.
+\end{ponder}
+
+\begin{diagram}
+
+  \node[dot] (k0) at (-3, 1.5) [label=left:{$0$}] {};
+  \node[dot] (k1) at (-3, 1) [label=left:{$1$}] {};
+  \node[dot] (k2) at (-3, 0.5) [label=left:{$2$}] {};
+  \node[dot] (k3) at (-3, 0) [label=left:{$3$}] {};
+  \node[dot] (k4) at (-3, -0.5) [label=left:{$4$}] {};
+  \node (kdots) at (-3, -1) {$\vdots$};
+
+  \node[dot] (v0) at (3, 1.5) [label=right:{$0$}] {};
+  \node[dot] (v1) at (3, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (3, 0.5) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, 0) [label=right:{$3$}] {};
+  \node[dot] (v4) at (3, -0.5) [label=right:{$4$}] {};
+  \node[dot] (v5) at (3, -1) [label=right:{$5$}] {};
+  \node[dot] (v6) at (3, -1.5) [label=right:{$6$}] {};
+  \node[dot] (v7) at (3, -2) [label=right:{$7$}] {};
+  \node[dot] (v8) at (3, -2.5) [label=right:{$8$}] {};
+  \node[dot] (v9) at (3, -3) [label=right:{$9$}] {};
+  \node (vdots) at (3, -3.5) {$\vdots$};  
+
+  \node (f) at (1.5, 2) {$\func{f}$};
+  \draw[->,spaced] (-3, 1.6) to[out=0,in=170] (3, 1.1);
+  \draw[->,spaced] (-3, 1.1) to[out=350,in=160] (3, -0.4);
+  \draw[->,spaced] (-3, 0.6) to[out=340,in=130] (3, -2.9);
+  \draw[->,spaced] (-3, 0.1) to[out=335,in=120] (0, -2.5);
+  \draw[->,spaced] (-3, -0.4) to[out=325,in=110] (-1, -3.5);
+
+  \node (g) at (-2.5, -2.5) {$\func{g}$};
+  \draw[->,spaced,dashed] (-3, 1.4) to[out=0,in=170] (3, 0.9);
+  \draw[->,spaced,dashed] (-3, 0.9) to[out=350,in=160] (3, -0.6);
+  \draw[->,spaced,dashed] (-3, 0.4) to[out=340,in=130] (3, -3.2);
+  \draw[->,spaced,dashed] (-3, -0.1) to[out=335,in=120] (-0.1, -2.7);
+  \draw[->,spaced,dashed] (-3, -0.6) to[out=325,in=110] (-1.1, -3.6);
+
+\end{diagram}
+
+In this picture too, we can see that $\func{f}$ and $\func{g}$ map each item on the left to the same item on the right. So these two functions look to be equal, even though they have different rules.
+
+Let's consider one more pair of functions. Let $\func{f}$ and $\func{g}$ be defined by these rules:
+
+\begin{equation*}
+  \func{f}(x) = 2x \hskip 2cm \func{g}(x) = 2x + 1
+\end{equation*}
+
+Are these versions of $\func{f}$ and $\func{g}$ different functions? As before, we can figure this out by checking that $\func{f}$ maps each $x$ to the same element that $\func{g}$ does. Let's look at the picture:
+
+\begin{diagram}
+
+  \node[dot] (k0) at (-3, 1.5) [label=left:{$0$}] {};
+  \node[dot] (k1) at (-3, 1) [label=left:{$1$}] {};
+  \node[dot] (k2) at (-3, 0.5) [label=left:{$2$}] {};
+  \node[dot] (k3) at (-3, 0) [label=left:{$3$}] {};
+  \node[dot] (k4) at (-3, -0.5) [label=left:{$4$}] {};
+  \node (kdots) at (-3, -1) {$\vdots$};
+
+  \node[dot] (v0) at (3, 1.5) [label=right:{$0$}] {};
+  \node[dot] (v1) at (3, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (3, 0.5) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, 0) [label=right:{$3$}] {};
+  \node[dot] (v4) at (3, -0.5) [label=right:{$4$}] {};
+  \node[dot] (v5) at (3, -1) [label=right:{$5$}] {};
+  \node[dot] (v6) at (3, -1.5) [label=right:{$6$}] {};
+  \node[dot] (v7) at (3, -2) [label=right:{$7$}] {};
+  \node[dot] (v8) at (3, -2.5) [label=right:{$8$}] {};
+  \node[dot] (v9) at (3, -3) [label=right:{$9$}] {};
+  \node (vdots) at (3, -3.5) {$\vdots$};  
+
+  \node (f) at (1.5, 2) {$\func{f}$};
+  \draw[->,spaced] (k0) to (v0);
+  \draw[->,spaced] (k1) to (v2);
+  \draw[->,spaced] (k2) to (v4);
+  \draw[->,spaced] (k3) to (v6);
+  \draw[->,spaced] (k4) to (v8);
+
+  \node (g) at (-1.5, -2) {$\func{g}$};
+  \draw[->,spaced,dashed] (k0) to (v1);
+  \draw[->,spaced,dashed] (k1) to (v3);
+  \draw[->,spaced,dashed] (k2) to (v5);
+  \draw[->,spaced,dashed] (k3) to (v7);
+  \draw[->,spaced,dashed] (k4) to (v9);
+
+\end{diagram}
+
+We can see from this picture that $\func{f}$ and $\func{g}$ do not map the elements on the left to the same elements on the right. For instance, $\func{f}$ maps $0$ to $0$ while $\func{g}$ maps it to $1$, $\func{f}$ maps $1$ to $2$ while $\func{g}$ maps it to $3$, and so on. So we can conclude that, in this case, $\func{f}$ and $\func{g}$ are not the same functions.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+In this chapter, we learned about \vocab{function equality}. We learned that two functions are the same (or ``equal'') when they map the same elements in the domain to the same elements in the codomain.
+
+\begin{itemize}
+
+  \item More exactly, a function $\func{f} : \set{A} \rightarrow \set{B}$ is equal to a function $\func{g} : \set{A} \rightarrow \set{B}$ if $\func{f}(x) = \func{g}(x)$ for every $x$ in $\set{A}$.
+  
+  \item If functions are very large, we can \vocab{specify them} by stating a \vocab{rule} or \vocab{recipe} that tells us how to calculate the mappings ourselves.
+  
+  \item If two functions are specified with different rules, that does not mean they are different functions. If they map the same inputs to the same outputs, they are still the same functions.
+
+\end{itemize}
+
+
+\end{document}

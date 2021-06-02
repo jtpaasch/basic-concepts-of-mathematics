@@ -1,0 +1,494 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Mappings}
+
+\newtopic{W}{e very often} make mappings from one set of things to another set of things. For example, a phone directory maps people to phone numbers, whereas a product catalogue maps serial numbers to prices.
+
+\begin{ponder}
+  What kinds of mappings do you use to organize things, remember things, or even to understand things?
+\end{ponder}
+
+In this chapter, we will look at a very common way to present a mapping, called \vocab{lookup tables}. We will also learn about another way to present the same information, called \vocab{association lists}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lookup Tables}
+
+\newthought{In essence}, a \vocab{lookup table} is a table that indexes some data with lookup keys. A key could be a serial number, a last name, or whatever, so long as it is unique. A key is just a unique identifier, that we can use to pick out the piece of data we are looking for in the table.
+
+\begin{terminology}
+  A \vocab{lookup table} indexes information by keys. It makes it easy for us to lookup a particular piece of data by its key. A \vocab{key} is just a unique label that lets us identify the piece of data we want to lookup.
+\end{terminology}
+
+As an example of a lookup table, consider the following office phone directory:
+
+\begin{center}
+  \begin{tabular}{| l | l |}
+    \hline
+    \textbf{Employee Name} & \textbf{Phone Number} \\ \hline
+    Akimbe, T. & 671-476-3455 \\ \hline
+    Carleno, S. & 671-476-3456 \\ \hline
+    Haslinger, T. & 671-476-3457 \\ \hline
+    McRogers, K. & 671-476-3458 \\ \hline
+    \ldots & \ldots \\ \hline
+    
+  \end{tabular}
+\end{center}
+
+If we want to lookup somebody's phone number using this table, all we need to know is their last name. For example, suppose we want to find T. Haslinger's office phone number. To do that, we find ``Haslinger, T.'' in the \textbf{Employee Name} column, then we look over to the phone number associated with T. Haslinger, which is listed in the right column.
+
+\begin{terminology}
+  The \vocab{data} of a lookup table is the information we can lookup. The \vocab{keys} are the labels we attach to each piece of data.
+\end{terminology}
+
+In essence, what we have here is just a list of phone numbers, keyed by names. The \vocab{keys} of this lookup table are \emph{names}, and the \vocab{data} we can lookup are \emph{phone numbers}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Meta Information}
+
+Let us establish some terminology and notation that will help us describe the \vocab{meta information} of the table.
+
+\begin{aside}
+  \begin{remark}
+    The \vocab{meta information} of a table is the \vocab{name} we use to refer to it, along with information about what \vocab{kind of data} it contains, and what \vocab{kind of keys} it uses. (Is it a table of phone numbers? Home addresses? What sort of data is in it? And what are the keys?)
+  \end{remark}
+\end{aside} 
+
+\paragraph{Names.} Let us say that we can give a \vocab{name} to a lookup table. That way, we can refer to the table by name, so that other people will know which table we are talking about (if we are talking about more than one table at a time). In this case, let us give this lookup table the name ``$\e{directory}$.''
+
+\paragraph{Domain and codomain.} Let us call the \emph{keys} the \vocab{domain} of the lookup table, and let us call the \emph{data} the \vocab{codomain} of the table.
+
+\begin{terminology}
+  The \vocab{domain} of a lookup table is the set of keys (the left column), and the \vocab{codomain} of the table is the set of data values its keys are associated with (the right column).
+\end{terminology}
+
+In other words, the \emph{domain} is the information in the left column, i.e., it is the set of unique keys that we use to lookup values, and the \emph{codomain} is the data in the right column, i.e., it is the set of values that we lookup.
+
+\paragraph{The type of table.} Let us write the table's name, domain, and codomain like this:
+
+\begin{aside}
+  \begin{example}
+    Consider this table:
+    
+    \begin{equation*}
+      \e{players} : \e{names} \rightarrow \e{position}
+    \end{equation*}
+    
+    This describes a table that maps the players on a sports team to the positions they play. Their names go in the left column, and the position they play goes in the right column.
+  \end{example}
+\end{aside} 
+
+\begin{equation*}
+  \e{directory} : \e{names} \rightarrow \e{phone~numbers}
+\end{equation*}
+
+\noindent
+Read that aloud like this: ``the lookup table called $\e{directory}$ maps \emph{names} to \emph{phone numbers}.'' This is a very compact way of describing what kind of lookup table we are dealing with. It tells us the name of the table, and it tells us what the domain is (names) and what the codomain is (phone numbers). This gives us, so to speak, the \emph{signature} of the lookup table.
+
+In general, we will write the \vocab{signature} of a lookup table with this format:
+
+\begin{equation*}
+  \e{mapping} : \e{domain} \rightarrow \e{codomain}
+\end{equation*}
+
+\noindent
+where:
+
+\begin{terminology}
+  We denote the \vocab{signature} of a lookup table like this:
+
+  \begin{equation*}
+    \e{mapping} : \e{domain} \rightarrow \e{codomain}
+  \end{equation*}
+
+  where $\e{mapping}$ is the name of the table, $\e{domain}$ is the type of key, and $\e{codomain}$ is the type of data you can lookup.
+\end{terminology}
+
+\begin{itemize}
+
+  \item $\e{mapping}$ is replaced with the name of the table (e.g., ``directory,'' ``product catalogue,'' or whatever name we have given the table).
+  
+  \item $\e{domain}$ is replaced with the type of keys the table uses (e.g., ``names,'' but it could be ``serial numbers,'' etc). 
+  
+  \item $\e{codomain}$ is replaced with the type of data we can lookup in the table (e.g., ``phone numbers,'' ``prices,'' etc).
+  
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Values in the Table}
+
+Now let us establish some terminology and notation that will help us describe the \vocab{data} in the table more concisely. Suppose we want to say something like this:
+
+\begin{quote}
+  According to this $\e{directory}$, the phone number assigned to T. Haslinger is 671-476-3457.
+\end{quote}
+
+\noindent
+That takes quite a few words to write out. We can definitely shorten this. Perhaps we could write something like this:
+
+\begin{equation*}
+  \e{In~this~directory, T.~Haslinger = 671\dash476\dash3457}
+\end{equation*}
+
+That is certainly shorter, but we can make it even more concise. Let's write it like this:
+
+\begin{aside}
+  \begin{notation}
+    To assert that a particular \vocab{key} is associated with a particular \vocab{value} in a lookup table, use an expression with this shape:
+    
+    \begin{equation*}
+      \e{mapping(key) = value}
+    \end{equation*}
+    
+    where ``$\e{mapping}$'' is the name of a lookup table, ``$\e{key}$'' is one of the keys, and ``$\e{value}$'' is the piece of data associated with that particular key.
+  \end{notation}
+\end{aside}
+
+\begin{equation*}
+  \e{directory(T.~Haslinger) = 671\dash476\dash3457}
+\end{equation*}
+
+This tells us that this ``$\e{directory}$'' gives the number ``$\e{617\dash476\dash3457}$`` for the name ``$\e{T.~Haslinger}$.'' Here is another example:
+
+\begin{equation*}
+  \e{directory(T.~Akimbe) = 671\dash476\dash3455}
+\end{equation*}
+
+That tells us that this ``$\e{directory}$'' gives the number ``$\e{617\dash475\dash3455}$'' for the name ``$\e{T.~Akimbe}$.''
+
+Now consider the following expression. Which particular value does it refer to?
+
+\begin{equation*}
+  \e{directory(K.~McRogers)}
+\end{equation*}
+
+The answer is: ``$\e{617\dash476\dash3458}$.'' After all, if we use this ``$\e{directory}$`` to lookup the phone number associated with the name ``$\e{K.~McRogers}$,'' we will find that the number it gives us is ``$\e{617\dash476\dash3458}$.''
+
+In fact, when we write down ``$\e{directory(K.~McRogers)}$,'' we can just think of that as a synonym for the phone number ``$\e{617\dash476\dash3458}$.'' So, if we want to refer to K. McRogers' phone number, we can either write out the phone number itself:
+
+\begin{aside}
+  \begin{example}
+    This expression:
+    
+    \begin{equation*}
+      \e{directory(S.~Carleno)}
+    \end{equation*}
+    
+    is a synonym for this:
+    
+    \begin{equation*}
+      \e{617\dash476\dash3456}
+    \end{equation*}
+    
+    It is just another way of referring to Carleno's phone number.
+  \end{example}
+\end{aside}
+
+\begin{equation*}
+  \e{617\dash476\dash3458}
+\end{equation*}
+
+\noindent
+or we can write out this:
+
+\begin{equation*}
+  \e{directory(K.~McRogers)}
+\end{equation*}
+
+\noindent
+because anybody can use the table to go and lookup what the phone number for K. McRogers is for themselves.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Association Lists}
+
+\newthought{We can also think of a lookup table} as an \vocab{association list}, because it is really just a list of associated pairs: it associates phone numbers with names. Let's write out our directory as a list of associated pairs:
+
+\begin{terminology}
+  An \vocab{association list} is a list of associated pairs. In our example, it is a list of $\e{(name, phone~number)}$ pairs.
+\end{terminology}
+
+\begin{align*}
+  \e{directory~=~}&\e{(T.~Akimbe, 671\dash476\dash3455),} \\
+    &\e{(S.~Carleno, 671\dash476\dash3456),} \\
+    &\e{(T.~Haslinger, 671\dash476\dash3457),} \\
+    &\e{(K.~McRogers, 671\dash476\dash3458),} \\
+    &\ldots
+\end{align*}
+
+Here we can see that we have a list of pairs. In each pair, the first item is a name (the ``key''), and the second item is a phone number (the ``data''). Even though we have changed the format, the essential contents of the lookup table are present in this association list.
+
+Also, notice that this association list has the same \vocab{meta information} as the lookup table. It has the same name, the type of keys are the same (employee names), and the type of data is the same too (phone numbers). Hence, we can describe this association list with the same \vocab{signature} that we used to describe the lookup table:
+
+\begin{aside}
+  \begin{remark}
+    We can denote the signature of an association list the same way that we can denote the signature of a lookup table: $\e{mapping : domain \rightarrow codomain}$.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \e{directory} : \e{names} \rightarrow \e{phone~numbers}
+\end{equation*}
+
+Notice also that we can refer to \vocab{particular values} in this association list just as we did with the lookup table. For example, we can write this:
+
+\begin{equation*}
+  \e{directory(T.~Haslinger) = 671\dash476\dash3457}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    With an association list, we can assert that a particular key is associated with a particular value the same we do with a lookup table: $\e{mapping(key) = value}$.
+  \end{remark}
+\end{aside}
+
+And this means exactly the same as it did before: it means that in this $\e{directory}$, the phone number associated with the name ``$\e{T.~Haslinger}$'' is ``$\e{617\dash476\dash3457}$.'' 
+
+Similarly, consider this expression:
+
+\begin{equation*}
+  \e{directory(S.~Carleno)}
+\end{equation*}
+
+We can read this aloud as ``the phone number that this $\e{directory}$ has for the name ``$\e{S.~Carleno}$.'' This expression refers to the phone number ``$\e{671\dash476\dash3456}$,'' because that is the number it associates with the name ``$\e{S.~Carleno}$.''
+
+\begin{aside}
+  \begin{remark}
+    We can think of a \vocab{lookup table} as an \vocab{association list}, and vice versa, since they have the same contents. They are two different ways of presenting the same information.
+  \end{remark}
+\end{aside}
+
+All of this makes it clear that we can think about any lookup table as an association list, in just the way we have done here. Be it a lookup table or an association list, the \vocab{essential contents are the same}. We have some data (e.g., phone numbers), and each piece of data is labeled by a unique key (e.g., employee names).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Mappings from Keys to Values}
+
+\newthought{Lookup tables and association lists} are two different ways to present the same information. Either way, they present us with a \vocab{mapping} from \vocab{keys} to \vocab{values}. 
+
+Let's picture this a bit more abstractly. Let's think about the domain as just a bag of points:
+
+\begin{aside}
+  \begin{remark}
+    Recall that one way to think about a \vocab{set} is as a bag of items. We are pretty much doing that here. We're thinking of the domain as a bag of items (which we are representing as points).
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 3.5) {$\e{The~domain}$}; 
+  \node[dot] (k1) at (-4, 2) {};
+  \node[dot] (k2) at (-2, 1.5) {};
+  \node[dot] (k3) at (-3.5, 0.5) {};
+  \node[dot] (k4) at (-2, 0) {};
+  \draw[color=gray] (-3, 1) ellipse (2.5cm and 2cm);
+
+\end{diagram}
+
+Let's think about the codomain as another bag of points:
+
+\begin{aside}
+  \begin{remark}
+    Two separate bags of points are like two separate sets. Each is a container with its own items inside it.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 3.5) {$\e{The~domain}$}; 
+  \node[dot] (k1) at (-4, 2) {};
+  \node[dot] (k2) at (-2, 1.5) {};
+  \node[dot] (k3) at (-3.5, 0.5) {};
+  \node[dot] (k4) at (-2, 0) {};
+  \draw[color=gray] (-3, 1) ellipse (2.5cm and 2cm);
+
+  \node (domain) at (3, 3.5) {$\e{The~codomain}$};
+  \node[dot] (v1) at (4, 2) {};
+  \node[dot] (v2) at (2.5, 0.5) {};
+  \node[dot] (v3) at (2, 1.5) {};
+  \node[dot] (v4) at (3.5, 0) {};
+  \draw[color=gray] (3, 1) ellipse (2.5cm and 2cm);
+
+\end{diagram}
+
+A \vocab{mapping} connects up points from the left side to points on the right side. We can draw this with arrows:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 3.5) {$\e{The~domain}$}; 
+  \node[dot] (k1) at (-4, 2) {};
+  \node[dot] (k2) at (-2, 1.5) {};
+  \node[dot] (k3) at (-3.5, 0.5) {};
+  \node[dot] (k4) at (-2, 0) {};
+  \draw[color=gray] (-3, 1) ellipse (2.5cm and 2cm);
+
+  \node (domain) at (3, 3.5) {$\e{The~codomain}$};
+  \node[dot] (v1) at (4, 2) {};
+  \node[dot] (v2) at (2.5, 0.5) {};
+  \node[dot] (v3) at (2, 1.5) {};
+  \node[dot] (v4) at (3.5, 0) {};
+  \draw[color=gray] (3, 1) ellipse (2.5cm and 2cm);
+
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v3);
+  \draw[->,spaced] (k4) -- (v4);
+
+\end{diagram}
+
+\begin{terminology}
+  One way to think about a \vocab{mapping} is in this pictorial way. It is the arrows which map the points on the left to the points on the right.
+\end{terminology}
+
+There are more ways to connect the points besides the one I just drew. Here is another mapping:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 3.5) {$\e{The~domain}$}; 
+  \node[dot] (k1) at (-4, 2) {};
+  \node[dot] (k2) at (-2, 1.5) {};
+  \node[dot] (k3) at (-3.5, 0.5) {};
+  \node[dot] (k4) at (-2, 0) {};
+  \draw[color=gray] (-3, 1) ellipse (2.5cm and 2cm);
+
+  \node (domain) at (3, 3.5) {$\e{The~codomain}$};
+  \node[dot] (v1) at (4, 2) {};
+  \node[dot] (v2) at (2.5, 0.5) {};
+  \node[dot] (v3) at (2, 1.5) {};
+  \node[dot] (v4) at (3.5, 0) {};
+  \draw[color=gray] (3, 1) ellipse (2.5cm and 2cm);
+
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v4);
+  \draw[->,spaced] (k4) -- (v3);
+
+\end{diagram}
+
+And here is yet another mapping:
+
+\begin{aside}
+  \begin{remark}
+Notice that multiple points in the domain can be mapped to the same point in the codomain. And notice that some points in the codomain can have no arrows at all pointing to them. 
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 3.5) {$\e{The~domain}$}; 
+  \node[dot] (k1) at (-4, 2) {};
+  \node[dot] (k2) at (-2, 1.5) {};
+  \node[dot] (k3) at (-3.5, 0.5) {};
+  \node[dot] (k4) at (-2, 0) {};
+  \draw[color=gray] (-3, 1) ellipse (2.5cm and 2cm);
+
+  \node (domain) at (3, 3.5) {$\e{The~codomain}$};
+  \node[dot] (v1) at (4, 2) {};
+  \node[dot] (v2) at (2.5, 0.5) {};
+  \node[dot] (v3) at (2, 1.5) {};
+  \node[dot] (v4) at (3.5, 0) {};
+  \draw[color=gray] (3, 1) ellipse (2.5cm and 2cm);
+
+  \draw[->,spaced] (k1) -- (v3);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v3);
+  \draw[->,spaced] (k4) -- (v4);
+
+\end{diagram}
+
+Let's add some labels to the points, so that we can think of them as representing the names and phone numbers from our lookup table:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 3.5) {$\e{The~domain}$}; 
+  \node[dot] (k1) at (-4, 2) [label=above left:{$\e{T.~Akimbe}$}] {};
+  \node[dot] (k2) at (-2, 1.5) [label=left:{$\e{S.~Carleno}$}] {};
+  \node[dot] (k3) at (-3.5, 0.5) [label=above left:{$\e{T.~Haslinger}$}] {};
+  \node[dot] (k4) at (-2, 0) [label=left:{$\e{K.~McRogers}$}] {};
+  \draw[color=gray] (-3, 1) ellipse (2.5cm and 2cm);
+
+  \node (domain) at (3, 3.5) {$\e{The~codomain}$};
+  \node[dot] (v1) at (4, 2) [label=above right:{$\e{671\dash476\dash3455}$}] {};
+  \node[dot] (v2) at (2.5, 0.5) [label=right:{$\e{671\dash476\dash3456}$}] {};
+  \node[dot] (v3) at (2, 1.5) [label=right:{$\e{671\dash476\dash3457}$}] {};
+  \node[dot] (v4) at (3.5, 0) [label=below right:{$\e{671\dash476\dash3458}$}] {};
+  \draw[color=gray] (3, 1) ellipse (2.5cm and 2cm);
+
+\end{diagram}
+
+Once we add the labels, we can then draw our mapping:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 3.5) {$\e{The~domain}$}; 
+  \node[dot] (k1) at (-4, 2) [label=above left:{$\e{T.~Akimbe}$}] {};
+  \node[dot] (k2) at (-2, 1.5) [label=left:{$\e{S.~Carleno}$}] {};
+  \node[dot] (k3) at (-3.5, 0.5) [label=above left:{$\e{T.~Haslinger}$}] {};
+  \node[dot] (k4) at (-2, 0) [label=left:{$\e{K.~McRogers}$}] {};
+  \draw[color=gray] (-3, 1) ellipse (2.5cm and 2cm);
+
+  \node (domain) at (3, 3.5) {$\e{The~codomain}$};
+  \node[dot] (v1) at (4, 2) [label=above right:{$\e{671\dash476\dash3455}$}] {};
+  \node[dot] (v2) at (2.5, 0.5) [label=right:{$\e{671\dash476\dash3456}$}] {};
+  \node[dot] (v3) at (2, 1.5) [label=right:{$\e{671\dash476\dash3457}$}] {};
+  \node[dot] (v4) at (3.5, 0) [label=below right:{$\e{671\dash476\dash3458}$}] {};
+  \draw[color=gray] (3, 1) ellipse (2.5cm and 2cm);
+
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v3);
+  \draw[->,spaced] (k4) -- (v4);
+
+\end{diagram}
+
+It is easy to see that these pictures capture the same information that we have in the lookup table and association list. All of these are really just \vocab{mappings}, which map \vocab{keys} (i.e., items on the left) to \vocab{values} (i.e., items on the right).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about \vocab{lookup tables} and \vocab{association lists}, which both present the same information. They index some data with unique keys, for easy lookup. In essence, they present us with a \vocab{mapping} from keys to data values.
+
+\begin{itemize}
+
+  \item A \vocab{lookup table} is a table with two columns. The keys go in the left column, and the data goes in the right column.
+  
+  \item An \vocab{association list} is a list of pairs, with the key as the first item in the pair, and the data as the second item. 
+  
+  \item We call the keys the \vocab{domain}, and the data the \vocab{codomain}, of the mapping.
+  
+  \item We can describe the \vocab{signature} of a mapping like this: 
+  
+  \begin{equation*}
+    \e{mapping : domain \rightarrow codomain}
+  \end{equation*}
+  
+  where ``$\e{mapping}$'' is replaced with the name of the mapping, ``$\e{domain}$'' is replaced by the type of keys, and ``$\e{codomain}$'' is replaced by the type of data. 
+  
+  \item We can assert that a particular key is associated with a particular value in such a mapping like this: 
+  
+  \begin{equation*}
+    \e{mapping(key) = value}
+  \end{equation*}
+  
+  where ``$\e{mapping}$'' is replaced with the name of the mapping, ``$\e{key}$'' is replaced by one of the keys, and ``$\e{value}$'' is replaced with the value associated with that particular key.
+  
+  \item An expression with the shape ``$\e{mapping(key)}$'' is a synonym for the $\e{value}$ associated with that key.
+
+\end{itemize}
+
+
+\end{document}

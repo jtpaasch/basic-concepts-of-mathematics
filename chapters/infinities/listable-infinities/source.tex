@@ -1,0 +1,874 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Listable Infinities}
+\label{ch:listable-infinities}
+
+\begin{ponder}
+  What are some infinite sets that you think might be listable? Do you think any of the sets of numbers that we discussed in \partref{part:numbers} are listable? Do you think any of them might \emph{not} be listable?
+\end{ponder}
+
+\newtopic{A}{s we saw in \chapterref{ch:listing-infinities}}, an infinite set $\set{A}$ is \vocab{listable} (or synonymously, \vocab{enumerable}) if we can construct an \vocab{isomorphism} $\func{f}$ from $\Nats/$ to $\set{A}$. In effect, an isomorphism shows us how to list out each element of $\set{A}$.
+
+So which infinite sets are listable? In this chapter, we will look at a few different examples of listable infinities.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Subsets of $\Nats/$}
+
+\begin{aside}
+  \begin{remark}
+    We normally think that a subset of a set is a \emph{smaller} slice of that set, so how can a subset of $\Nats/$ be just as large as the whole of $\Nats/$? With infinite sets, our intuitions mislead us. 
+  \end{remark}
+\end{aside}
+
+\newthought{A surprising thing} about the natural numbers is that certain subsets of the natural numbers are just as large as the entire set of natural numbers. This is rather counter intuitive. Let's look at some examples.
+
+\begin{fexample}
+
+Think about the natural numbers, i.e., $\Nats/$:
+
+\begin{equation*}
+  \Nats/ = \{ 0, 1, 2, 3, \ldots \}
+\end{equation*}
+
+Now consider just the even ones. Let's call this set $\EvenNats/$:
+
+\begin{equation*}
+  \EvenNats/ = \{ 0, 2, 4, 6, \ldots \}
+\end{equation*}
+
+Both of these sets are infinite, since each of them goes on forever. But here is the question: are they the same size? 
+
+\begin{aside}
+  \begin{remark}
+    How do we determine if two sets are the same size? We use the trick from \chapterref{ch:measuring-size} and \chapterref{ch:listing-infinities}: if we can construct a \vocab{listing} (an \vocab{isomorphism}), then the two must be the same size. Can we do this?
+  \end{remark}
+\end{aside}
+
+Intuitively, it might seem like these two sets should be different in size. $\EvenNats/$ has only even numbers in it, while $\Nats/$ has even \emph{and} the odd numbers in it. Shouldn't $\EvenNats/$ therefore be \emph{half} the size of $\Nats/$? 
+
+Well, let's construct a listing. Here it is:
+
+\begin{diagram}
+
+  \draw (0, 0) -- (8, 0) -- (8, -6) -- (0, -6) -- (0, 0);
+  \node at (0.75, -1) [label=right:{0. \fillinblank{5cm}}] {};
+  \node at (4, -0.85) {$\mathtt{0}$};
+  \node at (0.75, -2) [label=right:{1. \fillinblank{5cm}}] {};
+  \node at (4, -1.85) {$\mathtt{2}$};
+  \node at (0.75, -3) [label=right:{2. \fillinblank{5cm}}] {};
+  \node at (4, -2.85) {$\mathtt{4}$};
+  \node at (0.75, -4) [label=right:{3. \fillinblank{5cm}}] {};
+  \node at (4, -3.85) {$\mathtt{6}$};
+  \node at (0.825, -4.825) [label=right:{$\vdots$}] {};
+  \node at (4, -4.85) {$\vdots$};
+  
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    It is clear that this listing is indeed an \vocab{isomorphism}. It is a reversible, bijective function from $\Nats/$ to $\EvenNats/$. 
+  \end{remark}
+\end{aside}
+
+Or, to write it out horizontally:
+
+\begin{center}
+  \begin{tabular}{ c c c c c c }
+    $\Nats/:$         & $0$   & $1$   & $2$   & $3$   & \ldots \\
+                     & $\v/$ & $\v/$ & $\v/$ & $\v/$ &        \\ 
+    $\EvenNats/:$     & $0$   & $2$   & $4$   & $6$   & \ldots
+  \end{tabular}
+\end{center}
+
+You can see that we can in fact build up a listing like this. The trick lies in the fact that both $\Nats/$ and $\EvenNats/$ are endless, so we will never run out of numbers. For each number from $\Nats/$, we take the next even number from $\EvenNats/$, and we just repeat that again and again, forever.
+
+\begin{aside}
+  \begin{remark}
+    Here is where our intuitions mislead us. We initially think that $\EvenNats/$ must be half the size of $\Nats/$, but that's only because we forget that both of these sets are endless sequences. Once we remember that neither one has an end, it is easier to see (by the listing) that they are the same size.
+  \end{remark}
+\end{aside}
+
+What can we conclude? We must conclude that $\EvenNats/$ is not in fact half the size of $\Nats/$. On the contrary, $\EvenNats/$ and $\Nats/$ are the same size! They are both of size $\AlephZero/$:
+
+\begin{equation*}
+  \cardinality{\Nats/} = \AlephZero/ 
+  \hskip1cm \text{ and } \hskip 1cm
+  \cardinality{\EvenNats/} = \AlephZero/ 
+\end{equation*}
+
+\end{fexample}
+
+\begin{example}
+
+Consider the square of every natural number. That is, take each natural number $n$, and square it: $n^{2}$. For instance, $0^{2}$ is $0$, $1^{2}$ is $1$, $2^{2}$ is $4$, $3^{2}$ is $9$, $4^{2}$ is $16$, and so on. Let's put all of these into a set, and call it $\Nats/^{n^{2}}$. Like this:
+
+\begin{aside}
+  \begin{remark}
+    The square of a number is that number times itself. So, $2^{2}$ is just $2$ times $2$ (i.e., $4$), $3^{2}$ is just $3$ times $3$ (i.e., $9$), $4^{2}$ is just $4$ times $4$ (i.e., $16$), and so on.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \Nats/^{n^{2}} = \{ 0, 1, 4, 9, 16, \ldots \}
+\end{equation*}
+
+Is this set the same size as $\Nats/$? Yes it is, since we can list it:
+
+\begin{diagram}
+
+  \draw (0, 0) -- (8, 0) -- (8, -6) -- (0, -6) -- (0, 0);
+  \node at (0.75, -1) [label=right:{0. \fillinblank{5cm}}] {};
+  \node at (4, -0.85) {$\mathtt{0}$};
+  \node at (0.75, -2) [label=right:{1. \fillinblank{5cm}}] {};
+  \node at (4, -1.85) {$\mathtt{1}$};
+  \node at (0.75, -3) [label=right:{2. \fillinblank{5cm}}] {};
+  \node at (4, -2.85) {$\mathtt{4}$};
+  \node at (0.75, -4) [label=right:{3. \fillinblank{5cm}}] {};
+  \node at (4, -3.85) {$\mathtt{9}$};
+  \node at (0.825, -4.825) [label=right:{$\vdots$}] {};
+  \node at (4, -4.85) {$\vdots$};
+  
+\end{diagram}
+
+Or, to write it out horizontally:
+
+\begin{center}
+  \begin{tabular}{ c c c c c c }
+    $\Nats/:$         & $0$   & $1$   & $2$   & $3$   & \ldots \\
+                     & $\v/$ & $\v/$ & $\v/$ & $\v/$ &        \\ 
+    $\EvenNats/:$     & $0$   & $1$   & $4$   & $9$   & \ldots
+  \end{tabular}
+\end{center}
+
+Hence, $\Nats/^{n^{2}}$ and $\Nats/$ are the same size too. They are both of size $\AlephZero/$:
+
+\begin{equation*}
+  \cardinality{\Nats/} = \AlephZero/ 
+  \hskip1cm \text{ and } \hskip 1cm
+  \cardinality{\Nats/^{n^{2}}} = \AlephZero/ 
+\end{equation*}
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{How Many Integers?}
+
+\newthought{Let's turn our attention} to the integers. As we know, the integers include all the natural numbers, plus all the negative whole numbers too:
+
+\begin{ponder}
+  The natural numbers $\Nats/$ appear to have a starting point (namely, $0$), and then it appears to increase forever from there: after $0$ there's $1$, then $2$, and so on. The integers $\Ints/$ appear to be a little different in this regard, in that it appears that they \emph{don't} have a starting point. Zero looks like it's in the middle, and then it appears to extend outwards from there in both directions endlessly. But do you think this is really true? Remember: these are just sets.
+\end{ponder}
+
+\begin{equation*} 
+  \Ints/ = \{ \ldots, -2, -1, 0, 1, 2, \ldots \}
+\end{equation*}
+
+Intuitively, it might seem like $\Ints/$ should be \emph{twice} the size of $\Nats/$, since it includes all the same numbers as $\Nats/$, \emph{plus} a negative version of each number too. But is it really the case that $\Ints/$ is twice as big as $\Nats/$?
+
+Again, we can use our listing trick to find out. If $\Ints/$ is the same size as $\Nats/$, then we will be able to construct a \vocab{listing} (\vocab{isomorphism}) of $\Ints/$. So, is such a listing possible?
+
+One of the things that is required to make a listing is a definite starting point. We have to be able to start \emph{somewhere}, and then there has to be a repeatable way to find the \emph{next} number to put down. 
+
+Well, what is the ``starting'' point for listing out $\Ints/$? Where is the ``smallest number''? There isn't a smallest one, because no matter how far back in the negatives we go, there are always more beyond that. So, it might appear that we cannot in fact \vocab{list} all of $\Ints/$, because we just can't find a \emph{starting point}. 
+
+However, there is a trick. Let's start in the middle (at $0$), and then work our way outwards. We'll follow this pattern:
+
+\begin{diagram}
+
+  \draw[<->] (-5, 0) -- (5, 0);
+
+  \draw (-4, 0.1) -- (-4, -0.1);
+  \node at (-4, -0.5) {$-4$};
+
+  \draw (-3, 0.1) -- (-3, -0.1);
+  \node at (-3, -0.5) {$-3$};
+
+  \draw (-2, 0.1) -- (-2, -0.1);
+  \node at (-2, -0.5) {$-2$};
+
+  \draw (-1, 0.1) -- (-1, -0.1);
+  \node at (-1, -0.5) {$-1$};
+  
+  \draw (0, 0.1) -- (0, -0.1);
+  \node at (0, -0.5) {$0$};
+  
+  \draw (1, 0.1) -- (1, -0.1);
+  \node at (1, -0.5) {$1$};
+
+  \draw (2, 0.1) -- (2, -0.1);
+  \node at (2, -0.5) {$2$};
+
+  \draw (3, 0.1) -- (3, -0.1);
+  \node at (3, -0.5) {$3$};
+
+  \draw (4, 0.1) -- (4, -0.1);
+  \node at (4, -0.5) {$4$};
+
+  \draw[->,space] (0.1, 0.1) to[out=120,in=30] (-0.9, 0.25);
+  \draw[->,space] (-1, 0.25) to[out=45,in=135] (0.9, 0.25);
+  \draw[->,space] (1, 0.25) to[out=120,in=60] (-1.9, 0.25);
+  \draw[->,space] (-2, 0.25) to[out=75,in=105] (1.9, 0.25);
+  \draw[->,space] (2, 0.25) to[out=90,in=0] (-0.5, 1.75);
+
+\end{diagram}
+
+So, to make this listing, we first write down $0$:
+
+\begin{diagram}
+
+  \draw (0, 0) -- (8, 0) -- (8, -6) -- (0, -6) -- (0, 0);
+  \node at (0.75, -1) [label=right:{0. \fillinblank{5cm}}] {};
+  \node at (4.15, -0.85) {$\mathtt{0}$};
+  \node at (0.75, -2) [label=right:{1. \fillinblank{5cm}}] {};
+  \node at (0.75, -3) [label=right:{2. \fillinblank{5cm}}] {};
+  \node at (0.75, -4) [label=right:{3. \fillinblank{5cm}}] {};
+  \node at (0.825, -4.825) [label=right:{$\vdots$}] {};
+  
+\end{diagram}
+
+Then we write down $-1$:
+
+\begin{diagram}
+
+  \draw (0, 0) -- (8, 0) -- (8, -6) -- (0, -6) -- (0, 0);
+  \node at (0.75, -1) [label=right:{0. \fillinblank{5cm}}] {};
+  \node at (4.15, -0.85) {$\mathtt{0}$};
+  \node at (0.75, -2) [label=right:{1. \fillinblank{5cm}}] {};
+  \node at (4, -1.85) {$\mathtt{-1}$};
+  \node at (0.75, -3) [label=right:{2. \fillinblank{5cm}}] {};
+  \node at (0.75, -4) [label=right:{3. \fillinblank{5cm}}] {};
+  \node at (0.825, -4.825) [label=right:{$\vdots$}] {};
+  
+\end{diagram}
+
+Then we write down $1$:
+
+\begin{diagram}
+
+  \draw (0, 0) -- (8, 0) -- (8, -6) -- (0, -6) -- (0, 0);
+  \node at (0.75, -1) [label=right:{0. \fillinblank{5cm}}] {};
+  \node at (4.15, -0.85) {$\mathtt{0}$};
+  \node at (0.75, -2) [label=right:{1. \fillinblank{5cm}}] {};
+  \node at (4, -1.85) {$\mathtt{-1}$};
+  \node at (0.75, -3) [label=right:{2. \fillinblank{5cm}}] {};
+  \node at (4.15, -2.85) {$\mathtt{1}$};
+  \node at (0.75, -4) [label=right:{3. \fillinblank{5cm}}] {};
+  \node at (0.825, -4.825) [label=right:{$\vdots$}] {};
+  
+\end{diagram}
+
+Then we move to $-2$:
+
+\begin{diagram}
+
+  \draw (0, 0) -- (8, 0) -- (8, -6) -- (0, -6) -- (0, 0);
+  \node at (0.75, -1) [label=right:{0. \fillinblank{5cm}}] {};
+  \node at (4.15, -0.85) {$\mathtt{0}$};
+  \node at (0.75, -2) [label=right:{1. \fillinblank{5cm}}] {};
+  \node at (4, -1.85) {$\mathtt{-1}$};
+  \node at (0.75, -3) [label=right:{2. \fillinblank{5cm}}] {};
+  \node at (4.15, -2.85) {$\mathtt{1}$};
+  \node at (0.75, -4) [label=right:{3. \fillinblank{5cm}}] {};
+  \node at (4, -3.85) {$\mathtt{-2}$};
+  \node at (0.825, -4.825) [label=right:{$\vdots$}] {};
+  
+\end{diagram}
+
+Then we write down $2$, then $-3$, then $3$, and so on. Here is the listing, written horizontally:
+
+\begin{center}
+  \begin{tabular}{ c c c c c c c c }
+    $\Nats/:$ & $0$   & $1$   & $2$   & $3$   & $4$   & $5$   & \ldots \\
+              & $\v/$ & $\v/$ & $\v/$ & $\v/$ & $\v/$ & $\v/$ &       \\ 
+    $\Ints/:$ & $0$   & $-1$  & $1$   & $-2$  & $2$   & $-3$  & \ldots
+  \end{tabular}
+\end{center}
+
+We just start with $0$, and then we write the negative and the positive version of each integer after that. Basically, we just rearrange the integers, so that they start at $0$ and then proceed only to the right, like this:
+
+\begin{center}
+  \begin{tabular}{ c c c c c c c c c c c }
+    $\Ints/:$ & $0$ & $-1$ & $1$ & $-2$ & $2$ & $-3$ & $3$ & $-4$ & $4$ & \ldots
+  \end{tabular}
+\end{center}
+
+\begin{aside}
+  \begin{remark}
+    Again, our intuitions have simply misled us. While it might seem at first that $\Ints/$ should be a bigger set than $\Nats/$, by using our listing trick, we can see that there is a precise one-to-one pairing of $\Nats/$ and $\Ints/$ (which is only possible because both sets are endless).
+  \end{remark}
+\end{aside}
+
+By doing this, we then have a \vocab{listing} of the integers that has a definite starting place, and a way to proceed forward, one negative and positive integer at a time, forever.
+ 
+Hence, the integers $\Ints/$ are listable too, and hence they also are of size $\AlephZero/$:
+
+\begin{equation*}
+  \cardinality{\Nats/} = \AlephZero/ 
+  \hskip1cm \text{ and } \hskip 1cm
+  \cardinality{\Ints/} = \AlephZero/ 
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{How Many Rational Numbers?}
+
+\newthought{What about the rationals $\Rationals/$}, i.e., the fractions? Is the size of $\Rationals/$ the same as $\Nats/$ and $\Ints/$? On the face of it, it might seem that there are \emph{way more} fractions than there are natural numbers or integers. After all, between $0$ and $1$ there are \emph{infinitely many} fractions! So surely $\Rationals/$ is \emph{much} bigger. Or do our intuitions mislead us here too?
+
+In order to determine the answer to this, we can use the same technique we have been using: we need to see if there is a way to list $\Rationals/$. If we can find a listing (isomorphism) of $\Rationals/$, then we will know that $\Rationals/$ is the same size as $\Nats/$. Is it possible to find such a listing?
+
+\begin{aside}
+  \begin{remark}
+    These are just the positive whole numbers, written as fractions. To write ``$1$'' as a fraction, we write ``$\frac{1}{1}$,'' to write ``$2$'' as a fraction we write ``$\frac{2}{1}$,'' for ``$3$'' we write ``$\frac{3}{1}$,'' and so on. And ``$\frac{0}{1}$'' is just ``$0$.''
+  \end{remark}
+\end{aside}
+
+There are very many fractions. Let's write some of them out. First, let's start by listing out fractions that can be formed with a ``$1$'' as the bottom number. Like this:
+
+\begin{diagram}
+
+  \node at (1,  0) {$\frac{1}{1}$};
+  \node at (2,  0) {$\frac{2}{1}$};
+  \node at (3,  0) {$\frac{3}{1}$};
+  \node at (4,  0) {$\frac{4}{1}$};
+  \node at (5,  0) {$\ldots$};
+
+\end{diagram}
+
+We also have ``$\frac{0}{1}$'', so let's push that one on to the stack, up in the front (on the left side):
+
+\begin{diagram}
+
+  \node at (0,  0) {$\frac{0}{1}$};
+  \node at (1,  0) {$\frac{1}{1}$};
+  \node at (2,  0) {$\frac{2}{1}$};
+  \node at (3,  0) {$\frac{3}{1}$};
+  \node at (4,  0) {$\frac{4}{1}$};
+  \node at (5,  0) {$\ldots$};
+
+\end{diagram}
+
+We also have negative fractions, so let's add those in too:
+
+\begin{aside}
+  \begin{remark}
+    Since these are the positive and negative whole numbers (written as fractions), this much of our list is equivalent to (or better: isomorphic to) the integers $\Ints/$. Can you see how to build an isomorphism between this and $\Ints/$?
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node at (-5, 0) {$\ldots$};
+  \node at (-4, 0) {$-\frac{4}{1}$};
+  \node at (-3, 0) {$-\frac{3}{1}$};
+  \node at (-2, 0) {$-\frac{2}{1}$};
+  \node at (-1, 0) {$-\frac{1}{1}$};
+  \node at (0,  0) {$\frac{0}{1}$};
+  \node at (1,  0) {$\frac{1}{1}$};
+  \node at (2,  0) {$\frac{2}{1}$};
+  \node at (3,  0) {$\frac{3}{1}$};
+  \node at (4,  0) {$\frac{4}{1}$};
+  \node at (5,  0) {$\ldots$};
+
+\end{diagram}
+
+At this point, we have a list (extending forever in both directions) that is comprised of all fractions that can be formed with a ``$1$'' as the bottom number. 
+
+Next, let's think about all fractions that can be formed with a ``$2$'' as the bottom number. We can follow the same pattern we used for fractions with a ``$1$'' as the bottom number:
+
+\begin{diagram}
+
+  \node at (-5, -1) {$\ldots$};
+  \node at (-4, -1) {$-\frac{4}{2}$};
+  \node at (-3, -1) {$-\frac{3}{2}$};
+  \node at (-2, -1) {$-\frac{2}{2}$};
+  \node at (-1, -1) {$-\frac{1}{2}$};
+  \node at (0,  -1) {$\frac{0}{2}$};
+  \node at (1,  -1) {$\frac{1}{2}$};
+  \node at (2,  -1) {$\frac{2}{2}$};
+  \node at (3,  -1) {$\frac{3}{2}$};
+  \node at (4,  -1) {$\frac{4}{2}$};
+  \node at (5,  -1) {$\ldots$};
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Some of these fractions can be simplified to others. For instance, $\frac{2}{2} = \frac{1}{1}$, and $\frac{4}{2} = \frac{2}{1}$. But our goal here isn't to write out only fully simplified fractions. Our goal is simply to systematically write out all possible fractions of the form $\frac{m}{n}$.
+  \end{remark}
+\end{aside}
+
+Now we have a list (extending forever in both directions) that is comprised of all fractions that can be formed with a ``$2$'' as the bottom number. Let's combine that with the fractions with a ``$1$'' for the bottom number. Like this:
+
+\begin{diagram}
+
+  \node at (-5, 0) {$\ldots$};
+  \node at (-4, 0) {$-\frac{4}{1}$};
+  \node at (-3, 0) {$-\frac{3}{1}$};
+  \node at (-2, 0) {$-\frac{2}{1}$};
+  \node at (-1, 0) {$-\frac{1}{1}$};
+  \node at (0,  0) {$\frac{0}{1}$};
+  \node at (1,  0) {$\frac{1}{1}$};
+  \node at (2,  0) {$\frac{2}{1}$};
+  \node at (3,  0) {$\frac{3}{1}$};
+  \node at (4,  0) {$\frac{4}{1}$};
+  \node at (5,  0) {$\ldots$};
+
+  \node at (-5, -1) {$\ldots$};
+  \node at (-4, -1) {$-\frac{4}{2}$};
+  \node at (-3, -1) {$-\frac{3}{2}$};
+  \node at (-2, -1) {$-\frac{2}{2}$};
+  \node at (-1, -1) {$-\frac{1}{2}$};
+  \node at (0,  -1) {$\frac{0}{2}$};
+  \node at (1,  -1) {$\frac{1}{2}$};
+  \node at (2,  -1) {$\frac{2}{2}$};
+  \node at (3,  -1) {$\frac{3}{2}$};
+  \node at (4,  -1) {$\frac{4}{2}$};
+  \node at (5,  -1) {$\ldots$};
+
+\end{diagram}
+
+We can next add all fractions that can be formed with a ``$3$'' as the bottom number:
+
+\begin{diagram}
+
+  \node at (-5, 0) {$\ldots$};
+  \node at (-4, 0) {$-\frac{4}{1}$};
+  \node at (-3, 0) {$-\frac{3}{1}$};
+  \node at (-2, 0) {$-\frac{2}{1}$};
+  \node at (-1, 0) {$-\frac{1}{1}$};
+  \node at (0,  0) {$\frac{0}{1}$};
+  \node at (1,  0) {$\frac{1}{1}$};
+  \node at (2,  0) {$\frac{2}{1}$};
+  \node at (3,  0) {$\frac{3}{1}$};
+  \node at (4,  0) {$\frac{4}{1}$};
+  \node at (5,  0) {$\ldots$};
+
+  \node at (-5, -1) {$\ldots$};
+  \node at (-4, -1) {$-\frac{4}{2}$};
+  \node at (-3, -1) {$-\frac{3}{2}$};
+  \node at (-2, -1) {$-\frac{2}{2}$};
+  \node at (-1, -1) {$-\frac{1}{2}$};
+  \node at (0,  -1) {$\frac{0}{2}$};
+  \node at (1,  -1) {$\frac{1}{2}$};
+  \node at (2,  -1) {$\frac{2}{2}$};
+  \node at (3,  -1) {$\frac{3}{2}$};
+  \node at (4,  -1) {$\frac{4}{2}$};
+  \node at (5,  -1) {$\ldots$};
+  
+  \node at (-5, -2) {$\ldots$};
+  \node at (-4, -2) {$-\frac{4}{3}$};
+  \node at (-3, -2) {$-\frac{3}{3}$};
+  \node at (-2, -2) {$-\frac{2}{3}$};
+  \node at (-1, -2) {$-\frac{1}{3}$};
+  \node at (0,  -2) {$\frac{0}{3}$};
+  \node at (1,  -2) {$\frac{1}{3}$};
+  \node at (2,  -2) {$\frac{2}{3}$};
+  \node at (3,  -2) {$\frac{3}{3}$};
+  \node at (4,  -2) {$\frac{4}{3}$};
+  \node at (5,  -2) {$\ldots$};
+
+\end{diagram}
+
+And then the same for ``$4$'' as the bottom number, ``$5$,'' and so on, forever:
+
+\begin{diagram}
+
+  \node at (-5, 0) {$\ldots$};
+  \node at (-4, 0) {$-\frac{4}{1}$};
+  \node at (-3, 0) {$-\frac{3}{1}$};
+  \node at (-2, 0) {$-\frac{2}{1}$};
+  \node at (-1, 0) {$-\frac{1}{1}$};
+  \node at (0,  0) {$\frac{0}{1}$};
+  \node at (1,  0) {$\frac{1}{1}$};
+  \node at (2,  0) {$\frac{2}{1}$};
+  \node at (3,  0) {$\frac{3}{1}$};
+  \node at (4,  0) {$\frac{4}{1}$};
+  \node at (5,  0) {$\ldots$};
+
+  \node at (-5, -1) {$\ldots$};
+  \node at (-4, -1) {$-\frac{4}{2}$};
+  \node at (-3, -1) {$-\frac{3}{2}$};
+  \node at (-2, -1) {$-\frac{2}{2}$};
+  \node at (-1, -1) {$-\frac{1}{2}$};
+  \node at (0,  -1) {$\frac{0}{2}$};
+  \node at (1,  -1) {$\frac{1}{2}$};
+  \node at (2,  -1) {$\frac{2}{2}$};
+  \node at (3,  -1) {$\frac{3}{2}$};
+  \node at (4,  -1) {$\frac{4}{2}$};
+  \node at (5,  -1) {$\ldots$};
+  
+  \node at (-5, -2) {$\ldots$};
+  \node at (-4, -2) {$-\frac{4}{3}$};
+  \node at (-3, -2) {$-\frac{3}{3}$};
+  \node at (-2, -2) {$-\frac{2}{3}$};
+  \node at (-1, -2) {$-\frac{1}{3}$};
+  \node at (0,  -2) {$\frac{0}{3}$};
+  \node at (1,  -2) {$\frac{1}{3}$};
+  \node at (2,  -2) {$\frac{2}{3}$};
+  \node at (3,  -2) {$\frac{3}{3}$};
+  \node at (4,  -2) {$\frac{4}{3}$};
+  \node at (5,  -2) {$\ldots$};
+
+  \node at (-5, -3) {\reflectbox{$\ddots$}};
+  \node at (-4, -3) {$\vdots$};
+  \node at (-3, -3) {$\vdots$};
+  \node at (-2, -3) {$\vdots$};
+  \node at (-1, -3) {$\vdots$};
+  \node at (0,  -3) {$\vdots$};
+  \node at (1,  -3) {$\vdots$};
+  \node at (2,  -3) {$\vdots$};
+  \node at (3,  -3) {$\vdots$};
+  \node at (4,  -3) {$\vdots$};
+  \node at (5,  -3) {$\ddots$};
+
+\end{diagram}
+
+At this point, we have some idea of what is involved in writing out all possible fractions with the form $\frac{m}{n}$. Let's turn now to the question of whether there is a way to make a listing of them (i.e., an isomorphism with $\Nats/$).
+
+\begin{aside}
+  \begin{remark}
+     If we can draw such a path with a pen, then that is essentially a listing of all of these fractions (we can just write down each fraction as we traverse over it with our pen).
+  \end{remark}
+\end{aside}
+
+Let's imagine putting our pen down on one fraction, and then systematically drawing a path that will take us through each fraction. Can we find such a path?
+
+In this picture, there is no straight-lined path that will work. If we start at ``$\frac{0}{1}$'' and move to the right, we will never get to the end of that row, and never get back to another row:
+
+\begin{diagram}
+
+  \node[dot,color=highlight] (s) at (0, 0.1) {};
+  \draw[->,dashed,color=highlight] (s) to (5, 0.1);
+
+  \node at (-5, 0) {$\ldots$};
+  \node at (-4, 0) {$-\frac{4}{1}$};
+  \node at (-3, 0) {$-\frac{3}{1}$};
+  \node at (-2, 0) {$-\frac{2}{1}$};
+  \node at (-1, 0) {$-\frac{1}{1}$};
+  \node at (0,  0) {$\frac{0}{1}$};
+  \node at (1,  0) {$\frac{1}{1}$};
+  \node at (2,  0) {$\frac{2}{1}$};
+  \node at (3,  0) {$\frac{3}{1}$};
+  \node at (4,  0) {$\frac{4}{1}$};
+  \node at (5,  0) {$\ldots$};
+
+  \node at (-5, -1) {$\ldots$};
+  \node at (-4, -1) {$-\frac{4}{2}$};
+  \node at (-3, -1) {$-\frac{3}{2}$};
+  \node at (-2, -1) {$-\frac{2}{2}$};
+  \node at (-1, -1) {$-\frac{1}{2}$};
+  \node at (0,  -1) {$\frac{0}{2}$};
+  \node at (1,  -1) {$\frac{1}{2}$};
+  \node at (2,  -1) {$\frac{2}{2}$};
+  \node at (3,  -1) {$\frac{3}{2}$};
+  \node at (4,  -1) {$\frac{4}{2}$};
+  \node at (5,  -1) {$\ldots$};
+  
+  \node at (-5, -2) {$\ldots$};
+  \node at (-4, -2) {$-\frac{4}{3}$};
+  \node at (-3, -2) {$-\frac{3}{3}$};
+  \node at (-2, -2) {$-\frac{2}{3}$};
+  \node at (-1, -2) {$-\frac{1}{3}$};
+  \node at (0,  -2) {$\frac{0}{3}$};
+  \node at (1,  -2) {$\frac{1}{3}$};
+  \node at (2,  -2) {$\frac{2}{3}$};
+  \node at (3,  -2) {$\frac{3}{3}$};
+  \node at (4,  -2) {$\frac{4}{3}$};
+  \node at (5,  -2) {$\ldots$};
+
+  \node at (-5, -3) {\reflectbox{$\ddots$}};
+  \node at (-4, -3) {$\vdots$};
+  \node at (-3, -3) {$\vdots$};
+  \node at (-2, -3) {$\vdots$};
+  \node at (-1, -3) {$\vdots$};
+  \node at (0,  -3) {$\vdots$};
+  \node at (1,  -3) {$\vdots$};
+  \node at (2,  -3) {$\vdots$};
+  \node at (3,  -3) {$\vdots$};
+  \node at (4,  -3) {$\vdots$};
+  \node at (5,  -3) {$\ddots$};
+
+\end{diagram}
+
+Similarly, if we start at ``$\frac{0}{1}$'' and move to the left, we will get stuck going left forever, because that row never ends either:
+
+\begin{diagram}
+
+  \node[dot,color=highlight] (s) at (0, 0.1) {};
+  \draw[->,dashed,color=highlight] (s) to (-5, 0.1);
+
+  \node at (-5, 0) {$\ldots$};
+  \node at (-4, 0) {$-\frac{4}{1}$};
+  \node at (-3, 0) {$-\frac{3}{1}$};
+  \node at (-2, 0) {$-\frac{2}{1}$};
+  \node at (-1, 0) {$-\frac{1}{1}$};
+  \node at (0,  0) {$\frac{0}{1}$};
+  \node at (1,  0) {$\frac{1}{1}$};
+  \node at (2,  0) {$\frac{2}{1}$};
+  \node at (3,  0) {$\frac{3}{1}$};
+  \node at (4,  0) {$\frac{4}{1}$};
+  \node at (5,  0) {$\ldots$};
+
+  \node at (-5, -1) {$\ldots$};
+  \node at (-4, -1) {$-\frac{4}{2}$};
+  \node at (-3, -1) {$-\frac{3}{2}$};
+  \node at (-2, -1) {$-\frac{2}{2}$};
+  \node at (-1, -1) {$-\frac{1}{2}$};
+  \node at (0,  -1) {$\frac{0}{2}$};
+  \node at (1,  -1) {$\frac{1}{2}$};
+  \node at (2,  -1) {$\frac{2}{2}$};
+  \node at (3,  -1) {$\frac{3}{2}$};
+  \node at (4,  -1) {$\frac{4}{2}$};
+  \node at (5,  -1) {$\ldots$};
+  
+  \node at (-5, -2) {$\ldots$};
+  \node at (-4, -2) {$-\frac{4}{3}$};
+  \node at (-3, -2) {$-\frac{3}{3}$};
+  \node at (-2, -2) {$-\frac{2}{3}$};
+  \node at (-1, -2) {$-\frac{1}{3}$};
+  \node at (0,  -2) {$\frac{0}{3}$};
+  \node at (1,  -2) {$\frac{1}{3}$};
+  \node at (2,  -2) {$\frac{2}{3}$};
+  \node at (3,  -2) {$\frac{3}{3}$};
+  \node at (4,  -2) {$\frac{4}{3}$};
+  \node at (5,  -2) {$\ldots$};
+
+  \node at (-5, -3) {\reflectbox{$\ddots$}};
+  \node at (-4, -3) {$\vdots$};
+  \node at (-3, -3) {$\vdots$};
+  \node at (-2, -3) {$\vdots$};
+  \node at (-1, -3) {$\vdots$};
+  \node at (0,  -3) {$\vdots$};
+  \node at (1,  -3) {$\vdots$};
+  \node at (2,  -3) {$\vdots$};
+  \node at (3,  -3) {$\vdots$};
+  \node at (4,  -3) {$\vdots$};
+  \node at (5,  -3) {$\ddots$};
+
+\end{diagram}
+
+For this first row, let's use the re-arranging trick that we used for $\Ints/$: let's write the negative and then positive versions of each fraction in a sequence. The first row becomes this:
+
+\begin{diagram}
+
+  \node at (-5, 0) {$\frac{0}{1}$};
+  \node at (-4, 0) {$-\frac{1}{1}$};
+  \node at (-3, 0) {$\frac{1}{1}$};
+  \node at (-2, 0) {$-\frac{2}{1}$};
+  \node at (-1, 0) {$\frac{2}{1}$};
+  \node at (0,  0) {$-\frac{3}{1}$};
+  \node at (1,  0) {$\frac{3}{1}$};
+  \node at (2,  0) {$-\frac{4}{1}$};
+  \node at (3,  0) {$\frac{4}{1}$};
+  \node at (4,  0) {$\ldots$};
+
+\end{diagram}
+
+Now we can start on the left (at $\frac{0}{1}$), and move only to the right.
+Let's do the same re-arrangement for all of the rows:
+
+\begin{diagram}
+
+  \node at (-5, 0) {$\frac{0}{1}$};
+  \node at (-4, 0) {$-\frac{1}{1}$};
+  \node at (-3, 0) {$\frac{1}{1}$};
+  \node at (-2, 0) {$-\frac{2}{1}$};
+  \node at (-1, 0) {$\frac{2}{1}$};
+  \node at (0,  0) {$-\frac{3}{1}$};
+  \node at (1,  0) {$\frac{3}{1}$};
+  \node at (2,  0) {$-\frac{4}{1}$};
+  \node at (3,  0) {$\frac{4}{1}$};
+  \node at (4,  0) {$\ldots$};
+  
+  \node at (-5, -1) {$\frac{0}{2}$};
+  \node at (-4, -1) {$-\frac{1}{2}$};
+  \node at (-3, -1) {$\frac{1}{2}$};
+  \node at (-2, -1) {$-\frac{2}{2}$};
+  \node at (-1, -1) {$\frac{2}{2}$};
+  \node at (0,  -1) {$-\frac{3}{2}$};
+  \node at (1,  -1) {$\frac{3}{2}$};
+  \node at (2,  -1) {$-\frac{4}{2}$};
+  \node at (3,  -1) {$\frac{4}{2}$};
+  \node at (4,  -1) {$\ldots$};
+
+  \node at (-5, -2) {$\frac{0}{3}$};
+  \node at (-4, -2) {$-\frac{1}{3}$};
+  \node at (-3, -2) {$\frac{1}{3}$};
+  \node at (-2, -2) {$-\frac{2}{3}$};
+  \node at (-1, -2) {$\frac{2}{3}$};
+  \node at (0,  -2) {$-\frac{3}{3}$};
+  \node at (1,  -2) {$\frac{3}{3}$};
+  \node at (2,  -2) {$-\frac{4}{3}$};
+  \node at (3,  -2) {$\frac{4}{3}$};
+  \node at (4,  -2) {$\ldots$};
+  
+  \node at (-5, -3) {$\vdots$};
+  \node at (-4, -3) {$\vdots$};
+  \node at (-3, -3) {$\vdots$};
+  \node at (-2, -3) {$\vdots$};
+  \node at (-1, -3) {$\vdots$};
+  \node at (0,  -3) {$\vdots$};
+  \node at (1,  -3) {$\vdots$};
+  \node at (2,  -3) {$\vdots$};
+  \node at (3,  -3) {$\vdots$};
+  \node at (4,  -3) {$\ddots$};
+
+\end{diagram}
+
+Now our grid of fractions extends only to the right and downwards (not to the left). Can we draw a path now? Is there a way to draw a path through these fractions, without getting stuck going down a path that never ends? There is, if we draw a diagonal zigzag. Like this:
+
+\begin{diagram}
+
+  \node[dot,color=highlight] (s) at (-4.5, 0.5) {};
+  \draw[->,color=highlight] (s) to (-5.5, -0.5);
+  \draw[->,space,dashed,color=highlight] (-5.4, -0.5) to (-3.6, 0.5);
+  \draw[->,color=highlight] (-3.5, 0.5) to (-5.5, -1.5);
+  \draw[->,space,dashed,color=highlight] (-5.4, -1.5) to (-2.6, 0.5);
+  \draw[->,color=highlight] (-2.5, 0.5) to (-5.5, -2.5);
+  \draw[->,space,dashed,color=highlight] (-5.4, -2.5) to (-1.6, 0.5);
+  \draw[->,color=highlight] (-1.5, 0.5) to (-5.5, -3.5);
+  \draw[->,space,dashed,color=highlight] (-5.4, -3.5) to (-0.6, 0.5);
+  \draw[->,color=highlight] (-0.5, 0.5) to (-2.5, -1.5);
+
+  \node at (-5, 0) {$\frac{0}{1}$};
+  \node at (-4, 0) {$-\frac{1}{1}$};
+  \node at (-3, 0) {$\frac{1}{1}$};
+  \node at (-2, 0) {$-\frac{2}{1}$};
+  \node at (-1, 0) {$\frac{2}{1}$};
+  \node at (0,  0) {$-\frac{3}{1}$};
+  \node at (1,  0) {$\frac{3}{1}$};
+  \node at (2,  0) {$-\frac{4}{1}$};
+  \node at (3,  0) {$\frac{4}{1}$};
+  \node at (4,  0) {$\ldots$};
+  
+  \node at (-5, -1) {$\frac{0}{2}$};
+  \node at (-4, -1) {$-\frac{1}{2}$};
+  \node at (-3, -1) {$\frac{1}{2}$};
+  \node at (-2, -1) {$-\frac{2}{2}$};
+  \node at (-1, -1) {$\frac{2}{2}$};
+  \node at (0,  -1) {$-\frac{3}{2}$};
+  \node at (1,  -1) {$\frac{3}{2}$};
+  \node at (2,  -1) {$-\frac{4}{2}$};
+  \node at (3,  -1) {$\frac{4}{2}$};
+  \node at (4,  -1) {$\ldots$};
+
+  \node at (-5, -2) {$\frac{0}{3}$};
+  \node at (-4, -2) {$-\frac{1}{3}$};
+  \node at (-3, -2) {$\frac{1}{3}$};
+  \node at (-2, -2) {$-\frac{2}{3}$};
+  \node at (-1, -2) {$\frac{2}{3}$};
+  \node at (0,  -2) {$-\frac{3}{3}$};
+  \node at (1,  -2) {$\frac{3}{3}$};
+  \node at (2,  -2) {$-\frac{4}{3}$};
+  \node at (3,  -2) {$\frac{4}{3}$};
+  \node at (4,  -2) {$\ldots$};
+  
+  \node at (-5, -3) {$\vdots$};
+  \node at (-4, -3) {$\vdots$};
+  \node at (-3, -3) {$\vdots$};
+  \node at (-2, -3) {$\vdots$};
+  \node at (-1, -3) {$\vdots$};
+  \node at (0,  -3) {$\vdots$};
+  \node at (1,  -3) {$\vdots$};
+  \node at (2,  -3) {$\vdots$};
+  \node at (3,  -3) {$\vdots$};
+  \node at (4,  -3) {$\ddots$};
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    There are other ways to traverse these fractions with a pen so that we never get stuck. Can you see any more? There is even a way to do it without rearranging each row.
+  \end{remark}
+\end{aside}
+
+We start at ``$\frac{0}{1}$,'' then we go up to ``$-\frac{1}{1}$'' and do a diagonal stroke to the left until we get to the left edge (at ``$\frac{0}{2}$''). Then we go up to ``$\frac{1}{1}$'' and do a diagonal stroke again (down to ``$\frac{0}{3}$''), then we go up again, and diagonal down again, and so on. 
+
+Tthis particular way of traversing the nodes will never get stuck. We will just keep going on forever, in the correct direction. Hence, this gives us a way to list the fractions. If we write down each fraction as we traverse over it with our pen, we get this:
+
+\begin{diagram}
+
+  \node at (-6, 0) {$\Rationals/:$};
+
+  \node at (-5, 0) {$\frac{0}{1}$};
+  \node at (-4, 0) {$-\frac{1}{1}$};
+  \node at (-3, 0) {$\frac{0}{2}$};
+  \node at (-2, 0) {$\frac{1}{1}$};
+  \node at (-1, 0) {$-\frac{1}{2}$};
+  \node at (0,  0) {$\frac{0}{3}$};
+  \node at (1,  0) {$-\frac{2}{1}$};
+  \node at (2,  0) {$\frac{1}{2}$};
+  \node at (3,  0) {$-\frac{1}{3}$};
+  \node at (4,  0) {$\ldots$};
+
+\end{diagram}
+
+And we can use this to make a listing:
+
+\begin{diagram}
+
+  \draw (0, 0) -- (8, 0) -- (8, -6) -- (0, -6) -- (0, 0);
+  \node at (0.75, -1) [label=right:{0. \fillinblank{5cm}}] {};
+  \node at (4.15, -0.85) {$\mathtt{\sfrac{0}{1}}$};
+  \node at (0.75, -2) [label=right:{1. \fillinblank{5cm}}] {};
+  \node at (4, -1.85) {$\mathtt{-\sfrac{1}{1}}$};
+  \node at (0.75, -3) [label=right:{2. \fillinblank{5cm}}] {};
+  \node at (4.15, -2.85) {$\mathtt{\sfrac{0}{2}}$};
+  \node at (0.75, -4) [label=right:{3. \fillinblank{5cm}}] {};
+  \node at (4.15, -3.85) {$\mathtt{\sfrac{1}{1}}$};
+  \node at (0.825, -4.825) [label=right:{$\vdots$}] {};
+  \node at (4.15, -4.825) {$\vdots$};
+  
+\end{diagram}
+
+Or, if you want to write it horizontally:
+
+\begin{center}
+  \begin{tabular}{ c c c c c c c c }
+    $\Nats/:$ & $0$   & $1$   & $2$   & $3$   & $4$   & $5$   & \ldots \\
+              & $\v/$ & $\v/$ & $\v/$ & $\v/$ & $\v/$ & $\v/$ &       \\ 
+    $\Ints/:$ & $\frac{0}{0}$   & $-\frac{1}{1}$  & $\frac{0}{2}$   & $\frac{1}{1}$  & $-\frac{1}{2}$   & $\frac{0}{3}$  & \ldots
+  \end{tabular}
+\end{center}
+
+\begin{aside}
+  \begin{remark}
+    Again, our intuitions can mislead us. For although our intuitions might make us think that surely $\Rationals/$ is a bigger set than $\Nats/$ and $\Ints/$, once we sit down and construct a listing, we can see that even $\Rationals/$ is the same size as $\Nats/$.
+  \end{remark}
+\end{aside}
+
+So, it turns out that we \emph{can} construct a \vocab{listing} (isomorphism) of the rational numbers after all. Hence, $\Rationals/$ and $\Nats/$ are the same size, along with $\Ints/$:
+
+\begin{equation*}
+  \cardinality{\Nats/} = \AlephZero/ 
+  \hskip1cm \text{ and } \hskip 1cm
+  \cardinality{\Ints/} = \AlephZero/ 
+  \hskip1cm \text{ and } \hskip 1cm
+  \cardinality{\Rationals/} = \AlephZero/ 
+\end{equation*}
+
+All three of these sets of numbers have the same size: $\AlephZero/$. There are just as many fractions as there are integers, and there are just as many integers as there are natural numbers.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we looked at different examples of infinite, listable sets. Surprisingly, all of them turn out to be the same size as the natural numbers $\Nats/$. In each case, this is revealed by finding a way to list them, one by one.
+
+\begin{itemize}
+  \item Infinite subsets of $\Nats/$ (like just the even numbers) turn out to have a size of $\AlephZero/$, just like $\Nats/$, even though our intuitions might suggest that subsets of a set should be smaller than the parent set.
+  \item $\Ints/$ have a size of $\AlephZero/$, just like $\Nats/$, even though our intuitions might suggest that $\Ints/$ should be twice as large as $\Nats/$ because $\Ints/$ has negative numbers in addition to positive numbers.
+  \item $\Rationals/$ have a size of $\AlephZero/$ too, just like $\Nats/$, even though there are infinitely many fractions between every natural number. 
+\end{itemize}
+
+\end{document}

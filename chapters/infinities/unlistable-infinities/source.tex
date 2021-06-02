@@ -1,0 +1,492 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Unlistable Infinities}
+\label{ch:unlistable-infinities}
+
+\newtopic{C}{an we list the real numbers $\Reals/$}? It turns out that we cannot. The real numbers $\Reals/$ are unlistable. So, here we encounter an infinite set that is \emph{not} listable.
+
+\begin{ponder}
+  Can you think of a way to \emph{prove} that an infinite set is not listable? What sorts of strategies might you try?
+\end{ponder}
+
+Now, how could we possibly know that $\Reals/$ is unlistable? In \chapterref{ch:listable-infinities}, we deduced that the integers $\Ints/$ and the rational numbers $\Rationals/$ are the same size as the natural numbers $\Nats/$. How did we know this? We figured this out by finding an isomorphism between them. In other words, we found a way to list all of $\Ints/$, and we found a way to list all of $\Rationals/$. 
+
+However, we had to do a little work to find a way to list $\Rationals/$. The listing strategy for $\Rationals/$ was not entirely obvious at first. Nevertheless, after some thinking, we did find a way to list all the fractions in $\Rationals/$, proving that $\Rationals/$ and $\Nats/$ are the same size. 
+
+When it comes to the real numbers $\Reals/$, who's to say that there isn't some clever way to list them all out, and humans just haven't found it yet? How can we say with certainty that the real numbers are definitely \emph{not} listable? 
+
+The answer is that we can prove it. How do we prove it? We do it by finding real numbers that cannot be included in any listing of $\Reals/$. There is a particular trick to this, which we call \vocab{diagonalization}, and that is what we will look at here.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Diagonalization Trick}
+
+\newthought{Let's suppose that we do have a listing} of all of the real numbers. As we said, this is impossible, but let's pretend that we do have such a listing for the sake of the argument. 
+
+Real numbers have an infinite number of digits after decimal places, so such a listing would look something like this:
+
+\begin{aside}
+  \begin{remark}
+    Note that in this picture, each number written down has infinitely many digits after the decimal point. So each number would keep going to the right, forever. 
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw (0, 0) -- (8, 0) -- (8, -6) -- (0, -6) -- (0, 0);
+  \node at (0.75, -1) [label=right:{0. \fillinblank{5cm}}] {};
+  \node at (4, -0.85) {$\mathtt{0.573020304078\ldots}$};
+  \node at (0.75, -2) [label=right:{1. \fillinblank{5cm}}] {};
+  \node at (4, -1.85) {$\mathtt{0.683180356371\ldots}$};
+  \node at (0.75, -3) [label=right:{2. \fillinblank{5cm}}] {};
+  \node at (4, -2.85) {$\mathtt{0.739263080360\ldots}$};
+  \node at (0.75, -4) [label=right:{3. \fillinblank{5cm}}] {};
+  \node at (4, -3.85) {$\mathtt{0.836390285937\ldots}$};
+  \node at (0.825, -4.825) [label=right:{$\vdots$}] {};
+  
+\end{diagram}
+
+Let's make this a little more precise. Let's draw this same listing a little differently. Let's start by re-drawing the listing with a little more space around all of the digits, like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {
+    \begin{tabular}{ c c c c c c c c }
+      0) &
+        $0$ & $.$ & $5$ & $7$ & $3$ & $0$ & $\ldots$ \\
+      1) &
+        $0$ & $.$ & $6$ & $8$ & $3$ & $1$ & $\ldots$ \\
+      2) &
+        $0$ & $.$ & $7$ & $3$ & $9$ & $2$ & $\ldots$ \\
+      3) &
+        $0$ & $.$ & $8$ & $3$ & $6$ & $3$ & $\ldots$ \\
+      $\vdots$ &
+        $\vdots$ & & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & 
+    \end{tabular}
+  };
+
+\end{diagram}
+
+On the left side, each line is numbered with a number from the natural numbers $\Nats/$. Let's highlight these line numbers, and add a separator to make it clear that these line numbers are not part of the real numbers on the right:
+
+\begin{diagram}
+
+  \node at (0, 0) {
+    \begin{tabular}{ c | c c c c c c c }
+      \textbf{0)} &
+        $0$ & $.$ & $5$ & $7$ & $3$ & $0$ & $\ldots$ \\
+      \textbf{1)} &
+        $0$ & $.$ & $6$ & $8$ & $3$ & $1$ & $\ldots$ \\
+      \textbf{2)} &
+        $0$ & $.$ & $7$ & $3$ & $9$ & $2$ & $\ldots$ \\
+      \textbf{3)} &
+        $0$ & $.$ & $8$ & $3$ & $6$ & $3$ & $\ldots$ \\
+      $\vdots$ &
+        $\vdots$ & & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & 
+    \end{tabular}
+  };
+
+\end{diagram}
+
+Each real number on the right side of the separator has an infinite number of digits after the decimal point. Let's number each decimal position across the top, like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {
+    \begin{tabular}{ c | c c c c c c c }
+      & \textbf{0th} & &
+        \textbf{1st} & \textbf{2nd} & \textbf{3rd} &
+        \textbf{4th} & \ldots \\ \hline
+      \textbf{0)} &
+        $0$ & $.$ & $5$ & $7$ & $3$ & $0$ & $\ldots$ \\
+      \textbf{1)} &
+        $0$ & $.$ & $6$ & $8$ & $3$ & $1$ & $\ldots$ \\
+      \textbf{2)} &
+        $0$ & $.$ & $7$ & $3$ & $9$ & $2$ & $\ldots$ \\
+      \textbf{3)} &
+        $0$ & $.$ & $8$ & $3$ & $6$ & $3$ & $\ldots$ \\
+      $\vdots$ &
+        $\vdots$ & & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & 
+    \end{tabular}
+  };
+
+\end{diagram}
+
+Now, at this point, we're going to use a little trick to construct a special real number. Let's call this number $n$. The way we perform this trick runs as follows. 
+
+We're going to build $n$ one digit at a time. So let's make a slot for $n$ near the top, and we'll fill it in as we go:
+
+\begin{diagram}
+
+  \node at (0, 0) {
+    \begin{tabular}{ c | c c c c c c c }
+      \hline
+      $\mathbf{n}$ & ?? & . & ?? & ?? & ?? & ?? & \ldots \\ \hline
+      & & & & & & & \\
+      & \textbf{0th} & &
+        \textbf{1st} & \textbf{2nd} & \textbf{3rd} &
+        \textbf{4th} & \ldots \\ \hline
+      \textbf{0)} &
+        $0$ & $.$ & $5$ & $7$ & $3$ & $0$ & $\ldots$ \\
+      \textbf{1)} &
+        $0$ & $.$ & $6$ & $8$ & $3$ & $1$ & $\ldots$ \\
+      \textbf{2)} &
+        $0$ & $.$ & $7$ & $3$ & $9$ & $2$ & $\ldots$ \\
+      \textbf{3)} &
+        $0$ & $.$ & $8$ & $3$ & $6$ & $3$ & $\ldots$ \\
+      $\vdots$ &
+        $\vdots$ & & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ &
+    \end{tabular}
+  };
+
+\end{diagram}
+
+Next, we look at the digit on line 0 in the 0th position:
+
+\begin{diagram}
+
+  \node at (0, 0) {
+    \begin{tabular}{ c | c c c c c c c }
+      \hline
+      $\mathbf{n}$ & ?? & . & ?? & ?? & ?? & ?? & \ldots \\ \hline
+      & & & & & & & \\
+      & \textbf{0th} & &
+        \textbf{1st} & \textbf{2nd} & \textbf{3rd} &
+        \textbf{4th} & \ldots \\ \hline
+      \textbf{0)} &
+        \cellcolor{grey3}{$0$} & $.$ & $5$ & $7$ & $3$ & $0$ & $\ldots$ \\
+      \textbf{1)} &
+        $0$ & $.$ & $6$ & $8$ & $3$ & $1$ & $\ldots$ \\
+      \textbf{2)} &
+        $0$ & $.$ & $7$ & $3$ & $9$ & $2$ & $\ldots$ \\
+      \textbf{3)} &
+        $0$ & $.$ & $8$ & $3$ & $6$ & $3$ & $\ldots$ \\
+      $\vdots$ &
+        $\vdots$ & & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ &
+    \end{tabular}
+  };
+
+\end{diagram}
+
+The digit there is ``$0$.'' In our slot for $n$, let's fill in the 0th position with a digit that is \emph{not} ``$0$.'' Let's pick ``$1$'':
+
+\begin{aside}
+  \begin{remark}
+    Note what we just did: we just made sure that our number $n$ differs from the number listed on line 0 in its 0th digit. However many other digits that $n$ and the number at line 0 might have in common, they will differ \emph{at least} in this one digit. Hence, our number $n$ will \emph{not} be the same number as the number on line $0$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node at (0, 0) {
+    \begin{tabular}{ c | c c c c c c c }
+      \hline
+      $\mathbf{n}$ & \cellcolor{grey3}{$1$} & . & ?? & ?? & ?? & ?? & \ldots \\ \hline
+      & & & & & & & \\
+      & \textbf{0th} & &
+        \textbf{1st} & \textbf{2nd} & \textbf{3rd} &
+        \textbf{4th} & \ldots \\ \hline
+      \textbf{0)} &
+        \cellcolor{grey3}{$0$} & $.$ & $5$ & $7$ & $3$ & $0$ & $\ldots$ \\
+      \textbf{1)} &
+        $0$ & $.$ & $6$ & $8$ & $3$ & $1$ & $\ldots$ \\
+      \textbf{2)} &
+        $0$ & $.$ & $7$ & $3$ & $9$ & $2$ & $\ldots$ \\
+      \textbf{3)} &
+        $0$ & $.$ & $8$ & $3$ & $6$ & $3$ & $\ldots$ \\
+      $\vdots$ &
+        $\vdots$ & & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & 
+    \end{tabular}
+  };
+
+\end{diagram}
+
+Next, let's move to line 1, and look at its 1st position digit:
+
+\begin{diagram}
+
+  \node at (0, 0) {
+    \begin{tabular}{ c | c c c c c c c }
+      \hline
+      $\mathbf{n}$ & $1$ & . & ?? & ?? & ?? & ?? & \ldots \\ \hline
+      & & & & & & & \\
+      & \textbf{0th} & &
+        \textbf{1st} & \textbf{2nd} & \textbf{3rd} &
+        \textbf{4th} & \ldots \\ \hline
+      \textbf{0)} &
+        $0$ & $.$ & $5$ & $7$ & $3$ & $0$ & $\ldots$ \\
+      \textbf{1)} &
+        $0$ & $.$ & \cellcolor{grey3}{$6$} & $8$ & $3$ & $1$ & $\ldots$ \\
+      \textbf{2)} &
+        $0$ & $.$ & $7$ & $3$ & $9$ & $2$ & $\ldots$ \\
+      \textbf{3)} &
+        $0$ & $.$ & $8$ & $3$ & $6$ & $3$ & $\ldots$ \\
+      $\vdots$ &
+        $\vdots$ & & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ &
+    \end{tabular}
+  };
+
+\end{diagram}
+
+It's ``$6$.'' Let's now go back up to our slot for $n$, and let's fill in the 1st position of $n$ with a digit that's \emph{not} ``$6$,'' say ``$4$'':
+
+\begin{aside}
+  \begin{remark}
+    Notice again what we did: we made sure that our number $n$ differs from the number that appears on line 1. No matter how many other digits $n$ and the number on line 1 might have in common, they will differ at least in their 1st digit. Hence, so far, our number $n$ is different from the number on line 0, and it is different from the number on line 1.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node at (0, 0) {
+    \begin{tabular}{ c | c c c c c c c }
+      \hline
+      $\mathbf{n}$ & $1$ & . & \cellcolor{grey3}{$4$} & ?? & ?? & ?? & \ldots \\ \hline
+      & & & & & & & \\
+      & \textbf{0th} & &
+        \textbf{1st} & \textbf{2nd} & \textbf{3rd} &
+        \textbf{4th} & \ldots \\ \hline
+      \textbf{0)} &
+        $0$ & $.$ & $5$ & $7$ & $3$ & $0$ & $\ldots$ \\
+      \textbf{1)} &
+        $0$ & $.$ & \cellcolor{grey3}{$6$} & $8$ & $3$ & $1$ & $\ldots$ \\
+      \textbf{2)} &
+        $0$ & $.$ & $7$ & $3$ & $9$ & $2$ & $\ldots$ \\
+      \textbf{3)} &
+        $0$ & $.$ & $8$ & $3$ & $6$ & $3$ & $\ldots$ \\
+      $\vdots$ &
+        $\vdots$ & & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ &
+    \end{tabular}
+  };
+
+\end{diagram}
+
+Next, let's turn to line 2, and note its 2nd position digit:
+
+\begin{diagram}
+
+  \node at (0, 0) {
+    \begin{tabular}{ c | c c c c c c c }
+      \hline
+      $\mathbf{n}$ & $1$ & . & $4$ & ?? & ?? & ?? & \ldots \\ \hline
+      & & & & & & & \\
+      & \textbf{0th} & &
+        \textbf{1st} & \textbf{2nd} & \textbf{3rd} &
+        \textbf{4th} & \ldots \\ \hline
+      \textbf{0)} &
+        $0$ & $.$ & $5$ & $7$ & $3$ & $0$ & $\ldots$ \\
+      \textbf{1)} &
+        $0$ & $.$ & $6$ & $8$ & $3$ & $1$ & $\ldots$ \\
+      \textbf{2)} &
+        $0$ & $.$ & $7$ & \cellcolor{grey3}{$3$} & $9$ & $2$ & $\ldots$ \\
+      \textbf{3)} &
+        $0$ & $.$ & $8$ & $3$ & $6$ & $3$ & $\ldots$ \\
+      $\vdots$ &
+        $\vdots$ & & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ &
+    \end{tabular}
+  };
+
+\end{diagram}
+
+It's ``$3$.'' For our $n$, let's fill in its 2nd position digit with something that's not ``$3$,'' say ``$7$'': 
+
+\begin{aside}
+  \begin{remark}
+    Again, note what we did. We made sure that our number $n$ differs from the number on line 2. However many other digits $n$ and the number on line 2 might have in common, they will differ at least in the digit in that 2nd position.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node at (0, 0) {
+    \begin{tabular}{ c | c c c c c c c }
+      \hline
+      $\mathbf{n}$ & $1$ & . & $4$ & \cellcolor{grey3}{$7$} & ?? & ?? & \ldots \\ \hline
+      & & & & & & & \\
+      & \textbf{0th} & &
+        \textbf{1st} & \textbf{2nd} & \textbf{3rd} &
+        \textbf{4th} & \ldots \\ \hline
+      \textbf{0)} &
+        $0$ & $.$ & $5$ & $7$ & $3$ & $0$ & $\ldots$ \\
+      \textbf{1)} &
+        $0$ & $.$ & $6$ & $8$ & $3$ & $1$ & $\ldots$ \\
+      \textbf{2)} &
+        $0$ & $.$ & $7$ & \cellcolor{grey3}{$3$} & $9$ & $2$ & $\ldots$ \\
+      \textbf{3)} &
+        $0$ & $.$ & $8$ & $3$ & $6$ & $3$ & $\ldots$ \\
+      $\vdots$ &
+        $\vdots$ & & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ &
+    \end{tabular}
+  };
+
+\end{diagram}
+
+Let's now do the same for the 3rd digit on line 3. We can fill in $n$'s 3rd position with any digit that is different from the one in the 3rd position of line 3. For instance:
+
+\begin{aside}
+  \begin{remark}
+    Now our number $n$ is different from the number on line 3. However many other digits $n$ and the number on line 3 have in common, they will differ at least in the digit in that 3rd position.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node at (0, 0) {
+    \begin{tabular}{ c | c c c c c c c }
+      \hline
+      $\mathbf{n}$ & $1$ & . & $4$ & $7$ & \cellcolor{grey3}{$2$} & ?? & \ldots \\ \hline
+      & & & & & & & \\
+      & \textbf{0th} & &
+        \textbf{1st} & \textbf{2nd} & \textbf{3rd} &
+        \textbf{4th} & \ldots \\ \hline
+      \textbf{0)} &
+        $0$ & $.$ & $5$ & $7$ & $3$ & $0$ & $\ldots$ \\
+      \textbf{1)} &
+        $0$ & $.$ & $6$ & $8$ & $3$ & $1$ & $\ldots$ \\
+      \textbf{2)} &
+        $0$ & $.$ & $7$ & $3$ & $9$ & $2$ & $\ldots$ \\
+      \textbf{3)} &
+        $0$ & $.$ & $8$ & $3$ & \cellcolor{grey3}{$6$} & $3$ & $\ldots$ \\
+      $\vdots$ &
+        $\vdots$ & & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ &
+    \end{tabular}
+  };
+
+\end{diagram}
+
+We then go on and on like this, filling in the 4th position of $n$ with a digit that is different from the 4th digit of line 4, then likewise for the 5th position, and the 6th position, and so on.
+
+Now, we obviously can't keep doing this ourselves, because these numbers are infinitely long and the list extends infinitely downwards. But it's easy enough to imagine how this would repeat. We have a simple procedure here that we can use to choose each subsequent digit to build $n$. It's this: for the $k$th position of $n$, we just pick a digit that it different from the $k$th position on line $k$! 
+
+Let's write this down, as a kind of recipe for how to build the number $n$:
+
+\begin{framed}
+  To build the number $n$, fill in each digit as follows. To fill in the $k$th digit, fill it in with any digit $x$ that is different from the digit in the $k$th position on the $k$th line.
+\end{framed}
+
+\begin{terminology}
+  \vocab{Diagonalization} is the process of making sure that a sequence of items $n$ differs from a list of other sequences by making it differ down the diagonal.
+\end{terminology}
+
+We call this trick the \vocab{diagonalization} trick (or just ``diagonalization''). We call it this because to carry it out, we go down the diagonal of the listing, and make sure that our number $n$ differs at each point in the diagonal. Here are all the positions we went through, but highlighted so you can see how it's the diagonal:
+
+\begin{diagram}
+
+  \node at (0, 0) {
+    \begin{tabular}{ c | c c c c c c c }
+      \hline
+      $\mathbf{n}$ & \cellcolor{grey3}{$1$} & . & \cellcolor{grey3}{$4$} & \cellcolor{grey3}{$7$} & \cellcolor{grey3}{$2$} & \cellcolor{grey3}{\ldots} & \ldots \\ \hline
+      & & & & & & & \\
+      & \textbf{0th} & &
+        \textbf{1st} & \textbf{2nd} & \textbf{3rd} &
+        \textbf{4th} & \ldots \\ \hline
+      \textbf{0)} &
+        \cellcolor{grey3}{$0$} & $.$ & $5$ & $7$ & $3$ & $0$ & $\ldots$ \\
+      \textbf{1)} &
+        $0$ & $.$ & \cellcolor{grey3}{$6$} & $8$ & $3$ & $1$ & $\ldots$ \\
+      \textbf{2)} &
+        $0$ & $.$ & $7$ & \cellcolor{grey3}{$3$} & $9$ & $2$ & $\ldots$ \\
+      \textbf{3)} &
+        $0$ & $.$ & $8$ & $3$ & \cellcolor{grey3}{$6$} & $3$ & $\ldots$ \\
+      $\vdots$ &
+        $\vdots$ & & $\vdots$ & $\vdots$ & $\vdots$ & \cellcolor{grey3}{$\vdots$} &
+    \end{tabular}
+  };
+
+\end{diagram}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{An Unlistable Number}
+
+\newthought{The number we just constructed} (namely 1.472\ldots) just \emph{cannot} be listed in our listing. Why not? The reason is that we constructed it in such a way that it differs from every other number on the list. We built it to \emph{be} different. Think about it:
+
+\begin{itemize}
+
+  \item $n$ is different from the number listed on line 0, because they differ in their 0th position.
+  
+  \item $n$ is different from the number listed on line 1, because they differ in their 1st position.
+  
+  \item $n$ is different from the number listed on line 2, because they differ in their 2nd position.
+  
+  \item $n$ is different from the number listed on line 3, because they differ in their 3rd position.
+  
+  \item And so on for every possible number that is listed! No matter how far down the list we go, $n$ will be different. No matter which line $k$ we check, $n$ is different from the number listed on line $k$, because it differs from that number in the $k$th position.
+
+\end{itemize}
+
+\begin{aside}
+  \begin{remark}
+    The \vocab{diagonalization} trick has allowed us to construct a real number which, somehow, cannot be on the list. 
+  \end{remark}
+\end{aside}
+
+So, our number $n$ simply cannot be on the list. It is impossible for it to be on the list!
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{$\Reals/$ Is Unlistable}
+
+\newthought{What conclusion are we to draw from this?} We have seen that there is at least one real number that cannot be listed, and that is the number $n$ that we constructed with the diagonalization trick. So what does that mean?
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:proving-negations} that a proof by contradiction runs as follows: we assume the opposite of what we want to prove, then we show with pure logic that this leads to a contradictory state of affairs. This shows that our initial assumption is not possible, and therefore the opposite must be true.
+  \end{remark}
+\end{aside}
+
+It means that the real numbers are unlistable (they are not \vocab{enumarable}). We supposed initially that we had a list of all real numbers. But then we built a real number that can't be on the list. So, the real numbers must \emph{not} be listable.
+
+To be more exact, we have just carried out a proof \vocab{by contradiction}. Here are the steps, spelled out explicitly:
+
+\begin{itemize}
+
+  \item We start by assuming that there \emph{is} a listing of all of the real numbers.
+  
+  \item Next, we use the diagonalization trick to construct a real number $n$ that \emph{cannot} be on our supposed list.
+  
+  \item This puts us in a state of contradiction. For we are now in a state where (1) \emph{all} real numbers are listed (we assumed this to start), but yet (2) there is at least \emph{one} that is not on the list, namely $n$. 
+  
+  \item So, we are in an impossible state of affairs, and when that happens, we must go back and find the step in our reasoning where we went wrong. 
+  
+  \item There is nothing wrong with the way we constructed $n$. It is a very simple procedure that even a computer could follow: for the $k$th digit of $n$, pick a digit that differs from the $k$th digit on the $k$th line of the supposed list.
+  
+  \item So, that leaves our original assumption: namely, our assumption that the real numbers \emph{are} listable. This is the only thing left that could be wrong.
+  
+  \item So, that assumption must be false. The opposite must be true. It must in fact be the case that the real numbers cannot be listed in the first place.
+
+\end{itemize}
+
+Recall that $\Nats/$, $\Ints/$, and $\Rationals/$ are all the same size: $\AlephZero/$, because they are all listable. By contrast, the real numbers $\Reals/$ are not listable. There are too many of them. Hence, the real numbers are \vocab{bigger} than $\Nats/$, $\Ints/$, and $\Rationals/$. The real numbers are infinite too, but they make up an even bigger infinity. 
+
+Since the size of $\Reals/$ is bigger than $\AlephZero/$, \mathers/ say that the size of $\Reals/$ is $\AlephOne/$, pronounced ``Aleph one'':
+
+\begin{equation*}
+  \cardinality{\Reals/} = \AlephOne/
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    $\Reals/$ is not the only collection that is unlistable and hence larger than $\Nats/$, $\Ints/$, and $\Rationals/$. We can use a similar diagonalization proof to show that the \vocab{power set} of the natural numbers $\Nats/$ (i.e., $\powerset{\Nats/}$) cannot be listed either. The cardinality of $\powerset{\Nats/}$ is also $\AlephOne/$. There are still bigger infinities beyond this, going upwards through $\aleph_{2}$, $\aleph_{3}$, and so on.
+  \end{remark}
+\end{aside}
+
+The idea that the real numbers $\Reals/$ cannot be listed is an amazing fact. Our intuition makes it easy enough to imagine something like the list of real numbers that we imagined at the start of this chapter, and it is easy enough to imagine an unlimitedly intelligent and powerful entity (let's just call it God) actually finishing that list. 
+
+But this proof tells us that if there were such a being, even God could not actually do this. The real numbers are so dense that, somehow, they are just not the sort of collection that can be listed.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we looked at the real numbers $\Reals/$, and why they are not listable. By using the diagonalization trick, we were able to show that if we assume that the real numbers are listable, we can use diagonalization to construct a number that is not on the list. Hence, $\Reals/$ must \emph{not} be listable, and therefore it is bigger than $\Nats/$, $\Ints/$, and $\Rationals/$.
+
+\end{document}

@@ -1,0 +1,397 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The Natural Numbers}
+\label{ch:natural-numbers}
+
+\begin{ponder}
+  How would you define the concept of ``a number''? Can you think up a definition for ``number'' that does not involve using the concept of number? A true definition will not be circular.
+\end{ponder}
+
+\newtopic{W}{hat exactly is} a \vocab{number}? How do we even define numbers? If you think about it, it's quite difficult to come up with a definition of number that doesn't rely on the idea of number. 
+
+But \mathers/ are logical folk, and they really like to not have circular definitions. They like to try and define things in terms of simpler concepts. So, the task is: can we define numbers in simpler terms, without secretly relying on the concept of number?
+
+Since the beginning of civilization, humans have been working at understanding numbers. It turns out there is actually more than one type of number, which we will talk about in this and the next few chapters. In this chapter, we will start with the simplest type of numbers, namely the set of numbers we use to count.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Counting}
+
+\newthought{We all know the counting numbers}. It is easy for us to write them down. For instance, we can start out our listing like this:
+
+\begin{equation*}
+  0, 1, 2, 3, 4, \ldots
+\end{equation*}
+
+Notice, however, that these are really just \vocab{symbols} that we use for counting. They are nothing more than \vocab{squiggly marks} that we draw on the page. What really \emph{are} they? What do they mean? Let's look at counting more carefully, to see if we can understand these numbers better.
+
+\begin{ponder}
+  It's a good exercise to stop before reading on, pretend that you don't know the symbols ``0,'' ``1,'' ``2,'' and so on, and then think about how you might count objects and keep records of your totals. How might you do it? 
+\end{ponder}
+
+What exactly happens when we count things? Suppose we are looking at a bunch of apples lying on a table in front of us, and we want to count them. Let's pretend that we don't know the familiar symbols ``0,'' ``1,'' ``2,'' and so on, so we can't count our apples using the counting numbers we all learned in school. But let's suppose that we do have a pencil and a blank piece of paper, that we can use to record our progress. How might we count the apples?
+
+Well, before we start counting the apples, we start with a tally of nothing. To symbolize this, let's just make a special mark ``$\nought/$'' on our paper. Hence, our paper looks like this:
+
+\begin{equation*}
+  \text{Total tally: } \nought/
+\end{equation*}
+
+That symbol just means that we have counted nothing. So we can read it like this: ``Total tally: nothing.''
+
+\begin{aside}
+  \begin{remark}
+    To symbolize nothing, we could just write no marks on the page at all and leave our paper blank. But it's more explicit to actually write down a symbol that says ``The tally so far comes up to nothing.''
+  \end{remark}
+\end{aside}
+
+Next, we point to the first apple, and we count it. We can't use number symbols, so maybe we just write a scratch ``$\tally/$'' on our piece of paper, to indicate that we have counted one more than we had before. So, our paper now looks like this:
+
+\begin{equation*}
+  \text{Total tally: } \nought/\dash\tally/
+\end{equation*}
+
+We can read that like this: ``Total tally: one more than nothing.''
+
+\begin{aside}
+  \begin{remark}
+    Each tally mark indicates that we have counted one more than we had before. Each tally mark means something like this: ``another one.''
+  \end{remark}
+\end{aside}
+
+Next, we point to the second apple, and we count it. Again, we can't use number symbols, so we write down another scratch ``$\tally/$'' to indicate that we have counted yet one more than before. Our paper now looks like this:
+
+\begin{equation*}
+  \text{Total tally: } \nought/\dash\tally/\dash\tally/
+\end{equation*}
+
+We can read that like this: ``Total tally: one more than one more than nothing.'' To count the third apple, we add another tally mark:
+
+\begin{equation*}
+  \text{Total tally: } \nought/\dash\tally/\dash\tally/\dash\tally/
+\end{equation*}
+
+Which we can read as ``Total tally: one more than one more than one more than nothing.''
+
+\begin{aside}
+  \begin{remark}
+    In fact, we could go on counting apples like this \vocab{infinitely}, if we lived forever and had an infinite supply of apples.
+  \end{remark}
+\end{aside}
+
+We could go on like this, counting one apple after another by adding a new tally for each apple we come to.
+
+Isn't this exactly what happens when we count things? We go through them, one by one, building up a tally. At each point, we say we have ``one more'' than before. 
+
+\begin{terminology}
+  At a basic level, when we count, there are two things we use. First, we use a \vocab{starting point}, then we repeatedly use the idea of the \vocab{successor}, i.e., ``one more than before.'' None of this requires that we understand or use the concepts of ``0,'' ``1,'' ``2,'' and so on.
+\end{terminology}
+
+So really, we have just two ideas here. We have a \vocab{starting point} (which we symbolized as ``$\nought/$''), and then we have the idea of ``one more than before,'' i.e., the \vocab{successor} (which we symbolized with a tally mark ``$\tally/$'').
+
+Notice that when we count our apples like this, we never use the symbols ``0,'' ``1,'', ``2,'' and so on. In fact, we never even use those \emph{concepts}. Of course, we do say that each tally mark represents ``\emph{one} more than we had before.'' But we're not really using the numerical concept of ``one'' here. We don't mean ``1'' when we say that. We mean something much closer to ``another of them.''
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Definition and Notation}
+
+\begin{terminology}
+  The \vocab{natural numbers} is the set of counting numbers. We denote it like this: $\Nats/$.
+\end{terminology}
+
+\newthought{Now that we know what counting is}, let's use it to define a set of counting numbers. Let's call this set the \vocab{natural numbers}, and let's symbolize it like this:
+
+\begin{equation*}
+  \Nats/
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    There is \vocab{no end} to the counting numbers. For any number we count up to, there's always one more! After all, we can always add another tally mark. So it is actually impossible to list out every counting number in a set roster.
+  \end{remark}
+\end{aside}
+
+Read that out loud like this: ``the set of natural numbers'' (or, if you like, you can just call it the letter ``N'').
+
+Of course, there are a lot of counting numbers, and it would be tedious to list out every one in a set roster. So, let's instead describe how to \emph{build} this set. 
+
+First, let's say that $\Nats/$ includes a special object which represents the starting point for any counting. Let's call this \vocab{nought}, and let's denote it with the symbol ``$\nought/$'' from before. 
+
+\begin{aside}
+  \begin{remark}
+    Nought need not be thought of as nothing or zero. It is really just a \vocab{starting point} for counting. In fact, some \mathers/ prefer to leave zero out of the set of natural numbers. For them, the starting point isn't zero at all, but rather one. So it really makes no difference. Nought is just the starting point.
+  \end{remark}
+\end{aside}
+
+It might be tempting to think of this symbol as representing ``nothing'' or ``zero.'' But we don't necessarily need to think of it as representing ``nothing.'' We can just think of it as ``the \emph{starting point} for counting.'' 
+
+At this point, our set of natural numbers $\Nats/$ includes one object, namely nought. Let's write out what we have so far:
+
+\begin{equation*}
+  \Nats/ = \{ \nought/ \}
+\end{equation*}
+
+We can read that out loud like this: ``the set of natural numbers includes nought.''
+
+Next, let's say that we can add a new object to $\Nats/$ by taking any object already in $\Nats/$, and appending to it a tally mark. Let's interpret the tally mark as ``the (next) one after \ldots,'' or the \vocab{successor} of it. Let's write this out as a rule, like this:
+
+\begin{equation*}
+  \text{if ``$n$''} \in \Nats/ \text{, then ``$n\dash\tally/$''} \in \Nats/
+\end{equation*}
+
+Read this out loud like so: ``if $n$ is in the set of natural numbers, then the successor of $n$ is in the set of natural numbers.'' 
+
+\begin{aside}
+  \begin{remark}
+    Note that ``$n$'' is just a \vocab{placeholder} for any object already in $\Nats/$. Hence, if ``$n$'' is actually ``$\nought/$'' (nought), then ``$n\dash\tally/$'' (the successor of $n$) is actually ``$\nought/\dash\tally/$'' (the successor of nought). If ``$n$'' is actually ``$\nought/\dash\tally/$'' (the successor of nought), then ``$n\dash\tally/$'' (the successor of $n$) is actually ``$\nought/\dash\tally/\dash\tally/$'' (the successor of the successor of nought).
+  \end{remark}
+\end{aside}
+
+
+Let's use this rule to add some objects to our set $\Nats/$. At this point, we only have one item in the set, namely $\nought/$. Our rule says that we can take $\nought/$, and append a tally to it, to get a new object ``$\nought/\dash\tally/$'' (which we can read as ``the successor of nought''). So let's add that to our set. Now our set has two objects in it:
+
+\begin{equation*}
+  \Nats/ = \{~\nought/,~\nought/\dash\tally/~\}
+\end{equation*}
+
+We can read that like this: ``the set of natural numbers includes nought, and the successor of nought.''
+
+Let's use the rule again, to add another new object to the set. Our rule says we can take any $n$ from $\Nats/$, and append a tally mark to it, to get a new object that we can put back into $\Nats/$. So let's take out ``$\nought/\dash\tally/$,'' and add another tally to it to get ``$\nought/\dash\tally/\dash\tally/$,'' i.e., ``the successor of the successor of nought.'' Then when we put that back in $\Nats/$, our set ends up with three objects in it:
+
+\begin{equation*}
+  \Nats/ = \{~\nought/,~\nought/\dash\tally/,~\nought/\dash\tally/\dash\tally/~\}
+\end{equation*}
+
+We can read that like this: ``the set of natural numbers includes nought, the successor of nought, and successor of the successor of nought.''
+
+\begin{aside}
+  \begin{remark}
+    We could never live long enough to finish the task of adding tally after tally to fill out this set. Even if we lived eternally, there would \emph{still} not be enough time to do it. Why? Because there is no end to this set. No matter how big a number we get to, there is always a bigger one: we can always add another tally mark! So in point of fact, we have to imagine this set $\Nats/$ as if it were \vocab{already built} in its entirety (by God perhaps), even though it goes on forever.
+  \end{remark}
+\end{aside}
+
+You can see how we could keep going like this forever. Obviously, that would be tedious, so let's just stipulate up front that the set $\Nats/$ is the set that contains every possible object that can be built by adding tally after tally in this fashion. Hence, let's say that $\Nats/$ looks like this:
+
+\begin{equation*}
+  \Nats/ = \{~\nought/,~\nought/\dash\tally/,~\nought/\dash\tally/\dash\tally/,~\nought/\dash\tally/\dash\tally/\dash\tally/,~\ldots~\}
+\end{equation*}
+
+At this point, we have actually defined the set of natural numbers. We have said that this set begins with a starting point (nought), and then it is built up by adding successors, over and over again, forever. Let's write this down as a formal definition.
+
+\begin{aside}
+  \begin{remark}
+    Notice that our definition here \vocab{specifies} a set. And, notice that we do it with words, by describing how it is built up. This is a perfectly fine way to specify a set. What is important is that our description is unambiguous. It should be crystal clear to any reader, how to build up the set.
+  \end{remark}
+\end{aside}
+
+\begin{fdefinition}[Natural numbers]
+  \label{def:nats}
+  We will say that the \vocab{natural numbers} is a set which we will denote as $\Nats/$. We define this set in the following way: 
+  
+  \begin{itemize} 
+  
+    \item[(i)] $\Nats/$ contains a special object called \vocab{nought}, which we will denote as ``$\nought/$.'' 
+    \item[(ii)] For any $n$ in $\Nats/$, $\Nats/$ contains another object called the \vocab{successor} of $n$, which we will denote as ``$n\dash\tally/$.''
+    \item[(iii)] $\Nats/$ contains no other objects besides those mentioned in (i) and (ii).
+    
+  \end{itemize}
+\end{fdefinition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Familiar Names}
+
+\begin{ponder}
+  Which counting numbers do we use so often that it is useful for us to have a designated name for them? What about the first hundred natural numbers? What about in the thousands? Millions? Zillions?
+\end{ponder}
+
+\newthought{It is quite tedious} to speak about numbers in the above way. Suppose I ask you to bring me some ice cream sandwiches. You say, ``how many do you want?'' Imagine if I said, ``the successor of the successor of the successor of nought.'' It is obvious that we should invent some names for some of these counting numbers that we use commonly. 
+
+That's where the numbers we all know and love come in. The symbols ``0'' (pronounced ``zero''), ``1'' (pronounce ``one''), ``2'' (pronounced ``two''), and so on are just \vocab{names} for the natural numbers. They are short-hand abbreviations that we can use. So here's the picture:
+
+\begin{diagram}
+
+  \node at (-5, 4.25) [label=left:{Actual}] {};
+  \node at (-5, 3.75) [label=left:{Names}] {};
+  \node at (-4.5, 4) {$\longmapsto$};
+  \node at (-5, 2) [label=left:{$\Nats/$}] {};
+  \node at (-4.5, 2) {$\longmapsto$};
+  \node at (-5, 0) [label=left:{Convenient}] {};
+  \node at (-5, -0.5) [label=left:{Names}] {};
+  \node at (-4.5, -0.25) {$\longmapsto$};
+
+  \draw[color=gray] (-3.5, 2.5) rectangle (-2.5, 1.5);
+  \node (0) at (-3, 2) {$\nought/$};
+  
+  \draw[color=gray] (-1.25, 2.5) rectangle (-0.25, 1.5);
+  \node (1) at (-0.75, 2) {$\nought/\dash\tally/$};
+  
+  \draw[color=gray] (1.25, 2.5) rectangle (2.75, 1.5);
+  \node (2) at (2, 2) {$\nought/\dash\tally/\dash\tally/$};
+  
+  \node (dots) at (4, 2) {\ldots};
+  
+  \node (a0) at (-3, 0) {``0''};
+  \node (b0) at (-3, -0.75) {``zero''};
+  
+  \node (a1) at (-0.75, 0) {``1''};
+  \node (b1) at (-0.75, -0.75) {``one''};
+  
+  \node (a2) at (2, 0) {``2''};
+  \node (b2) at (2, -0.75) {``two''};  
+  
+  \node at (4, -0.25) {\ldots};
+  
+  \draw[->,spaced] (a0) to (0);
+  \draw[->,spaced] (a1) to (1);
+  \draw[->,spaced] (a2) to (2);
+  
+  \node (c0) at (-3, 4) {$\e{nought}$};
+  
+  \node (d1) at (-0.75, 4.5) {$\e{successor~of}$};
+  \node (c1) at (-0.75, 4) {$\e{nought}$};
+  
+  \node (e2) at (2, 5) {$\e{successor~of}$};
+  \node (d2) at (2, 4.5) {$\e{successor~of}$};
+  \node (c2) at (2, 4) {$\e{nought}$};
+  
+  \draw[->,spaced] (c0) to (0);
+  \draw[->,spaced] (c1) to (1);
+  \draw[->,spaced] (c2) to (2);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    So we have unambiguous symbols like ``$\nought/$'' or ``$\nought/\dash\tally/$''; we have technical names like ``nought'' or ``the successor of nought''; and we have convenient names and symbols like ``zero'' (``0'') or ``one'' (``1'').
+  \end{remark}
+\end{aside}
+
+You can see that, say, the squiggly mark ``2'' that we write down on paper, and pronounce as ``two,'' is really just a convenient name for the successor of the successor of nought.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{More Standard Notation}
+
+\newthought{Above, we used tally marks} to symbolize the natural numbers. But \mathers/ don't usually use tally marks. They use a slightly different notation, which we will adopt from here on out. Let us call this the \vocab{standard notation}.
+
+\begin{terminology}
+  To write the natural numbers in \vocab{standard notation}, we will write ``$0$'' for nought, and ``$\s{n}$'' for the successor of $n$. The lowercase ``$s$'' in ``$\s{n}$'' is a shorthand for ``the successor.''
+\end{terminology}
+
+It goes like this. For nought, we use ``$0$,'' and for the successor of $n$ we write ``$\s{n}$.'' Using this notation, we can write the successor of nought like this:
+
+\begin{equation*}
+  \s{0}
+\end{equation*} 
+
+And we can write the successor of the successor of nought like this:
+
+\begin{equation*}
+  \s{\s{0}}
+\end{equation*} 
+
+Hence, in this more standard notation, we can denote the set of natural numbers $\Nats/$ like this:
+
+\begin{equation*}
+  \Nats/ = \{ 0, \s{0}, \s{\s{0}}, \s{\s{\s{0}}}, \ldots \}
+\end{equation*}
+
+We still have convenient names like ``one'' and ``two'' for this set. All we did was change the notation for the natural numbers. Hence, we still have this picture:
+
+\begin{aside}
+  \begin{remark}
+    Notice that you can easily determine which number a symbol represents by counting how many little ``$s$'' characters appear in it. For instance, ``$\s{\s{0}}$'' represents two, because two ``$s$'' characters appear in it. And ``$0$'' represents zero because no ``$s$'' characters appear in it.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node at (-5, 2) [label=left:{$\Nats/$}] {};
+  \node at (-4.5, 2) {$\longmapsto$};
+  \node at (-5, 0) [label=left:{Convenient}] {};
+  \node at (-5, -0.5) [label=left:{Names}] {};
+  \node at (-4.5, -0.25) {$\longmapsto$};
+
+  \draw[color=gray] (-3.5, 2.5) rectangle (-2.5, 1.5);
+  \node (0) at (-3, 2) {$0$};
+  
+  \draw[color=gray] (-1.25, 2.5) rectangle (-0.25, 1.5);
+  \node (1) at (-0.75, 2) {$\s{0}$};
+  
+  \draw[color=gray] (1.25, 2.5) rectangle (2.75, 1.5);
+  \node (2) at (2, 2) {$\s{\s{0}}$};
+  
+  \node (dots) at (4, 2) {\ldots};
+  
+  \node (a0) at (-3, 0) {``0''};
+  \node (b0) at (-3, -0.75) {``zero''};
+  
+  \node (a1) at (-0.75, 0) {``1''};
+  \node (b1) at (-0.75, -0.75) {``one''};
+  
+  \node (a2) at (2, 0) {``2''};
+  \node (b2) at (2, -0.75) {``two''};  
+  
+  \node at (4, -0.25) {\ldots};
+  
+  \draw[->,spaced] (a0) to (0);
+  \draw[->,spaced] (a1) to (1);
+  \draw[->,spaced] (a2) to (2);
+  
+\end{diagram}
+
+Sometimes \mathers/ omit the parentheses so they don't have to write so much. In that case, $\Nats/$ looks like this:
+
+\begin{equation*}
+  \Nats/ = \{ 0, s 0, s s 0, s s s 0, \ldots \}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    Since \mathers/ sometimes use different notation, whenever you read \mathical/ texts, it is always important to check what the \emph{author} specifies as their notation.
+  \end{remark}
+\end{aside}
+
+There are various other, equivalent, ways that \mathers/ sometimes use to write the natural numbers. Sometimes, they just use a tick mark for the successor. So they might write the natural numbers out like this: 
+
+\begin{equation*}
+  \Nats/ = \{ 0, 0', 0'', 0''', \ldots \}
+\end{equation*}
+
+Another variant uses a little plus symbol: 
+
+\begin{equation*}
+  \Nats/ = \{ 0, 0^{+}, 0^{++}, 0^{+++}, \ldots \}
+\end{equation*}
+
+However we choose to write it, it should be obvious that the basic idea is the same. The natural numbers are just counting numbers, and they are really nothing more than a sequence of successors after a starting point.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about the counting numbers, which \mathers / call the \vocab{natural numbers}.
+
+\begin{itemize}
+
+  \item If we think about counting, we see that counting is really nothing more than \vocab{starting} at a certain point, and then increasing a tally, \vocab{one at a time}.
+  
+  \item Formally then, we can define the natural numbers like this: the \vocab{natural numbers} are a set that contains a special symbol \vocab{nought}, and then for every $n$ in the set, there is a \vocab{successor} of $n$ that is also in the set. No further objects are in the set besides those just mentioned. 
+  
+  \item We denote the set of natural numbers as $\Nats/$. Using standard notation, we denote nought as ``$0$,'' and we denote the successor of any $n$ as ``$\s{n}$.'' Hence, the successor of nought is $\s{0}$, the successor of the successor of nought is $\s{\s{0}}$, and so on.
+  
+  \item The marks ``0'' (pronounced ``zero''), ``1'' (pronounced ``one''), ``2'' (pronounced ``2''), and so on are just convenient \vocab{names} for the natural numbers. ``0'' is a name for nought, ``1'' is a name for the successor of nought, ``2'' is a name for the successor of the successor of nought, and so on.
+
+\end{itemize}
+
+\end{document}

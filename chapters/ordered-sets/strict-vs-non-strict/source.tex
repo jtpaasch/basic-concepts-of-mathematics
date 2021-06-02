@@ -1,0 +1,611 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Strict vs.~Non-strict}
+\label{ch:strict-vs-non-strict}
+
+\newtopic{I}{n \chapterref{ch:orderings}}, we introduced \vocab{ordered sets}. An ordered set is a structure comprised of a base set and an ordering relation. The ordering relation puts the items from the base set into some kind of ordering. 
+
+\begin{ponder}
+  Strict ordering corresponds to, say, ``$3 \strictorder/ 4$,'' as in ``3 is strictly less than 4,'' whereas non-strict ordering corresponds to ``$3 \order/ 4$,'' as in ``3 is less than or equal to 4.'' Can you generalize these two kinds of comparisons to examples that don't involve numbers? E.g., what would ``$\strictorder/$'' and ``$\order/$'' mean if used with, say, people in the chain of command? 
+\end{ponder}
+
+There are two distinct kinds of orderings: one is \vocab{strict}, and the other is \vocab{non-strict}. We will discuss both of these in this chapter, since they have different properties.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Two Kinds of Ordering}
+
+\newthought{There are two kinds} of orderings, which roughly correspond to the symbols ``$\strictorder/$'' and ``$\order/$'' that we use in arithmetic. In arithmetic, we can write down expressions with this shape:
+
+\begin{equation*}
+  x \order/ y
+\end{equation*}
+
+\begin{aside}
+  \begin{example}
+    ``$3 \order/ 4$'' is true, because $3$ is no bigger than $4$. ``$4 \order/ 4$'' is also true, because the number on the left (namely, $4$) is no bigger than the number on the right (in fact, they are equal). ``$3 \strictorder/ 4$'' is true, because $3$ is smaller than $4$. But ``$4 \strictorder/ 4$'' is false, because $4$ is not smaller than $4$.
+  \end{example}
+\end{aside}
+
+We can read that like this: ``$x$ is less than or equal to $y$.'' Another way to read it is this: ``$x$ is \emph{no bigger} than $y$.'' The expression asserts that $x$ is either the same number as $y$, or it is some smaller number, but it is not a bigger number than $y$.
+
+In arithmetic, we can also write down expressions that have this shape:
+
+\begin{equation*}
+  x \strictorder/ y
+\end{equation*}
+
+We can read that like this: ``$x$ is less than $y$.'' Another way to read that is this: ``$x$ is \emph{strictly} less than $y$.'' The expression asserts that $x$ is definitely smaller than $y$ ($x$ cannot be the same as $y$, it must be smaller).
+
+\begin{terminology}
+  ``$x \order/ y$'' lets $x$ be anything up to and \emph{including} $y$, whereas ``$x \strictorder/ y$'' lets $x$ be anything up to but \emph{not including} $y$. A \vocab{strict ordering} (``$\strictorder/$'') puts items from the base set into a strict prior-posterior arrangement. A \vocab{non-strict ordering} (``$\order/$'') puts the items into a prior-or-equal-to arrangement.
+\end{terminology}
+
+Corresponding to these two symbols are two kinds of orderings, called \vocab{strict} and \vocab{non-strict} orderings. We will use the symbol ``$\strictorder/$'' to denote a \vocab{strict} ordering (where $x$ is strictly prior to $y$ in the ordering arrangement), and we use the symbol ``$\order/$'' to denote a \vocab{non-strict} ordering (where $x$ is at least as prior in the arrangement as $y$ is, but may also be equal to $y$ in the arrangement).
+
+Strict and non-strict orderings have different properties. In the next couple of sections, we'll look at the properties of each of these types of orders.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Strict Order}
+\label{sec:strict-order}
+
+\newthought{A strict ordering} requires that the ordering relation put the items from the base set into a strict prior-and-posterior arrangement. What are the properties of such an arrangement?
+
+A strict ordering must be \vocab{transitive}, \vocab{asymmetric}, and \vocab{irreflexive}. Let's take a little bit of time to look at each of these in turn, to see why these properties are right.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Transitivity}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:properties-of-relations} that a transitive relation is one that connects up the endpoints of every two-arrow chain. That is, if $x$ is connected to $y$ and $y$ is connected to $z$, then $x$ is connected to $z$ too.
+  \end{remark}
+\end{aside}
+
+An ordering relation needs to be \vocab{transitive}. Why is this? The basic concept of an ordering seems to require this. Ordering involves some notion of chaining. If $x$ is behind $y$ in the ordering, and $y$ is behind $z$ in the ordering, then $x$ is behind $z$ as well. 
+
+To see this, take any three points in a base set:
+
+\begin{diagram}
+  \node[dot] (x) at (-1.5,0) [label=below:{$x$}] {};
+  \node[dot] (y) at (0,0) [label=below:{$y$}] {};
+  \node[dot] (z) at (1.5,0) [label=below:{$z$}] {};
+\end{diagram}
+
+Now suppose that in the ordering, $x$ is prior to $y$ in the arrangement:
+
+\begin{diagram}
+
+  \node[dot] (x) at (-1.5,0) [label=below:{$x$}] {};
+  \node[dot] (y) at (0,0) [label=below:{$y$}] {};
+  \node[dot] (z) at (1.5,0) [label=below:{$z$}] {};
+  
+  \draw[->,space] (x) to (y);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Think about our intuitive understanding of an ordering. Think of, say, people standing in line. If any three people in line (call them $x$, $y$, and $z$), if $x \strictorder/ y$ and $y \strictorder/ z$, what does your intuitive understanding of ordering tell you about $x$ and $z$? How is $x$ related to $z$?
+  \end{remark}
+\end{aside}
+
+Suppose also that $y$ is prior to $z$ in the arrangement too:
+
+\begin{diagram}
+
+  \node[dot] (x) at (-1.5,0) [label=below:{$x$}] {};
+  \node[dot] (y) at (0,0) [label=below:{$y$}] {};
+  \node[dot] (z) at (1.5,0) [label=below:{$z$}] {};
+  
+  \draw[->,space] (x) to (y);
+  \draw[->,space] (y) to (z);
+
+\end{diagram}
+
+So, in this ordering, we have these two things:
+
+\begin{equation*}
+  x \strictorder/ y \hskip 3cm y \strictorder/ z
+\end{equation*}
+
+Our intuitive understanding of ordering suggests that if indeed this is true, then $x$ would be prior to $z$ in the ordering arrangement too:
+
+\begin{equation*}
+  x \strictorder/ z
+\end{equation*}
+
+This really does match with our intuitive understanding of ordering. Think about it. If three people are standing in line, the third person in line does not have to wait only for the second person. They have to wait for the first person in line too.
+
+Hence, we should draw in a further arrow here, to match this idea we have about ordering:
+
+\begin{diagram}
+
+  \node[dot] (x) at (-1.5,0) [label=below:{$x$}] {};
+  \node[dot] (y) at (0,0) [label=below:{$y$}] {};
+  \node[dot] (z) at (1.5,0) [label=below:{$z$}] {};
+  
+  \draw[->,space] (x) to (y);
+  \draw[->,space] (y) to (z);
+  \draw[->,space] (x) to[out=45,in=135] (z);
+
+\end{diagram}
+
+This is why we say that a strict ordering must be \emph{transitive}. Items at the back of the line stand behind not just the next item in line. They stand behind every other item going up the line.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Asymmetry}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:anti-properties-of-relations} that an \vocab{asymmetric} relation is a relation where for any $x$ and $y$ in the base set, if $x$ is connected to $y$, then $y$ is not connected back to $x$. There simply are no two-way arrows at all.
+  \end{remark}
+\end{aside}
+
+A strict ordering must be \vocab{asymmetric}. Why is this? Well, if you think about it, the whole concept of an ordering is antithetical to symmetry. A symmetrical relationship is a two-way connection: both points are related to each other in the same way, like a mirror image. 
+
+But ordering is the opposite of that. To put two items into an order is precisely to arrange them so that one stands behind the other!
+
+Think about this visually. Suppose we have two points $x$ and $y$, and we have arranged it so that $x$ comes before $y$ in the ordering: 
+
+\begin{diagram}
+
+  \node[dot] (x) at (-0.75,0) [label=below:{$x$}] {};
+  \node[dot] (y) at (0.75,0) [label=below:{$y$}] {};
+  
+  \draw[->,space] (x) to (y);
+
+\end{diagram}
+
+It would make no sense to \emph{also} say that $y$ comes before $x$ in the ordering. I.e., it would make no sense for there to be a two way arrow such as this:
+
+\begin{diagram}
+
+  \node[dot] (x) at (-0.75,0) [label=below:{$x$}] {};
+  \node[dot] (y) at (0.75,0) [label=below:{$y$}] {};
+  
+  \draw[->,space] (-0.75, 0.1) to (0.75, 0.1);
+  \draw[<-,space] (-0.75, -0.1) to (0.75, -0.1);
+
+\end{diagram}
+
+If we had a pair of two-way arrows like this, we'd have to say that both $x$ and $y$ are ``prior'' to the other, and that makes no sense. An ordering is one-way, by definition, so its got to be one or the other.
+
+In a strict ordering, we should see only one-way arrows between two elements, to indicate the direction of the order.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Irreflexivity}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:anti-properties-of-relations} that an \vocab{irreflexive} relation is a relation where no $x$ is related to itself. There simply are no points with arrows that loop back to themselves.
+  \end{remark}
+\end{aside}
+
+A strict ordering must be \vocab{irreflexive}. Why is this? Because the ordering is \emph{strict}. If we say $x \strictorder/ y$, we mean that $x$ is \emph{strictly} prior to $y$ in the ordering arrangement. We are not saying $x \order/ y$, where $x$ is allowed to be prior, or \emph{equal to} $y$. No, we are saying that $x$ must definitely be prior to $y$ in the ordering arrangement. 
+
+To see this, suppose we have two points where the first is prior to the second in the ordering arrangement:
+
+\begin{diagram}
+
+  \node[dot] (x) at (-0.75,0) [label=below:{$x$}] {};
+  \node[dot] (y) at (0.75,0) [label=below:{$y$}] {};
+  
+  \draw[->,space] (x) to (y);
+
+\end{diagram}
+
+In this picture, it is clear that $x$ is \emph{strictly prior} to $y$, because there is just one arrow from $x$ to $y$, and so we can see that $x$ comes before $y$ in this ordering arrangement. But what would happen if there were an arrow from $x$ back to itself? Like this:
+
+\begin{diagram}
+
+  \node[dot] (x) at (-0.75,0) [label=below:{$x$}] {};
+  \node[dot] (y) at (0.75,0) [label=below:{$y$}] {};
+  
+  \draw[->,space] (x) to (y);
+  \draw[->,space] (x) to[looseness=35] (x);
+
+\end{diagram}
+
+Well, remember that each arrow means ``is strictly prior to'' (in the ordering arrangement). Hence, the arrow from $x$ to $y$ means ``$x$ is strictly prior to $y$,'' or ``$x \strictorder/ y$.''
+
+But this also applies to the arrow from $x$ to $x$. An arrow from $x$ to $x$ would mean ``$x$ is strictly prior to $x$,'' or ``$x \strictorder/ x$.'' But that makes no sense when we are talking about a \emph{strict} order. Nothing can be strictly prior to itself. 
+
+This makes it clear why there will be no self-loops in a strict ordering. A strict ordering arrow can only go from a point to some other point. It can never go back to itself.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Summing Up}
+
+To sum up, if we look at pictures of strict orderings, the \emph{only} arrows we should see are one-way arrows, arranged into transitive chains, with no self-loops. Here are three examples:
+
+\begin{aside}
+  \begin{remark}
+    It is a good idea to manually check each of these examples of strict orderings, and confirm for yourself that each is a strict ordering. To do that, check that each one is (a) irreflexive (i.e., make sure there are no self-loops), (b) asymmetric (i.e., make sure there are no two-way arrows), and (c) transitive (i.e., make sure there is an arrow from the start- to the end-point of every two-arrow chain). Likewise, it is a good idea to manually check the examples that fail to be strict orderings, and identify exactly where they fail to exhibit the properties of a strict ordering. Which properties do they fail to have?
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  % Three dots in a vertical chain
+  \node[dot] (p1) at (-4, 0) {};
+  \node[dot] (p2) at (-4, 1.5) {};
+  \node[dot] (p3) at (-4, 3) {};
+  \draw[->,space] (p1) to (p2);
+  \draw[->,space] (p2) to (p3);
+  \draw[->,space] (p1) to[out=135,in=225] (p3);
+  
+  % A tree branching upwards
+  \node[dot] (q1) at (0, 0) {};
+  \node[dot] (q2) at (0, 1) {};
+  \node[dot] (q3) at (0, 2) {};
+  \node[dot] (q4) at (-1, 3) {};
+  \node[dot] (q5) at (1, 3) {};
+  \draw[->,space] (q1) to (q2);
+  \draw[->,space] (q2) to (q3);
+  \draw[->,space] (q3) to (q4);
+  \draw[->,space] (q3) to (q5);
+  \draw[->,space] (q1) to[out=135,in=225] (q3);
+  \draw[->,space] (q2) to[out=135,in=270] (q4);
+  \draw[->,space] (q2) to[out=45,in=270] (q5);
+  \draw[->,space] (q1) to[out=135,in=240] (q4);
+  \draw[->,space] (q1) to[out=45,in=300] (q5);
+  
+  % a chain of command top lattice looking thing
+  \node[dot] (r1) at (3, 0) {};
+  \node[dot] (r2) at (5, 0) {};
+  \node[dot] (r3) at (3, 1.5) {};
+  \node[dot] (r4) at (5, 1.5) {};
+  \node[dot] (r5) at (4, 3) {};
+  \draw[->,space] (r1) to (r3);
+  \draw[->,space] (r2) to (r4);
+  \draw[->,space] (r3) to (r5);
+  \draw[->,space] (r4) to (r5);
+  \draw[->,spaced] (r1) to (r5);
+  \draw[->,spaced] (r2) to (r5);
+
+\end{diagram}
+
+Here are examples of relations that are \emph{not} strict orderings:
+
+\begin{diagram}
+
+  % Three dots in a vertical chain
+  \node (p0) at (-4, -0.75) {Example (i)};
+  \node[dot] (p1) at (-4, 0) [label=left:{$a$}] {};
+  \node[dot] (p2) at (-4, 1.5) [label=left:{$b$}] {};
+  \node[dot] (p3) at (-4, 3) [label=left:{$c$}] {};
+  \draw[->,space] (p1) to (p2);
+  \draw[->,space] (p2) to (p3);
+  
+  % A tree branching upwards
+  \node (q0) at (0, -0.75) {Example (ii)};
+  \node[dot] (q1) at (0, 0) [label=left:{$e$}] {};
+  \node[dot] (q2) at (0, 1.5) [label=left:{$f$}] {};
+  \node[dot] (q3) at (-1, 3) [label=left:{$g$}] {};
+  \node[dot] (q4) at (1, 3) [label=left:{$h$}] {};
+  \draw[->,spaced] (q1) to (q2);
+  \draw[->,spaced] (q2) to (q3);
+  \draw[->,spaced] (q2) to (q4);
+  \draw[->,space] (q1) to[looseness=25,out=45,in=325] (q1);
+  \draw[->,space] (q2) to[looseness=25,out=45,in=325] (q2);
+  \draw[->,space] (q3) to[looseness=25,out=45,in=325] (q3);
+  \draw[->,space] (q4) to[looseness=25,out=45,in=325] (q4);
+  
+  % a chain of command top lattice looking thing
+  \node (r0) at (4, -0.75) {Example (iii)};
+  \node[dot] (r1) at (3, 0) [label=left:{$q$}] {};
+  \node[dot] (r2) at (5, 0) [label=right:{$r$}] {};
+  \node[dot] (r3) at (3.25, 1.5) [label=above left:{$s$}] {};
+  \node[dot] (r4) at (4.75, 1.5) [label=above right:{$t$}] {};
+  \node[dot] (r5) at (4, 3) [label=above:{$u$}]{};
+  \draw[->,space] (r1) to (r3);
+  \draw[->,space] (r2) to (r4);
+  \draw[->,space] (r3) to (r5);
+  \draw[->,space] (r4) to (r5);
+  \draw[->,spaced] (r1) to[out=45,in=260] (r5);
+  \draw[->,spaced] (r2) to[out=135,in=280] (r5);
+  \draw[->,space] (r5) to[looseness=1.25,out=200,in=110]  (r1);
+  \draw[->,space] (r5) to[looseness=1.25,out=340,in=70] (r2);
+
+\end{diagram}
+
+Example (i) is not a strict ordering because it is not transitive. We can see that $a$ is behind $b$ in the line (i.e., $a \strictorder/ b$), and we can see that $b$ is behind $c$ in the line (i.e., $b \strictorder/ c$), but $a$ is not behind $c$ (i.e., $a \not \strictorder/ c$)! This does not accurately model our intuitive understanding of ordering. If Tom were behind Sally and Sally were behind Gina in line, then surely Tom would be behind Gina in line too. So, whatever sort of relation Example (i) is, it is not a strict ordering.
+
+Example (ii) is not a strict ordering for two reasons. First, it is not transitive (for instance, $e \strictorder/ f$ and $f \strictorder/ g$ but $e \not \strictorder/ g$). Second, there are self-loops (i.e., it is reflexive). For example, there is an arrow from $f$ to $f$. If this were a strict ordering, that would mean that in this picture, $f$ would stand strictly behind $f$ in the ordering (i.e., $f \strictorder/ f$). But that does not fit with how we normally understand a strict ordering. Nothing can be strictly behind itself in line. Hence, whatever sort of relation Example (ii) is, it is not a strict ordering.
+
+Example (iii) is not a strict ordering either because there are some two-way arrows in it. For example, there is an arrow from $q$ to $u$, and another arrow from $u$ back to $q$. If this were a strict ordering, that would mean that $q$ is strictly behind $u$ in the ordering, and also that $u$ is strictly behind $q$ in the ordering. But that makes no sense. Ordering goes one way. So whatever sort of relation Example (iii) is, it is not a strict ordering either.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Non-strict Order}
+\label{sec:non-strict-order}
+
+\begin{ponder}
+  When we shift our attention from a strict ordering to a non-strict ordering, what properties of the ordering do we need to change, to accommodate the non-strict version? 
+\end{ponder}
+
+\newthought{In a strict ordering}, $x \strictorder/ y$ means that $x$ is strictly prior to $y$ in the ordering arrangement. With a \emph{non-strict} ordering, $x \order/ y$ means that $x$ is no farther forward than $y$ is in the ordering arrangement. To put it another way, it means that $x$ is \emph{at least} as far back in the arrangement as $y$ is.
+
+How do we characterize a non-strict ordering relation? A non-strict ordering relation is \vocab{reflexive}, \vocab{antisymmetric}, and \vocab{transitive}. Let's look at each of these in turn, to see why these properties are the ones that characterize non-strict ordering.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Transitive}
+
+\begin{aside}
+  \begin{remark}
+    As we normally understand ordering, if Tom is behind Sally in line, and Sally is behind Gina in line, then Tom is behind Gina too. We understand ordering as a transitive relation (and this applies to both \vocab{strict} and \vocab{non-strict} orderings).
+  \end{remark}
+\end{aside}
+
+A non-strict ordering must be \vocab{transitive}, for the same reasons that a strict ordering are. We are trying to model our intuitive understanding of ordering here, and as we normally understand it, ordering is transitive. So, to match the way we understand ordering, we insist that ordering relations are transitive, and this applies to both strict and non-strict relations.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Reflexive}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:anti-properties-of-relations} that a relation is \vocab{reflexive} if it relates every item $x$ in the base set back to itself.
+  \end{remark}
+\end{aside}
+
+A non-strict ordering must be \vocab{reflexive}. Contrast this with a strict ordering. As we noted earlier, a strict ordering must be \emph{irreflexive}, because nothing can be strictly prior to itself. 
+
+But with a \emph{non-strict} ordering, $x \order/ y$ doesn't mean that $x$ is \emph{strictly} prior to $y$. It only means that $x$ is at least as far back in the ordering as $y$. Hence, $x$ can be equal to $y$ in the ordering.
+
+\begin{aside}
+  \begin{remark}
+    In strict orderings, no points will have a self-loop, because it is never true that $x \strictorder/ x$. In a non-strict ordering, every point will have a self-loop, because it is always true that $x \order/ x$.
+  \end{remark}
+\end{aside}
+
+But then, we can say $x \order/ x$, because it's true that $x$ is at least as far back in the ordering arrangement as itself. And this will be true for any $x$ from the base set. No matter which $x$ we pick in the base set, it will be true that $x \order/ x$, because each one will be at least as far back in the ordering as itself. 
+
+Hence, every point in the base set needs to have an arrow looping back to itself. In contrast to strict orderings (which have \emph{no} self-loops), in a \emph{non-strict} ordering, \emph{every point} must have a self-loop.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Antisymmetric}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:anti-properties-of-relations} that a relation is \vocab{antisymmetric} if the only way that any given $x$ and $y$ can be symmetrically related to each other is if they are the same point. So, if $x \order/ y$ and $y \order/ x$, then $x = y$.
+  \end{remark}
+\end{aside}
+
+A non-strict ordering must be \vocab{antisymmetric}. This follows from its reflexivity. Since each point has a self-loop arrow, it is possible that $x \order/ x$, and $x \orderrev/ x$. 
+
+Note that this is not possible with a strict ordering. With a strict ordering, it is not possible for $x \strictorder/ x$ nor $x \strictorderrev/ x$, because there are no self-loops.  But here, with a non-strict ordering, because each point has an arrow that loops back to itself, this is possible.
+
+\begin{aside}
+  \begin{remark}
+    Ordering goes one way, and because of this both strict and non-strict orderings are \vocab{not symmetric}. However, they are not symmetric in different ways. In a \vocab{non-strict} ordering, the only way that $x \order/ y$ and $y \order/ x$ can both be true is when $x = y$. Hence, a non-strict ordering is \vocab{anti}symmetric. In a \vocab{strict} ordering, it is never the case that $x \strictorder/ y$ and $y \strictorder/ x$. Hence, a strict ordering is \vocab{a}symmetric.
+  \end{remark}
+\end{aside}
+
+However, it's only possible for one and the same point. As we normally understand an ordering, it is one-directional, and not two-way. So $x \order/ y$ and $y \order/ x$ should never occur in a (non-strict) ordering, except for the cases where $x$ and $y$ are the same point.
+
+But that is the very definition of antisymmetry: namely, to be such that the only way for $x \order/ y$ and $y \order/ x$ is if $x = y$. And that is what we have here, with a non-strict ordering. So a non-strict ordering relation is antisymmetric.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Summary}
+
+To sum up, if we look at pictures of non-strict ordering relations, we should see a self-loop on every point, no two-way arrows, and transitive chains. Here are three examples of non-strict orderings:
+
+\begin{diagram}
+
+  % Three dots in a vertical chain
+  \node[dot] (p1) at (-4, 0) {};
+  \node[dot] (p2) at (-4, 1.5) {};
+  \node[dot] (p3) at (-4, 3) {};
+  \draw[->,space] (p1) to (p2);
+  \draw[->,space] (p2) to (p3);
+  \draw[->,space] (p1) to[out=135,in=225] (p3);
+  \draw[->,space] (p1) to[looseness=25,out=45,in=335] (p1);
+  \draw[->,space] (p2) to[looseness=25,out=45,in=335] (p2);
+  \draw[->,space] (p3) to[looseness=25,out=45,in=335] (p3);
+  
+  % A tree branching upwards
+  \node[dot] (q1) at (0, 0) {};
+  \node[dot] (q2) at (0, 1) {};
+  \node[dot] (q3) at (0, 2) {};
+  \node[dot] (q4) at (-1, 3) {};
+  \node[dot] (q5) at (1, 3) {};
+  \draw[->,space] (q1) to (q2);
+  \draw[->,space] (q2) to (q3);
+  \draw[->,space] (q3) to (q4);
+  \draw[->,space] (q3) to (q5);
+  \draw[->,space] (q1) to[out=135,in=225] (q3);
+  \draw[->,space] (q2) to[out=135,in=270] (q4);
+  \draw[->,space] (q2) to[out=45,in=270] (q5);
+  \draw[->,space] (q1) to[out=135,in=240] (q4);
+  \draw[->,space] (q1) to[out=45,in=300] (q5);
+  \draw[->,space] (q1) to[looseness=25,out=45,in=335] (q1);
+  \draw[->,space] (q2) to[looseness=25,out=45,in=335] (q2);
+  \draw[->,space] (q3) to[looseness=25,out=45,in=335] (q3);
+  \draw[->,space] (q4) to[looseness=25,out=45,in=335] (q4);
+  \draw[->,space] (q5) to[looseness=25,out=45,in=335] (q5);
+  
+  % a chain of command top lattice looking thing
+  \node[dot] (r1) at (3, 0) {};
+  \node[dot] (r2) at (5, 0) {};
+  \node[dot] (r3) at (3, 1.5) {};
+  \node[dot] (r4) at (5, 1.5) {};
+  \node[dot] (r5) at (4, 3) {};
+  \draw[->,space] (r1) to (r3);
+  \draw[->,space] (r2) to (r4);
+  \draw[->,space] (r3) to (r5);
+  \draw[->,space] (r4) to (r5);
+  \draw[->,spaced] (r1) to (r5);
+  \draw[->,spaced] (r2) to (r5);
+  \draw[->,space] (r2) to[looseness=25,out=45,in=335] (r2);
+  \draw[->,space] (r4) to[looseness=25,out=45,in=335] (r4);
+  \draw[->,space] (r5) to[looseness=25,out=45,in=335] (r5);
+  \draw[->,space] (r1) to[looseness=25,out=135,in=225] (r1);
+  \draw[->,space] (r3) to[looseness=25,out=135,in=225] (r3);
+
+\end{diagram}%
+%
+\begin{aside}
+  \begin{remark}
+    As before, it is a good idea to manually check each of these examples of non-strict orderings, and confirm for yourself that each is a non-strict ordering. To do that, check that each one is (a) reflexive, (b) antisymmetric, and (c) transitive.
+  \end{remark}
+\end{aside}
+
+Here are some examples that are \emph{not} non-strict orderings:
+
+\begin{diagram}
+
+  % Three dots in a vertical chain
+  \node (p0) at (-4, -0.75) {Example (i)};
+  \node[dot] (p1) at (-4, 0) [label=left:{$a$}] {};
+  \node[dot] (p2) at (-4, 1.5) [label=left:{$b$}] {};
+  \node[dot] (p3) at (-4, 3) [label=left:{$c$}] {};
+  \draw[->,space] (p1) to (p2);
+  \draw[->,space] (p2) to (p3);
+  
+  % A tree branching upwards
+  \node (q0) at (0, -0.75) {Example (ii)};
+  \node[dot] (q1) at (0, 0) [label=left:{$e$}] {};
+  \node[dot] (q2) at (0, 1.5) [label=left:{$f$}] {};
+  \node[dot] (q3) at (-1, 3) [label=left:{$g$}] {};
+  \node[dot] (q4) at (1, 3) [label=left:{$h$}] {};
+  \draw[->,spaced] (q1) to (q2);
+  \draw[->,spaced] (q2) to (q3);
+  \draw[->,spaced] (q2) to (q4);
+  \draw[->,space] (q1) to[looseness=25,out=45,in=325] (q1);
+  \draw[->,space] (q2) to[looseness=25,out=45,in=325] (q2);
+  \draw[->,space] (q3) to[looseness=25,out=45,in=325] (q3);
+  \draw[->,space] (q4) to[looseness=25,out=45,in=325] (q4);
+  
+  % a chain of command top lattice looking thing
+  \node (r0) at (4, -0.75) {Example (iii)};
+  \node[dot] (r1) at (3, 0) [label=left:{$q$}] {};
+  \node[dot] (r2) at (5, 0) [label=right:{$r$}] {};
+  \node[dot] (r3) at (3.25, 1.5) [label=above left:{$s$}] {};
+  \node[dot] (r4) at (4.75, 1.5) [label=above right:{$t$}] {};
+  \node[dot] (r5) at (4, 3) [label=above:{$u$}]{};
+  \draw[->,space] (r1) to (r3);
+  \draw[->,space] (r2) to (r4);
+  \draw[->,space] (r3) to (r5);
+  \draw[->,space] (r4) to (r5);
+  \draw[->,spaced] (r1) to[out=45,in=260] (r5);
+  \draw[->,spaced] (r2) to[out=135,in=280] (r5);
+  \draw[->,space] (r5) to[looseness=1.25,out=200,in=110]  (r1);
+  \draw[->,space] (r5) to[looseness=1.25,out=340,in=70] (r2);
+
+\end{diagram}%
+%
+\begin{aside}
+  \begin{remark}
+    Likewise, it is a good idea to manually check the examples that fail to be non-strict orderings, and identify exactly where they fail to exhibit the required properties. Which properties do they fail to have?
+  \end{remark}
+\end{aside}
+
+Example (i) fails to be a non-strict ordering because it is not reflexive, and it is not transitive. If it were a non-strict ordering, we would see a self-loop on each point, and we would see an arrow from $a$ to $c$.
+
+Example (ii) fails to be a non-strict ordering because it is not transitive. If it were a non-strict ordering, we would see an arrow from $e$ to $g$, and also from $e$ to $h$.
+
+Example (iii) fails to be a non-strict ordering because it is not reflexive, and it is not antisymmetric. If it were a non-strict ordering, we would see a self-loop on each point, and we wouldn't have two way arrows (such as the ones from $q$ to $u$ and $u$ back to $q$, or $r$ to $u$ and $u$ back to $r$).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Definitions}
+\label{sec:ordered-sets-definitions}
+
+\newthought{Now that we have explored} the properties that characterize both the strict and the non-strict versions of ordering relations, let us write down some definitions. First, let's put down a definition for strict and non-strict ordering relations. 
+
+\begin{terminology}
+  A \vocab{strict ordering relation} is any relation that is irreflexive, asymmetric, and transitive. A \vocab{non-strict ordering relation} is any relation that is reflexive, antisymmetric, and transitive. We will denote strict ordering relations with the ``$\strictorder/$'' symbol, and we will denote non-strict ordering relations with the ``$\order/$ symbol.
+\end{terminology}%
+%
+\begin{fdefinition}[Ordering relations]
+  \label{def:ordering-relations}
+  Given a base set $\set{A}$ and a relation $\R{R}$ on $\set{A}$, we will say that $\R{R}$ is a \vocab{strict ordering relation} if it is irreflexive, asymmetric, and transitive. We will denote strict ordering relations with the symbol ``$\strictorder/$,'' and we will write ``$x \strictorder/ y$'' to denote that $x$ is strictly prior to $y$ in the ordering arrangement.
+  
+  We will say that $\R{R}$ is a \vocab{non-strict ordering relation} if it is reflexive, antisymmetric, and transitive. We will denote non-strict ordering relations with the symbol ``$\order/$,'' and we will write ``$x \order/ y$'' to denote that $x$ is at least as prior in the ordering arrangement as $y$.
+\end{fdefinition}
+
+\begin{terminology}
+  By convention, most \mathers/ are thinking of the \vocab{non-strict} version when they speak merely about ``order'' and don't specify whether they mean the strict or non-strict version. We will follow suit.
+\end{terminology}
+
+Most \mathers/ use the word ``order'' or ``ordering'' to refer to the \vocab{non-strict} version of ordering. We will too. Hence, if we speak of an ``ordering relation,'' unless we say otherwise, we will mean ``$\order/$.'' If we want to speak about a strict ordering relation, we will be explicit and say a ``\emph{strict} ordering relation,'' or we will just use the symbol ``$\strictorder/$.'' 
+
+Next, let us define strictly and non-strictly ordered sets. These are base sets equipped with either a strict ordering relation, or a non-strict ordering relation.
+
+\begin{terminology}
+  We will refer to a structure $\struct{S} = (\set{A}, \strictorder/)$ as a \vocab{strictly ordered set}, and we will refer to a structure $\struct{S} = (\set{A}, \order/)$ as a \vocab{non-strictly ordered set}.
+\end{terminology}
+
+\begin{fdefinition}[Ordered sets]
+  \label{def:ordered-sets}
+  Given a base set $\set{A}$ and a strict ordering relation $\strictorder/$, we will say that a \vocab{strictly ordered set} is a structure $\struct{S} = (\set{A}, \strictorder/)$ comprised of the base set $\set{A}$ and the ordering relation $\strictorder/$.
+  
+  Given a base set $\set{A}$ and a non-strict ordering relation $\order/$, we will say that a \vocab{non-strictly ordered set} is a structure $\struct{S} = (\set{A}, \order/)$ comprised of the base set $\set{A}$ and the ordering relation $\order/$.
+\end{fdefinition}
+
+\begin{terminology}
+  By convention, when we speak merely about an \vocab{ordered set} and do not specify whether we mean the strict or non-strict version, we will mean the \vocab{non-strict} kind.
+\end{terminology}
+
+If we speak of an ``ordered set,'' unless we say otherwise, we will mean a non-strictly ordered set, i.e., $\struct{S} = (\set{A}, \order/)$. If we want to speak about a strictly ordered set, we will be explicit and say a ``\emph{strictly} ordered set,'' or we will be explicit and use the symbols: $\struct{S} = (\set{A}, \strictorder/)$.
+
+Let us finally turn to putting down a definition for partially and ordered sets. First, let us say that two elements $x$ and $y$ in an ordered set are \emph{comparable} (or \emph{incomparable}) in the ordering if they are (or are not) related by the ordering, i.e., if either $x \order/ y$ or $y \order/ x$ (or neither $x \order/ y$ nor $y \order/ x$). Likewise for a strict ordering with $\strictorder/$.
+
+\begin{terminology}
+  In an ordered set, two items $x$ and $y$ are \vocab{comparable} if either $x \order/ y$ or $y \order/ x$. If neither $x \order/ y$ nor $y \order/ x$, then $x$ and $y$ are \vocab{incomparable}. Likewise for $\strictorder/$: they are \vocab{comparable} if $x \strictorder/ y$ or $y \strictorder/ x$, whereas they are \vocab{incomparable} if neither $y \strictorder/ y$ nor $y \strictorder/ x$.
+\end{terminology}
+
+\begin{fdefinition}[Incomparability]
+  \label{def:incomparability}
+  Given an ordered set $\struct{S} = (\set{A}, \order/)$ and any two elements $x, y \in \set{A}$, we will say that $x$ and $y$ are \vocab{comparable} if either $x \order/ y$ or $y \order/ x$, and we will say that $x$ and $y$ are \vocab{incomparable} if neither $x \order/ y$ nor $y \order/ x$. Similarly, any two elements $x$ and $y$ from a strictly ordered set $\struct{S} = (\set{A}, \strictorder/)$ are comparable or incomparable in the same way, but using $\strictorder/$ rather than $\order/$.
+\end{fdefinition}
+
+Now we can put down a definition for partially and totally ordered sets:
+
+\begin{terminology}
+  By default, every ordered set is a \vocab{partially ordered set} (or a \vocab{poset} for short). If every pair of elements $x$ and $y$ from the set are \vocab{comparable}, then we say it is a \vocab{totally ordered set}. In a partially ordered set, it may be the case that there are elements $x$ and $y$ that are incomparable. This will never be true in a totally ordered set. Every two items are comparable in a totally ordered set.
+\end{terminology}
+
+\begin{fdefinition}[Partially and totally ordered sets]
+  \label{def:partial-and-total-orders}
+  Given an ordered set $\struct{S} = (\set{A}, \order/)$ or $\struct{S} = (\set{A}, \strictorder/)$, we will say that $\struct{S}$ is a \vocab{partially ordered set} (or a \vocab{poset}) by default. We will say that $\struct{S}$ is \vocab{totally ordered} if every $x$ and $y$ from $\set{A}$ are comparable.
+\end{fdefinition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about the strict and non-strict versions of orderings.
+
+\begin{itemize}
+
+  \item A \vocab{strict ordering} is any relation that is irreflexive, asymmetric, and transitive. A \vocab{non-strict ordering} is any relation that is reflexive, antisymmetric, and transitive.
+  
+  \item A \vocab{strictly ordered set} is a structure $\struct{S} = (\set{A}, \strictorder/)$ comprised of a base set $\set{A}$ and a strict ordering relation $\strictorder/$. A \vocab{non-strictly ordered set} is a structure $\struct{S} = (\set{A}, \order/)$ comprised of a base set $\set{A}$ and a non-strict ordering relation $\order/$.
+  
+  \item By convention, when we speak of ``order'' or ``ordering,'' we will mean the non-strict kind. If we want to speak about a strict ordering, we will explicitly say so and use the appropriate $\strictorder/$ symbol.
+  
+  \item A \vocab{partially ordered set} (be it strict or non-strict) is one that puts at least some of the items from the base set into an ordering arrangement. A \vocab{totally ordered set} (be it strict or non-strict) is one that puts every item from the base set into the ordering arrangement.
+
+\end{itemize}
+
+
+\end{document}

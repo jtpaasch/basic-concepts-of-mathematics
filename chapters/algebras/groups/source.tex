@@ -1,0 +1,763 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Groups}
+\label{ch:groups}
+
+\newtopic{I}{n \chapterref{ch:groupoids-semigroups-monoids}}, we looked at \vocab{groupoids}, \vocab{semigroups}, and \vocab{monoids}. In this chapter, we will look at another type of algebraic structure, called a \vocab{group}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Definition}
+
+\begin{terminology}
+  A \vocab{group} is comprised of a carrier set equipped with a binary operation that is associative, has an identity (unit) element, and has inverses.
+\end{terminology}
+
+\newthought{Beyond groupoids, semigroups, and monoids}, there are groups. A \vocab{group} is a monoid with inverses. So, a group is a structure comprised of a carrier set equipped with one binary operation, and that binary operation is (1) associative, (2) it has an identity element, and (3) it has inverses.
+
+\begin{fdefinition}[Group]
+  \label{def:group}
+  For any algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ comprised of a carrier set $\set{A}$ and a single binary operation $\opSymbol/$, if $\opSymbol/$ is (1) associative, (2) has an identity (unit) element, and (3) has inverses, then we will say that $\algebra{S}$ is a \vocab{group}.
+\end{fdefinition}
+
+\begin{aside}
+  \begin{remark}
+    Groups are \emph{extremely} common, not just in mathematics, but also in nature. They seem to permeate everything.
+  \end{remark}
+\end{aside}
+
+The study of groups is called \vocab{group theory}, and it is a large, beautiful, and deep subject in and of itself. In the rest of this chapter, we will look at examples.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Two Isomorphic Groups}
+
+\newthought{Recall the museum example} from \chapterref{ch:algebra-first-example}. We have $\algebra{S} = (\set{A}, \opSymbol/)$, with $\set{A} = \{ m_{0}, m_{1}, m_{2}, m_{3} \}$ and this Cayley table:
+
+\begin{aside}
+  \begin{remark}
+    With the museum example, it doesn't matter where we put the parentheses (it is associative). For instance:
+    \begin{align*}
+      \op{m_{0}}{(\op{m_{1}}{m_{2}})} &= \op{(\op{m_{0}}{m_{1}})}{m_{2}} \\
+      \op{m_{0}}{m_{3}} &= \op{m_{1}}{m_{2}} \\
+      m_{3} &= m_{3}
+    \end{align*}
+    
+    The identity element is $m_{0}$. For example:
+    \begin{equation*}
+      \op{m_{0}}{m_{2}} = m_{2} \hskip 0.5cm \op{m_{2}}{m_{0}} = m_{2}
+    \end{equation*}
+    
+    And each element has an inverse:
+    \begin{align*}
+      \inverseEl{m_{0}} = m_{0} \hskip 0.5cm
+      \inverseEl{m_{1}} = m_{3} \\
+      \inverseEl{m_{2}} = m_{2} \hskip 0.5cm
+      \inverseEl{m_{3}} = m_{1}
+    \end{align*}
+  \end{remark}
+\end{aside}
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline \hline
+    $m_{0}$      & $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline
+    $m_{1}$      & $m_{1}$ & $m_{2}$ & $m_{3}$ & $m_{0}$ \\ \hline
+    $m_{2}$      & $m_{2}$ & $m_{3}$ & $m_{0}$ & $m_{1}$ \\ \hline
+    $m_{3}$      & $m_{3}$ & $m_{0}$ & $m_{1}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+This is a \vocab{group}. It is associative, it has an identity element, and it has inverses.
+
+Now let's look at another, somewhat different example. Suppose we visit a distant planet whose clocks have only 4 hours on them, instead of 12. Like this:
+
+\begin{diagram}
+
+  \draw (0, 0) circle (1.5cm);
+  \draw (0, 1.5) -- (0, 1.4);
+  \node (4) at (0, 1.15) {$4$};
+  \draw (1.5, 0) -- (1.4, 0);
+  \node (1) at (1.15, 0) {$1$};
+  \draw (0, -1.5) -- (0, -1.4);
+  \node (2) at (0, -1.15) {$2$};
+  \draw (-1.5, 0) -- (-1.4, 0);
+  \node (3) at (-1.14, 0) {$3$};
+  \node[dot] at (0, 0) {};
+
+  \draw[->] (0, 0) to (0.75, 0.45);
+  \draw[->] (0, 0) to (0.35, 0.45);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    In this scenario, the set of numbers we have to work with are the numbers that are written on the face of the clock. So the \vocab{set} we have at hand is this:
+    
+    \begin{equation*}
+      \set{A} = \{ 4, 1, 2, 3 \}
+    \end{equation*}
+  \end{remark}
+\end{aside}
+
+Suppose that it is 1 o'clock (let's just show the hour hand):
+
+\begin{diagram}
+
+  \draw (0, 0) circle (1.5cm);
+  \draw (0, 1.5) -- (0, 1.4);
+  \node (4) at (0, 1.15) {$4$};
+  \draw (1.5, 0) -- (1.4, 0);
+  \node (1) at (1.15, 0) {$1$};
+  \draw (0, -1.5) -- (0, -1.4);
+  \node (2) at (0, -1.15) {$2$};
+  \draw (-1.5, 0) -- (-1.4, 0);
+  \node (3) at (-1.14, 0) {$3$};
+  \node[dot] at (0, 0) {};
+
+  \draw[->] (0, 0) to (0.85, 0);
+
+\end{diagram}
+
+In 2 hours, what time will it be? The answer is this: it will be 3 o'clock. We can see this by moving the hour hand around two more ticks:
+
+\begin{diagram}
+
+  \draw (0, 0) circle (1.5cm);
+  \draw (0, 1.5) -- (0, 1.4);
+  \node (4) at (0, 1.15) {$4$};
+  \draw (1.5, 0) -- (1.4, 0);
+  \node (1) at (1.15, 0) {$1$};
+  \draw (0, -1.5) -- (0, -1.4);
+  \node (2) at (0, -1.15) {$2$};
+  \draw (-1.5, 0) -- (-1.4, 0);
+  \node (3) at (-1.14, 0) {$3$};
+  \node[dot] at (0, 0) {};
+
+  \draw[->,dotted] (0, 0) to (0.85, 0);
+  \draw[->,dotted] (0, 0) to (0, -0.85);
+  \draw[->] (0, 0) to (-0.85, 0);
+  
+  \draw[->,space,highlight] (0.65, 0) arc
+    [start angle=0, end angle=-90, radius=0.65cm];
+  \draw[->,space,highlight] (0, -0.65) arc
+    [start angle=-90, end angle=-180, radius=0.65cm];
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    We are looking at \vocab{clock arithmetic} or \vocab{clock counting} here. When we get up to ``$4$,'' we don't keep counting with ``$5$.'' No, we wrap around and go back to ``$1$.'' It's the same on our 12-hour Earth clocks. When we count up to ``$12$,'' we wrap around and go back to ``$1$'' again.
+  \end{remark}
+\end{aside}
+
+Let's suppose now that it is 3 o'clock. What time will it be after 3 more hours pass? It will be 2 o'clock. We can see this by moving the hour hand around three more ticks:
+
+\begin{diagram}
+
+  \draw (0, 0) circle (1.5cm);
+  \draw (0, 1.5) -- (0, 1.4);
+  \node (4) at (0, 1.15) {$4$};
+  \draw (1.5, 0) -- (1.4, 0);
+  \node (1) at (1.15, 0) {$1$};
+  \draw (0, -1.5) -- (0, -1.4);
+  \node (2) at (0, -1.15) {$2$};
+  \draw (-1.5, 0) -- (-1.4, 0);
+  \node (3) at (-1.14, 0) {$3$};
+  \node[dot] at (0, 0) {};
+
+  \draw[->,dotted] (0, 0) to (-0.85, 0);
+  \draw[->,dotted] (0, 0) to (0, 0.85);
+  \draw[->,dotted] (0, 0) to (0.85, 0);
+  \draw[->] (0, 0) to (0, -0.85);
+
+  \draw[<-,space,highlight] (0, 0.65) arc
+    [start angle=90, end angle=180, radius=0.65cm];
+
+  \draw[<-,space,highlight] (0.65, 0) arc
+    [start angle=0, end angle=90, radius=0.65cm];
+  
+  \draw[<-,space,highlight] (0, -0.55) arc
+    [start angle=-90, end angle=0, radius=0.65cm];
+  
+\end{diagram}
+
+Let's use our ``$\opSymbol/$'' to talk about adding hours on this clock. Let's say that ``$\op{x}{y}$'' means that we add $x$ and $y$ on this 4-hour clock. So, for instance, we've seen that these are both true on this clock:
+
+\begin{equation*}
+   \op{1}{2} = 3 \hskip 3cm \op{3}{3} = 2
+\end{equation*}
+
+
+\begin{aside}
+  \begin{remark}
+    In this structure, it doesn't matter where we put the parentheses (it is associative). For instance:
+    \begin{align*}
+      \op{3}{(\op{4}{1})} &= \op{(\op{3}{4})}{1} \\
+      \op{3}{1} &= \op{3}{1} \\
+      4 &= 4
+    \end{align*}
+    
+    The identity element is $4$. For example:
+    \begin{equation*}
+      \op{4}{2} = 2 \hskip 0.5cm \op{2}{4} = 2
+    \end{equation*}
+    
+    And each element has an inverse:
+    \begin{align*}
+      \inverseEl{4} = 4 \hskip 0.5cm
+      \inverseEl{1} = 3 \\
+      \inverseEl{2} = 2 \hskip 0.5cm
+      \inverseEl{3} = 1
+    \end{align*}
+  \end{remark}
+\end{aside}
+
+Let's build a Cayley table for all of this clock arithmetic. Here it is, in full:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $4$ & $1$ & $2$ & $3$ \\ \hline \hline
+    $4$          & $4$ & $1$ & $2$ & $3$ \\ \hline
+    $1$          & $1$ & $2$ & $3$ & $4$ \\ \hline
+    $2$          & $2$ & $3$ & $4$ & $1$ \\ \hline
+    $3$          & $3$ & $4$ & $1$ & $2$ \\ \hline
+  \end{tabular}
+\end{center}
+
+This is a \vocab{group}. It is associative, it has an identity element, and it has inverses. 
+
+Now, clock arithmetic and our museum example may not seem to have much in common, but in fact, these two algebraic structures are completely \vocab{isomorphic}. To prove this, we need to construct an \vocab{isomorphism}, i.e., a function $\func{f}$ that preserves the binary operation. Here are our two carrier sets. The museum moves are on the left, and the numbers on the 4-hour clock are on the right:
+
+\begin{diagram}
+
+  \draw[color=grey3] (-3, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (m0) at (-3, 1) [label=left:{$m_{0}$}] {};
+  \node[dot] (m1) at (-2, 0.75) [label=left:{$m_{1}$}] {};
+  \node[dot] (m2) at (-2, 0.25) [label=left:{$m_{2}$}] {};
+  \node[dot] (m3) at (-3, 0) [label=left:{$m_{3}$}] {};
+  
+  \draw[color=grey3] (3, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (4) at (3, 1) [label=right:{$4$}] {};
+  \node[dot] (1) at (2, 0.75) [label=right:{$1$}] {};
+  \node[dot] (2) at (2, 0.25) [label=right:{$2$}] {};
+  \node[dot] (3) at (3, 0) [label=right:{$3$}] {};
+  
+\end{diagram}
+
+Let's pick this mapping:
+
+\begin{diagram}
+
+  \draw[color=grey3] (-3, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (m0) at (-3, 1) [label=left:{$m_{0}$}] {};
+  \node[dot] (m1) at (-2, 0.75) [label=left:{$m_{1}$}] {};
+  \node[dot] (m2) at (-2, 0.25) [label=left:{$m_{2}$}] {};
+  \node[dot] (m3) at (-3, 0) [label=left:{$m_{3}$}] {};
+  
+  \draw[color=grey3] (3, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (4) at (3, 1) [label=right:{$4$}] {};
+  \node[dot] (1) at (2, 0.75) [label=right:{$1$}] {};
+  \node[dot] (2) at (2, 0.25) [label=right:{$2$}] {};
+  \node[dot] (3) at (3, 0) [label=right:{$3$}] {};
+
+  \node (f) at (0, -0.75) {$\func{f}$};
+  \draw[->,space,dashed] (m0) to[out=10,in=170] (4);
+  \draw[->,space,dashed] (m1) to (1);
+  \draw[->,space,dashed] (m2) to (2);
+  \draw[->,space,dashed] (m3) to[out=350,in=190] (3);
+  
+\end{diagram}
+
+Does this preserve the binary operation? To check, we need to make sure that corresponding elements appear in corresponding positions in the Cayley tables. Let's check $m_{0}$ and $4$ first. We can see that they do appear in corresponding locations:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & \cellcolor{grey3} $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline \hline
+    \cellcolor{grey3} $m_{0}$      & \cellcolor{grey3} $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline
+    $m_{1}$      & $m_{1}$ & $m_{2}$ & $m_{3}$ & \cellcolor{grey3} $m_{0}$ \\ \hline
+    $m_{2}$      & $m_{2}$ & $m_{3}$ & \cellcolor{grey3} $m_{0}$ & $m_{1}$ \\ \hline
+    $m_{3}$      & $m_{3}$ & \cellcolor{grey3} $m_{0}$ & $m_{1}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+  \hskip 2cm
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & \cellcolor{grey3} $4$ & $1$ & $2$ & $3$ \\ \hline \hline
+    \cellcolor{grey3} $4$          & \cellcolor{grey3} $4$ & $1$ & $2$ & $3$ \\ \hline
+    $1$          & $1$ & $2$ & $3$ & \cellcolor{grey3} $4$ \\ \hline
+    $2$          & $2$ & $3$ & \cellcolor{grey3} $4$ & $1$ \\ \hline
+    $3$          & $3$ & \cellcolor{grey3} $4$ & $1$ & $2$ \\ \hline
+  \end{tabular}
+\end{center}
+
+We can also see that $m_{1}$ and $1$ correspond:
+
+\begin{ponder}
+  Turn back to \chapterref{ch:algebra-first-example} and look at the pictures of movements through the museum galleries. Then look at the pictures above of the movements of the hands on our 4-hour clock. How are they similar? If you look past the surface details, and look at the deeper structure of these two examples, can you explain why it is that these two Cayley tables line up with each other so perfectly?
+\end{ponder}
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $m_{0}$ & \cellcolor{grey3} $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline \hline
+    $m_{0}$      & $m_{0}$ & \cellcolor{grey3} $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline
+    \cellcolor{grey3} $m_{1}$      & \cellcolor{grey3} $m_{1}$ & $m_{2}$ & $m_{3}$ & $m_{0}$ \\ \hline
+    $m_{2}$      & $m_{2}$ & $m_{3}$ & $m_{0}$ & \cellcolor{grey3} $m_{1}$ \\ \hline
+    $m_{3}$      & $m_{3}$ & $m_{0}$ & \cellcolor{grey3} $m_{1}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+  \hskip 2cm
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $4$ & \cellcolor{grey3} $1$ & $2$ & $3$ \\ \hline \hline
+    $4$          & $4$ & \cellcolor{grey3} $1$ & $2$ & $3$ \\ \hline
+    \cellcolor{grey3} $1$          & \cellcolor{grey3} $1$ & $2$ & $3$ & $4$ \\ \hline
+    $2$          & $2$ & $3$ & $4$ & \cellcolor{grey3} $1$ \\ \hline
+    $3$          & $3$ & $4$ & \cellcolor{grey3} $1$ & $2$ \\ \hline
+  \end{tabular}
+\end{center}
+
+And $m_{2}$ and $2$ do too:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $m_{0}$ & $m_{1}$ & \cellcolor{grey3} $m_{2}$ & $m_{3}$ \\ \hline \hline
+    $m_{0}$      & $m_{0}$ & $m_{1}$ & \cellcolor{grey3} $m_{2}$ & $m_{3}$ \\ \hline
+    $m_{1}$      & $m_{1}$ & \cellcolor{grey3} $m_{2}$ & $m_{3}$ & $m_{0}$ \\ \hline
+    \cellcolor{grey3} $m_{2}$      & \cellcolor{grey3} $m_{2}$ & $m_{3}$ & $m_{0}$ & $m_{1}$ \\ \hline
+    $m_{3}$      & $m_{3}$ & $m_{0}$ & $m_{1}$ & \cellcolor{grey3} $m_{2}$ \\ \hline
+  \end{tabular}
+  \hskip 2cm
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $4$ & $1$ & \cellcolor{grey3} $2$ & $3$ \\ \hline \hline
+    $4$          & $4$ & $1$ & \cellcolor{grey3} $2$ & $3$ \\ \hline
+    $1$          & $1$ & \cellcolor{grey3} $2$ & $3$ & $4$ \\ \hline
+    \cellcolor{grey3} $2$          & \cellcolor{grey3} $2$ & $3$ & $4$ & $1$ \\ \hline
+    $3$          & $3$ & $4$ & $1$ & \cellcolor{grey3} $2$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Finally, $m_{3}$ and $3$ also correspond:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $m_{0}$ & $m_{1}$ & $m_{2}$ & \cellcolor{grey3} $m_{3}$ \\ \hline \hline
+    $m_{0}$      & $m_{0}$ & $m_{1}$ & $m_{2}$ & \cellcolor{grey3} $m_{3}$ \\ \hline
+    $m_{1}$      & $m_{1}$ & $m_{2}$ & \cellcolor{grey3} $m_{3}$ & $m_{0}$ \\ \hline
+    $m_{2}$      & $m_{2}$ & \cellcolor{grey3} $m_{3}$ & $m_{0}$ & $m_{1}$ \\ \hline
+    \cellcolor{grey3} $m_{3}$      & \cellcolor{grey3} $m_{3}$ & $m_{0}$ & $m_{1}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+  \hskip 2cm
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $4$ & $1$ & $2$ & \cellcolor{grey3} $3$ \\ \hline \hline
+    $4$          & $4$ & $1$ & $2$ & \cellcolor{grey3} $3$ \\ \hline
+    $1$          & $1$ & $2$ & \cellcolor{grey3} $3$ & $4$ \\ \hline
+    $2$          & $2$ & \cellcolor{grey3} $3$ & $4$ & $1$ \\ \hline
+    \cellcolor{grey3} $3$          & \cellcolor{grey3} $3$ & $4$ & $1$ & $2$ \\ \hline
+  \end{tabular}
+\end{center}
+
+So, the algebraic structures from our museum example and the 4-hour clock are \vocab{isomorphic}. Underneath the hood, they are exactly the same, and they differ only in the names of their elements.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Braids}
+
+\newthought{There are groups in knot theory}. Suppose we have three ropes. There are different twists we can make, when we braid them. Here are a few different twists that are available to us:
+
+\begin{aside}
+  \begin{remark}
+    Notice that it matters whether a rope crosses in the front or behind another rope. For instance, in $t_{1}$, the center rope crosses over the top of the left rope, while in $t_{2}$, the center rope passes behind the left rope. These are different twists.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node at (-4.5, 2) {$t_{0}$};
+  \draw[color=black,double distance=3pt] (-5, 1.5) to (-5, 0);
+  \draw[color=black,double distance=3pt] (-4.5, 1.5) to (-4.5, 0); 
+  \draw[color=black,double distance=3pt] (-4, 1.5) to (-4, 0);
+
+  \node at (-1.5, 2) {$t_{1}$};
+  \draw[color=black,double distance=3pt] (-2, 1.5) to[out=270,in=90] (-1.5, 0);
+  \draw[color=black,double distance=3pt] (-1.5, 1.5) to[out=270,in=90] (-2, 0); 
+  \draw[color=black,double distance=3pt] (-1, 1.5) to (-1, 0);
+
+  \node at (1.5, 2) {$t_{2}$};
+  \draw[color=black,double distance=3pt] (1.5, 1.5) to[out=270,in=90] (1, 0); 
+  \draw[color=black,double distance=3pt] (1, 1.5) to[out=270,in=90] (1.5, 0);
+  \draw[color=black,double distance=3pt] (2, 1.5) to (2, 0);
+
+  \node at (4.5, 2) {$t_{3}$};
+  \draw[color=black,double distance=3pt] (4, 1.5) to[out=270,in=90] (5, 0);
+  \draw[color=black,double distance=3pt] (4.5, 1.5) to[out=270,in=90] (4, 0); 
+  \draw[color=black,double distance=3pt] (5, 1.5) to[out=270,in=90] (4.5, 0);
+  
+\end{diagram}
+
+Here are some more twists we can make:
+
+\begin{diagram}
+
+  \node at (-4.5, 2) {$t_{4}$};
+  \draw[color=black,double distance=3pt] (-4, 1.5) to[out=270,in=90] (-4.5, 0);
+  \draw[color=black,double distance=3pt] (-5, 1.5) to[out=270,in=90] (-4, 0);
+  \draw[color=black,double distance=3pt] (-4.5, 1.5) to[out=270,in=90] (-5, 0); 
+
+  \node at (-1.5, 2) {$t_{5}$};
+  \draw[color=black,double distance=3pt] (-1.5, 1.5) to[out=270,in=90] (-2, 0); 
+  \draw[color=black,double distance=3pt] (-2, 1.5) to[out=270,in=90] (-1, 0);
+  \draw[color=black,double distance=3pt] (-1, 1.5) to[out=270,in=90] (-1.5, 0);
+
+  \node at (1.5, 2) {$t_{6}$};
+  \draw[color=black,double distance=3pt] (1.5, 1.5) to[out=270,in=90] (1, 0);
+  \draw[color=black,double distance=3pt] (2, 1.5) to[out=270,in=90] (1.5, 0);
+  \draw[color=black,double distance=3pt] (1, 1.5) to[out=270,in=90] (2, 0); 
+  
+  \node at (4.5, 2) {$t_{7}$};
+  \draw[color=black,double distance=3pt] (4, 1.5) to (4, 0);
+  \draw[color=black,double distance=3pt] (4.5, 1.5) to[out=270,in=90] (5, 0); 
+  \draw[color=black,double distance=3pt] (5, 1.5) to[out=270,in=90] (4.5, 0);
+  
+\end{diagram}
+
+We can also do more than one twist at once. For instance, we can twist the ropes twice, three times, and so on:
+
+\begin{diagram}
+
+  \node at (-4.5, 2) {$t_{8}$};
+  \draw[color=black,double distance=3pt] (-5, 1.5) to[out=270,in=90] (-4.5, 0.75);
+  \draw[color=black,double distance=3pt] (-4.5, 1.5) to[out=270,in=90] (-5, 0.75); 
+  \draw[color=black,double distance=3pt] (-4, 1.5) to (-4, 0.75);
+  \draw[color=black,double distance=3pt] (-5, 0.75) to[out=270,in=90] (-4.5, 0);
+  \draw[color=black,double distance=3pt] (-4.5, 0.75) to[out=270,in=90] (-5, 0); 
+  \draw[color=black,double distance=3pt] (-4, 0.75) to (-4, 0);
+
+  \node at (-1.5, 2) {$t_{9}$};
+  \draw[color=black,double distance=3pt] (-2, 1.5) to[out=270,in=90] (-1.5, 0.75);
+  \draw[color=black,double distance=3pt] (-1.5, 1.5) to[out=270,in=90] (-2, 0.75); 
+  \draw[color=black,double distance=3pt] (-1, 1.5) to (-1, 0.75);
+  \draw[color=black,double distance=3pt] (-2, 0.75) to[out=270,in=90] (-1, 0);
+  \draw[color=black,double distance=3pt] (-1.5, 0.75) to[out=270,in=90] (-2, 0); 
+  \draw[color=black,double distance=3pt] (-1, 0.75) to[out=270,in=90] (-1.5, 0);
+
+  \node at (1.5, 2) {$t_{10}$};
+  \draw[color=black,double distance=3pt] (1, 1.5) to[out=270,in=90] (2, 0.75);
+  \draw[color=black,double distance=3pt] (1.5, 1.5) to (1.5, 0.75); 
+  \draw[color=black,double distance=3pt] (2, 1.5) to[out=270,in=90] (1, 0.75);
+  \draw[color=black,double distance=3pt] (1, 0.75) to[out=270,in=90] (2, 0);
+  \draw[color=black,double distance=3pt] (1.5, 0.75) to (1.5, 0); 
+  \draw[color=black,double distance=3pt] (2, 0.75) to[out=270,in=90] (1, 0);
+
+  \node at (4.5, 2) {$t_{3}$};
+  \draw[color=black,double distance=3pt] (4, 1.5) to[out=270,in=90] (4.5, 1);
+  \draw[color=black,double distance=3pt] (4.5, 1.5) to[out=270,in=90] (4, 1); 
+  \draw[color=black,double distance=3pt] (5, 1.5) to (5, 1);
+  \draw[color=black,double distance=3pt] (4, 1) to[out=270,in=90] (4.5, 0.5);
+  \draw[color=black,double distance=3pt] (4.5, 1) to[out=270,in=90] (4, 0.5); 
+  \draw[color=black,double distance=3pt] (5, 1) to (5, 0.5);
+  \draw[color=black,double distance=3pt] (4, 0.5) to[out=270,in=90] (4.5, 0);
+  \draw[color=black,double distance=3pt] (4.5, 0.5) to[out=270,in=90] (4, 0); 
+  \draw[color=black,double distance=3pt] (5, 0.5) to (5, 0);
+
+\end{diagram}
+
+So, we have a large set of twists that are available to us:
+
+\begin{equation*}
+  \set{A} = \{ t_{0}, t_{1}, t_{2}, t_{3}, \ldots \}
+\end{equation*}
+
+We can combine these twists, by doing one after the other. For instance, we can do $t_{1}$, then $t_{7}$:
+
+\begin{aside}
+  \begin{remark}
+    To combine $t_{1}$, we first do twist $t_{1}$ (i.e., we take the center rope and cross it over the top of the left rope), then we do twist $t_{7}$ (i.e., we take the rope on the right side, and cross it over the top of the center rope).
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw[dotted] (-1, 1.5) to (1, 1.5);
+  \draw[->] (-1.75, 0.75) to (-0.75, 0.75);
+  \node at (-2.25, 0.75) {$t_{1}$};
+
+  \draw[color=black,double distance=3pt] (-0.5, 1.5) to[out=270,in=90] (0, 0);
+  \draw[color=black,double distance=3pt] (0, 1.5) to[out=270,in=90] (-0.5, 0); 
+  \draw[color=black,double distance=3pt] (0.5, 1.5) to (0.5, 0);
+
+  \draw[dotted] (-1, 0) to (1, 0);
+  \draw[->] (-1.75, -0.75) to (-0.75, -0.75);
+  \node at (-2.25, -0.75) {$t_{7}$};
+    
+  \draw[color=black,double distance=3pt] (-0.5, 0) to (-0.5, -1.5);
+  \draw[color=black,double distance=3pt] (0, 0) to[out=270,in=90] (0.5, -1.5); 
+  \draw[color=black,double distance=3pt] (0.5, 0) to[out=270,in=90] (0, -1.5); 
+
+  \draw[dotted] (-1, -1.5) to (1, -1.5);
+
+\end{diagram}
+
+Notice that doing $t_{1}$ followed by $t_{7}$ (i.e., $\op{t_{1}}{t_{7}}$) turns out to be just the same as doing $t_{3}$ all by itself:
+
+\begin{diagram}
+
+  \draw[dotted] (-1, 1.5) to (1, 1.5);
+  \draw[->] (-1.75, 0.75) to (-0.75, 0.75);
+  \node at (-2.25, 0.75) {$t_{1}$};
+
+  \draw[color=black,double distance=3pt] (-0.5, 1.5) to[out=270,in=90] (0, 0);
+  \draw[color=black,double distance=3pt] (0, 1.5) to[out=270,in=90] (-0.5, 0); 
+  \draw[color=black,double distance=3pt] (0.5, 1.5) to (0.5, 0);
+
+  \draw[dotted] (-1, 0) to (1, 0);
+  \draw[->] (-1.75, -0.75) to (-0.75, -0.75);
+  \node at (-2.25, -0.75) {$t_{7}$};
+    
+  \draw[color=black,double distance=3pt] (-0.5, 0) to (-0.5, -1.5);
+  \draw[color=black,double distance=3pt] (0, 0) to[out=270,in=90] (0.5, -1.5); 
+  \draw[color=black,double distance=3pt] (0.5, 0) to[out=270,in=90] (0, -1.5); 
+
+  \draw[dotted] (-1, -1.5) to (1, -1.5);
+
+  \node at (2.5, 0) {$=$};
+
+  \draw[dotted] (4, 1.5) to (5, 1.5);
+  \draw[<-] (5.25, 0) to (6.25, 0);
+  \node at (6.75, 0) {$t_{3}$};
+
+  \draw[color=black,double distance=3pt] (4, 1.5) to[out=270,in=90] (5, -1.5);
+  \draw[color=black,double distance=3pt] (4.5, 1.5) to[out=270,in=90] (4, -1.5); 
+  \draw[color=black,double distance=3pt] (5, 1.5) to[out=270,in=90] (4.5, -1.5);   
+  
+  \draw[dotted] (4, -1.5) to (5, -1.5);
+  
+\end{diagram}
+
+Hence, we can say that ``$\op{t_{1}}{t_{7}}$'' is equal to ``$t_{3}$'':
+
+\begin{aside}
+  \begin{remark}
+    In this context, we can read ``$\op{t_{1}}{t_{7}} = t_{3}$'' out loud like this: ``if we do twist $t_{1}$ then $t_{7}$, that's the same as just doing twist $t_{3}$.''
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \op{t_{1}}{t_{7}} = t_{3}
+\end{equation*}
+
+Similarly, I can do $t_{1}$ followed by another $t_{1}$, and that's the same as doing $t_{8}$:
+
+\begin{diagram}
+
+  \draw[dotted] (-1, 1.5) to (1, 1.5);
+  \draw[->] (-1.75, 0.75) to (-0.75, 0.75);
+  \node at (-2.25, 0.75) {$t_{1}$};
+
+  \draw[color=black,double distance=3pt] (-0.5, 1.5) to[out=270,in=90] (0, 0);
+  \draw[color=black,double distance=3pt] (0, 1.5) to[out=270,in=90] (-0.5, 0); 
+  \draw[color=black,double distance=3pt] (0.5, 1.5) to (0.5, 0);
+
+  \draw[dotted] (-1, 0) to (1, 0);
+  \draw[->] (-1.75, -0.75) to (-0.75, -0.75);
+  \node at (-2.25, -0.75) {$t_{1}$};
+    
+  \draw[color=black,double distance=3pt] (-0.5, 0) to[out=270,in=90] (0, -1.5);
+  \draw[color=black,double distance=3pt] (0, 0) to[out=270,in=90] (-0.5, -1.5); 
+  \draw[color=black,double distance=3pt] (0.5, 0) to (0.5, -1.5); 
+
+  \draw[dotted] (-1, -1.5) to (1, -1.5);
+
+  \node at (2.5, 0) {$=$};
+
+  \draw[dotted] (4, 1.5) to (5, 1.5);
+  \draw[<-] (5.25, 0) to (6.25, 0);
+  \node at (6.75, 0) {$t_{8}$};
+
+  \draw[color=black,double distance=3pt] (4, 1.5) to[out=270,in=90] (4.5, 0);
+  \draw[color=black,double distance=3pt] (4.5, 1.5) to[out=270,in=90] (4, 0); 
+  \draw[color=black,double distance=3pt] (5, 1.5) to (5, 0);
+  \draw[color=black,double distance=3pt] (4, 0) to[out=270,in=90] (4.5, -1.5);
+  \draw[color=black,double distance=3pt] (4.5, 0) to[out=270,in=90] (4, -1.5); 
+  \draw[color=black,double distance=3pt] (5, 0) to (5, -1.5);   
+  
+  \draw[dotted] (4, -1.5) to (5, -1.5);
+  
+\end{diagram}
+
+Hence:
+
+\begin{equation*}
+  \op{t_{1}}{t_{1}} = t_{8}
+\end{equation*}
+
+In fact, we can combine any two twisting moves, and it turns out that it will be the same as just doing one of the other twisting moves.
+
+We can put our set of twisting moves and our combining operation together, to form an algebraic structure $\algebra{T} = (\set{A}, \opSymbol/)$. And this structure is a \vocab{group}.
+
+First, it is associative, which is clear if you think about it for a bit. It doesn't matter which order I do the twists in. They all connect up end-to-end the same way.
+
+Second, there is an identity element. It is $t_{0}$, since that has no effect on other twists. For instance, doing no twists ($t_{0}$) then $t_{1}$ is just the same as doing $t_{1}$ all by itself:
+
+\begin{diagram}
+
+  \draw[dotted] (-1, 1.5) to (1, 1.5);
+  \draw[->] (-1.75, 0.75) to (-0.75, 0.75);
+  \node at (-2.25, 0.75) {$t_{0}$};
+
+  \draw[color=black,double distance=3pt] (-0.5, 1.5) to (-0.5, 0);
+  \draw[color=black,double distance=3pt] (0, 1.5) to (0, 0); 
+  \draw[color=black,double distance=3pt] (0.5, 1.5) to (0.5, 0);
+
+  \draw[dotted] (-1, 0) to (1, 0);
+  \draw[->] (-1.75, -0.75) to (-0.75, -0.75);
+  \node at (-2.25, -0.75) {$t_{1}$};
+    
+  \draw[color=black,double distance=3pt] (-0.5, 0) to (-0.5, -1.5);
+  \draw[color=black,double distance=3pt] (0, 0) to[out=270,in=90] (0.5, -1.5); 
+  \draw[color=black,double distance=3pt] (0.5, 0) to[out=270,in=90] (0, -1.5); 
+
+  \draw[dotted] (-1, -1.5) to (1, -1.5);
+
+  \node at (2.5, 0) {$=$};
+
+  \draw[dotted] (4, 1.5) to (5, 1.5);
+  \draw[<-] (5.25, 0) to (6.25, 0);
+  \node at (6.75, 0) {$t_{1}$};
+
+  \draw[color=black,double distance=3pt] (4, 1.5) to (4, -1.5);
+  \draw[color=black,double distance=3pt] (4.5, 1.5) to[out=270,in=90] (5, -1.5); 
+  \draw[color=black,double distance=3pt] (5, 1.5) to[out=270,in=90] (4.5, -1.5);   
+  
+  \draw[dotted] (4, -1.5) to (5, -1.5);
+  
+\end{diagram}
+
+Finally, this structure has inverses, because for any twist I can make, there is another twist that can undo it. For instance, I can do $t_{1}$ followed by $t_{2}$, which is the same as $t_{0}$:
+
+\begin{diagram}
+
+  \draw[dotted] (-1, 1.5) to (1, 1.5);
+  \draw[->] (-1.75, 0.75) to (-0.75, 0.75);
+  \node at (-2.25, 0.75) {$t_{1}$};
+
+  \draw[color=black,double distance=3pt] (-0.5, 1.5) to[out=270,in=90] (0, 0);
+  \draw[color=black,double distance=3pt] (0, 1.5) to[out=270,in=90] (-0.5, 0); 
+  \draw[color=black,double distance=3pt] (0.5, 1.5) to (0.5, 0);
+
+  \draw[dotted] (-1, 0) to (1, 0);
+  \draw[->] (-1.75, -0.75) to (-0.75, -0.75);
+  \node at (-2.25, -0.75) {$t_{2}$};
+
+  \draw[color=black,double distance=3pt] (0, 0) to[out=270,in=90] (-0.5, -1.5); 
+  \draw[color=black,double distance=3pt] (-0.5, 0) to[out=270,in=90] (0, -1.5);
+  \draw[color=black,double distance=3pt] (0.5, 0) to (0.5, -1.5); 
+
+  \draw[dotted] (-1, -1.5) to (1, -1.5);
+
+  \node at (2.5, 0) {$=$};
+
+  \draw[dotted] (4, 1.5) to (5, 1.5);
+  \draw[<-] (5.25, 0) to (6.25, 0);
+  \node at (6.75, 0) {$t_{0}$};
+
+  \draw[color=black,double distance=3pt] (4, 1.5) to (4, -1.5);
+  \draw[color=black,double distance=3pt] (4.5, 1.5) to (4.5, -1.5); 
+  \draw[color=black,double distance=3pt] (5, 1.5) to (5, -1.5);   
+  
+  \draw[dotted] (4, -1.5) to (5, -1.5);
+  
+\end{diagram}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Arithmetic}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:groupoids-semigroups-monoids} that the structure $\algebra{N} = (\Nats/, +)$ does \emph{not} have inverses, because $\Nats/$ does not contain any negative numbers. Hence, $\algebra{N} = (\Nats/, +)$ is a \vocab{monoid}, but not a \vocab{group}. By contrast, $\algebra{Z} = (\Ints/, +)$ does have negative numbers, so it has inverses, and hence it is a group.
+  \end{remark}
+\end{aside}
+
+\newthought{We find various groups in arithmetic}. As a first example, take the integers $\Ints/$ and the binary operation of addition (i.e., ``$+$''). Together, these make up an algebraic structure:
+
+\begin{equation*}
+  \algebra{Z} = (\Ints/, +)
+\end{equation*} 
+
+This is a \vocab{group}. It is associative, there is an identity element (namely, ``$0$''), and there are inverses (the inverse of every number is its positive/negative counterpart).
+
+For a second example, take the set of fractions, i.e., the rational numbers $\Rationals/$, and also the binary operation of multiplication (i.e., the symbol that can be written as ``$\times$'' or ``$\mult/$,'' but let's just use ``$\mult/$'' for now). Together, these make up an algebraic structure:
+
+\begin{equation*}
+  \algebra{Q} = (\Rationals/, \mult/)
+\end{equation*} 
+
+This is a \vocab{group} as well. It is associative. For instance:
+
+\begin{center}
+  \begin{tabular}{c c c | c c c}
+    $\frac{1}{2}$ & $\mult/$ & $(\frac{3}{4} \mult/ \frac{1}{3})$ & $(\frac{1}{2} \mult/ \frac{3}{4})$ & $\mult/$ & $\frac{1}{3})$ \\
+     & & $\downarrow$ & $\downarrow$ & & \\
+     $\frac{1}{2}$ & $\mult/$ & $\frac{3}{12}$ & $\frac{3}{8}$ & $\mult/$ & $\frac{1}{3}$ \\
+     & $\downarrow$ & & & $\downarrow$ & \\
+     & $\frac{3}{24}$ & & & $\frac{3}{24}$ & \\
+     & $\downarrow$ & & & $\downarrow$ & \\
+     & $\frac{1}{8}$ & & & $\frac{1}{8}$ &
+  \end{tabular}
+\end{center}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:groupoids-semigroups-monoids} that the structure $\algebra{Z} = (\Ints/, \mult/)$ does \emph{not} have inverses, because there is no number in $\Ints/$ that you can multiply by $5$ that will cancel it out and give us back $1$. We would need the fraction $\frac{1}{5}$ to cancel out $5$, but there are no fractions in $\Ints/$. So, $\algebra{Z} = (\Ints/, \mult/)$ has no inverses, and hence it is a \vocab{monoid}, but not a \vocab{group}. By contrast, $\algebra{Q} = (\Rationals/, \mult/)$ does have the fractions we need to cancel each other out, so it has inverses, and hence it \emph{is} a group.
+  \end{remark}
+\end{aside}
+
+There is an identity element, namely ``$\frac{1}{1}$'' because multiplying any fraction by $\frac{1}{1}$ has no effect. For instance:
+
+\begin{equation*}
+  \frac{3}{8} \mult/ \frac{1}{1} = \frac{3}{8} \hskip 2cm
+  \frac{1}{1} \mult/ \frac{3}{8} = \frac{3}{8}
+\end{equation*}
+
+Finally, there are inverses. The inverse of any fraction is the same fraction, but turned upside down. They cancel each other out. For instance:
+
+\begin{align*}
+  \frac{3}{8} \mult/ \frac{8}{3} = \frac{24}{24} = \frac{1}{1} \hskip 1.25cm
+  \frac{1}{4} \mult/ \frac{4}{1} = \frac{4}{4} = \frac{1}{1} \hskip 1.25cm
+  \frac{33}{18} \mult/ \frac{18}{33} &= \frac{594}{594} = \frac{1}{1}
+\end{align*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we looked at the definition of groups, and we looked at some example of groups.
+
+\begin{itemize}
+
+  \item A \vocab{group} is an algebraic structure comprised of a carrier set equipped with a single binary operation, and (1) it is associative, (2) it has an identity (unit) element, and (3) it has inverses. 
+  
+  \item To illustrate the wide variety of groups that appear in \math/ and nature, we looked at a variety of examples ranging from clocks, to braids, to shapes, to arithmetic.
+
+\end{itemize}
+
+
+
+\end{document}

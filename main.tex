@@ -1,0 +1,549 @@
+\documentclass[leqno]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{subfiles}
+
+\usepackage[round]{natbib}
+
+\usepackage{framed}
+\usepackage{graphicx}
+\usepackage{xcolor,colortbl}
+\definecolor{vocabcolor}{HTML}{580000}
+\definecolor{highlight}{HTML}{ac0000}
+\definecolor{grey1}{HTML}{333333}
+\definecolor{grey2}{HTML}{555555}
+\definecolor{grey3}{HTML}{aaaaaa}
+\definecolor{grey4}{HTML}{cccccc}
+
+\usepackage{cancel}
+\usepackage{xfrac}
+
+
+% ----------------------------------------------------------
+% Layout
+% ----------------------------------------------------------
+
+% Font styling
+\usepackage{palatino}
+\usepackage{lettrine}
+
+\renewcommand{\normalsize}{\fontsize{13}{15}\selectfont}
+\pagenumbering{arabic}
+
+\usepackage[
+  letterpaper,
+  twoside,
+  headheight=24pt,
+  headsep=24pt,
+  footskip=60pt,
+  textwidth=348pt,
+  lmargin=48pt,
+  marginparwidth=172pt,
+  marginparsep=12pt,
+  includehead,includemp]{geometry}
+
+\setlength{\skip\footins}{18pt}
+
+
+% ----------------------------------------------------------
+% Page styles
+% ----------------------------------------------------------
+
+\usepackage{emptypage}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\fancyhead{}
+\fancyhead[RO,LE]{\normalfont\leftmark}
+
+\fancyfoot{}
+\fancyfoot[C]{\thepage}
+
+\renewcommand\headrulewidth{2pt}
+
+
+% ----------------------------------------------------------
+% Custom commmands for formatting
+% ----------------------------------------------------------
+
+\newcommand\emrule{\noindent\rule[0pt]{\linewidth}{1em}}
+\newcommand{\highlight}[1]{\textbf{#1}}
+\newcommand{\newthought}[1]{\noindent\textsc{#1}}
+\newcommand{\newtopic}[2]{\lettrine{#1}{#2}}
+\newcommand{\blank}{\underline{\hspace{1cm}}}
+\newcommand{\fillinblank}[1]{\rule{#1}{0.15mm}}
+\newcommand{\lightrule}{%
+  \noindent\textcolor{gray}{\rule{\textwidth}{0.4pt}}}
+
+
+% ----------------------------------------------------------
+% Title
+% ----------------------------------------------------------
+
+\makeatletter
+\renewcommand{\maketitle}{
+  \pagestyle{empty}
+  \begin{titlepage}
+  \newgeometry{top=1in,left=1.25in,bottom=1in,right=1.25in}
+  \makeatother\CROP@center\makeatletter
+  \begin{center}
+    \vspace*{72pt}
+    \hrule
+    \vskip 24pt
+    {\Large \bfseries \@title}
+    \vskip 36pt
+    {\large \@author}
+    \vskip 24pt
+    \emrule
+    \vfill
+    Rough Draft - Last compiled \today
+  \end{center}
+  \restoregeometry
+  \makeatother\CROP@center\makeatletter
+  \end{titlepage}
+  \pagestyle{fancy}
+}
+\makeatother
+
+
+% ----------------------------------------------------------
+% Parts, Chapters, Sections
+% ----------------------------------------------------------
+
+\usepackage{titlesec}
+
+% For the part headings.
+\renewcommand{\thepart}{\arabic{part}}
+\titleformat{\part}[display]
+  {\bfseries\large}
+  {{\Huge Part [~\thepart~]} \vskip 1em \hrule}
+  {1em}
+  {}
+\titlespacing*{\part}{0pt}{0pt}{0pt}
+
+% Make a part with some text underneath it.
+\newcommand{\partwithtext}[3]{%
+  \part[#1]{%
+    \label{#2}%
+    \MakeUppercase{#1}%
+    \vskip 1em%
+    % \hrule%
+    \vskip 3em%
+    {\normalfont #3}%
+  }%
+}
+
+% For numberless chapters, like the TOC.
+\titleformat{name=\chapter,numberless}[hang]
+  {\bfseries\large}
+  {}
+  {0pt}
+  {\MakeUppercase}
+
+% For numbered chapters.
+\titleformat{\chapter}[display]
+  {\bfseries\large}
+  {\Huge [~\thechapter~]}
+  {1em}
+  {\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{4em}{12em}
+
+% For numbered sections.  
+\titleformat{\section}[hang]
+  {\bfseries}
+  {\thesection}
+  {1em}
+  {}
+  [\dotfill]
+\titlespacing*{\section}{0pt}{24pt}{18pt}
+
+
+% ----------------------------------------------------------
+% TOC
+% ----------------------------------------------------------
+
+\usepackage{titletoc}
+\usepackage[nottoc]{tocbibind}
+
+\titlecontents{part}[0pt]
+  {}
+  {}
+  {\vskip 0.5em \bfseries Part }
+  {\titlerule*{}\contentspage}
+  [\vskip 0.5em \hrule \vskip 0.5em]
+
+\dottedcontents{chapter}[2em]
+  {\vskip 1em \bfseries}
+  {2em}
+  {1pc}
+
+\dottedcontents{section}[4em]
+  {}
+  {2em}
+  {1pc}
+
+
+% ----------------------------------------------------------
+% Footnotes, margin notes, etc
+% ----------------------------------------------------------
+
+% Use the manyfoot package to create footnote streams
+\usepackage[para]{manyfoot}
+\DeclareNewFootnote[para]{Alpha}[alph]
+
+% For margin notes
+\usepackage{sidenotes}
+\usepackage{marginfix}
+
+% Shortcut for a floating aside.
+\newenvironment{aside}
+  {\begin{marginfigure} \raggedright \fontsize{11}{13}\selectfont}
+  {\vskip 1em \end{marginfigure}}
+
+
+% ----------------------------------------------------------
+% Showing camera ready crop marks
+% ----------------------------------------------------------
+
+\usepackage[cross,a3,center]{crop}
+
+
+% ----------------------------------------------------------
+% Tikz/Diagrams
+% ----------------------------------------------------------
+
+\usepackage{tikz,circuitikz}
+\usetikzlibrary{arrows,positioning,math}
+\tikzset{
+  odot/.style={circle,draw,inner sep=0.45mm,fill=white},
+  dot/.style={circle,draw,inner sep=0.45mm,fill=black},
+  box/.style={draw,inner sep=2mm,fill=white},
+  space/.style={>=stealth',shorten >=4pt, shorten <=4pt},
+  spaced/.style={>=stealth',shorten >=8pt, shorten <=8pt},
+  every loop/.style={min distance=10mm,looseness=10},
+}
+
+\newenvironment{diagram}
+  {\begin{center}\begin{tikzpicture}}
+  {\end{tikzpicture}\end{center}}
+
+\usepackage{}
+
+\newenvironment{circuitdiagram}
+  {\begin{center}\begin{circuitikz}}
+  {\end{circuitikz}\end{center}}
+
+
+% ----------------------------------------------------------
+% Math formatting
+% ----------------------------------------------------------
+
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+
+\theoremstyle{definition} % Bold header, Roman text
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{example}{Example}[chapter]
+\newtheorem{notation}{Notation}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+
+\newenvironment{fdefinition}
+  {\begin{framed}\begin{definition}}
+  {\end{definition}\end{framed}}
+
+\newenvironment{ftheorem}
+  {\begin{framed}\begin{theorem}}
+  {\end{theorem}\end{framed}}
+  
+\newenvironment{fexample}
+  {\begin{example}}
+  {\end{example}\lightrule\vskip 16pt}
+
+\newcommand{\partrefbynum}[1]{Part #1}
+\newcommand{\partref}[1]{Part \ref{#1}}  
+\newcommand{\chapterref}[1]{Chapter \ref{#1}}
+\newcommand{\sectionref}[1]{Section \ref{#1}}
+\newcommand{\defref}[1]{Definition \ref{#1}}
+\newcommand{\exampleref}[1]{Example \ref{#1}}
+
+
+% ----------------------------------------------------------
+% Custom commands
+% ----------------------------------------------------------
+
+\newcommand{\vocab}[1]{\textbf{\textcolor{vocabcolor}{#1}}}
+\newcommand{\e}[1]{\ensuremath{\mathsf{#1}}}
+
+\newenvironment{ponder}
+  {\begin{aside}\highlight{Ponder}.}
+  {\end{aside}}
+
+\newenvironment{terminology}
+  {\begin{aside}\highlight{Terminology}.}
+  {\end{aside}}
+
+\def\math/{math}
+\def\Math/{Math}
+\def\mathical/{mathematical}
+\def\Mathical/{Mathematical}
+\def\mather/{mathematician}
+\def\Mather/{Mathematician}
+\def\mathers/{mathematicians}
+\def\Mathers/{Mathematicians}
+
+\mathchardef\dash="2D
+\def\Nats/{\mathbb{N}}
+\def\Ints/{\mathbb{Z}}
+\def\Rationals/{\mathbb{Q}}
+\def\Reals/{\mathbb{R}}
+\def\Bool/{\mathbb{B}}
+\def\EvenNats/{\Nats/^{E}}
+\def\PositiveInts/{\Ints/^{+}}
+\def\PositiveIntsAndZero/{\Ints/^{0+}}
+\def\NegativeIntsAndZero/{\Ints/^{0-}}
+
+\def\AlephZero/{\aleph_{0}}
+\def\AlephOne/{\aleph_{1}}
+\def\v/{\downarrow}
+
+\def\P/{\e{P}}
+\def\Q/{\e{Q}}
+
+\def\mult/{\cdot}
+
+\def\nought/{\oslash}
+\def\tally/{\rceil}
+\newcommand{\s}[1]{s(#1)}
+
+\def\strictorder/{<}
+\def\strictorderrev/{>}
+\def\order/{\leqslant}
+\def\orderrev/{\geqslant}
+\def\equivalence/{\sim}
+\def\isomorphic/{\cong}
+\def\emptyset/{\varnothing}
+
+\newcommand{\set}[1]{#1}
+\newcommand{\cardinality}[1]{|#1|}
+\renewcommand{\complement}[1]{\overline{#1}}
+\newcommand{\product}[2]{#1 \times #2}
+\newcommand{\productThree}[3]{#1 \times #2 \times #3}
+\newcommand{\productFour}[4]{#1 \times #2 \times #3 \times #4}
+\newcommand{\powerset}[1]{\mathcal{P}(#1)}
+
+\newcommand{\func}[1]{#1}
+\newcommand{\invfunc}[1]{\func{#1}^{-1}}
+\newcommand{\funcsig}[3]{\func{#1}: #2 \rightarrow #3}
+\newcommand{\invfuncsig}[3]{\invfunc{#1}: #2 \rightarrow #3}
+\newcommand{\image}[1]{\e{img}~\func{#1}}
+\newcommand{\idfunc}[2]{\func{#1}_{#2}}
+\newcommand{\R}[1]{#1}
+\newcommand{\Rsig}[3]{\R{#1} \subseteq \product{#2}{#3}}
+\newcommand{\struct}[1]{\mathbf{#1}}
+
+\newcommand{\equivclass}[1]{[#1]}
+\newcommand{\quotientset}[2]{#1/#2}
+\newcommand{\strictlyordered}[2]{#1 \strictorder/ #2}
+\newcommand{\ordered}[3]{#2 \order/_{#1} #3}
+
+\newcommand{\graph}[1]{\struct{#1}}
+\newcommand{\graphsig}[2]{(\set{#1}, \set{#2})}
+\newcommand{\vertex}[1]{\e{v_{#1}}}
+\newcommand{\nullgraph}[1]{\graph{N}_{#1}}
+\newcommand{\completegraph}[1]{\graph{K}_{#1}}
+
+\newcommand{\Line}[1]{#1}
+
+\newcommand{\algebra}[1]{\struct{#1}}
+\def\unitEl/{e}
+\newcommand{\inverseEl}[1]{#1^{-1}}
+\def\opSymbol/{\star}
+\newcommand{\opprefix}[2]{\opSymbol/(#1, #2)}
+\newcommand{\op}[2]{#1 \opSymbol/ #2}
+
+
+
+% ----------------------------------------------------------
+% END PREAMBLE
+% ----------------------------------------------------------
+
+\begin{document}
+
+\frontmatter 
+
+\title{Basic Concepts in Mathematics}
+\author{JT Paasch}
+
+\maketitle
+\newpage
+
+\tableofcontents
+
+\subfile{chapters/frontmatter/preface/source}
+
+\mainmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\partwithtext{The Mathematical Method}{part:mathematical-method}{%
+How do \mathers/ think? How do \mathers/ investigate problems? How do \mathers/ discover new knowledge? If a \mather/ believes that they have figured out something new, how do they determine if they are correct? 
+\\ \\
+In \partrefbynum{\thepart}, we introduce the \vocab{mathematical method} by discussing how it is that \mathers/ actually think and do their work.}
+
+\subfile{chapters/method/deductive-reasoning/source}
+\subfile{chapters/method/proving-simple-facts/source}
+\subfile{chapters/method/proving-general-facts/source}
+\subfile{chapters/method/proving-negations/source}
+\subfile{chapters/method/further-reading/source}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\partwithtext{Sets}{part:sets}{%
+One of the most basic ways to add structure to an otherwise unorganized heap of objects is to put the objects into collections (i.e., put them into various buckets). In \math/, we call a collection a \vocab{set}.
+\\ \\
+In \partrefbynum{\thepart}, we discuss \vocab{sets} and many of the various things we can do with them.}
+
+\subfile{chapters/sets/collections/source}
+\subfile{chapters/sets/composition-of-sets/source}
+\subfile{chapters/sets/size-of-sets/source}
+\subfile{chapters/sets/set-operations/source}
+\subfile{chapters/sets/powersets/source}
+\subfile{chapters/sets/products/source}
+\subfile{chapters/sets/further-reading/source}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\partwithtext{Functions}{part:functions}{%
+Once we have organized all of the objects we care about into sets, we can then start building associations or ``mappings'' between them. A mapping between two sets simply maps the items in the first set to items in the second set. We can put together as many mappings as suit our purposes. \Mathers/ call a mapping a \vocab{function} (or synonymously, a \vocab{map}), and this basic idea is absolutely fundamental to almost every branch of \math/.
+\\ \\
+In \partrefbynum{\thepart}, we discuss \vocab{functions} (or \vocab{maps}). We discuss what they are, how they are defined, and many of their properties. We also see how they help us define one of the most fundamental concepts in \math/: \vocab{isomorphisms}.
+}
+
+\subfile{chapters/functions/mappings/source}
+\subfile{chapters/functions/functions/source}
+\subfile{chapters/functions/function-equality/source}
+\subfile{chapters/functions/kinds-of-functions/source}
+\subfile{chapters/functions/isomorphism/source}
+\subfile{chapters/functions/further-reading/source}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\partwithtext{Relations}{part:relations}{%
+Functions are special kinds of mappings, because they map each object in a domain to one object in a codomain. The key feature of a function is that it pairs up \emph{every} object in the domain with an object in the codomain. \vocab{Relations} are looser sets of pairings. A relation need not pair up \emph{every} object in the domain. It can skip some. Or, it can pair an object up with more than one other objects. A relation is basically just any pairing of objects from sets, no matter how loose or dense the pairings happen to be.
+\\ \\
+In \partrefbynum{\thepart}, we discuss \vocab{relations}. We discuss what they are, how they are defined, and many of their properties. We also see how they (along with sets and functions) help us define \mathical/ \vocab{structures}.}
+
+\subfile{chapters/relations/relations/source}
+\subfile{chapters/relations/properties-of-relations/source}
+\subfile{chapters/relations/anti-properties-of-relations/source}
+\subfile{chapters/relations/structures/source}
+\subfile{chapters/relations/further-reading/source}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\partwithtext{Graphs}{part:graphs}{%
+There are many situations that involve some kind of a \vocab{network}. For instance, we can think of the U.S. interstate system as a network of roads between cities. We can think of a social network as a network of friends. In all of these scenarios, there is a common structure: we have a set of objects (cities, people, or whatever), and a set of connections between them (roads, being-acquainted-with, etc). \Mathers/ call these structures \vocab{graphs}, and they call the study of graphs \vocab{graph theory}.
+\\ \\
+In \partrefbynum{\thepart}, we discuss \vocab{graph} and \vocab{graph theory}. We look at what graphs are, how they are defined, and some of their properties. We also look at \vocab{graph isomorphisms}, which are maps between graphs that are essentially the same because they have same shape.
+}
+
+\subfile{chapters/graphs/networks/source}
+\subfile{chapters/graphs/properties-of-graphs/source}
+\subfile{chapters/graphs/graph-isomorphisms/source}
+\subfile{chapters/graphs/other-kinds-of-graphs/source}
+\subfile{chapters/graphs/further-reading/source}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\partwithtext{Numbers}{part:numbers}{%
+What exactly are \vocab{numbers}? How do we define a number without secretly relying on the concept of number? And how do we count, anyway? What about negative numbers, and fractions, or numbers with decimals points in them?
+\\ \\
+In \partrefbynum{\thepart}, we discuss four different \vocab{sets of numbers}. We look at the most basic set of numbers, which we use to \emph{count}, called the \vocab{natural numbers}. Then we look at the \vocab{integers}, which includes negative numbers so we can keep track of adding and taking away. Next, we look at the \vocab{rational numbers}, which are the set of fractions. Finally, we look at the \vocab{real numbers}, which is the set of every point on a real number line.
+}
+
+\subfile{chapters/numbers/natural-numbers/source}
+\subfile{chapters/numbers/integers/source}
+\subfile{chapters/numbers/rationals/source}
+\subfile{chapters/numbers/reals/source}
+\subfile{chapters/numbers/further-reading/source}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\partwithtext{Infinites}{part:infinities}{%
+How big is infinity, exactly? And what exactly do we mean by ``infinity''? Are some infinite collections bigger than other infinite collections? Can we even compare the size of different infinite collections?
+\\ \\
+In \partrefbynum{\thepart}, we discuss the idea of infinity as the size of an infinitely large collection. We define a way to \vocab{compare} two infinitely large sets without counting them, so that we can check if they are the same size or not. We define what it means for an infinite set to be \vocab{listable} vs.~\vocab{unlistable}, and we look at some examples.
+}
+
+\subfile{chapters/infinities/measuring-size/source}
+\subfile{chapters/infinities/listing-infinities/source}
+\subfile{chapters/infinities/unlistable-infinities/source}
+\subfile{chapters/infinities/further-reading/source}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\partwithtext{Algebras}{part:algebras}{%
+What exactly is \vocab{algebra}? And how many are there? (There are many!) Algebra is the study of combining things inside of a set. For instance, we can take numbers and add them together to get other numbers, we can take moves in a game and sequence them to get other moves, and so on. It turns out that there are deep structural patterns in all of these, and this kind of structure is what algebra studies.
+\\ \\
+In \partrefbynum{\thepart}, we look at \vocab{algebraic structures}, which are sets equipped with combining \vocab{operations} that tell us how to put things together in the set. We discuss how to ``\vocab{calculate}'' answers with algebraic structures, and we look at a variety of different \vocab{examples} of algebras.
+}
+
+\subfile{chapters/algebras/first-example/source}
+\subfile{chapters/algebras/algebraic-structures/source}
+\subfile{chapters/algebras/isomorphisms/source}
+\subfile{chapters/algebras/properties-of-operations/source}
+\subfile{chapters/algebras/groupoids-semigroups-monoids/source}
+\subfile{chapters/algebras/groups/source}
+\subfile{chapters/algebras/further-reading/source}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\partwithtext{Equivalence Classes}{part:equivalence-classes}{%
+When we work with collections of objects, we often want to partition the collection up into disjoint sub-collections. And often, when we do this, our goal is to put all ``equivalent'' items into the same buckets. For instance, maybe we want to sort all of the employees of a company into different buckets by their skillsets. The great advantage of doing this is that, for certain tasks, all we really care about are the buckets, instead of the individuals inside the bucket. For next week's project, I don't care who it is, I just need someone with the right skills to help.
+\\ \\
+In \partrefbynum{\thepart}, we look first at how to \vocab{partition} a set into \vocab{disjoint} subsets. Then we turn to the idea of partitioning a set into disjoint \vocab{equivalence classes}. Equivalence classes turn up in quite a lot of places in the world of \math/.
+}
+
+\subfile{chapters/equivalence-classes/partitions/source}
+\subfile{chapters/equivalence-classes/equivalence-relations/source}
+\subfile{chapters/equivalence-classes/equivalence-classes/source}
+\subfile{chapters/equivalence-classes/further-reading/source}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\partwithtext{Ordered Sets}{part:ordered-sets}{%
+One of the things we do with a collection of objects is that we put the objects into some sort of order. We arrange them so that this one comes before that one, and that other one comes before this other one, and so on. There are many ways to order objects too. We might only order some of the objects, or we might order all of them. We might put them into a line, or we order them more like a lattice going up the side of a house.
+\\ \\
+In \partrefbynum{\thepart}, we discuss \vocab{ordered sets}, which are sets that are equipped with some kind of additional internal ordering or arrangement. We look at how these structures are defined, we look at how to tell when two such ordered structures are essentially the same, and we look at how to draw pictures of them that represents their ordering structures.
+}
+
+\subfile{chapters/ordered-sets/orderings/source}
+\subfile{chapters/ordered-sets/strict-vs-non-strict/source}
+\subfile{chapters/ordered-sets/hasse-diagrams/source}
+\subfile{chapters/ordered-sets/order-isomorphisms/source}
+% \subfile{chapters/ordered-sets/lattices/source}
+\subfile{chapters/ordered-sets/further-reading/source}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\partwithtext{Appendices}{part:extras}{}
+\subfile{chapters/extras/pythagorean-theorem/source}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subfile{chapters/backmatter/bibliography/source.tex}
+
+\end{document}

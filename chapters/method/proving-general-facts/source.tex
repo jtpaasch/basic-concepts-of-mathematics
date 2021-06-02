@@ -1,0 +1,289 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Proving General Facts}
+
+\newtopic{I}{n the last chapter, we started to get a feel} for the deductive process in detail. We imagined an imaginary universe where three students (Alice, Bob, and Carolina) want to travel to a Museum, using a specified map of bus and subway routes. We learned that this imagined little universe is called the \vocab{universe} or \vocab{domain of discourse}. 
+
+\begin{terminology}
+  Something is \vocab{more general} if it covers more cases. By contrast, something is \vocab{more specific} if it covers fewer cases.
+\end{terminology}
+
+We also learned that we can start proving some \vocab{specific facts} about our chosen universe, and we learned some basic techniques for doing that. We learned that we can prove a single, specific fact directly by just describing the logic which shows that it is true in our little imagined universe. This is called \vocab{direct proof}.
+
+Then we learned that we can prove a \vocab{conjunction} of two facts by proving both of those facts separately, we can prove a \vocab{disjunction} of two facts by proving one of those facts, and we can prove an \vocab{implication} by temporarily assuming that the antecedent is true and then showing that the consequent follows.
+
+In this chapter, we are going to learn a few more techniques that we can use to prove facts about our chosen universe. But this time, we are going to be proving some facts that are \vocab{more general} than the more specific sorts of facts we proved in the last chapter. In this chapter, we are going to learn how to prove facts that \vocab{range over the entire set of objects} that populate our universe. These are much more general.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Existential Claims}
+
+\begin{terminology}
+  An \vocab{existential claim} is a statement that has this shape:
+    
+  \begin{quote}
+    there is an $x$ such that $x$ is $\P/$
+  \end{quote}
+    
+  \noindent
+  where ``$\P/$'' is replaced by some assertion about $x$. Alternatively, one can write this:
+    
+  \begin{quote}
+    $\exists x$, $x$ is $\P/$ 
+  \end{quote}
+    
+  \noindent
+  which should be read out loud as ``there is an $x$ such that $x$ is $\P/$.'' The backwards ``$\exists$'' reminds us we are asserting that there \vocab{exists} an $x$ (in our chosen universe) which is $\P/$.
+\end{terminology}
+
+\newthought{Sometimes we want to say} that, among all the objects that populate our chosen universe, at least one of them has some particular characteristic. We usually write such statements so that they have this shape:
+
+\begin{quote}
+  there is an $x$ such that $x$ is $\P/$
+\end{quote}
+
+\noindent
+where $\P/$ is replaced be any sort of assertion about $x$. We call this an \vocab{existentially quantified} statement, or just an \vocab{existential claim} for short, because it asserts that there \emph{is} something in our chosen universe (i.e., something ``exists'' in our chosen universe) which is described by $\P/$.
+
+Note that we do not need to explicitly say that $x$ is an object \emph{in our chosen universe}. All we need to say is that ``there is an $x$,'' and \mathers/ will always assume that we are talking only about the $x$s that live in our chosen domain of discourse.
+
+
+To prove an existential claim, we need to do two things: (1) we need to bring forward some object from our chosen universe as an example, and (2) we need to show that our example is in fact accurately described by $\P/$. We call such an example a \vocab{witness}.
+
+For example, suppose we want to claim that someone in our chosen universe has enough money on their farecard to visit the Sandwich Shop and the Museum:
+
+\begin{framed}
+  \begin{theorem}
+    There is a student $x$ such that $x$ has enough money on their farecard to visit the Sandwich Shop and the Museum.
+  \end{theorem}
+\end{framed}
+
+\noindent
+To prove this, we need to (1) point to one of the students in our chosen universe who is an example of this claim, and (2) show that they do indeed have enough money on their farecard to visit the Sandwich Shop and the Museum.
+
+\begin{aside}
+  \begin{remark}
+    To \vocab{prove} an existential claim, we bring forward a \vocab{witness} $x$, and prove that $x$ is in fact accurately described by $\P/$.
+  \end{remark}
+\end{aside}
+
+\begin{framed}
+  \begin{proof}
+    To prove the theorem, I provide a witness. Carolina is an example of such a student. At the start of her journey, she has \$20.00 on her farecard. To get from Campus to Central Station, it will cost her \$5.00 (as proved by Theorem \ref{thm:same-cost-to-central-station}). It will then cost her another \$10.00 to get to the Sandwich Shop and back (\$5.00 each way). Finally, it will cost her at a minimum another \$2.50 to get from Central Station to the Museum. That adds up to \$17.50, which is less than the \$20.00 that she started with.
+  \end{proof}
+\end{framed}
+
+Notice that we brought forward Carolina as an example, but then we \emph{showed that she does in fact have enough on her farecard to visit the relevant stops}. It is important that we do not forget this second step. We cannot simply say ``Carolina is an example,'' and then stop writing our proof. We need to complete the second step: namely, we need to show that our witness does in fact satisfy what the theorem says (which in this case means we need to show that she has enough to get the Sandwich Shop and the Museum).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Universal Claims and Brute Force}
+
+\begin{terminology}
+  A \vocab{universal claim} is a statement that has this shape:
+    
+  \begin{quote}
+    for every $x$, $x$ is $\P/$
+  \end{quote}
+    
+  \noindent
+  where ``$\P/$'' is replaced by some assertion about each $x$ in our chosen universe. Alternatively, one can write this:
+    
+  \begin{quote}
+    $\forall x$, $x$ is $\P/$ 
+  \end{quote}
+    
+  \noindent
+  which should be read out loud as ``for every $x$, $x$ is $\P/$.'' The upside down ``$\forall$'' reminds us we are asserting that \vocab{all} of the $x$s (in our chosen universe) are $\P/$.
+\end{terminology}
+
+\newthought{Sometimes we want to say} that \emph{all} of the objects in our chosen universe have some particular characteristic. We usually write such statements with this shape:
+
+\begin{quote}
+  for every $x$, $x$ is $\P/$ (or synonymously: for all $x$, $x$ is $\P/$) 
+\end{quote}
+
+\noindent
+where $\P/$ is replaced be any sort of assertion about each $x$ in our chosen universe. We call this a \vocab{universally quantified} statement, or just a \vocab{universal claim} for short, because it asserts that $\P/$ applies \emph{universally} to our chosen universe --- it asserts that \emph{every} object is $\P/$.
+
+In this context, we can speak about \emph{every $x$}, or \emph{all $x$}, or \emph{each $x$}, or \emph{any $x$} when we say that they are $\P/$. All of these expressions mean exactly the same thing. The idea is that we mean to speak about \vocab{all} of the objects in our chosen universe --- we mean to apply the description $\P/$ to \vocab{each and every one} of them.
+
+To prove a universal claim, we have two options. One option is a method that we call \vocab{brute force}. The brute force method is this: go through each object in your chosen universe, one by one, and prove what you need to prove for each one separately.
+
+\begin{terminology}
+  A proof of some statement $\P/$ is done with \vocab{brute force} if you manually go through each object in your universe, one by one, and verify that $\P/$ holds for each one separately.
+\end{terminology}
+
+For example, suppose we want to prove that every student in our universe has less than \$22.50 dollars on their farecard at the start of their journey:
+
+\begin{framed}
+  \begin{lemma}
+    \label{lemma:less-than-twenty-two-fifty-on-farecard}
+    For every student $x$, $x$ begins their journey with less than \$22.50 on their farecard.
+  \end{lemma}
+\end{framed}
+
+\begin{aside}
+  \begin{remark}
+    We are calling our theorem a \vocab{lemma} here, rather than a \vocab{theorem}, just for fun. A lemma and a theorem are really no different, but sometimes, \mathers/ call a theorem a ``lemma'' to signal that it is not particularly important in its own right, but rather is something they will use later, to help prove other theorems. But really, this is just a matter of taste. ``Theorem'' and ``lemma'' are synonyms.
+  \end{remark}
+\end{aside}
+
+To prove this, we can look at each student in our universe, one by one, and check that they have less than \$22.50 on their farecard:
+
+\begin{framed}
+  \begin{proof}
+    I will prove the lemma with brute force. Alice starts her journey with \$7.50 on her farecard, which is less than \$22.50. Bob starts his journey with \$12.50 on his farecard, which is less than \$22.50. Finally, Carolina starts her journey with \$20.00 on her farecard, which is also less than \$22.50. Since that covers all of the students, the lemma is proved.
+  \end{proof}
+\end{framed}
+
+Suppose we want to prove that no student has less than \$7.50 on their farecard, at the start of their journey:
+
+\begin{framed}
+  \begin{lemma}
+    \label{lemma:more-than-seven-fifty-on-farecard}
+    For every student $x$, $x$ begins their journey with \$7.50 or more on their farecard.
+  \end{lemma}
+\end{framed}
+
+We can prove this with brute force too. We can look at each student, one by one, and check that they have \$7.50 or more on their farecard:
+
+\begin{framed}
+  \begin{proof}
+    I will prove the lemma with brute force. Alice starts her journey with \$7.50 on her farecard, which is exactly the required amount. Bob starts his journey with \$12.50, which is more than \$7.50. Finally, Carolina starts her journey with \$20.00, which is also more than \$7.50. Since that covers all of the students, the lemma is proved.
+  \end{proof}
+\end{framed}
+
+If we wanted to, we could be a lot more concise about this proof. Instead of manually listing out each case, we could just write this:
+
+\begin{framed}
+  \begin{proof}
+    The lemma can be proved with brute force, simply by checking the starting amounts that each student has on their farecard.
+  \end{proof}
+\end{framed}
+
+This is perfectly fine, because any competent reader could flip back a few pages and check for themselves that the initial amounts on the students' farecards, and thereby see that the lemma is in fact true in our chosen universe.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Universal Instantiation}
+
+\newthought{The method of brute force} is fine if you have a small enough universe. But if you have a lot of objects in your universe, it is tedious to verify $\P/$ for every object. And if your universe has an infinite number of objects, you simply \emph{can't} use brute force. You'll never get through all the objects!
+
+\begin{terminology}
+  A proof of a universal statement is done by \vocab{universal instantiation} if you prove it for an arbitrarily chosen object in your domain.
+\end{terminology}
+
+So we have another proof method. It is called \vocab{universal instantiation}. To prove a universal claim with this method, we do two things: (1) from our chosen universe we pick an \vocab{arbitrary object} and we give it an arbitrary name, like ``$a$,'' and then (2) we show that $\P/$ is actually true of this object $a$, \vocab{without appealing to any individual features} of $a$.
+
+Let's spend a little time unpacking this idea. What does it mean to pick an \emph{arbitrary} object $a$ from the domain? And what does it mean to say that we \emph{do not appeal to any individual features} of $a$? 
+
+Basically, it means we put on a blindfold for the duration of the proof, and then we let someone else pick an object at random from our universe, without telling us which one they've picked. We don't know its real name, so we just call it ``$a$.'' This way, we don't know \emph{which} object got picked, and because we don't know which object got picked, we also don't know any \emph{individual details} about it (not even its name).
+
+Now, if you like, you can actually wear a blindfold, and then have someone randomly pick an object from your domain, which you will refer to as ``$a$.'' But obviously we don't need to do that. All we really need to do, to pick an arbitrary object $a$, is just write down something like the following at the beginning of our proof:
+
+\begin{aside}
+  \begin{remark}
+    It is important that the name ``$a$'' be chosen arbitrarily, so that it does not signal which object got picked. In essence, it should be a temporary fake name that hides the identity of its bearer. As an analogy, think about news sources that are reported under fake names, for protection. It would do no good to report such sources under a name that told us who they really were! The name ``$a$'' should be arbitrary like this. So, for example, don't pick ``$a$'' if there is an object named ``$a$'' in your universe! Use some other name, which doesn't belong to an object already. Say instead something like, ``let $b$ be an arbitrary object from our chosen universe,'' or ``let $c$ be an arbitrary object from our chosen universe.''
+  \end{remark}
+\end{aside}
+
+\begin{quote}
+  Let $a$ be an arbitrary object from our chosen universe.
+\end{quote}
+
+\noindent
+When we write something like that, \mathers/ understand that what we mean is this:
+
+\begin{quote}
+  You (the reader) should pick some object from our chosen universe, it doesn't matter which one, and let's just call it ``$a$'' for the duration of our proof. I won't look, so that I won't know which one you've picked.
+\end{quote}
+
+So by writing down ``let $a$ be an arbitrary object,'' we are in effect allowing an object from our universe to be picked at random, and we are stipulating that we will refer to it as ``$a$.'' We are ``blindfolded'' because we don't know which object got picked. All we did was give it the temporary name ``$a$,'' so we have some way to refer to it, for the duration of our proof. But beyond that, we know nothing about which object this ``$a$'' is supposed to be.
+
+As an analogy, imagine that you are a student in a classroom. You are blindfolded, standing on one side of the room, and your classmates are on the other side of the room. You say to your classmates, ``pick one of you to step forward, it doesn't matter who, but don't tell me who. Whoever you are that gets picked, I'll just call you `$a$' for now.'' Suppose that the students then draw straws, and the chosen one steps forward.
+
+When we write ``let $a$ be an arbitrary object in our universe,'' we are doing something just like this. We are blindly selecting an object from our universe, without knowing which one is selected. And, since we don't know which one it is, we will use a temporary name ``$a$'' to refer to it for the duration of our proof.
+
+Notice also the following. Since we don't know which of the objects in our universe got picked, we don't know any \vocab{specific} or \vocab{individual details} about it. Think to the classroom again. If we don't know who was picked, we don't know if they have brown hair, if they are tall, and so on. We simply don't know any of their identifying features.
+
+Now, since we don't know which particular object got picked, and since we don't know any specific details about the object that was picked, we are left with a question: what exactly \emph{do} we know about our pick? Well, when we're blindfolded, we only know things that are true of all of the objects in our domain.
+
+\begin{aside}
+  \begin{remark}
+    If we don't know which object $a$ is, we don't know any individual details about $a$. What do we know then? We know (1) anything that is true of all our objects, (2) we know any information contained in our starting points, and (3) we know any information contained in any theorems (or lemmas) we have proved already.
+  \end{remark}
+\end{aside}
+
+Imagine the classroom again. If you don't know who $a$ is, the only facts you know about them are facts that are true of all the students in the class. For example, you may not know if they have brown hair, but you do know that they are a fellow student in your class, you know that they attend the class at the same time as the other students each day, perhaps every student has an assigned seat, and so on.
+
+We also have our \vocab{starting points}, namely the definitions and axioms we started with. And if there are any \vocab{theorems} (or lemmas) we have proven already, then we have them too. All of this information is available to us. The only things we \emph{don't} know are individual details about our chosen object, because we simply don't know which object it is.
+
+With all that in hand, what we do next is this: we take all of this general information that we know about our objects and our chosen universe, and we use it to prove that $a$ is truly described by $P$. We show that the object $a$, which was picked at random, \emph{must} in fact be $P$.
+
+\begin{aside}
+  \begin{remark}
+    To \vocab{prove} a universal claim using \vocab{universal instantiation}, pick an \emph{arbitrary} object $a$ from your chosen universe, and then show that $a$ is $\P/$ using only the general information that is available.
+  \end{remark}
+\end{aside}
+
+So to summarize, the pattern for universal instantiation is this. The claim we want to prove is that every $x$ in our domain is $P$. To prove this, we pick an arbitrary $a$ from our domain, and then we take general information that we know about our universe and all of our objects, and we use that to prove that $a$ is in fact truly described by $P$.
+
+Let's do an example. Suppose we want to claim that every student in our chosen universe starts the journey with enough money on their farecard to reach the Museum:
+
+\begin{framed}
+  \begin{theorem}
+    For every student $x$, $x$ begins the journey with enough money on their farecard to reach the Museum.
+  \end{theorem}
+\end{framed}
+
+Let us prove this using the method of universal instantiation. To do that, we first pick an arbitrary student from our domain. We do this blindfolded, so we don't really know which one gets picked. Hence, we'll just call the selected student ``$a$.''
+
+Next, we need to show that the chosen student does have enough money on their farecard to reach the Museum. However, we cannot appeal to any specific details about our chosen student.
+
+On the contrary, we can only appeal to things that are true about all of our students. What sorts of things do we know about all of our students? Well, at this point, we have our starting points. But we also have two lemmas, and in particular we know Lemma \ref{lemma:more-than-seven-fifty-on-farecard}: that every student starts the journey with \$7.50 or more on their farecard.
+
+That's enough information to prove that the student we are calling ``$a$'' --- whoever they may be --- has enough money on their farecard to reach the Museum:
+
+\begin{aside}
+  \begin{remark}
+    Notice how we prove that \emph{one} (arbitrarily chosen) student can reach the Museum, and then we conclude that our theorem therefore holds for \emph{every} student. But how are we justified to conclude that what holds for just \emph{one} student holds for \emph{all} of them? 
+
+    The answer lies in the fact that we stay blindfolded the whole time. By staying blindfolded, what we are doing is coming up with a way to show that any student, whoever they might be, has enough money to reach the Museum. Whichever student we pick, it doesn't matter, because we can just repeat the same proof for \emph{them}, and it would still work, because we aren't appealing to anything specific about our pick. So in effect, we come up with a proof that we can repeat for each and every object in our universe, and that is why it proves the entire universal claim.
+  \end{remark}
+\end{aside}
+
+\begin{framed}
+  \begin{proof}
+    To prove the theorem, let $a$ be an arbitrary student. From Lemma \ref{lemma:more-than-seven-fifty-on-farecard}, we know that every student starts their journey with at least \$7.50 on their farecard. That amount is just enough to get from Campus to the Museum: for it costs \$5.00 to get from Campus to Central Station (as proved by Theorem \ref{thm:same-cost-to-central-station}), and it costs another \$2.50 to go by bus from Central Station to the Museum. Therefore, $a$ begins the journey with enough on their farecard to reach the Museum, whoever $a$ might be. Since $a$ was chosen arbitrarily, it follows that every student begins the journey with enough money on their farecard to reach the Museum.
+  \end{proof}
+\end{framed}
+
+Notice in this proof that we followed the pattern for universal instantiation. We first picked an arbitrary student, who we called $a$. We didn't specify anything about who it might be, so it could be Alice, it could be Bob, or it could be Carolina. We don't know which one it is, nor do we care. Then, we used information that we know about all of the students, to show that whoever $a$ might be, they will most certainly have enough on their farecard to reach the Museum.
+
+Even though we proved this fact about \emph{one} student, we were careful in picking this particular student arbitrarily (hence, it could be any one of them). So what we proved here really turns out to be a proof that \emph{any} student has enough money on their farecard to reach the Museum, which is precisely what our theorem asserts.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+In this chapter, we learned some techniques for proving more general facts about our chosen universe. In particular, we learned how to prove facts that range over all of the objects in our universe.
+
+\begin{itemize}
+
+  \item We learned that an \vocab{existential claim} is a statement with the shape ``there is an $x$ such that $x$ is $\P/$.'' This asserts that among all the objects in our chosen universe, there is at least one who is $\P/$. To prove an existential claim, we provide a \vocab{witness}, which means that we bring forward an object from our chosen universe as an example, and we show that they are in fact accurately described by $\P/$. 
+  
+  \item We learned that a \vocab{universal claim} is a statement with the shape ``for every $x$, $x$ is $\P/$.'' This asserts that every object in our chosen universe is $\P/$. To prove a universal claim, we can either use \vocab{brute force}, or we can use \vocab{universal instantiation}, i.e., we pick an arbitrary object $a$ from our chosen universe, and then we show that $a$ is in fact truly described by $\P/$, using only facts that are true about all of our objects.
+  
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,765 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Kinds of Functions}
+\label{ch:kinds-of-functions}
+
+\newtopic{I}{n the last chapter} we learned about \vocab{function equality}. We learned that two functions are considered to be equal when they map the same elements from the domain to the same elements in the codomain.
+
+\begin{aside}
+  \begin{remark}
+    Recall that the \vocab{cardinality} of a set is the number of elements in it.
+  \end{remark}
+\end{aside}
+
+In this chapter, we want to think about what functions look like when the domain and codomain have different sizes (i.e., when they have different \vocab{cardinalities}). Certain kinds of functions can be constructed when the domain and codomain are the same size, and other kinds of functions can be constructed when one is bigger than the other. 
+
+As we will see, there are three special kinds of functions that \mathers/ have given special names to: they are \vocab{injective functions}, \vocab{surjective functions}, and \vocab{bijective functions}. Each of these has special characteristics that we will talk about below.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Different Sized Sets}
+
+\newthought{Suppose we have two sets}, $\set{A}$ and $\set{B}$, and $\set{A}$ is bigger than $\set{B}$. For example, $\set{A}$ has four elements, and $\set{B}$ has three:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0.5) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.25) [label=left:{$c$}] {};
+  \node[dot] (k4) at (-2.5, -1) [label=left:{$d$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+\end{diagram}
+
+Since there are more elements in $\set{A}$, we can't map each element of $\set{A}$ to its own point in $\set{B}$. Some of them are going to have to share. So, for example, we could map both $b$ and $c$ to $2$, and then let $a$ and $d$ have their own elements in $\set{B}$, like this:
+
+\begin{aside}
+  \begin{remark}
+    As $\set{A}$ gets bigger and $\set{B}$ gets smaller, more and more arrows from $\set{A}$ will have to ``squeeze in'' to fit into $\set{B}$, so to speak. For example:
+
+    \begin{diagram}
+
+      \node (domain) at (-1.5, 1.75) {$\set{A}$}; 
+      \node[dot] (k1) at (-1.5, 0.75) [label=left:{$a$}] {};
+      \node[dot] (k2) at (-1.5, 0.25) [label=left:{$b$}] {};
+      \node[dot] (k3) at (-1.5, -0.25) [label=left:{$c$}] {};
+      \node[dot] (k4) at (-1.5, -0.75) [label=left:{$d$}] {};
+      \draw[color=gray] (-1.5, 0) ellipse (0.75cm and 1.5cm);
+
+      \node (codomain) at (1.5, 1.75) {$\set{B}$};
+      \node[dot] (v1) at (1.5, 0.5) [label=right:{$1$}] {};
+      \node[dot] (v2) at (1.5, -0.5) [label=right:{$2$}] {};
+      \draw[color=gray] (1.5, 0) ellipse (0.75cm and 1.5cm);
+
+      \node (f) at (0, 1.25) {$\func{f}$};
+      \draw[->,space] (k1) -- (v1);
+      \draw[->,space] (k2) -- (v1);
+      \draw[->,space] (k3) -- (v2);
+      \draw[->,space] (k4) -- (v2);
+
+    \end{diagram}
+
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0.5) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.25) [label=left:{$c$}] {};
+  \node[dot] (k4) at (-2.5, -1) [label=left:{$d$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (0, 1.5) {$\func{f}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v2);
+  \draw[->,spaced] (k4) -- (v3);
+
+\end{diagram}
+
+So if the first set has more elements than the second set, then the only way to ``fit'' all of the points from the first set into the points of the second set is to have some of the arrows \vocab{share their endpoints}.
+
+Now consider the opposite scenario. Suppose that $\set{B}$ has more elements than $\set{A}$, for instance like this:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.35, 0.35) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3.25, -0.5) [label=right:{$3$}] {};
+  \node[dot] (v4) at (2.5, -1) [label=right:{$4$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+\end{diagram}
+
+Since there are more elements in $\set{B}$ than there are in $\set{A}$, we can't cover all of $\set{B}$ with arrows. At least one of the points in $\set{B}$ will have to go without an arrow pointing at it. For example, this mapping leaves $3$ without an arrow pointing at it:
+
+\begin{aside}
+  \begin{remark}
+    As $\set{A}$ gets smaller and $\set{B}$ gets bigger, there will be more and more points in $\set{B}$ that $\set{A}$ cannot point to. For example:
+
+    \begin{diagram}
+
+      \node (domain) at (-1.5, 1.75) {$\set{A}$}; 
+      \node[dot] (k1) at (-1.5, 0.5) [label=left:{$a$}] {};
+      \node[dot] (k2) at (-1.5, -0.5) [label=left:{$b$}] {};
+      \draw[color=gray] (-1.5, 0) ellipse (0.75cm and 1.5cm);
+
+      \node (codomain) at (1.5, 1.75) {$\set{B}$};
+      \node[dot] (v1) at (1.5, 0.75) [label=right:{$1$}] {};
+      \node[dot] (v2) at (1.5, 0.25) [label=right:{$2$}] {};
+      \node[dot] (v3) at (1.5, -0.25) [label=right:{$3$}] {};
+      \node[dot] (v4) at (1.5, -0.75) [label=right:{$4$}] {};
+      \node[dot] (v5) at (1.5, -1.25) [label=right:{$5$}] {};
+      \node[dot] (v6) at (1.5, -1.75) [label=right:{$6$}] {};
+      \draw[color=gray] (1.5, -0.5) ellipse (0.75cm and 2cm);
+
+      \node (f) at (0, 1.25) {$\func{f}$};
+      \draw[->,space] (k1) -- (v2);
+      \draw[->,space] (k2) -- (v5);
+
+    \end{diagram}
+
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.35, 0.35) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3.25, -0.5) [label=right:{$3$}] {};
+  \node[dot] (v4) at (2.5, -1) [label=right:{$4$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (0, 1.5) {$\func{f}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v4);
+
+\end{diagram}
+
+So if the second set is bigger than the first set, then the first set won't be able to cover all of the elements in the second set. At least some points in the second set will \vocab{have no arrows pointing to them}.
+
+Now suppose $\set{A}$ and $\set{B}$ have the same number of elements in them. For instance, suppose both have 3 elements:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+\end{diagram}
+
+Since both sets have the same number of elements, we can construct a function that maps the points one-to-one. No points in $\set{B}$ will be left out, and none of the arrows will have to share an endpoint:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (0, 1.5) {$\func{f}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v3);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    There can be multiple one-to-one functions from $\set{A}$ to $\set{B}$. Here is one:
+
+    \begin{diagram}
+
+      \node (domain) at (-1.5, 1.25) {$\set{A}$}; 
+      \node[dot] (k1) at (-1.5, 0.5) [label=left:{$a$}] {};
+      \node[dot] (k2) at (-1.5, 0) [label=left:{$b$}] {};
+      \node[dot] (k3) at (-1.5, -0.5) [label=left:{$c$}] {};
+      \draw[color=gray] (-1.5, 0) ellipse (0.75cm and 1cm);
+
+      \node (codomain) at (1.5, 1.25) {$\set{B}$};
+      \node[dot] (v1) at (1.5, 0.5) [label=right:{$1$}] {};
+      \node[dot] (v2) at (1.5, 0) [label=right:{$2$}] {};
+      \node[dot] (v3) at (1.5, -0.5) [label=right:{$3$}] {};
+      \draw[color=gray] (1.5, 0) ellipse (0.75cm and 1cm);
+
+      \node (g) at (0, 0.75) {$\func{f}$};
+      \draw[->,space] (k1) -- (v2);
+      \draw[->,space] (k2) -- (v3);
+      \draw[->,space] (k3) -- (v1);
+
+    \end{diagram}
+    
+    And here is another one:
+
+    \begin{diagram}
+
+      \node (domain) at (-1.5, 1.25) {$\set{A}$}; 
+      \node[dot] (k1) at (-1.5, 0.5) [label=left:{$a$}] {};
+      \node[dot] (k2) at (-1.5, 0) [label=left:{$b$}] {};
+      \node[dot] (k3) at (-1.5, -0.5) [label=left:{$c$}] {};
+      \draw[color=gray] (-1.5, 0) ellipse (0.75cm and 1cm);
+
+      \node (codomain) at (1.5, 1.25) {$\set{B}$};
+      \node[dot] (v1) at (1.5, 0.5) [label=right:{$1$}] {};
+      \node[dot] (v2) at (1.5, 0) [label=right:{$2$}] {};
+      \node[dot] (v3) at (1.5, -0.5) [label=right:{$3$}] {};
+      \draw[color=gray] (1.5, 0) ellipse (0.75cm and 1cm);
+
+      \node (h) at (0, 0.75) {$\func{f}$};
+      \draw[->,space] (k1) -- (v2);
+      \draw[->,space] (k2) -- (v1);
+      \draw[->,space] (k3) -- (v3);
+
+    \end{diagram}
+
+  \end{remark}
+\end{aside}
+
+Of course, a function need not cover every point in the codomain. This is a perfectly valid function:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (0, 1.5) {$\func{f}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v1);
+  \draw[->,spaced] (k3) -- (v1);
+
+\end{diagram}
+
+But if both sets have the same size, then it is possible to construct a function that maps the points one-to-one.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Images}
+
+\newthought{As we saw a moment ago}, a function need not cover all of the points in the codomain. Some functions do cover all of the points in the codomain, but not all functions do. 
+
+We can look at any function, and we can make a list of the just the points that have arrows pointing at them. We call this set the \vocab{image} of the function. Consider this function:
+
+\begin{terminology}
+  The \vocab{image} of a function is the set of elements in the codomain that are mapped by the function. Elements that have no arrow pointing at them are not included in the image.
+\end{terminology}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0.5) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.25) [label=left:{$c$}] {};
+  \node[dot] (k4) at (-2.5, -1) [label=left:{$d$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.5) [label=right:{$2$}] {};
+  \node[dot] (v3) at (2.75, 0) [label=right:{$3$}] {};
+  \node[dot] (v4) at (3, -0.75) [label=right:{$4$}] {};
+  \node[dot] (v5) at (3.75, -0.25) [label=right:{$5$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (0, 1.5) {$\func{f}$};
+  \draw[->,spaced] (k1) -- (v2);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v4);
+  \draw[->,spaced] (k4) -- (v4);
+
+\end{diagram}
+
+Which points in $\set{B}$ have arrows pointing at them? Just the points labeled $2$ and $4$. So, let's put these into a set all by themselves. That is the \emph{image} of $\func{f}$:
+
+\begin{equation*}
+  \text{image of } \func{f} = \{ 2, 4 \}
+\end{equation*}
+
+To denote the image of a function $\func{f}$, we will write this:
+
+\begin{aside}
+  \begin{notation}
+    To denote the image of a function $\func{f}$, we write ``$\image{f}$.''
+  \end{notation}
+\end{aside}
+
+\begin{equation*}
+  \image{f}
+\end{equation*}
+
+Hence, we can say that the \vocab{image} of $\func{f}$ is this:
+
+\begin{equation*}
+  \image{f} = \{ 2, 4 \}
+\end{equation*}
+
+Notice that $\image{f}$ is a \vocab{subset} of the codomain $\set{B}$:
+
+\begin{equation*}
+  \image{f} \subseteq \set{B}
+\end{equation*}
+
+This is because the image makes up a \emph{part} of $\set{B}$. The image is comprised of some, but not all, of the points in $\set{B}$. We might say that $\func{f}$ ``selects'' only certain points out of $\set{B}$. 
+
+\begin{aside}
+  \begin{remark}
+    Think of a function as projecting a picture on a projection screen.
+    
+    \begin{diagram}
+    
+      \node (domain) at (-2, 0.75) {$\set{A}$};
+      \node[dot] (k1) at (-2, 0.25) {};
+      \node[dot] (k2) at (-2.1, 0.15) {};
+      \node[dot] (k3) at (-2.3, 0.05) {};
+      \node[dot] (k4) at (-1.8, -0.05) {};
+      \node[dot] (k5) at (-1.7, -0.15) {};
+      \node[dot] (k6) at (-1.9, -0.25) {};
+      \node[dot] (k7) at (-2.2, 0.25) {};
+      \node[dot] (k8) at (-2, 0.1) {};
+      \draw[color=gray] (-2, 0) ellipse (0.5cm and 0.5cm);
+    
+      \node (domain) at (1, 1.5) {$\set{B}$};
+      \node[dot] (v1) at (0.5, 0.5) {};
+      \node[dot] (v2) at (1.5, 0.5) {};
+      \node[dot] (v3) at (0.5, -0.45) {};
+      \node[dot] (v4) at (0.7, -0.6) {};
+      \node[dot] (v5) at (0.9, -0.65) {};
+      \node[dot] (v6) at (1.1, -0.65) {};
+      \node[dot] (v7) at (1.3, -0.6) {};
+      \node[dot] (v8) at (1.5, -0.45) {};
+      \draw[color=gray] (1, 0) ellipse (1.25cm and 1.25cm);
+    
+      \node (f) at (-0.75, 1) {$\func{f}$};
+      \draw[-,dotted,space] (k1) -- (v1);
+      \draw[-,dotted,space] (k2) -- (v2);
+      \draw[-,dotted,space] (k3) -- (v3);
+      \draw[-,dotted,space] (k4) -- (v4);
+      \draw[-,dotted,space] (k5) -- (v5);
+      \draw[-,dotted,space] (k6) -- (v6);
+      \draw[-,dotted,space] (k7) -- (v7);
+      \draw[-,dotted,space] (k8) -- (v8);
+      
+    \end{diagram}
+  \end{remark}
+\end{aside}
+
+Why do we call it the ``image'' of $\func{f}$? If you like, you can think of the entire codomain as a big projector screen, and you can think of just the points that $\func{f}$ points to as the picture or ``image'' that $\func{f}$ ``projects'' onto the projector screen.
+
+Let's look at one other example. Consider this function:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0.5) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.25) [label=left:{$c$}] {};
+  \node[dot] (k4) at (-2.5, -1) [label=left:{$d$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (g) at (0, 1.5) {$\func{f}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v2);
+  \draw[->,spaced] (k4) -- (v3);
+
+\end{diagram}
+
+What is the image of $\func{g}$? In this case, it is $1$, $2$, and $3$. Hence:
+
+\begin{equation*}
+  \image{g} = \{ 1, 2, 3 \}
+\end{equation*}
+
+In our previous example, $\image{f}$ was smaller than the codomain. But in this case, $\image{g}$ makes up the entire codomain of $\func{g}$. But that's okay. The image is still a subset of the codomain, because a subset can be equal to its superset. Hence, this is true:
+
+\begin{equation*}
+  \image{g} \subseteq \set{B}
+\end{equation*}
+
+And, in this case, this is true too:
+
+\begin{aside}
+  \begin{remark}
+    Recall that if $\set{A}$ is a subset of $\set{B}$, i.e., $\set{A} \subseteq \set{B}$, then $\set{A}$ can either be smaller than $\set{B}$, or it can be equal to $\set{B}$. A subset is analogous to being ``less than or equal to.''
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \image{g} = \set{B}
+\end{equation*}
+
+Let's put down a proper definition for images. To do that, let's get a little bit more formal.
+
+We can find the image of a function $\func{f}$ by taking $\func{f}(x)$ for every $x$ in the domain. Recall that ``$\func{f}(x)$'' is just a synonym for the element in the codomain that $\func{f}$ maps $x$ to. So, if we go through every $x$ in the domain, and find $\func{f}(x)$ for that $x$, then we will have all of the elements that make up the image. With that, we can construct a definition:
+
+\begin{fdefinition}[Images]
+  \label{def:images}
+  For any function $\funcsig{f}{\set{A}}{\set{B}}$, we will say that the \vocab{image} of $\func{f}$ is the set that is comprised of every element $\func{f}(x) \in \set{B}$, for every $x \in \set{A}$. To denote the image of $\func{f}$, we will write this: $\image{f}$.
+\end{fdefinition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Injective Functions}
+
+\newthought{If a function maps} the points of its domain to distinct endpoints, then we say it is \emph{injective}. An \vocab{injective function} is a function whose arrows all point to distinct endpoints. None of its arrows point to the same endpoint.
+
+As a slogan, we might say that an injective function \vocab{preserves distinctness}. It preserves the distinctness of its original points, by not mapping any two points to the same endpoint.
+
+Another slogan we might use is this: an injective function \vocab{never collapses paths}, i.e., if the arrows are ``paths'' from the one set to the other, then an injective function never has two paths that go to the same point. 
+
+\begin{terminology}
+  An \vocab{injective function} maps each point in the domain to a distinct endpoint in the codomain. No two arrows point to the same endpoint in the codomain. It preserves the distinctness of points, and never collapses paths.
+\end{terminology}
+
+As an example, consider this function:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.35, 0.35) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3.25, -0.5) [label=right:{$3$}] {};
+  \node[dot] (v4) at (2.5, -1) [label=right:{$4$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (0, 1.5) {$\func{f}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v4);
+
+\end{diagram}
+
+This function is injective, because each point from the domain is mapped to a distinct point in the codomain. None of the arrows go to the same place in the codomain.
+
+\begin{terminology}
+  Some \mathers/ call an injective function a \vocab{one-to-one}-function, because it maps each item in the domain to a separate item in the codomain. You never get a two-to-one mapping, where it maps two elements in the domain to the same element in the codomain.
+\end{terminology}
+
+Here is an example of a function that is \emph{not} injective:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0.5) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.25) [label=left:{$c$}] {};
+  \node[dot] (k4) at (-2.5, -1) [label=left:{$d$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (g) at (0, 1.5) {$\func{f}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v2);
+  \draw[->,spaced] (k4) -- (v3);
+
+\end{diagram}
+
+\begin{ponder}
+  No function from a bigger set to a smaller set can be injective. Can you see why?
+\end{ponder}
+
+This is not injective, because two arrows point to the same endpoint ($b$ and $c$ are both mapped to $2$). So this function collapses a path (it collapses $b$ and $c$ to $2$), and hence it does \emph{not} preserve the distinctness of its original points.
+
+Let us write down a definition for injective functions. We can say that, if a function is injective, then it will satisfy this condition: if $\func{f}(x)$ and $\func{f}(y)$ in the codomain are the same, then $x$ and $y$ in the domain must be the same.
+
+\begin{aside}
+  \begin{remark}
+    An equivalent way to define injective functions would be to put it this way: if $\func{f}(x) \not = \func{f}(y)$, then $x \not = y$.
+  \end{remark}
+\end{aside}
+
+\begin{fdefinition}[Injective functions]
+  For any sets $\set{A}$, $\set{B}$ and any function $\funcsig{f}{\set{A}}{\set{B}}$, we will say that $\func{f}$ is \vocab{injective} if, for any $x, y \in \set{A}$, if $\func{f}(x) = \func{f}(y)$, then $x = y$.
+\end{fdefinition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Surjective Functions}
+
+\newthought{If a function covers} all of the codomain with arrows, then we say it is \emph{surjective}. A \vocab{surjective} function is a function that sends an arrow to each and every point in the codomain. It leaves no points in the codomain without an arrow pointing at them. 
+
+\begin{terminology}
+  A \vocab{surjective} function covers the entire codomain: it sends an arrow to every point in the codomain. No codomain points are left without an arrow pointing at them.
+\end{terminology}
+
+As a slogan, we can say that a surjective function \vocab{completely covers} the codomain. When it maps the points of the domain to the codomain, it doesn't miss any points in the codomain. It gets each one. 
+
+Here is an example of a surjective function:
+
+\begin{aside}
+  \begin{remark}
+    Note that this function is \emph{surjective}, but it is not \emph{injective}.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0.5) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.25) [label=left:{$c$}] {};
+  \node[dot] (k4) at (-2.5, -1) [label=left:{$d$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (g) at (0, 1.5) {$\func{f}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v2);
+  \draw[->,spaced] (k4) -- (v3);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    No function from a smaller set to a bigger set can be surjective. Can you see why?
+  \end{remark}
+\end{aside}
+
+This function is surjective because every point from the codomain has an arrow pointing at it.
+
+Here is an example of a function that is \emph{not} surjective:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0.5) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.25) [label=left:{$c$}] {};
+  \node[dot] (k4) at (-2.5, -1) [label=left:{$d$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.5) [label=right:{$2$}] {};
+  \node[dot] (v3) at (2.75, 0) [label=right:{$3$}] {};
+  \node[dot] (v4) at (3, -0.75) [label=right:{$4$}] {};
+  \node[dot] (v5) at (3.75, -0.25) [label=right:{$5$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (0, 1.5) {$\func{f}$};
+  \draw[->,spaced] (k1) -- (v2);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v4);
+  \draw[->,spaced] (k4) -- (v4);
+
+\end{diagram}
+
+This function is not surjective, because it does not cover the entire domain. It leaves the points $1$, $3$, and $5$ with no arrows pointing at them.
+
+\begin{terminology}
+  Some \mathers/ call a surjective function an \vocab{onto}-function, and they say that it maps its domain \emph{onto} its codomain. So, an injective function is sometimes called a \emph{on-to-one}-function, whereas a surjective function is sometimes called an \emph{onto}-function.
+\end{terminology}
+
+Notice that with a surjective function, the \vocab{image} of the function is equal to its codomain. Since a surjective function is a function that sends an arrow to every point in the codomain, the image of a surjective function is just the entire codomain. We can use that to define surjective functions:
+
+\begin{fdefinition}[Surjective functions]
+  \label{def:surjective-functions}
+  For any sets $\set{A}$, $\set{B}$ and any function $\funcsig{f}{\set{A}}{\set{B}}$, we will say that $\func{f}$ is \vocab{surjective} if $\image{f} = \set{B}$. 
+\end{fdefinition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Bijective Functions}
+
+\begin{terminology}
+  A \vocab{bijective} function is a function that is both injective and surjective. In other words, the elements of the domain and codomain stand in a one-to-one relationship. Because it is both injective and surjective, it is sometimes called a \vocab{one-to-one-and-onto}-function.
+\end{terminology}
+
+\newthought{A function can be both} injective and surjective. If a function is both, we say it is \vocab{bijective}. A bijective function essentially pairs up the elements of the domain and codomain in a one-to-one way. Here is an example of a bijective function:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (0, 1.5) {$\func{f}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v3);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    There is more than one way to construct a bijective function. Here is another one:
+    
+    \begin{diagram}
+
+      \node (domain) at (-1.5, 1.25) {$\set{A}$}; 
+      \node[dot] (k1) at (-1.5, 0.5) [label=left:{$a$}] {};
+      \node[dot] (k2) at (-1.5, 0) [label=left:{$b$}] {};
+      \node[dot] (k3) at (-1.5, -0.5) [label=left:{$c$}] {};
+      \draw[color=gray] (-1.5, 0) ellipse (0.75cm and 1cm);
+
+      \node (codomain) at (1.5, 1.25) {$\set{B}$};
+      \node[dot] (v1) at (1.5, 0.5) [label=right:{$1$}] {};
+      \node[dot] (v2) at (1.5, 0) [label=right:{$2$}] {};
+      \node[dot] (v3) at (1.5, -0.5) [label=right:{$3$}] {};
+      \draw[color=gray] (1.5, 0) ellipse (0.75cm and 1cm);
+
+      \node (h) at (0, 0.75) {$\func{f}$};
+      \draw[->,space] (k1) -- (v2);
+      \draw[->,space] (k2) -- (v1);
+      \draw[->,space] (k3) -- (v3);
+
+    \end{diagram}
+
+  \end{remark}
+\end{aside}
+
+This function is bijective because we can see that each point in the domain and codomain are paired up, one-to-one. 
+
+Why is a bijective function a one-to-one mapping? It is because it is \emph{both} surjective and injective. Since it is surjective, there has to be an arrow going to \emph{each} point in the codomain. But since it is injective, no two arrows can go to the \emph{same} point in the codomain. So every point in the codomain will be covered, but every point will have its own arrow going to it. Hence, the mapping has to be one-to-one.
+
+Here is an example of a function that is \emph{not} bijective:
+
+\begin{aside}
+  \begin{remark}
+    Bijective functions can only be constructed between sets that have the same cardinality (i.e., the same number of elements). Can you see why?
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.35, 0.35) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3.25, -0.5) [label=right:{$3$}] {};
+  \node[dot] (v4) at (2.5, -1) [label=right:{$4$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (f) at (0, 1.5) {$\func{f}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v4);
+
+\end{diagram}
+
+This function is not bijective, because the elements are paired up in a one-to-one way. Three of the elements \emph{are} paired up one-to-one, but the element $3$ is a loner. It has nothing paired up with it. A function is bijective only if \emph{all} of the elements are paired up in a one-to-one fashion.
+
+Let's put this down in a definition.
+
+\begin{fdefinition}[Bijective functions]
+  \label{def:bijective-functions}
+  For any sets $\set{A}$, $\set{B}$ and any function $\funcsig{f}{\set{A}}{\set{B}}$, we will say that $\func{f}$ is \vocab{bijective} if it is both injective and surjective.
+\end{fdefinition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about three special kinds of functions. 
+
+\begin{itemize}
+
+  \item A function is \vocab{injective} if it preserves distinctness, and does not collapse any paths. That is to say, each element in the domain gets mapped to a distinct element in the codomain. No two arrows end up at the same endpoint.
+  
+  \item A function is \vocab{surjective} if it covers the entire codomain. That is to say, each element in the codomain has an arrow pointing at it.
+  
+  \item A function is \vocab{bijective} if it is both injective and surjective. A bijective function is a one-to-one mapping: it puts the elements from the domain and the codomain in a one-to-one correspondence.
+
+\end{itemize}
+
+\end{document}

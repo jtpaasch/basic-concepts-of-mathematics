@@ -1,0 +1,442 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Properties of Graphs}
+\label{ch:properties-of-graphs}
+
+\newtopic{I}{n \chapterref{ch:networks}} we discussed \vocab{graphs}, which are network structures comprised of points connected by lines. The study of graphs is called \vocab{graph theory}.
+
+\begin{ponder}
+  What are some of the characteristics of a graph that you might write down if you were asked to describe it? The number of vertices? The number of edges? How many edges touch a vertex?
+\end{ponder}
+
+In this chapter, we will look at some of the basic properties of graphs, and we will look at certain kinds of graphs that are discussed so often that they have special names.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Properties of Graphs}
+
+\newthought{Graph theorists have come up with} some special names to refer to various properties or characteristics of graphs. In this section, we will cover some of these properties.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Order}
+
+\begin{terminology}
+  Recall from \chapterref{ch:the-size-of-sets} that the size of a set is called its \vocab{cardinality}. So, the \vocab{order} of a graph is the \vocab{cardinality} of its set of vertices $\set{V}$, which we denote as $\cardinality{\set{V}}$.
+\end{terminology}
+
+The \vocab{order} of a graph is the number of vertices it has. For example, consider this graph:
+
+\begin{diagram}
+
+  \node[dot] (v1) at (-1, 0) {};
+  \node[dot] (v2) at (1, 0) {};
+  \node[dot] (v3) at (0, 1) {};
+  
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+  \draw (v3) to (v1);
+
+\end{diagram}
+
+That graph has order 3, because it has three vertices.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Degree}
+
+\begin{terminology}
+  The \vocab{degree} of a vertex is the number of edges connected to it. 
+\end{terminology}
+
+The \vocab{degree} of a vertex is the number of edges connected to it. For example, consider this graph:
+
+\begin{diagram}
+
+  \node[dot] (v1) at (-2, 0) [label=below:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (2, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (0, 1) [label=above:{$\vertex{3}$}] {};
+  \node[dot] (v4) at (3, 1) [label=right:{$\vertex{4}$}] {};
+  
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+  \draw (v3) to (v1);
+  \draw (v3) to (v4);
+  \draw (v2) to (v4);
+
+\end{diagram}
+
+In this graph, vertex $\vertex{1}$ has a degree of 2, because there are two edges connected to it. Vertex $\vertex{2}$ has a degree of 3, $\vertex{3}$ has a degree of 3, and $\vertex{4}$ has a degree of 2.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Path}
+
+\begin{terminology}
+  A \vocab{path} through a graph is a route from one vertex to another vertex, by traveling through intermediate vertices between. Some \math/ books call a path a \vocab{walk}. 
+\end{terminology}
+
+A \vocab{path} through a graph is a walk from one vertex in the graph to another vertex in the graph, by traveling from vertex to vertex along edges between them. For example, consider this graph:
+
+\begin{diagram}
+
+  \node[dot] (v1) at (-2, 0) [label=below:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (2, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (0, 1) [label=above:{$\vertex{3}$}] {};
+  \node[dot] (v4) at (4, 1) [label=right:{$\vertex{4}$}] {};
+  
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+  \draw (v3) to (v1);
+  \draw (v3) to (v4);
+  \draw (v2) to (v4);
+
+\end{diagram}
+
+The next picture shows a path from $\vertex{2}$ to $\vertex{4}$ (the path is indicated with arrows to show each step of the journey):
+
+\begin{diagram}
+
+  \node[dot,color=gray] (v1) at (-2, 0) [label=below:{\textcolor{gray}{$\vertex{1}$}}] {};
+  \node[dot] (v2) at (2, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (0, 1) [label=above:{$\vertex{3}$}] {};
+  \node[dot] (v4) at (4, 1) [label=right:{$\vertex{4}$}] {};
+  
+  \draw[dashed,color=gray] (v1) to (v2);
+  \draw[->,space] (v2) to (v3);
+  \draw[dashed,color=gray] (v3) to (v1);
+  \draw[->,space] (v3) to (v4);
+  \draw[dashed,color=gray] (v2) to (v4);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    There are two legs to this journey. The first leg is from $\vertex{2}$ to $\vertex{3}$. The second is from $\vertex{3}$ to $\vertex{4}$.
+  \end{remark}
+\end{aside}
+
+The path starts at vertex $\vertex{2}$, then it goes to vertex $\vertex{3}$, then it goes to vertex $\vertex{4}$. We can write this concisely like this: $\vertex{2}\dash\vertex{3}\dash\vertex{4}$.
+
+Here is another path, $\vertex{4}\dash\vertex{3}\dash\vertex{2}\dash\vertex{3}\dash\vertex{1}$:
+
+\begin{diagram}
+
+  \node[dot] (v1) at (-2, 0) [label=below:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (2, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (0, 1) [label=above:{$\vertex{3}$}] {};
+  \node[dot] (v4) at (4, 1) [label=right:{$\vertex{4}$}] {};
+  
+  \draw[dashed,color=gray] (v1) to (v2);
+  \draw[<-,spaced] (2.15, 0) to (0.15, 1);
+  \draw[<-,spaced] (-0.15, 1) to (1.85, 0);
+  \draw[<-,spaced] (v3) to (v1);
+  \draw[<-,spaced] (v3) to (v4);
+  \draw[dashed,color=gray] (v2) to (v4);
+
+\end{diagram}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cycle}
+
+\begin{terminology}
+  A \vocab{cycle} through a graph is a path that starts and ends at the same vertex. Some \math/ books call a cycle a \vocab{circuit}. 
+\end{terminology}
+
+A \vocab{cycle} through a graph is a path that starts and ends at the same point. Consider this graph again:
+
+\begin{diagram}
+
+  \node[dot] (v1) at (-2, 0) [label=below:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (2, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (0, 1) [label=above:{$\vertex{3}$}] {};
+  \node[dot] (v4) at (4, 1) [label=right:{$\vertex{4}$}] {};
+  
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+  \draw (v3) to (v1);
+  \draw (v3) to (v4);
+  \draw (v2) to (v4);
+
+\end{diagram}
+
+The next picture shows a cycle from $\vertex{2}$ to $\vertex{2}$:
+
+\begin{aside}
+  \begin{remark}
+    This path starts at $\vertex{2}$, and it ends at $\vertex{2}$. Since it starts and ends at the same point, it's a cycle.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot,color=gray] (v1) at (-2, 0) [label=below:{\textcolor{gray}{$\vertex{1}$}}] {};
+  \node[dot] (v2) at (2, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (0, 1) [label=above:{$\vertex{3}$}] {};
+  \node[dot] (v4) at (4, 1) [label=right:{$\vertex{4}$}] {};
+  
+  \draw[dashed,color=gray] (v1) to (v2);
+  \draw[->,space] (v2) to (v3);
+  \draw[dashed,color=gray] (v3) to (v1);
+  \draw[->,space] (v3) to (v4);
+  \draw[<-,space] (v2) to (v4);
+
+\end{diagram}
+
+The path starts at $\vertex{2}$, it then goes to $\vertex{3}$, then to $\vertex{4}$, and finally, it goes back to $\vertex{2}$ again. Since this path starts and ends at the same point, it is a \vocab{cycle}.
+
+Now consider this picture:
+
+\begin{aside}
+  \begin{remark}
+    This is an example of a \vocab{trivial cycle}. If you're already home, how do you get back home? One way is just to not leave the house.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot,color=gray] (v1) at (-2, 0) [label=below:{\textcolor{gray}{$\vertex{1}$}}] {};
+  \node[dot] (v2) at (2, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot,color=gray] (v3) at (0, 1) [label=above:{\textcolor{gray}{$\vertex{3}$}}] {};
+  \node[dot,color=gray] (v4) at (4, 1) [label=right:{\textcolor{gray}{$\vertex{4}$}}] {};
+  
+  \draw[dashed,color=gray] (v1) to (v2);
+  \draw[dashed,color=gray] (v2) to (v3);
+  \draw[dashed,color=gray] (v3) to (v1);
+  \draw[dashed,color=gray] (v3) to (v4);
+  \draw[dashed,color=gray] (v2) to (v4);
+
+\end{diagram}
+
+This is actually a cycle. It's just that it's the shortest possible cycle. We start at $\vertex{2}$, and we end up at $\vertex{2}$, by simply not going anywhere! This cycle has a distance of zero, so to speak. We can call such a cycle a \vocab{trivial cycle}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Connectedness}
+
+A graph is \vocab{connected} if there is a path between any two distinct vertices in the graph. Consider this graph again:
+
+\begin{diagram}
+
+  \node[dot] (v1) at (-2, 0) [label=below:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (2, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (0, 1) [label=above:{$\vertex{3}$}] {};
+  \node[dot] (v4) at (4, 1) [label=right:{$\vertex{4}$}] {};
+  
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+  \draw (v3) to (v1);
+  \draw (v3) to (v4);
+  \draw (v2) to (v4);
+
+\end{diagram}
+
+Between every pair of distinct vertices, there is a path. Pick any two distinct vertices, and you will be able to find a path between them.
+
+\begin{aside}
+  \begin{remark}
+    Notice that we can talk about how many ``pieces'' a graph is broken up into. In the first graph, there is just one ``piece'' (it is not broken up into pieces). In this second graph, there are two ``pieces.''
+  \end{remark}
+\end{aside}
+
+By contrast, a graph is \vocab{disconnected} if there are at least two vertices that have \vocab{no path} between them. This happens when a graph is broken up into distinct pieces. For instance:
+
+\begin{diagram}
+
+  \node[dot] (v1) at (-2, 0) [label=below:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (2, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (0, 1) [label=above:{$\vertex{3}$}] {};
+  \node[dot] (v4) at (4, 1) [label=above:{$\vertex{4}$}] {};
+  \node[dot] (v5) at (4, 0) [label=below:{$\vertex{5}$}] {};
+  \node[dot] (v6) at (6, 0) [label=below:{$\vertex{6}$}] {};
+  
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+  \draw (v3) to (v1);
+
+  \draw (v4) to (v5);
+  \draw (v5) to (v6);
+  \draw (v4) to (v6);
+
+\end{diagram}
+
+This graph is in two pieces: a left piece, comprised of vertices $\vertex{1}$, $\vertex{2}$, $\vertex{3}$, and the edges between them; and a right piece, comprised of vertices $\vertex{4}$, $\vertex{5}$, $\vertex{6}$, and the edges between them. 
+
+\begin{aside}
+  \begin{remark}
+    To say that there is \vocab{no path} between two vertices exactly characterizes what it means for a graph to be disconnected. If you can't travel between two points, then there is a ``gap'' between them, i.e., a place where there are no edges. So you must have two pieces. Likewise, to say that \vocab{there is} a path between any two vertices exactly characterizes what it means for a graph to be connected. If you can travel between any two points, then there are no ``gaps'' between two pieces that you cannot cross.
+  \end{remark}
+\end{aside}
+
+Notice that there is no way to travel from one piece to another, because there is no edge connecting the left piece to the right piece. Consequently, there are vertices in this graph that have no path between them. Just pick any vertex from the left piece and any vertex from the right piece. You will see that there is no path between them.
+
+Suppose there were a single vertex to connect these two pieces. For instance, suppose the graph had this extra edge between $\vertex{2}$ and $\vertex{5}$:
+
+\begin{diagram}
+
+  \node[dot] (v1) at (-2, 0) [label=below:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (2, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (0, 1) [label=above:{$\vertex{3}$}] {};
+  \node[dot] (v4) at (4, 1) [label=above:{$\vertex{4}$}] {};
+  \node[dot] (v5) at (4, 0) [label=below:{$\vertex{5}$}] {};
+  \node[dot] (v6) at (6, 0) [label=below:{$\vertex{6}$}] {};
+  
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+  \draw (v3) to (v1);
+
+  \draw (v4) to (v5);
+  \draw (v5) to (v6);
+  \draw (v4) to (v6);
+  
+  \draw (v2) to (v5);
+
+\end{diagram}
+
+The edge between $\vertex{2}$ and $\vertex{5}$ is called a \vocab{bridge}, because it bridges the gap between the two pieces. With the bridge in place, this graph is a \vocab{connected} graph, because now there is a way to travel across the gap. So no matter which two vertices we pick, we will be able to find a path between them.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Null and Complete Graphs}
+
+\newthought{Two kinds of graphs} crop up so often that graph theorists have given them names: \emph{null} graphs and \emph{complete} graphs.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Null Graphs}
+
+A \vocab{null graph} of order $n$ is a graph with $n$ vertices and no edges. In other words, a null graph is a graph whose vertices have the most \emph{minimal} degree (i.e., a degree of zero). 
+
+Here is the null graph of order 1 (we will call it $\nullgraph{1}$):
+
+\begin{diagram}
+  \node[dot] (v1) at (0, 0) {};
+\end{diagram}
+
+\begin{terminology}
+  A \vocab{null graph} of order $n$ has $n$ vertices with \vocab{no edges}. In other words, each vertex in the graph has the absolute minimal degree (i.e., each vertex has a degree of zero). We denote a null graph of order $n$ like this: $\nullgraph{n}$, e.g., $\nullgraph{3}$, $\nullgraph{4}$, and so on.
+\end{terminology}
+
+It is just a single point, with no edges. Here is the null graph of order 2 (we will call it $\nullgraph{2}$):
+
+\begin{diagram}
+  \node[dot] (v1) at (-0.5, 0) {};
+  \node[dot] (v2) at (0.5, 0) {};
+\end{diagram}
+
+It is two points, with no edges. Here is the null graph of order 3 ($\nullgraph{3}$):
+
+\begin{diagram}
+  \node[dot] (v1) at (-1, 0) {};
+  \node[dot] (v2) at (1, 0) {};
+  \node[dot] (v3) at (0, 1) {};
+\end{diagram}
+
+It is three points, with no edges. We could go on, but you get the picture. We can keep increasing $n$ by one to get $\nullgraph{4}$, then $\nullgraph{5}$, and so on.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Complete Graphs}
+
+A \vocab{complete} graph of order $n$ is a graph with $n$ vertices, each of which are connected every other vertex. Basically, a complete graph is a graph that has as many connections as possible between all the points. Each vertex has the \emph{maximal} degree (the maximum amount of edges).
+
+\begin{terminology}
+  A \vocab{complete graph} of order $n$ has $n$ vertices with \vocab{maximal edges}. In other words, each vertex in the graph has the maximum degree possible (i.e., each vertex has an edge to every other vertex). We denote a complete graph of order $n$ like this: $\completegraph{n}$, e.g., $\completegraph{3}$, $\completegraph{4}$, and so on.
+\end{terminology}
+
+Here is the complete graph of order 1 (we will call it $\completegraph{1}$):
+
+\begin{diagram}
+  \node[dot] (v1) at (0, 0) {};
+\end{diagram}
+
+There is just one point here, so there are no edges. Hence, $\completegraph{1}$ is the same graph as $\nullgraph{1}$.
+
+Here is the complete graph of order 2 (we will call it $\completegraph{2}$):
+
+\begin{diagram}
+  \node[dot] (v1) at (-0.5, 0) {};
+  \node[dot] (v2) at (0.5, 0) {};
+  \draw (v1) to (v2);
+\end{diagram}
+
+It has two points, with a single edge, because that's the most connections there can be between two vertices. Here is the complete graph of order 3 ($\completegraph{3}$):
+
+\begin{diagram}
+  \node[dot] (v1) at (-1, 0) {};
+  \node[dot] (v2) at (1, 0) {};
+  \node[dot] (v3) at (0, 1) {};
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+  \draw (v1) to (v3);
+\end{diagram}
+
+This one has three vertices, and three edges, because that is the most connections there can be between three points. Each point is connected to every other point.
+
+Here are the complete graphs of order 4 and 5 (we will call them $\completegraph{4}$ and $\completegraph{5}$):
+
+\begin{aside}
+  \begin{remark}
+    What is the \vocab{degree} of a complete graph of order $n$? Notice that it is always $n - 1$, i.e., one less than its \vocab{order}. Why is that? Because: by definition a complete graph connects each vertex to every other vertex. If there are $n$ vertices, then each vertex will be connected to every vertex except itself (so all $n$ of them except for one). Hence, there will always be $n - 1$ edges coming out of each vertex in a complete graph of order $n$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (k4) at (-3, -0.5) {$\completegraph{4}$};
+  \node[dot] (v1) at (-4, 2) {};
+  \node[dot] (v2) at (-4, 0) {};
+  \node[dot] (v3) at (-2, 0) {};
+  \node[dot] (v4) at (-2, 2) {};  
+  \draw (v1) -- (v2) -- (v3) -- (v4) -- (v1);
+  \draw (v1) to (v3);
+  \draw (v2) to (v4);
+
+  \node (k5) at (3, -0.5) {$\completegraph{5}$};
+  \node[dot] (v5) at (3, 2.15) {};
+  \node[dot] (v6) at (4, 1.25) {};
+  \node[dot] (v7) at (3.75, 0) {};
+  \node[dot] (v8) at (2.25, 0) {};
+  \node[dot] (v9) at (2, 1.25) {};
+  
+  \draw (v5) to (v6);
+  \draw (v5) to (v7);
+  \draw (v5) to (v8);
+  \draw (v5) to (v9);
+  \draw (v6) to (v7);
+  \draw (v6) to (v8);
+  \draw (v6) to (v9);
+  \draw (v7) to (v8);
+  \draw (v7) to (v9);
+  \draw (v8) to (v9);
+
+\end{diagram}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about some of the different properties of graphs.
+
+\begin{itemize}
+
+  \item The \vocab{order} of a graph is the number of vertices it has. The \vocab{degree} of a vertex is the number of edges it has.
+  
+  \item A \vocab{path} (synonymously, a \vocab{walk}) in a graph is a trail from one vertex to another vertex in the graph, going from vertex to vertex by traveling across edges. A \vocab{cycle} (synonymously, a \vocab{circuit}) is a path that starts and ends at the same point.
+  
+  \item A graph is \vocab{connected} if there is a path between any two vertices (which means the graph is in one ``piece''). A graph is \vocab{disconnected} if there are some vertices that there is no path between (this happens when the graph is in two or more ``pieces''). 
+  
+  \item Null graphs of order $n$ (e.g., $\nullgraph{1}$, $\nullgraph{2}$, and so on) are graphs that contain $n$ vertices and no edges. Complete graphs of order $n$ (e.g., $\completegraph{1}$, $\completegraph{2}$, and so on) are graphs that contain $n$ vertices and as many connections as possible (i.e., every vertex is connected to every other vertex). 
+
+\end{itemize}
+
+
+\end{document}

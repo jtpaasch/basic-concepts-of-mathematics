@@ -1,0 +1,439 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Networks}
+\label{ch:networks}
+
+\newtopic{T}{here are many scenarios} that involve a \vocab{network} of connections between objects. For instance, the internet is a network (of connections between routers), and the U.S. interstate system is a network (of freeways between cities).
+
+\begin{ponder}
+  What other networks do you engage with on a daily basis? Perhaps project managers at work? A chain of command in the military? Electrical circuits in a vehicle?
+\end{ponder}
+
+\Mathers/ call such networks \vocab{graphs}, and the study of networks is called \vocab{graph theory}. In this chapter, we will look at the basic structure of graphs.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Plots and Graphs}
+
+\newthought{When we hear the word ``graph,''} we might think of various kinds of data visualizations, or even drawings we did on graph paper in school. 
+
+For example, as an example of a ``graph,'' we might think of a data visualization such as a bar plot, e.g., something that looks like this:
+
+\begin{aside}
+  \begin{remark}
+    Sometimes visualizations with bars are called ``bar graphs,'' but to avoid mixing up our terminology, we will call them ``bar \emph{plots}.''
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw (-0.1, 0) to (5, 0);
+  \draw (0, 0) to (0, 3);
+  
+  \draw (-0.1, 1) to (0.1, 1);
+  \draw (-0.1, 2) to (0.1, 2);
+  
+  \draw[fill=gray] (0.5, 0) to (0.5, 2.5) to (1, 2.5) to (1, 0) to (0.5, 0);
+  \draw[fill=gray] (1.5, 0) to (1.5, 1.5) to (2, 1.5) to (2, 0) to (1.5, 0);
+  \draw[fill=gray] (2.5, 0) to (2.5, 2) to (3, 2) to (3, 0) to (2.5, 0);
+  \draw[fill=gray] (3.5, 0) to (3.5, 0.5) to (4, 0.5) to (4, 0) to (3.5, 0);
+  
+\end{diagram}
+
+Alternatively, as an example of a ``graph,'' we might think of plotting a curve on graph paper, for instance:
+
+\begin{aside}
+  \begin{remark}
+    Sometimes this is called the ``graph'' of a curve, but to avoid mixing up our terminology, we will call this a ``plot'' of the curve.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw (-4, 0) to (4, 0);
+  \draw (0, -1.75) to (0, 1.75);
+  
+  \draw (-3, -0.1) to (-3, 0.1);
+  \draw (-2, -0.1) to (-2, 0.1);
+  \draw (-1, -0.1) to (-1, 0.1);
+  \draw (1, -0.1) to (1, 0.1);
+  \draw (2, -0.1) to (2, 0.1);
+  \draw (3, -0.1) to (3, 0.1);
+
+  \draw (-0.1, -1) to (0.1, -1);
+  \draw (-0.1, 1) to (0.1, 1);
+
+  \draw[dashed] (-2.5, 1.5) .. controls (0, -2.25) .. (2.5, 1.5);
+
+\end{diagram}
+
+These sorts of drawings are sometimes called ``graphs,'' but to avoid mixing up our terminology, let's call these \vocab{plots} instead. In the context of graph theory, a plot is not what a \mather/ has in mind when they speak of a ``graph.'' 
+
+\begin{terminology}
+  In the context of graph theory, a graph is not a \vocab{plot}. Rather, a graph is always a \vocab{network} comprised of points that are connected in some way. In graph theory, the term ``graph'' is just a synonym for ``network.''
+\end{terminology}
+
+In the context of graph theory, a \vocab{graph} is really a \vocab{network}. We can usually draw it simply with dots and lines. Here is an example of a graph (a network):
+
+\begin{diagram}
+
+  \node[dot] (v1) at (-3, 1) {};
+  \node[dot] (v2) at (-2, 0.5) {};
+  \node[dot] (v3) at (-1, -0.25) {};
+  \node[dot] (v4) at (-2.5, -0.25) {};
+  \node[dot] (v5) at (1, 1) {};
+  \node[dot] (v6) at (2.5, 0) {};
+  \node[dot] (v7) at (0.75, 0.5) {};
+
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+  \draw (v2) to (v4);  
+  \draw (v2) to (v5);
+  \draw (v5) to (v6);
+  \draw (v5) to (v7);
+
+\end{diagram}
+
+Here is another graph (i.e., a network):
+
+\begin{diagram}
+
+  \node[dot] (v1) at (-1.5, 1) {};
+  \node[dot] (v2) at (0, 1) {};
+  \node[dot] (v3) at (1.5, 1) {};
+  \node[dot] (v4) at (-1.5, -1) {};
+  \node[dot] (v5) at (0, -1) {};
+  \node[dot] (v6) at (1.5, -1) {};
+
+  \draw (v1) to (v4);
+  \draw (v1) to (v5);
+  \draw (v1) to (v6);
+  \draw (v2) to (v4);
+  \draw (v2) to (v5);
+  \draw (v2) to (v6);
+  \draw (v3) to (v4);
+  \draw (v3) to (v5);
+  \draw (v3) to (v6);
+
+\end{diagram}
+
+As you can see, these ``graphs'' have little relation to the plots we mentioned earlier. In graph theory, when we speak of graphs, we are always speaking of networks.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Definition and Notation}
+
+\begin{aside}
+  \begin{remark}
+    A network consists of some \vocab{objects}, and some \vocab{pairings} of those objects. We have some things (the objects), which are connected (paired up).
+  \end{remark}
+\end{aside}
+
+\newthought{Conceptually speaking}, a graph is just a set of objects, along with some pairings of those objects. That's really all a network is. You have some \emph{things} (some objects, whatever they might be), and then you have some \emph{connections} between them (pairings of objects).
+
+Here is an example. Suppose we have four people (these are the objects we care about):
+
+\begin{aside}
+  \begin{remark}
+    The \vocab{objects} in our network are these four people.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \{ \e{Alice}, \e{Bob}, \e{Clara}, \e{Dan} \}
+\end{equation*}
+
+Next, suppose some of these people know each other. Suppose, for example, that Alice and Bob know each other, Clara and Dan know each other, and Bob and Clara know each other too. We can put these down as pairs:
+
+\begin{aside}
+  \begin{remark}
+    The \vocab{connections} in our network are these pairings. There are three connections.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \{ (\e{Alice}, \e{Bob}), (\e{Clara}, \e{Dan}), (\e{Bob}, \e{Clara}) \}
+\end{equation*}
+
+So we have a set of objects, and a set of pairings of those objects. Let's give each of these two sets names. Let's call the first set $\set{V}$. Hence:
+
+\begin{terminology}
+  We choose ``$\set{V}$'' for \vocab{vertices}, which is what graph theorists call the objects or ``points'' in a graph. We'll come back to this name below.
+\end{terminology}
+
+\begin{equation*}
+  \set{V} = \{ \e{Alice}, \e{Bob}, \e{Clara}, \e{Dan} \}
+\end{equation*}
+
+Let's call the second set $\set{E}$:
+
+\begin{equation*}
+  \set{E} = \{ (\e{Alice}, \e{Bob}), (\e{Clara}, \e{Dan}), (\e{Bob}, \e{Clara}) \}
+\end{equation*}%
+%
+\begin{terminology}%
+  We choose ``$\set{E}$'' for \vocab{edges}, which is what graph theorists call the connections or ``lines'' in a graph. We'll come back to this below too.
+\end{terminology}
+
+Now, let's put the two together, and say that our graph is the \vocab{tuple} of $\set{V}$ and $\set{E}$:
+
+\begin{equation*}
+  \graphsig{\set{V}}{\set{E}}
+\end{equation*}
+
+Read that aloud like this: ``the tuple consisting of the set $\set{V}$ and the set $\set{E}$.''
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:products} that a \vocab{tuple} is an ordered sequence of items. In this case, a 2-tuple (also called a ``pair'') is a sequence of two items: in the first slot we have $\set{V}$, and in the second slot we have $\set{E}$.
+  \end{remark}
+\end{aside}
+
+Let's give this graph a name. Let's call it $\struct{G}$. Hence, we can specify our graph by writing this:
+
+\begin{equation*}
+  \graph{G} = \graphsig{\set{V}}{\set{E}}
+\end{equation*}
+
+Read that aloud like this: ``the graph $\struct{G}$ is the tuple consisting of the set $\set{V}$ and the set $\set{E}$.'' Or, if you like, you could read it like this: ``the graph $\struct{G}$ is defined as the tuple $\graphsig{\set{V}}{\set{E}}$.''
+
+To draw this graph, we draw a dot for each object in $\set{V}$. We can put the dots wherever we like on the page. For instance, we might arrange them on the page like this:
+
+\begin{aside}
+  \begin{remark}
+    Here we arranged the four dots in a rectangular fashion, but this is not necessary. We could put the dots anywhere on the page.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (alice) at (-2, 0.5) [label=above:{$\e{Alice}$}] {};
+  \node[dot] (bob) at (2, 0.5) [label=above:{$\e{Bob}$}] {};
+  \node[dot] (clara) at (-2, -0.5) [label=below:{$\e{Clara}$}] {};
+  \node[dot] (dan) at (2, -0.5) [label=below:{$\e{Dan}$}] {};
+
+\end{diagram}
+
+Next, we draw a line to represent each pairing in $\set{E}$. So, for example, since the pair $(\e{Alice}, \e{Bob})$ is in $\set{E}$, we can draw a line between their two dots:
+
+\begin{aside}
+  \begin{remark}
+    If we initially drew our dots in a different arrangement, no matter where we put those dots, we'd want to connect up the dot labeled ``Alice'' with the dot labeled ``Bob.''
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (alice) at (-2, 0.5) [label=above:{$\e{Alice}$}] {};
+  \node[dot] (bob) at (2, 0.5) [label=above:{$\e{Bob}$}] {};
+  \node[dot] (clara) at (-2, -0.5) [label=below:{$\e{Clara}$}] {};
+  \node[dot] (dan) at (2, -0.5) [label=below:{$\e{Dan}$}] {};
+
+  \draw (alice) to (bob);
+
+\end{diagram}
+
+Clara and Dan are also paired up, so we add a line for their connection:
+
+\begin{diagram}
+
+  \node[dot] (alice) at (-2, 0.5) [label=above:{$\e{Alice}$}] {};
+  \node[dot] (bob) at (2, 0.5) [label=above:{$\e{Bob}$}] {};
+  \node[dot] (clara) at (-2, -0.5) [label=below:{$\e{Clara}$}] {};
+  \node[dot] (dan) at (2, -0.5) [label=below:{$\e{Dan}$}] {};
+
+  \draw (alice) to (bob);
+  \draw (clara) to (dan);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Again, it doesn't matter if we initially drew our dots in a different arrangement than what we have pictured here. No matter where we put those dots, we'd want to connect the same dots we are connecting here (i.e., we'd want to connect ``Clara'' and ``Dan,'' as well as ``Bob'' and ``Clara.''
+  \end{remark}
+\end{aside}
+
+And Bob and Clara are also paired up, so we add a line for them too:
+
+\begin{diagram}
+
+  \node[dot] (alice) at (-2, 0.5) [label=above:{$\e{Alice}$}] {};
+  \node[dot] (bob) at (2, 0.5) [label=above:{$\e{Bob}$}] {};
+  \node[dot] (clara) at (-2, -0.5) [label=below:{$\e{Clara}$}] {};
+  \node[dot] (dan) at (2, -0.5) [label=below:{$\e{Dan}$}] {};
+
+  \draw (alice) to (bob);
+  \draw (clara) to (dan);
+  \draw (bob) to (clara);
+
+\end{diagram}
+
+With that, we have drawn a picture of our graph. You can see that it visually represents the sets $\set{V}$ and $\set{E}$ exactly, because it has a dot for each object in $\set{V}$, and a connecting line for each pairing in $\set{E}$.
+
+\begin{terminology}
+  The word \vocab{vertices} is plural (many of them), and \vocab{vertex} is singular (one of them). Since graph theorists call the objects \vocab{vertices} and the connections \vocab{edges}, we will often name the set of objects in our graphs ``$\set{V}$'' and the pairings ``$\set{E}$.'' That's why we chose those names above.
+\end{terminology}
+
+In graph theory, we often call the objects in $\set{V}$ the \vocab{vertices} of the graph, because a \vocab{vertex} is a point where lines come together. We call the pairings in $\set{E}$ the \vocab{edges} of the graph, because in geometry, we often refer to lines as ``edges'' (as in, the edge of a shape).
+
+Let's take what we have said and put down a definition for a graph.
+
+\begin{fdefinition}
+  \label{def:graph}
+  We will say that a \vocab{graph} is a tuple $\graphsig{\set{V}}{\set{E}}$, where $\set{V}$ is a set of objects, and $\set{E}$ is a set of pairs of objects from $\set{V}$. We will call $\set{V}$ the \vocab{vertices} of the graph, and we will call $\set{E}$ the \vocab{edges} of the graph. We will use bolded, capital letters as names for graphs, e.g., $\graph{G}$, $\graph{H}$, etc.
+\end{fdefinition}
+
+Notice how we really have captured the \vocab{essence} of a \vocab{network} here. If we strip away inessential details, a network is nothing more than a bunch of objects that are connected. For instance, a set of cities and the roads between them can be seen as just a set of objects (in this case, cities) and connections (roads). A social network can be seen as a set of objects (people) and connections (who knows who). That is exactly what we've defined a graph to be.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Different Drawings}
+
+\begin{aside}
+  \begin{remark}
+    A \vocab{graph} is not identical to its \vocab{drawing}. There are many drawings of a single graph. Each drawing is just a \vocab{representation} of a graph.
+  \end{remark}
+\end{aside}
+
+\newthought{A graph is actually} not the same thing as its drawing. A drawing of a graph is really just a \emph{picture} or \emph{representation} of a graph. 
+
+Exactly where we draw the dots in a picture doesn't matter. What matters is only that the points are connected to each other in the right way. For example, let's draw the above graph $\struct{G}$ in a different way. Let's draw the four dots in different places:
+
+\begin{aside}
+  \begin{remark}
+    Notice how the dots are not arranged in a triangular fashion as before, and they are not even in the same order (going clockwise around). 
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (alice) at (3, 0.5) [label=right:{$\e{Alice}$}] {};
+  \node[dot] (bob) at (3, -0.5) [label=below:{$\e{Bob}$}] {};
+  \node[dot] (clara) at (0, 0) [label=left:{$\e{Clara}$}] {};
+  \node[dot] (dan) at (1, 0.5) [label=above:{$\e{Dan}$}] {};
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Notice that in this picture and the picture we drew above, there is a line between Alice and Bob.
+  \end{remark}
+\end{aside}
+
+Now let's draw in the connections. We have Alice connected to Bob:
+
+\begin{diagram}
+
+  \node[dot] (alice) at (3, 0.5) [label=right:{$\e{Alice}$}] {};
+  \node[dot] (bob) at (3, -0.5) [label=below:{$\e{Bob}$}] {};
+  \node[dot] (clara) at (0, 0) [label=left:{$\e{Clara}$}] {};
+  \node[dot] (dan) at (1, 0.5) [label=above:{$\e{Dan}$}] {};
+
+  \draw (alice) to (bob);
+
+\end{diagram}
+
+Then Clara connected to Dan:
+
+\begin{diagram}
+
+  \node[dot] (alice) at (3, 0.5) [label=right:{$\e{Alice}$}] {};
+  \node[dot] (bob) at (3, -0.5) [label=below:{$\e{Bob}$}] {};
+  \node[dot] (clara) at (0, 0) [label=left:{$\e{Clara}$}] {};
+  \node[dot] (dan) at (1, 0.5) [label=above:{$\e{Dan}$}] {};
+
+  \draw (alice) to (bob);
+  \draw (clara) to (dan);
+
+\end{diagram}
+
+\begin{ponder}
+  Compare this drawing to the earlier drawing of the same graph. What's different about it? And what's the same? 
+\end{ponder}
+
+And finally, Bob connected to Clara:
+
+\begin{diagram}
+
+  \node[dot] (alice) at (3, 0.5) [label=right:{$\e{Alice}$}] {};
+  \node[dot] (bob) at (3, -0.5) [label=below:{$\e{Bob}$}] {};
+  \node[dot] (clara) at (0, 0) [label=left:{$\e{Clara}$}] {};
+  \node[dot] (dan) at (1, 0.5) [label=above:{$\e{Dan}$}] {};
+
+  \draw (alice) to (bob);
+  \draw (clara) to (dan);
+  \draw (bob) to (clara);
+
+\end{diagram}
+
+Notice that this picture looks different from the one we drew before. Here they are side by side:
+
+\begin{aside}
+  \begin{remark}
+    Notice that when we look at this drawing and compare it to the earlier drawing, the same points are connected, even though we have drawn the points in different places on the page. Regardless of how the points are positioned in these two drawings, there is still the same number of connections, between the same points.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (alice) at (-3, 0.5) [label=above:{$\e{Alice}$}] {};
+  \node[dot] (bob) at (1, 0.5) [label=above:{$\e{Bob}$}] {};
+  \node[dot] (clara) at (-3, -0.5) [label=below:{$\e{Clara}$}] {};
+  \node[dot] (dan) at (1, -0.5) [label=below:{$\e{Dan}$}] {};
+
+  \draw (alice) to (bob);
+  \draw (clara) to (dan);
+  \draw (bob) to (clara);
+  
+  \node[dot] (alice2) at (7, 0.5) [label=right:{$\e{Alice}$}] {};
+  \node[dot] (bob2) at (7, -0.5) [label=below:{$\e{Bob}$}] {};
+  \node[dot] (clara2) at (4, 0) [label=left:{$\e{Clara}$}] {};
+  \node[dot] (dan2) at (5, 0.5) [label=above:{$\e{Dan}$}] {};  
+
+  \draw (alice2) to (bob2);
+  \draw (clara2) to (dan2);
+  \draw (bob2) to (clara2);
+
+\end{diagram}
+
+But these depict the very \vocab{same graph}. We know that because they have exactly the same \emph{points} (Alice, Bob, Clara, and Dan), and they have the same \emph{connections}: in both pictures, Alice is connected to Bob, Clara is connected to Dan, and Bob is connected to Clara. 
+
+What this shows us is that the essence of a graph is not the picture of it. Rather, it is the \vocab{points} (the objects), and the \vocab{connections} between them (the pairings). We could draw the lines curvy if we liked, so long as we connect up the right points, for instance like this:
+
+\begin{diagram}
+
+  \node[dot] (alice) at (-2, 0.5) [label=right:{$\e{Alice}$}] {};
+  \node[dot] (bob) at (3, -0.5) [label=right:{$\e{Bob}$}] {};
+  \node[dot] (clara) at (-3, 0) [label=left:{$\e{Clara}$}] {};
+  \node[dot] (dan) at (0.5, -1.25) [label=right:{$\e{Dan}$}] {};
+
+  \draw (alice) to[looseness=2,out=45,in=280] (bob);
+  \draw (clara) to[looseness=2,out=90,in=100] (dan);
+  \draw (bob) to[looseness=1.5,out=120,in=330] (clara);
+
+\end{diagram}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about the basic structure of graphs (which are networks, not plots).
+
+\begin{itemize}
+
+  \item A \vocab{graph} $\struct{G}$ is defined as a tuple $(\set{V}, \set{E})$, where $\set{V}$ is a set of objects, and $\set{E}$ is a set of pairings of those objects. We call $\set{V}$ the \vocab{vertices} of the graph, and we call $\set{E}$ the \vocab{edges} of the graph.
+  
+  \item When we draw a graph, we represent the vertices as points, and we draw the connections as lines. 
+  
+  \item A \vocab{graph} and \vocab{its drawings} are not the same. There can be many different drawings of the same graph. Two drawings are drawings of the same graph if they have the same vertices and the same edges.
+
+\end{itemize}
+
+\end{document}

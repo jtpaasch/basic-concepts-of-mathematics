@@ -1,0 +1,300 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Operations on Sets}
+\label{ch:operations-on-sets}
+
+\newtopic{O}{nce we have some sets} at hand, we can combine them in various ways, and divide them in various ways. In this chapter, we will look at some of the operations that we can perform on sets.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Union}
+\label{sec:set-union}
+
+\newthought{If you have two sets}, you can combine them into a bigger set, by taking all of the elements in the first set, and all of the elements in the second set, and then throwing all of those elements into one big new set. 
+
+When we take two sets $A$ and $B$, and we join them in this way, to make a new, bigger set, we call the bigger set the \vocab{union} of $A$ and $B$. To denote this new, bigger set, we write this:
+
+\begin{equation*}
+  A \cup B
+\end{equation*}
+
+For example, take these two sets:
+
+\begin{equation*}
+  A = \{ 1, 2, 3 \} \hskip 2cm B = \{ a, b \}
+\end{equation*}
+
+\begin{terminology}
+  To form the \vocab{union} of two sets $A$ and $B$, take every element from $A$ and put it in a new set, then take every element from $B$ and add it to the new set as well.
+\end{terminology}
+
+The union of these two sets is this:
+
+\begin{equation*}
+  A \cup B = \{ 1, 2, 3, a, b \}
+\end{equation*}
+
+Let's put this down as a definition.
+
+\begin{fdefinition}[Unions]
+  For any two sets $A$ and $B$, we will say that the \vocab{union} of $A$ and $B$ is the set that contains every element of $A$ and every element of $B$. We will denote the union of $A$ and $B$ as $A \cup B$.
+\end{fdefinition}
+
+When we form a union, if there are any duplicates, we drop the duplicates. So for example, consider these two sets:
+
+\begin{equation*}
+  C = \{ 3, 4, 5 \} \hskip 2cm D = \{ 4, 6, 8, 10 \}
+\end{equation*}
+
+Note that $4$ is in both sets. When we put $4$ into the union, we don't need to add it to the union twice (once from $C$, and once from $D$). Duplicates are ignored in sets. Hence, the union is this:
+
+\begin{equation*}
+  C \cup D = \{ 3, 4, 5, 6, 8, 10 \}
+\end{equation*}
+
+What about this one:
+
+\begin{equation*}
+  E = \{ 3, 4, 5 \} \hskip 2cm F = \emptyset/
+\end{equation*}
+
+What is the union of $E$ with the empty set? Well, to form the union we take all the elements in $E$ (which are 3, 4, and 5), and all the elements of $F$ (of which there are none). So the union is just 3, 4, 5:
+
+\begin{equation*}
+  E \cup F = \{ 3, 4, 5 \}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    The union of any set $A$ with the empty set is just $A$. That is to say, $A \cup \emptyset/ = A$.
+  \end{remark}
+\end{aside}
+
+And that means that the union of $E$ with the empty set is just $E$:
+
+\begin{equation*}
+  E \cup F = E
+\end{equation*}
+
+This applies to any set. The union of any set with the empty set is just the first set.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Intersection}
+\label{sec:set-intersection}
+
+\newthought{If you have two sets} $A$ and $B$, you can take the elements they have in common, and put just those common elements into a new set all to their own. When we do this, we call the new set the \vocab{intersection} of $A$ and $B$. To denote this new set, we write this:
+
+\begin{equation*}
+  A \cap B
+\end{equation*}
+
+For example, take these two sets:
+
+\begin{equation*}
+  A = \{ 1, 2, 3 \} \hskip 2cm B = \{ 0, 2, 3, 5 \}
+\end{equation*}
+
+\begin{terminology}
+  To form the \vocab{intersection} of two sets $A$ and $B$, take every element that belongs to both $A$ and $B$, and put it in a new set.
+\end{terminology}
+
+The intersection of these two sets is this:
+
+\begin{equation*}
+  A \cap B = \{ 2, 3 \}
+\end{equation*}
+
+This new set contains only two elements, because $A$ and $B$ only have two elements in common, namely 2 and 3. Let's put this down as a definition.
+
+\begin{fdefinition}[Intersection]
+  For any two sets $A$ and $B$, we will say that the \vocab{intersection} of $A$ and $B$ is the set that contains every element which belongs to both $A$ and $B$. We will denote the intersection of $A$ and $B$ as $A \cap B$.
+\end{fdefinition}
+
+When we form the intersection of two sets, if the two sets who have no elements in common, then the intersection is the empty set. For example, consider these two sets:
+
+\begin{equation*}
+  C = \{ 3, 4, 5 \} \hskip 2cm D = \{ 6, 8, 10 \}
+\end{equation*}
+
+These two sets have no elements in common, so their intersection is empty:
+
+\begin{equation*}
+  C \cap D = \emptyset/
+\end{equation*}
+
+What about these two sets:
+
+\begin{equation*}
+  E = \{ 1, 2, 6, 8 \} \hskip 2cm F = \emptyset/
+\end{equation*}
+
+What is the intersection of them? What is $E \cap \emptyset/$? Well, E has no elements in common with F, since F has nothing in it. So the intersection of these two sets is the empty set:
+
+\begin{aside}
+  \begin{remark}
+    The intersection of any set $A$ with the empty set is itself empty. That is to say, $A \cap \emptyset/ = \emptyset/$.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  E \cap \emptyset/ = \emptyset/
+\end{equation*}
+
+This applies to any set. The intersection of any set with the empty set is empty. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Difference}
+
+\newthought{If you have two sets} $A$ and $B$, you can form a new set by taking every element of $A$, and then removing every element that $B$. In your new set, you will be left with only the elements from $A$ that are \emph{not} in $B$. We call this new set the \vocab{difference} of $A$ and $B$. To denote it, we write $A - B$, or $A \setminus B$. 
+
+\begin{aside}
+  \begin{remark}
+    If you like, you can think of $A - B$ as ``$A$ with $B$ subtracted from it.'' Similarly, you can think of $A \setminus B$ as ``$A$ with $B$ divided or separated out.''
+  \end{remark}
+\end{aside}
+
+For example, consider these two sets:
+
+\begin{equation*}
+  A = \{ 1, 2, 3, 4, 5 \} \hskip 2cm B = \{ 1, 3, 5 \}
+\end{equation*}
+
+To take the difference of $A$ and $B$, take everything in $A$, and remove the elements that are in $B$. So we start with 1, 2, 3, 4, and 5, and we remove 1, 3, and 5, which leaves 2 and 4. Hence:
+
+\begin{terminology}
+  To form the \vocab{difference} of a set $A$ and $B$, take all the elements of $A$, and then remove any elements that are also in $B$. That is, ``subtract'' out or remove $B$ from it.
+\end{terminology}
+
+\begin{equation*}
+  A - B = \{ 2, 4 \}
+\end{equation*} 
+
+Let's put this down as a definition.
+
+\begin{fdefinition}[Difference]
+  For any two sets $A$ and $B$, we will say that the \vocab{difference} of $A$ and $B$ is the set formed by taking all the elements of $A$ and then removing any elements that are also in $B$. We will denote the difference of $A$ and $B$ like this: $A - B$.
+\end{fdefinition}
+
+The order of the two sets matters. Consider $A$ and $B$ again:
+
+\begin{equation*}
+  A = \{ 1, 2, 3, 4, 5 \} \hskip 2cm B = \{ 1, 3, 5 \}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    The order of ``subtracting'' in set difference matters. For any two sets $A$ and $B$, $A - B$ is not necessarily going to be the same as $B - A$.
+  \end{remark}
+\end{aside}
+
+We saw that $A - B$ is $\{ 2, 4 \}$. But let's subtract the other way. What's $B - A$? To form the difference, we take everything from $B$, which is 1, 3, and 5, and then we remove any elements that are also in $A$. In this case, 1 is in $A$, so we remove it, and 3 is in $A$, so we remove it too, and the same goes for 5. So, the resulting set is empty:
+
+\begin{equation*}
+  B - A = \emptyset/
+\end{equation*}
+
+What happens if the two sets have nothing in common? For example, consider these two sets:
+
+\begin{equation*}
+  C = \{ 1, 2, 3 \} \hskip 2cm D = \{ a, b \}
+\end{equation*}
+
+What is the difference of $C$ and $D$. That is, what is $C - D$? To form the difference, we first take all the elements in $C$, which are 1, 2, and 3, and then we remove any elements that also happen to be in $D$. Well, neither $a$ nor $b$ occur in $C$, so there is just nothing to remove here. Hence, the resulting set is just 1, 2, and 3:
+
+\begin{equation*}
+  C - D = \{ 1, 2, 3 \}
+\end{equation*}
+
+What is the difference of any set and the empty set? For example, consider these two sets:
+
+\begin{equation*}
+  E = \{ 1, 2, 3 \} \hskip 2cm F = \emptyset/
+\end{equation*}
+
+What is $E - F$? The principle here is much the same as in our last example. There is nothing in the empty set, so there is nothing to subtract from the first set $E$. Hence, the difference of $E$ and $F$ is just first set $E$:
+
+\begin{aside}
+  \begin{remark}
+    For any set $A$, the difference of $A$ and the empty set is $A$. That is, $A - \emptyset/ = A$.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  E - F = \{ 1, 2, 3 \} \hskip 1cm \text{i.e.} \hskip 1cm E - F = E
+\end{equation*} 
+
+This applies to any set. The difference of any set and the empty set is just the first set.
+
+What about $F - E$? That is, what if we subtract $E$ from the empty set? To form the difference, we first take all the elements of $F$, which are none, and then we remove any elements that are also in $E$. Well, there are no elements to remove, since we're starting with nothing, so the result is the empty set. Hence:
+
+\begin{aside}
+  \begin{remark}
+    For any set $A$, the difference of the empty set and $A$ is empty. That is, $\emptyset/ - A = \emptyset/$.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  F - E = \emptyset/
+\end{equation*}
+
+This applies to any set too. If you subtract any set from the empty set, the result is just the empty set.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Compliment}
+
+\newthought{If you have a set} $A$ and a domain of discourse, you can form a new set by taking all of the objects from the domain that are \emph{not} in $A$ and putting them into a set all to their own. We call this new set the \vocab{complement} of $A$. We denote the complement of $A$ like this: $\complement{A}$.
+
+\begin{terminology}
+  To form the \vocab{complement} of a set $A$, take all the elements in the domain of discourse that are not in $A$, and put them into a new set all to their own.
+\end{terminology}
+
+For example, suppose we have in our universe just the whole numbers 1 through 10. So, 1, 2, and so on, up to 10. Now consider this set:
+
+\begin{equation*}
+  B = \{ 2, 4, 6 \}
+\end{equation*}
+
+What is the complement of $B$? It is the set we get by taking every object from the domain that is not in $B$:
+
+\begin{equation*}
+  \complement{B} = \{ 1, 3, 5, 7, 8, 9, 10 \}
+\end{equation*}
+
+Let's put this into a definition:
+
+\begin{fdefinition}[Complement]
+  Given a domain of discourse and a set $A$, we will say that the \vocab{complement} of $A$ is the set that is formed from every object in the domain that is not in $A$. We will denote the complement of $A$ as $\complement{A}$.
+\end{fdefinition}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about some of the ways to combine and divide sets. 
+
+\begin{itemize}
+
+  \item To form the \vocab{union} of any two sets $A$ and $B$, take all the elements of $A$ and all of the elements of $B$, and put them together into a new, bigger set. We denote the union of $A$ and $B$ like this: $A \cup B$.
+  
+  \item To form the \vocab{intersection} of any two sets $A$ and $B$, take only the elements they have in common, and put them into a new set. We denote the intersection of $A$ and $B$ like this: $A \cap B$.
+  
+  \item To form the \vocab{difference} of any two sets $A$ and $B$, take all the elements from $A$ and remove any elements that are also in $B$. We denote the difference of $A$ and $B$ like this: $A - B$.
+  
+  \item To form the \vocab{complement} of any set $A$, take all of the elements from the domain of discourse that are not in $A$, and put them into a set all by themselves. We denote the complement of $A$ like this: $\complement{A}$.
+
+\end{itemize}
+
+
+\end{document}

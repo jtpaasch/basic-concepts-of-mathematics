@@ -1,0 +1,1031 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Reals and Rationals}
+\label{ch:reals-and-rationals}
+
+\newtopic{I}{n the last chapter} we saw \ldots
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Area of Squares}
+
+Consider the following rectangle:
+
+\begin{diagram}
+  \draw (0, 0) -- (5, 0) -- (5, 3) -- (0, 3) -- (0, 0);
+  \draw[color=gray] (1, 0) -- (1, 3);
+  \draw[color=gray] (2, 0) -- (2, 3);
+  \draw[color=gray] (3, 0) -- (3, 3);
+  \draw[color=gray] (4, 0) -- (4, 3);
+  \draw[color=gray] (5, 0) -- (5, 3);
+  \draw[color=gray] (0, 1) -- (5, 1);
+  \draw[color=gray] (0, 2) -- (5, 2);
+  \draw[color=gray] (0, 3) -- (5, 3);
+\end{diagram}
+
+How much space this rectangle takes up is called the \vocab{area} of the rectangle. How do we calculate the area of this rectangle? 
+
+Well, one way we could do it would be to count each square we see in it. If we count all the squares, we see that there are 15 squares. So this rectangle takes up 15 units of space. Its \emph{area} is 15 of these little square units.
+
+Another, simpler way, is to first measure its length and its height. How long is it, and how high is it? It is 5 units long, and 3 units high:
+
+\begin{diagram}
+  \draw (0, 0) -- (5, 0) -- (5, 3) -- (0, 3) -- (0, 0);
+  \draw[color=gray] (1, 0) -- (1, 3);
+  \draw[color=gray] (2, 0) -- (2, 3);
+  \draw[color=gray] (3, 0) -- (3, 3);
+  \draw[color=gray] (4, 0) -- (4, 3);
+  \draw[color=gray] (5, 0) -- (5, 3);
+  \draw[color=gray] (0, 1) -- (5, 1);
+  \draw[color=gray] (0, 2) -- (5, 2);
+  \draw[color=gray] (0, 3) -- (5, 3);
+  
+  \draw (0, -0.25) -- (0, -0.5) -- (5, -0.5) -- (5, -0.25);
+  \node at (2.5, -1) {5 units long};
+  
+  \draw (-0.25, 0) -- (-0.5, 0) -- (-0.5, 3) -- (-0.25, 3);
+  \node at (-0.45, 1.5) [label=left:{3 units high}] {};
+\end{diagram}
+
+Then we multiply the two together. We can write ``5 times 3'' like this:
+
+\begin{aside}
+  \begin{remark}
+    That notation should look familiar, since the ``$\times$'' symbol is also used for the product of sets.
+  \end{remark} 
+\end{aside}
+
+\begin{equation*}
+  5 \times 3
+\end{equation*}
+
+We can also write it like this:
+
+\begin{equation*}
+  5 \mult/ 3
+\end{equation*}
+
+Either way of writing it is fine. They both mean the same thing. Let's use the dot symbol here.
+
+When we multiply these together, the answer is 15. And that is indeed correct. As we know from counting the square units inside the rectangle, there are exactly 15 such units in this rectangle. So, multiplying the length by the height gets us this answer too. 
+
+Now let's look at a square. For instance, this one:
+
+\begin{diagram}
+  \draw (0, 0) -- (3, 0) -- (3, 3) -- (0, 3) -- (0, 0);
+  \draw[color=gray] (1, 0) -- (1, 3);
+  \draw[color=gray] (2, 0) -- (2, 3);
+  \draw[color=gray] (3, 0) -- (3, 3);
+  \draw[color=gray] (0, 1) -- (3, 1);
+  \draw[color=gray] (0, 2) -- (3, 2);
+  \draw[color=gray] (0, 3) -- (3, 3);
+  
+  \draw (0, -0.25) -- (0, -0.5) -- (3, -0.5) -- (3, -0.25);
+  \node at (1.5, -1) {3 units long};
+  
+  \draw (-0.25, 0) -- (-0.5, 0) -- (-0.5, 3) -- (-0.25, 3);
+  \node at (-0.45, 1.5) [label=left:{3 units high}] {};
+\end{diagram}
+
+We can calculate the area of this square in just the same way. We could either count the units inside the square individually (there are a total of 9 units), or we could multiply its length by its height, like this:
+
+\begin{equation*}
+  3 \mult/ 3
+\end{equation*}
+
+A square is a special rectangle, in that its sides are all the very same length. So, we actually don't need to know both the length \emph{and} the height of a square, if we want to calculate its area. All we need to know is the size of a single side. For instance:
+
+\begin{diagram}
+  \draw (0, 0) -- (3, 0) -- (3, 3) -- (0, 3) -- (0, 0);
+  \draw[color=gray] (1, 0) -- (1, 3);
+  \draw[color=gray] (2, 0) -- (2, 3);
+  \draw[color=gray] (3, 0) -- (3, 3);
+  \draw[color=gray] (0, 1) -- (3, 1);
+  \draw[color=gray] (0, 2) -- (3, 2);
+  \draw[color=gray] (0, 3) -- (3, 3);
+    
+  \draw (-0.25, 0) -- (-0.5, 0) -- (-0.5, 3) -- (-0.25, 3);
+  \node at (-0.45, 1.5) [label=left:{3 units}] {};
+\end{diagram}
+
+Once we know the size of one side of the square, we can find the total area by multiplying that side by itself. In this case:
+
+\begin{equation*}
+  3 \mult/ 3
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Squaring a Length}
+
+If we are multiplying a number by itself two times, as we did with ``$3 \mult/ 3$,'' we can write it another way. We can write it like this:
+
+\begin{equation*}
+  3^{2}
+\end{equation*}
+
+If you like, you can read that like this: ``multiply the number `3' by itself 2 times.'' It is just another way of writing ``$3 \mult/ 3$'' because ``$3$'' appears two times when we write that:
+
+\begin{aside}
+  \begin{remark}
+    If we want to multiply ``$3$'' by itself 3 times, we can write ``$3^{3}$,'' since:
+
+    \begin{diagram}
+      \node at (-2, 0) {$3$};
+      \node at (-1, 0) {$\mult/$};
+      \node at (0, 0) {$3$};
+      \node at (1, 0) {$\mult/$};
+      \node at (2, 0) {$3$};
+
+      \draw (-2.25, -0.25) -- (-2.25, -0.5) -- (2.25, -0.5) -- (2.25, -0.25);
+      \draw[->,space] (0, -1.5) -- (0, -0.5);
+      \node at (0, -1.75) {``$3$'' appears here 3 times};
+    \end{diagram}
+    
+    And if we want to multiply ``$3$'' by itself 4 times, we have ``$3^{4}$'':
+    
+    \begin{diagram}
+      \node at (-2, 0) {$3$};
+      \node at (-1.25, 0) {$\mult/$};
+      \node at (-0.75, 0) {$3$};
+      \node at (0, 0) {$\mult/$};
+      \node at (0.75, 0) {$3$};
+      \node at (1.25, 0) {$\mult/$};
+      \node at (2, 0) {$3$};
+
+      \draw (-2.25, -0.25) -- (-2.25, -0.5) -- (2.25, -0.5) -- (2.25, -0.25);
+      \draw[->,space] (0, -1.5) -- (0, -0.5);
+      \node at (0, -1.75) {``$3$'' appears here 4 times};
+    \end{diagram}
+    
+    And so on, any number of times.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node at (-1, 0) {$3$};
+  \node at (0, 0) {$\mult/$};
+  \node at (1, 0) {$3$};
+  
+  \draw (-1.25, -0.25) -- (-1.25, -0.5) -- (1.25, -0.5) -- (1.25, -0.25);
+  \draw[->,space] (0, -1.5) -- (0, -0.5);
+  \node at (0, -1.75) {``$3$'' appears here 2 times};
+
+\end{diagram}
+
+When we multiply a number by itself like this, we are essentially computing the area of a square. Hence, when we write ``$3^{2}$,'' \mathers/ say that that is the \vocab{square} of ``$3$.'' We can also use the word ``square'' as a verb. If you have the number ``$3$,'' you can \vocab{square} it, which means that you multiply it by itself, i.e., you make it ``$3^{2}$.'' 
+
+Think about squaring a number in a very visual way. In fact, think of it as literally taking that number and constructing a square with it. 
+
+Suppose we have a number, call it $n$. Then suppose that we want to ``square it.'' What do we do? First, we draw a line that is $n$ units long:
+
+\begin{diagram}
+
+  \node[dot] (a) at (-1, 0) {};
+  \node[dot] (b) at (1, 0) {};
+  \draw (a) to (b);
+  
+  \draw[color=gray] (-1, -0.25) -- (-1, -0.5) -- (1, -0.5) -- (1, -0.25);
+  \draw[color=gray] (0, -1) -- (0, -0.5);
+  \node at (0, -1.25) {$n$ units in length};
+
+\end{diagram}
+
+That's the first $n$. Next, we draw a second $n$, but vertically:
+
+\begin{diagram}
+
+  \node[dot] (a) at (-1, 0) {};
+  \node[dot] (b) at (1, 0) {};
+  \node[dot] (c) at (-1, 2) {};
+  \draw (a) to (b);
+  \draw (a) to (c);
+  
+  \draw[color=gray] (-1, -0.25) -- (-1, -0.5) -- (1, -0.5) -- (1, -0.25);
+  \draw[color=gray] (0, -1) -- (0, -0.5);
+  \node at (0, -1.25) {$n$ units};
+  
+  \draw[color=gray] (-1.25, 0) -- (-1.5, 0) -- (-1.5, 2) -- (-1.25, 2);
+  \draw[color=gray] (-1.5, 1) -- (-2, 1);
+  \node at (-1.825, 1) [label=left:{$n$ units}] {};
+
+\end{diagram}
+
+Then we make a square from these two lines:
+
+\begin{diagram}
+
+  \node[dot] (a) at (-1, 0) {};
+  \node[dot] (b) at (1, 0) {};
+  \node[dot] (c) at (-1, 2) {};
+  \node[dot] (d) at (1, 2) {};
+  \draw (a) to (b);
+  \draw (a) to (c);
+  \draw (c) to (d);
+  \draw (b) to (d);
+  
+  \draw[color=gray] (-1, -0.25) -- (-1, -0.5) -- (1, -0.5) -- (1, -0.25);
+  \draw[color=gray] (0, -1) -- (0, -0.5);
+  \node at (0, -1.25) {$n$ units};
+  
+  \draw[color=gray] (-1.25, 0) -- (-1.5, 0) -- (-1.5, 2) -- (-1.25, 2);
+  \draw[color=gray] (-1.5, 1) -- (-2, 1);
+  \node at (-1.825, 1) [label=left:{$n$ units}] {};
+
+\end{diagram}
+
+So, we start with a line of length ``$n$,'' and then we ``square it,'' i.e., we literally make a square out of it. The area of this square is ``$n^{2}$,'' which we call the \vocab{square} of $n$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Unsquaring a Square}
+
+If we have a length ``$n$'' and we have squared it, we can \emph{unsquare} it. How do we do that? Suppose we have our square of $n$:
+
+\begin{diagram}
+
+  \node[dot] (a) at (-1, 0) {};
+  \node[dot] (b) at (1, 0) {};
+  \node[dot] (c) at (-1, 2) {};
+  \node[dot] (d) at (1, 2) {};
+  \draw (a) to (b);
+  \draw (a) to (c);
+  \draw (c) to (d);
+  \draw (b) to (d);
+  
+  \draw[color=gray] (-1, -0.25) -- (-1, -0.5) -- (1, -0.5) -- (1, -0.25);
+  \draw[color=gray] (0, -1) -- (0, -0.5);
+  \node at (0, -1.25) {$n$ units};
+  
+  \draw[color=gray] (-1.25, 0) -- (-1.5, 0) -- (-1.5, 2) -- (-1.25, 2);
+  \draw[color=gray] (-1.5, 1) -- (-2, 1);
+  \node at (-1.825, 1) [label=left:{$n$ units}] {};
+
+\end{diagram}
+
+To ``unsquare'' this is just to take it apart, and return it to the original line ``$n$.'' So we remove the lines on the top right:
+
+\begin{diagram}
+
+  \node[dot] (a) at (-1, 0) {};
+  \node[dot] (b) at (1, 0) {};
+  \node[dot] (c) at (-1, 2) {};
+  \draw (a) to (b);
+  \draw (a) to (c);
+
+  \draw[color=gray] (-1, -0.25) -- (-1, -0.5) -- (1, -0.5) -- (1, -0.25);
+  \draw[color=gray] (0, -1) -- (0, -0.5);
+  \node at (0, -1.25) {$n$ units};
+  
+  \draw[color=gray] (-1.25, 0) -- (-1.5, 0) -- (-1.5, 2) -- (-1.25, 2);
+  \draw[color=gray] (-1.5, 1) -- (-2, 1);
+  \node at (-1.825, 1) [label=left:{$n$ units}] {};
+
+\end{diagram}
+
+And then we remove one of our $n$-sized lines, which leaves us with a single $n$-sized line:
+
+\begin{diagram}
+
+  \node[dot] (a) at (-1, 0) {};
+  \node[dot] (b) at (1, 0) {};
+  \draw (a) to (b);
+
+  \draw[color=gray] (-1, -0.25) -- (-1, -0.5) -- (1, -0.5) -- (1, -0.25);
+  \draw[color=gray] (0, -1) -- (0, -0.5);
+  \node at (0, -1.25) {$n$ units};
+
+\end{diagram}
+
+So, we end up back at $n$. So if ``$n^{2}$'' is the square, ``$n$'' is the \emph{un}square, as it were. 
+
+To denote the ``unsquare'' of a square, we draw a special line over it: ``$\sqrt{~}$.'' Since ``$n^{2}$'' is a square, we can write the ``unsquare'' of $n^{2}$ by drawing that symbol over the top of it, like this:
+
+\begin{equation*}
+  \sqrt{n^{2}}
+\end{equation*}
+
+\Mathers/ call the ``unsquare'' of ``$n^{2}$'' the \vocab{square root} of ``$n^{2}$.'' So, the \emph{square root} of ``$n^{2}$'' is just ``$n$.'' It's the $n$-sized line we get when we take away the square we built with $n$:
+
+\begin{equation*}
+  \sqrt{n^{2}} = n
+\end{equation*}
+
+\begin{example}
+  Take a line that is $5$ units long. Make a square from it (i.e., $5^{2}$). The total area of that square is $25$ units. So, the square of $5$ (i.e., $5^{2}$) is $25$, because $5 \mult/ 5$ is $25$:
+  
+  \begin{equation*}
+    5^{2} = 25 \hskip 1cm \text{ i.e. } \hskip 1cm 5 \mult/ 5 = 25
+  \end{equation*}
+  
+  Now, let's reverse that. We have a square with an area of $25$ units. If we unsquare it (i.e., the square root of 25, $\sqrt{25}$), we get back to our original $5$-unit line:
+  
+  \begin{equation*}
+    \sqrt{25} = 5
+  \end{equation*}
+  
+  Similarly, start with a line that is $4$ units long. Make a square from it (i.e., $4^{2}$). That gives us a square with a unit of $16$ units. Now unsquare it (the square root, $\sqrt{16}$). That gets us back to our original $4$-unit line:
+  
+  \begin{equation*}
+    4 \mult/ 4 = 4^{2} = 16 \hskip 2cm \sqrt{16} = 4
+  \end{equation*}
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Pythagorean Theorem}
+
+Consider the following right triangle:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0.25) -- (0.25, 0.25) -- (0.25, 0);
+  \draw (0, 0) -- (0, 3) -- (2.25, 0) -- (0, 0);
+  
+  \node at (1.125, -0.375) {$A$};
+  \node at (-0.375, 1.5) {$B$};
+  \node at (1.5, 1.75) {$C$};
+
+\end{diagram}
+
+This is called a \vocab{right triangle}. It is called that because one of its three corners is a right angle. A \vocab{right angle} is just a square corner (a $90^{\circ}$ angle). 
+
+The two sides $\Line{A}$ and $\Line{B}$ that join at the right angle are called the \vocab{legs} of the triangle. The side $\Line{C}$ that is opposite the right angle is called the \vocab{hypotenuse} of the triangle.
+
+Ancient Greek \mathers/ discovered that there is an interesting relationship between these sides. They discovered the following. First, notice that side $\Line{A}$ is a line segment. Let's square it, i.e., make a square from it:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0.25) -- (0.25, 0.25) -- (0.25, 0);
+  \draw (0, 0) -- (0, 3) -- (2.25, 0) -- (0, 0);
+
+  \node at (-0.375, 1.5) {$B$};
+  \node at (1.5, 1.75) {$C$};  
+
+  \draw[fill=grey4] (0, 0) -- (2.25, 0) -- (2.25, -2.25) -- (0, -2.25) -- (0, 0);
+  
+  \node at (1.125, -1.125) {$A^{2}$};
+
+\end{diagram}
+
+Now look at side $\Line{B}$. Let's square this length too:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0.25) -- (0.25, 0.25) -- (0.25, 0);
+  \draw (0, 0) -- (0, 3) -- (2.25, 0) -- (0, 0);
+
+  \node at (1.5, 1.75) {$C$};  
+
+  \draw[fill=grey3] (0, 0) -- (0, 3) -- (-3, 3) -- (-3, 0) -- (0, 0);
+  \draw[fill=grey4] (0, 0) -- (2.25, 0) -- (2.25, -2.25) -- (0, -2.25) -- (0, 0);
+  
+  \node at (1.125, -1.125) {$A^{2}$};
+  \node at (-1.5, 1.5) {$B^{2}$};
+
+\end{diagram}
+
+
+Finally, look at side $\Line{C}$. Let's square this length too:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0.25) -- (0.25, 0.25) -- (0.25, 0);
+  
+  \draw[fill=grey3] (0, 0) -- (0, 3) -- (-3, 3) -- (-3, 0) -- (0, 0);
+  \draw[fill=grey4] (0, 0) -- (2.25, 0) -- (2.25, -2.25) -- (0, -2.25) -- (0, 0);
+  \draw[fill=grey2] (2.25, 0) -- (5.25, 2.25) -- (3, 5.25) -- (0, 3) -- (2.25, 0);
+  
+  \node at (1.125, -1.125) {$A^{2}$};
+  \node at (-1.5, 1.5) {$B^{2}$};
+  \node[color=white] at (2.625, 2.625) {$C^{2}$};
+
+\end{diagram}
+
+What the Greeks discovered is that if we take the area of the $\Line{A}$-sized square and the $\Line{B}$-sized square and we add them together, that turns out to be \emph{exactly} the same as the area of the $\Line{C}$-sized square. In other words:
+
+\begin{equation*}
+  A^{2} + B^{2} = C^{2}
+\end{equation*}
+
+This is called the \vocab{Pythogeran Theorem}.
+
+\begin{fexample}
+
+Suppose we have a triangle like this:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) -- (0.25, 0) -- (0.25, 0.25) -- (0, 0.25);
+  \draw (0, 0) -- (4, 0) -- (0, 3) -- (0, 0);
+
+  \node at (1.75, -0.375) {$4$};
+  \node at (-0.375, 1.25) {$3$};
+  \node at (2.25, 1.825) {$5$};
+
+\end{diagram}
+
+The Pythogorean Theorem tells us that if we make squares from $4$, $3$, and $5$, and then if we add together the squares of $4$ and $3$, together they will have the same area as the square of $5$. And indeed, that is true. Here is the calculation:
+
+\begin{align*}
+  4^{2} + 3^{2} &= 5^{2} \\
+         16 + 9 &= 25 \\
+             25 &= 25 \checkmark
+\end{align*}
+
+\end{fexample}
+
+\begin{example}
+
+Suppose we have a right triangle, and we know the lengths of its legs, but we don't know the length of its hypotenuse:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) -- (0.25, 0) -- (0.25, 0.25) -- (0, 0.25);
+  \draw (0, 0) -- (4, 0) -- (0, 3) -- (0, 0);
+
+  \node at (1.75, -0.375) {$4$};
+  \node at (-0.375, 1.25) {$3$};
+  \node at (2.25, 1.825) {$??$};
+
+\end{diagram}
+
+Can we figure out how long the hypotenuse is? Yes, by using the Pythagorean Theorem. First, we square $4$ and $3$ and add them together:
+
+\begin{align*}
+  4^{2} &+ 3^{2} \\
+     16 &+ 9 \\
+        &25
+\end{align*}
+
+That tells us the combined area of the square of $4$ and the square of $3$. The Pythagorean Theorem tells us that this will be exactly the same size as the square of the hypotenuse. Hence, we know that if we take our unknown length and square it, it will be 25:
+
+\begin{equation*}
+  {??}^{2} = 25
+\end{equation*}
+
+So, we know that the area of the \emph{square} of the hypotenuse is 25. We just want to know the length of one side of that square. We want to find the length of just the hypotenuse. To do that, we therefore need to \emph{unsquare} 25, to get back to the original length:
+
+\begin{equation*}
+  {??} = \sqrt{25}
+\end{equation*}
+
+And of course, the square root of $25$ is $5$:
+
+\begin{equation*}
+  5 = \sqrt{25}
+\end{equation*}
+
+Hence, the length of the hypotenuse must be $5$. 
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Why Is The Theorem True?}
+
+How do we know that the Pythagorean Theorem is true? There are a variety of proofs to show that it is true, but here's a simple one.
+
+ Start by drawing a square:
+
+\begin{diagram}
+
+  \draw (0, 0) -- (4, 0) -- (4, 4) -- (0, 4) -- (0, 0);
+
+\end{diagram}
+
+Now draw another square inside this one, but rotated a bit, like this:
+
+\begin{aside}
+  \begin{remark}
+    There are many ways to draw the square inside the other square. For example, any of these will work fine:
+    
+    \begin{diagram}
+      \draw (0, 0) -- (2, 0) -- (2, 2) -- (0, 2) -- (0, 0);
+      \draw (1, 0) -- (2, 1) -- (1, 2) -- (0, 1) -- (1, 0);
+    \end{diagram}
+    
+    \begin{diagram}
+      \draw (0, 0) -- (2, 0) -- (2, 2) -- (0, 2) -- (0, 0);
+      \draw (0.5, 0) -- (2, 0.5) -- (1.5, 2) -- (0, 1.5) -- (0.5, 0);
+    \end{diagram}
+    
+    \begin{diagram}
+      \draw (0, 0) -- (2, 0) -- (2, 2) -- (0, 2) -- (0, 0);
+      \draw (0.25, 0) -- (2, 0.25) -- (1.75, 2) -- (0, 1.75) -- (0.25, 0);
+    \end{diagram}
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw (0, 0) -- (4, 0) -- (4, 4) -- (0, 4) -- (0, 0);
+  \draw (2.5, 0) -- (4, 2.5) -- (1.5, 4) -- (0, 1.5) -- (2.5, 0);
+
+\end{diagram}
+
+Notice that now we have a square in the middle, and four right triangles in the corners. Let's label all of the sides:
+
+\begin{diagram}
+
+  \draw (2.5, 0) -- (4, 2.5) -- (1.5, 4) -- (0, 1.5) -- (2.5, 0);
+  \draw[fill=grey4] (0, 1.5) -- (0, 4) -- (1.5, 4) -- (0, 1.5);
+  \draw[fill=grey3] (2.5, 0) -- (4, 0) -- (4, 2.5) -- (2.5, 0);
+  \draw[fill=grey1] (0, 0) -- (2.5, 0) -- (0, 1.5) -- (0, 0);
+  \draw[fill=grey2] (4, 4) -- (1.5, 4) -- (4, 2.5) -- (4, 4);
+
+  \node at (1.25, -0.35) {$\Line{A}$};
+  \node at (-0.35, 0.75) {$\Line{B}$};
+  \node at (1.5, 1.05) {$\Line{C}$};
+  
+  \node at (3, 4.35) {$\Line{A}$};
+  \node at (4.35, 3.25) {$\Line{B}$};
+  \node at (2.5, 2.95) {$\Line{C}$};
+
+  \node at (0.75, 4.35) {$\Line{B}$};
+  \node at (-0.35, 3.25) {$\Line{A}$};
+  \node at (1.05, 2.5) {$\Line{C}$}; 
+
+  \node at (4.35, 0.75) {$\Line{A}$};
+  \node at (3.25, -0.35) {$\Line{B}$};
+  \node at (3, 1.5) {$\Line{C}$};
+
+\end{diagram}
+
+Look at each edge of the outside square. Notice that for each of the four outside edges, it has a length of $\Line{A} + \Line{B}$:
+
+\begin{diagram}
+
+  \draw (2.5, 0) -- (4, 2.5) -- (1.5, 4) -- (0, 1.5) -- (2.5, 0);
+  \draw[fill=grey4] (0, 1.5) -- (0, 4) -- (1.5, 4) -- (0, 1.5);
+  \draw[fill=grey3] (2.5, 0) -- (4, 0) -- (4, 2.5) -- (2.5, 0);
+  \draw[fill=grey1] (0, 0) -- (2.5, 0) -- (0, 1.5) -- (0, 0);
+  \draw[fill=grey2] (4, 4) -- (1.5, 4) -- (4, 2.5) -- (4, 4);
+
+  \node at (1.25, -0.35) {$\Line{A}$};
+  \node at (-0.35, 0.75) {$\Line{B}$};
+  \node at (1.5, 1.05) {$\Line{C}$};
+  
+  \node at (3, 4.35) {$\Line{A}$};
+  \node at (4.35, 3.25) {$\Line{B}$};
+  \node at (2.5, 2.95) {$\Line{C}$};
+
+  \node at (0.75, 4.35) {$\Line{B}$};
+  \node at (-0.35, 3.25) {$\Line{A}$};
+  \node at (1.05, 2.5) {$\Line{C}$}; 
+
+  \node at (4.35, 0.75) {$\Line{A}$};
+  \node at (3.25, -0.35) {$\Line{B}$};
+  \node at (3, 1.5) {$\Line{C}$};
+  
+  \draw (4.75, 0) to (5, 0);
+  \draw (4.75, 4) to (5, 4);
+  \draw (5, 0) to (5, 4);
+  \draw (5, 2) to (5.25, 2);
+  \node at (6, 2) {$\Line{A} + \Line{B}$};
+  
+  \draw (0, 4.75) to (0, 5);
+  \draw (4, 4.75) to (4, 5);
+  \draw (0, 5) to (4, 5);
+  \draw (2, 5) to (2, 5.25);
+  \node at (2, 5.75) {$\Line{A} + \Line{B}$};
+
+\end{diagram}
+
+
+Now, let's copy the bottom left triangle over to the side:
+
+\begin{diagram}
+
+  \draw (2.5, 0) -- (4, 2.5) -- (1.5, 4) -- (0, 1.5) -- (2.5, 0);
+  \draw[fill=grey4] (0, 1.5) -- (0, 4) -- (1.5, 4) -- (0, 1.5);
+  \draw[fill=grey3] (2.5, 0) -- (4, 0) -- (4, 2.5) -- (2.5, 0);
+  \draw[fill=grey1] (0, 0) -- (2.5, 0) -- (0, 1.5) -- (0, 0);
+  \draw[fill=grey2] (4, 4) -- (1.5, 4) -- (4, 2.5) -- (4, 4);
+
+  \node at (1.25, -0.35) {$\Line{A}$};
+  \node at (-0.35, 0.75) {$\Line{B}$};
+  \node at (1.5, 1.05) {$\Line{C}$};
+  
+  \node at (3, 4.35) {$\Line{A}$};
+  \node at (4.35, 3.25) {$\Line{B}$};
+  \node at (2.5, 2.95) {$\Line{C}$};
+
+  \node at (0.75, 4.35) {$\Line{B}$};
+  \node at (-0.35, 3.25) {$\Line{A}$};
+  \node at (1.05, 2.5) {$\Line{C}$}; 
+
+  \node at (4.35, 0.75) {$\Line{A}$};
+  \node at (3.25, -0.35) {$\Line{B}$};
+  \node at (3, 1.5) {$\Line{C}$};
+  
+  \draw[->,dashed] (1.25, 0.25) to[out=180,in=300] (-4, 2.25);
+
+  \draw[fill=grey1] (-6, 2.5) -- (-3.5, 2.5) -- (-6, 4) -- (-6, 2.5);
+  \node at (-4.75, 2.15) {$\Line{A}$};
+  \node at (-6.35, 3.25) {$\Line{B}$};
+  \node at (-4.5, 3.55) {$\Line{C}$};  
+
+\end{diagram}
+
+And let's copy the other triangles over to the side too, like this:
+
+\begin{diagram}
+
+  \draw (2.5, 0) -- (4, 2.5) -- (1.5, 4) -- (0, 1.5) -- (2.5, 0);
+  \draw[fill=grey4] (0, 1.5) -- (0, 4) -- (1.5, 4) -- (0, 1.5);
+  \draw[fill=grey3] (2.5, 0) -- (4, 0) -- (4, 2.5) -- (2.5, 0);
+  \draw[fill=grey1] (0, 0) -- (2.5, 0) -- (0, 1.5) -- (0, 0);
+  \draw[fill=grey2] (4, 4) -- (1.5, 4) -- (4, 2.5) -- (4, 4);
+
+  \node at (1.25, -0.35) {$\Line{A}$};
+  \node at (-0.35, 0.75) {$\Line{B}$};
+  \node at (1.5, 1.05) {$\Line{C}$};
+  
+  \node at (3, 4.35) {$\Line{A}$};
+  \node at (4.35, 3.25) {$\Line{B}$};
+  \node at (2.5, 2.95) {$\Line{C}$};
+
+  \node at (0.75, 4.35) {$\Line{B}$};
+  \node at (-0.35, 3.25) {$\Line{A}$};
+  \node at (1.05, 2.5) {$\Line{C}$}; 
+
+  \node at (4.35, 0.75) {$\Line{A}$};
+  \node at (3.25, -0.35) {$\Line{B}$};
+  \node at (3, 1.5) {$\Line{C}$};
+  
+  \draw[fill=grey1] (-6, 2.5) -- (-3.5, 2.5) -- (-6, 4) -- (-6, 2.5);
+  \node at (-4.75, 2.15) {$\Line{A}$};
+  \node at (-6.35, 3.25) {$\Line{B}$};
+
+  \draw[fill=grey3] (-3.5, 2.5) -- (-3.5, 4) -- (-6, 4) -- (-3.5, 2.5);
+  \node at (-4.65, 4.35) {$\Line{A}$};
+  \node at (-3.15, 3.25) {$\Line{B}$};
+
+  \draw[fill=grey4] (-3.5, 0) -- (-3.5, 2.5) -- (-2, 2.5) -- (-3.5, 0);
+  \node at (-2.75, 2.8) {$\Line{B}$};
+  \node at (-3.85, 1.5) {$\Line{A}$};
+
+  \draw[fill=grey3] (-3.5, 0) -- (-2, 0) -- (-2, 2.5) -- (-3.5, 0);
+  \node at (-1.65, 1.25) {$\Line{A}$};
+  \node at (-2.75, -0.35) {$\Line{B}$};
+
+  \node at (-2.45, 1.15) {$\Line{C}$};
+
+  \draw[->,dashed] (3.25, 3.5) to[out=120,in=35] (-3.75, 3.5);
+  \draw[->,dashed] (0.5, 3) to[out=220,in=350] (-2.75, 2);
+  \draw[->,dashed] (3.5, 0.5) to[out=235,in=315] (-2.25, 0.5);
+
+\end{diagram}
+
+Notice that, over on the left, we have a hole for an $\Line{A}$-sized square and another hole for a $\Line{B}$-sized square:
+
+\begin{diagram}
+
+  \draw (2.5, 0) -- (4, 2.5) -- (1.5, 4) -- (0, 1.5) -- (2.5, 0);
+  \draw[fill=grey4] (0, 1.5) -- (0, 4) -- (1.5, 4) -- (0, 1.5);
+  \draw[fill=grey3] (2.5, 0) -- (4, 0) -- (4, 2.5) -- (2.5, 0);
+  \draw[fill=grey1] (0, 0) -- (2.5, 0) -- (0, 1.5) -- (0, 0);
+  \draw[fill=grey2] (4, 4) -- (1.5, 4) -- (4, 2.5) -- (4, 4);
+
+  \node at (1.25, -0.35) {$\Line{A}$};
+  \node at (-0.35, 0.75) {$\Line{B}$};
+  \node at (1.5, 1.05) {$\Line{C}$};
+  
+  \node at (3, 4.35) {$\Line{A}$};
+  \node at (4.35, 3.25) {$\Line{B}$};
+  \node at (2.5, 2.95) {$\Line{C}$};
+
+  \node at (0.75, 4.35) {$\Line{B}$};
+  \node at (-0.35, 3.25) {$\Line{A}$};
+  \node at (1.05, 2.5) {$\Line{C}$}; 
+
+  \node at (4.35, 0.75) {$\Line{A}$};
+  \node at (3.25, -0.35) {$\Line{B}$};
+  \node at (3, 1.5) {$\Line{C}$};
+  
+  \draw[fill=grey1] (-6, 2.5) -- (-3.5, 2.5) -- (-6, 4) -- (-6, 2.5);
+  \node at (-4.75, 2.15) {$\Line{A}$};
+  \node at (-6.35, 3.25) {$\Line{B}$};
+
+  \draw[fill=grey3] (-3.5, 2.5) -- (-3.5, 4) -- (-6, 4) -- (-3.5, 2.5);
+  \node at (-4.65, 4.35) {$\Line{A}$};
+  \node at (-3.15, 3.25) {$\Line{B}$};
+
+  \draw[fill=grey4] (-3.5, 0) -- (-3.5, 2.5) -- (-2, 2.5) -- (-3.5, 0);
+  \node at (-2.75, 2.8) {$\Line{B}$};
+  \node at (-3.85, 1.5) {$\Line{A}$};
+
+  \draw[fill=grey3] (-3.5, 0) -- (-2, 0) -- (-2, 2.5) -- (-3.5, 0);
+  \node at (-1.65, 1.25) {$\Line{A}$};
+  \node at (-2.75, -0.35) {$\Line{B}$};
+  
+  % \node at (-6.35, 1.25) {$\Line{A}$};
+  % \node at (-4.75, -0.35) {$\Line{A}$};
+
+  \draw[dashed] (-6, 2.5) -- (-6, 0) -- (-3.5, 0);  
+  
+  \draw (-6.5, 0) to (-6.75, 0);
+  \draw (-6.5, 2.5) to (-6.75, 2.5);
+  \draw (-6.75, 0) to (-6.75, 2.5);
+  \draw (-6.75, 1.25) to (-7, 1.25);
+  \node at (-7.25, 1.25) {$\Line{A}$};
+
+  \draw (-6, -0.5) to (-6, -0.75);
+  \draw (-3.5, -0.5) to (-3.5, -0.75);
+  \draw (-6, -0.75) to (-3.5, -0.75);
+  \draw (-4.75, -0.75) to (-4.75, -1);
+  \node at (-4.75, -1.25) {$\Line{A}$};
+  
+  \draw[dashed] (-2, 2.5) -- (-2, 4) -- (-3.5, 4);
+
+  \draw (-1.75, 2.5) -- (-1.5, 2.5);
+  \draw (-1.75, 4) -- (-1.5, 4);
+  \draw (-1.5, 2.5) -- (-1.5, 4);
+  \draw (-1.5, 3.25) -- (-1.25, 3.25);
+  \node at (-1, 3.25) {$\Line{B}$};
+
+  \draw (-3.5, 4.25) -- (-3.5, 4.5);
+  \draw (-2, 4.25) -- (-2, 4.5);
+  \draw (-3.5, 4.5) -- (-2, 4.5);
+  \draw (-2.75, 4.5) -- (-2.75, 4.75);
+  \node at (-2.75, 5) {$\Line{B}$};
+
+\end{diagram}
+
+Let's fill those in:
+
+\begin{diagram}
+
+  \draw (2.5, 0) -- (4, 2.5) -- (1.5, 4) -- (0, 1.5) -- (2.5, 0);
+  \draw[fill=grey4] (0, 1.5) -- (0, 4) -- (1.5, 4) -- (0, 1.5);
+  \draw[fill=grey3] (2.5, 0) -- (4, 0) -- (4, 2.5) -- (2.5, 0);
+  \draw[fill=grey1] (0, 0) -- (2.5, 0) -- (0, 1.5) -- (0, 0);
+  \draw[fill=grey2] (4, 4) -- (1.5, 4) -- (4, 2.5) -- (4, 4);
+
+  \node at (1.25, -0.35) {$\Line{A}$};
+  \node at (-0.35, 0.75) {$\Line{B}$};
+  \node at (1.5, 1.05) {$\Line{C}$};
+  
+  \node at (3, 4.35) {$\Line{A}$};
+  \node at (4.35, 3.25) {$\Line{B}$};
+  \node at (2.5, 2.95) {$\Line{C}$};
+
+  \node at (0.75, 4.35) {$\Line{B}$};
+  \node at (-0.35, 3.25) {$\Line{A}$};
+  \node at (1.05, 2.5) {$\Line{C}$}; 
+
+  \node at (4.35, 0.75) {$\Line{A}$};
+  \node at (3.25, -0.35) {$\Line{B}$};
+  \node at (3, 1.5) {$\Line{C}$};
+  
+  \draw[fill=grey1] (-6, 2.5) -- (-3.5, 2.5) -- (-6, 4) -- (-6, 2.5);
+  \node at (-4.75, 2.15) {$\Line{A}$};
+  \node at (-6.35, 3.25) {$\Line{B}$};
+
+  \draw[fill=grey3] (-3.5, 2.5) -- (-3.5, 4) -- (-6, 4) -- (-3.5, 2.5);
+  \node at (-4.65, 4.35) {$\Line{A}$};
+  \node at (-3.15, 3.25) {$\Line{B}$};
+
+  \draw[fill=grey4] (-3.5, 0) -- (-3.5, 2.5) -- (-2, 2.5) -- (-3.5, 0);
+  \node at (-2.75, 2.8) {$\Line{B}$};
+  \node at (-3.85, 1.5) {$\Line{A}$};
+
+  \draw[fill=grey3] (-3.5, 0) -- (-2, 0) -- (-2, 2.5) -- (-3.5, 0);
+  \node at (-1.65, 1.25) {$\Line{A}$};
+  \node at (-2.75, -0.35) {$\Line{B}$};
+
+  \draw (-6, 2.5) -- (-6, 0) -- (-3.5, 0);
+  
+  \node at (-6.35, 1.25) {$\Line{A}$};
+  \node at (-4.75, -0.35) {$\Line{A}$};
+  
+  \draw (-2, 2.5) -- (-2, 4) -- (-3.5, 4);
+
+  \node at (-1.65, 3.25) {$\Line{B}$};
+  \node at (-2.75, 4.35) {$\Line{B}$};
+
+\end{diagram}
+
+Notice that each outside edge is made up of an $\Line{A}$-sized line segment, and a $\Line{B}$-sized line segment. So, the full length of each side is $\Line{A} + \Line{B}$:
+
+\begin{diagram}
+
+  \draw (3.5, 0) -- (5, 2.5) -- (2.5, 4) -- (1, 1.5) -- (3.5, 0);
+  \draw[fill=grey4] (1, 1.5) -- (1, 4) -- (2.5, 4) -- (1, 1.5);
+  \draw[fill=grey3] (3.5, 0) -- (5, 0) -- (5, 2.5) -- (3.5, 0);
+  \draw[fill=grey1] (1, 0) -- (3.5, 0) -- (1, 1.5) -- (1, 0);
+  \draw[fill=grey2] (5, 4) -- (2.5, 4) -- (5, 2.5) -- (5, 4);
+
+  \node at (2.25, -0.35) {$\Line{A}$};
+  \node at (0.65, 0.75) {$\Line{B}$};
+  \node at (2.5, 1.05) {$\Line{C}$};
+  
+  \node at (4, 4.35) {$\Line{A}$};
+  \node at (5.35, 3.25) {$\Line{B}$};
+  \node at (3.5, 2.95) {$\Line{C}$};
+
+  \node at (1.75, 4.35) {$\Line{B}$};
+  \node at (0.65, 3.25) {$\Line{A}$};
+  \node at (2.05, 2.5) {$\Line{C}$}; 
+
+  \node at (5.35, 0.75) {$\Line{A}$};
+  \node at (4.25, -0.35) {$\Line{B}$};
+  \node at (4, 1.5) {$\Line{C}$};
+  
+  \draw[fill=grey1] (-6, 2.5) -- (-3.5, 2.5) -- (-6, 4) -- (-6, 2.5);
+  \node at (-4.75, 2.15) {$\Line{A}$};
+  \node at (-6.35, 3.25) {$\Line{B}$};
+
+  \draw[fill=grey3] (-3.5, 2.5) -- (-3.5, 4) -- (-6, 4) -- (-3.5, 2.5);
+  \node at (-4.65, 4.35) {$\Line{A}$};
+  \node at (-3.15, 3.25) {$\Line{B}$};
+
+  \draw[fill=grey4] (-3.5, 0) -- (-3.5, 2.5) -- (-2, 2.5) -- (-3.5, 0);
+  \node at (-2.75, 2.8) {$\Line{B}$};
+  \node at (-3.85, 1.5) {$\Line{A}$};
+
+  \draw[fill=grey3] (-3.5, 0) -- (-2, 0) -- (-2, 2.5) -- (-3.5, 0);
+  \node at (-1.65, 1.25) {$\Line{A}$};
+  \node at (-2.75, -0.35) {$\Line{B}$};
+
+  \draw (-6, 2.5) -- (-6, 0) -- (-3.5, 0);
+  
+  \node at (-6.35, 1.25) {$\Line{A}$};
+  \node at (-4.75, -0.35) {$\Line{A}$};
+  
+  \draw (-2, 2.5) -- (-2, 4) -- (-3.5, 4);
+
+  \node at (-1.65, 3.25) {$\Line{B}$};
+  \node at (-2.75, 4.35) {$\Line{B}$};
+  
+  \draw (-6, 4.5) -- (-6, 4.75);
+  \draw (-2, 4.5) -- (-2, 4.75);
+  \draw (-6, 4.75) -- (-2, 4.75);
+  \draw (-4, 4.75) -- (-4, 5);
+  \node at (-4, 5.5) {$\Line{A} + \Line{B}$};
+
+  \draw (-1.5, 0) -- (-1.25, 0);
+  \draw (-1.5, 4) -- (-1.25, 4);
+  \draw (-1.25, 0) -- (-1.25, 4);
+  \draw (-1.25, 2) -- (-1, 2);
+  \node at (-0.25, 2) {$\Line{A} + \Line{B}$};
+
+\end{diagram}
+
+Hence, we have constructed a new square which is exactly the same size as the other one.
+
+
+\begin{diagram}
+
+  \draw (3.5, 0) -- (5, 2.5) -- (2.5, 4) -- (1, 1.5) -- (3.5, 0);
+  \draw[fill=grey4] (1, 1.5) -- (1, 4) -- (2.5, 4) -- (1, 1.5);
+  \draw[fill=grey3] (3.5, 0) -- (5, 0) -- (5, 2.5) -- (3.5, 0);
+  \draw[fill=grey1] (1, 0) -- (3.5, 0) -- (1, 1.5) -- (1, 0);
+  \draw[fill=grey2] (5, 4) -- (2.5, 4) -- (5, 2.5) -- (5, 4);
+
+  \node at (2.25, -0.35) {$\Line{A}$};
+  \node at (0.65, 0.75) {$\Line{B}$};
+  \node at (2.5, 1.05) {$\Line{C}$};
+  
+  \node at (4, 4.35) {$\Line{A}$};
+  \node at (5.35, 3.25) {$\Line{B}$};
+  \node at (3.5, 2.95) {$\Line{C}$};
+
+  \node at (1.75, 4.35) {$\Line{B}$};
+  \node at (0.65, 3.25) {$\Line{A}$};
+  \node at (2.05, 2.5) {$\Line{C}$}; 
+
+  \node at (5.35, 0.75) {$\Line{A}$};
+  \node at (4.25, -0.35) {$\Line{B}$};
+  \node at (4, 1.5) {$\Line{C}$};
+  
+  \draw[fill=grey1] (-6, 2.5) -- (-3.5, 2.5) -- (-6, 4) -- (-6, 2.5);
+  \node at (-4.75, 2.15) {$\Line{A}$};
+  \node at (-6.35, 3.25) {$\Line{B}$};
+
+  \draw[fill=grey3] (-3.5, 2.5) -- (-3.5, 4) -- (-6, 4) -- (-3.5, 2.5);
+  \node at (-4.65, 4.35) {$\Line{A}$};
+  \node at (-3.15, 3.25) {$\Line{B}$};
+
+  \draw[fill=grey4] (-3.5, 0) -- (-3.5, 2.5) -- (-2, 2.5) -- (-3.5, 0);
+  \node at (-2.75, 2.8) {$\Line{B}$};
+  \node at (-3.85, 1.5) {$\Line{A}$};
+
+  \draw[fill=grey3] (-3.5, 0) -- (-2, 0) -- (-2, 2.5) -- (-3.5, 0);
+  \node at (-1.65, 1.25) {$\Line{A}$};
+  \node at (-2.75, -0.35) {$\Line{B}$};
+
+  \draw (-6, 2.5) -- (-6, 0) -- (-3.5, 0);
+  
+  \node at (-6.35, 1.25) {$\Line{A}$};
+  \node at (-4.75, -0.35) {$\Line{A}$};
+  
+  \draw (-2, 2.5) -- (-2, 4) -- (-3.5, 4);
+
+  \node at (-1.65, 3.25) {$\Line{B}$};
+  \node at (-2.75, 4.35) {$\Line{B}$};
+
+  \node at (-0.5, 2) {$=$};
+
+  \draw[dashed] (-6.75, 4.75) -- (-1.25, 4.75) -- (-1.25, -0.75) -- (-6.75, -0.75) -- (-6.75, 4.75);
+  \draw[dashed] (0.25, -0.75) -- (5.75, -0.75) -- (5.75, 4.75) -- (0.25, 4.75) -- (0.25, -0.75);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    On each side of the equals sign, there were 4 triangles, all of which were exactly the same size. By removing them, we removed exactly the same amount from each side of the equals sign in this picture. And when you remove the same amount from both sides of an equal sign, what's left are still equal. If I have two 5 pound bags of flour and I remove 2 pounds from each bag, my two bags are now smaller, but they're still equal (each of them has 3 pounds of flour left). Likewise here. If we remove four triangles from each side of the equals sign, the area that's left is smaller, but it's still equal. 
+  \end{remark}
+\end{aside}
+
+Next, let's take away the $\Line{A} \times \Line{B}$ sized rectangles. After we remove the triangles, here's what's left, colored in with grey:
+
+\begin{diagram}
+
+  \draw[dashed] (0, 1.5) -- (0, 0) -- (2.5, 0);
+  \draw[dashed] (2.5, 0) -- (4, 0) -- (4, 2.5);
+  \draw[dashed] (4, 2.5) -- (4, 4) -- (1.5, 4);
+  \draw[dashed] (1.5, 4) -- (0, 4) -- (0, 1.5);
+  
+  \draw[dashed] (-6, 2.5) -- (-6, 4) -- (-3.5, 4);
+  \draw[dashed] (-6, 4) -- (-3.5, 2.5);
+  \draw[dashed] (-3.5, 0) -- (-2, 0) -- (-2, 2.5);
+  \draw[dashed] (-3.5, 0) -- (-2, 2.5);
+
+  \draw[fill=grey3] (2.5, 0) -- (4, 2.5) -- (1.5, 4) -- (0, 1.5) -- (2.5, 0);  
+  \node at (1.5, 1.05) {$\Line{C}$};  
+  \node at (2.5, 2.95) {$\Line{C}$};
+  \node at (1.05, 2.5) {$\Line{C}$}; 
+  \node at (3, 1.5) {$\Line{C}$};
+  
+  \draw[fill=grey3] (-6, 2.5) -- (-6, 0) -- (-3.5, 0) -- (-3.5, 2.5) -- (-6, 2.5);
+  \node at (-5.7, 1.25) {$\Line{A}$};
+  \node at (-3.9, 1.25) {$\Line{A}$};  
+  \node at (-4.75, 0.35) {$\Line{A}$};
+  \node at (-4.75, 2.15) {$\Line{A}$};
+  
+  \draw[fill=grey3] (-2, 2.5) -- (-2, 4) -- (-3.5, 4) -- (-3.5, 2.5) -- (-2, 2.5);
+  \node at (-2.3, 3.25) {$\Line{B}$};
+  \node at (-3.2, 3.25) {$\Line{B}$};
+  \node at (-2.75, 3.75) {$\Line{B}$};
+  \node at (-2.75, 2.8) {$\Line{B}$};
+
+  \node at (-1, 2) {$=$};
+  
+  \draw (-6.5, -0.25) -- (-6.5, -0.5) -- (-1.5, -0.5) -- (-1.5, -0.25);
+
+  \node at (-4, -1) {the grey area};
+
+  \node at (-0.75, -1) {$=$};
+
+  \draw (0, -0.25) -- (0, -0.5) -- (4, -0.5) -- (4, -0.25);
+  \node at (2, -1) {the grey area};
+
+\end{diagram}
+
+Hence, we can see that the combined area of the $\Line{A}$-square and the $\Line{B}$ square is the same as the area of the $\Line{C}$ square. That is:
+
+\begin{equation*}
+  \Line{A}^{2} + \Line{B}^{2} = \Line{C}^{2}
+\end{equation*}
+
+That proves the Theorem.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{Common Measures}
+
+% You might think that for any two lengths, you can find a smaller stick piece that they have in common. There are examples where this can be done.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{Unsquaring the Number Two}
+
+% But it cannot always be done. Try it with a right triangle with legs of length 1.
+
+% Proof that the square root of two is not a fraction:
+% https://www.mathsisfun.com/numbers/euclid-square-root-2-irrational.html
+% https://www.homeschoolmath.net/teaching/proof_square_root_2_irrational.php
+% https://www.cut-the-knot.org/proofs/sq_root.shtml
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we looked at 
+
+\end{document}

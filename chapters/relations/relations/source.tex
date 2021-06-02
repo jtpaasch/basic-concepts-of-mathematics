@@ -1,0 +1,515 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Relations}
+\label{ch:relations}
+
+\newtopic{A}{ function is a special kind of mapping}. A mapping qualifies as a function only if it satisfies some fairly strict conditions: in particular, it must map \vocab{each} element in the domain to \vocab{one} element in the codomain. However, sometimes we might want to relax these restrictions, and allow looser mappings.
+
+For instance, we might want to remove the restriction which says that we must specify a mapping for \emph{each} item from the domain. Instead, we might want to give ourselves permission to skip some of the items in the domain, if we so please, and not map them to anything. In other words, we might want to allow some points in the domain to have no arrows coming out of them at all.
+
+Similarly, we might want to remove the restriction which says that we must map each item from the domain to \emph{only one} item in the codomain. Instead, we might want to give ourselves permission to map a point from the domain to \emph{many} points in the codomain. That is to say, we might want to allow multiple arrows to come out of a point in the domain, if we so please.
+
+This more relaxed notion of a mapping is called a \vocab{relation}. A relation is really just \emph{any} mapping from some points in the domain to some points in the codomain. In this chapter, we will discuss relations, and their properties.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Looser Mappings}
+
+\newthought{As we said a moment ago}, a relation is a much looser sort of mapping than a function. In essence, a \vocab{relation} is any pairing of elements from the domain with elements from the codomain. Consider this mapping:
+
+\begin{terminology}
+  A \vocab{relation} is any mapping of elements from the domain to the codomain. It does not need to satisfy the requirements of a function, that is to say, it does not need to provide exactly \emph{one} mapping for \emph{each} element in the domain. A relation can pair up any elements it likes, as many times as it likes, so to speak.
+\end{terminology}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  % \node (R) at (0, 1.75) {$\R{R}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k1) -- (v3);
+  \draw[->,spaced] (k3) -- (v3);
+
+\end{diagram}
+
+Notice that $a$ is mapped to $1$ and also to $3$, while $c$ is mapped to $3$. But that's it. There are no further arrows here. This mapping fails to qualify as a function, in two separate ways:
+
+\begin{itemize}
+
+  \item It is required of a function that it provide a mapping for \emph{each} element in the domain. But here, there is no mapping for $b$, so this cannot qualify as a function.
+
+  \item It is also required of a function that it provide \emph{only one} mapping for each element in the domain. But here, there are \emph{two} mappings for $a$: $a$ is mapped to $1$, but also to $3$. So this cannot qualify as a function for this reason too.
+
+\end{itemize}
+
+\begin{aside}
+  \begin{remark}
+    A mapping can fail to be a function in two ways: if it doesn't provide a mapping for an element in the domain, or if it maps an element from the domain to more than one item in the codomain.
+  \end{remark}
+\end{aside}
+
+So this is a \emph{relation}, and not a function. Nevertheless, this is still a mapping in the sense that it pairs up items from $\set{A}$ with items in $\set{B}$. 
+
+Let's put this into \vocab{lookup table}:
+
+\begin{center}
+  \begin{tabular}{| l | l |}
+    \hline
+    \set{A} & \set{B} \\ \hline
+    $a$ & $1$ \\ \hline
+    $a$ & $3$ \\ \hline
+    $c$ & $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Like the lookup tables we discussed earlier, this one pairs up ``keys'' (in the left column) with ``data'' (the right column). However, we can see that this is a table for a relation rather than a function, because:
+
+\begin{itemize}
+
+  \item Each ``key'' is not unique (there are two rows for ``$a$''). 
+  
+  \item Not every item in the domain has a row in this table (there is no row for $b$).
+  
+\end{itemize}
+
+Now let's present this same mapping as an association list:
+
+\begin{aside}
+  \begin{remark}
+    Recall that an \vocab{association list} is just a list of the pairings, with the first item in each pair being the ``key'' and the second item in each pair being the ``data.''
+  \end{remark}
+\end{aside}
+
+\begin{align*}
+  \e{relation}~=~&(a, 1), \\
+                 &(a, 3), \\
+                 &(c, 3).
+\end{align*}
+
+Here too we can see the same information. We can see that this mapping pairs up $a$ with $1$, and also with $3$, and it pairs up $c$ with $3$. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Definition and Notation}
+\label{sec:relations-definition-and-notation}
+
+\newthought{We can give names to relations}, just as we could give names to functions. We noted before that \mathers/ tend to name their functions $\func{f}$, $\func{g}$, and $\func{h}$. They tend to name relations $\R{R}$, $\R{S}$, and $\R{T}$.
+
+\begin{aside}
+  \begin{notation}
+    We can give relations \vocab{names}, and we tend to name them $\R{R}$, $\R{S}$, and $\R{T}$. To denote that a relation $\R{R}$ \vocab{pairs up} a particular $x$ to $y$, we write this: $\R{R}(x, y)$. 
+  \end{notation}
+\end{aside}
+
+With functions, when we want to denote that a function $\func{f}$ maps a particular element $x$ to an element $y$, we write this:
+
+\begin{equation*}
+  \func{f}(x) = y
+\end{equation*}
+
+\begin{aside}
+  \begin{notation}
+    Sometimes, \mathers/ don't write $\R{R}(x, y)$. Instead they write $x\R{R}y$. For example, instead of writing $\R{R}(c, 3)$, they would write $c\R{R}3$.
+  \end{notation}
+\end{aside}
+
+With relations, we write it a little differently. To denote that a relation $\R{R}$ maps a particular element $x$ to another element $y$, we write this:
+
+\begin{equation*}
+  \R{R}(x, y)
+\end{equation*}
+
+Read that aloud like so: ``The relation $\R{R}$ relates $x$ to $y$,'' or ``$x$ is related to $y$ by the relation $\R{R}$.'' Look back to the picture we drew above. Let's give that relation the name ``$\R{R}$.'' We can see from the picture that $\R{R}$ relates $c$ to $3$. So we could write that like this:
+
+\begin{equation*}
+  \R{R}(c, 3)
+\end{equation*}
+
+And we read that like this: ``$\R{R}$ relates $c$ to $3$,'' or ``$c$ is related to $3$ by $\R{R}$.'' In the same way, we can also use this notation to assert that ``$\R{R}$ relates $a$ to $1$,'' and ``$\R{R}$ relates $a$ to $3$.'' Like this:
+
+\begin{equation*}
+  \R{R}(a, 1) \hskip 3cm \R{R}(a, 3)
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    As with functions, there are no hard and fast rules about how to specify a relation. What's important is just to be absolutely clear about which elements the relation pairs together, so that other people know exactly what the mapping is that you have in mind.
+  \end{remark}
+\end{aside}
+
+We can depict a relation in many ways. For instance, we can depict it as a \vocab{table} or an \vocab{association list}, like we did a moment ago. We can also specify a \vocab{rule} or \vocab{recipe}, that tells other people how to calculate the pairs themselves, just as we can do with functions. Or we can depict a relation with a picture, like we did earlier.
+
+But if we look underneath all these particular modes of presentation, we see that a relation between two sets $\set{A}$ and $\set{B}$ is really just a set of pairings of elements from $\set{A}$ and $\set{B}$. 
+
+Hence, we can write out a relation as a set of pairs. For example, the relation $\R{R}$ pictured above can be written out like this:
+
+\begin{equation*}
+  \R{R} = \{ (a, 1), (a, 3), (c, 3) \}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    Recall that the \vocab{product} of $\set{A}$ and $\set{B}$ is the set of all possible pairings of points from $\set{A}$ and $\set{B}$.
+  \end{remark}
+\end{aside}
+
+Notice that this is a \vocab{subset} of the \vocab{product} $\product{\set{A}}{\set{B}}$. What is the product of $\set{A}$ and $\set{B}$? It is all possible pairings of elements from $\set{A}$ and $\set{B}$. Here is the product (presented as a grid, so it's easy to see all the pairings):
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c |}
+    \hline
+    ~   & $1$        & $2$        & $3$        \\ \hline
+    $a$ & $~(a, 1)~$ & $~(a, 2)~$ & $~(a, 3)~$ \\ \hline
+    $b$ & $~(b, 1)~$ & $~(b, 2)~$ & $~(b, 3)~$ \\ \hline
+    $c$ & $~(c, 1)~$ & $~(c, 2)~$ & $~(c, 3)~$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Compare our relation to this grid of pairings. You can see that our relation $\{ (a, 1), (a, 3), (c, 3) \}$ is just a subset of the coordinates we have in this grid. We've just picked out three of the pairings from this grid. Here they are, highlighted:
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c |}
+    \hline
+    ~   & $1$        & $2$        & $3$        \\ \hline
+    $a$ & \textcolor{vocabcolor}{$~\mathbf{(a, 1)}~$} & $~(a, 2)~$ & \textcolor{vocabcolor}{$~\mathbf{(a, 3)}~$} \\ \hline
+    $b$ & $~(b, 1)~$ & $~(b, 2)~$ & $~(b, 3)~$ \\ \hline
+    $c$ & $~(c, 1)~$ & $~(c, 2)~$ & \textcolor{vocabcolor}{$~\mathbf{(c, 3)}~$} \\ \hline
+  \end{tabular}
+\end{center}
+
+\begin{aside}
+  \begin{remark}
+    A \vocab{function} is also a \vocab{subset of the product}, but a function must satisfy the additional requirement that \vocab{each} element from the domain must be paired up with \vocab{one} element from the codomain. Relations do not have this restriction. A relation is just \emph{any} subset of the product.
+  \end{remark}
+\end{aside}
+
+This shows that when we construct a relation, we are really just picking out, or selecting, some of the pairs from the product. So a relation between a set $\set{A}$ and another set $\set{B}$ is really just a subset of the product $\product{\set{A}}{\set{B}}$. To put this into symbols:
+
+\begin{equation*}
+  \R{R} \subseteq \product{\set{A}}{\set{B}}
+\end{equation*}
+
+Read that aloud like this: ``$\R{R}$ is a subset of the product of the set $\set{A}$ and the set $\set{B}$.''
+
+\begin{aside}
+  \begin{remark}
+    Recall that the \vocab{signature} of a function $\funcsig{f}{\set{A}}{\set{B}}$ tells us that the function is called ``$\func{f}$,'' it tells us that the domain is the set $\set{A}$, and it tells us that the codomain is the set $\set{B}$.
+  \end{remark}
+\end{aside}
+
+When we discussed functions, we noted that we can describe the \vocab{signature} of a function like this: $\funcsig{f}{\set{A}}{\set{B}}$. That tells us (i) the name of the function, (ii) the domain, and (iii) the codomain.
+
+Relations also have a \vocab{name}, a \vocab{domain}, and a \vocab{codomain}, so we can describe relations with a signature too. To denote the \vocab{signature} of a relation, let's use the subset notation we used a moment ago. Hence, to describe the signature of the relation $\R{R}$ from $\set{A}$ to $\set{B}$, we will just write this:
+
+\begin{aside}
+  \begin{notation}
+    To denote the \vocab{signature} of a relation $\R{R}$ from a set $\set{A}$ to a set $\set{B}$, we write this: $\Rsig{R}{\set{A}}{\set{B}}$.
+  \end{notation}
+\end{aside}
+
+\begin{equation*}
+  \R{R} \subseteq \product{\set{A}}{\set{B}}
+\end{equation*}
+
+Let's put down everything we have said here into a definition for relations.
+
+\begin{fdefinition}[Relations]
+  \label{def:relations}
+  For any sets $\set{A}$ and $\set{B}$, we will say that a \vocab{relation} from $\set{A}$ to $\set{B}$ is any set of pairs $(x, y)$, where $x$ is an element taken from $\set{A}$ and $y$ is an element taken from $\set{B}$. To denote the signature of a function $\R{R}$ from $\set{A}$ to $\set{B}$, we will write this: $\Rsig{R}{\set{A}}{\set{B}}$. To denote that $\R{R}$ pairs up a particular element $x$ from $\set{A}$ with a particular element $y$ from $\set{B}$, we will write this: $\R{R}(x, y)$.
+\end{fdefinition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Examples}
+
+\begin{fexample}
+
+Here is an example of a relation $\Rsig{S}{\set{C}}{\set{B}}$:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{C}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, -0.15) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \node[dot] (k4) at (-3.1, 0.5) [label=left:{$d$}] {};
+  \node[dot] (k5) at (-2.25, -0.25) [label=left:{$e$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (S) at (0, 1.75) {$\R{S}$};
+  \draw[->,space] (k1) -- (v1);
+  \draw[->,space] (k4) -- (v2);
+  \draw[->,space] (k4) -- (v3);
+  \draw[->,space] (k3) -- (v3);
+  \draw[->,space] (k5) -- (v2);
+
+\end{diagram}
+
+We can also write this out as a set of pairs:
+
+\begin{equation*}
+  \R{S} = \{ (a, 1), (c, 3), (d, 2), (d, 3), (e, 2) \}
+\end{equation*}
+
+We can say that the relation $\R{S}$ relates $c$ to $3$, or $d$ to $3$, or $e$ to $2$, like this:
+
+\begin{equation*}
+  \R{S}(c, 3) \hskip 2cm \R{S}(d, 3) \hskip 2cm \R{S}(e, 2)
+\end{equation*}
+
+\end{fexample}
+
+\begin{fexample}
+
+Suppose we have some employees:
+
+\begin{equation*}
+  \e{Employee} = \{ \e{Alice}, \e{Bob}, \e{Carol}, \e{Diedre}, \e{Emil} \}
+\end{equation*}
+
+Suppose we also have some projects that the company is working on:
+
+\begin{equation*}
+  \e{Project} = \{ \e{Strategy~2.0}, \e{Product~dev}, \e{Market~research} \}
+\end{equation*}
+
+We can assign employees to projects:
+
+\begin{aside}
+  \begin{remark}
+    Notice that the set labeled as $\e{Employees}$ is isomorphic to the one pictured as $\set{C}$ above. This one just has different names: instead of $a$ it's $\set{Alice}$, instead of $b$ it's $\e{Bob}$, and so on. Likewise, the set $\e{Projects}$ is isomorphic to the one pictured as $\set{B}$ above. It just has different names too.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\e{Employees}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$\e{Alice}$}] {};
+  \node[dot] (k2) at (-3.75, -0.15) [label=left:{$\e{Bob}$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$\e{Carol}$}] {};
+  \node[dot] (k4) at (-3.1, 0.5) [label=left:{$\e{Diedre}$}] {};
+  \node[dot] (k5) at (-2.25, -0.25) [label=left:{$\e{Emil}$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\e{Projects}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$\e{Strategy~2.0}$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$\e{Product~dev}$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$\e{Market~research}$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (S) at (0, 1.5) {$\e{Assignments}$};
+  \draw[->,space] (k1) -- (v1);
+  \draw[->,space] (k4) -- (v1);
+  \draw[->,space] (k4) -- (v2);
+  \draw[->,space] (k3) -- (v2);
+  \draw[->,space] (k5) -- (v2);
+
+\end{diagram}
+
+This is just a relation, of course, from $\e{Employees}$ to $\e{Projects}$. Hence it has the signature: 
+
+\begin{equation*}
+  \Rsig{\e{Assignments}}{\e{Employees}}{\e{Projects}}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    Is $\e{Assignments}$ a \emph{function}? No, it is not. Why not? There are two ways it fails to be a function. First, there is an item in the domain that has no arrow coming out of it: Bob is not assigned to any project. Second, some people in the domain have more than one arrow coming out of them: Diedre, for example, is assigned to two projects.
+  \end{remark}
+\end{aside}
+
+In the picture, we can see that Alice and Diedre are assigned to ``Strategy 2.0,'' while Diedre, Emil, and Carol are assigned to ``Product dev.'' We can also see that Bob has no projects to work on, and nobody is working on ``Market research.''
+
+We can write this all out as a set of pairs too:
+
+\begin{align*}
+  \R{\e{Assignments}}~=~\{ 
+    &(\e{Alice}, \e{Strategy~2.0}), (\e{Diedre}, \e{Strategy~2.0}), \\
+  ~ &(\e{Diedre}, \e{Product~dev}), (\e{Carol}, \e{Product~dev}), \\
+  ~ &(\e{Emil}, \e{Product~dev}) \}
+\end{align*}
+
+We can use our special notation to say things like ``Alice is assigned to Product dev'' (or to put it another way: ``the $\e{Assignments}$ relation relates Alice to Product dev''):
+
+\begin{equation*}
+  \e{Assignments}(\e{Alice}, \e{Product~dev})
+\end{equation*}
+
+\end{fexample}
+
+\begin{fexample}
+
+An extreme example of a relation is one where \emph{all of the items} in the domain and codomain are related to each other. For instance:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, -0.15) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (T) at (0, 1.75) {$\R{T}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k1) -- (v2);
+  \draw[->,spaced] (k1) -- (v3);
+  \draw[->,spaced] (k2) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k2) -- (v3);
+  \draw[->,spaced] (k3) -- (v1);
+  \draw[->,spaced] (k3) -- (v2);
+  \draw[->,spaced] (k3) -- (v3);
+
+\end{diagram}
+
+Here, each item in the domain $\set{A}$ is related to all of the items in the codomain $\set{B}$. There are three items in the codomain, and so each item in $\set{A}$ has three arrows coming out of it. So this relation has every possible pairing between $\set{A}$ and $\set{B}$. (Notice that this is identical to the \vocab{product} of $\set{A}$ and $\set{B}$.)
+
+\end{fexample}
+
+\begin{example}
+
+Another extreme example of a relation is one that relates \emph{none of the items} in the domain and codomain. For example, consider this one:
+
+\begin{aside}
+  \begin{remark}
+    An empty relation may seem like a useless relation, but it's always important to think of the \vocab{limit cases}, just to make sure that we understand the concept fully. In this context, the limit cases are (i) the case where there are \vocab{all} possible arrows, and (ii) the case where there are \vocab{no} arrows.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, -0.15) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$1$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$2$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$3$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (U) at (0, 1.75) {$\R{U}$};
+
+\end{diagram}
+
+This relation has no arrows going from $\set{A}$ to $\set{B}$. Hence, the list of pairings in this relation is entirely empty:
+
+\begin{equation*}
+  \Rsig{U}{\set{A}}{\set{B}} = \{ \} \hskip 1cm \text{ i.e. } \hskip 1cm \Rsig{U}{\set{A}}{\set{B}} = \emptyset/
+\end{equation*}
+
+Read that aloud like so: ``the relation $\R{U}$ from $\set{A}$ to $\set{B}$ is empty,'' or ``the subset $\R{U}$ of the product $\product{\set{A}}{\set{B}}$ is empty.''
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Self-relations}
+
+\newthought{When we discussed functions}, we pointed out that there can be self-maps. That is to say, there is nothing in the definition of a function that stops us from constructing a function that maps a set back to itself. The same goes for relations. We can have relations from a set to itself. 
+
+To draw such a relation, we can do it in two ways. We can draw another copy of the set in question, and then draw our arrows in. For instance, here is a relation $\Rsig{R}{\set{A}}{\set{A}}$:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, -0.15) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{A}$};
+  \node[dot] (v1) at (3.25, 1) [label=right:{$a$}] {};
+  \node[dot] (v2) at (2.25, 0.25) [label=right:{$b$}] {};
+  \node[dot] (v3) at (3, -0.75) [label=right:{$c$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (R) at (0, 1.75) {$\R{R}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k1) -- (v3);
+  \draw[->,spaced] (k2) -- (v2);
+
+\end{diagram}
+
+\begin{terminology}
+  When we talk about \vocab{self-relations}, i.e., relations that relate a set $\set{A}$ to itself, we will sometimes say that it is ``a relation \vocab{defined over} $\set{A}$,'' or ``a relation \vocab{defined over} $\set{A}$,'' or even more simply that it is ``a relation \vocab{on} $\set{A}$'' or ``a relation \vocab{over} $\set{A}$.'' All of these are equivalent ways of saying it relates the set $\set{A}$ \emph{to itself}.
+\end{terminology}
+
+This is a relation from $\set{A}$ to $\set{A}$, so it is a relation that relates some of the elements in $\set{A}$ to other of the elements in $\set{A}$.
+
+Another way to draw the same relation is to just draw one circle, and then have the arrows go out and come right back. Like this:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, -0.15) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.75) [label=left:{$c$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (R) at (-0.5, 0.5) {$\R{R}$};
+  \draw[->,spaced] (k1) to[looseness=55,out=75,in=340] (k1);
+  \draw[->,spaced] (k1) to[out=250,in=90] (k3);
+  \draw[->,spaced] (k2) to[looseness=55,out=230,in=120] (k2);
+
+\end{diagram}
+
+This picture represents the very same relation, just in a different way. Whichever picture we choose, we can write out the pairings directly:
+
+\begin{equation*}
+  \R{R} = \{ (a, a), (a, c), (b, b) \}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about \vocab{relations}, which are looser mappings than functions. 
+
+\begin{itemize}
+
+  \item A \vocab{function} is a mapping from one set to another, but it is subject to the constraint that it must map \emph{each} element in the domain to \emph{one} element in the codomain. A \vocab{relation} is a mapping too, but without that constraint. A relation need not pair up each item in the domain, nor must it pair it with only one item in the codomain.
+  
+  \item Formally speaking, a relation $\R{R}$ from $\set{A}$ to $\set{B}$ is any set of pairs $(x, y)$, where $x$ comes from $\set{A}$ and $y$ comes from $\set{B}$. Hence, a relation from $\set{A}$ to $\set{B}$ is just a \vocab{subset of the product} $\product{\set{A}}{\set{B}}$.
+  
+  \item To describe the \vocab{signature} of a relation $\R{R}$ from $\set{A}$ to $\set{B}$, we write this: $\Rsig{R}{\set{A}}{\set{B}}$. To denote that $\R{R}$ relates $x$ to $y$, we write this: $\R{R}(x, y)$. 
+  
+  \item A relation can relate items from a set to itself, just as functions can. Hence, there can be a relation $\R{R}$ from the set $\set{A}$ back to the set $\set{A}$, i.e., $\Rsig{R}{\set{A}}{\set{A}}$.
+
+\end{itemize}
+
+
+
+\end{document}

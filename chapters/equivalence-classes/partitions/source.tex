@@ -1,0 +1,430 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Partitions}
+\label{ch:partitions}
+
+\newtopic{I}{n chapter \chapterref{ch:structures}}, we looked at the concept of \vocab{structures}. A structure is one or more sets (called the \vocab{base sets} or \vocab{carrier sets}), equipped with any number of functions or relations that add some structure to the base sets. In this and the following chapters, we will look at a few structures that consist of a \vocab{base set} and a \vocab{single relation}. The relations we will look at are special, because each of them arranges the items of the base set into a particular configuration.
+
+\begin{aside}
+  \begin{remark}
+    We will look at three special kinds of structures: (i) a set equipped with an \vocab{equivalence relation}, (ii) a set equipped with an \vocab{ordering relation}, and (iii) a set equipped with a \vocab{lattice} relation.
+  \end{remark}
+\end{aside}
+
+The first such structure we will discuss are called \vocab{partitions}, and that is the topic for this chapter. A \vocab{partition} of a set $\set{A}$ cleanly cuts $\set{A}$ up into distinct, non-overlapping subsets. If we glue those subsets back together, we end up with the original set $\set{A}$ again.
+
+In the next chapter, we will look at \vocab{equivalence classes}, which arise by equipping a set $\set{A}$ with an \vocab{equivalence relation}. An equivalence relation partitions a set into groups of equivalent items. 
+
+Following that, we will look at \vocab{ordered sets}, which are sets equipped with an \vocab{ordering relation} (it puts some or all of the items from the base set into some ordering). Then in the following chapter, we will look at \vocab{lattices}, which are sets equipped with a very special kind of ordering relation that gives the whole set the shape of a lattice.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Partitions}
+
+\begin{terminology}
+  A \vocab{partition} of a set $\set{A}$ is a collection of subsets of $\set{A}$, which do not overlap each other, but when glued together, they make up the whole set $\set{A}$.
+\end{terminology}
+
+\newthought{One way to break up a set} is to \vocab{partition} it, i.e., to cut it up into distinct, non-overlapping pieces. For example, take a set $\set{A}$: 
+
+\begin{diagram}
+  \draw[color=gray] (0, 0) ellipse (3.5cm and 1.5cm);
+  \node (domain) at (0, 2) {$\set{A}$};
+  \node[dot] (k1) at (-2.25, 0.25) [label=left:${a}$] {};
+  \node[dot] (k2) at (-1.5, -0.5) [label=left:${b}$] {};
+  \node[dot] (k3) at (-0.5, 0.75) [label=right:${c}$] {};
+  \node[dot] (k4) at (0.75, 0.15) [label=left:${d}$] {};
+  \node[dot] (k5) at (0.1, -0.65) [label=left:${e}$] {};
+  \node[dot] (k6) at (1.75, 0.55) [label=right:${i}$] {};
+  \node[dot] (k7) at (2.25, -0.25) [label=right:${j}$] {};
+\end{diagram}
+
+Then cut it up into, say, three non-overlapping pieces:
+
+\begin{aside}
+  \begin{remark}
+    The dashed lines indicate places where we divide the set $\set{A}$ up into subsets. These two dashed lines indicate that we have broken up $\set{A}$ into three subsets: one that contains $a$ and $b$, another that contains $c$, $d$, and $e$, and a third that contains $i$ and $j$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+  \draw[color=gray] (0, 0) ellipse (3.5cm and 1.5cm);
+  \node (domain) at (0, 2) {$\set{A}$};
+  \node[dot] (k1) at (-2.25, 0.25) [label=left:${a}$] {};
+  \node[dot] (k2) at (-1.5, -0.5) [label=left:${b}$] {};
+  \node[dot] (k3) at (-0.5, 0.75) [label=right:${c}$] {};
+  \node[dot] (k4) at (0.75, 0.15) [label=left:${d}$] {};
+  \node[dot] (k5) at (0.1, -0.65) [label=left:${e}$] {};
+  \node[dot] (k6) at (1.75, 0.55) [label=right:${i}$] {};
+  \node[dot] (k7) at (2.25, -0.25) [label=right:${j}$] {};
+  \draw[dashed] (-1, 1.4) -- (-1, -1.4);
+  \draw[dashed] (1.25, 1.4) -- (1.25, -1.4);
+\end{diagram}
+
+These three pieces make up a partition of $\set{A}$. Basically, a \vocab{partition} of $\set{A}$ is a collection of subsets of $\set{A}$, none of which overlap each other, but if you glue them back together, you get the whole subset $\set{A}$ again. We can call each ``piece'' of the partition (i.e., each subset) a \vocab{cell} of the partition.
+
+In this case, we started with a set $\set{A}$:
+
+\begin{equation*}
+  \set{A} = \{ a, b, c, d, e, i, j \}
+\end{equation*}
+
+Then we broke it up into three \vocab{cells} (i.e., three subsets). Let's call them $\set{S}_{1}$, $\set{S}_{2}$, and $\set{S}_{3}$:
+
+\begin{equation*}
+  \set{S}_{1} = \{ a, b \} \hskip 1cm 
+  \set{S}_{2} = \{ c, d, e \} \hskip 1cm 
+  \set{S}_{3} = \{ i, j \}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    The three cells $\set{S}_{1}$, $\set{S}_{2}$, and $\set{S}_{3}$ form a \vocab{partition} of $\set{A}$, because they do not overlap (they have no elements in common), and when you glue them all back together, you get $\set{A}$ again.
+  \end{remark}
+\end{aside}
+
+These three cells do not overlap, in the sense that they share no elements. There is no element that belongs in more than one of these cells. Each element belongs to exactly one, and only one, cell.
+
+Also, if we glue all of these cells back together, we end up with the original set. Hence, if we combine $\set{S}_{1}$ and $\set{S}_{2}$, we end up with $\{ a, b, c, d, e \}$, and then if we combine that with $\set{S}_{3}$, we end up with the original set $\{ a, b, c, d, e, i, j \}$ again.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Definition}
+
+\begin{terminology}
+  Recall from \sectionref{sec:set-intersection} that the \vocab{intersection} of two sets $\set{A}$ and $\set{B}$, which we denote $\set{A} \cap \set{B}$, is the set of elements that exist in both $\set{A}$ and $\set{B}$. If the intersection is \vocab{empty}, which we denote $\set{A} \cap \set{B} = \emptyset/$, then that means $\set{A}$ and $\set{B}$ share no elements.
+\end{terminology}
+
+We can use set-theoretic language to define what a partition is more exactly. We can use set \emph{intersection} to define what it means for the cells to be non-overlapping. Remember that the \vocab{intersection} of two sets is the set of items they have in common. 
+
+In this case, none of the cells have any items in common. If we compare $\set{S}_{1}$ with $\set{S}_{2}$, we can see that they have nothing in common, so their intersection is empty. Likewise, if we compare $\set{S}_{2}$ with $\set{S}_{3}$, we can see that they have no elements in common, so their intersection is empty too. And the same goes if we compare $\set{S}_{1}$ and $\set{S}_{3}$. So, we can say that the intersection of any two of our cells is \vocab{empty}:
+
+\begin{equation*}
+  \set{S}_{1} \cap \set{S}_{2} = \emptyset/ \hskip 1cm
+  \set{S}_{2} \cap \set{S}_{3} = \emptyset/ \hskip 1cm
+  \set{S}_{1} \cap \set{S}_{3} = \emptyset/
+\end{equation*}
+
+\begin{terminology}
+  If the intersection of two sets is empty, we say they are \vocab{disjoint}. If a number of sets are disjoint from each other, we say they are \vocab{pairwise disjoint} (because we can pair them up and see that each is disjoint from each). 
+\end{terminology}
+
+We say that these subsets are \vocab{pairwise disjoint}. By saying they are \emph{disjoint}, we mean to say that they have no elements in common (their intersection is empty). By saying they are \emph{pairwise} disjoint, we mean that \emph{each pair} of them is disjoint: this one is disjoint from that one, and this one is disjoint from that other one, and so on. Let's put this down in a definition:
+
+\begin{fdefinition}[Pairwise disjoint]
+  For any collection $\set{C}$ of sets $\set{S}_{1}$, $\set{S}_{2}$, \ldots, we will say that the sets in $\set{C}$ are \vocab{pairwise disjoint} if, for each pair of sets $\set{S}_{n}$ and $\set{S}_{m}$ in $\set{C}$, $\set{S}_{n} \cap \set{S}_{m} = \emptyset/$.
+\end{fdefinition}
+
+We can use the concept of set \emph{union} to define what it means for the cells to make up the whole set $\set{A}$ again if you glue them back together. Recall that the \vocab{union} of two sets is all of the elements from both sets combined. So, to ``union'' two sets, is to combine them.
+
+\begin{terminology}
+  Recall from \sectionref{sec:set-union} that the \vocab{union} of two sets $\set{A}$ and $\set{B}$, which we denote $\set{A} \cup \set{B}$, is the set we get when we combine all of the elements from $\set{A}$ and all of the elements from $\set{B}$.
+\end{terminology}
+
+Hence, when we say that if you glue our cells $\set{S}_{1}$, $\set{S}_{2}$, and $\set{S}_{3}$ back together you get the whole set $\set{A}$ again, we can instead say this: the \emph{union} of $\set{S}_{1}$, $\set{S}_{2}$, and $\set{S}_{3}$ is equal to the original set $\set{A}$:
+
+\begin{equation*}
+  \set{S}_{1} \cup \set{S}_{2} \cup \set{S}_{3} = \set{A}
+\end{equation*}
+
+With all of that at hand, we can now define a partition using these concepts from set theory. We can say that a partition of $\set{A}$ is a collection of subsets of $\set{A}$ which (a) are pairwise disjoint, and (b) the union of which is equal to $\set{A}$. Let's put that in a definition:
+
+\begin{fdefinition}[Partition]
+  \label{def:partition}
+  For any set $\set{A}$ and any collection $\set{C}$ of subsets of $\set{A}$, we will say that $\set{C}$ is a \vocab{partition} of $\set{A}$ if (i) all of the subsets in $\set{C}$ are pairwise disjoint, and (ii) the union of all subsets in $\set{C}$ is equal to $\set{A}$. We will call each subset of a partition $\set{C}$ a \vocab{cell} of $\set{C}$.
+\end{fdefinition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Examples}
+
+\begin{fexample}
+
+Here is a partition:
+
+\begin{diagram}
+  \draw[color=gray] (0, 0) ellipse (3.5cm and 1cm);
+  \node (domain) at (0, 1.5) {$\set{A}$};
+  \node[dot] (k1) at (-2.25, 0.25) [label=left:${a}$] {};
+  \node[dot] (k2) at (-1.5, -0.35) [label=left:${b}$] {};
+  \node[dot] (k3) at (-0.5, 0.55) [label=right:${c}$] {};
+  \node[dot] (k4) at (0.75, 0.15) [label=left:${d}$] {};
+  \node[dot] (k5) at (0.1, -0.45) [label=left:${e}$] {};
+  \node[dot] (k6) at (1.75, 0.35) [label=right:${i}$] {};
+  \node[dot] (k7) at (2.25, -0.25) [label=right:${j}$] {};
+  \draw[dashed] (1, -0.95) -- (2.8, 0.55);
+\end{diagram}
+
+Where the cells are these:
+
+\begin{equation*}
+  \set{S}_{1} = \{ a, b, c, d, e, i \} \hskip 2cm
+  \set{S}_{2} = \{ j \}
+\end{equation*}
+
+These subsets are pairwise disjoint (no element is shared), and when glued together, they make up $\set{A}$ (the union of $\set{S}_{1}$ and $\set{S}_{2}$ equals $\set{A}$).
+
+\end{fexample}
+
+\begin{fexample}
+
+Suppose we take the following subsets of $\set{A}$ (marked by circles):
+
+\begin{diagram}
+  \draw[color=gray] (0, 0) ellipse (3.5cm and 1cm);
+  \node (domain) at (0, 1.5) {$\set{A}$};
+  \node[dot] (k1) at (-2.25, 0.25) [label=left:${a}$] {};
+  \node[dot] (k2) at (-1.6, -0.35) [label=left:${b}$] {};
+  \node[dot] (k3) at (-0.5, 0.55) [label=right:${c}$] {};
+  \node[dot] (k4) at (0.75, 0.15) [label=right:${d}$] {};
+  \node[dot] (k5) at (0.1, -0.45) [label=right:${e}$] {};
+  \node[dot] (k6) at (1.75, 0.35) [label=right:${i}$] {};
+  \node[dot] (k7) at (2.25, -0.25) [label=right:${j}$] {};
+
+  \draw[dashed] (-2, 0) ellipse (0.9cm and 1cm);
+  \draw[dashed] (1.35, 0.5) ellipse (0.95cm and 0.95cm);
+  \draw[dashed] (0.1, 0) ellipse (1.35cm and 1.15cm);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    The dashed circles in the picture indicate the subsets. Points that appear inside a dashed circle are elements of that subset. If two dashed circles overlap a point, then that point belongs to both circles (i.e., it belongs to both subsets).
+  \end{remark}
+\end{aside}
+
+So that we end up with these subsets:
+
+\begin{equation*}
+  \set{S}_{1} = \{ a, b \} \hskip 1cm
+  \set{S}_{2} = \{ c, d, e \} \hskip 1cm
+  \set{S}_{3} = \{ d, i \}
+\end{equation*}
+
+This is \emph{not} a partition on $\set{A}$, for two reasons. First, the subsets are not pairwise disjoint. In particular, $\set{S}_{2}$ and $\set{S}_{3}$ have an element in common, namely $d$. So $\set{S}_{2} \cap \set{S}_{3} \not = \emptyset/$ (i.e., the intersection of $\set{S}_{2}$ and $\set{S}_{3}$ is not empty). On the contrary, $\set{S}_{2} \cap \set{S}_{3} = \{ d \}$.
+
+Second, the union of these subsets does not add up to $\set{A}$. If we union $\set{S}_{1}$ and $\set{S}_{2}$, we get $\{ a, b, c, d, e \}$, and if we union that with $\set{S}_{3}$, we get $\{ a, b, c, d, e, i \}$. But that misses out on $j$, which is an element in $\set{A}$. Hence, we can see that if we glue these pieces back together, we don't get back the full set $\set{A}$.
+
+\end{fexample}
+
+\begin{fexample}
+
+Consider the following subsets of $\set{A}$:
+
+\begin{aside}
+  \begin{remark}
+    In this example, every point has its own dashed circle drawn around it. So every point from $\set{A}$ is put into its own cell. We can think of this as a limit case of partitions: it is the case where we partition the set $\set{A}$ into the \vocab{smallest} possible pieces: one cell for each point!
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+  \draw[color=gray] (0, 0) ellipse (3.5cm and 1cm);
+  \node (domain) at (0, 1.5) {$\set{A}$};
+  \node[dot] (k1) at (-2.25, 0.25) [label=left:${a}$] {};
+  \node[dot] (k2) at (-1.6, -0.35) [label=left:${b}$] {};
+  \node[dot] (k3) at (-0.5, 0.55) [label=right:${c}$] {};
+  \node[dot] (k4) at (0.75, 0.15) [label=right:${d}$] {};
+  \node[dot] (k5) at (0.1, -0.45) [label=right:${e}$] {};
+  \node[dot] (k6) at (1.75, 0.35) [label=right:${i}$] {};
+  \node[dot] (k7) at (2.25, -0.25) [label=right:${j}$] {};
+
+  \draw[dashed] (-2.25, 0.25) ellipse (0.55cm and 0.55cm);
+  \draw[dashed] (-1.6, -0.35) ellipse (0.55cm and 0.55cm);
+  \draw[dashed] (-0.5, 0.55) ellipse (0.55cm and 0.55cm);
+  \draw[dashed] (0.75, 0.15) ellipse (0.55cm and 0.55cm);
+  \draw[dashed] (0.1, -0.45) ellipse (0.55cm and 0.55cm);
+  \draw[dashed] (1.75, 0.35) ellipse (0.55cm and 0.55cm);
+  \draw[dashed] (2.25, -0.25) ellipse (0.55cm and 0.55cm);
+
+\end{diagram}
+
+We have these cells:
+
+\begin{align*}
+  \set{S}_{1} = \{ a \} \hskip 1cm
+  \set{S}_{2} = \{ b \} \hskip 1cm
+  \set{S}_{3} = \{ c \} \hskip 1cm
+  \set{S}_{4} = \{ d \} \\
+  \set{S}_{5} = \{ e \} \hskip 1cm
+  \set{S}_{6} = \{ i \} \hskip 1cm
+  \set{S}_{7} = \{ j \} \hskip 1cm
+\end{align*}
+
+This is a partition of $\set{A}$, because it breaks it up into 7 pairwise disjoint pieces, the union of which equals $\set{A}$.
+
+\end{fexample}
+
+\begin{example}
+
+Consider the following subsets of $\set{A}$ (there is one subset, marked by a circle):
+
+\begin{aside}
+  \begin{remark}
+    In this example, all of the points belong in one dashed circle. So every point from $\set{A}$ is put into the same cell. We can think of this as the opposite limit case of partitions: it is the case where we partition the set $\set{A}$ into the \vocab{biggest} possible piece: all of the points go in the same big piece.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+  \draw[color=gray] (0, 0) ellipse (3.5cm and 1cm);
+  \node (domain) at (0, 1.5) {$\set{A}$};
+  \node[dot] (k1) at (-2.25, 0.25) [label=left:${a}$] {};
+  \node[dot] (k2) at (-1.6, -0.35) [label=left:${b}$] {};
+  \node[dot] (k3) at (-0.5, 0.55) [label=right:${c}$] {};
+  \node[dot] (k4) at (0.75, 0.15) [label=right:${d}$] {};
+  \node[dot] (k5) at (0.1, -0.45) [label=right:${e}$] {};
+  \node[dot] (k6) at (1.75, 0.35) [label=right:${i}$] {};
+  \node[dot] (k7) at (2.25, -0.25) [label=right:${j}$] {};
+  \draw[dashed] (0, 0) ellipse (3.25cm and 1.25cm);
+\end{diagram}
+
+We have this one cell:
+
+\begin{align*}
+  \set{S}_{1} = \{ a, b, c, d, e, i, j \} \hskip 1cm
+\end{align*}
+
+\begin{terminology}
+  Recall from \sectionref{sec:peculiar-facts-about-the-empty-set} that something satisfies a definition \vocab{vacuously} if there is nothing to do to satisfy the definition.
+\end{terminology}
+
+This is a partition of $\set{A}$, because it breaks the original set up into a single piece. None of the subsets overlap (because there's only one subset), and if we combine the subsets, they ``add up'' to the original set $\set{A}$ (indeed, the one subset just is the whole set $\set{A}$). So this is a 1-piece partition (like a 1-piece jigsaw puzzle). It's a partition, but only in a \vocab{vacuous} sense.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Relations}
+
+\newthought{Some relations partition a set}. For example, suppose we have a structure $\struct{S} = (\set{A}, \R{R})$ comprised of a set $\set{A}$ and a relation $\R{R}$, which looks something like this:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (3.75cm and 1.15cm);
+  \node (domain) at (0, 1.5) {$\struct{S} = (\set{A}, \R{R})$};
+  \node[dot] (k1) at (-2.75, 0.25) [label=left:${a}$] {};
+  \node[dot] (k2) at (-2.1, -0.35) [label=right:${b}$] {};
+  \node[dot] (k3) at (-0.5, 0.65) [label=left:${c}$] {};
+  \node[dot] (k4) at (0.75, 0.15) [label=right:${d}$] {};
+  \node[dot] (k5) at (0, -0.45) [label=below:${e}$] {};
+  \node[dot] (k6) at (2.25, 0.25) [label=above:${i}$] {};
+  \node[dot] (k7) at (3, -0.15) [label=right:${j}$] {};
+
+  \draw[->,space] (k1) to[out=330,in=120] (k2);
+  \draw[->,space] (k2) to[out=180,in=280] (k1);
+  
+  \draw[->,space] (k3) to[out=0,in=150] (k4);
+  \draw[->,space] (k4) to[out=180,in=330] (k3);
+  \draw[->,space] (k4) to[out=250,in=0] (k5);
+  \draw[->,space] (k5) to (k4);
+  \draw[->,space] (k3) to (k5);
+  \draw[->,space] (k5) to[out=160,in=270] (k3);
+  
+  \draw[->,space] (k6) to[out=360,in=120] (k7);
+  \draw[->,space] (k7) to[out=180,in=310] (k6);
+
+\end{diagram}
+
+The base set $\set{A}$ is this:
+
+\begin{equation*}
+  \set{A} = \{ a, b, c, d, e, i, j \}
+\end{equation*}
+
+And the relation $\R{R}$ is this:
+
+\begin{align*}
+  \R{R} = \{ &(a, b), (b, a), \\
+             &(c, d), (d, c), (d, e), (e, d), (c, e), (e, c), \\
+             &(i, j), (i, j) \}
+\end{align*}
+
+Notice that this relation connects the elements in such a way that they clump together into separate groups. We can draw circles around each distinct clump:
+
+\begin{aside}
+  \begin{remark}
+    The relation connects the elements together into distinct clumps. We can draw circles around the clumps.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (3.75cm and 1.15cm);
+  \node (domain) at (0, 1.75) {$\struct{S} = (\set{A}, \R{R})$};
+  \node[dot] (k1) at (-2.75, 0.25) [label=left:${a}$] {};
+  \node[dot] (k2) at (-2.1, -0.35) [label=right:${b}$] {};
+  \node[dot] (k3) at (-0.5, 0.65) [label=left:${c}$] {};
+  \node[dot] (k4) at (0.75, 0.15) [label=right:${d}$] {};
+  \node[dot] (k5) at (0, -0.45) [label=below:${e}$] {};
+  \node[dot] (k6) at (2.25, 0.25) [label=above:${i}$] {};
+  \node[dot] (k7) at (3, -0.15) [label=right:${j}$] {};
+
+  \draw[->,space] (k1) to[out=330,in=120] (k2);
+  \draw[->,space] (k2) to[out=180,in=280] (k1);
+  
+  \draw[->,space] (k3) to[out=0,in=150] (k4);
+  \draw[->,space] (k4) to[out=180,in=330] (k3);
+  \draw[->,space] (k4) to[out=250,in=0] (k5);
+  \draw[->,space] (k5) to (k4);
+  \draw[->,space] (k3) to (k5);
+  \draw[->,space] (k5) to[out=160,in=270] (k3);
+  
+  \draw[->,space] (k6) to[out=360,in=120] (k7);
+  \draw[->,space] (k7) to[out=180,in=310] (k6);
+
+  \draw[dashed] (-2.4, 0) ellipse (1cm and 1.15cm);
+  \draw[dashed] (0.1, 0) ellipse (1.25cm and 1.45cm);
+  \draw[dashed] (2.75, 0.1) ellipse (0.85cm and 1cm);
+
+\end{diagram}
+
+If we make subsets from these circles, we get:
+
+\begin{aside}
+  \begin{remark}
+    We can check that this collection of subsets truly qualifies as a partition. (1) Are these subsets pairwise disjoint? Yes, because none of them share any elements. (2) When we union all of them together, do we end up with our original set $\set{A}$? Yes, if we combine these subsets, we get $\set{A}$. So yes, this is a genuine partition of $\set{A}$.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \set{S}_{1} = \{ a, b \} \hskip 1cm
+  \set{S}_{2} = \{ c, d, e \} \hskip 1cm
+  \set{S}_{3} = \{ i, j \}
+\end{equation*}
+
+This collection of subsets is a \vocab{partition} of $\set{A}$, which is obvious just by looking at the picture: none of these subsets overlap, and if we glued them together, we'd end up with our set $\set{A}$.
+
+Because this partition arises from the relation $\R{R}$, we say that the relation \vocab{induces} the partition, or we say that the partition \vocab{is induced} by the relation $\R{R}$.
+
+\begin{terminology}
+  Given a structure $\struct{S} = (\set{A}, \R{R})$, if $\R{R}$ partitions $\set{A}$, we say that $\R{R}$ \vocab{induces} the partition. We can call the whole structure a \vocab{partitioned structure}, or just ``a partition'' for short.
+\end{terminology}
+
+However you want to say it, the basic idea is just that the relation itself breaks the set $\set{A}$ up into distinct, non-overlapping clumps. The relation \vocab{partitions} the set. Hence, we can refer to the whole structure $\struct{S} = (\set{A}, \R{R})$ as a \vocab{partitioned structure}, because it is a set $\set{A}$ which is partitioned into distinct cells by the relation $\R{R}$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about partitions and partition structures. 
+
+\begin{itemize}
+
+  \item A \vocab{partition} of a set $\set{A}$ is a collection of subsets of $\set{A}$ which are pairwise disjoint, and which when unioned are equal to $\set{A}$. The subsets are called the \vocab{cells} of the partition.
+  
+  \item If a relation $\R{R}$ on a set $\set{A}$ groups the elements of $\set{A}$ into non-overlapping clumps which can be taken as the cells of a partition of $\set{A}$, then we say that $\R{R}$ \vocab{induces} that partition on $\set{A}$.
+  
+  \item A \vocab{partitioned structure} is a structure $\struct{S} = (\set{A}, \R{R})$ where the set $\set{A}$ is partitioned by the relation $\R{R}$ (i.e., a partition of $\set{A}$ is induced by $\R{R}$).
+
+\end{itemize}
+
+
+\end{document}

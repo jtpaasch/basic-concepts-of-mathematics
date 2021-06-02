@@ -1,0 +1,768 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Order Isomorphisms}
+\label{ch:order-isomorphisms}
+
+\begin{ponder}
+  Can you come up with a precise definition of what it means for two ordered sets to have the \vocab{same shape} or \vocab{structure}?
+\end{ponder}
+
+\newtopic{I}{n this chapter}, we will look at how to tell if two ordered sets have the same shape --- i.e., are \vocab{isomorphic}. Two ordered sets are isomorphic if there is an \vocab{order isomorphism} between them, i.e., a one-to-one mapping of the points from the first set to the points of the second set, which \vocab{preserves the order}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Maps between Ordered Sets}
+
+\newthought{We can construct} a \vocab{map} (a \vocab{function}) from one set to another set, by mapping each point from the first set to some point in the second set. Of course, we can do the same thing with ordered sets, by mapping the points in their base sets.
+
+Let's do an example. Suppose we have two ordered sets: 
+
+\begin{equation*}
+  \struct{S} = (\set{A}, \order/) \hskip 2cm
+  \struct{T} = (\set{B}, \order/)
+\end{equation*}
+
+Well, the ordering relation in each of these structures might be different. So maybe we shouldn't use the same symbol $\order/$ for both. For the sake of clarity, let's add a subscript to each ``$\order/$'' symbol, so that we can tell them apart. To the ordering for $\set{A}$, let's add ``$\set{A}$'' as a subscript:
+
+\begin{equation*}
+  \order/_{\set{A}}
+\end{equation*}
+
+That way, when we use this symbol, it's obvious that the ordering we are referring to is the one that belongs to the set $\set{A}$. We can do the same thing for the ordering that belongs to $\set{B}$, by writing it like this: $\order/_{\set{B}}$. 
+
+So, let's say instead that we have two ordered sets, like this:
+
+\begin{aside}
+  \begin{notation}
+By adding a subscript to each ordering relation symbol, it makes it clear that ``$\order/_{\set{A}}$'' denotes the ordering on the set $\set{A}$ that we have in $\struct{S}$, while ``$\order/_{\set{B}}$'' denotes the ordering on the set $\set{B}$ that we have in $\struct{T}$.
+  \end{notation}
+\end{aside}
+
+\begin{equation*}
+  \struct{S} = (\set{A}, \order/_{\set{A}}) \hskip 2cm
+  \struct{T} = (\set{B}, \order/_{\set{B}})
+\end{equation*}
+
+Now suppose that these ordered sets looks like this:
+
+\begin{diagram}
+
+  % S
+  \node (S) at (-3, -1) {$\struct{S} = (\set{A}, \order/_{\set{A}})$};
+  \node[odot] (a) at (-3, 0) [label=left:{$a$}] {};
+  \node[odot] (b) at (-3, 1) [label=left:{$b$}] {};
+  \node[odot] (c) at (-3, 2) [label=left:{$c$}] {};
+  \node[odot] (d) at (-2, 2) [label=right:{$d$}] {};
+  
+  \draw (a) to (b);
+  \draw (b) to (c);
+  \draw (b) to (d);
+
+  % T
+  \node (T) at (3, -1) {$\struct{T} = (\set{B}, \order/_{\set{B}})$};
+  \node[odot] (1) at (3, 0) [label=above:{$1$}] {};
+  \node[odot] (2) at (2, 1) [label=above:{$2$}] {};
+  \node[odot] (3) at (4, 1) [label=right:{$3$}] {};
+  \node[odot] (4) at (4, 2) [label=right:{$4$}] {};
+  
+  \draw (1) to (2);
+  \draw (1) to (3);
+  \draw (3) to (4);
+
+\end{diagram}
+
+Let's build a map (function) from $\struct{S}$ to $\struct{T}$. Let's call our function $\funcsig{f}{\struct{S}}{\struct{T}}$, because it is a map from the ordered set (structure) $\struct{S}$ to the ordered set (structure) $\struct{T}$. 
+
+To build such a map, all we have to do is build function between the \vocab{base sets} of these two structures. And we can pick any mapping between the base sets that we like. For instance, let's map the points from $\set{A}$ to $\set{B}$ like this:
+
+\begin{diagram}
+
+  % S
+  \node (S) at (-3, -1) {$\struct{S} = (\set{A}, \order/_{\set{A}})$};
+  \node[odot] (a) at (-3, 0) [label=left:{$a$}] {};
+  \node[odot] (b) at (-3, 1) [label=left:{$b$}] {};
+  \node[odot] (c) at (-3, 2) [label=left:{$c$}] {};
+  \node[odot] (d) at (-2, 2) [label=below right:{$d$}] {};
+  
+  \draw (a) to (b);
+  \draw (b) to (c);
+  \draw (b) to (d);
+
+  % T
+  \node (T) at (3, -1) {$\struct{T} = (\set{B}, \order/_{\set{B}})$};
+  \node[odot] (1) at (3, 0) [label=above:{$1$}] {};
+  \node[odot] (2) at (2, 1) [label=above:{$2$}] {};
+  \node[odot] (3) at (4, 1) [label=right:{$3$}] {};
+  \node[odot] (4) at (4, 2) [label=right:{$4$}] {};
+  
+  \draw (1) to (2);
+  \draw (1) to (3);
+  \draw (3) to (4);
+
+  % f
+  \node (f) at (0, 3.5) {$\funcsig{f}{\struct{S}}{\struct{T}}$};
+  \draw[->,spaced,dashed] (a) to (1);
+  \draw[->,spaced,dashed] (b) to (2);
+  \draw[->,spaced,dashed] (c) to[out=30,in=135] (3);
+  \draw[->,spaced,dashed] (d) to (4);
+  
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Notice that $\func{f}$ maps every point from $\struct{S}$ to a distinct point in $\struct{T}$. Hence, $\func{f}$ is \vocab{injective}. Also, $\func{f}$ covers every point in $\struct{T}$ (no points in $\struct{T}$ are left without an arrow pointing to them). Hence, $\func{f}$ is \vocab{surjective} too.
+  \end{remark}
+\end{aside}
+
+That is to say, let's define $\func{f}$ like this:
+
+\begin{align*}
+  \func{f}(a) = 1 \hskip 1cm \func{f}(b) = 2 \hskip 1cm
+  \func{f}(c) = 3 \hskip 1cm \func{f}(d) = 4
+\end{align*}
+
+We can come up with a different mapping, if needed. For example, we might construct a new map $\func{g}$, like this:
+
+\begin{diagram}
+
+  % S
+  \node (S) at (-3, -1) {$\struct{S} = (\set{A}, \order/_{\set{A}})$};
+  \node[odot] (a) at (-3, 0) [label=left:{$a$}] {};
+  \node[odot] (b) at (-3, 1) [label=left:{$b$}] {};
+  \node[odot] (c) at (-3, 2) [label=left:{$c$}] {};
+  \node[odot] (d) at (-2, 2) [label=below right:{$d$}] {};
+  
+  \draw (a) to (b);
+  \draw (b) to (c);
+  \draw (b) to (d);
+
+  % T
+  \node (T) at (3, -1) {$\struct{T} = (\set{B}, \order/_{\set{B}})$};
+  \node[odot] (1) at (3, 0) [label=above:{$1$}] {};
+  \node[odot] (2) at (2, 1) [label=above:{$2$}] {};
+  \node[odot] (3) at (4, 1) [label=right:{$3$}] {};
+  \node[odot] (4) at (4, 2) [label=right:{$4$}] {};
+  
+  \draw (1) to (2);
+  \draw (1) to (3);
+  \draw (3) to (4);
+
+  % g
+  \node (g) at (0, 3.5) {$\funcsig{g}{\struct{S}}{\struct{T}}$};
+  \draw[->,space,dashed] (a) to (1);
+  \draw[->,spaced,dashed] (b) to (1);
+  \draw[->,spaced,dashed] (c) to[out=30,in=135] (2);
+  \draw[->,spaced,dashed] (d) to[out=30,in=135] (3);
+  
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Notice that $\func{g}$ maps $a$ and $b$ to the same point $1$. Hence, $\func{g}$ is not \vocab{injective}. Also, $\func{g}$ does not cover all of the points in $\struct{T}$ (in particular, nothing is mapped to $4$). Hence, $\func{g}$ is not \vocab{surjective}.
+  \end{remark}
+\end{aside}
+
+That is, we might define $\func{g}$ like this:
+
+\begin{align*}
+  \func{g}(a) = 1 \hskip 1cm \func{g}(b) = 1 \hskip 1cm
+  \func{g}(c) = 2 \hskip 1cm \func{g}(d) = 3
+\end{align*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Order-preserving Maps}
+
+\begin{terminology}
+  Given two ordered sets $\struct{S}$ and $\struct{T}$, a map from $\struct{S}$ to $\struct{T}$ is an \vocab{order-preserving map} if it keeps the ordering intact when we follow the arrows from $\struct{S}$ to $\struct{T}$. If $x$ comes before $y$ in the ordering of $\struct{S}$, then the point that $x$ is mapped to in $\struct{T}$ should come before the point that $y$ is mapped to in $\struct{T}$ as well.
+\end{terminology}
+
+\newthought{Not all maps between structures} are equal. Some preserve the ordering. A map from one ordered set to another \vocab{preserves the order} of the first set if it keeps the ordering intact when we use the map and follow the points from the one set to the other. If the points are ordered in the first set, then the points at the other end of the mapping should have the same ordering.
+
+Consider the map $\func{g}$ from earlier. Here it is, pictured again:
+
+\begin{diagram}
+
+  % S
+  \node[odot] (a) at (-3, 0) [label=left:{$a$}] {};
+  \node[odot] (b) at (-3, 1) [label=left:{$b$}] {};
+  \node[odot] (c) at (-3, 2) [label=left:{$c$}] {};
+  \node[odot] (d) at (-2, 2) [label=below right:{$d$}] {};
+  
+  \draw (a) to (b);
+  \draw (b) to (c);
+  \draw (b) to (d);
+
+  % T
+  \node[odot] (1) at (3, 0) [label=above:{$1$}] {};
+  \node[odot] (2) at (2, 1) [label=above:{$2$}] {};
+  \node[odot] (3) at (4, 1) [label=right:{$3$}] {};
+  \node[odot] (4) at (4, 2) [label=right:{$4$}] {};
+  
+  \draw (1) to (2);
+  \draw (1) to (3);
+  \draw (3) to (4);
+
+  % g
+  \draw[->,space,dashed] (a) to (1);
+  \draw[->,spaced,dashed] (b) to (1);
+  \draw[->,spaced,dashed] (c) to[out=30,in=135] (2);
+  \draw[->,spaced,dashed] (d) to[out=30,in=135] (3);
+  
+\end{diagram}
+
+Is $\func{g}$ an \vocab{order-preserving} map? To check, we need to make sure that $\func{g}$ preserves the ordering of every pair of points in $\struct{S}$.
+
+\begin{aside}
+  \begin{remark}
+    To \vocab{prove} that a map from one ordered set to another is order-preserving, we need to show that it preserves the order of \emph{every} pair of points in the first set.
+  \end{remark}
+\end{aside}
+
+First, let's check $b$ and $c$. We can see from the picture that $\ordered{\set{A}}{b}{c}$ in $\struct{S}$. Let's see if $\func{g}$ preserves this order. What does $\func{g}$ map $b$ and $c$ too? That is, what are $\func{g}(b)$ and $\func{g}(c)$? If we follow the arrows, we can see that they are these:
+
+\begin{equation*}
+  \func{g}(b) = 1 \hskip 3cm \func{g}(c) = 2
+\end{equation*}
+
+Let's highlight just this part of the mapping in the picture, so we can see it clearly:
+
+\begin{diagram}
+
+  % S
+  \node[odot,gray] (a) at (-3, 0) [label=left:{$\textcolor{gray}{a}$}] {};
+  \node[odot] (b) at (-3, 1) [label=left:{$b$}] {};
+  \node[odot] (c) at (-3, 2) [label=left:{$c$}] {};
+  \node[odot,gray] (d) at (-2, 2) [label=below right:{$\textcolor{gray}{d}$}] {};
+  
+  \draw[lightgray] (a) to (b);
+  \draw (b) to (c);
+  \draw[lightgray] (b) to (d);
+
+  % T
+  \node[odot] (1) at (3, 0) [label=above:{$1$}] {};
+  \node[odot] (2) at (2, 1) [label=above:{$2$}] {};
+  \node[odot,gray] (3) at (4, 1) [label=right:{$\textcolor{gray}{3}$}] {};
+  \node[odot,gray] (4) at (4, 2) [label=right:{$\textcolor{gray}{4}$}] {};
+  
+  \draw (1) to (2);
+  \draw[lightgray] (1) to (3);
+  \draw[lightgray] (3) to (4);
+
+  % g
+  \draw[->,space,dashed,gray] (a) to (1);
+  \draw[->,spaced,dashed] (b) to (1);
+  \draw[->,spaced,dashed] (c) to[out=30,in=135] (2);
+  \draw[->,spaced,dashed,gray] (d) to[out=30,in=135] (3);
+  
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    We can see that $\func{g}$ maps $b \mapsto 1$ and $c \mapsto 2$. But $b$ is prior to $c$ in the ordering of $\struct{S}$, and $1$ is similarly prior to $2$ in the ordering of $\struct{T}$. So $g$ preserves the ordering of $b$ and $c$.
+  \end{remark}
+\end{aside}
+
+Are the points $1$ and $2$ in the same order as $b$ and $c$? Yes they are. In $\struct{S}$, we can see that $\ordered{\set{A}}{b}{c}$, and in $\struct{T}$, we can see that $\ordered{\set{B}}{1}{2}$. So, we can conclude that $\func{g}$ does preserve the ordering between $b$ and $c$ when we follow the arrows over to $\struct{T}$. To put it concisely: $\ordered{\set{A}}{b}{c}$, and also $\ordered{\set{B}}{\func{g}(b)}{\func{g}(c)}$.
+
+Next, let's check $b$ and $d$. What does $\func{g}$ map $b$ and $d$ too? What are $\func{g}(b)$ and $\func{g}(d)$? Here is the mapping:
+
+\begin{aside}
+  \begin{remark}
+    We can see that $\func{g}$ maps $b \mapsto 1$ and $d \mapsto 3$. But $b$ is prior to $d$ in the ordering of $\struct{S}$, and $1$ is similarly prior to $3$ in the ordering of $\struct{T}$. So $g$ preserves the ordering of $b$ and $d$ as well.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  % S
+  \node[odot,gray] (a) at (-3, 0) [label=left:{$\textcolor{gray}{a}$}] {};
+  \node[odot] (b) at (-3, 1) [label=left:{$b$}] {};
+  \node[odot,gray] (c) at (-3, 2) [label=left:{$\textcolor{gray}{c}$}] {};
+  \node[odot] (d) at (-2, 2) [label=below right:{$d$}] {};
+  
+  \draw[lightgray] (a) to (b);
+  \draw[lightgray] (b) to (c);
+  \draw (b) to (d);
+
+  % T
+  \node[odot] (1) at (3, 0) [label=above:{$1$}] {};
+  \node[odot,gray] (2) at (2, 1) [label=above:{$\textcolor{gray}{2}$}] {};
+  \node[odot] (3) at (4, 1) [label=right:{$3$}] {};
+  \node[odot,gray] (4) at (4, 2) [label=right:{$\textcolor{gray}{4}$}] {};
+  
+  \draw[lightgray] (1) to (2);
+  \draw (1) to (3);
+  \draw[lightgray] (3) to (4);
+
+  % g
+  \draw[->,space,dashed,gray] (a) to (1);
+  \draw[->,spaced,dashed] (b) to (1);
+  \draw[->,spaced,dashed,gray] (c) to[out=30,in=135] (2);
+  \draw[->,spaced,dashed] (d) to[out=30,in=135] (3);
+  
+\end{diagram}
+
+We can see that $\func{g}$ preserves the order between $b$ and $d$ as well. In $\struct{S}$, $\ordered{\set{A}}{b}{d}$, and in $\struct{T}$, $\ordered{\set{B}}{\func{g}(b)}{\func{g}(d)}$, i.e., $\ordered{\set{B}}{1}{3}$.
+
+Next, let's check $a$ and $b$. Does $\func{g}$ preserve the order between $a$ and $b$? Let's look at the picture:
+
+\begin{aside}
+  \begin{remark}
+    We can see that $\func{g}$ maps $a \mapsto 1$ and $b \mapsto 1$. But $a$ is no higher than $b$ in the ordering of $\struct{S}$, and $1$ is similarly no higher than $1$ (itself) in the ordering of $\struct{T}$. So we can see that $g$ preserves the ordering of $a$ and $b$ too.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  % S
+  \node[odot] (a) at (-3, 0) [label=left:{$a$}] {};
+  \node[odot] (b) at (-3, 1) [label=left:{$b$}] {};
+  \node[odot,gray] (c) at (-3, 2) [label=left:{$\textcolor{gray}{c}$}] {};
+  \node[odot,gray] (d) at (-2, 2) [label=below right:{$\textcolor{gray}{d}$}] {};
+  
+  \draw (a) to (b);
+  \draw[lightgray] (b) to (c);
+  \draw[lightgray] (b) to (d);
+
+  % T
+  \node[odot] (1) at (3, 0) [label=above:{$1$}] {};
+  \node[odot,gray] (2) at (2, 1) [label=above:{$\textcolor{gray}{2}$}] {};
+  \node[odot,gray] (3) at (4, 1) [label=right:{$\textcolor{gray}{3}$}] {};
+  \node[odot,gray] (4) at (4, 2) [label=right:{$\textcolor{gray}{4}$}] {};
+  
+  \draw[lightgray] (1) to (2);
+  \draw[lightgray] (1) to (3);
+  \draw[lightgray] (3) to (4);
+
+  % g
+  \draw[->,space,dashed] (a) to (1);
+  \draw[->,spaced,dashed] (b) to (1);
+  \draw[->,spaced,dashed,gray] (c) to[out=30,in=135] (2);
+  \draw[->,spaced,dashed,gray] (d) to[out=30,in=135] (3);
+  
+\end{diagram}
+
+We can see that $\func{g}$ maps $a$ and $b$ to the same point in $\struct{T}$, namely $1$. In $\struct{S}$, $\ordered{\set{A}}{a}{b}$, but is $\ordered{\set{B}}{\func{g}(a)}{\func{g}(b)}$ in $\struct{T}$? Yes, it is, because $\func{f}(a) = 1$ and $\func{f}(b) = 1$, and $\ordered{\set{B}}{1}{1}$. So $\func{f}$ preserves the order between $a$ and $b$ too.
+
+\begin{aside}
+  \begin{remark}
+    To be completely thorough, we actually need to check that $\func{g}$ preserves the order for \emph{every} pairing. So we also need to check whether $\func{g}$ preserves the ordering between $a$ and $c$, and also between $a$ and $d$. But if you work it out, you will see that it does. In $\struct{S}$, $\ordered{\set{A}}{a}{c}$, and in $\struct{T}$, it is also true that $\ordered{\set{B}}{\func{g}(a)}{\func{g}(c)}$, i.e., $\ordered{\set{B}}{1}{2}$. Likewise for $a$ and $d$.
+  \end{remark}
+\end{aside}
+
+We can see from all this that $\func{g}$ does indeed preserve the order of $\struct{S}$ in the way that it maps the points to $\struct{T}$. The ordering on the left side of the arrows is preserved over on the right side of the arrows, so $\func{g}$ is an \vocab{order-preserving map}.
+
+Let's put down a definition for order-preserving maps. All we need to say is that if we have two ordered sets $\struct{S}$ and $\struct{T}$, and we have a map $\funcsig{f}{\struct{S}}{\struct{T}}$, then $\func{f}$ is an order-preserving map if it preserves the order of every two points. 
+
+\begin{fdefinition}[Order-preserving maps]
+  For any two ordered sets $\struct{S} = (\set{A}, \order/_{\set{A}})$ and $\struct{T} = (\set{B}, \order/_{\set{B}})$, and any map $\funcsig{f}{\struct{S}}{\struct{T}}$, we will say that $\func{f}$ is an \vocab{order-preserving map} if whenever $\ordered{\set{A}}{x}{y}$, then $\ordered{\set{B}}{\func{f}(x)}{\func{f}(y)}$ also.
+\end{fdefinition}
+
+\begin{example}
+
+Let's look at a map that fails to preserve the ordering. Consider this mapping again:
+
+\begin{diagram}
+
+  % S
+  \node (S) at (-3, -1) {$\struct{S} = (\set{A}, \order/_{\set{A}})$};
+  \node[odot] (a) at (-3, 0) [label=left:{$a$}] {};
+  \node[odot] (b) at (-3, 1) [label=left:{$b$}] {};
+  \node[odot] (c) at (-3, 2) [label=left:{$c$}] {};
+  \node[odot] (d) at (-2, 2) [label=below right:{$d$}] {};
+  
+  \draw (a) to (b);
+  \draw (b) to (c);
+  \draw (b) to (d);
+
+  % T
+  \node (T) at (3, -1) {$\struct{T} = (\set{B}, \order/_{\set{B}})$};
+  \node[odot] (1) at (3, 0) [label=above:{$1$}] {};
+  \node[odot] (2) at (2, 1) [label=above:{$2$}] {};
+  \node[odot] (3) at (4, 1) [label=right:{$3$}] {};
+  \node[odot] (4) at (4, 2) [label=right:{$4$}] {};
+  
+  \draw (1) to (2);
+  \draw (1) to (3);
+  \draw (3) to (4);
+
+  % f
+  \node (f) at (0, 3.5) {$\funcsig{f}{\struct{S}}{\struct{T}}$};
+  \draw[->,spaced,dashed] (a) to (1);
+  \draw[->,spaced,dashed] (b) to (2);
+  \draw[->,spaced,dashed] (c) to[out=30,in=135] (3);
+  \draw[->,spaced,dashed] (d) to (4);
+  
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    To \vocab{prove} that a map is not order-preserving, we only need to find \vocab{one} pair of points from the first structure whose order is not preserved.
+  \end{remark}
+\end{aside}
+
+To show that a map is not order-preserving, we only need to find one pair of points from $\struct{S}$ where it fails to preserve the order. We can do this with $b$ and $d$. Let's focus on the mapping of $b$ and $d$:
+
+\begin{diagram}
+
+  % S
+  \node[odot] (a) at (-3, 0) [label=left:{$\textcolor{gray}{a}$}] {};
+  \node[odot] (b) at (-3, 1) [label=left:{$b$}] {};
+  \node[odot] (c) at (-3, 2) [label=left:{$\textcolor{gray}{c}$}] {};
+  \node[odot] (d) at (-2, 2) [label=below right:{$d$}] {};
+  
+  \draw[lightgray] (a) to (b);
+  \draw[lightgray] (b) to (c);
+  \draw (b) to (d);
+
+  % T
+  \node[odot] (1) at (3, 0) [label=above:{$\textcolor{gray}{1}$}] {};
+  \node[odot] (2) at (2, 1) [label=above:{$2$}] {};
+  \node[odot] (3) at (4, 1) [label=right:{$\textcolor{gray}{3}$}] {};
+  \node[odot] (4) at (4, 2) [label=right:{$4$}] {};
+  
+  \draw[lightgray] (1) to (2);
+  \draw[lightgray] (1) to (3);
+  \draw[lightgray] (3) to (4);
+
+  % f
+  \draw[->,spaced,dashed,gray] (a) to (1);
+  \draw[->,spaced,dashed] (b) to (2);
+  \draw[->,spaced,dashed,gray] (c) to[out=30,in=135] (3);
+  \draw[->,spaced,dashed] (d) to (4);
+  
+\end{diagram}
+
+Does $\func{f}$ preserve the ordering? No it does not. We can see in the picture that, in $\struct{S}$, $\ordered{\set{A}}{b}{d}$, yet in $\struct{T}$, it is not the case that $\ordered{\set{B}}{\func{f}(b)}{\func{f}(d)}$. In fact, $\func{f}(b)$ (namely, $2$) and $\func{f}(d)$ (namely, $4$) are \vocab{incomparable}. So, $\func{f}$ does not preserve the ordering, and hence $\func{f}$ is \emph{not} an order-preserving map.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Order Isomorphisms}
+
+\newthought{As we saw in \chapterref{ch:function-isomorphism}}, two sets $\set{A}$ and $\set{B}$ are \vocab{isomorphic} if they have the same shape, which we denote by writing: 
+
+\begin{equation*}
+  \set{A} \isomorphic/ \set{B}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:kinds-of-functions} that a function $\func{f}$ is \vocab{bijective} if it is both injective and surjective, i.e., it puts the elements from the domain into a one-to-one correspondence with the elements of the codomain. Recall from \chapterref{ch:function-isomorphism} that $\func{f}$ is \vocab{reversible} only if we can construct an \vocab{inverse} function $\invfunc{f}$ that maps the end-points of $\func{f}$ right back to their starting points. An \vocab{isomporphism} is just a reversible bijective function.
+  \end{remark}
+\end{aside}
+
+We know that $\set{A}$ and $\set{B}$ have the same shape if we can construct an \vocab{isomorphism} between them (i.e., a \vocab{reversible bijective function}). Such a function shows us that each element from the first set has a counterpart ``twin'' in the other set (and vice versa). Hence, the two sets differ only in the names of their elements.
+
+Ordered sets can also be isomorphic (i.e., have the same shape) in this way. An isomorphism between ordered sets is much the same as an isomorphism between unordered sets, except that it must \emph{also} \vocab{preserve the ordering} (and its inverse must preserve the ordering too).
+
+Hence, two ordered sets are isomorphic if we can construct an \vocab{order-preserving} isomorphism between them, i.e., a reversible bijective function that preserves their orderings in both directions.
+
+\begin{fexample}
+
+Consider these two ordered sets:
+
+\begin{aside}
+  \begin{remark}
+    We can tell just by looking at these two structures that they have the same shape. But can we be more \vocab{precise} about what it means to say that they ``have the same shape''? Yes, we can, by using the notion of an order-isomorphism. If each point in the left set has a counterpart ``twin'' in the right set that stands in exactly the same ordering arrangement, then it is clear that these two ordered sets have exactly the same structure (i.e., they are \vocab{isomorphic}).
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (S) at (-3, -1) {$\struct{S} = (\set{A}, \order/_{\set{A}})$};
+  \node[odot] (a) at (-3, 0) [label=below:{$a$}] {};
+  \node[odot] (b) at (-3.75, 1) [label=left:{$b$}] {};
+  \node[odot] (c) at (-2.25, 1) [label=right:{$c$}] {};
+  \node[odot] (d) at (-3, 2) [label=left:{$d$}] {};
+  \node[odot] (e) at (-3, 3) [label=left:{$e$}] {};
+  \draw (a) to (b);
+  \draw (a) to (c);
+  \draw (b) to (d);
+  \draw (c) to (d);
+  \draw (d) to (e);
+  
+  \node (T) at (3, -1) {$\struct{T} = (\set{B}, \order/_{\set{B}})$};
+  \node[odot] (1) at (3, 0) [label=below:{$1$}] {};
+  \node[odot] (2) at (2.25, 1) [label=left:{$2$}] {};
+  \node[odot] (3) at (3.75, 1) [label=right:{$3$}] {};
+  \node[odot] (4) at (3, 2) [label=right:{$4$}] {};
+  \node[odot] (5) at (3, 3) [label=right:{$5$}] {};
+  \draw (1) to (2);
+  \draw (1) to (3);
+  \draw (2) to (4);
+  \draw (3) to (4);
+  \draw (4) to (5);
+
+\end{diagram}
+
+Let's add an order-preserving bijective map from $\struct{S}$ to $\struct{T}$:
+
+\begin{diagram}
+
+  \node (S) at (-3, -1) {$\struct{S} = (\set{A}, \order/_{\set{A}})$};
+  \node[odot] (a) at (-3, 0) [label=below:{$a$}] {};
+  \node[odot] (b) at (-3.75, 1) [label=left:{$b$}] {};
+  \node[odot] (c) at (-2.25, 1) [label=left:{$c$}] {};
+  \node[odot] (d) at (-3, 2) [label=left:{$d$}] {};
+  \node[odot] (e) at (-3, 3) [label=left:{$e$}] {};
+  \draw (a) to (b);
+  \draw (a) to (c);
+  \draw (b) to (d);
+  \draw (c) to (d);
+  \draw (d) to (e);
+  
+  \node (T) at (3, -1) {$\struct{T} = (\set{B}, \order/_{\set{B}})$};
+  \node[odot] (1) at (3, 0) [label=below:{$1$}] {};
+  \node[odot] (2) at (2.25, 1) [label=right:{$2$}] {};
+  \node[odot] (3) at (3.75, 1) [label=right:{$3$}] {};
+  \node[odot] (4) at (3, 2) [label=right:{$4$}] {};
+  \node[odot] (5) at (3, 3) [label=right:{$5$}] {};
+  \draw (1) to (2);
+  \draw (1) to (3);
+  \draw (2) to (4);
+  \draw (3) to (4);
+  \draw (4) to (5);
+  
+  \node (f) at (0, 4) {$\funcsig{f}{\struct{S}}{\struct{T}}$};
+  \draw[->,spaced,dashed] (e) to[out=15,in=165] (5);
+  \draw[->,spaced,dashed] (d) to[out=20,in=160] (4);
+  \draw[->,space,dashed] (c) to[out=30,in=150] (3);
+  \draw[->,space,dashed] (b) to[out=30,in=150] (2);
+  \draw[->,spaced,dashed] (a) to[out=15,in=165] (1);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:function-isomorphisms} that a function $\func{f}$ is \vocab{reversible} if we can construct an \vocab{inverse} function, which maps the endpoints of $\func{f}$ back to their starting points.
+  \end{remark}
+\end{aside}
+
+This map is (i) bijective, and (ii) order preserving. But it is also \vocab{reversible}. We can see this because we can construct an order-preserving inverse $\invfuncsig{f}{\struct{T}}{\struct{S}}$ which maps all the end-points of $\func{f}$ right back to their starting points:
+
+\begin{diagram}
+
+  \node (S) at (-3, -1) {$\struct{S} = (\set{A}, \order/_{\set{A}})$};
+  \node[odot] (a) at (-3, 0) [label=below:{$a$}] {};
+  \node[odot] (b) at (-3.75, 1) [label=left:{$b$}] {};
+  \node[odot] (c) at (-2.25, 1) [label=left:{$c$}] {};
+  \node[odot] (d) at (-3, 2) [label=left:{$d$}] {};
+  \node[odot] (e) at (-3, 3) [label=left:{$e$}] {};
+  \draw (a) to (b);
+  \draw (a) to (c);
+  \draw (b) to (d);
+  \draw (c) to (d);
+  \draw (d) to (e);
+  
+  \node (T) at (3, -1) {$\struct{T} = (\set{B}, \order/_{\set{B}})$};
+  \node[odot] (1) at (3, 0) [label=below:{$1$}] {};
+  \node[odot] (2) at (2.25, 1) [label=right:{$2$}] {};
+  \node[odot] (3) at (3.75, 1) [label=right:{$3$}] {};
+  \node[odot] (4) at (3, 2) [label=right:{$4$}] {};
+  \node[odot] (5) at (3, 3) [label=right:{$5$}] {};
+  \draw (1) to (2);
+  \draw (1) to (3);
+  \draw (2) to (4);
+  \draw (3) to (4);
+  \draw (4) to (5);
+
+  \node (f) at (0, 4) {$\funcsig{f}{\struct{S}}{\struct{T}}$};
+  \draw[->,spaced,dashed] (e) to[out=15,in=165] (5);
+  \draw[->,spaced,dashed] (d) to[out=20,in=160] (4);
+  \draw[->,space,dashed] (c) to[out=30,in=150] (3);
+  \draw[->,space,dashed] (b) to[out=30,in=150] (2);
+  \draw[->,spaced,dashed] (a) to[out=15,in=165] (1);
+
+  \node (f) at (0, -0.35) {$\invfuncsig{f}{\struct{T}}{\struct{S}}$};
+  \draw[->,spaced,dashed] (3, 2.9) to[out=170,in=10] (-3, 2.9);
+  \draw[->,spaced,dashed] (3, 2.1) to[out=155,in=25] (-3, 2.1);
+  \draw[->,space,dashed] (3.65, 0.9) to[out=150,in=30] (-2.15, 0.9);
+  \draw[->,space,dashed] (2.15, 0.9) to[out=150,in=30] (-3.65, 0.9);
+  \draw[->,spaced,dashed] (3, -0.1) to[out=170,in=10] (-3, -0.1);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    In fact, $\func{f}$ is an isomorphism, but so is $\invfunc{f}$, because $\func{f}$ is the \vocab{inverse} of $\invfunc{f}$. Hence, we can also say that $\struct{T} \isomorphic/ \struct{S}$.
+  \end{remark}
+\end{aside}
+
+Hence, $\func{f}$ is an \vocab{isomorphism}. And since there is an isomorphism between $\struct{S}$ and $\struct{T}$, we can conclude that $\struct{S}$ and $\struct{T}$ are \vocab{isomorphic}, i.e., $\struct{S} \isomorphic/ \struct{T}$.
+
+\end{fexample}
+
+Let's write down a definition for order isomorphisms.
+
+\begin{fdefinition}[Order isomorphism]
+  \label{def:order-isomorphism}
+  For any ordered sets $\struct{S}, \struct{T}$ and any map $\funcsig{f}{\struct{S}}{\struct{T}}$, we will say that $\func{f}$ is an \vocab{order isomorphism} if $\func{f}$ is a reversible, bijective function that preserves the ordering of $\struct{S}$, and whose inverse $\invfuncsig{f}{\struct{T}}{\struct{S}}$ preserves the ordering of $\struct{T}$.
+\end{fdefinition}
+
+\begin{terminology}
+  Given two ordered sets $\struct{S}$ and $\struct{T}$, a function $\funcsig{f}{\struct{S}}{\struct{T}}$ is an \vocab{order isomorphism} if it is a reversible, bijective, order-preserving map. If there is an isomorphism between $\struct{S}$ and $\struct{T}$, then $\struct{S}$ and $\struct{T}$ are \vocab{isomorphic}, which we denote as $\struct{S} \isomorphic/ \struct{T}$.
+\end{terminology}
+
+If there is an order isomorphism between two structures $\struct{S}$ and $\struct{T}$, then we say they are \vocab{isomorphic}, or that they are the same \vocab{up to isomorphism}. To denote this, we write $\struct{S} \isomorphic/ \struct{T}$. Let's put this down as a definition too.
+
+\begin{fdefinition}[Isomorphic Ordered Sets]
+  \label{def:isomorphic-ordered-sets}
+  For any ordered sets $\struct{S}$ and $\struct{T}$, we will say that $\struct{S}$ and $\struct{T}$ are \vocab{isomorphic} (or synonymously: the same \vocab{up to isomorphism}) if there is an order isomorphism $\funcsig{f}{\struct{S}}{\struct{T}}$. To denote that $\struct{S}$ and $\struct{T}$ are isomorphic, we will write this: $\struct{S} \isomorphic/ \struct{T}$.
+\end{fdefinition}
+
+\begin{fexample}
+
+Let us look at an example of an order-preserving map that is \emph{not} an isomorphism. Consider the following two ordered sets:
+
+\begin{aside}
+  \begin{remark}
+    If you squint hard enough at this picture, you can see that $\struct{S}$ can be mapped to $\struct{T}$ and the order can be preserved. All that we need to do is collapse $b$ and $c$. Picture putting thumb and forefinger on the outsides of $b$ and $c$, and then squeezing the diamond shape until it collapses inwards and $b$ and $c$ are smashed together.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (S) at (-3, -1) {$\struct{S} = (\set{A}, \order/_{\set{A}})$};
+  \node[odot] (a) at (-3, 0) [label=below:{$a$}] {};
+  \node[odot] (b) at (-3.75, 1) [label=left:{$b$}] {};
+  \node[odot] (c) at (-2.25, 1) [label=right:{$c$}] {};
+  \node[odot] (d) at (-3, 2) [label=left:{$d$}] {};
+  \node[odot] (e) at (-3, 3) [label=left:{$e$}] {};
+  \draw (a) to (b);
+  \draw (a) to (c);
+  \draw (b) to (d);
+  \draw (c) to (d);
+  \draw (d) to (e);
+  
+  \node (T) at (3, -1) {$\struct{T} = (\set{B}, \order/_{\set{B}})$};
+  \node[odot] (1) at (3, 0) [label=right:{$1$}] {};
+  \node[odot] (2) at (3, 1) [label=right:{$2$}] {};
+  \node[odot] (3) at (3, 2) [label=right:{$3$}] {};
+  \node[odot] (4) at (3, 3) [label=right:{$4$}] {};
+  \draw (1) to (2);
+  \draw (2) to (3);
+  \draw (3) to (4);
+
+\end{diagram}
+
+Let's add an order-preserving map from $\struct{S}$ to $\struct{T}$:
+
+\begin{diagram}
+
+  \node (S) at (-3, -1) {$\struct{S} = (\set{A}, \order/_{\set{A}})$};
+  \node[odot] (a) at (-3, 0) [label=below:{$a$}] {};
+  \node[odot] (b) at (-3.75, 1) [label=left:{$b$}] {};
+  \node[odot] (c) at (-2.25, 1) [label=left:{$c$}] {};
+  \node[odot] (d) at (-3, 2) [label=left:{$d$}] {};
+  \node[odot] (e) at (-3, 3) [label=left:{$e$}] {};
+  \draw (a) to (b);
+  \draw (a) to (c);
+  \draw (b) to (d);
+  \draw (c) to (d);
+  \draw (d) to (e);
+  
+  \node (T) at (3, -1) {$\struct{T} = (\set{B}, \order/_{\set{B}})$};
+  \node[odot] (1) at (3, 0) [label=right:{$1$}] {};
+  \node[odot] (2) at (3, 1) [label=right:{$2$}] {};
+  \node[odot] (3) at (3, 2) [label=right:{$3$}] {};
+  \node[odot] (4) at (3, 3) [label=right:{$4$}] {};
+  \draw (1) to (2);
+  \draw (2) to (3);
+  \draw (3) to (4);
+  
+  \node (f) at (0, 3.5) {$\funcsig{f}{\struct{S}}{\struct{T}}$};
+  \draw[->,spaced,dashed] (e) to (4);
+  \draw[->,spaced,dashed] (d) to (3);
+  \draw[->,spaced,dashed] (c) to (2);
+  \draw[->,spaced,dashed] (b) to[out=15,in=160] (2);
+  \draw[->,spaced,dashed] (a) to (1);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Notice that all of the points from $\struct{S}$ are mapped to a distinct ``parallel'' point in $\struct{T}$ except for $b$ and $c$. Those two points are mapped to one and the same point in $\struct{T}$, namely $2$. Hence, $\func{f}$ is not \vocab{bijective}. It therefore cannot be reversed, because it is impossible to draw a single arrow from $2$ back to both $b$ and $c$.
+  \end{remark}
+\end{aside}
+
+Notice that $\func{f}$ is an order-preserving map (verify this for yourself). But it is \vocab{not reversible}, because we cannot construct an inverse: $\func{f}$ ``collapses'' $b$ and $c$ into the same point in $\struct{T}$ (namely, $2$), so it is impossible to reverse $2$. There is no way to draw a single arrow from $2$ back to both $b$ and $c$.
+
+\begin{aside}
+  \begin{remark}
+    When we try to construct an inverse function that maps the points from the right side back to the left side, we run into a problem when we have to draw an arrow from $2$ back to the left side. Do we send $2$ to $b$, or $c$?
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[odot,gray] (a) at (-3, 0) [label=below:{$\textcolor{gray}{a}$}] {};
+  \node[odot] (b) at (-3.75, 1) [label=left:{$b$}] {};
+  \node[odot] (c) at (-2.25, 1) [label=left:{$c$}] {};
+  \node[odot,gray] (d) at (-3, 2) [label=left:{$\textcolor{gray}{d}$}] {};
+  \node[odot,gray] (e) at (-3, 3) [label=left:{$\textcolor{gray}{e}$}] {};
+  \draw[lightgray] (a) to (b);
+  \draw[lightgray] (a) to (c);
+  \draw[lightgray] (b) to (d);
+  \draw[lightgray] (c) to (d);
+  \draw[lightgray] (d) to (e);
+  
+  \node[odot,gray] (1) at (3, 0) [label=right:{$\textcolor{gray}{1}$}] {};
+  \node[odot] (2) at (3, 1) [label=right:{$2$}] {};
+  \node[odot,gray] (3) at (3, 2) [label=right:{$\textcolor{gray}{3}$}] {};
+  \node[odot,gray] (4) at (3, 3) [label=right:{$\textcolor{gray}{4}$}] {};
+  \draw[lightgray] (1) to (2);
+  \draw[lightgray] (2) to (3);
+  \draw[lightgray] (3) to (4);
+  
+  \draw[->,spaced,dashed,gray] (e) to (4);
+  \draw[->,spaced,dashed,gray] (d) to (3);
+  \draw[->,spaced,dashed] (c) to (2);
+  \draw[->,spaced,dashed] (b) to[out=15,in=160] (2);
+  \draw[->,spaced,dashed,gray] (a) to (1);
+  
+  \draw[->,space] (2) to[out=220,in=0] (0, 0.25);
+  \node at (-0.25, 0.25) {\textbf{??}};
+  \draw[->,space] (-0.5, 0.25) to[out=180,in=320] (b);
+  \draw[->,space] (-0.5, 0.25) to[out=180,in=320] (c);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Isomorphisms can only be constructed between ordered sets that have the same number of points. If one set has fewer points than the other, then some part of the structure will have to be \vocab{collapsed}. This is why isomorphisms must be bijective.
+  \end{remark}
+\end{aside}
+
+Hence, $\func{f}$ is not an isomorphism. In fact, there cannot be an isomorphism between $\struct{S}$ and $\struct{T}$ at all. They have a different number of points, so we cannot construct a bijective function between them. 
+
+\end{fexample}
+
+If there is an isomorphism between two ordered sets, then this means that each element in the one set has a counterpart ``twin'' in the other set, standing in exactly the same ordering relationships. Hence, if two ordered sets are isomorphic, they are essentially the \vocab{same structure}. It's just that the elements have different names. Isomorphisms give us a precise way to identify when two ordered sets are structurally identical, without getting sidetracked by names.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about \vocab{order isomorphisms} and \vocab{isomorphic} ordered sets.
+
+\begin{itemize}
+
+  \item Given two ordered sets $\struct{S} = (\set{A}, \order/_{\set{A}})$ and $\struct{T} = (\set{B}, \order/_{\set{B}})$, a map $\funcsig{f}{\struct{S}}{\struct{T}}$ is an \vocab{order isomorphism} if it is a reversible, bijective, order-preserving map. The inverse $\invfuncsig{f}{\struct{T}}{\struct{S}}$ must also preserve the order going the other direction.
+  
+  \item If there is an order isomorphism between two ordered sets $\struct{S}$ and $\struct{T}$, then $\struct{S}$ and $\struct{T}$ are \vocab{isomorphic}, which we denote like this: $\struct{S} \isomorphic/ \struct{T}$.
+
+\end{itemize}
+
+
+\end{document}

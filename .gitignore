@@ -1,0 +1,7 @@
+*.aux
+*.log
+*.gz
+*.DS_Store
+*.toc
+*synctex*
+source.pdf

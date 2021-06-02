@@ -1,0 +1,492 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Functions}
+\label{ch:functions}
+
+\newtopic{I}{n the last chapter}, we discussed \vocab{mappings}, which map keys to values. We initially looked at lookup tables and association lists, but we saw that both of those are really just two different ways to present the same thing. If we get a bit more abstract and think in terms of pictures, we can see that a mapping is really just a bunch of arrows that connect up the items in one bag to items in another bag.
+
+\begin{terminology}
+  A \vocab{function} or \vocab{map} is basically just a mapping from keys to values, much like the lookup tables or association lists we discussed in the last chapter.
+\end{terminology}
+
+In \math/, we typically call mappings \vocab{functions}, although many \mathers/ sensibly just call them \vocab{maps}. Whatever we choose to call them, functions are fundamental to \math/. It is practically impossible to look at any branch of \math/ without finding functions everywhere. In this chapter, we will more formally introduce the basic concepts, terminology, and notation that govern the use of functions.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Terminology and Notation}
+
+\newthought{A function} is a mapping, in exactly the same sense that we discussed in the last chapter. So, a function maps keys to values. But let's get a little more precise about this. 
+
+We saw that we can think of a function as a map from the items in one bag to the items in another bag, and of course the idea of a ``bag of items'' is just the idea of a \vocab{set}. So let us talk about this in terms of sets. Let us say that for any function, we start with two sets:
+
+\begin{terminology}
+  A \vocab{function} (or synonymously, a \vocab{map}) maps the items from one set to the items in another set. The first set is called the \vocab{domain} of the function, and the second set is called the \vocab{codomain} of the function. 
+\end{terminology}
+
+\begin{itemize}
+  \item We call the first set the \vocab{domain}.
+  \item We call the second set the \vocab{codomain}.
+\end{itemize}
+
+\noindent
+Then, we can describe a function like this:
+
+\begin{itemize}
+  \item A function maps \vocab{every element} from the domain to \vocab{one element} in the codomain. 
+\end{itemize}
+
+\begin{terminology}
+  We will use short names for functions like $\func{f}$, $\func{g}$, or $\func{h}$.
+\end{terminology}
+
+In the last chapter, we named our mapping ``$\e{directory}$.'' But this is a fairly long name to write out, and \mathers/ like short names. When \mathers/ name functions, they usually just pick the names $\func{f}$, $\func{g}$, and $\func{h}$. We will do this too.
+
+We can describe a function's \vocab{signature} in the same way that we described the signature of a mapping in the last chapter. For example, to denote the signature of a function $\func{f}$ that maps items in a set $A$ to items in a set $B$, write this:
+
+\begin{aside}
+  \begin{notation}
+    To denote the \vocab{signature} of a function, use this format:
+    
+    \begin{equation*}
+      \func{f} : \set{A} \rightarrow \set{B}
+    \end{equation*}
+    
+    where $\func{f}$ is the name of the function, and $\set{A}$ and $\set{B}$ are sets (the domain and codomain of the function, respectively).
+  \end{notation}
+\end{aside}
+
+\begin{equation*}
+  \func{f} : \set{A} \rightarrow \set{B}
+\end{equation*}
+
+Read that aloud as ``$\func{f}$ maps items from $\set{A}$ to items in $\set{B}$,'' or ``$\func{f}$ takes elements from $\set{A}$ to elements in $\set{B}$,'' or even more concisely, ``$\func{f}$ goes from $\set{A}$ to $\set{B}$.''
+
+For another example, suppose we want to describe the signature of a function $\func{g}$ that maps elements from a set $\set{C}$ to elements from another set $\set{D}$. To do that, write this:
+
+\begin{equation*}
+  \func{g} : \set{C} \rightarrow \set{D}
+\end{equation*}
+
+Read that aloud as ``$\func{g}$ goes from $\set{C}$ to $\set{D}$,'' or ``$\func{g}$ takes elements from $\set{C}$ to elements in $\set{D}$,'' or even ``$\func{g}$ maps items from $\set{C}$ to items in $\set{D}$.''
+
+We can also assert that a function maps a particular key to a particular value in the same way that we did for mappings in the last chapter. Suppose we want to assert that a function $\func{f}$ maps an item $x$ to the item $y$ (where $x$ is an item in the set $\set{A}$ and $y$ is an item in the set $\set{B}$). To do that, write this:
+
+\begin{aside}
+  \begin{notation}
+    To assert that a function $\func{f}$ maps an element $x$ to an element $y$, use this format:
+    
+    \begin{equation*}
+      \func{f}(x) = y
+    \end{equation*}
+    
+    where $\func{f}$ is the name of the function, $x$ is an element from the domain, and $y$ is the element in the codomain that $\func{f}$ maps $x$ to.
+  \end{notation}
+\end{aside}
+
+\begin{equation*}
+  \func{f}(x) = y
+\end{equation*}
+
+Read that aloud like this: ``$\func{f}$ maps $x$ to $y$.'' \Mathers/ also read that like this ``$\func{f}$ applied to $x$ yields $y$,'' or more concisely, ``$\func{f}$ of $x$ is $y$.''
+
+In the last chapter, we pointed out that an expression like ``$\e{directory(T.~Haslinger)}$'' is just a synonym for the phone number that the directory associates with ``$\e{T.~Haslinger}$.'' The same applies here. Take this expression:
+
+\begin{equation*}
+  \func{f}(x)
+\end{equation*}
+
+\begin{aside}
+  \begin{notation}
+    This expression
+    
+    \begin{equation*}
+      \func{f}(x)
+    \end{equation*}
+    
+    is pronounced ``$\func{f}$ of $x$'' or ``$\func{f}$ applied to $x$.'' It is a synonym for the value that $\func{f}$ associates with $x$.
+  \end{notation}
+\end{aside}
+
+Read that aloud as ``$\func{f}$ applied to $x$,'' or ``$\func{f}$ of $x$,'' or ``the value that $\func{f}$ gives for $x$.'' The expression ``$\func{f}(x)$'' is just a synonym for the value $y$ that $\func{f}$ associates with $x$. So we can write the value directly if we like, i.e., ``$y$,'' but we can also write ``$\func{f}(x)$'' instead, and that means the same thing. Both expressions refer to $y$.
+
+From all of this, you can see that the terminology and notation for functions is pretty much exactly the same as what we used for lookup tables and association lists in the last chapter.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Definition}
+
+Now that we have established the basic terminology and notation, let us put down what we have said into a proper definition for functions.
+
+\begin{fdefinition}[Functions]
+  \label{def:function}
+  For any two sets $\set{A}$ and $\set{B}$, a \vocab{function} (or \vocab{map}) $\func{f}$ from $\set{A}$ to $\set{B}$ is a mapping which maps each element from $\set{A}$ to one element from $\set{B}$. To denote that $\func{f}$ maps elements from $\set{A}$ to elements from $\set{B}$, we will write $\func{f} : \set{A} \rightarrow \set{B}$, and we will call this the \vocab{signature} of $\func{f}$. To denote the element from $\set{B}$ that $\func{f}$ associates with $x$, we can write $\func{f}(x)$. To denote that $\func{f}$ maps $x \in A$ to $y \in B$, we will write $\func{f}(x) = y$.
+\end{fdefinition}
+
+\begin{aside}
+  \begin{remark}
+    Recall that sets are like containers: they hold things inside of them.
+  \end{remark}
+\end{aside}
+
+To help visualize this, let us draw some pictures. First, let us draw two sets. Since we can think of a set as a container, let's draw each set as a circle, as if to imagine that it is a bag that can hold things inside of it. We do not care what these sets are called just yet, so let's just pick the names $\set{A}$ and $\set{B}$. Here they are:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+\end{diagram}
+
+Now let's add some elements to these sets. We do not care exactly what the elements are yet, so we can just draw them as points scattered about inside their containers. Here are some random points put into each container:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) {};
+  \node[dot] (k2) at (-3.75, 0.5) {};
+  \node[dot] (k3) at (-3, -0.25) {};
+  \node[dot] (k4) at (-2.5, -1) {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) {};
+  \node[dot] (v2) at (2.25, 0.25) {};
+  \node[dot] (v3) at (3, -0.75) {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+\end{diagram}
+
+At this point, we can draw in a mapping. Here is one:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) {};
+  \node[dot] (k2) at (-3.75, 0.5) {};
+  \node[dot] (k3) at (-3, -0.25) {};
+  \node[dot] (k4) at (-2.5, -1) {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) {};
+  \node[dot] (v2) at (2.25, 0.25) {};
+  \node[dot] (v3) at (3, -0.75) {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v2);
+  \draw[->,spaced] (k4) -- (v3);
+
+\end{diagram}
+
+Let's give this map a name. Let's call it $\func{f}$. We'll write its name above the arrows:
+
+\begin{aside}
+  \begin{remark}
+    Pictures like this show us how $\func{f}$ maps each element from $\set{A}$ to an element from $\set{B}$. We can call this the \vocab{diagram} of $\func{f}$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) {};
+  \node[dot] (k2) at (-3.75, 0.5) {};
+  \node[dot] (k3) at (-3, -0.25) {};
+  \node[dot] (k4) at (-2.5, -1) {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) {};
+  \node[dot] (v2) at (2.25, 0.25) {};
+  \node[dot] (v3) at (3, -0.75) {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (func) at (0, 1.75) {$\func{f}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,spaced] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v2);
+  \draw[->,spaced] (k4) -- (v3);
+
+\end{diagram}
+
+It is important to note that, according to the definition of a funtion, a function must map \vocab{each point} in the first set to \vocab{one point} in the second set. Is that true for $\func{f}$? In the picture we just drew, we can see that $\func{f}$ does indeed map each element in $\set{A}$ to one element in $\set{B}$. 
+
+Here is the way to check that a mapping fully maps each element in the domain to one element in the codomain. Check these two things:
+
+\begin{aside}
+  \begin{remark}
+    A function maps \vocab{each point} in the domain to \vocab{one point} in the codomain. So, every point in the domain will have \emph{exactly one} arrow coming out of it. There cannot be points in the domain that have no arrows coming out of them, or more than one arrow coming out of them.
+  \end{remark}
+\end{aside}
+
+\begin{itemize}
+
+  \item Check that there is \vocab{exactly one arrow} coming out of each point in the domain set. This tells us that the function maps each point to \vocab{one element} in the codomain. If we saw \emph{two} arrows coming out of a single point in the domain, we would know that the mapping is trying to connect up a point in the first set to \emph{more than one} point in the second set, and that's not allowed. A function must map each point from the domain to \vocab{exactly one} point in the codomain.
+  
+  \item Check that the domain has \vocab{no arrowless points}, i.e., make sure that there are no points in the codomain which have no arrows coming out of them. The definition of a function says that a function must map \vocab{each point} in the domain to a point in the codomain. So, there can't be any points in the domain that don't have an arrow coming out of them. If you find a point in the domain that has no arrow coming out of it, then this mapping is not a genuine function.
+
+\end{itemize}
+
+Let's look at some examples. Consider this mapping:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) {};
+  \node[dot] (k2) at (-3.75, 0.5) {};
+  \node[dot] (k3) at (-3, -0.25) {};
+  \node[dot] (k4) at (-2.5, -1) {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) {};
+  \node[dot] (v2) at (2.25, 0.25) {};
+  \node[dot] (v3) at (3, -0.75) {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (func) at (0, 1.75) {$\func{g}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,space] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v2);
+  \draw[->,spaced] (k4) -- (v2);
+
+\end{diagram}
+
+Is $\func{g}$ a function? Yes, because each point in $\set{A}$ has exactly one arrow coming out of it. Notice that three of the points in $\set{A}$ point to the same point in $\set{B}$. This is allowed in a function. Nothing says that a function can't map multiple points in the domain to the same point in the codomain. 
+
+Notice also that there is a point in $\set{B}$ that has no arrows pointing at it. This is also allowed. Nothing says that the function has to cover all points in the codomain. Every point in the \emph{domain} must have an arrow coming out of it, but not every point in the \emph{codomain} needs an arrow pointing to it.
+
+Now consider this mapping, which we'll call $\func{h}$:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) {};
+  \node[dot] (k2) at (-3.75, 0.5) {};
+  \node[dot] (k3) at (-3, -0.25) {};
+  \node[dot] (k4) at (-2.5, -1) {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) {};
+  \node[dot] (v2) at (2.25, 0.25) {};
+  \node[dot] (v3) at (3, -0.75) {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (func) at (0, 1.75) {$\func{h}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,space] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v3);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    If not every point in the domain has an arrow coming out of it, we call the mapping a \vocab{partial function} or \vocab{partial mapping}.
+  \end{remark}
+\end{aside}
+
+Is $\func{h}$ a function? The answer is no, because one of the points in $\set{A}$ does not have an arrow coming out of it. What about this function, which we'll call $\func{k}$:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) {};
+  \node[dot] (k2) at (-3.75, 0.5) {};
+  \node[dot] (k3) at (-3, -0.25) {};
+  \node[dot] (k4) at (-2.5, -1) {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (codomain) at (3, 2) {$\set{B}$};
+  \node[dot] (v1) at (3.25, 1) {};
+  \node[dot] (v2) at (2.25, 0.25) {};
+  \node[dot] (v3) at (3, -0.75) {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (func) at (0, 1.75) {$\func{k}$};
+  \draw[->,spaced] (k1) -- (v1);
+  \draw[->,space] (k2) -- (v2);
+  \draw[->,spaced] (k3) -- (v2);
+  \draw[->,spaced] (k3) -- (v3);
+  \draw[->,spaced] (k4) -- (v3);
+
+\end{diagram}
+
+Is $\func{k}$ a function? The answer is no, because one of the points in $\set{A}$ has more than one arrow coming out of it. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Self-maps}
+
+As we have seen, functions map the elements from one set to elements of another set. So far, we have been looking at examples where those two sets are different, e.g., functions from $\set{A}$ to $\set{B}$. But there is no reason that a function cannot map elements from one set back to elements in that same set. In other words, there is no reason that we can't have a function from $\set{A}$ to $\set{A}$, with the following \vocab{signature}:
+
+\begin{aside}
+  \begin{remark}
+    There is no reason we cannot have self-map functions. That is, there is nothing to prevent us from constructing functions that map elements in a set back to other elements in that same set.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \func{f} : \set{A} \rightarrow \set{A}
+\end{equation*}
+
+To visualize this, we can draw $\set{A}$ twice:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0.5) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.25) [label=left:{$c$}] {};
+  \node[dot] (k4) at (-2.5, -1) [label=left:{$d$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (domain) at (3, 2) {$\set{A}$}; 
+  \node[dot] (v1) at (3.25, 1) [label=right:{$a$}] {};
+  \node[dot] (v2) at (2.25, 0.5) [label=right:{$b$}] {};
+  \node[dot] (v3) at (3, -0.25) [label=right:{$c$}] {};
+  \node[dot] (v4) at (3.5, -1) [label=right:{$d$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+\end{diagram}
+
+Then, we can draw arrows in. For example, here is one possible function from $\set{A}$ to $\set{A}$:
+
+\begin{aside}
+  \begin{remark}
+    If a function maps a set back to itself, e.g., $\func{f} : \set{A} \rightarrow \set{A}$, we can draw two copies of the set $\set{A}$, and add the lines. This is one way to depict such a self-mapping function.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0.5) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.25) [label=left:{$c$}] {};
+  \node[dot] (k4) at (-2.5, -1) [label=left:{$d$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (domain) at (3, 2) {$\set{A}$}; 
+  \node[dot] (v1) at (3.25, 1) [label=right:{$a$}] {};
+  \node[dot] (v2) at (2.25, 0.5) [label=right:{$b$}] {};
+  \node[dot] (v3) at (3, -0.25) [label=right:{$c$}] {};
+  \node[dot] (v4) at (3.5, -1) [label=right:{$d$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (func) at (0, 1.75) {$\func{f}$};
+  \draw[->,spaced] (k1) -- (v3);
+  \draw[->,space] (k2) -- (v1);
+  \draw[->,spaced] (k3) -- (v2);
+  \draw[->,spaced] (k4) -- (v4);
+
+\end{diagram}
+
+As an alternative way of drawing the same function, we can just draw $\set{A}$ one time, and then have the arrows loop back into the same set, to show which points from $\set{A}$ are mapped to which other points in $\set{A}$. Like this:
+
+\begin{aside}
+  \begin{remark}
+    Notice how this drawing depicts the same function 
+    $\func{f} : \set{A} \rightarrow \set{A}$ that we drew above with two copies of $\set{A}$. That is to say, it maps the same points in $\set{A}$ to the same other points in $\set{A}$. This is just a different way of drawing the same function.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=above right:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0.5) [label=right:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.25) [label=above:{$c$}] {};
+  \node[dot] (k4) at (-2.5, -1) [label=above right:{$d$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.6cm and 1.6cm);
+
+  \node (func) at (0, 0) {$\func{f}$};
+  \draw[->,spaced] (k1) to[looseness=5,out=0,in=0] (k3);
+  \draw[->,space] (k2) to[looseness=5,out=180,in=145] (k1);
+  \draw[->,spaced] (k3) to[looseness=5,out=220,in=200] (k2);
+  \draw[->,spaced] (k4) to[looseness=55,out=180,in=270] (k4);
+
+\end{diagram}
+
+There is a special self-map called the \vocab{identity function} (or synonymously the \vocab{identity map}). This function maps every element in a set back to the very same element. If we draw a picture of it, it looks like this:
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=above left:{$a$}] {};
+  \node[dot] (k2) at (-3.75, 0.5) [label=right:{$b$}] {};
+  \node[dot] (k3) at (-3, -0.25) [label=right:{$c$}] {};
+  \node[dot] (k4) at (-2.5, -1) [label=above right:{$d$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+  \draw[->,spaced] (k1) to[looseness=35,out=0,in=270] (k1);
+  \draw[->,spaced] (k2) to[looseness=35,out=220,in=120] (k2);
+  \draw[->,spaced] (k3) to[looseness=35,out=230,in=150] (k3);
+  \draw[->,spaced] (k4) to[looseness=35,out=180,in=270] (k4);
+
+\end{diagram}
+
+This picture makes it clear that the \vocab{identity function} for a set maps each element in that set back to itself.
+
+\begin{terminology}
+  For any set $\set{A}$, the \vocab{identity function} (or as a synonym the \vocab{identity map}) on the set $\set{A}$ is a function that maps each element in $\set{A}$ back to itself. To denote the identity function for $\set{A}$, we write $\func{id}_{\set{A}} : \set{A} \rightarrow \set{A}$.
+\end{terminology}
+
+By convention, we call an identity function $\func{id}$, and we add the name of the set it is an identity function for as a subscript. In this case, the set in question is $\set{A}$, so we would call this identity function $\func{id}_{\set{A}}$. Hence, the identity function for the set $\set{A}$ that we just drew is:
+
+\begin{equation*}
+  \func{id}_{\set{A}} : \set{A} \rightarrow \set{A}
+\end{equation*}
+
+Similarly, we would denote the identity functions for the sets $\set{B}$ and $\set{C}$ respectively, as follows: 
+
+\begin{equation*}
+  \func{id}_{\set{B}} : \set{B} \rightarrow \set{B} \hskip 3cm \func{id}_{\set{C}} : \set{C} \rightarrow \set{C}
+\end{equation*}
+
+Since an identity function maps each element of a set back to itself, the following is always true:
+
+\begin{aside}
+  \begin{remark}
+    Since an identity function maps every element in a set to itself, no matter which element in the set we pick, the identity function will give back the same element. Hence, in this example, $\func{id}_{\set{A}}(a) = a$, $\func{id}_{\set{A}}(b) = b$, $\func{id}_{\set{A}}(c) = c$, and $\func{id}_{\set{A}}(d) = d$.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \func{id}_{\set{A}}(x) = x
+\end{equation*}
+
+Read that expression aloud as ``The identity function $\func{id}_{\set{A}}$ applied to $x$ gives back $x$,'' or ``$\func{id}_{\set{A}}$ of $x$ is $x$,'' but replace ``$x$'' with any of the actual elements in $\set{A}$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about the formal definition of a function. We learned that:
+
+\begin{itemize}
+
+  \item A \vocab{function} (also called a \vocab{map}) $\func{f}$ is a mapping from one set $\set{A}$ to another set $\set{B}$. In particular, $\func{f}$ maps each element from $\set{A}$ to one element from $\set{B}$. 
+  
+  \item We denote the \vocab{signature} of a function $\func{f}$ from the set $\set{A}$ to the set $\set{B}$ like this: $\func{f}: \set{A} \rightarrow \set{B}$. We denote that $\func{f}$ maps an element $x$ in $\set{A}$ to an element $y$ in $\set{B}$ like this: $\func{f}(x) = y$. The expression $\func{f}(x)$ is a synonym for the element $y$ that $\func{f}$ associates with $x$. 
+  
+  \item Functions can also be constructed from a set $\set{A}$ to the same set $\set{A}$. For example, $\func{f} : \set{A} \rightarrow \set{A}$ is a function $\func{f}$ that maps each element of $\set{A}$ to another element in $\set{A}$.
+  
+  \item An \vocab{identity function} is a function that maps every element in a set to itself. We denote the signature of the identity function for a set $\set{A}$ like this: $\func{id}_{\set{A}} : \set{A} \rightarrow \set{A}$.   
+
+\end{itemize}
+
+\end{document}

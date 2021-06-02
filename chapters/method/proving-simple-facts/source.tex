@@ -1,0 +1,370 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Proving Simple Facts}
+
+\newtopic{I}{n the last chapter}, we started to develop a picture of \vocab{deductive reasoning}, which lies at the heart of the \vocab{mathematical method}. We learned that when a \mather/ sets out to perform an investigation of some topic, they establish some basic starting points: some definitions and axioms. Then, they use nothing but pure logic to draw out further conclusions.
+
+The conclusions that a \mather/ establishes through this process are called \vocab{theorems} (or sometimes \vocab{lemmas}). For every theorem (or lemma) that they discover, a \mather/ will always write down a description of the logical reasoning that takes you from the established starting points to the theorem. This description shows you how the theorem actually follows from the starting points, logically speaking. This description of the logical reasoning is called a \vocab{proof}.
+
+In the last chapter, we didn't talk much about what this process looks like. And we didn't talk much about what theorems and proofs look like either. When \mathers/ use ``pure logic'' to come up with theorems, and then write down proofs, what exactly does that look like? In this chapter, we are going to start looking at just this sort of thing.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A Trip to the Museum}
+
+\newthought{Let us begin with a made-up situation}. Alice, Bob, and Carolina are university students. They want to go to the Museum together, so they agree to meet there later in the day. They will use public transportation. Here is a map of the bus and subway routes:
+
+\begin{aside}
+  \vocab{Bus} routes are represented with dashed lines.
+  \vocab{Subway} routes are represented with solid lines.
+\end{aside}
+
+\begin{diagram}
+  \node[odot] (a) at (0, 0) [label=below:{Campus}] {};
+  \node[odot] (b) at (-0.75, 1.25) [label=left:{Bus Depot}] {};
+  \node[odot] (c) at (0.5, 2.5) [label=left:{Central Station}] {};
+  \node[odot] (d) at (-1, 4) [label=above:{Museum}] {};
+  \node[odot] (e) at (3, 4) [label=above:{Coffee shop}] {};
+  \node[odot] (f) at (4, 1) [label=right:{Sandwich shop}] {};
+  
+  \draw[->,space] (a) to[out=45,in=280] (c);
+  \draw[->,space,dashed] (a) to[out=130,in=290] (b);
+  \draw[->,space,dashed] (b) to[out=30,in=245] (c);
+  
+  \draw[->,space] (c) to[out=90,in=0] (d);
+  \draw[->,space,dashed] (c) to[out=120,in=270] (d);
+  
+  \draw[->,space,dashed] (c) to[out=5,in=250] (e);
+  \draw[->,space,dashed] (e) to[out=190,in=45] (c);
+  
+  \draw[->,space] (c) to[out=310,in=180] (f);
+  \draw[->,space] (f) to[out=145,in=340] (c);
+  
+\end{diagram}
+
+\begin{aside}
+  Each leg of a \vocab{bus ride} costs \$2.50, and each leg of a \vocab{subway ride} costs \$5.00.
+\end{aside}
+
+\noindent
+Each ride between two dots on the map costs a fixed amount: \$2.50 for the bus, and \$5.00 for the subway. So, for example, it costs \$5.00 to get from Campus to Central Station by bus (because it costs \$2.50 for the bus ride from Campus to the Bus Depot, and another \$2.50 for the ride from the Bus Depot to Central Station).
+
+At the start of the journey, Alice has \$7.50 pre-loaded on her public transit farecard, Bob has \$12.50, and Carolina has \$20.00. Each time they take a ride, the cost of that ride is subtracted from their total. So, for example, if Alice takes the bus from Campus to the Bus Depot, \$2.50 will be subtracted from her total, and she will be left with \$5.00 on her farecard.
+
+\begin{aside}
+  In total, \vocab{Alice} has \$7.50 to spend on fares, \vocab{Bob} has \$12.50 to spend on fares, and \vocab{Carolina} has \$20.00 to spend on fares.
+\end{aside}
+
+It is a simple matter to compute the costs of the various paths these students can take through this map to get to the Museum. In our daily lives, we do this kind of path/money arithmetic all the time. But let's slow down. Let's try to reason as \mathers/ about the various travel possibilities.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Universe of Discourse}
+
+\begin{terminology}
+  The process of cutting away everything irrelevant and focusing only on the bits we care about is called \vocab{abstraction}. By cutting away everything we don't need to think about, we end up thinking only about the relevant bits, \vocab{in abstraction} from everything else.
+\end{terminology}
+
+\newthought{In \math/, when we want to reason} about some particular situation, we cut the situation off from the real world, and we imagine putting it into a little universe all by itself. And when we do that, we strip away everything that we don't need or care about.
+
+We import our agreed-upon definitions and axioms into our little imaginary universe too. Those definitions and axioms serve as the ``laws'' that govern our imaginary universe. Much like how the objects around us obey the physical laws of our universe, we can imagine that the objects in our made-up universe obey the definitions and axioms we have stipulated for our investigation.
+
+When we do this, we end up with a collection of things we want to think about, floating in our little universe, obeying the laws that we have imagined. We call the things floating there the \vocab{objects} of our investigation, and we call our little imaginary universe the \vocab{universe of discourse} (or synonymously, the \vocab{domain of discourse}).
+
+In our case, we lift our three students out of the actual city, along with the objects on our transit map (the stations/stops, and bus/subway routes between them). We imagine all of this floating in its own little universe.
+
+\begin{terminology}
+    The \vocab{universe} or \vocab{domain of discourse} for an investigation is the collection of \vocab{objects} we want to investigate, governed by the \vocab{definitions} and \vocab{axioms} we have agreed to.
+\end{terminology}
+
+The ``laws'' of our universe are these: the rules of arithmetic (for adding up fares), the stipulation that bus rides cost \$2.50 and subway rides cost \$5.00, and the amounts of money our students have pre-loaded on their farecards. This is our chosen universe of discourse.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Proving Theorems}
+
+\newthought{Once we have constructed} our little imagined universe, we can then proceed to the task of proving some theorems about our little universe. Essentially, a \vocab{theorem} is just a statement that expresses some \vocab{fact about our chosen universe}. 
+
+\begin{aside}
+  \begin{remark}
+    Proving a theorem really amounts to showing that the theorem truly holds \vocab{in our chosen universe} (it may not hold in other universes). To show this, we can point to various objects in our chosen universe, we can point to how the objects are related, we can point to the ``laws'' of our chosen universe, and so on. But in the end, we are really just using rigorous logical thinking to show that the theorem must be true, \emph{in} our chosen universe.
+  \end{remark}
+\end{aside}
+
+To prove a theorem about our chosen universe, we can make use of the objects and ``laws'' in our chosen universe, and we use pure logic to show that the theorem holds or ``is true'' in our chosen universe.
+
+There are many ways to prove a theorem. There are some basic patterns though, which we can use to guide us. We'll learn some of the simple patterns here, and then some more complex patterns in the next chapter.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Direct Proof}
+
+\newthought{The simplest way to prove} a single fact about our chosen universe is just to explain directly that it holds in our little universe. We call this \vocab{direct proof}. 
+
+Let's do an example. One thing you might have noticed about the transit map is that if a student travels from Campus to Central Station, it costs the same, regardless of whether they take the bus or the subway. This is a simple fact about our little universe. So, let us prove it! First, let us state this little fact as a theorem, which we can do like this:
+
+\begin{aside}
+  \begin{remark}
+    Always \emph{label} your theorems with a unique number, so that you can easily refer back to them later.
+  \end{remark}
+\end{aside}
+
+\begin{framed}
+  \begin{theorem} 
+    \label{thm:same-cost-to-central-station}
+    The cost of traveling from Campus to Central Station by bus is the same as the cost of traveling there by subway.
+  \end{theorem}
+\end{framed}
+
+\noindent
+Notice how we introduce the theorem by writing ``Theorem'' in bold, and then we give it a number. Here I picked \thetheorem because it is Chapter \thechapter, theorem number 1, but we could pick any unique number or label that we like. We simply add the number so that we can \vocab{refer back to it} later. By giving it this label, at any later point in our discussion, we can always say, ``see Theorem \ref{thm:same-cost-to-central-station}.'' 
+
+\begin{terminology}
+  A \vocab{declarative sentence} (synonymns: an \vocab{indicative sentence}, an \vocab{assertive sentence}, or simply a \vocab{statement}) is a sentence which asserts that something is or is not the case. Not all sentences are declarative. The key mark of a declarative sentence is that it can be true or false. If I say ``it is raining,'' that is either true or false, so it is a declarative sentence. But a question --- e.g., ``is the window open?'' --- or a command --- e.g., ``close the window!'' --- cannot be true or false. You can always tell if a sentence is declarative by asking yourself if it can be true or false. If so, it is a declarative sentence.
+\end{terminology}
+
+Notice also that, after providing our theorem  with a number, we write out the fact that we want to claim is true, using a \vocab{declarative sentence}: we assert that the cost of traveling ``from Campus to Central Station by bus is the same as the cost of traveling there by subway.'' We use a declarative sentence here because in a theorem we are \emph{asserting} or \emph{declaring} that something is true about our little universe.
+
+So this theorem expresses a single fact about our chosen universe: it claims that it costs the same to go from Campus to Central Station, regardless of whether one travels by bus or subway. Of course, now that we have written our theorem down, we need to \vocab{prove it}. How do we do that? 
+
+I often find it helpful to pretend that I show my theorem to you, and you are skeptical. Then I think, ``what could I do to prove this to you? What could I do to convince you?'' Often, this helps me see at least some of the steps I need to take to convince you that what my theorem says must be true in my chosen universe. 
+
+Let's do that here. Let's pretend that I tell you what our theorem says, and you are skeptical. Perhaps you haven't looked at the transit map above. Or perhaps you looked at the map too quickly. Whatever the reason, let's pretend that you are skeptical of my theorem. How Could I prove to you that what my theorem says is in fact true in our little universe?
+
+One thing I could do is calculate the costs of traveling to Central Station by subway and bus, and then I could show you my calculations, and show you that they come to the same amount. That would be a very straightforward way to help you to see that the theorem is true in our little universe.
+
+So let's do that. Let's write up a proof, which describes those very calculations. Here's how we might write it:
+
+\begin{framed}
+  \begin{proof}
+  To get from Campus to Central Station by subway, it costs \$5.00 for the subway ride. To get to the same place by bus, a student needs to go first to the Bus Depot for \$2.50, then to Central Station for another \$2.50, which adds up to \$5.00. Hence, it costs \$5.00 to go by bus too. Either way is the same cost.
+  \end{proof}
+\end{framed}
+
+\begin{aside}
+  \begin{remark}
+    By writing out our proof, we communicate exactly why the theorem is true. Anybody who takes the time to check our logic would see that the theorem is correct. There is simply no way that the theorem could be false (in our chosen universe). Of course, one might imagine different subway costs, or different routes. But that would amount to a \emph{different universe}, where our theorem need not apply. Our theorem is a theorem about \emph{our} chosen universe, and our little proof here makes it clear that the theorem is definitely true in our universe; it can't be otherwise.
+  \end{remark}
+\end{aside}
+
+Here we have our first example of a proof. Notice how we indicate the beginning of the proof by writing the word ``\emph{Proof}'' in italics. Then, we provide a description of our reasoning, which in this case is a description of our calculations. Finally, we signal that the proof is finished with a little box over on the right.
+
+This is an example of proving a little theorem about our chosen universe. Sure, it is simple, but it constitutes a genuine proof that the theorem holds or ``is true'' in our imagined little universe. Anybody else could read our proof, check our logic, and see that Theorem \ref{thm:same-cost-to-central-station} does indeed hold in our little universe.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conjunctions}
+
+\newthought{In the last section}, we showed an example of proving a single fact about our chosen universe. To do it, we used some simple calculations to show directly that the fact must be true.
+
+Sometimes we want to prove not just that a single thing is true in our universe. Sometimes we want to prove that a \emph{combination} of two things are true in our chosen universe.
+
+If we have two statements (call them $\P/$ and $\Q/$ respectively), and we want to assert that they are jointly true, we use ``and'' to combine them. In other words, we take $\P/$ and $\Q/$, and then we put them together to formulate a compound statement that has this shape:
+
+\begin{quote}
+  $\P/$ and $\Q/$
+\end{quote}
+
+\begin{terminology}
+  A \vocab{conjunction} is a statement that has this shape:
+    
+  \begin{quote}
+    $\P/$ and $\Q/$
+  \end{quote}
+    
+  \noindent
+  where ``$\P/$'' and ``$\Q/$'' are replaced by other statements. $\P/$ and $\Q/$ are called the \vocab{left} and \vocab{right conjuncts} of the conjunction.
+\end{terminology}
+
+\noindent
+Statements with this shape are called \vocab{conjunctions}, and we call $\P/$ and $\Q/$ the left and right \vocab{conjuncts} of the conjunction.
+
+To prove a conjunction, we must prove both of the conjuncts separately. For example, suppose we want to prove that Bob has enough money on his farecard to make it to the Coffee Shop \emph{and} the Museum: 
+
+\begin{framed}
+  \begin{theorem}
+    After going from Campus to Central Station, Bob still has enough money on his farecard to travel to the Coffee Shop, and to the Museum.
+  \end{theorem}
+\end{framed}
+
+\begin{aside}
+  \begin{remark}
+    To \vocab{prove} a conjunction, we must prove \vocab{both conjuncts} separately. It is not enough to prove only one conjunct. We must show that both are true. Proving that both conjuncts are true separately \vocab{is sufficient} to show that the entire conjunction is true.
+  \end{remark}
+\end{aside}
+
+To prove this, we need to prove both facts: namely, that Bob can reach the Coffee Shop, and also that he can reach the Museum. To prove each such fact individually, we can just use simple calculations. Here is an example of how we might do this:
+
+\begin{framed}
+  \begin{proof}
+    To prove the theorem, I need to prove both conjuncts. At the start of his journey, Bob has \$12.50 on his farecard. It will cost him \$5.00 to get from Campus to Central Station (as proved by Theorem \ref{thm:same-cost-to-central-station}). So, after traveling to Central Station, Bob will have \$7.50 left on his farecard.
+    \begin{itemize}
+      \item First, I prove the left conjunct. It will cost Bob another \$5.00 to get from Central Station to the Coffee Shop and back (\$2.50 each way). That will leave \$2.50 on his farecard.
+      \item Now I prove the right conjunct. From Central Station, it will cost Bob another \$2.50 to get to the Museum by bus, which is exactly how much he has  left on his farecard.
+    \end{itemize}
+
+    \noindent
+    Therefore, after traveling to Central Station, Bob still has enough on his farecard to travel to the Coffee Shop and the Museum.
+  \end{proof}
+\end{framed}
+
+Notice how in this proof, we announce at the beginning what we need to do to prove the theorem, namely we need to prove both conjuncts. Then, after providing a little information about how much it costs to get to Central Station, we do indeed prove that both conjuncts are true, with two separate bullet points. In the first bullet point, we show that Bob has enough to get from Central Station to the Coffee Shop and back, and then in the second bullet point, we show that Bob has enough to get from Central Station to the Museum.
+
+Notice also that we used Theorem \ref{thm:same-cost-to-central-station} to assert that it will cost Bob \$5.00 to go from Campus to Central Station. This is one of the great things about the deductive process. Once we've proved a theorem, it then becomes a known ``fact'' about our little universe. We can then use it to prove further facts, as we do here.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Disjunctions}
+
+\newthought{Sometimes we want to prove} not that two things are true in combination, but rather that either one of two things is true.
+
+\begin{terminology}
+  A \vocab{disjunction} is a statement that has this shape:
+    
+  \begin{quote}
+    $\P/$ or $\Q/$
+  \end{quote}
+    
+  \noindent
+  where ``$\P/$'' and ``$\Q/$'' are replaced by other statements. $\P/$ and $\Q/$ are each called the \vocab{left} and \vocab{right disjuncts} of the disjunction.
+\end{terminology}
+
+If we have two statements (call them $\P/$ and $\Q/$ again), and we want to assert that one or the other of them is true, we use ``or'' to combine them, so as to formulate a compound statement with this shape:
+
+\begin{quote}
+  $\P/$ or $\Q/$
+\end{quote}
+
+\noindent
+Statements with this shape are called \vocab{disjunctions}, and we call $\P/$ and $\Q/$ the left and right \vocab{disjuncts} of the disjunction, respectively.
+
+\begin{aside}
+  \begin{remark}
+    In \math/, we always assume that disjunctions are \vocab{inclusive}, rather than \vocab{exclusive}, unless stated otherwise. An exclusive disjunction is true when one of the disjuncts is true, but not both. An inclusive disjunction is true when either \emph{or both} of the disjuncts are true.
+  \end{remark}
+\end{aside}
+
+To prove a disjunction, we only need to prove that one of the disjuncts is true. For example, suppose we want to prove that Bob has enough money on his farecard to travel to the Sandwich Shop, or to the Museum.
+
+\begin{framed}
+  \begin{theorem}
+    \label{thm:bob-can-get-to-sandwich-shop-or-museum}
+    After going from Campus to Central Station, Bob has enough money left on his farecard to travel to the Sandwich Shop, or to the Museum.
+  \end{theorem}
+\end{framed}
+
+To prove this, we only need to prove one of the disjuncts. Let's pick the first one: namely, that Bob can reach the Sandwich Shop.
+
+\begin{aside}
+  \begin{remark}
+    To \vocab{prove} a disjunction, we must prove \vocab{one of the disjuncts}. Proving one of the disjuncts \vocab{is sufficient} to show that the entire disjunction is true.
+  \end{remark}
+\end{aside}
+
+\begin{framed}
+  \begin{proof}
+    To prove the theorem, I need to prove one of the disjuncts. I will prove the first disjunct, namely that Bob can reach the Sandwich Shop. 
+        
+    At the start of his journey, Bob has \$12.50 on his farecard. It will cost him \$5.00 to get from Campus to Central Station (as proved by Theorem \ref{thm:same-cost-to-central-station}). Then it will cost him another \$5.00 to get to the Sandwhich Shop. That adds up to \$10.00, which is less than the \$12.50 that he started with.
+  \end{proof}
+\end{framed}
+
+\begin{aside}
+  \begin{remark}
+    Does Theorem \ref{thm:bob-can-get-to-sandwich-shop-or-museum} say that Bob has enough money to get to the Sandwich Shop or the Museum \emph{but not both}? No, it does add the ``but not both'' part. Remember: we always assume that disjunctions are inclusive, \emph{unless stated otherwise}. If our theorem did explicitly assert that Bob can go to either one \emph{but not both}, then we would have to show in our proof not only that he could get to one of them, we would also have to show that he could not get to both.
+  \end{remark}
+\end{aside}
+
+Notice that we did not need to prove that Bob could alternatively go to the Museum. That is because we only need to prove one of the disjuncts to prove the entire disjunction. And indeed: if it is really true that Bob has enough money to get to the Sandwich Shop, then it really is true that he has enough money to get to the Sandwich Shop \emph{or} the Museum.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Implications}
+
+\newthought{Sometimes we want to prove} that something is true, provided that some other condition is met. In other words, we want to say that something is true \emph{on the condition that} something else is true first.
+
+\begin{terminology}
+  An \vocab{implication} is a statement that has this shape:
+    
+  \begin{quote}
+    if $\P/$ then $\Q/$
+  \end{quote}
+    
+  \noindent
+  where ``$\P/$'' and ``$\Q/$'' are replaced by other statements. $\P/$ is called the \vocab{antecedent}, and $\Q/$ is called the \vocab{consequent}, of the implication.
+\end{terminology}
+
+If we have two statements ($\P/$ and $\Q/$ again) and we want to assert that $\Q/$ is true provided that $\P/$ is true first, we use ``if'' and ``then'' to combine them, so as to formulate a compound statement with this shape:
+
+\begin{quote}
+  if $\P/$ then $\Q/$
+\end{quote}
+
+\noindent
+Statements with this shape are called \vocab{implications} (or sometimes \vocab{conditionals}, because they assert that $\Q/$ is true on the condition that $\P/$ is true). We call $\P/$ the \vocab{antecedent} of the implication, and we call $\Q/$ the \vocab{consequent} of the implication.
+
+\begin{aside}
+  \begin{remark}
+    To \vocab{prove} an implication, we assume that the antecedent is true temporarily, and then we prove that the consequent follows.
+  \end{remark}
+\end{aside}
+
+To prove an implication, we assume that the antecedent $\P/$ is true, and then we prove the consequent $\Q/$. That is to say, we pretend that $\P/$ is true temporarily, for the duration of the proof, and then we show that once $\P/$ is in the mix, $\Q/$ follows.
+
+For example, suppose we want to prove that if a student had \$25.00 on their farecard, they would have enough to visit both the Sandwich Shop and the Coffee Shop on their way to the Museum. 
+
+\begin{aside}
+  \begin{remark}
+    Note that no student in our chosen universe actually has \$25.00 on their farecard. The antecedent is purely hypothetical. But that's okay with implications! An implication asserts what \emph{would} be the case \emph{if} the antecedent were true.
+  \end{remark}
+\end{aside}
+
+\begin{framed}
+  \begin{theorem}
+    If a student had \$25.00 on their farecard, they would have enough to visit the Sandwich Shop, the Coffee Shop, and the Museum.
+  \end{theorem}
+\end{framed}
+
+To prove this, we assume that the antecedent is true, so we suppose that a student does have \$25.00 on their farecard. Then we show that once they have this amount of money on their farecard, they can reach all the desired places.
+
+\begin{framed}
+  \begin{proof}
+    Suppose there is a student with \$25.00 on her farecard. To get from Campus to Central Station, it costs \$5.00 (as proved by Theorem \ref{thm:same-cost-to-central-station}). It costs another \$10.00 to get to the Sandwich Shop and back (\$5.00 each way), and another \$5.00 to get to the Coffee Shop and back (\$2.50 each way). That adds up to \$20.00 so far, and that leaves enough for this hypothetical student to get to the Museum (\$2.50 by bus, or \$5.00 by subway).
+  \end{proof}
+\end{framed}
+
+Of course, no such student exists in our chosen universe. But that is fine with implications. What we have proved is not that one of our students \emph{does} have enough to visit the Sandwich Shop, Coffee Shop, and Museum. Rather, we have proved only that \emph{if} a student had \$25.00 on their farecard, \emph{then} they would have enough to visit all the stops. That is why we assume that the antecedent is true as the first step in our proof: we are proving only what would follow \emph{if} the antecedent were true.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+In this chapter, we learned some of the basic techniques that \mathers/ use to carry out their investigations. 
+
+\begin{itemize}
+  
+  \item We learned that \mathers/ like to think of any given situation \vocab{in abstraction}, as if the situation were cut off from reality, and stuffed into its own little universe. To construct such a universe, we imagine putting the \vocab{objects} we care about into that universe, and we import the relevant \vocab{definitions and axioms} that we care about into it too. In this way, we end up with a nice little universe that has nothing in it but the objects we care to investigate, governed by the ``laws'' we have agreed to. This little universe is called our \vocab{universe} or \vocab{domain of discourse}.
+  
+  \item We learned that \mathers/ can prove a single fact about their chosen universe through \vocab{direct proof}. A direct proof is simply a description of the logical reasoning which shows that the fact in question must \vocab{hold} or be \vocab{true in} our chosen universe.
+  
+  \item We learned that a \vocab{conjunction} is a statement with the shape ``$\P/$ and $\Q/$,'' where $\P/$ and $\Q/$ are replaced by other statements. $\P/$ and $\Q/$ are called the left and right \vocab{conjuncts} of the conjunction. We can prove a conjunction by proving both of the conjuncts separately.
+  
+  \item We learned that a \vocab{disjunction} is a statement with the shape ``$\P/$ or $\Q/$,'' where $\P/$ and $\Q/$ are replaced by other statements. $\P/$ and $\Q/$ are called the left and right \vocab{disjuncts} of the disjunction. We can prove a disjunction by proving only one of the disjuncts. We also learned that we always assume a disjunction is \vocab{inclusive}, unless stated otherwise.
+  
+  \item We learned that an \vocab{implication} is a statement with the shape ``if $\P/$ then $\Q/$,'' where $\P/$ and $\Q/$ are replaced by other statements. $\P/$ and $\Q/$ are called the \vocab{antecedent} and \vocab{consequent} of the implication, respectively. We can prove an implication by assuming temporarily that $\P/$ is true, and then proving that $\Q/$ follows, once $\P/$ is in the mix.
+  
+\end{itemize}
+
+\end{document}

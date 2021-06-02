@@ -1,0 +1,1155 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The Rationals}
+\label{ch:the-rationals}
+
+\begin{ponder}
+  How might you measure distances, if you were an ancient surveyor? How would you establish a unit of measurement, and how would you use that to measure distances?
+\end{ponder}
+
+\newtopic{S}{uppose we are ancient surveyors}. We are tasked with inventing a standardized way to measure distances (along straight lines). So, we need to be able to go to a line, and we need to be able to use our method to measure it, so that we can say it is such-and-such units long. How might we do this? How might we measure lines in a standard way?
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Measuring Distances}
+
+\begin{aside}
+  \begin{remark}
+    This is how the \vocab{yard} or \vocab{meter} stick came to be: someone picked a stick, they said, ``this is how long a yard/meter will be,'' and it was made official by the government. All other yard/meter sticks copy the length of that official original stick.
+  \end{remark}
+\end{aside}
+
+Here's one way to measure distances. We find a straight stick, and say, ``this stick here is our gold standard: the length of this stick will be what we mean by one unit of length.'' Let's call this our \vocab{unit stick} (because it has the length of one unit). 
+
+\begin{diagram}
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (-1, 0.15) -- (1, 0.15);
+  \draw (-1, -0.15) -- (1, -0.15);
+  
+  \draw (-1, -0.5) -- (-1, -0.75);
+  \draw (1, -0.5) -- (1, -0.75);
+  \draw (-1, -0.625) -- (1, -0.625);
+  \node at (0, -1) {one unit};
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Once upon a time, a government might keep an official yard or meter stick around at the treasury. Other yard/meter sticks could always be checked for accuracy by comparing them to the official stick. 
+  \end{remark}
+\end{aside}
+
+Next, we gather a bunch more sticks, and we cut them to precisely the same length as our unit stick. Now we have a bunch of unit sticks, all with the same length. Each stick has a length of one unit. 
+
+\begin{diagram}
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (-1, 0.15) -- (1, 0.15);
+  \draw (-1, -0.15) -- (1, -0.15);
+  
+  \draw (-1, -0.5) -- (-1, -0.75);
+  \draw (1, -0.5) -- (1, -0.75);
+  \draw (-1, -0.625) -- (1, -0.625);
+  \node at (0, -1) {one unit};
+  
+  \draw (-1, 2) ellipse(0.05cm and 0.15cm);
+  \draw (1, 2.15) .. controls(1.1, 2.1) and (1.1, 1.9) .. (1, 1.85);
+  \draw (-1, 2.15) -- (1, 2.15);
+  \draw (-1, 1.85) -- (1, 1.85);
+  
+  \draw (-1, 1.5) -- (-1, 1.25);
+  \draw (1, 1.5) -- (1, 1.25);
+  \draw (-1, 1.375) -- (1, 1.375);
+  \node at (0, 1) {one unit};
+  
+  \draw (1.5, 0) ellipse(0.05cm and 0.15cm);
+  \draw (3.5, 0.15) .. controls(3.6, 0.1) and (3.6, -0.1) .. (3.5, -0.15);
+  \draw (1.5, 0.15) -- (3.5, 0.15);
+  \draw (1.5, -0.15) -- (3.5, -0.15);
+  
+  \draw (1.5, -0.5) -- (1.5, -0.75);
+  \draw (3.5, -0.5) -- (3.5, -0.75);
+  \draw (1.5, -0.625) -- (3.5, -0.625);
+  \node at (2.5, -1) {one unit};
+
+  \draw (1.5, 2) ellipse(0.05cm and 0.15cm);
+  \draw (3.5, 2.15) .. controls(3.6, 2.1) and (3.6, 1.9) .. (3.5, 1.85);
+  \draw (1.5, 2.15) -- (3.5, 2.15);
+  \draw (1.5, 1.85) -- (3.5, 1.85);
+  
+  \draw (1.5, 1.5) -- (1.5, 1.25);
+  \draw (3.5, 1.5) -- (3.5, 1.25);
+  \draw (1.5, 1.375) -- (3.5, 1.375);
+  \node at (2.5, 1) {one unit};
+  
+  \draw (4, 0) ellipse(0.05cm and 0.15cm);
+  \draw (6, 0.15) .. controls(6.1, 0.1) and (6.1, -0.1) .. (6, -0.15);
+  \draw (4, 0.15) -- (6, 0.15);
+  \draw (4, -0.15) -- (6, -0.15);
+  
+  \draw (4, -0.5) -- (4, -0.75);
+  \draw (6, -0.5) -- (6, -0.75);
+  \draw (4, -0.625) -- (6, -0.625);
+  \node at (5, -1) {one unit};
+
+  \draw (4, 2) ellipse(0.05cm and 0.15cm);
+  \draw (6, 2.15) .. controls(6.1, 2.1) and (6.1, 1.9) .. (6, 1.85);
+  \draw (4, 2.15) -- (6, 2.15);
+  \draw (4, 1.85) -- (6, 1.85);
+  
+  \draw (4, 1.5) -- (4, 1.25);
+  \draw (6, 1.5) -- (6, 1.25);
+  \draw (4, 1.375) -- (6, 1.375);
+  \node at (5, 1) {one unit};
+
+\end{diagram}
+
+At this point, we can start measuring lines. We do that by lying down sticks, end to end, along the line. For example, suppose we want to measure this straight line:
+
+\begin{diagram}
+
+  \draw (-3, 0) to (3, 0);
+  \node at (0, -1) {How long is this line?};
+  \draw[<-,dashed] (-3, -0.25) -- (-3, -1) -- (-2.5, -1);
+  \draw[<-,dashed] (3, -0.25) -- (3, -1) -- (2.5, -1);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    We can measure lines by using the measuring sticks we have built. The length of a ``unit'' doesn't really matter. What matters is that we all agree on how long one ``unit'' is, so that all units are the same length.
+  \end{remark}
+\end{aside}
+
+We can do it by lying down unit sticks, end to end. So first, we start at the left side of the line, and we lay down one unit stick, making sure it is lined up with the far left side of the line:
+
+\begin{diagram}
+
+  \draw (-3, 0.5) to (3, 0.5);
+  
+  \draw[dashed] (-3, 1) to (-3, -0.75);
+  \draw (-3, 0.3) to (-3, 0.7);
+
+  \draw (-3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-1, 0.15) .. controls(-0.9, 0.1) and (-0.9, -0.1) .. (-1, -0.15);
+  \draw (-3, 0.15) -- (-1, 0.15);
+  \draw (-3, -0.15) -- (-1, -0.15);
+
+\end{diagram}
+
+Next, we put a mark on the line at the point where our unit stick comes up to, to indicate that this mark is one unit:
+
+\begin{diagram}
+
+  \draw (-3, 0.5) to (3, 0.5);
+  
+  \draw[dashed] (-3, 1) to (-3, -0.75);
+  \draw[dashed] (-1, 1) to (-1, -0.75);
+  
+  \draw (-3, 0.3) to (-3, 0.7);
+  \draw (-1, 0.3) to (-1, 0.7);
+
+  \draw (-3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-1, 0.15) .. controls(-0.9, 0.1) and (-0.9, -0.1) .. (-1, -0.15);
+  \draw (-3, 0.15) -- (-1, 0.15);
+  \draw (-3, -0.15) -- (-1, -0.15);
+
+\end{diagram}
+
+Now we can label ``$0$'' and ``$1$'' units of the line, to indicate that we have measured 1 unit of the line:
+
+\begin{aside}
+  \begin{remark}
+    The ``$0$'' indicates where the measuring starts. It indicates that we have measured no amount of the line yet. The ``$1$'' indicates that we have measured one unit stick length of the line after ``$0$.'' In other words, it is like a tally mark: i.e., one unit stick's length longer than \vocab{nought}.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw (-3, 0.5) to (3, 0.5);
+  
+  \draw[dashed] (-3, 1) to (-3, -0.75);
+  \draw[dashed] (-1, 1) to (-1, -0.75);
+  
+  \draw (-3, 0.3) to (-3, 0.7);
+  \draw (-1, 0.3) to (-1, 0.7);
+
+  \node at (-3, 1.5) {$0$};
+  \node at (-1, 1.5) {$1$};
+
+  \draw (-3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-1, 0.15) .. controls(-0.9, 0.1) and (-0.9, -0.1) .. (-1, -0.15);
+  \draw (-3, 0.15) -- (-1, 0.15);
+  \draw (-3, -0.15) -- (-1, -0.15);
+
+\end{diagram}
+
+Next, we lay down a second unit stick, at the end of the first one:
+
+\begin{diagram}
+
+  \draw (-3, 0.5) to (3, 0.5);
+  
+  \draw[dashed] (-3, 1) to (-3, -0.75);
+  \draw[dashed] (-1, 1) to (-1, -0.75);
+  
+  \draw (-3, 0.3) to (-3, 0.7);
+  \draw (-1, 0.3) to (-1, 0.7);
+
+  \node at (-3, 1.5) {$0$};
+  \node at (-1, 1.5) {$1$};
+
+  \draw (-3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-1, 0.15) .. controls(-0.9, 0.1) and (-0.9, -0.1) .. (-1, -0.15);
+  \draw (-3, 0.15) -- (-1, 0.15);
+  \draw (-3, -0.15) -- (-1, -0.15);
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (-1, 0.15) -- (1, 0.15);
+  \draw (-1, -0.15) -- (1, -0.15);
+
+\end{diagram}
+
+Then, we draw a mark on the line again, which we can label as ``$2$'' units:
+
+\begin{aside}
+  \begin{remark}
+    Note that ``$2$'' here denotes that we have measured two unit stick lengths of the line. In other words, ``$2$'' is just a symbol for two tally marks: i.e., one unit stick's length longer than one unit stick's length longer than nought. This is just like counting with the \vocab{natural numbers}, except we are counting in stick lengths. 
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw (-3, 0.5) to (3, 0.5);
+  
+  \draw[dashed] (-3, 1) to (-3, -0.75);
+  \draw[dashed] (-1, 1) to (-1, -0.75);
+  \draw[dashed] (1, 1) to (1, -0.75);
+  
+  \draw (-3, 0.3) to (-3, 0.7);
+  \draw (-1, 0.3) to (-1, 0.7);
+  \draw (1, 0.3) to (1, 0.7);
+
+  \node at (-3, 1.5) {$0$};
+  \node at (-1, 1.5) {$1$};
+  \node at (1, 1.5) {$2$};
+
+  \draw (-3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-1, 0.15) .. controls(-0.9, 0.1) and (-0.9, -0.1) .. (-1, -0.15);
+  \draw (-3, 0.15) -- (-1, 0.15);
+  \draw (-3, -0.15) -- (-1, -0.15);
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (-1, 0.15) -- (1, 0.15);
+  \draw (-1, -0.15) -- (1, -0.15);
+
+\end{diagram}
+
+Then we can add a third stick:
+
+\begin{diagram}
+
+  \draw (-3, 0.5) to (3, 0.5);
+  
+  \draw[dashed] (-3, 1) to (-3, -0.75);
+  \draw[dashed] (-1, 1) to (-1, -0.75);
+  \draw[dashed] (1, 1) to (1, -0.75);
+  
+  \draw (-3, 0.3) to (-3, 0.7);
+  \draw (-1, 0.3) to (-1, 0.7);
+  \draw (1, 0.3) to (1, 0.7);
+
+  \node at (-3, 1.5) {$0$};
+  \node at (-1, 1.5) {$1$};
+  \node at (1, 1.5) {$2$};
+
+  \draw (-3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-1, 0.15) .. controls(-0.9, 0.1) and (-0.9, -0.1) .. (-1, -0.15);
+  \draw (-3, 0.15) -- (-1, 0.15);
+  \draw (-3, -0.15) -- (-1, -0.15);
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (-1, 0.15) -- (1, 0.15);
+  \draw (-1, -0.15) -- (1, -0.15);
+
+  \draw (1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (3, 0.15) .. controls(3.1, 0.1) and (3.1, -0.1) .. (3, -0.15);
+  \draw (1, 0.15) -- (3, 0.15);
+  \draw (1, -0.15) -- (3, -0.15);
+
+\end{diagram}
+
+And of course, we can make a mark on our line again, to indicate that we have measured 3 units of the line:
+
+\begin{diagram}
+
+  \draw (-3, 0.5) to (3, 0.5);
+  
+  \draw[dashed] (-3, 1) to (-3, -0.75);
+  \draw[dashed] (-1, 1) to (-1, -0.75);
+  \draw[dashed] (1, 1) to (1, -0.75);
+  \draw[dashed] (3, 1) to (3, -0.75);
+  
+  \draw (-3, 0.3) to (-3, 0.7);
+  \draw (-1, 0.3) to (-1, 0.7);
+  \draw (1, 0.3) to (1, 0.7);
+  \draw (3, 0.3) to (3, 0.7);
+
+  \node at (-3, 1.5) {$0$};
+  \node at (-1, 1.5) {$1$};
+  \node at (1, 1.5) {$2$};
+  \node at (3, 1.5) {$3$};
+
+  \draw (-3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-1, 0.15) .. controls(-0.9, 0.1) and (-0.9, -0.1) .. (-1, -0.15);
+  \draw (-3, 0.15) -- (-1, 0.15);
+  \draw (-3, -0.15) -- (-1, -0.15);
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (-1, 0.15) -- (1, 0.15);
+  \draw (-1, -0.15) -- (1, -0.15);
+
+  \draw (1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (3, 0.15) .. controls(3.1, 0.1) and (3.1, -0.1) .. (3, -0.15);
+  \draw (1, 0.15) -- (3, 0.15);
+  \draw (1, -0.15) -- (3, -0.15);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    We can remove the sticks, and think about this picture more abstractly. To do that, we just think in terms of lines and tick marks. In our mind, we strip away the physicality of the sticks and the line, and just think about lengths appended to each other. This is another example of the process of \vocab{abstraction}: we strip away details that don't matter, in order to get to the essence of the matter.
+  \end{remark}
+\end{aside}
+
+With that, we have finished measuring the line. In essence, we have counted how many units there are in this line, by laying down our unit sticks end to end, and counting how many unit sticks we had to put down. And indeed, we can see that this line has 3 units in it:
+
+\begin{diagram}
+
+  \draw (-3, 0.5) to (3, 0.5);
+  
+  \draw[dotted] (-3, 1) to (-3, -0.25);
+  \draw[dotted] (-1, 1) to (-1, -0.25);
+  \draw[dotted] (1, 1) to (1, -0.25);
+  \draw[dotted] (3, 1) to (3, -0.25);
+  
+  \draw (-3, 0.3) to (-3, 0.7);
+  \draw (-1, 0.3) to (-1, 0.7);
+  \draw (1, 0.3) to (1, 0.7);
+  \draw (3, 0.3) to (3, 0.7);
+
+  \node at (-3, 1.5) {$0$};
+  \node at (-1, 1.5) {$1$};
+  \node at (1, 1.5) {$2$};
+  \node at (3, 1.5) {$3$};
+
+\end{diagram}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Parts of Sticks}
+
+\newthought{This works great} if the lines we want to measure have ends that line up with an exact number of unit sticks. In our last example, the line measured out to 3 unit sticks, \emph{exactly}. 
+
+But what happens if the line doesn't end up so perfectly at the end of a unit stick? For example, consider this line:
+
+\begin{diagram}
+
+  \draw (-3, 0) to (2.5, 0);
+  \node at (-0.25, -1) {How long is this?};
+  \draw[<-,dashed] (-3, -0.25) -- (-3, -1) -- (-2.5, -1);
+  \draw[<-,dashed] (2.5, -0.25) -- (2.5, -1) -- (2, -1);
+
+\end{diagram}
+
+Let's lay down our unit sticks, end to end, to see how this line measures up against our unit sticks:
+
+\begin{diagram}
+
+  \draw (-3, 0.5) to (2, 0.5);
+  \node[dot] at (2, 0.5) {};
+  
+  \draw[dashed] (-3, 1) to (-3, -0.75);
+  \draw[dashed] (-1, 1) to (-1, -0.75);
+  \draw[dashed] (1, 1) to (1, -0.75);
+  \draw[dashed] (3, 1) to (3, -0.75);
+  
+  \draw (-3, 0.3) to (-3, 0.7);
+  \draw (-1, 0.3) to (-1, 0.7);
+  \draw (1, 0.3) to (1, 0.7);
+  \draw (3, 0.3) to (3, 0.7);
+
+  \node at (-3, 1.5) {$0$};
+  \node at (-1, 1.5) {$1$};
+  \node at (1, 1.5) {$2$};
+  \node at (3, 1.5) {$3$};
+
+  \draw (-3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-1, 0.15) .. controls(-0.9, 0.1) and (-0.9, -0.1) .. (-1, -0.15);
+  \draw (-3, 0.15) -- (-1, 0.15);
+  \draw (-3, -0.15) -- (-1, -0.15);
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (-1, 0.15) -- (1, 0.15);
+  \draw (-1, -0.15) -- (1, -0.15);
+
+  \draw (1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (3, 0.15) .. controls(3.1, 0.1) and (3.1, -0.1) .. (3, -0.15);
+  \draw (1, 0.15) -- (3, 0.15);
+  \draw (1, -0.15) -- (3, -0.15);
+
+\end{diagram}
+
+\begin{ponder}
+  What do we do when the line doesn't correspond to an \vocab{exact} number of unit sticks? What do we do when the line goes only \vocab{part way} up a unit stick?
+\end{ponder}
+
+Uh oh. We put down three unit sticks, and the end of the line doesn't match up with the ends of any of our sticks. Rather, the line ends somewhere between the 2nd and 3rd unit stick. So, it's longer than 2 unit sticks, but it's shorter than 3 unit sticks. 
+
+With our current system of using unit sticks to measure lines, we can't say precisely how long this line is. How might we remedy this problem? One option is that we can cut some of our unit sticks up into equal parts. For example, let's take a unit stick: 
+
+\begin{diagram}
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (-1, 0.15) -- (1, 0.15);
+  \draw (-1, -0.15) -- (1, -0.15);
+  
+  \draw (-1, -0.5) -- (-1, -0.75);
+  \draw (1, -0.5) -- (1, -0.75);
+  \draw (-1, -0.625) -- (1, -0.625);
+  \node at (0, -1) {one unit};
+  
+\end{diagram}
+
+Then, let's cut it down the middle:
+
+\begin{aside}
+  \begin{remark}
+    We can break up a unit stick into two equal parts. We call these \vocab{halves}. The first half-piece is the first half (or ``the $1$st out of $2$'' pieces), and the second half-piece is the second half (or ``the $2$nd out of $2$'' pieces). Do you recognize how ``$1$ out of $2$'' corresponds to ``$1/2$,'' or even ``$\frac{1}{2}$''? What is the \vocab{ratio} of parts to whole here? 
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (-1, 0.15) -- (1, 0.15);
+  \draw (-1, -0.15) -- (1, -0.15);
+  
+  \draw[dashed] (0, 0.5) to (0, -0.5);
+  
+  \draw (-1, -0.5) -- (-1, -0.75);
+  \draw (1, -0.5) -- (1, -0.75);
+  \draw (-1, -0.625) -- (1, -0.625);
+  \node at (0, -1) {one unit};
+  
+\end{diagram}
+
+And that leaves us with two equal parts:
+
+\begin{diagram}
+
+  \draw (-1.5, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-0.5, 0.15) .. controls(-0.4, 0.1) and (-0.4, -0.1) .. (-0.5, -0.15);
+  \draw (-1.5, 0.15) -- (-0.5, 0.15);
+  \draw (-1.5, -0.15) -- (-0.5, -0.15);
+  
+  \draw (0, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (0, 0.15) -- (1, 0.15);
+  \draw (0, -0.15) -- (1, -0.15);
+  
+  \draw (-1.5, -0.5) -- (-1.5, -0.75);
+  \draw (-0.5, -0.5) -- (-0.5, -0.75);
+  \draw (-1.5, -0.625) -- (-0.5, -0.625);
+  \node at (-1, -1) {$1$ of $2$};
+  
+  \draw[dashed] (-0.25, 0.75) -- (-0.25, -1.5);
+  
+  \draw (0, -0.5) -- (0, -0.75);
+  \draw (1, -0.5) -- (1, -0.75);
+  \draw (0, -0.625) -- (1, -0.625);
+  \node at (0.5, -1) {$2$ of $2$};
+  
+\end{diagram}
+
+Notice that we labeled these as ``$1$ of $2$'' and ``$2$ of $2$.'' That is because the first is one of the two parts, and the second the second of the two parts. For convenience, let's write ``$1$ of $2$'' as ``$1/2$,'' or even ``$\frac{1}{2}$.'' Likewise, let's write ``$2$ of $2$'' as ``$2/2$,'' or even ``$\frac{2}{2}$.'' Like this:
+
+\begin{diagram}
+
+  \draw (-1.5, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-0.5, 0.15) .. controls(-0.4, 0.1) and (-0.4, -0.1) .. (-0.5, -0.15);
+  \draw (-1.5, 0.15) -- (-0.5, 0.15);
+  \draw (-1.5, -0.15) -- (-0.5, -0.15);
+  
+  \draw (0, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (0, 0.15) -- (1, 0.15);
+  \draw (0, -0.15) -- (1, -0.15);
+  
+  \draw (-1.5, -0.5) -- (-1.5, -0.75);
+  \draw (-0.5, -0.5) -- (-0.5, -0.75);
+  \draw (-1.5, -0.625) -- (-0.5, -0.625);
+  \node at (-1, -1) {$\frac{1}{2}$};
+  
+  \draw[dashed] (-0.25, 0.75) -- (-0.25, -1.5);
+  
+  \draw (0, -0.5) -- (0, -0.75);
+  \draw (1, -0.5) -- (1, -0.75);
+  \draw (0, -0.625) -- (1, -0.625);
+  \node at (0.5, -1) {$\frac{2}{2}$};
+  
+\end{diagram}
+
+Let's call each of these pieces a \vocab{half-unit} stick, since we made them by cutting one unit stick into two halves.
+
+\begin{ponder}
+  Having smaller pieces is convenient, because we can use them to measure the length of a unit stick too. However, we made these smaller sticks by breaking up a unit stick into equal pieces. So, will we ever have a situation where these smaller pieces don't add back up to one unit?
+\end{ponder}
+
+We can measure the length of a \vocab{unit stick}, using \vocab{half-unit} sticks. For instance, we start with our unit stick:
+
+\begin{diagram}
+
+  \draw (-1, 2) ellipse(0.05cm and 0.15cm);
+  \draw (1, 2.15) .. controls(1.1, 2.1) and (1.1, 1.9) .. (1, 1.85);
+  \draw (-1, 2.15) -- (1, 2.15);
+  \draw (-1, 1.85) -- (1, 1.85);
+  
+  \draw (-1, 1.5) -- (-1, 1.25);
+  \draw (1, 1.5) -- (1, 1.25);
+  \draw (-1, 1.375) -- (1, 1.375);
+  \node at (0, 1) {one unit};
+  
+\end{diagram}
+
+Next, we put down one half-unit stick, and we line up the left sides of the two sticks. We mark ``$0$'' on the unit stack, to indicate where the measuring starts:
+
+\begin{diagram}
+
+  \draw (-1, 1) ellipse(0.05cm and 0.15cm);
+  \draw (1, 1.15) .. controls(1.1, 1.1) and (1.1, 0.9) .. (1, 0.85);
+  \draw (-1, 1.15) -- (1, 1.15);
+  \draw (-1, 0.85) -- (1, 0.85);
+  
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (0, 0.15) .. controls(0.1, 0.1) and (0.1, -0.1) .. (0, -0.15);
+  \draw (-1, 0.15) -- (0, 0.15);
+  \draw (-1, -0.15) -- (0, -0.15);
+  
+  \draw[dashed] (-1, 1.5) to (-1, -0.5);
+  
+  \draw (-1, 1) to (-1, 1.5);
+  \node at (-1, 2) {$0$};
+  
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    The ``$0$'' mark indicates that we have measured no units of length yet, and the ``$\frac{1}{2}$'' mark indicates that we have measured one half of a unit stick's length past nought. So, it's like we're counting with natural numbers again, except we're counting with halves.
+  \end{remark}
+\end{aside}
+
+Then we mark ``$\frac{1}{2}$'' at the point on the unit stick where the half-unit stick comes up to:
+
+\begin{diagram}
+
+  \draw (-1, 1) ellipse(0.05cm and 0.15cm);
+  \draw (1, 1.15) .. controls(1.1, 1.1) and (1.1, 0.9) .. (1, 0.85);
+  \draw (-1, 1.15) -- (1, 1.15);
+  \draw (-1, 0.85) -- (1, 0.85);
+  
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (0, 0.15) .. controls(0.1, 0.1) and (0.1, -0.1) .. (0, -0.15);
+  \draw (-1, 0.15) -- (0, 0.15);
+  \draw (-1, -0.15) -- (0, -0.15);
+
+  \draw[dashed] (-1, 1.5) to (-1, -0.5);
+  \draw[dashed] (0, 1.5) to (0, -0.5);
+  
+  \draw (-1, 1) to (-1, 1.5);
+  \node at (-1, 2) {$0$};
+  \draw (0, 1) to (0, 1.5);
+  \node at (0, 2) {$\frac{1}{2}$};
+  
+\end{diagram}
+
+Then, we add another half-unit stick at the end of the first one:
+
+\begin{diagram}
+
+  \draw (-1, 1) ellipse(0.05cm and 0.15cm);
+  \draw (1, 1.15) .. controls(1.1, 1.1) and (1.1, 0.9) .. (1, 0.85);
+  \draw (-1, 1.15) -- (1, 1.15);
+  \draw (-1, 0.85) -- (1, 0.85);
+  
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (0, 0.15) .. controls(0.1, 0.1) and (0.1, -0.1) .. (0, -0.15);
+  \draw (-1, 0.15) -- (0, 0.15);
+  \draw (-1, -0.15) -- (0, -0.15);
+  
+  \draw (0, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (0, 0.15) -- (1, 0.15);
+  \draw (0, -0.15) -- (1, -0.15);
+
+  \draw[dashed] (-1, 1.5) to (-1, -0.5);
+  \draw[dashed] (0, 1.5) to (0, -0.5);
+  
+  \draw (-1, 1) to (-1, 1.5);
+  \node at (-1, 2) {$0$};
+  \draw (0, 1) to (0, 1.5);
+  \node at (0, 2) {$\frac{1}{2}$};
+  
+\end{diagram}
+
+And we mark the unit stick with ``$\frac{2}{2}$'' at the point where the second half-unit stick ends:
+
+\begin{aside}
+  \begin{notation}
+    Notice the role of the two numbers in our notation ``$\frac{n}{m}$.'' The bottom number $m$ indicates \vocab{how many equal pieces} we have broken a unit stick into, and the top number $n$ is just a \vocab{natural number}, i.e., it is just a counter indicating how many of the $\frac{1}{n}$ sized pieces we have counted. Here we can see this in action. The bottom number in these ratios is $2$, which means we have broken up the unit stick into 2 equal pieces. The top number in these ratios indicates how many of these pieces we have counted up to. We start with ``$0$'' to indicate nought (we could also write ``$\frac{0}{2}$'' to indicate that we have counted no half-units yet). Then we count to ``$\frac{1}{2}$,'' to indicate that we have counted $1$ half-unit. Finally, we reach $\frac{2}{2}$,'' to indicate that we have counted $2$ half-units 
+  \end{notation}
+\end{aside}
+
+\begin{diagram}
+
+  \draw (-1, 1) ellipse(0.05cm and 0.15cm);
+  \draw (1, 1.15) .. controls(1.1, 1.1) and (1.1, 0.9) .. (1, 0.85);
+  \draw (-1, 1.15) -- (1, 1.15);
+  \draw (-1, 0.85) -- (1, 0.85);
+  
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (0, 0.15) .. controls(0.1, 0.1) and (0.1, -0.1) .. (0, -0.15);
+  \draw (-1, 0.15) -- (0, 0.15);
+  \draw (-1, -0.15) -- (0, -0.15);
+  
+  \draw (0, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (0, 0.15) -- (1, 0.15);
+  \draw (0, -0.15) -- (1, -0.15);
+
+  \draw[dashed] (-1, 1.5) to (-1, -0.5);
+  \draw[dashed] (0, 1.5) to (0, -0.5);
+  \draw[dashed] (1, 1.5) to (1, -0.5);
+  
+  \draw (-1, 1) to (-1, 1.5);
+  \node at (-1, 2) {$0$};
+  \draw (0, 1) to (0, 1.5);
+  \node at (0, 2) {$\frac{1}{2}$};
+  \draw (1, 1) to (1, 1.5);
+  \node at (1, 2) {$\frac{2}{2}$};
+  
+\end{diagram}
+
+So, we have used our half-unit sticks to measure the unit stick, and we can see that the length of one unit stick is two half-unit sticks. Since ``$\frac{2}{2}$'' (i.e., $2$ out of $2$ half-units) comes up to one full unit, so we can erase the ``$\frac{2}{2}$'' label, and just write ``$1$,'' like this:
+
+\begin{diagram}
+
+  \draw (-1, 1) ellipse(0.05cm and 0.15cm);
+  \draw (1, 1.15) .. controls(1.1, 1.1) and (1.1, 0.9) .. (1, 0.85);
+  \draw (-1, 1.15) -- (1, 1.15);
+  \draw (-1, 0.85) -- (1, 0.85);
+  
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (0, 0.15) .. controls(0.1, 0.1) and (0.1, -0.1) .. (0, -0.15);
+  \draw (-1, 0.15) -- (0, 0.15);
+  \draw (-1, -0.15) -- (0, -0.15);
+  
+  \draw (0, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (0, 0.15) -- (1, 0.15);
+  \draw (0, -0.15) -- (1, -0.15);
+
+  \draw[dashed] (-1, 1.5) to (-1, -0.5);
+  \draw[dashed] (0, 1.5) to (0, -0.5);
+  \draw[dashed] (1, 1.5) to (1, -0.5);
+  
+  \draw (-1, 1) to (-1, 1.5);
+  \node at (-1, 2) {$0$};
+  \draw (0, 1) to (0, 1.5);
+  \node at (0, 2) {$\frac{1}{2}$};
+  \draw (1, 1) to (1, 1.5);
+  \node at (1, 2) {$1$};
+  
+\end{diagram}
+
+Hence, these two half-unit sticks, when combined, measure up to one unit. Likewise, we could go on and add more half-unit sticks, to count longer portions. For instance, we can count 4 half-unit pieces --- i.e., $\frac{1}{2}$ (one half-unit stick), $\frac{2}{2}$ (two half-unit sticks), $\frac{3}{2}$ (three half-unit sticks), and $\frac{4}{2}$ (four half-unit sticks) --- which adds up to 2 unit sticks:
+
+\begin{diagram}
+
+  \draw (-1, 2) ellipse(0.05cm and 0.15cm);
+  \draw (1, 2.15) .. controls(1.1, 2.1) and (1.1, 1.9) .. (1, 1.85);
+  \draw (-1, 2.15) -- (1, 2.15);
+  \draw (-1, 1.85) -- (1, 1.85);
+  
+  \draw (-1, 1.5) -- (-1, 1.25);
+  \draw (1, 1.5) -- (1, 1.25);
+  \draw (-1, 1.375) -- (1, 1.375);
+  \node at (0, 1) {one unit};
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (0, 0.15) .. controls(0.1, 0.1) and (0.1, -0.1) .. (0, -0.15);
+  \draw (-1, 0.15) -- (0, 0.15);
+  \draw (-1, -0.15) -- (0, -0.15);
+  
+  \draw (0, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (0, 0.15) -- (1, 0.15);
+  \draw (0, -0.15) -- (1, -0.15);
+  
+  \draw (-1, -0.5) -- (-1, -0.75);
+  \draw (0, -0.5) -- (0, -0.75);
+  \draw (-1, -0.625) -- (0, -0.625);
+  \node at (-0.5, -1) {$\frac{1}{2}$};
+  
+  \draw (0, -0.5) -- (0, -0.75);
+  \draw (1, -0.5) -- (1, -0.75);
+  \draw (0, -0.625) -- (1, -0.625);
+  \node at (0.5, -1) {$\frac{2}{2}$};
+  
+  \draw[dotted] (-1, 2.75) to (-1, -1.25);
+  \draw[dotted] (1, 2.75) to (1, -1.25);
+  
+  \draw (2, 2) ellipse(0.05cm and 0.15cm);
+  \draw (4, 2.15) .. controls(4.1, 2.1) and (4.1, 1.9) .. (4, 1.85);
+  \draw (2, 2.15) -- (4, 2.15);
+  \draw (2, 1.85) -- (4, 1.85);
+  
+  \draw (2, 1.5) -- (2, 1.25);
+  \draw (4, 1.5) -- (4, 1.25);
+  \draw (2, 1.375) -- (4, 1.375);
+  \node at (3, 1) {one unit};
+  
+  \draw (4, 2) ellipse(0.05cm and 0.15cm);
+  \draw (6, 2.15) .. controls(6.1, 2.1) and (6.1, 1.9) .. (6, 1.85);
+  \draw (4, 2.15) -- (6, 2.15);
+  \draw (4, 1.85) -- (6, 1.85);
+  
+  \draw (4, 1.5) -- (4, 1.25);
+  \draw (6, 1.5) -- (6, 1.25);
+  \draw (4, 1.375) -- (6, 1.375);
+  \node at (5, 1) {one unit};
+
+  \draw (2, 0) ellipse(0.05cm and 0.15cm);
+  \draw (3, 0.15) .. controls(3.1, 0.1) and (3.1, -0.1) .. (3, -0.15);
+  \draw (2, 0.15) -- (3, 0.15);
+  \draw (2, -0.15) -- (3, -0.15);
+  
+  \draw (3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (4, 0.15) .. controls(4.1, 0.1) and (4.1, -0.1) .. (4, -0.15);
+  \draw (3, 0.15) -- (4, 0.15);
+  \draw (3, -0.15) -- (4, -0.15);
+  
+  \draw (2, -0.5) -- (2, -0.75);
+  \draw (3, -0.5) -- (3, -0.75);
+  \draw (2, -0.625) -- (3, -0.625);
+  \node at (2.5, -1) {$\frac{1}{2}$};
+  
+  \draw (3, -0.5) -- (3, -0.75);
+  \draw (4, -0.5) -- (4, -0.75);
+  \draw (3, -0.625) -- (4, -0.625);
+  \node at (3.5, -1) {$\frac{2}{2}$};
+  
+  \draw (4, 0) ellipse(0.05cm and 0.15cm);
+  \draw (5, 0.15) .. controls(5.1, 0.1) and (5.1, -0.1) .. (5, -0.15);
+  \draw (4, 0.15) -- (5, 0.15);
+  \draw (4, -0.15) -- (5, -0.15);
+  
+  \draw (5, 0) ellipse(0.05cm and 0.15cm);
+  \draw (6, 0.15) .. controls(6.1, 0.1) and (6.1, -0.1) .. (6, -0.15);
+  \draw (5, 0.15) -- (6, 0.15);
+  \draw (5, -0.15) -- (6, -0.15);
+  
+  \draw (4, -0.5) -- (4, -0.75);
+  \draw (5, -0.5) -- (5, -0.75);
+  \draw (4, -0.625) -- (5, -0.625);
+  \node at (4.5, -1) {$\frac{3}{2}$};
+  
+  \draw (5, -0.5) -- (5, -0.75);
+  \draw (6, -0.5) -- (6, -0.75);
+  \draw (5, -0.625) -- (6, -0.625);
+  \node at (5.5, -1) {$\frac{4}{2}$};
+  
+  \draw[dotted] (2, 2.75) to (2, -1.25);
+  \draw[dotted] (4, 2.75) to (4, -1.25);
+  \draw[dotted] (6, 2.75) to (6, -1.25);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    It is easy to see from these pictures that we can keep adding half-unit sticks on, one at a time, to measure distances just as we do with unit sticks. We can represent this in our ratio notation too. For each tick mark, we write a ``$2$'' on the bottom to indicate that we are counting in half-unit sticks, and then we just increment the number on the top by one each time: $\frac{0}{2}$, $\frac{1}{2}$, $\frac{2}{2}$, $\frac{3}{2}$, \ldots, $\frac{134}{2}$, \ldots. We can go on forever like this. Of course, we can also see that $\frac{0}{2}$ measures the same distance as $0$ unit sticks, $\frac{2}{2}$ the same as $1$ unit stick, $\frac{4}{2}$ the same as $2$ unit sticks, $\frac{110}{2}$ the same as $55$ unit sticks, and so on.
+  \end{remark}
+\end{aside}
+
+Now we can return to the line we were trying to measure before, which fell somewhere between 2 units and 3 units long. Here is the picture again:
+
+\begin{diagram}
+
+  \draw (-3, 0.5) to (2, 0.5);
+  \node[dot] at (2, 0.5) {};
+  
+  \draw[dashed] (-3, 1) to (-3, -0.75);
+  \draw[dashed] (-1, 1) to (-1, -0.75);
+  \draw[dashed] (1, 1) to (1, -0.75);
+  \draw[dashed] (3, 1) to (3, -0.75);
+  
+  \draw (-3, 0.3) to (-3, 0.7);
+  \draw (-1, 0.3) to (-1, 0.7);
+  \draw (1, 0.3) to (1, 0.7);
+  \draw (3, 0.3) to (3, 0.7);
+
+  \node at (-3, 1.5) {$0$};
+  \node at (-1, 1.5) {$1$};
+  \node at (1, 1.5) {$2$};
+  \node at (3, 1.5) {$3$};
+
+  \draw (-3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-1, 0.15) .. controls(-0.9, 0.1) and (-0.9, -0.1) .. (-1, -0.15);
+  \draw (-3, 0.15) -- (-1, 0.15);
+  \draw (-3, -0.15) -- (-1, -0.15);
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (-1, 0.15) -- (1, 0.15);
+  \draw (-1, -0.15) -- (1, -0.15);
+
+  \draw (1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (3, 0.15) .. controls(3.1, 0.1) and (3.1, -0.1) .. (3, -0.15);
+  \draw (1, 0.15) -- (3, 0.15);
+  \draw (1, -0.15) -- (3, -0.15);
+
+\end{diagram}
+
+We can measure this line by taking away the third unit stick and keeping just two unit sticks:
+
+\begin{diagram}
+
+  \draw (-3, 0.5) to (2, 0.5);
+  \node[dot] at (2, 0.5) {};
+  
+  \draw[dashed] (-3, 1) to (-3, -0.75);
+  \draw[dashed] (-1, 1) to (-1, -0.75);
+  \draw[dashed] (1, 1) to (1, -0.75);
+  
+  \draw (-3, 0.3) to (-3, 0.7);
+  \draw (-1, 0.3) to (-1, 0.7);
+  \draw (1, 0.3) to (1, 0.7);
+
+  \node at (-3, 1.5) {$0$};
+  \node at (-1, 1.5) {$1$};
+  \node at (1, 1.5) {$2$};
+
+  \draw (-3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-1, 0.15) .. controls(-0.9, 0.1) and (-0.9, -0.1) .. (-1, -0.15);
+  \draw (-3, 0.15) -- (-1, 0.15);
+  \draw (-3, -0.15) -- (-1, -0.15);
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (-1, 0.15) -- (1, 0.15);
+  \draw (-1, -0.15) -- (1, -0.15);
+
+\end{diagram}
+
+And then we can add a half-unit stick to the end:
+
+\begin{diagram}
+
+  \draw (-3, 0.5) to (2, 0.5);
+  \node[dot] at (2, 0.5) {};
+  
+  \draw[dashed] (-3, 1) to (-3, -0.75);
+  \draw[dashed] (-1, 1) to (-1, -0.75);
+  \draw[dashed] (1, 1) to (1, -0.75);
+  
+  \draw (-3, 0.3) to (-3, 0.7);
+  \draw (-1, 0.3) to (-1, 0.7);
+  \draw (1, 0.3) to (1, 0.7);
+
+  \node at (-3, 1.5) {$0$};
+  \node at (-1, 1.5) {$1$};
+  \node at (1, 1.5) {$2$};
+
+  \draw (-3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-1, 0.15) .. controls(-0.9, 0.1) and (-0.9, -0.1) .. (-1, -0.15);
+  \draw (-3, 0.15) -- (-1, 0.15);
+  \draw (-3, -0.15) -- (-1, -0.15);
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (-1, 0.15) -- (1, 0.15);
+  \draw (-1, -0.15) -- (1, -0.15);
+
+  \draw (1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (2, 0.15) .. controls(2.1, 0.1) and (2.1, -0.1) .. (2, -0.15);
+  \draw (1, 0.15) -- (2, 0.15);
+  \draw (1, -0.15) -- (2, -0.15);
+
+\end{diagram}
+
+Now we can mark that we have 2 full units, and one half-unit:
+
+\begin{diagram}
+
+  \draw (-3, 0.5) to (2, 0.5);
+  \node[dot] at (2, 0.5) {};
+  
+  \draw[dashed] (-3, 1) to (-3, -0.75);
+  \draw[dashed] (-1, 1) to (-1, -0.75);
+  \draw[dashed] (1, 1) to (1, -0.75);
+  \draw[dashed] (2, 1) to (2, -0.75);
+  
+  \draw (-3, 0.3) to (-3, 0.7);
+  \draw (-1, 0.3) to (-1, 0.7);
+  \draw (1, 0.3) to (1, 0.7);
+  \draw (2, 0.3) to (2, 0.7);
+
+  \node at (-3, 1.5) {$0$};
+  \node at (-1, 1.5) {$1$};
+  \node at (1, 1.5) {$2$};
+  \node at (2, 1.5) {$\frac{1}{2}$};
+
+  \draw (-3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-1, 0.15) .. controls(-0.9, 0.1) and (-0.9, -0.1) .. (-1, -0.15);
+  \draw (-3, 0.15) -- (-1, 0.15);
+  \draw (-3, -0.15) -- (-1, -0.15);
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (-1, 0.15) -- (1, 0.15);
+  \draw (-1, -0.15) -- (1, -0.15);
+
+  \draw (1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (2, 0.15) .. controls(2.1, 0.1) and (2.1, -0.1) .. (2, -0.15);
+  \draw (1, 0.15) -- (2, 0.15);
+  \draw (1, -0.15) -- (2, -0.15);
+
+\end{diagram}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{More Parts}
+
+\begin{aside}
+  \begin{remark}
+    We can divide a unit stick up into any number of equal parts (assuming our tools are precise enough to handle really small pieces). So, we can divide one unit up into 2 equal pieces, or 3 equal pieces, or 4 equal pieces, and so on forever. It may be hard to imagine, but we could even divide it up into a million equal pieces, a million and one equal pieces, and so on, forever.
+  \end{remark}
+\end{aside}
+
+\newthought{We can divide unit sticks} into more and more equal parts. Above, we divided our unit stick up into \vocab{two} parts (halves). But we can also divide a unit stick up into \vocab{three} parts (thirds):
+
+\begin{diagram}
+
+  \draw (-1, 2) ellipse(0.05cm and 0.15cm);
+  \draw (1, 2.15) .. controls(1.1, 2.1) and (1.1, 1.9) .. (1, 1.85);
+  \draw (-1, 2.15) -- (1, 2.15);
+  \draw (-1, 1.85) -- (1, 1.85);
+  
+  \draw (-1, 1.5) -- (-1, 1.25);
+  \draw (1, 1.5) -- (1, 1.25);
+  \draw (-1, 1.375) -- (1, 1.375);
+  \node at (0, 1) {one unit};
+
+  \draw (-1, 0) ellipse(0.05cm and 0.15cm);
+  \draw (-0.3, 0.15) .. controls(-0.2, 0.1) and (-0.2, -0.1) .. (-0.3, -0.15);
+  \draw (-1, 0.15) -- (-0.3, 0.15);
+  \draw (-1, -0.15) -- (-0.3, -0.15);
+
+  \draw (-0.3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (0.3, 0.15) .. controls(0.4, 0.1) and (0.4, -0.1) .. (0.3, -0.15);
+  \draw (-0.3, 0.15) -- (0.3, 0.15);
+  \draw (-0.3, -0.15) -- (0.3, -0.15);
+  
+  \draw (0.3, 0) ellipse(0.05cm and 0.15cm);
+  \draw (1, 0.15) .. controls(1.1, 0.1) and (1.1, -0.1) .. (1, -0.15);
+  \draw (0.3, 0.15) -- (1, 0.15);
+  \draw (0.3, -0.15) -- (1, -0.15);
+  
+  \draw (-1, -0.5) -- (-1, -0.75);
+  \draw (-0.3, -0.5) -- (-0.3, -0.75);
+  \draw (-1, -0.625) -- (-0.3, -0.625);
+  \node at (-0.6, -1) {$\frac{1}{3}$};
+  
+  \draw (-0.3, -0.5) -- (-0.3, -0.75);
+  \draw (0.3, -0.5) -- (0.3, -0.75);
+  \draw (-0.3, -0.625) -- (0.3, -0.625);
+  \node at (0, -1) {$\frac{2}{3}$};
+  
+  \draw (0.3, -0.5) -- (0.3, -0.75);
+  \draw (1, -0.5) -- (1, -0.75);
+  \draw (0.3, -0.625) -- (1, -0.625);
+  \node at (0.6, -1) {$\frac{3}{3}$};
+  
+  \draw[dotted] (-1, 2.75) to (-1, -1.25);
+  \draw[dotted] (1, 2.75) to (1, -1.25);
+  
+\end{diagram}
+
+\begin{aside}
+  \begin{notation}
+    When we divide a unit stick up into $2$ pieces, we put $2$ on the bottom of the ratio $\frac{n}{m}$. Hence, we have $\frac{1}{2}$, $\frac{2}{2}$, and so on. When we divide a unit stick up into $3$ pieces, then we put $3$ on the bottom of the ratio. Hence, we have $\frac{1}{3}$, $\frac{2}{3}$, and so on. Likewise, if we divide the unit stick up into $7$ pieces, we put $7$ on the bottom of the ratio (which gives us $\frac{1}{7}$, $\frac{2}{7}$, etc). 
+  \end{notation}
+\end{aside}
+
+We could divide it up into fourths, fifths, sixths, and so on. In principle, there is no end to how many pieces we can divide a unit stick into. Of course, we are limited by how small our tools will allow us to go, but that is just a physical limitation. 
+
+There is no reason why we can't imagine dividing up unit sticks into smaller and smaller pieces, forever. We can imagine breaking up a unit stick into a hundred pieces:
+
+\begin{equation*}
+  \frac{1}{100}, \frac{2}{100}, \frac{3}{100}, \ldots
+\end{equation*}
+
+We can imagine breaking it up into a million pieces:
+
+\begin{equation*}
+  \frac{1}{1,000,000}, \frac{2}{1,000,000}, \frac{3}{1,000,000}, \ldots
+\end{equation*}
+
+And so on. We have hit on a special idea here: we can break up a unit into equally sized smaller pieces, and we can use those to measure smaller portions of a unit length.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Rational Numbers}
+
+\newthought{In doing all this}, we have encountered a new kind of number: we encountered \vocab{parts} or \vocab{portions} of numbers. Why is this ``new''?
+
+\begin{terminology}
+  The natural numbers $\Nats/$ and the integers $\Ints/$ are \vocab{whole numbers}, because each one is a whole unit that is not broken up into smaller pieces.
+\end{terminology}
+
+Well, with $\Nats/$ and $\Ints/$, we only have \vocab{whole} numbers. If we look in $\Nats/$ and $\Ints/$, and look around, we will see numbers like $1$, $2$, $-7$, $253$, and so on. But we will never encounter half of a number, or a third of a number. That is why we say $\Nats/$ and $\Ints/$ contain \vocab{whole numbers}. Those numbers are whole units, which are not broken up into smaller parts.
+
+\begin{terminology}
+  A \vocab{ratio} (or synonymously: a \vocab{fraction}) indicates some amount of equally sized \emph{parts} or \emph{portions} of a whole unit. For instance, $\frac{2}{3}$ indicates that we have 2 of 3 equally sized pieces of a unit, and $\frac{5}{3}$ indicates that we have 5 such third-sized pieces.
+\end{terminology}
+
+But now we have seen \emph{parts} of units, i.e., halves, thirds, hundreths, and so on. Let us call each such part a \vocab{ratio} (because $\frac{1}{100}$ is a ratio of $1$ out of a $100$ parts). Another name we will use is a \vocab{fraction} (because $\frac{1}{100}$ is a fraction of a whole).
+
+Let us put all of these ratios (synonymously: fractions) into a set. What exactly goes into this set? Let's build up this set slowly, so we can see all the fractions that go into it. Let's start with 0 in our set:
+
+\begin{equation*}
+  \{ 0 \}
+\end{equation*}
+
+Next, let's add the halves:
+
+\begin{align*}
+  \{ &0, \frac{1}{2}, \frac{2}{2} \}
+\end{align*}
+
+\begin{aside}
+  \begin{remark}
+    It would be impossible for any human to list out all the halves, because it just keeps going. For any $\frac{n}{2}$, we can always add another: $\frac{n + 1}{2}$! Just increment the top number by one! So, we have to imagine that this list of halves has already been built (by God, perhaps).
+  \end{remark}
+\end{aside}
+
+However, there are many more halves beyond this. There is $\frac{3}{2}$ (i.e., 3 half-unit sticks), and $\frac{4}{2}$ (i.e., 4 half-unit sticks), and so on forever:
+
+\begin{align*}
+  \{ &0, \frac{1}{2}, \frac{2}{2}, \frac{3}{2}, \frac{4}{2}, \frac{5}{2}, \ldots \}
+\end{align*}
+
+Note that we already have an infinitely large set of fractions here, just with the halves. But we're not done. Next, we need to add the thirds. And in the same way, there is an infinite number of thirds:
+
+\begin{align*}
+  \{ &0, \frac{1}{2}, \frac{2}{2}, \frac{3}{2}, \frac{4}{2}, \frac{5}{2}, \ldots, \frac{1}{3}, \frac{2}{3}, \frac{3}{3}, \frac{4}{3}, \frac{5}{3}, \ldots \}
+\end{align*}
+
+We should next add the fourths:
+
+\begin{aside}
+  \begin{remark}
+    It might be clearer to list this out in rows and columns. Something like this:
+    
+    \begin{align*}
+      &\frac{0}{2},~\frac{1}{2},~\frac{2}{2},~\frac{3}{2},~\frac{4}{2},~\frac{5}{2},~\ldots \\
+      &\frac{0}{3},~\frac{1}{3},~\frac{2}{3},~\frac{3}{3},~\frac{4}{3},~\frac{5}{3},~\ldots \\
+      &\frac{0}{4},~\frac{1}{4},~\frac{2}{4},~\frac{3}{4},~\frac{4}{4},~\frac{5}{4},~\ldots \\
+      &\frac{0}{5},~\frac{1}{5},~\frac{2}{5},~\frac{3}{5},~\frac{4}{5},~\frac{5}{5},~\ldots \\
+      &~\vdots~~~~\vdots~~~~~\vdots~~~~~\vdots~~~~\vdots~~~~~\vdots
+    \end{align*}
+    
+    We can see how each row keeps expanding forever to the right, and each column keeps expanding forever downwards.
+  \end{remark}
+\end{aside}
+
+\begin{align*}
+  \{ &0, \frac{1}{2}, \frac{2}{2}, \frac{3}{2}, \frac{4}{2}, \frac{5}{2}, \ldots, \frac{1}{3}, \frac{2}{3}, \frac{3}{3}, \frac{4}{3}, \frac{5}{3}, \ldots, \frac{1}{4}, \frac{2}{4}, \frac{3}{4}, \frac{4}{4}, \frac{5}{4}, \ldots \}
+\end{align*}
+
+
+\begin{aside}
+  \begin{remark}
+    With negative fractions, the rows expand forever both left and right:
+    
+    \begin{align*}
+      &\ldots,~-\frac{2}{2},~-\frac{1}{2},~\frac{0}{2},~\frac{1}{2},~\frac{2}{2},~\frac{3}{2},~\frac{4}{2},~\ldots \\
+      &\ldots,~-\frac{2}{3},~-\frac{1}{3},~\frac{0}{3},~\frac{1}{3},~\frac{2}{3},~\frac{3}{3},~\frac{4}{3},~\ldots \\
+      &\ldots,~-\frac{2}{4},~-\frac{1}{4},~\frac{0}{4},~\frac{1}{4},~\frac{2}{4},~\frac{3}{4},~\frac{4}{4},~\ldots \\
+      &\ldots,~-\frac{2}{5},~-\frac{1}{5},~\frac{0}{5},~\frac{1}{5},~\frac{2}{5},~\frac{3}{5},~\frac{4}{5},~\ldots \\
+      &~~~~~~~~~~~~~\vdots~~~~~~~\vdots~~~~~\vdots~~~~~\vdots~~~~~\vdots~~~~\vdots~~~~~\vdots
+    \end{align*}
+  \end{remark}
+\end{aside}
+
+You can see how we can keep going, to build up this set. This set keeps going, in the positive direction.
+
+We also need to go in the \vocab{negative} direction too. Hence, we need to add the negative halves, i.e., $-\frac{1}{2}$, $-\frac{2}{2}$, $-\frac{3}{2}$, and so on:
+
+\begin{align*}
+  \{ \ldots, -\frac{3}{2}, -\frac{2}{2}, -\frac{1}{2}, 0, \frac{1}{2}, \frac{2}{2}, \frac{3}{2}, \ldots, \frac{1}{3}, \frac{2}{3}, \frac{3}{3}, \frac{4}{3}, \ldots \}
+\end{align*}
+
+And we need to add all of the negative thirds:
+
+\begin{align*}
+  \{ \ldots, -\frac{4}{3}, -\frac{3}{3}, -\frac{2}{3}, -\frac{1}{3}, \ldots, -\frac{3}{2}, -\frac{2}{2}, -\frac{1}{2}, 0, \ldots \}
+\end{align*}
+
+You can see that this is a very large set of fractions. In both the positive and negative directions, we have an infinite amount of halves, and an infinite amount of thirds, and an infinite amount of fourths, and so on, forever! 
+
+We call this set the \vocab{rational numbers}. They are not called ``rational'' because they are smart or anything like that. The name ``rational'' is used because it is the adjective form of \vocab{ratio}. Hence these numbers are just \emph{ratios}, i.e., \emph{fractions}. We use the letter ``$\Rationals/$'' to denote them. Hence, we can write our set out like this:
+
+\begin{align*}
+  \Rationals/ = \{ \ldots, -\frac{2}{3}, -\frac{1}{3}, \ldots, -\frac{2}{2}, -\frac{1}{2}, 0, \frac{1}{2}, \frac{2}{2}, \ldots, \frac{1}{3}, \frac{2}{3}, \ldots \}
+\end{align*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about the rational numbers, i.e., ratios or fractions. 
+
+\begin{itemize}
+
+  \item $\Nats/$ and $\Ints/$ contain only \vocab{whole numbers}.
+  
+  \item If we break whole numbers up into parts (i.e., halves, thirds, fourths, fifths, and so on), then we get \vocab{fractions}, or synonymously \vocab{ratios}.
+  
+  \item The \vocab{rational numbers}, which we denote as ``$\Rationals/$,'' is the set of all positive and negative fractions. 
+  
+  \item Like the natural numbers and the integers, $\Rationals/$ is an \vocab{infinite} set. There is no end to the numbers it contains.
+
+\end{itemize}
+
+\end{document}

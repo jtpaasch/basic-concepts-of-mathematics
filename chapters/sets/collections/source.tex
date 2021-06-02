@@ -1,0 +1,413 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Collections}
+
+\newtopic{O}{ne of the ways we organize} our thinking is by gathering things into collections. We are so good at it that we often don't notice we are doing it. But we do. And grouping things together has a purpose: it lets us think about the objects all together as one thing --- as one blob, so to speak.
+
+\begin{ponder}
+  What kinds of collections do you form in your mind, as you go about your day? What kinds of collections help you think through problems better?
+\end{ponder}
+
+Moreover, we can do a variety of things with collections. We can compare them. We can combine and divide them, to form new collections. We can even make collections of collections, and collections of collections of collections.
+
+Recall that \math/ is concerned with the abstract study of structures. Well, sorting things into buckets imposes some structure on an otherwise unstructured bunch of objects. So let us say that \vocab{collections} are a minimal kind of \vocab{structure}, at least insofar as they function something like a container that we can put things in.
+
+\Mathers/ have formalized the primary ways that we work with collections, and they have boiled it down to the fundamentals. The resulting theory is simple, and basic. \Mathers/ call a collection a \vocab{set}, and the theory built up around sets is called \vocab{set theory}. 
+
+\begin{terminology}
+  \vocab{Set theory} is the \mathical/ theory of \emph{sets}. A \vocab{set} is just a collection of objects.
+\end{terminology}
+
+In this chapter, we will introduce the basic ideas and definitions behind set theory. In the following chapters, we will turn to some of the things we can do with sets.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Forming Sets}
+
+\newthought{To form a set}, take any number of objects, and announce, ``let's consider all of these things together, as one set.'' For example, I can point to the pencil, book, and coffee mug on my desk, and say, ``those three things --- let's consider them together, as one set.'' 
+
+Of course, I could physically put those objects into a container (a bag, or a box), but that is unnecessary. I can just collect them together \emph{in my mind}. That is all I really need to do to form a set.
+
+I can put almost anything into a set, and the objects don't need to be related. I can consider all the ideas I had yesterday as one set, or a jar of peanut butter, the number four, and all 1980s teen coming-of-age movies.
+
+\begin{terminology}
+  A set is \vocab{well-defined} if it is clear and unambiguous which objects belong in the set and which do not.
+\end{terminology}
+
+The only basic restriction on forming a set is that it must be \vocab{well-defined}. When we say a set is ``well-defined,'' we mean it is clear which items belong in it, and which do not. 
+
+Suppose I say, ``consider the set of the biggest stars in the galaxy.'' That would not be well-defined, because it is not clear exactly how big a star needs to be to belong in the set. I can fix the problem by stipulating some particular mass, and saying that a star belongs if it has at least that mass.
+
+On rare occasions, we try to form sets which are in fact \vocab{impossible} to form. Such sets are ill-defined (obviously). But usually this only occurs if we try to get too clever. 
+
+\begin{terminology}
+  A set is \vocab{impossible to form} if trying to form it results in a contradiction. Contradictions signal an impossible state of affairs.
+\end{terminology}
+
+As an example, consider the following. An adjective is \emph{autological} if it possesses the property it describes, otherwise it is \emph{heterological}. For example, ``English'' is autological, because it is itself an English word. 
+
+\begin{aside}
+  \begin{remark}
+    Is ``heterological'' heterological? If we say ``yes, `heterological' is heterological,'' then it would describe itself after all, which contradicts its meaning. If we say ``no, `heterological' is not heterological,'' then it follows that it would be autological, which again contradicts its meaning.
+  \end{remark}
+\end{aside}
+
+Now suppose I say, ``consider the set of all heterological adjectives.'' Many adjectives would clearly belong in this set. But what about ``heterological'' itself? We can't answer this without ending up in a contradiction.
+
+We have to be careful about this sort of thing, but we usually only need to worry about it in paradoxical cases, like the hetorological example just mentioned.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Set-Rosters}
+
+\newthought{If we want to work with sets}, we need to tell others about the set we have in mind. In particular, we need to be able to specify \emph{which} items go in the set. When we announce what goes in a set, we say that we \vocab{specify} the set.
+
+\begin{terminology}
+  To \vocab{specify} a set is to specify which objects the set is made up of. That is, we specify which objects go in the set.
+\end{terminology}
+
+One way to specify a set is to just list out all its objects. For example, I can specify the set of objects on my desk:
+
+\begin{equation*}
+  \text{the pencil, the book, the mug}
+\end{equation*}
+
+But when we list the objects in a set, we should always wrap the list in curly braces. Like this:
+
+\begin{aside}
+  \begin{notation}
+    \vocab{Curly braces} are the universal sign to \mathers/ that we are dealing with a \vocab{set}. 
+  \end{notation}
+\end{aside}
+
+\begin{equation*}
+  \{ \text{ the pencil, the book, the mug}~\}
+\end{equation*}
+
+When we list out the objects in a set like this, with curly braces around the list, we call this \vocab{set-roster notation}. We call it ``set-roster'' because by listing out the items, we are providing a \emph{roster} of the items in our set.
+
+\begin{terminology}
+  To specify a set using \vocab{set-roster notation}, simply list the objects between curly braces. 
+\end{terminology}
+
+What do we do if we want to list out a really big set? For example, suppose I want to write out the set of numbers from 1 to 100. How would I do that in set-roster notation?
+
+I could write them all out, one by one, but that'd be long and tedious. Instead, we can use an ellipsis (three dots) to indicate that there is a pattern. So I could do it like this:
+
+\begin{equation*}
+  \{ 1, 2, 3, \ldots, 100 \}
+\end{equation*}
+
+You can read this aloud like this: ``this is the set containing the numbers 1, 2, 3, and so on, up through 100.''
+
+\begin{aside}
+  \begin{notation}
+    In set-roster notation, an \vocab{ellipsis} denotes a repeating pattern.
+  \end{notation}
+\end{aside}
+
+We can use this technique to specify infinite sets too. Suppose I want to specify the set of positive even numbers: 0, 2, 4, and so on infinitely. I could write that out like this:
+
+\begin{equation*}
+  \{ 0, 2, 4, 6, \ldots \}
+\end{equation*}
+ 
+You can read this aloud like so: ``this is the set containing the numbers 0, 2, 4, 6, and so on (forever, into infinity).''
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Naming Sets}
+
+\newthought{When we talk about} a particular set, we can end up referring to it again and again. It's tedious to write out the set-roster every time we need to mention it. Instead, we can give our set a name. 
+
+For example, I might call the objects on my desk my ``Desk Kit.'' In \mathical/ notation, I would write this:
+
+\begin{equation*}
+  \text{Desk Kit} = \{ \text{ the pencil, the book, the mug}~\}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    When we use an equals sign to indicate a name, it has the following meaning: it says that the thing on the left side of the equals sign is the same as (or is a name for) the thing on the right side of the equals sign.
+  \end{remark}
+\end{aside}
+
+You can read this aloud like so: ``let `Desk Kit' be the set containing the pencil, the book, the mug.'' 
+
+\Mathers/ prefer to name sets concisely: with just one italicized uppercase letter. In keeping with this practice, let's name my set $A$:
+
+\begin{equation*}
+  A = \{ \text{ the pencil, the book, the mug}~\}
+\end{equation*}
+
+You can read this aloud like so: ``let $A$ be the set containing the pencil, the book, and the mug.''
+
+\Mathers/ also prefer italicized lowercase letters as names for objects. Let's give our objects such names:
+
+\begin{aside}
+  \begin{remark}
+    We can specify short names for any of the objects in our universe of discourse, using this same format.
+  \end{remark}
+\end{aside}
+
+\begin{align*}
+  p &= \text{the pencil} \\
+  b &= \text{the book} \\
+  m &= \text{the mug}
+\end{align*}
+
+You can read this aloud like so: ``let $p$ be the pencil, let $b$ be the book, and let $m$ be the mug.'' Then we can specify our set like this:
+
+\begin{align*}
+  A = \{ p, b, m \}
+\end{align*}
+
+You can read this aloud like so: ``let $A$ be the set containing $p$, $b$, and $m$.'' Notice how much more concise this is, without losing any essential information.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Set Membership}
+
+\begin{terminology}
+  The objects in a set are called its \vocab{elements}. If an object is an element of a set, we say it is a \vocab{member} of the set. 
+\end{terminology}
+
+\newthought{Here is some vocabulary}. We call the objects in a set the \vocab{elements} of the set. If an object is an element of a set, we say it is a \vocab{member} of the set. If we want to say that an object is a member of a set, we use a special symbol: the $\in$ symbol. 
+
+For example, suppose we want to say that $p$ (the pencil) is a member of my desk kit set $A$. We would write it like this:
+
+\begin{equation*}
+  p \in A
+\end{equation*}
+
+\begin{aside}
+  \begin{notation}
+    To denote that an object $b$ is in a set $C$, we write this:
+    
+    \begin{equation*}
+      b \in C
+    \end{equation*}
+    
+    \noindent
+    That should be read as ``$b$ is in $C$.''
+  \end{notation}
+\end{aside}
+
+You can read this aloud like so: ``$p$ is a member of $A$,'' or even ``$p$ is in $A$.'' If it helps, you can think of the $\in$ symbol as being a little ``e'' for \emph{element}, and so you can read it like this: ``$p$ is an \emph{element} of $A$.''
+
+\begin{aside}
+  \begin{notation}
+    To denote that an object $b$ is not in a set $C$, write this:
+    
+    \begin{equation*}
+      b \not \in C
+    \end{equation*}
+    
+    \noindent
+    Read that as ``$b$ is not in $C$.''
+  \end{notation}
+\end{aside}
+
+If we want to say that some object is \emph{not} in a set, we use the $\in$ symbol again, but we put a slash through it, like this: $\not \in$. For example, if we want to say that a ruler (let's call it ``$r$'') is not in my desk kit set $A$, we can write this:
+
+\begin{equation*}
+  r \not \in A
+\end{equation*}
+
+You can read that out loud like this: ``$r$ is not an element of the set $A$,'' or even more concisely: ``$r$ is not in $A$.''
+
+\begin{aside}
+  \begin{remark}
+    Writing (or saying) that some element is (or is not) a member of a set is a statement. It asserts something, which can be true or false. And there is nothing preventing us from writing (or saying) that an object is in a set when in fact it is not, nor is anything preventing us from writing (or saying) that an object is not in a set when in fact it is. 
+  \end{remark}
+\end{aside}
+
+Notice that when we use the $\in$ or $\not \in$ symbols to say that something is or is not a member of a set, we make a \vocab{statement}. That is, we issue a declarative sentence (using \mathical/ symbols), and that sentence can be true or false.
+
+And of course, there is nothing to prevent us from asserting something false. For example, I can assert that $r$ (the ruler) is in $A$:
+
+\begin{equation*}
+  r \in A
+\end{equation*}
+
+But is this a true statement? No, it is not. We know from our roster that $A$ contains $p$, $b$, and $m$, but no $r$. So this statement is false. Similarly, consider this statement:
+
+\begin{equation*}
+  p \not \in A
+\end{equation*}
+
+This asserts that the object $p$ (the pencil) is \emph{not} in the set $A$, but is that true? No, it is not. We know from our roster that $p$ is in fact a member of $A$.
+
+Another way to think about a set is this: a set is just a bag or container of items. Hence, our set $\set{A}$ which contains the elements $p$, $b$, and $m$ can be pictured as a bag of the items:
+
+\begin{aside}
+  \begin{remark}
+    A set can be pictured as a \vocab{bag} or \vocab{container} with some \vocab{points} scattered about inside it.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (-3, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (-2.75, 1) [label=left:{$p$}] {};
+  \node[dot] (k2) at (-3.75, -0.15) [label=left:{$b$}] {};
+  \node[dot] (k3) at (-2.25, -0.75) [label=left:{$m$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1.5cm);
+
+\end{diagram}
+
+\begin{terminology}
+  We will sometimes call the members of a set its \vocab{elements}, but other times we will call them \vocab{points}. We use these as synonyms, as two different ways of talking about the same thing.
+\end{terminology}
+
+Here we have pictured the elements of the set as \vocab{points}, labeled with their names. The set itself is pictured as a circle that is drawn around the points. So this visually shows us that a set is \vocab{container} that contains some points (elements). Throughout, we will refer to the members of a set as its \vocab{elements} or its \vocab{points}, but we will mean these as just two different ways of talking about the same thing: we really just mean the objects that are contained inside the set.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Set-Builder Notation}
+\label{sec:set-builder-notation}
+
+\begin{aside}
+  \begin{remark}
+    There are two ways to specify a set:
+    \begin{enumerate}
+      \item List out the elements (the roster of items)
+      \item Provide a recipe for building the set
+    \end{enumerate}
+  \end{remark}
+\end{aside}
+
+\newthought{We have been specifying sets} with set-roster notation. But there is another way we can specify a set: we can provide a description or a recipe that tells the reader how to build the set themselves.
+
+For example, I might say to you, ``look around the environment you are in, take every object which is green, and put it into a set.'' By doing that, I tell you how to build the set, without listing out the roster.
+
+\begin{aside}
+  \begin{remark}
+    Here's a little game to play with friends. Look around the room, and pick a set of items (but don't tell anybody which items you picked). Then come up with a description $\P/$ that you think picks out just those items. Then say, ``I've selected the set containing every $x$ such that $x$ is $\P/$'' (for example, ``I've selected the set containing every $x$ such that $x$ is made of metal''). Have your friends then look around the room and find all the items that satisfy your description. You may discover that you need to make your description more precise!
+  \end{remark}
+\end{aside}
+
+If I want to write this out, I would write it like this: 
+
+\begin{equation*}
+  \{~x \mid \text{$x$ is green}~\}
+\end{equation*}
+
+You can read this aloud like so: ``this is the set that contains every $x$ which is such that $x$ is green.'' This might seem a little obtuse, so let's break it down:
+
+\begin{diagram}
+  \node (lb) at (-2, 0) {$\{$};
+  \node (var) at (-1.25, 0) {$x$};
+  \node (mid) at (-0.5, 0) {$\mid$};
+  \node (recipe) at (1, 0) {$x$ is green};
+  \node (rb) at (2.5, 0) {$\}$};
+  
+  \node (var_label) at (-3, -1.5) {each $x$};
+  \node (mid_label) at (-1, -2.5) {``such that''};
+  \node (recipe_label) at (3, -1.75) {recipe for selecting};
+  \node (recipe_label_2) at (3, -2.25) {each element $x$};
+  
+  \draw[->,space] (var_label) -- (var);
+  \draw[->,space] (mid_label) -- (mid);
+  \draw[->,space] (recipe_label) -- (recipe);
+\end{diagram}
+
+\noindent
+Note the following about this notation:
+
+\begin{itemize}
+
+  \item We surround the whole thing in curly braces, because that is the universal sign that we are dealing with a set.
+
+  \item In the middle, we write down a vertical bar, which stands for ``such that.''
+  
+  \item On the left side of the bar, we write down a lowercase letter (usually $x$) to stand for each object in the set.
+    
+  \item On the right side of the bar, we specify the recipe which tells us how to select the elements that go in the set.
+  
+\end{itemize}
+
+This notation might seem cumbersome, but it allows us to specify pretty much any set we like, no matter how complicated or large it might be. We call this \vocab{set-builder notation}. It has the shape:
+
+\begin{equation*}
+  \{~x \mid \text{$x$ is $\P/$ }~\}
+\end{equation*}
+
+\noindent
+where you can replace $\P/$ with any description or recipe that tells your reader how to select the objects that go in the set.
+
+For example, I can use set-builder notation to specify all the positive even numbers, like this:
+
+\begin{equation*}
+  \{~x \mid \text{$x$ is a positive even number }~\}
+\end{equation*}
+
+\begin{terminology}
+  To specify a set using \vocab{set-builder notation}, write an expression with this shape:
+
+\begin{equation*}
+  \{~x \mid \text{$x$ is $\P/$ }~\}
+\end{equation*}
+
+\noindent
+and replace $\P/$ with a description or recipe that uniquely identifies each $x$ in your set.  
+\end{terminology}
+
+As another example, consider the set specified by this set-builder recipe:
+
+\begin{equation*}
+  \{~x \mid 0 < x < 10 \}
+\end{equation*}
+
+Read this aloud like so: ``this is the set containing every $x$ which is such that 0 is less than $x$ and $x$ is less than 10.'' 
+
+What do you think the members of this set are? Can you write it out in set-roster notation? It is this:
+
+\begin{equation*}
+  \{ 1, 2, 3, ..., 9 \}
+\end{equation*}
+
+Notice that this set includes numbers from 1 to 9, but not 0 or 10. Why not? Because the recipe used the less-than symbol, not less-than-or-equal symbols. 
+
+To include 0 and 10, we would write this:
+
+\begin{equation*}
+  \{ x \mid 0 \leq x \leq 10 \}
+\end{equation*}
+
+Read this aloud like so: ``this is the set containing every $x$ which is such that 0 is less-than or equal-to $x$, and $x$ is less-than or equal-to 10.'' And this set would include 0 and 10, as well as every number in between.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned that a set is just a well-defined collection of objects. Then we learned the following:
+
+\begin{itemize}
+
+  \item The objects that are \vocab{members} of a set are called the \vocab{elements} of the set (and sometimes we will just call them the \vocab{points} in a set).
+
+  \item We can specify a set with \vocab{set-roster notation}, by listing out its elements between curly braces, e.g., $\{ 1, 2, 3 \}$.
+  
+  \item We can specify a set with \vocab{set-builder notation}, by giving a recipe that tells the reader how to build the set themselves, e.g., $\{ x | 0 < x < 10 \}$. 
+  
+  \item We name sets with \vocab{italicized uppercase letters}, e.g., $A$, $C$, and so on. We name elements with italicized lowercase letters, e.g., $a$, $b$, and so on.
+  
+  \item To assert that an element $b$ is a \vocab{member} of a set $C$, we can use the $\in$ symbol like so: $b \in C$.
+  
+  \item To assert that an element $b$ is \vocab{not a member} of a set $C$, we can use the $\in$ symbol with a slash through it, like so: $b \not \in C$.
+
+\end{itemize}
+
+
+\end{document}

@@ -1,0 +1,336 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The Size of Sets}
+\label{ch:the-size-of-sets}
+
+\newtopic{H}{ow do we determine} the ``size'' of a set? In this chapter, we will will look at how to measure the size of a set, even when sets are nested inside other sets. We will also look at an important edge case: the empty set.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Cardinality}
+
+\newthought{The size of a set} is the number of elements in it. We call this the set's \vocab{cardinality}. To denote the size of a set $C$, we write the name of the set with vertical bars around it:
+
+\begin{equation*}
+  \cardinality{C}
+\end{equation*}
+
+Read that aloud as: ``the cardinality of the set $C$.''
+
+\begin{terminology}
+  The \vocab{cardinality} of a set is the number of elements in it.
+\end{terminology}
+
+To determine the cardinality of a set, simply count the number of elements in it. For example, consider this set:
+
+\begin{aside}
+  \begin{remark}
+    Because duplicates do not matter, we do not count duplicates when we count the number of elements in a set. If ``$b$'' occurs more than once in a set, we only count it one time.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  C = \{ a, b, c, d, e, f, g, r, t \}
+\end{equation*}
+
+How many elements are in this set? If we count them, we see that there are nine elements in this set. So the cardinality of this set is 9. We write that like this:
+
+\begin{equation*}
+  \cardinality{C} = 9
+\end{equation*}
+
+You can read that aloud like so: ``the cardinality of the set $C$ is 9.'' Let us put the notion of cardinality into a definition.
+
+\begin{fdefinition}[Cardinality]
+  \label{def:set-cardinality}
+  For any set $A$, the cardinality of $A$ is the number of elements contained in $A$. We will denote the cardinality of $A$ like this: $\cardinality{A}$.
+\end{fdefinition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Empty Set}
+
+\newthought{We described a set as a container}. So far, we have been talking about sets that have at least some elements in them. Let's talk about sets that have very few elements in them. A set with only one element in it has a fancy name. We call it a \vocab{singleton}. But what about a set with no elements, i.e., a container with nothing inside it?
+
+\begin{terminology}
+  The \vocab{empty set} has no elements in it. It is completely empty, like an empty box.
+\end{terminology}
+
+If a set has nothing in it, we call it the \vocab{empty set}. We can symbolize it in two different ways. First, we can write curly braces, and then put nothing between them, like this:
+
+\begin{equation*}
+  \{ ~ \}
+\end{equation*}
+
+The other way is a special symbol. \Mathers/ use the symbol $\emptyset/$ to denote the empty set.
+
+Since the empty set has no elements in it, what is its cardinality? It has a cardinality is zero. Hence (both of these ways of writing it are equavalent): 
+
+\begin{equation*}
+  \cardinality{\emptyset/} = 0 \hskip 3cm \cardinality{\{ \}} = 0
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Peculiar Facts About the Empty Set}
+\label{sec:peculiar-facts-about-the-empty-set}
+
+There are two peculiar facts about the empty set to note. First, how many empty sets are there? According to \defref{def:set-identity}, there can only be \vocab{one} empty set.
+
+\begin{aside}
+  \begin{remark}
+    There is only \vocab{one empty set}. Hence, it is \emph{the} empty set.
+  \end{remark}
+\end{aside}
+
+How do we know this? Two sets are identical if they have the same elements. Well, consider these two sets:
+
+\begin{equation*}
+  A = \{ \} \hskip 3cm B = \{ \}
+\end{equation*}
+
+Are $A$ and $B$ identical? According to \defref{def:set-identity}, we need to check if everything contained in $A$ is also in $B$, and vice versa. Is that so here? Well, yes, in the sense that there is nothing in $A$, and we can see that there is also nothing in $B$. The same goes the other way: the ``nothing'' that's in $B$ is also in $A$. So these are the same set.
+
+\begin{aside}
+  \begin{remark}
+    The empty set is \vocab{always a subset} of every other set.
+  \end{remark}
+\end{aside}
+
+The second peculiar fact about the empty set is that it is \vocab{always a subset} of every other set. According to \defref{def:subset}, to determine if one set is a subset of another set, we have to check that each element in the first set is also in the second set. So, consider this:
+
+\begin{equation*}
+  \emptyset/ \subseteq A
+\end{equation*}
+
+Is $\emptyset/$ a subset of $A$? Well, the empty set has no elements, so there's nothing to check. All of its ``nothing'' is also in $A$. 
+
+\begin{terminology}
+  Something is \vocab{vacuously true} when there is nothing to do to satisfy the definition or statement in question.
+\end{terminology}
+
+We say it is \vocab{vacuously true} that the empty set's elements are in $A$, because it satisfies the required definition, but only in a vacuous way. There is nothing to actually fulfill in satisfying the definition. 
+
+This is like asking, ``did you finish all your chores?'' Well, if you have no chores to complete in the first place, then you are indeed ``finished'' with your chores, in virtue of not having any to do!
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Sets in Sets}
+
+\newthought{Sets can contain other sets}. For example, consider this set:
+
+\begin{aside}
+  \begin{remark}
+    Be careful not to confuse \vocab{elements} and \vocab{subsets}. Take the set $\{ a, b, \{ 1, 2, 3 \}, c, d \}$. Is $\{ 1, 2, 3 \}$ an \emph{element} of this set, or a \emph{subset} of it? The answer: it is an \vocab{element} of it, not a subset.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \{ a, b, \{ 1, 2, 3 \}, c, d \}
+\end{equation*}
+
+This set has $a$, $b$, $c$, and $d$ in it, but it also has $\{ 1, 2, 3 \}$ in it, which is itself a set. How many items are in this set? That is, what is its cardinality? The answer is 5:
+
+\begin{equation*}
+  \cardinality{\{ a, b, \{ 1, 2, 3 \}, c, d \}} = 5
+\end{equation*}
+
+Why 5? Why not 7? Well, $a$, $b$, $c$, and $d$ are clearly members of this set, so that's four. But then there's only one more element, namely the set $\{ 1, 2, 3 \}$. So that makes 5.
+
+\begin{aside}
+  \begin{remark}
+    If one set is nested inside another set, when we count the number of elements in the outer set, we do not count the inner set's elements. In this example, $1$, $2$, and $3$ are not counted as three extra elements in the outer set. Rather, the whole set $\{ 1, 2, 3 \}$ is counted as one element of the outer set.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+  \node (lb) at (-5, 0) {$\{$};
+  \node (1) at (-4, 0) {$a$};
+  \node (sep_1) at (-3, 0) {,};
+  \node (2) at (-2, 0) {$b$};
+  \node (sep_2) at (-1, 0) {,};
+  \node (3) at (0.5, 0) {$\{ 1, 2, 3 \}$};
+  \node (sep_3) at (2, 0) {,};
+  \node (4) at (3, 0) {$c$};
+  \node (sep_4) at (4, 0) {,};
+  \node (5) at (5, 0) {$d$};
+  \node (rb) at (6, 0) {$\}$};
+  
+  \draw (-4.5, -0.25) -- (-4.5, -0.5) -- (-3.5, -0.5) -- (-3.5, -0.25);
+  \draw (-2.5, -0.25) -- (-2.5, -0.5) -- (-1.5, -0.5) -- (-1.5, -0.25);
+  \draw (-0.5, -0.25) -- (-0.5, -0.5) -- (1.5, -0.5) -- (1.5, -0.25);
+  \draw (2.5, -0.25) -- (2.5, -0.5) -- (3.5, -0.5) -- (3.5, -0.25);
+  \draw (4.5, -0.25) -- (4.5, -0.5) -- (5.5, -0.5) -- (5.5, -0.25);
+  
+  \node (1_label) at (-4, -2) {1st};
+  \node (1_label_b) at (-4, -2.5) {element};
+  \draw[->,spaced] (1_label) -- (1);
+  \node (2_label) at (-2, -2) {2nd};
+  \node (2_label_b) at (-2, -2.5) {element};
+  \draw[->,spaced] (2_label) -- (2);
+  \node (3_label) at (0.5, -2) {3rd};
+  \node (3_label_b) at (0.5, -2.5) {element};
+  \draw[->,spaced] (3_label) -- (3);
+  \node (4_label) at (3, -2) {4th};
+  \node (4_label_b) at (3, -2.5) {element};
+  \draw[->,spaced] (4_label) -- (4);
+  \node (5_label) at (5, -2) {5th};
+  \node (5_label_b) at (5, -2.5) {element};
+  \draw[->,spaced] (5_label) -- (5);
+\end{diagram}
+
+Now take just the 3rd element from this set, namely $\{ 1, 2, 3 \}$. Let's unwrap it. What is \emph{its} cardinality? The answer is 3, because there are three elements in it:
+
+\begin{diagram}
+  \node (lb) at (-3, 0) {$\{$};
+  \node (1) at (-2, 0) {$1$};
+  \node (sep_1) at (-1, 0) {,};
+  \node (2) at (0, 0) {$2$};
+  \node (sep_2) at (1, 0) {,};
+  \node (3) at (2, 0) {$3$};
+  \node (rb) at (3, 0) {$\}$};
+  
+  \draw (-2.5, -0.25) -- (-2.5, -0.5) -- (-1.5, -0.5) -- (-1.5, -0.25);
+  \draw (-0.5, -0.25) -- (-0.5, -0.5) -- (0.5, -0.5) -- (0.5, -0.25);
+  \draw (1.5, -0.25) -- (1.5, -0.5) -- (2.5, -0.5) -- (2.5, -0.25);
+  
+  \node (1_label) at (-2, -2) {1st};
+  \node (1_label_b) at (-2, -2.5) {element};
+  \draw[->,spaced] (1_label) -- (1);
+  \node (2_label) at (0, -2) {2nd};
+  \node (2_label_b) at (0, -2.5) {element};
+  \draw[->,spaced] (2_label) -- (2);
+  \node (3_label) at (2, -2) {3rd};
+  \node (3_label_b) at (2, -2.5) {element};
+  \draw[->,spaced] (3_label) -- (3);
+\end{diagram}
+
+For another example, what's the cardinality of this next set (I've written it two ways, but they both mean the same thing):
+
+\begin{equation*}
+  \{ \} \hskip 3cm \emptyset/
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    One way to think about cardinality is to think about sets as sealed boxes that have things in them. If we unseal our box, open it up, and count how many items are inside, that's the cardinality of the set. Some of the things in our box might be smaller sealed boxes, and each such smaller box counts as one thing in our total count.
+  \end{remark}
+\end{aside}
+
+Think of the empty set as a box with nothing inside. When we ask for its cardinality, we are asking how many items it has inside it. The answer is zero. There are simply no items at all inside it (its an empty box).
+
+\begin{diagram}
+  \node (lb) at (-1, 0) {$\{$};
+  \node (rb) at (1, 0) {$\}$};
+  \node (1_label) at (0, -2) {Nothing};
+  \node (1_label_b) at (0, -2.5) {inside};
+  \draw[->,spaced] (1_label) -- (0, 0);
+\end{diagram}
+
+We can write that the empty set has a cardinality of zero like this (written in two ways, but both mean the same thing):
+
+\begin{equation*}
+  \cardinality{\{ \}} = 0 \hskip 3cm \cardinality{\emptyset/} = 0
+\end{equation*}
+
+Let us turn to another example. What is the cardinality of the following set (I've written it two ways, but both mean the same thing):
+
+\begin{equation*}
+  \{ \{ \} \} \hskip 3cm \{ \emptyset/ \}
+\end{equation*}
+
+This is a set that contains the empty set. It's cardinality is one, not zero. Why? Think about sets as boxes. There is an outer box, which contains an inner box (and the inner box is empty). How many things does the outer box contain? It contains one box (even though that inner box is itself empty). You can see this in the following picture (I've drawn it two ways, but again, both mean the same thing):
+
+\begin{aside}
+  \begin{remark}
+    The set $\{ \{ \} \}$ is made up from an outer box that contains an inner box. The inner box is empty, but the outer box is not. The outer box has one thing in it, namely another box!
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+  \node (lb) at (-4, 0) {$\{$};
+  \node (1) at (-3, 0) {$\{~\}$};
+  \node (rb) at (-2, 0) {$\}$};
+  \draw (-3.5, -0.25) -- (-3.5, -0.5) -- (-2.5, -0.5) -- (-2.5, -0.25);
+  \node (1_label) at (-3, -2) {A single};
+  \node (1_label_b) at (-3, -2.5) {element};
+  \draw[->,spaced] (1_label) -- (-3, -0.25);
+  
+  \node (lb2) at (2, 0) {$\{$};
+  \node (1b) at (3, 0) {$\emptyset/$};
+  \node (rb2) at (4, 0) {$\}$};
+  \draw (2.5, -0.25) -- (2.5, -0.5) -- (3.5, -0.5) -- (3.5, -0.25);
+  \node (1_label2) at (3, -2) {A single};
+  \node (1_label_b2) at (3, -2.5) {element};
+  \draw[->,spaced] (1_label2) -- (3, -0.25);
+\end{diagram}
+
+So its cardinality is one, which we can write like this (I've written it two ways, but both mean the same thing):
+
+\begin{equation*}
+  \cardinality{\{ \{ \} \}} = 1 \hskip 3cm \cardinality{\{ \emptyset/ \}} = 1
+\end{equation*}
+
+As a final example, think about this set:
+
+\begin{equation*}
+  \{ \emptyset/, \{ \emptyset/ \}, \{ \{ \emptyset/ \} \} \}
+\end{equation*}
+
+Think of this in terms of boxes. This box contains an empty box as its first element, then it has a box containing an empty box as its second element, then it has a box containing a box containing an empty box as its second element. 
+
+What is its cardinality? The answer is 3, because it contains three elements.
+
+\begin{diagram}
+  \node (lb) at (-4, 0) {$\{$};
+  \node (1) at (-3, 0) {$\emptyset/$};
+  \node (1_sep) at (-2, 0) {,};
+  \node (2) at (-0.75, 0) {$\{ \emptyset/ \}$};
+  \node (2_sep) at (0.5, 0) {,};
+  \node (3) at (1.75, 0) {$\{ \{ \emptyset/ \} \}$};
+  \node (rb) at (3, 0) {$\}$};
+  
+  \draw (-3.5, -0.25) -- (-3.5, -0.5) -- (-2.5, -0.5) -- (-2.5, -0.25);
+  \draw (-1.25, -0.25) -- (-1.25, -0.5) -- (-0.25, -0.5) -- (-0.25, -0.25);
+  \draw (1, -0.25) -- (1, -0.5) -- (2.5, -0.5) -- (2.5, -0.25);
+  
+  \node (1_label) at (-3, -2) {1st};
+  \node (1_label_b) at (-3, -2.5) {element};
+  \draw[->,spaced] (1_label) -- (-3, -0.25);
+  \node (2_label) at (-0.75, -2) {2nd};
+  \node (2_label_b) at (-0.75, -2.5) {element};
+  \draw[->,spaced] (2_label) -- (-0.75, -0.25);
+  \node (3_label) at (1.75, -2) {3rd};
+  \node (3_label_b) at (1.75, -2.5) {element};
+  \draw[->,spaced] (3_label) -- (1.75, -0.25);
+\end{diagram}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned how to measure the size of differents sets, including the empty set and sets with other sets nested inside of them. 
+
+\begin{itemize}
+
+  \item The ``size'' of a set is called its \vocab{cardinality}, and that is defined as the number of elements contained in the set. We denote the cardinality of a set $C$ with two vertical bars: $\cardinality{C}$.
+  
+  \item The \vocab{empty set} is the set with no elements. It can be written as ``$\{~\}$'' or ``$\emptyset/$.''
+  
+  \item There is only \vocab{one empty set}, which follows from \defref{def:set-identity}.
+
+  \item The empty set is a \vocab{subset of every other set}, which follows from \defref{def:subset}.
+  
+  \item The cardinality of $\{ \}$ is zero, whereas the cardinality of $\{ \{ \} \}$ is one. That is, $\cardinality{\emptyset/} = 0$, but $\cardinality{\{\emptyset/\}} = 1$.
+
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,804 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Properties of Operations}
+\label{ch:properties-of-operations}
+
+\newtopic{I}{n this chapter}, we'll look at some of the properties that \vocab{binary operations} can have. In the next chapters, we'll use these properties to distinguish different kinds of algebras.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Associativity}
+
+\begin{terminology}
+  An operation is \vocab{associative} if ``$\op{(\op{x}{y})}{z}$'' always equals ``$\op{x}{(\op{y}{z})}$.'' In other words, where we put the parentheses doesn't matter.
+\end{terminology}
+
+\newthought{A binary operation} $\opSymbol/$ on a set $\set{A}$ is \vocab{associative} if this is true for all elements in $\set{A}$:
+
+\begin{equation*}
+  \op{(\op{x}{y})}{z} = \op{x}{(\op{y}{z})}
+\end{equation*}
+
+The basic idea here is just this. If we are combining $x$, $y$, and $z$, it doesn't matter if we first combine $x$ and $y$, or if we first combine $y$ and $z$. Either way comes to the same answer.
+
+If an algebraic structure has a binary operation that is associative, then we can say that the \emph{algebraic structure} is associative. That is, we say it is an \vocab{associative algebra}. 
+
+\begin{aside}
+  \begin{remark}
+    You may recognize associativity from addition. Regular \vocab{addition} is associative. It doesn't matter where we put the parentheses. For example, consider these two equations: 
+    \begin{equation*}
+      2 + (3 + 4) \hskip 0.25cm \text{ and } \hskip 0.25cm (2 + 3) + 4)
+    \end{equation*}
+    
+    These give the same answer:
+    \begin{center}
+      \begin{tabular}{c c c | c c c}
+        $2$ & $+$          & $(3 + 4)$    & $(2 + 3)$    & $+$          & $4$ \\
+            &              & $\downarrow$ & $\downarrow$ &              &     \\
+        $2$ & $+$          & $7$          & $5$          & $+$          & $4$ \\
+            & $\downarrow$ &              &              & $\downarrow$ &     \\
+            & $9$          &              &              & $9$          &
+      \end{tabular}
+    \end{center}
+    
+    So, when we are adding number like this, where we put the parentheses doesn't matter. We still get the same answer. By contrast, \vocab{subtraction} is not associative. `Consider these two equations:
+    \begin{equation*}
+      2 - (3 - 4) \hskip 0.25cm \text{ and } \hskip 0.25cm (2 - 3) - 4
+    \end{equation*}
+    
+    These do not give the same answer: 
+    \begin{center}
+      \begin{tabular}{c c c | c c c}
+        $2$ & $-$          & $(3 - 4)$    & $(2 - 3)$    & $-$          & $4$ \\
+            &              & $\downarrow$ & $\downarrow$ &              &     \\
+        $2$ & $-$          & $(-1)$       & $(-1)$       & $-$          & $4$ \\
+            & $\downarrow$ &              &              & $\downarrow$ &     \\
+            & $3$          &              &              & $-5$         &
+      \end{tabular}
+    \end{center}
+    
+    So, when we're subtracting numbers like this, where we put the parentheses \emph{does} matter. Subtraction is \emph{not} associative.
+  \end{remark}
+\end{aside}
+
+\begin{fdefinition}[Associative algebra]
+  \label{def:associative-algebra}
+  For any algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$, we will say that $\algebra{S}$ is an \vocab{associative algebra} if, for every $x$, $y$, and $z$ in $\set{A}$:
+  
+  \begin{equation*}
+    \op{(\op{x}{y})}{z} = \op{x}{(\op{y}{z})}
+  \end{equation*}
+\end{fdefinition}
+
+\begin{fexample}
+
+Suppose we have an algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ where the set $\set{A}$ is defined like this:
+
+\begin{equation*}
+  \set{A} = \{ a, b \}
+\end{equation*}
+
+and the Cayley table is defined like this:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | }
+    \hline
+    $\opSymbol/$ & $a$ & $b$ \\ \hline \hline
+    $a$          & $a$ & $b$ \\ \hline
+    $b$          & $b$ & $a$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Is this an associative algebra? Let's check some cases. First, let's take $a$, $b$, and $a$, and let's check if this holds:
+
+\begin{equation*}
+  \op{(\op{a}{b})}{b} = \op{a}{(\op{b}{b})}
+\end{equation*}
+
+That is to say, does $\op{(\op{a}{b})}{b}$ gives us the same answer as $\op{a}{(\op{b}{b})}$? Using our Cayley table, we can reduce both sides of the equation, and we see that they do in fact come to the same thing:
+
+\begin{diagram}
+
+  \node at (-4, 0) {$($};
+  \node at (-3.5, 0) {$a$};
+  \node at (-3, 0) {$\opSymbol/$};
+  \node at (-2.5, 0) {$b$};
+  \node at (-2, 0) {$)$};
+  \node at (-1.5, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$b$};
+  \node at (0, 0) {$=$};
+  \node at (1, 0) {$a$};
+  \node at (1.5, 0) {$\opSymbol/$};
+  \node at (2, 0) {$($};
+  \node at (2.5, 0) {$b$};
+  \node at (3, 0) {$\opSymbol/$};
+  \node at (3.5, 0) {$b$};
+  \node at (4, 0) {$)$};
+
+  \draw (-3.75, -0.25) -- (-3.75, -0.5) -- (-2.25, -0.5) -- (-2.25, -0.25);
+  \draw[->] (-3, -0.5) -- (-3, -1);
+  \node at (-3, -1.25) {$b$};
+  \draw[->,dotted] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.5, -1.25) {$\opSymbol/$};
+  \draw[->,dotted] (-1, -0.25) -- (-1, -1);
+  \node at (-1, -1.25) {$b$};
+  
+  \draw (-3.25, -1.5) -- (-3.25, -1.75) -- (-0.75, -1.75) -- (-0.75, -1.5);
+  \draw[->] (-1.5, -1.75) -- (-1.5, -2.25);
+  \node at (-1.5, -2.5) {$a$};
+
+  \draw (2.25, -0.25) -- (2.25, -0.5) -- (3.75, -0.5) -- (3.75, -0.25);
+  \draw[->] (3, -0.5) -- (3, -1);
+  \node at (3, -1.25) {$a$};
+  \draw[->,dotted] (1.5, -0.25) -- (1.5, -1);
+  \node at (1.5, -1.25) {$\opSymbol/$};
+  \draw[->,dotted] (1, -0.25) -- (1, -1);
+  \node at (1, -1.25) {$a$};
+  
+  \draw (0.75, -1.5) -- (0.75, -1.75) -- (3.25, -1.75) -- (3.25, -1.5);
+  \draw[->] (1.5, -1.75) -- (1.5, -2.25);
+  \node at (1.5, -2.5) {$a$};
+
+  \node at (0, -2.5) {$=$};
+
+\end{diagram}
+
+Let's check another case. Let's check if $\op{(\op{b}{b})}{a}$ gives us the same answer as $\op{b}{(\op{b}{a})}$. If we reduce both sides of the equation, we can see that we get the same result:
+
+\begin{aside}
+  \begin{remark}
+    To show that an algebraic structure is \vocab{associative}, we have to show that parentheses do not matter in \emph{every} possible combination of letters. If there is even one combination where the location of the parentheses matters, then the structure is \emph{not} associative.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node at (-4, 0) {$($};
+  \node at (-3.5, 0) {$b$};
+  \node at (-3, 0) {$\opSymbol/$};
+  \node at (-2.5, 0) {$b$};
+  \node at (-2, 0) {$)$};
+  \node at (-1.5, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$a$};
+  \node at (0, 0) {$=$};
+  \node at (1, 0) {$b$};
+  \node at (1.5, 0) {$\opSymbol/$};
+  \node at (2, 0) {$($};
+  \node at (2.5, 0) {$b$};
+  \node at (3, 0) {$\opSymbol/$};
+  \node at (3.5, 0) {$a$};
+  \node at (4, 0) {$)$};
+
+  \draw (-3.75, -0.25) -- (-3.75, -0.5) -- (-2.25, -0.5) -- (-2.25, -0.25);
+  \draw[->] (-3, -0.5) -- (-3, -1);
+  \node at (-3, -1.25) {$a$};
+  \draw[->,dotted] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.5, -1.25) {$\opSymbol/$};
+  \draw[->,dotted] (-1, -0.25) -- (-1, -1);
+  \node at (-1, -1.25) {$a$};
+  
+  \draw (-3.25, -1.5) -- (-3.25, -1.75) -- (-0.75, -1.75) -- (-0.75, -1.5);
+  \draw[->] (-1.5, -1.75) -- (-1.5, -2.25);
+  \node at (-1.5, -2.5) {$a$};
+
+  \draw (2.25, -0.25) -- (2.25, -0.5) -- (3.75, -0.5) -- (3.75, -0.25);
+  \draw[->] (3, -0.5) -- (3, -1);
+  \node at (3, -1.25) {$b$};
+  \draw[->,dotted] (1.5, -0.25) -- (1.5, -1);
+  \node at (1.5, -1.25) {$\opSymbol/$};
+  \draw[->,dotted] (1, -0.25) -- (1, -1);
+  \node at (1, -1.25) {$b$};
+  
+  \draw (0.75, -1.5) -- (0.75, -1.75) -- (3.25, -1.75) -- (3.25, -1.5);
+  \draw[->] (1.5, -1.75) -- (1.5, -2.25);
+  \node at (1.5, -2.5) {$a$};
+
+  \node at (0, -2.5) {$=$};
+
+\end{diagram}
+
+If you check all possible combinations of three elements from $\set{A}$, you will see that we always get the same answer, no matter where we put the parentheses. So this is an associative algebra.
+
+\end{fexample}
+
+\begin{example}
+
+Suppose we have an algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ where the set $\set{A}$ is defined like this:
+
+\begin{equation*}
+  \set{A} = \{ 1, 2 \}
+\end{equation*}
+
+and the Cayley table is defined like this:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | }
+    \hline
+    $\opSymbol/$ & $1$ & $2$ \\ \hline \hline
+    $1$          & $1$ & $1$ \\ \hline
+    $2$          & $2$ & $1$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Is this an associative algebra? It is not. Here's a case where we get a different answer if we put the parentheses in a different place:
+
+\begin{aside}
+  \begin{remark}
+    To show that an algebraic structure is \vocab{not associative}, all we need to do is find one case where the location of the parentheses matters. 
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node at (-4, 0) {$($};
+  \node at (-3.5, 0) {$2$};
+  \node at (-3, 0) {$\opSymbol/$};
+  \node at (-2.5, 0) {$1$};
+  \node at (-2, 0) {$)$};
+  \node at (-1.5, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$2$};
+  \node at (0, 0) {$=$};
+  \node at (1, 0) {$2$};
+  \node at (1.5, 0) {$\opSymbol/$};
+  \node at (2, 0) {$($};
+  \node at (2.5, 0) {$1$};
+  \node at (3, 0) {$\opSymbol/$};
+  \node at (3.5, 0) {$2$};
+  \node at (4, 0) {$)$};
+
+  \draw (-3.75, -0.25) -- (-3.75, -0.5) -- (-2.25, -0.5) -- (-2.25, -0.25);
+  \draw[->] (-3, -0.5) -- (-3, -1);
+  \node at (-3, -1.25) {$2$};
+  \draw[->,dotted] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.5, -1.25) {$\opSymbol/$};
+  \draw[->,dotted] (-1, -0.25) -- (-1, -1);
+  \node at (-1, -1.25) {$2$};
+  
+  \draw (-3.25, -1.5) -- (-3.25, -1.75) -- (-0.75, -1.75) -- (-0.75, -1.5);
+  \draw[->] (-1.5, -1.75) -- (-1.5, -2.25);
+  \node at (-1.5, -2.5) {$1$};
+
+  \draw (2.25, -0.25) -- (2.25, -0.5) -- (3.75, -0.5) -- (3.75, -0.25);
+  \draw[->] (3, -0.5) -- (3, -1);
+  \node at (3, -1.25) {$1$};
+  \draw[->,dotted] (1.5, -0.25) -- (1.5, -1);
+  \node at (1.5, -1.25) {$\opSymbol/$};
+  \draw[->,dotted] (1, -0.25) -- (1, -1);
+  \node at (1, -1.25) {$2$};
+  
+  \draw (0.75, -1.5) -- (0.75, -1.75) -- (3.25, -1.75) -- (3.25, -1.5);
+  \draw[->] (1.5, -1.75) -- (1.5, -2.25);
+  \node at (1.5, -2.5) {$2$};
+
+  \node at (0, -2.5) {$\not =$};
+
+\end{diagram}
+
+So this is not an associative algebra, because the binary operation is not associative.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Commutativity}
+
+\begin{terminology}
+  An algebraic structure is \vocab{commutative} (or synonymously, \vocab{abelian}) if ``$\op{x}{y}$'' and ``$\op{y}{x}$'' always give the same answer. In other words, the order of $x$ and $y$ does not matter: $x$ can come first, or $y$ can come first, but either way, we get the same answer.
+\end{terminology}
+
+\newthought{A binary operation} $\opSymbol/$ on a set $\set{A}$ is \vocab{commutative} (or synonymously, \vocab{abelian}) if this is true for all elements in $\set{A}$:
+
+\begin{equation*}
+  \op{x}{y} = \op{y}{x}
+\end{equation*}
+
+In other words, the order of $x$ and $y$ doesn't matter. If an algebraic structure has a binary operation that is commutative, then we can say it as a \vocab{commutative} (\vocab{abelian}) \vocab{algebraic structure}, or a \vocab{commutative} (\vocab{abelian}) \vocab{algebra}.
+
+\begin{fdefinition}[Commutative algebra]
+  \label{def:commutative-algebra}
+  For any algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$, we will say that $\algebra{S}$ is a \vocab{commutative algebra} (or synonymously, an \vocab{abelian algebra}) if, for every $x$ and $y$ in $\set{A}$:
+  
+  \begin{equation*}
+    \op{x}{y} = \op{y}{x}
+  \end{equation*}
+\end{fdefinition}
+
+\begin{fexample}
+
+Consider the algebraic structure we built in \chapterref{ch:algebra-first-example}. There we defined an algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ where the set $\set{A}$ was defined like this:
+
+\begin{aside}
+  \begin{remark}
+    You may be familiar with commutativity through addition as well. Regular \vocab{addition} is commutative (abelian). Consider these two equations:
+    \begin{equation*}
+      3 + 4 \hskip 0.5cm \text{ and } \hskip 0.5cm 4 + 3
+    \end{equation*}
+    
+    These give the same answers:
+    \begin{center}
+      \begin{tabular}{c | c}
+        $3 + 4$      & $4 + 3$ \\
+        $\downarrow$ & $\downarrow$ \\ 
+        $7$          & $7$
+      \end{tabular}
+    \end{center}
+    
+    It doesn't matter if we put the ``$3$'' first or the ``$4$'' first. Either way, we get the same answer. By contrast, \vocab{subtraction} is not commutative. Consider these two equations:
+    \begin{equation*}
+      3 - 4 \hskip 0.5cm \text{ and } \hskip 0.5cm 4 + 3
+    \end{equation*}
+    
+    These give different answers:
+    \begin{center}
+      \begin{tabular}{c | c}
+        $3 - 4$      & $4 - 3$ \\
+        $\downarrow$ & $\downarrow$ \\ 
+        $-1$         & $1$
+      \end{tabular}
+    \end{center}
+    
+    
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \set{A} = \{ m_{0}, m_{1}, m_{2}, m_{3} \}
+\end{equation*}
+
+and the Cayley table was defined like this:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline \hline
+    $m_{0}$      & $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline
+    $m_{1}$      & $m_{1}$ & $m_{2}$ & $m_{3}$ & $m_{0}$ \\ \hline
+    $m_{2}$      & $m_{2}$ & $m_{3}$ & $m_{0}$ & $m_{1}$ \\ \hline
+    $m_{3}$      & $m_{3}$ & $m_{0}$ & $m_{1}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Is this algebraic structure commutative? Let's check some cases. Here's one:
+
+\begin{diagram}
+
+  \node at (-2, 0) {$m_{1}$};
+  \node at (-1.5, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$m_{3}$};
+  \node at (0, 0) {$=$};
+  \node at (1, 0) {$m_{3}$};
+  \node at (1.5, 0) {$\opSymbol/$};
+  \node at (2, 0) {$m_{1}$};
+
+  \draw (-2.25, -0.25) -- (-2.25, -0.5) -- (-0.75, -0.5) -- (-0.75, -0.25);
+  \draw[->] (-1.5, -0.5) -- (-1.5, -1);
+  \node at (-1.5, -1.25) {$m_{0}$};
+
+  \draw (0.75, -0.25) -- (0.75, -0.5) -- (2.25, -0.5) -- (2.25, -0.25);
+  \draw[->] (1.5, -0.5) -- (1.5, -1);
+  \node at (1.5, -1.25) {$m_{0}$};
+
+  \node at (0, -1.25) {$=$};
+
+\end{diagram}
+
+We can see from this that $\op{m_{1}}{m_{3}}$ comes out to the same as $\op{m_{3}}{m_{1}}$, so in this case, the order of $m_{1}$ and $m_{3}$ doesn't matter.
+
+We could check more cases, but there's an easier way to tell if an algebra is commutative. You can look at the Cayley table, and check every diagonal going from the bottom left to the top right. Each such diagonal row should have the same elements in it. 
+
+In our Cayley table, we can see that this is so. For instance, look at this diagonal:
+
+\begin{aside}
+  \begin{remark}
+    We can see that every highlighted cell contains $m_{3}$. The same goes for every diagonal going from the bottom left to the top right: each diagonal is filled with the same value. So this algebra is \vocab{commutative} (it is an \vocab{abelian algebra}).
+  \end{remark}
+\end{aside}
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline \hline
+    $m_{0}$      & $m_{0}$ & $m_{1}$ & $m_{2}$ & \cellcolor{grey3} $m_{3}$ \\ \hline
+    $m_{1}$      & $m_{1}$ & $m_{2}$ & \cellcolor{grey3} $m_{3}$ & $m_{0}$ \\ \hline
+    $m_{2}$      & $m_{2}$ & \cellcolor{grey3} $m_{3}$ & $m_{0}$ & $m_{1}$ \\ \hline
+    $m_{3}$      & \cellcolor{grey3} $m_{3}$ & $m_{0}$ & $m_{1}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+\end{fexample}
+
+\begin{example}
+
+Suppose we have an algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ where the set $\set{A}$ is defined like this:
+
+\begin{equation*}
+  \set{A} = \{ 1, 2 \}
+\end{equation*}
+
+and the Cayley table is defined like this:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | }
+    \hline
+    $\opSymbol/$ & $1$ & $2$ \\ \hline \hline
+    $1$          & $1$ & $1$ \\ \hline
+    $2$          & $2$ & $1$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Is this algebraic structure commutative? Let's check some cases. Here's one:
+
+\begin{diagram}
+
+  \node at (-2, 0) {$1$};
+  \node at (-1.5, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$2$};
+  \node at (0, 0) {$=$};
+  \node at (1, 0) {$2$};
+  \node at (1.5, 0) {$\opSymbol/$};
+  \node at (2, 0) {$1$};
+
+  \draw (-2.25, -0.25) -- (-2.25, -0.5) -- (-0.75, -0.5) -- (-0.75, -0.25);
+  \draw[->] (-1.5, -0.5) -- (-1.5, -1);
+  \node at (-1.5, -1.25) {$1$};
+
+  \draw (0.75, -0.25) -- (0.75, -0.5) -- (2.25, -0.5) -- (2.25, -0.25);
+  \draw[->] (1.5, -0.5) -- (1.5, -1);
+  \node at (1.5, -1.25) {$2$};
+
+  \node at (0, -1.25) {$\not =$};
+
+\end{diagram}
+
+We can see here that the order does matter. We get a different answer if we put the $2$ first, or the $1$ first. So this is \emph{not} a commutative (abelian) algebra.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Identity Elements}
+
+\begin{terminology}
+  An algebraic structure has an \vocab{identity} element (or synonymously, a \vocab{unit} element), if there is an element $e$ that has no effect on the combination: ``$\op{x}{e}$'' and ``$\op{e}{x}$'' always equal ``$x$.'' When we are writing in pure symbols, \mathers/ often use the letter ``$e$'' as a symbol for the identity element.
+\end{terminology}
+
+\newthought{A binary operation} $\opSymbol/$ on a set $\set{A}$ has an \vocab{identity} element (or synonymously, a \vocab{unit} element) if there is some element (let's just call it $\unitEl/$) in $\set{A}$ that has no effect when we combine it with other elements. If we combine it with $x$ (i.e., if we calculate ``$\op{\unitEl/}{x}$'' or ``$\op{x}{\unitEl/}$''), it has no effect, and we just get back $x$:
+
+\begin{equation*}
+  \op{\unitEl/}{x} = x \hskip 1cm \text{ and } \hskip 1cm \op{x}{\unitEl/} = x
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    In addition, $0$ is the identity (unit). If you add $0$ to any number $x$, you just get $x$. Adding $0$ has no effect. Similarly, $1$ behaves this way in multiplication. Multiply any number $x$ by $1$, and you just get $x$. Multiplying by $1$ has no effect. Hence, $1$ is the identity (unit) for multiplication.
+  \end{remark}
+\end{aside}
+
+If an algebraic structure has a binary operation with an identity element (unit element), then we can say that the \emph{algebraic structure} has an \vocab{identity} (or synonymously, a \vocab{unit}).
+
+\begin{aside}
+  \begin{remark}
+    When it comes to regular \vocab{addition}, ``$0$'' (the number zero) is the identity (or unit). If you add ``$0$'' to ``$7$,'' the ``$0$'' doesn't change anything. You still get ``$7$.'' If you add ``$0$'' to ``$100$,`` again the ``$0$'' doesn't change anything. You still get ``$100$.'' Adding ``$0$'' to a number has no effect on the result. So ``$0$'' is the identity (or unit) for addition.
+    \vskip 0.5cm
+    Similarly, when it comes to \vocab{multiplication}, ``$1$'' (the number one) is the identity (or unit). If you multiply ``$7$'' by ``$1$,'' the ``$1$'' doesn't change anything. You still get ``$7$.'' If you multiply ``$100$'' by ``$1$,'' you still get ``$100$.'' The ``$1$'' didn't change anything. So multiplying by ``$1$'' has no effect on the result. Hence, ``$1$'' is the identity (or unit) for multiplication.
+  \end{remark}
+\end{aside}
+
+\begin{fdefinition}[Algebra with an identity (unit)]
+  \label{def:algebra-with-identity}
+  For any algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$, we will say that $\algebra{S}$ has an \vocab{identity} (or synonymously, a \vocab{unit}) if, there is an element $\unitEl/$ in $\set{A}$ which is such that for every $x$ in $\set{A}$:
+  
+  \begin{equation*}
+    \op{\unitEl/}{x} = x \hskip 1cm \text{ and } \hskip 1cm \op{x}{\unitEl/} = x
+  \end{equation*}
+\end{fdefinition}
+
+\begin{fexample}
+
+Consider again the algebraic structure from the museum $\algebra{S} = (\set{A}, \opSymbol/)$, where $\set{A} = \{ m_{0}, m_{1}, m_{2}, m_{3} \}$ and its Cayley table is this:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline \hline
+    $m_{0}$      & $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline
+    $m_{1}$      & $m_{1}$ & $m_{2}$ & $m_{3}$ & $m_{0}$ \\ \hline
+    $m_{2}$      & $m_{2}$ & $m_{3}$ & $m_{0}$ & $m_{1}$ \\ \hline
+    $m_{3}$      & $m_{3}$ & $m_{0}$ & $m_{1}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Does this algebraic structure have an identity (unit) element? Yes, it's $m_{0}$. After all, no matter what we combine $m_{0}$ with, it has no effect on the combination:
+
+\begin{alignat*}{3}
+  \op{m_{0}}{m_{1}} = m_{1} & \hskip 1cm 
+  \op{m_{0}}{m_{2}} = m_{2} & \hskip 1cm 
+  \op{m_{0}}{m_{3}} = m_{3} \\
+  \op{m_{1}}{m_{0}} = m_{1} & \hskip 1cm 
+  \op{m_{2}}{m_{0}} = m_{2} & \hskip 1cm 
+  \op{m_{3}}{m_{0}} = m_{3} \\
+  & \hskip 1cm \op{m_{0}}{m_{0}} = m_{0} &
+\end{alignat*}
+
+There is an easy way to check if an algebra has an identity unit. You look at the Cayley table, and you see if there is an element whose row and column copies the row and column headers exactly. 
+
+In this Cayley table, let's put the row and column headers in bold, so we can see them clearly:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $\mathbf{m_{0}}$ & $\mathbf{m_{1}}$ & $\mathbf{m_{2}}$ & $\mathbf{m_{3}}$ \\ \hline \hline
+    $\mathbf{m_{0}}$      & $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline
+    $\mathbf{m_{1}}$      & $m_{1}$ & $m_{2}$ & $m_{3}$ & $m_{0}$ \\ \hline
+    $\mathbf{m_{2}}$      & $m_{2}$ & $m_{3}$ & $m_{0}$ & $m_{1}$ \\ \hline
+    $\mathbf{m_{3}}$      & $m_{3}$ & $m_{0}$ & $m_{1}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+\begin{aside}
+  \begin{remark}
+  
+Notice how $m_{0}$'s row matches the column headers exactly:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & \cellcolor{grey3} $\mathbf{m_{0}}$ & \cellcolor{grey3} $\mathbf{m_{1}}$ & \cellcolor{grey3} $\mathbf{m_{2}}$ & \cellcolor{grey3} $\mathbf{m_{3}}$ \\ \hline \hline
+    $\mathbf{m_{0}}$      & \cellcolor{grey3}$m_{0}$ & \cellcolor{grey3}$m_{1}$ & \cellcolor{grey3} $m_{2}$ & \cellcolor{grey3} $m_{3}$ \\ \hline
+    $\mathbf{m_{1}}$      & $m_{1}$ & $m_{2}$ & $m_{3}$ & $m_{0}$ \\ \hline
+    $\mathbf{m_{2}}$      & $m_{2}$ & $m_{3}$ & $m_{0}$ & $m_{1}$ \\ \hline
+    $\mathbf{m_{3}}$      & $m_{3}$ & $m_{0}$ & $m_{1}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+And $m_{0}$'s column matches the row headers exactly:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $\mathbf{m_{0}}$ & $\mathbf{m_{1}}$ & $\mathbf{m_{2}}$ & $\mathbf{m_{3}}$ \\ \hline \hline
+    \cellcolor{grey3} $\mathbf{m_{0}}$      & \cellcolor{grey3}$m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline
+    \cellcolor{grey3} $\mathbf{m_{1}}$      & \cellcolor{grey3} $m_{1}$ & $m_{2}$ & $m_{3}$ & $m_{0}$ \\ \hline
+    \cellcolor{grey3} $\mathbf{m_{2}}$      & \cellcolor{grey3} $m_{2}$ & $m_{3}$ & $m_{0}$ & $m_{1}$ \\ \hline
+    \cellcolor{grey3} $\mathbf{m_{3}}$      & \cellcolor{grey3} $m_{3}$ & $m_{0}$ & $m_{1}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+\end{center}
+  
+  \end{remark}
+\end{aside}
+
+Is there an element whose row and column copies these headers exactly? Yes, it's $m_{0}$. If we look at the row and column for $m_{0}$, we can see that they copy the headers exactly:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $\mathbf{m_{0}}$ & $\mathbf{m_{1}}$ & $\mathbf{m_{2}}$ & $\mathbf{m_{3}}$ \\ \hline \hline
+    $\mathbf{m_{0}}$      & \cellcolor{grey3}$m_{0}$ & \cellcolor{grey3}$m_{1}$ & \cellcolor{grey3} $m_{2}$ & \cellcolor{grey3} $m_{3}$ \\ \hline
+    $\mathbf{m_{1}}$      & \cellcolor{grey3} $m_{1}$ & $m_{2}$ & $m_{3}$ & $m_{0}$ \\ \hline
+    $\mathbf{m_{2}}$      & \cellcolor{grey3} $m_{2}$ & $m_{3}$ & $m_{0}$ & $m_{1}$ \\ \hline
+    $\mathbf{m_{3}}$      & \cellcolor{grey3} $m_{3}$ & $m_{0}$ & $m_{1}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+\end{fexample}
+
+\begin{example}
+
+Suppose we have an algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ with $\set{A} = \{ 1, 2, 3 \}$ and a Cayley table like this:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $1$ & $2$ & $3$ \\ \hline \hline
+    $1$          & $2$ & $3$ & $1$ \\ \hline
+    $2$          & $3$ & $1$ & $2$ \\ \hline
+    $3$          & $1$ & $2$ & $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Does this algebraic structure have an identity element? To check, we look at the row and column headers. Here they are, in bold:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $\mathbf{1}$ & $\mathbf{2}$ & $\mathbf{3}$ \\ \hline \hline
+    $\mathbf{1}$          & $2$ & $3$ & $1$ \\ \hline
+    $\mathbf{2}$          & $3$ & $1$ & $2$ \\ \hline
+    $\mathbf{3}$          & $1$ & $2$ & $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+\begin{aside}
+  \begin{remark}
+Notice how $3$'s row matches the column headers:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & \cellcolor{grey3} $\mathbf{1}$ & \cellcolor{grey3} $\mathbf{2}$ & \cellcolor{grey3} $\mathbf{3}$ \\ \hline \hline
+    $\mathbf{1}$          & $2$ & $3$ & $1$ \\ \hline
+    $\mathbf{2}$          & $3$ & $1$ & $2$ \\ \hline
+    $\mathbf{3}$          & \cellcolor{grey3} $1$ & \cellcolor{grey3} $2$ & \cellcolor{grey3} $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+And $3$'s column matches the row headers:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $\mathbf{1}$ & $\mathbf{2}$ & $\mathbf{3}$ \\ \hline \hline
+    \cellcolor{grey3} $\mathbf{1}$          & $2$ & $3$ & \cellcolor{grey3} $1$ \\ \hline
+    \cellcolor{grey3} $\mathbf{2}$          & $3$ & $1$ & \cellcolor{grey3} $2$ \\ \hline
+    \cellcolor{grey3} $\mathbf{3}$          & $1$ & $2$ & \cellcolor{grey3} $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+  \end{remark}
+\end{aside}
+
+Next, we look to see if there is an element whose row and column match the headers exactly. Is there one? Yes, it's $3$. Here is the row and column for $3$, highlighted:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $\mathbf{1}$ & $\mathbf{2}$ & $\mathbf{3}$ \\ \hline \hline
+    $\mathbf{1}$          & $2$ & $3$ & \cellcolor{grey3} $1$ \\ \hline
+    $\mathbf{2}$          & $3$ & $1$ & \cellcolor{grey3} $2$ \\ \hline
+    $\mathbf{3}$          & \cellcolor{grey3} $1$ & \cellcolor{grey3} $2$ & \cellcolor{grey3} $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+\end{example}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Inverse Elements}
+
+\begin{terminology}
+  An algebraic structure has \vocab{inverses} if every element has an opposite. Elements are opposites if they cancel each other out, i.e., if combining them gives you back the identity element.
+\end{terminology}
+
+\newthought{A binary operation} $\opSymbol/$ on a set $\set{A}$ has \vocab{inverses} if every element has an ``opposite'' element. Two elements are opposites if they cancel each other out. That is, if you combine them, you just get back the identity (unit) element.
+
+For convenience, let's denote the ``opposite'' element of $x$ like this:
+
+\begin{equation*}
+  \inverseEl{x}
+\end{equation*}
+
+Read that out loud as ``the inverse of $x$.'' With this notation at hand, we can assert that an element $x$ combined with its inverse $\inverseEl{x}$ gives back the identity $\unitEl/$ by writing this:
+
+\begin{ponder}
+  Can an algebraic structure have \vocab{inverses} if it doesn't have an \vocab{identity} (unit) element?
+\end{ponder}
+
+\begin{equation*}
+  \op{x}{\inverseEl{x}} = \unitEl/ 
+  \hskip 1cm \text{ and } \hskip 1cm
+  \op{\inverseEl{x}}{x} = \unitEl/  
+\end{equation*}
+
+Read that out loud like this: ``$x$ combined with its inverse $\inverseEl{x}$ equals the identity $\unitEl/$, and also the inverse $\inverseEl{x}$ combined with $x$ equals the identity $\unitEl/$.'' 
+
+If every element in an algebraic structure has an inverse, then we say it is an algebraic structure with \vocab{inverses}.
+
+\begin{fdefinition}[Algebra with inverses]
+  \label{def:algebra-with-inverses}
+  For any algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$, we will say that $\algebra{S}$ has \vocab{inverses} if, for every $x$ in $\set{A}$:
+  
+  \begin{equation*}
+    \op{x}{\inverseEl{x}} = \unitEl/ \hskip 1cm \text{ and } \hskip 1cm \op{x}{\inverseEl{x}} = \unitEl/
+  \end{equation*}
+\end{fdefinition}
+
+\begin{aside}
+  \begin{remark}
+    You may be familiar with inverses from addition. Regular \vocab{addition} has inverses. Take any number, e.g., ``$7$,'' or ``$100$.'' What is its opposite? What ``cancels it out''? It's the negative version of itself. The opposite of ``$7$'' is ``$-7$,'' because if we add ``$7$'' and ``$-7$,'' we get ``$0$,'' which is the identity (unit) for addition. Similarly, what's the inverse of ``$100$''? It's ``$-100$,'' because if we add ``$100$'' and ``$-100$,'' we get ``$0$,'' the identity (unit). In regular addition, for any number $x$, its inverse is $-x$, because ``$x + (-x)$'' always equals ``$0$.'' So addition has inverses.
+  \end{remark}
+\end{aside}
+
+\begin{example}
+
+Suppose we have an algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ with $\set{A} = \{ 1, 2, 3 \}$ and a Cayley table like this:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $1$ & $2$ & $3$ \\ \hline \hline
+    $1$          & $2$ & $3$ & $1$ \\ \hline
+    $2$          & $3$ & $1$ & $2$ \\ \hline
+    $3$          & $1$ & $2$ & $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Does this algebraic structure have inverses? To check, we need to find an opposite for each element in $\set{A}$. The set $\set{A}$ contains $1$, $2$, and $3$, so let's see if we can find an opposite for each one.
+
+First, let's look at $1$. Recall that the identity for this algebraic structure is $3$. So, is there an element that we can combine with $1$ to get $3$? Yes, it is $2$:
+
+\begin{equation*}
+  \op{1}{2} = 3 \hskip 1cm \text{ and } \hskip 1cm \op{2}{1} = 3
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    With regular addition, it's easy to figure out the inverse for any number (just reverse its positive/negative sign). But not all structures will have inverses that are negative. In this structure $\algebra{S} = (\set{A}, \opSymbol/)$, there simply are no negative numbers! The inverse of $1$ is $2$, the inverse of $2$ is $1$, and the inverse of $3$ is $3$.
+  \end{remark}
+\end{aside}
+
+We can see it in the Cayley table:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $1$ & \cellcolor{grey3} $2$ & $3$ \\ \hline \hline
+    \cellcolor{grey3} $1$          & $2$ & \cellcolor{grey3} $3$ & $1$ \\ \hline
+    $2$          & $3$ & $1$ & $2$ \\ \hline
+    $3$          & $1$ & $2$ & $3$ \\ \hline
+  \end{tabular}
+  \hskip 2cm
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & \cellcolor{grey3} $1$ & $2$ & $3$ \\ \hline \hline
+    $1$          & $2$ & $3$ & $1$ \\ \hline
+    \cellcolor{grey3} $2$          & \cellcolor{grey3} $3$ & $1$ & $2$ \\ \hline
+    $3$          & $1$ & $2$ & $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+What about $2$? Does $2$ have an inverse? Yes, it's $1$:
+
+\begin{equation*}
+  \op{2}{1} = 3 \hskip 1cm \text{ and } \hskip 1cm \op{1}{2} = 3
+\end{equation*}
+
+How about $3$? Does $3$ have an inverse? Well, this one's easy, because $3$ is the identity element, and the identity element combined with anything gives us back the identity element. So its inverse is just itself. It's $3$!
+
+\begin{aside}
+  \begin{remark}
+    The \vocab{identity} (unit) element is always \vocab{its own inverse}. Why? Because $\op{e}{e}$ is always $e$.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \op{3}{3} = 3 \hskip 1cm \text{ and } \hskip 1cm \op{3}{3} = 3
+\end{equation*}
+
+Since every element in this algebraic structure has an opposite, we can conclude that this is an algebra with inverses.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we looked at some \vocab{properties} of binary operations.
+
+\begin{itemize}
+
+  \item If we have an algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ and for any three elements $x$, $y$, and $z$ in $\set{A}$, if $\op{(\op{x}{y})}{z}$ gives us the same answer as $\op{x}{(\op{y}{z})}$, then $\algebra{S}$ is an \vocab{associative} algebra.
+  
+  \item If we have an algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ and for any elements $x$ and $y$ in $\set{A}$, if $\op{x}{y}$ gives us the same answer as $\op{y}{x}$, then $\algebra{S}$ is a \vocab{commutative} algebra (or synonymously, an \vocab{abelian} algebra).
+  
+  \item If an element in an algebra has no effect on combinations, i.e. if $\op{x}{\unitEl/} = x$ and $\op{\unitEl/}{x} = x$, then we say that $\unitEl/$ is the \vocab{identity} element (or synonymously, the \vocab{unit} element) of the algebra.
+  
+  \item If we have an algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ and $\struct{S}$ has an identity (unit) element, then we say that $\algebra{S}$ is an algebra \vocab{with an identity} (or \vocab{unit}).
+  
+  \item An element $x$ has an opposite element (which we denote as $\inverseEl{x}$) if combining the two cancels each other out, and we get back the identity (unit) element. We call the opposite of $x$ the \vocab{inverse} of $x$.
+  
+  \item If we have an algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ and every $x$ in $\set{A}$ has an inverse $\inverseEl{x}$, then we say that $\algebra{S}$ is an algebra \vocab{with inverses}.
+  
+\end{itemize}
+
+
+\end{document}

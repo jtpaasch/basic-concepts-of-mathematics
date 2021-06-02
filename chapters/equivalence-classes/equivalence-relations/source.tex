@@ -1,0 +1,678 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Equivalence Relations}
+\label{ch:equivalence-relations}
+
+\newtopic{I}{n \chapterref{ch:partitions}}, we looked at \vocab{partitions} and also \vocab{partitioned structures}. A partition on a set $\set{A}$ is a collection of cells (i.e., disjoint subsets of $\set{A}$) which are such that, if you glue them all back together, you end up with $\set{A}$ again. In this chapter, we will look at a special kind of partitioned structure, which is based on the notion of \vocab{equivalence}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Equivalence relations}
+
+\newthought{Some relations pair up} all the elements that are equivalent to each other in some way. We call these \vocab{equivalence relations}. Consider the following example. Suppose I have two red marbles (call them $r_{1}$ and $r_{2}$), three green marbles (call them $g_{1}$, $g_{2}$, and $g_{3}$), and two blue marbles (call them $b_{1}$ and $b_{2}$):
+
+\begin{terminology}
+  An \vocab{equivalence relation} pairs up all elements that are equivalent to each other in some way.
+\end{terminology}
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (4cm and 1.25cm);
+  
+  \node[dot] (r1) at (-2.75, 0.25) [label=left:$r_{1}$] {};
+  \node[dot] (r2) at (-2.1, -0.35) [label=right:$r_{2}$] {};
+  \node[dot] (g1) at (-0.5, 0.65) [label=above:$g_{1}$] {};
+  \node[dot] (g2) at (0.75, 0.6) [label=above right:$g_{2}$] {};
+  \node[dot] (g3) at (-0.5, -0.45) [label=below:$g_{3}$] {};
+  \node[dot] (g4) at (1.15, -0.45) [label=below right:$g_{4}$] {};
+  \node[dot] (b1) at (2.25, 0.25) [label=above right:$b_{1}$] {};
+  \node[dot] (b2) at (3, -0.15) [label=right:$b_{2}$] {};
+
+\end{diagram}
+
+Now suppose we connect up each marble to every marble with the same color (including itself). So, for instance, let's start with $r_{1}$. Let's connect it to every red marble. Which marbles are red? It's $r_{2}$, and also itself, so we add those arrows:
+
+\begin{aside}
+  \begin{remark}
+    Remember: we are connecting $r_{1}$ to every red marble. When we say ``every red marble,'' we mean \emph{every} red marble, include $r_{1}$! If $r_{1}$ weren't connected to itself, then it wouldn't be connected to \emph{every} red marble. There would be one red marble that it wouldn't be connected to, namely itself.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (4cm and 1.25cm);
+  
+  \node[dot] (r1) at (-2.75, 0.25) [label=left:$r_{1}$] {};
+  \node[dot] (r2) at (-2.1, -0.35) [label=right:$r_{2}$] {};
+  \node[dot] (g1) at (-0.5, 0.65) [label=above:$g_{1}$] {};
+  \node[dot] (g2) at (0.75, 0.6) [label=above right:$g_{2}$] {};
+  \node[dot] (g3) at (-0.5, -0.45) [label=below:$g_{3}$] {};
+  \node[dot] (g4) at (1.15, -0.45) [label=below right:$g_{4}$] {};
+  \node[dot] (b1) at (2.25, 0.25) [label=above right:$b_{1}$] {};
+  \node[dot] (b2) at (3, -0.15) [label=right:$b_{2}$] {};
+
+  \draw[->,spaced] (r1) to[looseness=40,out=120,in=230] (r1);
+
+  \draw[->,space] (r1) to[out=330,in=120] (r2);
+
+\end{diagram}
+
+Now let's turn to $r_{2}$, and connect it to every red marble. There's $r_{1}$, and itself, so we draw in those arrows too:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (4cm and 1.25cm);
+  
+  \node[dot] (r1) at (-2.75, 0.25) [label=left:$r_{1}$] {};
+  \node[dot] (r2) at (-2.1, -0.35) [label=right:$r_{2}$] {};
+  \node[dot] (g1) at (-0.5, 0.65) [label=above:$g_{1}$] {};
+  \node[dot] (g2) at (0.75, 0.6) [label=above right:$g_{2}$] {};
+  \node[dot] (g3) at (-0.5, -0.45) [label=below:$g_{3}$] {};
+  \node[dot] (g4) at (1.15, -0.45) [label=below right:$g_{4}$] {};
+  \node[dot] (b1) at (2.25, 0.25) [label=above right:$b_{1}$] {};
+  \node[dot] (b2) at (3, -0.15) [label=right:$b_{2}$] {};
+
+  \draw[->,spaced] (r1) to[looseness=40,out=120,in=230] (r1);
+  \draw[->,spaced] (r2) to[looseness=40,out=290,in=50] (r2);
+
+  \draw[->,space] (r1) to[out=330,in=120] (r2);
+  \draw[->,space] (r2) to[out=180,in=280] (r1);
+
+\end{diagram}
+
+Next, we do the same for the green marbles, and connect each one to every green marble:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (4cm and 1.25cm);
+  
+  \node[dot] (r1) at (-2.75, 0.25) [label=left:$r_{1}$] {};
+  \node[dot] (r2) at (-2.1, -0.35) [label=right:$r_{2}$] {};
+  \node[dot] (g1) at (-0.5, 0.65) [label=above:$g_{1}$] {};
+  \node[dot] (g2) at (0.75, 0.6) [label=above right:$g_{2}$] {};
+  \node[dot] (g3) at (-0.5, -0.45) [label=below:$g_{3}$] {};
+  \node[dot] (g4) at (1.15, -0.45) [label=below right:$g_{4}$] {};
+  \node[dot] (b1) at (2.25, 0.25) [label=above right:$b_{1}$] {};
+  \node[dot] (b2) at (3, -0.15) [label=right:$b_{2}$] {};
+
+  \draw[->,spaced] (r1) to[looseness=40,out=120,in=230] (r1);
+  \draw[->,spaced] (r2) to[looseness=40,out=290,in=50] (r2);
+  \draw[->,spaced] (g1) to[looseness=40,out=45,in=140] (g1);
+  \draw[->,spaced] (g2) to[looseness=40,out=5,in=90] (g2);
+  \draw[->,spaced] (g3) to[looseness=40,out=320,in=220] (g3);
+  \draw[->,spaced] (g4) to[looseness=40,out=280,in=0] (g4);
+
+  \draw[->,space] (r1) to[out=330,in=120] (r2);
+  \draw[->,space] (r2) to[out=180,in=280] (r1);
+  
+  \draw[->,space] (g1) to[out=30,in=140] (g2);
+  \draw[->,space] (g2) to[out=170,in=10] (g1);
+  \draw[->,space] (g2) to[out=230,in=30] (g3);
+  \draw[->,space] (g3) to[out=50,in=210] (g2);
+  \draw[->,space] (g1) to[out=260,in=100] (g3);
+  \draw[->,space] (g3) to[out=130,in=240] (g1);
+  \draw[->,space] (g3) to[out=330,in=210] (g4);
+  \draw[->,space] (g4) to[out=190,in=350] (g3);
+  \draw[->,space] (g2) to[looseness=1.5,out=0,in=30] (g4);
+  \draw[->,space] (g4) to[looseness=1.25,out=60,in=330] (g2);
+  \draw[->,space] (g4) to (g1);
+  \draw[->,space] (g1) to[out=310,in=160] (g4);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Notice that \emph{each} green marble is connected to \emph{every} green marble, even itself. All of the green marbles are \emph{thoroughly connected} to each other. Pick any two green marbles from the picture, and you'll find an arrow between them (even if you check whether there is an arrow from a green marble to itself). Likewise, all of the red marbles are thoroughly connected, and all of the blue marbles are thoroughly connected.
+  \end{remark}
+\end{aside}
+
+Finally, we connect each blue marble to every blue marble, which gives us this:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (4cm and 1.25cm);
+  
+  \node[dot] (r1) at (-2.75, 0.25) [label=left:$r_{1}$] {};
+  \node[dot] (r2) at (-2.1, -0.35) [label=right:$r_{2}$] {};
+  \node[dot] (g1) at (-0.5, 0.65) [label=above:$g_{1}$] {};
+  \node[dot] (g2) at (0.75, 0.6) [label=above right:$g_{2}$] {};
+  \node[dot] (g3) at (-0.5, -0.45) [label=below:$g_{3}$] {};
+  \node[dot] (g4) at (1.15, -0.45) [label=below right:$g_{4}$] {};
+  \node[dot] (b1) at (2.25, 0.25) [label=above right:$b_{1}$] {};
+  \node[dot] (b2) at (3, -0.15) [label=right:$b_{2}$] {};
+
+  \draw[->,spaced] (r1) to[looseness=40,out=120,in=230] (r1);
+  \draw[->,spaced] (r2) to[looseness=40,out=290,in=50] (r2);
+  \draw[->,spaced] (g1) to[looseness=40,out=45,in=140] (g1);
+  \draw[->,spaced] (g2) to[looseness=40,out=5,in=90] (g2);
+  \draw[->,spaced] (g3) to[looseness=40,out=320,in=220] (g3);
+  \draw[->,spaced] (g4) to[looseness=40,out=280,in=0] (g4);
+  \draw[->,spaced] (b1) to[looseness=40,out=10,in=90] (b1);
+  \draw[->,spaced] (b2) to[looseness=40,out=45,in=310] (b2);
+
+  \draw[->,space] (r1) to[out=330,in=120] (r2);
+  \draw[->,space] (r2) to[out=180,in=280] (r1);
+  
+  \draw[->,space] (g1) to[out=30,in=140] (g2);
+  \draw[->,space] (g2) to[out=170,in=10] (g1);
+  \draw[->,space] (g2) to[out=230,in=30] (g3);
+  \draw[->,space] (g3) to[out=50,in=210] (g2);
+  \draw[->,space] (g1) to[out=260,in=100] (g3);
+  \draw[->,space] (g3) to[out=130,in=240] (g1);
+  \draw[->,space] (g3) to[out=330,in=210] (g4);
+  \draw[->,space] (g4) to[out=190,in=350] (g3);
+  \draw[->,space] (g2) to[looseness=1.5,out=0,in=30] (g4);
+  \draw[->,space] (g4) to[looseness=1.25,out=60,in=330] (g2);
+  \draw[->,space] (g4) to (g1);
+  \draw[->,space] (g1) to[out=310,in=160] (g4);
+  
+  \draw[->,space] (b1) to[out=360,in=120] (b2);
+  \draw[->,space] (b2) to[out=180,in=310] (b1);
+
+\end{diagram}
+
+We can see from the picture that this relation \emph{partitions} our original set into three cells:
+
+\begin{aside}
+  \begin{remark}
+    Each cell collects up the items that are equivalent. In the left cell we have all marbles that are red, in the middle cell we have all marbles that are green, and in the right cell we have all marbles that are blue.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (4cm and 1.25cm);
+  
+  \node[dot] (r1) at (-2.75, 0.25) [label=left:$r_{1}$] {};
+  \node[dot] (r2) at (-2.1, -0.35) [label=right:$r_{2}$] {};
+  \node[dot] (g1) at (-0.5, 0.65) [label=above:$g_{1}$] {};
+  \node[dot] (g2) at (0.75, 0.6) [label=above right:$g_{2}$] {};
+  \node[dot] (g3) at (-0.5, -0.45) [label=below:$g_{3}$] {};
+  \node[dot] (g4) at (1.15, -0.45) [label=below right:$g_{4}$] {};
+  \node[dot] (b1) at (2.25, 0.25) [label=above right:$b_{1}$] {};
+  \node[dot] (b2) at (3, -0.15) [label=right:$b_{2}$] {};
+
+  \draw[->,spaced] (r1) to[looseness=40,out=120,in=230] (r1);
+  \draw[->,spaced] (r2) to[looseness=40,out=290,in=50] (r2);
+  \draw[->,spaced] (g1) to[looseness=40,out=45,in=140] (g1);
+  \draw[->,spaced] (g2) to[looseness=40,out=5,in=90] (g2);
+  \draw[->,spaced] (g3) to[looseness=40,out=320,in=220] (g3);
+  \draw[->,spaced] (g4) to[looseness=40,out=280,in=0] (g4);
+  \draw[->,spaced] (b1) to[looseness=40,out=10,in=90] (b1);
+  \draw[->,spaced] (b2) to[looseness=40,out=45,in=310] (b2);
+
+  \draw[->,space] (r1) to[out=330,in=120] (r2);
+  \draw[->,space] (r2) to[out=180,in=280] (r1);
+  
+  \draw[->,space] (g1) to[out=30,in=140] (g2);
+  \draw[->,space] (g2) to[out=170,in=10] (g1);
+  \draw[->,space] (g2) to[out=230,in=30] (g3);
+  \draw[->,space] (g3) to[out=50,in=210] (g2);
+  \draw[->,space] (g1) to[out=260,in=100] (g3);
+  \draw[->,space] (g3) to[out=130,in=240] (g1);
+  \draw[->,space] (g3) to[out=330,in=210] (g4);
+  \draw[->,space] (g4) to[out=190,in=350] (g3);
+  \draw[->,space] (g2) to[looseness=1.5,out=0,in=30] (g4);
+  \draw[->,space] (g4) to[looseness=1.25,out=60,in=330] (g2);
+  \draw[->,space] (g4) to (g1);
+  \draw[->,space] (g1) to[out=310,in=160] (g4);
+  
+  \draw[->,space] (b1) to[out=360,in=120] (b2);
+  \draw[->,space] (b2) to[out=180,in=310] (b1);
+  
+  \draw[dashed] (-1.45,1) to[out=300,in=60] (-1.25, -1);
+  \draw[dashed] (1.95,1) to[out=250,in=120] (2.5,-1);
+
+\end{diagram}
+
+The arrows tell us which items are \vocab{equivalent} (in color). They show us the clump of items that are red, and the clump of items that are green, and the clump of items that are blue.
+
+Let us write out the structure that we have here, in symbols. First, we have a base set. Let's call it $\set{A}$:
+
+\begin{equation*}
+  \set{A} = \{ r_{1}, r_{2}, g_{1}, g_{2}, g_{3}, g_{4}, b_{1}, b_{2} \}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    Our base set is the set of marbles, and our equivalence relation pairs up all equivalent items. Notice that the red pairings make up the \vocab{product} of $\{ r_{1}, r_{2} \}$, the green pairings make up the \vocab{product} of $\{ g_{1}, g_{2}, g_{3}, g_{4} \}$, and the blue pairings make up the \vocab{product} of $\{ b_{1}, b_{2} \}$. In other words, each cell has every possible combination of pairings of the elements in the cell: every possible pairing of reds, every possible pairing of greens, and every possible pairing of blues.
+  \end{remark}
+\end{aside}
+
+Then, we have a relation. Let's call it $\R{R}$. It is comprised of the following pairings:
+
+\begin{align*}
+  \R{R} = \{ &(r_{1}, r_{1}), (r_{1}, r_{2}), (r_{2}, r_{1}), (r_{2}, r_{2}), \\
+             &(g_{1}, g_{1}), (g_{1}, g_{2}), (g_{1}, g_{3}), (g_{1}, g_{4}), \\
+             &(g_{2}, g_{1}), (g_{2}, g_{2}), (g_{2}, g_{3}), (g_{2}, g_{4}), \\
+             &(g_{3}, g_{1}), (g_{3}, g_{2}), (g_{3}, g_{3}), (g_{3}, g_{4}), \\
+             &(g_{4}, g_{1}), (g_{4}, g_{2}), (g_{4}, g_{3}), (g_{4}, g_{4}), \\
+             &(b_{1}, b_{1}), (b_{1}, b_{2}), (b_{2}, b_{1}), (b_{2}, b_{2}) \}
+\end{align*}
+
+Put these together, and we have a structure. Let's call it $\struct{S}$:
+
+\begin{equation*}
+  \struct{S} = (\set{A}, \R{R})
+\end{equation*}
+
+\begin{terminology}
+  An \vocab{equivalence structure} is a structure built by taking a base set and equipping it with an equivalence relation. The equivalence relation partitions the base set into cells of equivalent items.
+\end{terminology}
+
+
+We might call this an \vocab{equivalence structure}, because it is a set partitioned into clumps of equivalent items.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Notation}
+
+\newthought{Equivalence is a fancy word} for similarity. When we say $x$ and $y$ are equivalent, we aren't saying that $x$ and $y$ are identical. We are saying they are ``equal'' only in some specific way. Hence, we use the word ``equivalent.''
+
+In the example above, the relation makes explicit which objects are equivalent in color. Each arrow pointing from one marble $x$ to another marble $y$ indicates that $x$ is the same color as $y$. \Mathers/ have a special symbol for equivalence. It looks like this:
+
+\begin{equation*}
+  \equivalence/
+\end{equation*}
+
+When we're dealing with an equivalence relation, instead of writing $\R{R}$, we can write $\equivalence/$ instead. 
+
+\begin{aside}
+  \begin{notation}
+    To denote an \vocab{equivalence relation}, we will use the tilde character (namely, ``$\equivalence/$''). To denote an equivalence structure $\struct{S}$ built from a base set $\set{A}$ and an equivalence relation $\equivalence/$, we will write $\struct{S} = (\set{A}, \equivalence/)$. To denote that the equivalence relation connects $x$ to $y$, we will write $x \equivalence/ y$, which we can read aloud as, ``$x$ is equivalent to $y$.''
+  \end{notation}
+\end{aside}
+
+Hence, instead of describing our structure as ``$\struct{S} = (\set{A}, \R{R})$,'' we can describe it like this:
+
+\begin{equation*}
+  \struct{S} = (\set{A}, \equivalence/)
+\end{equation*}
+
+When we use ``$\R{R}$'' as a name for a relation, we can assert that $\R{R}$ connects $x$ to $y$ by writing this:
+
+\begin{equation*}
+  \R{R}(x, y)
+\end{equation*}
+
+When we're dealing with an equivalence relation, we can use the equivalence symbol instead, and write this:
+
+\begin{equation*}
+  \equivalence/(x, y)
+\end{equation*}
+
+In fact, \mathers/ usually write that like this:
+
+\begin{aside}
+  \begin{remark}
+    When we put a relation or function symbol up front, before $x$ and $y$, as when we write ``$\equivalence/(x, y)$'' or ``$\R{R}(x, y)$,'' we say that we write the symbol using \vocab{prefix} notation (because it \emph{prefixes} or comes before $x$ and $y$). When we put the symbol in between $x$ and $y$, as when we write ``$x \equivalence/ y$'' or ``$x \R{R} y$,'' we say that we write it using \vocab{infix} notation (because it is fixed \emph{in between} $x$ and $y$). We can do the same with, say, the addition symbol: we can write ``$3 + 4$'' (infix notation) or ``$+(3, 4)$'' (prefix notation). Whether we use prefix or infix notation, it doesn't really matter. Both are just two different ways of writing down the same thing.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  x \equivalence/ y
+\end{equation*}
+
+Read it aloud as, ``$x$ is equivalent to $y$.'' This is just a different way of writing ``$\equivalence/(x, y)$,'' but writing it with the symbol in between $x$ and $y$ makes it look a little like this:
+
+\begin{equation*}
+  x = y
+\end{equation*}
+
+But ``$x = y$'' asserts that $x$ and $y$ are identical objects. What we want to say here instead is that $x$ and $y$ are ``equal'' only \emph{in color}. That is why we can use the equivalence symbol instead.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Definition}
+
+\begin{terminology}
+  Formally speaking, an \vocab{equivalence relation} is any relation that is reflexive, symmetric, and transitive. Recall from \chapterref{ch:properties-of-relations} that for any given relation $\R{R}$ on a set $\set{A}$:
+  
+  \begin{itemize}
+    \item $\R{R}$ is \vocab{reflexive} if every point is connected to itself, i.e., $\R{R}(x, x)$ for every $x$ in $\set{A}$.
+    \item $\R{R}$ is \vocab{symmetric} if every connection goes both ways, i.e., if $\R{R}(x, y)$ then $\R{R}(y, x)$.
+    \item $\R{R}$ is \vocab{transitive} if the start- and end-point of every two-arrow chain is connected, i.e., if $\R{R}(x, y)$ and $\R{R}(y, z)$ then $\R{R}(x, z)$.
+  \end{itemize}
+\end{terminology}
+
+\newthought{Let us put down a definition} for equivalence relations. Formally speaking, \mathers/ characterize an equivalence relation as any relation that is \vocab{reflexive}, \vocab{symmetric}, and \vocab{transitive}. Hence, we can define equivalence relations as follows:
+
+\begin{fdefinition}[Equivalence relation]
+  Given a relation $\R{R}$ on a set $\set{A}$, we will say that $\R{R}$ is an \vocab{equivalence relation} if it is reflexive, symmetric, and transitive. To denote an equivalence relation, we will use this symbol: $\equivalence/$. To assert that $x$ and $y$ are equivalent under this relation, we will write this: $x \equivalence/ y$.
+\end{fdefinition}
+
+Why do we define an equivalence relation as any relation that is reflexive, symmetric, and transitive? Well, think about our picture of the marbles above. What can we see there? We can see that the relation partitions the set into cells. But there's more. We can also see that it \emph{thoroughly connects} all of the items inside a cell to each other.
+
+\begin{aside}
+  \begin{remark}
+    Not every relation that partitions a set \vocab{thoroughly connects} all of the points inside each cell.
+  \end{remark}
+\end{aside}
+
+There are multiple ways that a relation can partition a set. For instance, here is one:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0) ellipse (4cm and 1.25cm);
+  
+  \node[dot] (r1) at (-2.75, 0.25) [label=left:$r_{1}$] {};
+  \node[dot] (r2) at (-2.1, -0.35) [label=right:$r_{2}$] {};
+  \node[dot] (g1) at (-0.5, 0.65) [label=above:$g_{1}$] {};
+  \node[dot] (g2) at (0.75, 0.6) [label=above right:$g_{2}$] {};
+  \node[dot] (g3) at (-0.5, -0.45) [label=below:$g_{3}$] {};
+  \node[dot] (g4) at (1.15, -0.45) [label=below right:$g_{4}$] {};
+  \node[dot] (b1) at (2.25, 0.25) [label=above right:$b_{1}$] {};
+  \node[dot] (b2) at (3, -0.15) [label=right:$b_{2}$] {};
+
+  \draw[->,space] (r1) to[out=330,in=120] (r2);
+  
+  \draw[->,space] (g1) to[out=30,in=140] (g2);
+  \draw[->,space] (g2) to[out=170,in=10] (g1);
+  \draw[->,space] (g2) to[out=230,in=30] (g3);
+  \draw[->,space] (g3) to[out=330,in=210] (g4);
+  \draw[->,space] (g4) to[out=190,in=350] (g3);
+  
+  \draw[->,space] (b1) to[out=360,in=120] (b2);
+  \draw[->,space] (b2) to[out=180,in=310] (b1);
+  
+  \draw[dashed] (-1.45,1) to[out=300,in=60] (-1.25, -1);
+  \draw[dashed] (1.95,1) to[out=250,in=120] (2.5,-1);
+
+\end{diagram}
+
+However, this does not thoroughly connect the points in each cell to each other. In these cells, there are some connections missing. For example, in the left cell, $r_{2}$ is not connected back to $r_{1}$, or in the middle cell, $g_{1}$ is not connected to $g_{3}$. So this picture presents us with a partition, but it is not one where all of the points in each cell are thoroughly connected to each other.
+
+\begin{aside}
+  \begin{remark}
+    To say that a cell is \emph{thoroughly connected} is to say that every point in the cell is connected to (i.e., has an arrow pointing to) every point in the cell, including itself.
+  \end{remark}
+\end{aside}
+
+By contrast, an equivalence relation \emph{does} thoroughly connect all the points in a cell to each other. If you look at our earlier picture above, you will see that, in each cell, all of the points in each cell are connected to each other. There are no missing connections in each cell.
+
+So how do we characterize this idea that the points in each cell are ``thoroughly connected'' to each other? It turns out that the idea is captured exactly by saying the relation is reflexive, symmetric, and transitive. Let's look at each of these in turn, to see why.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Reflexivity}
+
+First of all, if \emph{each point} is connected to \emph{every point} (in the cell), then each point must have an arrow that points back \vocab{to itself}. To see this, suppose we only have two points in a cell:
+
+\begin{diagram}
+  \node[dot] (p1) at (0, 0) [label=below left:{$x$}] {};
+  \node[dot] (p2) at (1.5, 0) [label=below:{$y$}] {};
+\end{diagram}
+
+Let's look at $x$ first. We want this point to be connected to every point in the cell. So, let's connect $x$ to $y$:
+
+\begin{diagram}
+  \node[dot] (p1) at (0, 0) [label=below left:{$x$}] {};
+  \node[dot] (p2) at (1.5, 0) [label=below:{$y$}] {};
+  \draw[->,space] (p1) to[out=15,in=165] (p2);
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Is $x$ connected to every point in the cell? If it's missing a connection to itself, then there's at least one point in the cell that it's \emph{not} connected to, namely itself.
+  \end{remark}
+\end{aside}
+
+Is $x$ connected to every point in the cell now? The answer is no. There are two points in the cell, and $x$ is connected to only one of them. It is connected to $y$, but not to $x$ (itself). So, we need to connect it back to itself. Hence:
+
+\begin{diagram}
+  \node[dot] (p1) at (0, 0) [label=below left:{$x$}] {};
+  \node[dot] (p2) at (1.5, 0) [label=below:{$y$}] {};
+  \draw[->,space] (p1) to[out=15,in=165] (p2);
+  \draw[->,space] (p1) to[looseness=40,out=160,in=280] (p1);
+\end{diagram}
+
+Now $x$ is connected to every point in the cell. There are two points in the cell (namely, $x$ and $y$), and $x$ is connected to both of them.
+
+Next, consider $y$. We also want $y$ to be connected to every point in the cell. Let's connect $y$ to $x$:
+
+\begin{aside}
+  \begin{remark}
+    In order for all of the points to be connected, \emph{each point} needs to be connected \emph{each point} (including itself). So, this cell is fully connected only when $x$ is connected to each point, \emph{and} when $y$ is connected to each point too.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+  \node[dot] (p1) at (0, 0) [label=below left:{$x$}] {};
+  \node[dot] (p2) at (1.5, 0) [label=below:{$y$}] {};
+  \draw[->,space] (p1) to[out=15,in=165] (p2);
+  \draw[->,space] (p1) to[looseness=40,out=160,in=280] (p1);
+  \draw[->,space] (p2) to[out=195,in=345] (p1);
+\end{diagram}
+
+Is $y$ connected to every point now? The answer is no. There is one point it is \emph{not} connected to, namely itself. Hence, we need to add an arrow looping back to $y$ as well:
+
+\begin{diagram}
+  \node[dot] (p1) at (0, 0) [label=below left:{$x$}] {};
+  \node[dot] (p2) at (1.5, 0) [label=below:{$y$}] {};
+  \draw[->,space] (p1) to[out=15,in=165] (p2);
+  \draw[->,space] (p1) to[looseness=40,out=160,in=280] (p1);
+  \draw[->,space] (p2) to[out=195,in=345] (p1);
+  \draw[->,space] (p2) to[looseness=40,out=225,in=315] (p2);
+\end{diagram}
+
+Now $y$ is connected to every point in the cell. There are two points (namely, $x$ and $y$), and $y$ is connected to both of them.
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:properties-of-relations} that a relation $\R{R}$ is \vocab{reflexive} if each point $x$ is connected to itself, i.e., if $\R{R}(x, x)$ for every $x$.
+  \end{remark}
+\end{aside}
+%
+This makes it clear that every point needs to be connected not just to the \emph{other} points in the cell, it also needs to be connected to \emph{itself}. So, if a relation is one that \emph{thoroughly connects} every point in a cell, then it needs to be \vocab{reflexive}: it must connect each point to itself.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Symmetric}
+
+Second, if a point is connected to another point, then that other point must be connected back. Each connection needs to go \vocab{both ways}. To see this, consider our two-point cell again:
+
+\begin{diagram}
+  \node[dot] (p1) at (0, 0) [label=below left:{$x$}] {};
+  \node[dot] (p2) at (1.5, 0) [label=below:{$y$}] {};
+  \draw[->,space] (p1) to[out=15,in=165] (p2);
+  \draw[->,space] (p1) to[looseness=40,out=160,in=280] (p1);
+  \draw[->,space] (p2) to[out=195,in=345] (p1);
+  \draw[->,space] (p2) to[looseness=40,out=225,in=315] (p2);
+\end{diagram}
+
+Suppose that $y$ is connected to itself, but \emph{not} $x$:
+
+\begin{aside}
+  \begin{remark}
+    Connections do not automatically go both ways. Just because $x$ is connected to $y$ by a relation $\R{R}$ does not necessarily mean $y$ is connected back to $x$ in that same way (Harry can love Selma, but Selma need not love Harry back). An arrow from $x$ to $y$ only connects $x$ to $y$. If we want $y$ to be connected back to $x$, we need a second arrow, going from $y$ to $x$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+  \node[dot] (p1) at (0, 0) [label=below left:{$x$}] {};
+  \node[dot] (p2) at (1.5, 0) [label=below:{$y$}] {};
+  \draw[->,space] (p1) to[out=15,in=165] (p2);
+  \draw[->,space] (p1) to[looseness=40,out=160,in=280] (p1);
+  \draw[->,space] (p2) to[looseness=40,out=225,in=315] (p2);
+\end{diagram}
+
+In this picture, we can see that $x$ is connected to $y$, but $y$ is not connected back to $x$. Well, is $y$ connected to every point in the cell? The answer is no: it may be connected to itself, but it is not connected to $x$. So, if we want it to be connected to every point in the cell, we need to add that arrow back in:
+
+\begin{diagram}
+  \node[dot] (p1) at (0, 0) [label=below left:{$x$}] {};
+  \node[dot] (p2) at (1.5, 0) [label=below:{$y$}] {};
+  \draw[->,space] (p1) to[out=15,in=165] (p2);
+  \draw[->,space] (p1) to[looseness=40,out=160,in=280] (p1);
+  \draw[->,space] (p2) to[out=195,in=345] (p1);
+  \draw[->,space] (p2) to[looseness=40,out=225,in=315] (p2);
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:properties-of-relations} that a relation $\R{R}$ is \vocab{symmetric} when each connection goes both ways, i.e., if $\R{R}(x, y)$, then $\R{R}(y, x)$.
+  \end{remark}
+\end{aside}
+
+We can see from this that, in order for these points to be \emph{thoroughly connected}, if one point is connected to another, the reverse connection needs to be there too. Otherwise, there will be a missing connection. So, the relation needs to be \vocab{symmetric}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Transitivity}
+
+Third, chains need to be thoroughly connected. To see this, suppose we have a third point in our cell:
+
+\begin{diagram}
+  \node[dot] (p1) at (0, 0) [label=below left:{$x$}] {};
+  \node[dot] (p2) at (1.5, 0) [label=below:{$y$}] {};
+  \node[dot] (p3) at (3, 0) [label=below right:{$z$}] {};
+  \draw[->,space] (p1) to[out=15,in=165] (p2);
+  \draw[->,space] (p1) to[looseness=40,out=160,in=280] (p1);
+  \draw[->,space] (p2) to[out=195,in=345] (p1);
+  \draw[->,space] (p2) to[looseness=40,out=225,in=315] (p2);
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    In this picture, there are two links in a chain: $x$ and $y$ are fully connected to each other (that's one link in the chain), and $y$ and $z$ are fully connected to each other (that's a second link in the chain). When we say they are ``fully connected to each other,'' we mean they have all connections between them (both reflexive and symmetric arrows). However, the start- and end-points of this two-link chain are \emph{not} connected. There are no arrows going from $x$ to $z$, nor from $z$ to $x$.
+  \end{remark}
+\end{aside}
+
+And suppose that $y$ and $z$ are fully connected too:
+
+\begin{diagram}
+  \node[dot] (p1) at (0, 0) [label=below left:{$x$}] {};
+  \node[dot] (p2) at (1.5, 0) [label=below:{$y$}] {};
+  \node[dot] (p3) at (3, 0) [label=below right:{$z$}] {};
+  \draw[->,space] (p1) to[out=15,in=165] (p2);
+  \draw[->,space] (p1) to[looseness=40,out=160,in=280] (p1);
+  \draw[->,space] (p2) to[out=195,in=345] (p1);
+  \draw[->,space] (p2) to[looseness=40,out=225,in=315] (p2);
+  \draw[<-,space] (p2) to[out=15,in=165] (p3);
+  \draw[->,space] (p3) to[looseness=40,out=280,in=20] (p3);
+  \draw[<-,space] (p3) to[out=195,in=345] (p2);
+\end{diagram}
+
+Now consider $x$. Is $x$ connected to every point in the cell? The answer is no. It is not connected to $z$ (and similarly, $z$ is not connected to $x$). So, even though $x$ is connected to $y$ and $y$ is connected to $z$ in a chain, we are missing a connection between the start of that chain (namely, $x$) and the end of that chain (namely, $z$). So we need to add those arrows too:
+
+\begin{diagram}
+  \node[dot] (p1) at (0, 0) [label=below left:{$x$}] {};
+  \node[dot] (p2) at (1.5, 0) [label=below:{$y$}] {};
+  \node[dot] (p3) at (3, 0) [label=below right:{$z$}] {};
+  \draw[->,space] (p1) to[out=15,in=165] (p2);
+  \draw[->,space] (p1) to[looseness=40,out=160,in=280] (p1);
+  \draw[->,space] (p2) to[out=195,in=345] (p1);
+  \draw[->,space] (p2) to[looseness=40,out=225,in=315] (p2);
+  \draw[<-,space] (p2) to[out=15,in=165] (p3);
+  \draw[->,space] (p3) to[looseness=40,out=280,in=20] (p3);
+  \draw[<-,space] (p3) to[out=195,in=345] (p2);
+  \draw[->,space] (p1) to[looseness=1.1,out=45,in=135] (p3);
+  \draw[->,space] (p3) to[looseness=1.25,out=125,in=55] (p1);
+\end{diagram}
+
+If there were a fourth point in the cell, we'd need to add more arrows in this fashion:
+
+\begin{diagram}
+  \node[dot] (p1) at (0, 0) [label=below left:{$x$}] {};
+  \node[dot] (p2) at (1.5, 0) [label=below:{$y$}] {};
+  \node[dot] (p3) at (3, 0) [label=below:{$z$}] {};
+  \node[dot] (p4) at (4.5, 0.5) [label=below:{$w$}] {};
+  \draw[->,space] (p1) to[out=15,in=165] (p2);
+  \draw[->,space] (p1) to[looseness=40,out=160,in=280] (p1);
+  \draw[->,space] (p2) to[out=195,in=345] (p1);
+  \draw[->,space] (p2) to[looseness=40,out=220,in=315] (p2);
+  \draw[<-,space] (p2) to[out=15,in=165] (p3);
+  \draw[->,space] (p3) to[looseness=40,out=225,in=315] (p3);
+  \draw[<-,space] (p3) to[out=195,in=345] (p2);
+  \draw[->,space] (p1) to[looseness=1.1,out=45,in=135] (p3);
+  \draw[->,space] (p3) to[looseness=1.25,out=125,in=55] (p1);
+  \draw[->,space] (p2) to[looseness=1.1,out=45,in=135] (p4);
+  \draw[->,space] (p4) to[looseness=1.25,out=125,in=55] (p2);
+  \draw[->,space] (p3) to[out=30,in=180] (p4);
+  \draw[->,space] (p4) to[out=200,in=0] (p3);
+  \draw[->,space] (p4) to[looseness=40,out=225,in=330] (p4);
+  \draw[->,space] (p1) to[looseness=1.55,out=60,in=115] (p4);
+  \draw[->,space] (p4) to[looseness=1.6,out=105,in=65] (p1);
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Note that once we add $w$ to the cell, we get more two-link chains. There is $x \mapsto y \mapsto z$ and $y \mapsto z \mapsto w$, but then there is also $x \mapsto y \mapsto w$, and $x \mapsto z \mapsto w$. And for each of these, the start- and end-points need to be connected. Likewise, when we add $u$ to the cell, we get even more two-link chains (e.g., $x \mapsto z \mapsto u$, or $x \mapsto w \mapsto u$), all of which need their start- and end-points connected too.
+  \end{remark}
+\end{aside}
+
+And if there were a fifth point, we'd have to add even more:
+
+\begin{diagram}
+  \node[dot] (p1) at (0, 0) [label=below left:{$x$}] {};
+  \node[dot] (p2) at (1.5, 0) [label=below:{$y$}] {};
+  \node[dot] (p3) at (3, 0) [label=below:{$z$}] {};
+  \node[dot] (p4) at (4.5, 0.5) [label=below:{$w$}] {};
+  \node[dot] (p5) at (6, 1) [label=below right:{$u$}] {};
+  \draw[->,space] (p1) to[out=15,in=165] (p2);
+  \draw[->,space] (p1) to[looseness=40,out=160,in=280] (p1);
+  \draw[->,space] (p2) to[out=195,in=345] (p1);
+  \draw[->,space] (p2) to[looseness=40,out=220,in=315] (p2);
+  \draw[<-,space] (p2) to[out=15,in=165] (p3);
+  \draw[->,space] (p3) to[looseness=40,out=225,in=315] (p3);
+  \draw[<-,space] (p3) to[out=195,in=345] (p2);
+  \draw[->,space] (p1) to[looseness=1.1,out=45,in=135] (p3);
+  \draw[->,space] (p3) to[looseness=1.25,out=125,in=55] (p1);
+  \draw[->,space] (p2) to[looseness=1.1,out=45,in=135] (p4);
+  \draw[->,space] (p4) to[looseness=1.25,out=125,in=55] (p2);
+  \draw[->,space] (p3) to[out=30,in=180] (p4);
+  \draw[->,space] (p4) to[out=200,in=0] (p3);
+  \draw[->,space] (p4) to[looseness=40,out=225,in=330] (p4);
+  \draw[->,space] (p1) to[looseness=1.55,out=60,in=115] (p4);
+  \draw[->,space] (p4) to[looseness=1.6,out=105,in=65] (p1);
+  \draw[->,space] (p5) to[looseness=40,out=270,in=10] (p5);
+  \draw[->,space] (p1) to[looseness=1.55,out=60,in=115] (p5);
+  \draw[->,space] (p5) to[looseness=1.6,out=105,in=65] (p1);
+  \draw[->,space] (p4) to[out=30,in=180] (p5);
+  \draw[->,space] (p5) to[out=200,in=0] (p4);
+  \draw[->,space] (p3) to[looseness=1.25,out=80,in=120] (p5);
+  \draw[->,space] (p5) to[looseness=1.1,out=130,in=70] (p3);
+  \draw[->,space] (p2) to[looseness=1.25,out=80,in=110] (p5);
+  \draw[->,space] (p5) to[looseness=1.2,out=120,in=70] (p2);
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:properties-of-relations} that a relation $\R{R}$ is \vocab{transitive} when the start- and end-points of every two-arrow chain are connected, i.e., if $\R{R}(x, y)$ and $\R{R}(y, z)$, then $\R{R}(x, z)$.
+  \end{remark}
+\end{aside}
+
+This makes it clear that, in order for the points in the cell to be thoroughly connected, chains need to be thoroughly connected too. If $x$ is connected to $y$ and $y$ is connected to $z$, then $x$ must \emph{also} be connected to $z$. Otherwise, there will be a missing connection. (And since the relation also needs to be symmetric, $z$ needs to be connected back to $x$, or else there will again be a missing connection.) And, this goes for \emph{every} ``two-links'' in the chain. For every two links that are fully connected, the start- and end-points of those two links need to be connected to. So, the relation needs to be \vocab{transitive}.
+
+\lightrule \vskip 0.5cm
+
+\begin{aside}
+  \begin{remark}
+    If a relation thoroughly connects up all the points in a cell, it will be reflexive (no points will be missing a connection to themselves), it will be symmetric (no connections will be missing a return arrow), and it will be transitive (no chains will be missing connections).
+  \end{remark}
+\end{aside}
+
+The aforegoing shows why we can define an equivalence relation as any relation that is reflexive, symmetric, and transitive. Any relation that partitions a set into cells, and also thoroughly connects the points in each cell, is going to be reflexive, symmetric, and transitive. Otherwise, there would be some connections missing. 
+
+To say the relation must be reflexive guarantees that every point is connected to itself, to say it must be symmetric guarantees that every connection goes both ways, and to say it must be transitive guarantees that all the points in a chain are connected up too. This way, there simply aren't any missing connections inside a cell.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about \vocab{equivalence relations}, which are relations that partition a set into cells, and which thoroughly connects all the points in each cell to each other.
+
+\begin{itemize}
+  \item Formally speaking, an \vocab{equivalence relation} is any relation that is reflexive, symmetric, and transitive.
+  \item We can use the ``$\equivalence/$'' symbol to denote an equivalence relation, and to say that ``$x$ is equivalent to $y$,'' we can write this: ``$x \equivalence/ y$.''
+\end{itemize} 
+
+
+\end{document}

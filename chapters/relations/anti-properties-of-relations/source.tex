@@ -1,0 +1,513 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Anti-Properties of Relations}
+\label{ch:anti-properties-of-relations}
+
+\newtopic{I}{n \chapterref{ch:properties-of-relations}}, we looked at some of the \vocab{properties} that certain sorts of self-relations can have. In particular, we noted that a relation can be \vocab{reflexive} (if it connects every element in a set to itself), it can be \vocab{symmetric} (if, it makes every connection go both ways), and it can be \vocab{transitive} (if it connects the start- and end-points of every two-link chain).
+
+\begin{aside}
+  \begin{remark}
+    The antithesis of reflexivity is irreflexivity. The antitheses of transitivity is intransitivity. There are two antitheses of symmetry: asymmetry and antisymmetry.
+  \end{remark}
+\end{aside}
+
+In this chapter, we will look at relations that exhibit the opposite properties: namely, relations that are \vocab{irreflexive}, \vocab{intransitive}, or \vocab{asymmetric}/\vocab{antisymmetric}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Irreflexivity}
+
+\newthought{Recall from \chapterref{ch:properties-of-relations}} that a relation is \vocab{reflexive} if it connects every item in the domain to itself. So, if the relation is called $\R{R}$ and the set is called $\set{A}$, then this will be true:
+
+\begin{terminology}
+  A relation on $\set{A}$ is \vocab{reflexive} if every item in $\set{A}$ is connected to itself.
+\end{terminology}
+
+\begin{equation*}
+  \R{R}(x, x), \text{ for every } x \in \set{A}
+\end{equation*}
+
+By contrast, if a relation connects \emph{no} items to themselves, then it is \vocab{irreflexive}. Hence, for an irreflexive relation, this will be true:
+
+\begin{terminology}
+  A relation on $\set{A}$ is \vocab{irreflexive} if no items in $\set{A}$ are connected to themselves.
+\end{terminology}
+
+\begin{equation*}
+  \text{for every } x \in \set{A}, \text{ it is not the case that } \R{R}(x, x)
+\end{equation*}
+
+We can use this observation to write down a formal definition of an irreflexive relation. Let's write it out like this:
+
+\begin{fdefinition}[Irreflexive relations]
+  \label{def:irreflexive-relation}
+  For any set $\set{A}$ and relation $\Rsig{R}{\set{A}}{\set{A}}$, we will say that $\R{R}$ is \vocab{irreflexive} if for every $x$ in $\set{A}$, it is not the case that $\R{R}(x, x)$.
+\end{fdefinition}
+
+\begin{fexample}
+
+Here is an example of a reflexive relation:
+
+\begin{aside}
+  \begin{remark}
+    Every point in this picture is connected to itself (each dot has a self-loop). That make this relation \vocab{reflexive}.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (k1) at (0.5, 0.5) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-0.75, -0.15) [label=left:{$b$}] {};
+  \node[dot] (k3) at (0.25, -0.35) [label=left:{$c$}] {};
+  \draw[color=gray] (0, 0) ellipse (3cm and 1cm);
+
+  \draw[->,spaced] (k1) to[looseness=35, out=0, in=90] (k1);
+  \draw[->,spaced] (k2) to[looseness=35, out=120, in=230] (k2);
+  \draw[->,spaced] (k3) to[looseness=35, out=310, in=25] (k3);
+  \draw[->,space] (k1) to (k3);
+  \draw[->,space] (k1) to[out=225, in=15] (k2);
+
+\end{diagram}
+
+We can see that this relation is reflexive because each dot has a self-loop (i.e., an arrow looping back to itself).
+
+\end{fexample}
+
+\begin{fexample}
+
+By contrast, here is an example of an irreflexive relation:
+
+\begin{aside}
+  \begin{remark}
+    No point in this picture is connected to itself (no dot has a self-loop). That make this relation \vocab{irreflexive}.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (k1) at (0.15, 0.35) [label=above:{$a$}] {};
+  \node[dot] (k2) at (-1.5, -0.15) [label=left:{$b$}] {};
+  \node[dot] (k3) at (1.25, -0.35) [label=right:{$c$}] {};
+  \draw[color=gray] (0, 0) ellipse (3cm and 1cm);
+
+  \draw[->,space] (k1) to (k2);
+  \draw[->,space] (k1) to (k3);
+
+\end{diagram}
+
+We can see that it is irreflexive because no dot in the picture has a self-loop. Note that other arrows are present in this irreflexive relation. What makes it irreflexive is not whether it has other arrows, but only that it has no self-loops. 
+
+\end{fexample}
+
+\begin{example}
+
+A relation need not be reflexive or irreflexive. A relation can be \vocab{neither}. Consider this example:
+
+\begin{aside}
+  \begin{remark}
+    Not every dot in this picture is connected to itself, but some are. Hence, not every dot has a self-loop, and not every dot is missing a self-loop. That make this relation neither \vocab{reflexive} nor \vocab{irreflexive}.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (k1) at (0.15, 0.35) [label=above:{$a$}] {};
+  \node[dot] (k2) at (-1.5, -0.15) [label=left:{$b$}] {};
+  \node[dot] (k3) at (1.25, -0.35) [label=right:{$c$}] {};
+  \draw[color=gray] (0, 0) ellipse (3cm and 1cm);
+
+  \draw[->,space] (k1) to (k2);
+  \draw[->,space] (k1) to (k3);
+  \draw[->,spaced] (k1) to[looseness=35,out=45, in=135] (k1);
+  \draw[->,spaced] (k3) to[looseness=35,out=300, in=45] (k3);
+
+\end{diagram}
+
+We can see that two of the dots have a self-loop. In order to be reflexive, \emph{every} dot would need to have a self-loop, and we can see that this is not the case. One dot is missing a self-loop (namely, $b$), so this relation is not reflexive.
+
+At the same time, in order to be irreflexive, every dot would have to be \emph{missing} a self-loop, and we can see that this is not the case. Two dots have self-loops (namely, $a$ and $c$), so this relation is not irreflexive either.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Intransitivity}
+
+\begin{terminology}
+  A relation on $\set{A}$ is \vocab{transitive} when, if $x$ is connected to $y$ and $y$ is connected to $z$, then $x$ is connected to $z$ too.
+\end{terminology}
+
+\newthought{As we saw in \chapterref{ch:properties-of-relations}}, a relation $\R{R}$ is \vocab{transitive} if it connects the start-point to the end-point of every two-arrow chain --- i.e., if $x$ is connected to $y$ and $y$ is connected to $z$, then $x$ is also connected to $z$. We can put it like this:
+
+\begin{equation*}
+  \text{ if } \R{R}(x, y) \text{ and } \R{R}(y, z) \text{ then } \R{R}(x, z), \text{ for any $x, y, z \in \set{A}$ }
+\end{equation*}
+
+By contrast, a relation is \vocab{intransitive} if it does not connect up the start- and end-point of every two-arrow chain. So, if there is at at least one case in $\R{R}$ where $\R{R}(x, y)$ and $\R{R}(y, z)$, but not $\R{R}(x, z)$, then $\R{R}$ is intransitive. We can put the rule like this. A relation $\R{R}$ is intransitive when this is true:
+
+\begin{terminology}
+  A relation on $\set{A}$ is \vocab{intransitive} when, if there is at least one case where $x$ is connected to $y$ and $y$ is connected to $z$, but $x$ is not connected to $z$.
+\end{terminology}
+
+\begin{equation*}
+  \text{ if } \R{R}(x, y) \text{ and } \R{R}(y, z) \text{ yet not } \R{R}(x, z), \text{ for some $x, y, z \in \set{A}$ }
+\end{equation*}
+
+We can use this observation to write down a formal definition for intransitive relations. Let's write it out like this:
+
+\begin{fdefinition}[Inransitive relations]
+  \label{def:intransitive-relations}
+  For any set $\set{A}$ and relation $\Rsig{R}{\set{A}}{\set{A}}$, we will say that $\R{R}$ is \vocab{intransitive} if, for some $x, y, z$ in $\set{A}$, $\R{R}(x, y)$ and $\R{R}(y, z)$, but not $\R{R}(x, z)$.
+\end{fdefinition}
+
+\begin{fexample}
+
+Here is an example of an intransitive relation:
+
+\begin{diagram}
+
+  \node[dot] (k1) at (0, 0.85) [label=right:{$a$}] {};
+  \node[dot] (k2) at (-0.8, -0.3) [label=left:{$b$}] {};
+  \node[dot] (k3) at (0.25, -0.75) [label=right:{$c$}] {};
+  \node[dot] (k4) at (0.85, 0.25) [label=below:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (1.5cm and 1.5cm);
+
+  \draw[->,space] (k1) to[out=190, in=100] (k2);
+  \draw[->,space] (k2) to[out=310, in=180] (k3);
+  
+\end{diagram}
+
+There is a two-arrow chain here: $a$ is connected to $b$, and $b$ is connected to $c$. But the start-point $a$ of the chain is not connected to the end-point $c$ of the chain. Hence, this is an intransitive relation.
+
+\end{fexample}
+
+\begin{fexample}
+
+With an intransitive relation, some two-arrow chains \emph{can} have their start-points connected to their end-points, so long as there is \emph{at least one} two-arrow chain that is not like this. Consider this example:
+
+\begin{aside}
+  \begin{remark}
+    An intransitive relation does not require that \emph{every} two-arrow chain has its start-point disconnected from its end-point. Some two-arrow chains can have their start-points connected to their end-points, so long as not \emph{every} two-arrow chain is like this. 
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (k1) at (0, 0.85) [label=right:{$a$}] {};
+  \node[dot] (k2) at (-0.8, -0.3) [label=left:{$b$}] {};
+  \node[dot] (k3) at (0.25, -0.75) [label=below:{$c$}] {};
+  \node[dot] (k4) at (0.9, 0.25) [label=right:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (1.5cm and 1.5cm);
+
+  \draw[->,space] (k1) to[out=190, in=100] (k2);
+  \draw[->,space] (k2) to[out=310, in=180] (k3);
+  \draw[->,space] (k1) to[out=210, in=150] (k3);
+  \draw[->,space] (k3) to[out=15, in=270] (k4);
+  \draw[->,space] (k2) to[out=340, in=240] (k4);
+  
+\end{diagram}
+
+In this relation, we have four two-arrow chains:
+
+\begin{align*}
+  a \mapsto b, b \mapsto c \hskip 1.5cm 
+  b \mapsto c, c \mapsto d \\
+  a \mapsto b, b \mapsto d \hskip 1.5cm
+  a \mapsto c, c \mapsto d
+\end{align*}
+
+For two of these chains, the start-point is connected to its end-point:
+
+\begin{aside}
+  \begin{remark}
+    Note that, in this case, \emph{not every} two-arrow chain has an arrow connecting its start-point with its end-point.
+  \end{remark}
+\end{aside}
+
+\begin{align*}
+  a \mapsto b, b \mapsto c, \text{ and } a \mapsto c \hskip 1.5cm 
+  b \mapsto c, c \mapsto d, \text{ and } b \mapsto d
+\end{align*}
+
+But for the other two chains, the start-point is \emph{not} connected its end-point:
+
+\begin{align*}
+  a \mapsto b, b \mapsto d, \text{ but not } a \mapsto d \hskip 1.5cm
+  a \mapsto c, c \mapsto d, \text{ but not } a \mapsto d
+\end{align*}
+
+Hence, this is an intransitive relation.
+
+\end{fexample}
+
+\begin{aside}
+  \begin{remark}
+    A relation is either transitive, or it is intransitive. Every relation is one or the other.
+  \end{remark}
+\end{aside}
+
+Every relation is \vocab{either} transitive, \vocab{or} it is intransitive. It must be one or the other. For either every two-arrow chain has its start- and end-points connected up (in which case it is transitive), or this is not so for every two-arrow chain (in which case it is intransitive).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Non-symmetry}
+
+\begin{terminology}
+  A relation on $\set{A}$ is \vocab{symmetric} if every pairing goes both ways.
+\end{terminology}
+
+\newthought{Recall from \chapterref{ch:properties-of-relations}} that a relation $\R{R}$ is \vocab{symmetric} if each connection goes both ways. More exactly, if $\R{R}$ connects a point $x$ to a point $y$, it \emph{also} connects $y$ to $x$:
+
+\begin{equation*}
+  \text{ if } \R{R}(x, y) \text{ then } \R{R}(y, x), \text{ for every $x, y \in \set{A}$ }
+\end{equation*}
+
+By contrast, a relation is \emph{not} symmetric if this fails to be the case. But, there are two kinds of non-symmetry. One is called \vocab{asymmetry}, and the other is called \vocab{antisymmetry}. Let's look at each in turn.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Asymmety}
+
+\begin{terminology}
+  A relation is \vocab{asymmetric} when it is never the case that a point $x$ is connected to a point $y$ and $y$ is also connected to $x$.
+\end{terminology}
+
+A relation is \vocab{asymmetric} if it is never that case that a point $x$ is connected to a point $y$ and also $y$ is connected to $x$:
+
+\begin{equation*}
+  \text{ if } \R{R}(x, y) \text{ then not } \R{R}(y, x), \text{ for every $x, y \in \set{A}$ }
+\end{equation*}
+
+So whenever $\R{R}$ connects a point $x$ to a point $y$, it will \emph{never} connect $y$ to $x$ as well.
+
+We can use this observation to write down a formal definition for asymmetric relations:
+
+\begin{fdefinition}[Asymmetric relations]
+  \label{def:asymmetric-relations}
+  For any set $\set{A}$ and relation $\Rsig{R}{\set{A}}{\set{A}}$, we will say that $\R{R}$ is \vocab{asymmetric} if, for every $x, y$ in $\set{A}$, if $\R{R}(x, y)$ then it is not the case that $\R{R}(y, x)$.
+\end{fdefinition}
+
+\begin{fexample}
+
+Here is an example of a relation that is \emph{not} asymmetric:
+
+\begin{aside}
+  \begin{remark}
+    We can see that this relation is not asymmetric, because we can see an arrow going both ways between $a$ and $d$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (k1) at (-0.75, 0.35) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-1.8, -0.25) [label=left:{$b$}] {};
+  \node[dot] (k3) at (1.5, -0.35) [label=right:{$c$}] {};
+  \node[dot] (k4) at (0.85, 0.35) [label=right:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (3cm and 1cm);
+
+  \draw[->,space] (k1) to[out=30, in=135] (k4);
+  \draw[->,space] (k4) to[out=190, in=330] (k1);
+  \draw[->,space] (k2) to[out=335, in=200] (k3);
+  \draw[->,space] (k3) to[out=160, in=290] (k4);
+  
+\end{diagram}
+
+In order to be asymmetric, if $\R{R}(x, y)$, then it cannot be the case that $\R{R}(y, x)$. But here, that rule is violated, because $\R{R}(a, d)$ and $\R{R}(d, a)$.
+
+\end{fexample}
+
+\begin{fexample}
+
+Here is another example of a relation that is \emph{not} asymmetric:
+
+\begin{ponder}
+  None of the arrows look suspicious here, except for the self-loop $b$. Does $b$ disqualify this relation from being asymmetric?
+\end{ponder}
+
+\begin{diagram}
+
+  \node[dot] (k1) at (-0.75, 0.35) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-1.8, -0.25) [label=left:{$b$}] {};
+  \node[dot] (k3) at (1.5, -0.35) [label=right:{$c$}] {};
+  \node[dot] (k4) at (0.85, 0.35) [label=right:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (3cm and 1cm);
+
+  \draw[->,space] (k1) to[out=30, in=135] (k4);
+  \draw[->,space] (k2) to[looseness=40, out=135, in=255] (k2);
+  \draw[->,space] (k2) to[out=335, in=200] (k3);
+  \draw[->,space] (k3) to[out=160, in=290] (k4);
+  
+\end{diagram}
+
+Why is this not asymmetric? Remember that the rule is this: if $\R{R}(x, y)$, then it cannot be the case that $\R{R}(y, x)$. That is, if a point $x$ is connected to a point $y$, then $y$ cannot also be connected to $x$, no matter which points we pick for $x$ and $y$. Well, what if we ask about $b$ in the picture? 
+
+In the picture, we can see that $b$ is connected to $b$! Now, if this relation were truly asymmetric, then $b$ could not be connected back to $b$. But of course, it \emph{is} connected back to $b$ (there's a self-loop). Hence, this relation fails to be asymmetric, because there is a self-loop.
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:properties-of-relations} that reflexive self-loops can be seen to go two-way, because you can get from a point $x$ to the point $x$, and then back again, by following the same self-loop arrow back. Hence, if a relation is \vocab{asymmetric}, then it must be \vocab{irreflexive} --- it cannot have any self-loops. Every arrow must be truly one way: every arrow must go from one point to another (distinct) point.
+  \end{remark}
+\end{aside}
+
+This shows us that there cannot be \emph{any} self-loops in an asymmetric relation.
+And what does that mean? If there cannot be any self-loops, then it is irreflexive. Hence, an \vocab{asymmetric relation} is always \vocab{irreflexive} too, because there cannot be any self-loops in asymmetric relations. 
+
+An asymmetric relation is truly \vocab{one-way}. Every arrow in the picture will go from one point to another, \emph{distinct} point.
+
+\end{fexample}
+
+\begin{example}
+\label{ex:asymmetric-relation}
+
+Here is an example of a asymmetric relation:
+
+\begin{aside}
+  \begin{remark}
+    Notice in \exampleref{ex:asymmetric-relation} that no two points have arrows going both ways, and no points have a self-loop. If there is an arrow, it goes one way only, from one point to another, different point. That is what it means to be asymmetric.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (k1) at (-0.75, 0.35) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-1.8, -0.25) [label=left:{$b$}] {};
+  \node[dot] (k3) at (1.5, -0.35) [label=right:{$c$}] {};
+  \node[dot] (k4) at (0.85, 0.35) [label=right:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (3cm and 1cm);
+
+  \draw[->,space] (k1) to[out=30, in=135] (k4);
+  \draw[->,space] (k4) to[out=190, in=0] (k2);
+  \draw[->,space] (k2) to[out=335, in=200] (k3);
+  \draw[->,space] (k3) to[out=160, in=290] (k4);
+  
+\end{diagram}
+
+No two points have an arrow going both ways, and no point has a self-loop. Each arrow goes one way, from one point to a distinct, other point. So this relation is asymmetric.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Antisymmetry}
+
+\begin{terminology}
+  An \vocab{antisymmetric} relation is like an asymmetric relation, except it allows self-loops. Between any two distinct points, there can be only one arrow, going one way only. But there can also be self-loops.
+\end{terminology}
+
+An \vocab{asymmetric} relation is one whose arrows always go from a point $x$ to a point $y$, and no arrow goes back from $y$ to $x$. This rules out any reflexive self-loops.
+
+A relation is \vocab{antisymmetric} if it is asymmetric, but it allows self-loops. So, between any two \vocab{distinct} points, there must be one arrow only, going one way. But from any point to \vocab{itself}, there can be a self-loop.
+
+Since we allow self-loops, we can say that $x$ is connected to $y$ and $y$ is connected to $x$ when $x$ and $y$ are the same point. We can put the idea like this: 
+
+\begin{aside}
+  \begin{remark}
+    The defining mark of an antisymmetric relation is that the only cases where a point $x$ is connected to a point $y$ and also $y$ is connected to $x$ are cases where $x$ and $y$ are the same point, i.e., when $x = y$. If $x$ and $y$ are different points, then there can only be one arrow between them, going one way only (so $x$ will be connected to $y$, or $y$ will be connected to $x$, or there simply won't be an arrow between them at all).
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \text{ if } \R{R}(x, y) \text{ and } \R{R}(y, x) \text{ then } x = y, \text{ for every } x, y \in \set{A}
+\end{equation*}
+
+We can use this observation to write down a formal definition for antisymmetric relations:
+
+\begin{fdefinition}[Antisymmetric relations]
+  \label{def:antisymmetric-relations}
+  For any set $\set{A}$ and relation $\Rsig{R}{\set{A}}{\set{A}}$, we will say that $\R{R}$ is \vocab{antisymmetric} if, for every $x, y$ in $\set{A}$, if $\R{R}(x, y)$ and $\R{R}(y, x)$, then $x = y$.
+\end{fdefinition}
+
+\begin{fexample}
+
+Here is an example of a relation that is antisymmetric:
+
+\begin{aside}
+  \begin{remark}
+    We can see that this relation is antisymmetric, because there are no two-way arrows between different points, but there is a self-loop.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (k1) at (-0.75, 0.35) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-1.8, -0.25) [label=left:{$b$}] {};
+  \node[dot] (k3) at (1.5, -0.35) [label=right:{$c$}] {};
+  \node[dot] (k4) at (0.85, 0.35) [label=right:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (3cm and 1cm);
+
+  \draw[->,space] (k1) to[out=30, in=135] (k4);
+  \draw[->,space] (k2) to[looseness=40, out=135, in=255] (k2);
+  \draw[->,space] (k2) to[out=335, in=200] (k3);
+  \draw[->,space] (k3) to[out=160, in=290] (k4);
+  
+\end{diagram}
+
+In order to be antisymmetric, if $\R{R}(x, y)$, then it cannot be the case that $\R{R}(y, x)$, unless $x = y$. Here, that is true. No two points are such that $\R{R}(x, y)$ and $\R{R}(y, x)$, except for $b$ and $b$, which are of course the same point. 
+
+Visually, we can see this. There are no two way connections between distinct points, but there is a self-loop.
+
+\end{fexample}
+
+\begin{example}
+
+Here is another example of an antisymmetric relation:
+
+\begin{diagram}
+
+  \node[dot] (k1) at (-0.75, 0.35) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-1.8, -0.25) [label=left:{$b$}] {};
+  \node[dot] (k3) at (1.5, -0.35) [label=right:{$c$}] {};
+  \node[dot] (k4) at (0.85, 0.35) [label=right:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (3cm and 1cm);
+
+  \draw[->,space] (k1) to[out=30, in=135] (k4);
+  \draw[->,space] (k4) to[out=190, in=0] (k2);
+  \draw[->,space] (k2) to[out=335, in=200] (k3);
+  \draw[->,space] (k3) to[out=160, in=290] (k4);
+  
+\end{diagram}
+
+Notice that this relation is \vocab{asymmetric}, because there are no two-way arrows, and there are no self-loops. But such a relation is \emph{also} \vocab{antisymmetric}, because it satisfies the definition of antisymmetry. An antisymmetric relation allows self-loops, but it does not require that they be present. 
+
+\begin{aside}
+  \begin{remark}
+    Every \vocab{asymmetric} relation is \vocab{antisymmetric}, but not vice versa. In particular, if it is not symmetric but there are self-loops, then it is \emph{anti}-symmetric, and not \emph{a}-symmetric.
+  \end{remark}
+\end{aside}
+
+This tells us something important: every \vocab{asymmetric} relation is an \vocab{antisymmetric} relation, but not vice versa. An asymmetric relation is just an antisymmetric relation with no self-loops. An antisymmetric relation with self-loops, on the other hand, is not asymmetric. When self-loops are present, that pushes it out of pure a-symmetry land (the non-symmetry land without self-loops), and lands it in anti-symmetry land (the non-symmetry land with self-loops).
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about some anti-properties of relations: irreflexivity, intransitivity, and non-symmetry.
+
+\begin{itemize}
+
+  \item A relation $\R{R}$ on a set $\set{A}$ is \vocab{irreflexive} if it relates no item in $\set{A}$ to itself. That is, it is irreflexive if for every $x \in \set{A}$, it is not the case that $\R{R}(x, x)$.
+    
+  \item A relation $\R{R}$ on a set $\set{A}$ is \vocab{intransitive} if it fails to connect up the start- and end-point of at least one two-arrow chain. That is, it is intransitive if, for some $x, y, z \in \set{A}$, $\R{R}(x, y)$ and $\R{R}(y, z)$ but not $\R{R}(x, z)$.
+
+  \item There are two kinds of non-symmetry: \vocab{asymmetry} and \vocab{antisymmetry}.
+
+  \item A relation $\R{R}$ on a set $\set{A}$ is \vocab{asymmetric} if, for any $x, y \in \set{A}$, if $\R{R}(x, y)$ then it is not the case that $\R{R}(y, x)$. This excludes reflexivity (there cannot be any self-loops in an asymmetric relation).
+  
+  \item A relation $\R{R}$ on a set $\set{A}$ is \vocab{antisymmetric} if, for any $x, y \in \set{A}$, if $\R{R}(x, y)$ and $\R{R}(y, x)$, then $x = y$. In other words, the only way that a point $x$ can be connected to a point $y$ and $y$ can be connected to $x$ is when $x$ and $y$ are the same point. So antisymmetric relations are like asymmetric relations, but they allow self-loops.
+  
+  \item Every \vocab{asymmetric} relation is \vocab{antisymmetric}, but \vocab{not vice-versa}.
+
+
+\end{itemize}
+
+\end{document}

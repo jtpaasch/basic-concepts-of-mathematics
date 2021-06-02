@@ -1,0 +1,649 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The Real Numbers}
+\label{ch:the-real-numbers}
+
+\begin{ponder}
+  Can you think of any circumstances in which the rational numbers wouldn't be good enough to use for calculations? When are fractions not good enough?
+\end{ponder}
+
+\newtopic{T}{here aren't enough rational numbers} to cover all the points on a number line. So, if we want to calculate with precision, we need a better set of numbers than the rationals. In this chapter, we will look at the set of \vocab{real numbers}, which includes every possible point on the number line.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Gaps between Fractions}
+
+\newthought{As we saw in \chapterref{ch:the-rationals}}, the rational numbers is the set of all fractions. We can construct fractions by imagining that we divide a unit stick up into smaller, equally-sized pieces. In theory, there is no end to how small we can make the pieces. We can keep dividing each unit infinitely.
+
+However, no matter how tiny we make our pieces, there will \emph{always} be \vocab{gaps} between them. Imagine a number line with the integers on it, e.g.:
+
+\begin{diagram}
+
+  \draw[<->] (-5.5, 0) -- (5.5, 0);
+
+  \draw (-4, 0.15) -- (-4, -0.15);
+  \node at (-4, -0.5) {$-2$};
+
+  \draw (-2, 0.15) -- (-2, -0.15);
+  \node at (-2, -0.5) {$-1$};
+  
+  \draw (0, 0.15) -- (0, -0.15);
+  \node at (0, -0.5) {$0$};
+  
+  \draw (2, 0.15) -- (2, -0.15);
+  \node at (2, -0.5) {$1$};
+  
+  \draw (4, 0.15) -- (4, -0.15);
+  \node at (4, -0.5) {$2$};
+
+\end{diagram}
+
+Now imagine adding tick marks for fractions. For instance, let's add tick marks for the halves that occur between $0$ and $1$:
+
+\begin{diagram}
+
+  \draw[<->] (-5.5, 0) -- (5.5, 0);
+
+  \draw (-4, 0.15) -- (-4, -0.15);
+  \node at (-4, -0.5) {$-2$};
+
+  \draw (-2, 0.15) -- (-2, -0.15);
+  \node at (-2, -0.5) {$-1$};
+  
+  \draw (0, 0.15) -- (0, -0.15);
+  \node at (0, -0.5) {$0$};
+
+  \draw (1, 0.15) -- (1, -0.15);
+  \node at (1, -0.5) {$\frac{1}{2}$};
+  
+  \draw (2, 0.15) -- (2, -0.15);
+  \node at (2, -0.5) {$1$};
+  
+  \draw (4, 0.15) -- (4, -0.15);
+  \node at (4, -0.5) {$2$};
+
+\end{diagram}
+
+Notice that there are gaps between the tick marks. Let's now add tick marks for the thirds that occur between $0$ and $1$:
+
+\begin{diagram}
+
+  \draw[<->] (-5.5, 0) -- (5.5, 0);
+
+  \draw (-4, 0.15) -- (-4, -0.15);
+  \node at (-4, -0.5) {$-2$};
+
+  \draw (-2, 0.15) -- (-2, -0.15);
+  \node at (-2, -0.5) {$-1$};
+  
+  \draw (0, 0.15) -- (0, -0.15);
+  \node at (0, -0.5) {$0$};
+
+  \draw (0.66, 0.15) -- (0.66, -0.15);
+  \node at (0.66, -0.5) {$\frac{1}{3}$};
+
+  \draw (1, 0.15) -- (1, -0.15);
+  \node at (1, -0.5) {$\frac{1}{2}$};
+
+  \draw (1.33, 0.15) -- (1.33, -0.15);
+  \node at (1.33, -0.5) {$\frac{2}{3}$};
+  
+  \draw (2, 0.15) -- (2, -0.15);
+  \node at (2, -0.5) {$1$};
+  
+  \draw (4, 0.15) -- (4, -0.15);
+  \node at (4, -0.5) {$2$};
+
+\end{diagram}
+
+Notice that there are still gaps between these tick marks. Let's add tick marks for the fourths that occur between $0$ and $1$:
+
+\begin{diagram}
+
+  \draw[<->] (-5.5, 0) -- (5.5, 0);
+
+  \draw (-4, 0.15) -- (-4, -0.15);
+  \node at (-4, -0.5) {$-2$};
+
+  \draw (-2, 0.15) -- (-2, -0.15);
+  \node at (-2, -0.5) {$-1$};
+  
+  \draw (0, 0.15) -- (0, -0.15);
+  \node at (0, -0.5) {$0$};
+
+  \draw (0.5, 0.15) -- (0.5, -0.15);
+  \node at (0.5, -0.5) {$\frac{1}{4}$};
+
+  \draw (0.66, 0.15) -- (0.66, -0.15);
+  \node at (0.66, -0.5) {$\frac{1}{3}$};
+
+  \draw (1, 0.15) -- (1, -0.15);
+  \node at (1, -0.5) {$\frac{1}{2}$};
+
+  \draw (1.33, 0.15) -- (1.33, -0.15);
+  \node at (1.33, -0.5) {$\frac{2}{3}$};
+  
+  \draw (1.5, 0.15) -- (1.5, -0.15);
+  \node at (1.5, -0.5) {$\frac{3}{4}$};
+  
+  \draw (2, 0.15) -- (2, -0.15);
+  \node at (2, -0.5) {$1$};
+  
+  \draw (4, 0.15) -- (4, -0.15);
+  \node at (4, -0.5) {$2$};
+
+\end{diagram}
+
+\begin{ponder}
+  We can always divide a unit into more fractions. If we've divided it into fourths, we can then divide it into fifths. If we've divided it into $n$ths, we can divide it into $(n + 1)$ths! With that in mind, do you think this means that there \emph{must} be a gap between every $n$th? Otherwise, how could we divide it further?
+\end{ponder}
+
+Again, we still have gaps between our tick marks. No matter how many fractions we add between $0$ and $1$, there will always be gaps between them. Of course, we might have to zoom in to see the gaps once we get really, really small, but the idea is clear enough: there will always be gaps between the tick marks.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Real Number Line}
+
+\newthought{If we want more precise measurements} for things like lines, or even particles moving about in space, we can't have gaps between our numbers. We need a set of numbers that runs \emph{continuously} through the gaps.
+
+\begin{terminology}
+  In this context, to go \vocab{continuously} through the points means to pass through the points without any gaps. You might imagine putting your pencil on the paper, and drawing a line without lifting your pencil. If you lifted your pencil and put it down again, that would leave a ``gap'' in the line, and so that line would not be continuous.
+\end{terminology}
+
+How do we model this? Let's imagine a particle flying through space in a straight line. Let's draw it as a dot, with a trajectory, something like this:
+
+\begin{diagram}
+
+  \node[odot] at (0, 0) {};
+  \draw[->,space,dashed] (0, 0) -- (4, 0);
+
+\end{diagram}
+
+Now, let's suppose that the particle starts to move forward along its trajectory. As it moves, it passes through points on its trajectory. Let's draw the points with solid black dots. So, for instance, it moves forward a tiny bit, leaving behind a dot where it's been:
+
+\begin{diagram}
+
+  \draw[->,space,dashed] (0, 0) -- (4, 0);
+  \node[dot] at (0, 0) {};
+  \node[odot] at (0.15, 0) {};
+
+\end{diagram}
+
+Then it moves some more, leaving behind more black dots:
+
+\begin{diagram}
+
+  \draw[->,space,dashed] (0, 0) -- (4, 0);
+  \node[dot] at (0, 0) {};
+  \node[dot] at (0.15, 0) {};
+  \node[dot] at (0.3, 0) {};
+  \node[odot] at (0.45, 0) {};
+
+\end{diagram}
+
+However, this drawing isn't good enough, because we can see tiny spaces between the dots. This isn't right, because it's not like the particle ``jumps'' from one point to the next. If we zoom in real close, we won't see this:
+
+\begin{diagram}
+
+  \draw[->,space,dashed] (1.5, 0) -- (4, 0);
+  \draw[->,space,dashed] (0, 0) .. controls (0.25, 0.75) .. (0.5, 0);
+  \draw[->,space,dashed] (0.5, 0) .. controls (0.75, 0.75) .. (1, 0);
+  \draw[->,space,dashed] (1, 0) .. controls (1.25, 0.75) .. (1.5, 0);
+  \node[dot] at (0, 0) {};
+  \node[dot] at (0.5, 0) {};
+  \node[dot] at (1, 0) {};
+  \node[odot] at (1.5, 0) {};
+
+\end{diagram}
+
+No, if we zoom in real close, we'll see more dots that the particle has passed through:
+
+\begin{diagram}
+
+  \draw[->,space,dashed] (0, 0) -- (4, 0);
+  \node[dot] at (0, 0) {};
+  \node[dot] at (0.15, 0) {};
+  \node[dot] at (0.3, 0) {};
+  \node[dot] at (0.45, 0) {};
+  \node[dot] at (0.6, 0) {};
+  \node[dot] at (0.75, 0) {};
+  \node[dot] at (0.9, 0) {};
+  \node[dot] at (1.05, 0) {};
+  \node[dot] at (1.20, 0) {};
+  \node[dot] at (1.35, 0) {};
+  \node[odot] at (1.5, 0) {};
+
+\end{diagram}
+
+And if we zoom in even more, we'll see more dots:
+
+\begin{diagram}
+
+  \draw[->,space,dashed] (0, 0) -- (4, 0);
+  \node[dot] at (0, 0) {};
+  \node[dot] at (0.1, 0) {};
+  \node[dot] at (0.2, 0) {};
+  \node[dot] at (0.3, 0) {};
+  \node[dot] at (0.4, 0) {};
+  \node[dot] at (0.5, 0) {};
+  \node[dot] at (0.6, 0) {};
+  \node[dot] at (0.7, 0) {};
+  \node[dot] at (0.8, 0) {};
+  \node[dot] at (0.9, 0) {};
+  \node[dot] at (1.0, 0) {};
+  \node[dot] at (1.1, 0) {};
+  \node[dot] at (1.2, 0) {};
+  \node[dot] at (1.3, 0) {};
+  \node[dot] at (1.4, 0) {};
+  \node[odot] at (1.5, 0) {};
+
+\end{diagram}
+
+And even this drawing isn't good enough, because there are still gaps. It really needs to be a solid black line, packed infinitely densely with points:
+
+\begin{diagram}
+
+  \draw[->,space,dashed] (0, 0) -- (4, 0);
+  \node[dot] at (0, 0) {};
+  \node[dot] at (0.05, 0) {};
+  \node[dot] at (0.1, 0) {};
+  \node[dot] at (0.15, 0) {};
+  \node[dot] at (0.2, 0) {};
+  \node[dot] at (0.25, 0) {};
+  \node[dot] at (0.3, 0) {};
+  \node[dot] at (0.35, 0) {};
+  \node[dot] at (0.4, 0) {};
+  \node[dot] at (0.45, 0) {};
+  \node[dot] at (0.5, 0) {};
+  \node[dot] at (0.55, 0) {};
+  \node[dot] at (0.6, 0) {};
+  \node[dot] at (0.65, 0) {};
+  \node[dot] at (0.7, 0) {};
+  \node[dot] at (0.75, 0) {};
+  \node[dot] at (0.8, 0) {};
+  \node[dot] at (0.85, 0) {};
+  \node[dot] at (0.9, 0) {};
+  \node[dot] at (0.95, 0) {};
+  \node[dot] at (1.0, 0) {};
+  \node[dot] at (0.05, 0) {};
+  \node[dot] at (1.1, 0) {};
+  \node[dot] at (0.15, 0) {};
+  \node[dot] at (1.2, 0) {};
+  \node[dot] at (0.25, 0) {};
+  \node[dot] at (1.3, 0) {};
+  \node[dot] at (0.35, 0) {};
+  \node[dot] at (1.4, 0) {};
+  \node[dot] at (0.45, 0) {};
+  \node[odot] at (1.5, 0) {};
+
+\end{diagram}
+
+\begin{ponder}
+  Try to imagine all the points that the particle travels through as it moves in a straight line through space. Remember that the particle never ``jumps'' or ``warps'' from one spot in space to another, later spot. What do you see in your mind when you try to imagine all these points?
+\end{ponder}
+
+This is because the particle travels continuously along its trajectory, and there is \emph{never} a gap in its movement. It never skips or ``jumps'' from one point in space to another point in space farther along. Between any two points $x$ and $y$ on the trajectory, no matter how infinitesimally close they may be, there are still infinitely many more points between which the particle passes through as it travels from $x$ to $y$. 
+
+If we want to really capture all of the points on a line, we need to imagine something like the sequence of points that the particle travels through. We need to say that we have infinitely many points, packed in so densely that there are literally no gaps anywhere. Between any two points $x$ and $y$, there are infinitely many more points.
+
+\begin{terminology}
+  The \vocab{real number line} is an imaginary model of a real line that extends in space. A real line has no gaps, so in order to imagine this as a set of points, we need to imagine infinitely many points packed infinitely densely into a straight line.
+\end{terminology}
+
+So, let's imagine this infinitely dense set of points, all arranged in a straight line. This is how we can model a \emph{real} line in our minds. This is how we can capture the idea that a solid line extended in space has no gaps (for if it had gaps, it wouldn't be a solid line). Let's call this the \vocab{real number line}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Real Numbers}
+
+\newthought{Let's take all the points} that we just imagined, arranged in a line, and let's put them into a set. We call this set the \vocab{real numbers}, and we denote it like this:
+
+\begin{equation*}
+  \Reals/
+\end{equation*}
+
+\begin{terminology}
+  The \vocab{real numbers} are all the points that fall on the real number line. We denote the set like this: $\Reals/$. It is an infinitely dense set of objects.
+\end{terminology}
+
+The real numbers are a truly spooky collection of objects. The sheer size and density of them is mind boggling.
+
+It's nice to have so many points, but we need names for them all. So how do we get names for all of them? 
+
+The established tradition is to use decimal points. Let's say we have a point on the real number line that lies somewhere between $1$ and $2$:
+
+\begin{ponder}
+  Suppose you had to make an educated guess at where this point lies. Is it 1.5? 1.25? 1.33? Somewhere in between? How might you guess the first couple of decimal places? 
+\end{ponder}
+
+\begin{diagram}
+
+  \draw[<->] (-1.5, 0) -- (8, 0);
+
+  \draw (0, 0.1) -- (0, -0.1);
+  \node at (0, -0.5) {$1$};
+
+  \draw (6, 0.1) -- (6, -0.1);
+  \node at (6, -0.5) {$2$};
+
+  \node[dot] at (2.15, 0) {};
+
+\end{diagram} 
+
+What is the name of this object, using a decimal point? We know it is bigger than $1$, so it will be one-point-something:
+
+\begin{equation*}
+  1.??????
+\end{equation*}
+
+\begin{terminology}
+  A \vocab{decimal expansion} has the form $n.d_{1}d_{2}d_{3}\ldots~$, where $n$ is a positive or negative integer, and $d_{1}$, $d_{2}$, $d_{3}$, and so on are replaced by digits.
+\end{terminology}
+
+The question marks are empty slots that we need to fill in. When we fill in these slots with numbers, we say that this is a \vocab{decimal expansion}. Think of a decimal expansion as the process of adding in numbers after the decimal point.
+
+How do we calculate the numbers that go into our decimal expansion? First, we divide the portion of the line between ``$1$'' and ``$2$'' into 10ths, like this:
+
+\begin{aside}
+  \begin{remark}
+    We could write these fractions as decimal numbers if we were so inclined. For instance, we could write $1$ and $\frac{1}{10}$ as $1.1$, we could write $1$ and $\frac{2}{10}$ as $1.2$, and so on.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw[<->] (-1.5, 0) -- (8, 0);
+
+  \draw (0, 0.25) -- (0, -0.5);
+  \node at (0, -0.75) {$1$};
+
+  \draw (6, 0.25) -- (6, -0.5);
+  \node at (6, -0.75) {$2$};
+
+  \node[dot] at (2.15, 0) {};
+  
+  \draw (0.6, 0.1) -- (0.6, -0.1);
+  \node at (0.6, -0.5) {$\frac{1}{10}$};
+  
+  \draw (1.2, 0.1) -- (1.2, -0.1);
+  \node at (1.2, -0.5) {$\frac{2}{10}$};
+  
+  \draw (1.8, 0.1) -- (1.8, -0.1);
+  \node at (1.8, -0.5) {$\frac{3}{10}$};
+  
+  \draw (2.4, 0.1) -- (2.4, -0.1);
+  \node at (2.4, -0.5) {$\frac{4}{10}$};
+  
+  \draw (3, 0.1) -- (3, -0.1);
+  \node at (3, -0.5) {$\frac{5}{10}$};
+  
+  \draw (3.6, 0.1) -- (3.6, -0.1);
+  \node at (3.6, -0.5) {$\frac{6}{10}$};
+  
+  \draw (4.2, 0.1) -- (4.2, -0.1);
+  \node at (4.2, -0.5) {$\frac{7}{10}$};
+  
+  \draw (4.8, 0.1) -- (4.8, -0.1);
+  \node at (4.8, -0.5) {$\frac{8}{10}$};
+  
+  \draw (5.4, 0.1) -- (5.4, -0.1);
+  \node at (5.4, -0.5) {$\frac{9}{10}$};
+
+\end{diagram} 
+
+We can see that our dot falls after $\frac{3}{10}$, so we write $3$ in the first empty slot in our decimal expansion:
+
+\begin{equation*}
+  1.3?????
+\end{equation*}
+
+Next, we zoom in on the area marked $\frac{3}{10}$ and $\frac{4}{10}$, which are $1.3$ and $1.4$ on the line:
+
+\begin{diagram}
+
+  \draw[<->] (-1.5, 0) -- (8, 0);
+
+  \draw (0, 0.25) -- (0, -0.5);
+  \node at (0, -0.75) {$1.3$};
+
+  \draw (6, 0.25) -- (6, -0.5);
+  \node at (6, -0.75) {$1.4$};
+
+  \node[dot] at (3.15, 0) {};
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    We could write these fractions as decimal numbers too, if we were so inclined. For instance, we could write $1.3$ and $\frac{1}{10}$ as $1.31$, we could write $1.3$ and $\frac{2}{10}$ as $1.32$, and so on.
+  \end{remark}
+\end{aside}
+
+Next, we again divide this portion of the line up into 10ths, like this:
+
+\begin{diagram}
+
+  \draw[<->] (-1.5, 0) -- (8, 0);
+
+  \draw (0, 0.25) -- (0, -0.5);
+  \node at (0, -0.75) {$1.3$};
+
+  \draw (6, 0.25) -- (6, -0.5);
+  \node at (6, -0.75) {$1.4$};
+
+  \node[dot] at (3.15, 0) {};
+  
+  \draw (0.6, 0.1) -- (0.6, -0.1);
+  \node at (0.6, -0.5) {$\frac{1}{10}$};
+  
+  \draw (1.2, 0.1) -- (1.2, -0.1);
+  \node at (1.2, -0.5) {$\frac{2}{10}$};
+  
+  \draw (1.8, 0.1) -- (1.8, -0.1);
+  \node at (1.8, -0.5) {$\frac{3}{10}$};
+  
+  \draw (2.4, 0.1) -- (2.4, -0.1);
+  \node at (2.4, -0.5) {$\frac{4}{10}$};
+  
+  \draw (3, 0.1) -- (3, -0.1);
+  \node at (3, -0.5) {$\frac{5}{10}$};
+  
+  \draw (3.6, 0.1) -- (3.6, -0.1);
+  \node at (3.6, -0.5) {$\frac{6}{10}$};
+  
+  \draw (4.2, 0.1) -- (4.2, -0.1);
+  \node at (4.2, -0.5) {$\frac{7}{10}$};
+  
+  \draw (4.8, 0.1) -- (4.8, -0.1);
+  \node at (4.8, -0.5) {$\frac{8}{10}$};
+  
+  \draw (5.4, 0.1) -- (5.4, -0.1);
+  \node at (5.4, -0.5) {$\frac{9}{10}$};
+
+\end{diagram}
+
+We can see that our dot is after $\frac{5}{10}$, so we write $5$ in the next empty slot in our decimal expansion:
+
+\begin{equation*}
+  1.35?????
+\end{equation*}
+
+We can repeat this process again. We zoom in on the area marked $\frac{5}{10}$ and $\frac{6}{10}$, which are $1.35$ and $1.36$ on the line:
+
+\begin{diagram}
+
+  \draw[<->] (-1.5, 0) -- (8, 0);
+
+  \draw (0, 0.25) -- (0, -0.5);
+  \node at (0, -0.75) {$1.35$};
+
+  \draw (6, 0.25) -- (6, -0.5);
+  \node at (6, -0.75) {$1.36$};
+
+  \node[dot] at (1.4, 0) {};
+
+\end{diagram}
+
+And we again divide this portion of the line into 10ths, like this:
+
+\begin{aside}
+  \begin{remark}
+    We can write these fractions as decimal numbers too, just as before. For instance, we can write $1.35$ and $\frac{1}{10}$ as $1.351$, we can write $1.35$ and $\frac{2}{10}$ as $1.352$, etc.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw[<->] (-1.5, 0) -- (8, 0);
+
+  \draw (0, 0.25) -- (0, -0.5);
+  \node at (-0.1, -0.75) {$1.35$};
+
+  \draw (6, 0.25) -- (6, -0.5);
+  \node at (6.1, -0.75) {$1.36$};
+
+  \node[dot] at (1.4, 0) {};
+  
+  \draw (0.6, 0.1) -- (0.6, -0.1);
+  \node at (0.6, -0.5) {$\frac{1}{10}$};
+  
+  \draw (1.2, 0.1) -- (1.2, -0.1);
+  \node at (1.2, -0.5) {$\frac{2}{10}$};
+  
+  \draw (1.8, 0.1) -- (1.8, -0.1);
+  \node at (1.8, -0.5) {$\frac{3}{10}$};
+  
+  \draw (2.4, 0.1) -- (2.4, -0.1);
+  \node at (2.4, -0.5) {$\frac{4}{10}$};
+  
+  \draw (3, 0.1) -- (3, -0.1);
+  \node at (3, -0.5) {$\frac{5}{10}$};
+  
+  \draw (3.6, 0.1) -- (3.6, -0.1);
+  \node at (3.6, -0.5) {$\frac{6}{10}$};
+  
+  \draw (4.2, 0.1) -- (4.2, -0.1);
+  \node at (4.2, -0.5) {$\frac{7}{10}$};
+  
+  \draw (4.8, 0.1) -- (4.8, -0.1);
+  \node at (4.8, -0.5) {$\frac{8}{10}$};
+  
+  \draw (5.4, 0.1) -- (5.4, -0.1);
+  \node at (5.4, -0.5) {$\frac{9}{10}$};
+
+\end{diagram}
+
+We can see that our dot falls on the line after the $\frac{2}{10}$ mark, so we write $2$ in the next empty slot in our decimal expansion:
+
+\begin{equation*}
+  1.352????
+\end{equation*}
+
+We can keep going like this forever, always zooming in, finding the next closest decimal digit in our decimal expansion.
+
+Of course, the more times we do this, the more digits we add to our decimal expansion. And the more digits we add, the more accurate our decimal expansion becomes at representing the exact point on the line where our dot falls.
+
+\begin{aside}
+  \begin{remark}
+    Every \vocab{real number} has an \vocab{infinite number of digits} in its decimal expansion. Hence, any decimal number with a finite number of digits is just an \vocab{approximation} of the real number. The more digits we add to the expansion, the more \vocab{accurate} the approximation.
+  \end{remark}
+\end{aside}
+
+In truth, a real number has an \vocab{infinite number of digits} in its expansion. It's not just $1.352$. It's $1.352\ldots$, with digit after digit appearing at the end forever. In practice, we obviously can't keep expanding (we'd run out of time). In practice, we usually just stop after we have reached a level of precision that is good enough for our purposes.
+
+For instance, with money, we don't need to expand beyond two decimal places, but with a sensitive physics experiment, maybe we would want to expand more digits, so that we can be more accurate.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{How Other Numbers Fit}
+
+\newthought{For simplicity}, we can think of the real numbers as just all numbers with decimal points. For instance, these would all be real numbers:
+
+\begin{equation*}
+  1.0 \hskip 1cm 2.457 \hskip 1cm 3.14159\ldots \hskip 1cm 32,754.9879879999\ldots
+\end{equation*}
+
+We sometimes write only one or two digits in these numbers' expansions, even though in truth, every real number actually has an infinite expansion.
+
+Every \vocab{natural number} can be written as a real number, by adding infinitely many zeros afterwards:
+
+\begin{alignat*}{3}
+       0 &&~~\mapsto~~&&  &0.00000000\ldots \\
+       1 &&~~\mapsto~~&&  &1.00000000\ldots \\
+       2 &&~~\mapsto~~&&  &2.00000000\ldots \\
+  \vdots &&           &&  &\vdots
+\end{alignat*}
+
+The \vocab{integers} can be written similarly:
+
+\begin{alignat*}{3}
+  \vdots &&           &&  &\vdots \\
+      -2 &&~~\mapsto~~&& -&2.00000000\ldots \\
+      -1 &&~~\mapsto~~&& -&1.00000000\ldots \\
+       0 &&~~\mapsto~~&&  &0.00000000\ldots \\
+       1 &&~~\mapsto~~&&  &1.00000000\ldots \\
+       2 &&~~\mapsto~~&&  &2.00000000\ldots \\
+  \vdots &&           &&  &\vdots
+\end{alignat*}
+
+\begin{aside}
+  \begin{remark}
+    In practice, we usually don't write all the zeros. We don't write $2.0000000\ldots$ We just write $2.0$ or even $2$. And we don't write $0.75000000\ldots$ We just write $0.75$.
+  \end{remark}
+\end{aside}
+
+And fractions (the \vocab{rational numbers}) can of course be written as decimals too, with infinitely many zeros in the expansion. For instance, here are some fourths:
+
+\begin{alignat*}{3}
+  \sfrac{0}{4} &&~~\mapsto~~&& &0.00000000\ldots \\
+  \sfrac{1}{4} &&~~\mapsto~~&& &0.25000000\ldots \\
+  \sfrac{2}{4} &&~~\mapsto~~&& &0.50000000\ldots \\
+  \sfrac{3}{4} &&~~\mapsto~~&& &0.75000000\ldots \\
+  \sfrac{4}{4} &&~~\mapsto~~&& &1.00000000\ldots \\
+  \sfrac{5}{4} &&~~\mapsto~~&& &1.25000000\ldots \\
+  \vdots &&           &&  &\vdots
+\end{alignat*}
+
+This makes it clear that the real numbers include all of the natural numbers, all of the integers, and all of the rational numbers. They are all subsets of the real numbers. To put it in symbols:
+
+\begin{aside}
+  \begin{remark}
+    Recall that we denote the natural numbers as $\Nats/$, we denote the integers as $\Ints/$, and we denote the rationals as $\Rationals/$.
+  \end{remark}
+\end{aside}
+
+\begin{align*}
+  \Nats/ &\subseteq \Reals/ \\
+  \Ints/ &\subseteq \Reals/ \\
+  \Rationals/ &\subseteq \Reals/
+\end{align*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about the real numbers, i.e., the set that includes every single point on the real number line.
+
+\begin{itemize}
+
+  \item The \vocab{real number line} models a real line extending in space. A real line has no gaps. To capture this, we say that the real number line is a collection of points arranged in a straight line, and between any two points $x$ and $y$, there are infinitely many more points.
+  
+  \item If we take all these points and put them into a set, we call that set the \vocab{real numbers}, and we denote it like this: $\Reals/$.
+  
+  \item To generate a name for any of the object in $\Reals/$, we can create a \vocab{decimal expansion}. To do that, we add a decimal point, and then we add digit after digit. With each digit, we get a tenth of the way closer to where the point really lies on the real number line.
+  
+  \item However, each real number has an \vocab{infinite number of digits} in its decimal expansion (even if those digits are all zeros). Hence, in practice we stop at whatever number of digits \vocab{we need} to suit our purposes.
+
+\end{itemize}
+
+
+\end{document}

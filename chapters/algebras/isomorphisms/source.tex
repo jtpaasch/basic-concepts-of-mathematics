@@ -1,0 +1,660 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Isomorphisms}
+\label{ch:algebra-isomorphisms}
+
+\begin{ponder}
+  What do you think it would mean to say that two algebraic structures are ``essentially the same,'' under the hood, in their internal structure?
+\end{ponder}
+
+\newtopic{I}{n \chapterref{ch:algebraic-structures}}, we saw that an algebraic structure is a base set equipped with one or more binary operations. In this chapter, we will look at the question of \vocab{isomorphisms} for algebraic structures: when can we say that two algebraic structures have the same shape or structure?
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Maps between Algebras}
+
+\newthought{Let's start} with how we can map one algebraic structure to another. To construct a \vocab{map} (i.e., a \vocab{function}) from one algebraic structure to another, all we need to do is map the carrier set of the one to the other.
+
+\begin{fexample}
+
+Suppose we have two algebras:
+
+\begin{equation*}
+  \algebra{S} = (\set{A}, \opSymbol/) \hskip 2cm \algebra{T} = (\set{B}, \opSymbol/)
+\end{equation*}
+
+Let's ignore their binary operations for now. Let's just look at their carrier sets $\set{A}$ and $\set{B}$. Suppose they look like this:
+
+\begin{diagram}
+
+  \node (A) at (-2.675, 1.75) {$\set{A}$};
+  \draw[color=grey3] (-2.75, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (a) at (-3, 1) [label=left:{$a$}] {};
+  \node[dot] (b) at (-2, 0.5) [label=left:{$b$}] {};
+  \node[dot] (c) at (-3, 0) [label=left:{$c$}] {};
+  
+  \node (B) at (2.675, 1.75) {$\set{B}$};
+  \draw[color=grey3] (2.75, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (1) at (3, 1) [label=right:{$1$}] {};
+  \node[dot] (2) at (2, 0.5) [label=right:{$2$}] {};
+  \node[dot] (3) at (3, 0) [label=right:{$3$}] {};
+
+\end{diagram}
+
+Let's create a map (a function) from $\struct{S}$ to $\struct{T}$, Let's call our function $\func{f}$. To create this, all we need to do is map each element from $\set{A}$ to an element in $\set{B}$. For example, we could do this:
+
+\begin{aside}
+  \begin{remark}
+    In other words, here is the mapping:
+
+    \begin{align*}
+      \func{f}(a) &= 1 \\
+      \func{f}(b) &= 2 \\
+      \func{f}(c) &= 3
+    \end{align*}
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (A) at (-2.675, 1.75) {$\set{A}$};
+  \draw[color=grey3] (-2.75, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (a) at (-3, 1) [label=left:{$a$}] {};
+  \node[dot] (b) at (-2, 0.5) [label=left:{$b$}] {};
+  \node[dot] (c) at (-3, 0) [label=left:{$c$}] {};
+  
+  \node (B) at (2.675, 1.75) {$\set{B}$};
+  \draw[color=grey3] (2.75, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (1) at (3, 1) [label=right:{$1$}] {};
+  \node[dot] (2) at (2, 0.5) [label=right:{$2$}] {};
+  \node[dot] (3) at (3, 0) [label=right:{$3$}] {};
+
+  \node (f) at (0, -0.5) {$\func{f}$};
+  \draw[->,space,dashed] (a) to (1);
+  \draw[->,space,dashed] (b) to (2);
+  \draw[->,space,dashed] (c) to (3);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    This function maps the set $\set{A}$ to the set $\set{B}$, so we could denote its signature like this:
+
+\begin{equation*}
+  \funcsig{f}{\set{A}}{\set{B}}
+\end{equation*}
+
+But in this context, this function is really intended as a map between our algebraic structures $\algebra{S}$ and $\algebra{T}$, so we write its signature as going from $\algebra{S}$ to $\algebra{T}$ instead of from $\set{A}$ to $\set{B}$.
+  \end{remark}
+\end{aside}
+
+That is enough to map the structure $\struct{S}$ to $\struct{T}$. So, let's denote its \vocab{signature} like this:
+
+\begin{equation*}
+  \funcsig{f}{\algebra{S}}{\algebra{T}}
+\end{equation*}
+
+Read that like this: ``the function $\func{f}$ maps the algebraic structure $\algebra{S}$ to the algebraic structure $\algebra{T}$.'' Or, just read it like this: ``$\func{f}$ maps $\algebra{S}$ to $\algebra{T}$.''
+
+\end{fexample} 
+
+\begin{fexample}
+
+Let's construct a different mapping. Let's call this one $\funcsig{g}{\algebra{S}}{\algebra{T}}$, and let's define it like this:
+
+\begin{diagram}
+
+  \node (A) at (-2.675, 1.75) {$\set{A}$};
+  \draw[color=grey3] (-2.75, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (a) at (-3, 1) [label=left:{$a$}] {};
+  \node[dot] (b) at (-2, 0.5) [label=left:{$b$}] {};
+  \node[dot] (c) at (-3, 0) [label=left:{$c$}] {};
+  
+  \node (B) at (2.675, 1.75) {$\set{B}$};
+  \draw[color=grey3] (2.75, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (1) at (3, 1) [label=right:{$1$}] {};
+  \node[dot] (2) at (2, 0.5) [label=right:{$2$}] {};
+  \node[dot] (3) at (3, 0) [label=right:{$3$}] {};
+
+  \node (g) at (0, -0.5) {$\func{f}$};
+  \draw[->,space,dashed] (a) to (2);
+  \draw[->,space,dashed] (b) to (3);
+  \draw[->,space,dashed] (c) to (1);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    The function $\func{g}$ differs from $\func{f}$ because it maps elements from the first carrier set to different elements in the other carrier set.
+  \end{remark}
+\end{aside}
+
+In other words, here is the mapping:
+
+\begin{equation*}
+  \func{g}(a) = 2 \hskip 2cm
+  \func{g}(b) = 3 \hskip 2cm
+  \func{g}(c) = 1
+\end{equation*}
+
+\end{fexample}
+
+\begin{example}
+
+Let's look at one more example. Suppose $\set{A}$ and $\set{B}$ look like this:
+
+\begin{aside}
+  \begin{remark}
+    The cardinality of $\set{A}$ is $\cardinality{\set{A}} = 3$, while the cardinality of $\set{B}$ is $\cardinality{\set{B}} = 4$.  
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (A) at (-2.675, 1.75) {$\set{A}$};
+  \draw[color=grey3] (-2.75, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (a) at (-3, 1) [label=left:{$a$}] {};
+  \node[dot] (b) at (-2, 0.5) [label=left:{$b$}] {};
+  \node[dot] (c) at (-3, 0) [label=left:{$c$}] {};
+  
+  \node (B) at (3.175, 1.75) {$\set{B}$};
+  \draw[color=grey3] (3.175, 0.5) ellipse (2cm and 1cm);
+  \node[dot] (1) at (3, 1) [label=right:{$1$}] {};
+  \node[dot] (2) at (2, 0.5) [label=right:{$2$}] {};
+  \node[dot] (3) at (3, 0) [label=right:{$3$}] {};
+  \node[dot] (4) at (4, 0.5) [label=right:{$4$}] {};
+
+\end{diagram}
+
+Notice that $\set{B}$ has more elements than $\set{A}$. We can still create a mapping. Let's call this map $\funcsig{h}{\algebra{S}}{\algebra{T}}$, and define it like this:
+
+\begin{diagram}
+
+  \node (A) at (-2.675, 1.75) {$\set{A}$};
+  \draw[color=grey3] (-2.75, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (a) at (-3, 1) [label=left:{$a$}] {};
+  \node[dot] (b) at (-2, 0.5) [label=left:{$b$}] {};
+  \node[dot] (c) at (-3, 0) [label=left:{$c$}] {};
+  
+  \node (B) at (3.175, 1.75) {$\set{B}$};
+  \draw[color=grey3] (3.175, 0.5) ellipse (2cm and 1cm);
+  \node[dot] (1) at (3, 1) [label=right:{$1$}] {};
+  \node[dot] (2) at (2, 0.5) [label=right:{$2$}] {};
+  \node[dot] (3) at (3, 0) [label=right:{$3$}] {};
+  \node[dot] (4) at (4, 0.5) [label=right:{$4$}] {};
+
+  \node (h) at (0, -0.5) {$\func{h}$};
+  \draw[->,space,dashed] (a) to (2);
+  \draw[->,space,dashed] (b) to (3);
+  \draw[->,space,dashed] (c) to (3);
+
+\end{diagram}
+
+In other words, here is the mapping:
+
+\begin{equation*}
+  \func{h}(a) = 2 \hskip 2cm
+  \func{h}(b) = 3 \hskip 2cm
+  \func{h}(c) = 3
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:kinds-of-functions} that functions can be injective, surjective, or bijective. Here, $\func{h}$ is neither \vocab{surjective} nor \vocab{injective}. By contrast, $\func{f}$ and $\func{g}$ are both injective and surjective (hence, they are \vocab{bijective}).
+  \end{remark}
+\end{aside}
+
+There are two points in $\set{B}$ that have no arrows coming to them, namely $1$ and $4$. Since $\set{B}$ is a bigger set than $\set{A}$, it is not possible for $\func{h}$ to cover all of the elements in $\set{B}$. 
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preserving Structure}
+
+\begin{terminology}
+  A map from $\algebra{S}$ to $\algebra{T}$ \vocab{preserves the binary operation} if whenever $\op{x}{y} = z$ in $\algebra{S}$, then $\op{\func{f}(x)}{\func{f}(y)} = \func{f}(z)$ in $\algebra{T}$.
+\end{terminology}
+
+\newthought{Not all maps between algebraic structures} are equal. Some \vocab{preserve the binary operation}, while others do not. 
+
+What does it mean to say that a map ``preserves the binary operation,'' exactly? Suppose we have a map $\func{f}$ from $\algebra{S}$ to $\algebra{T}$:
+
+\begin{equation*}
+  \funcsig{f}{\algebra{S}}{\algebra{T}}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    The rule says:
+    
+    \begin{center}
+      if $\op{x}{y} = z$ in $\algebra{S}$, then $\op{\func{f}(x)}{\func{f}(y)} = \func{f}(z)$ in $\algebra{T}$.
+    \end{center}
+    
+    This can be written a different way. We have two equations here:
+    \begin{align*}
+      \op{x}{y} &= z \\
+      \op{\func{f}(x)}{\func{f}(y)} &= \func{f}(z)
+    \end{align*}
+    
+    Flip both around:
+    \begin{align*}
+      z &= \op{x}{y} \\
+      \func{f}(z) &= \op{\func{f}(x)}{\func{f}(y)}
+    \end{align*}
+    
+    The first tells us that another way to write ``$z$'' is ``$\op{x}{y}$.'' So, let's take the second equation, and let's replace ``$z$'' with ``$\op{x}{y}$'':
+    
+    \begin{equation*}
+      \func{f}(\op{x}{y}) = \op{\func{f}(x)}{\func{f}(y)}
+    \end{equation*}
+    
+    This is an equivalent way of writing the same rule.
+  \end{remark}
+\end{aside}
+
+To say that $\func{f}$ preserves the operation means that it preserves the structure of the \vocab{Cayley table}. So, whenever $\op{x}{y}$ equals $z$ in the first structure, then $\op{\func{f}(x)}{\func{f}(y)}$ will equal $\func{f}(z)$ in the second structure:
+
+\begin{equation*}
+  \text{ if } \op{x}{y} = z \text{ in $\algebra{S}$, then } \op{\func{f}(x)}{\func{f}(y)} = \func{f}(z) \text{ in $\algebra{T}$}
+\end{equation*}
+
+Let's write this idea down as a definition.
+
+\begin{fdefinition}[Structure-preserving maps]
+  \label{def:algebra-structure-preserving-maps}
+  Given two algebraic structures $\algebra{S} = (\set{A}, \opSymbol/)$ and $\algebra{T} = (\set{B}, \opSymbol/)$, we will say that a map $\funcsig{f}{\algebra{S}}{\algebra{T}}$ is a \vocab{structure preserving} map when, for every $x, y, z$ in $\set{A}$: 
+  
+  \begin{center}
+    if $\op{x}{y} = z$ in $\algebra{S}$, then $\op{\func{f}(x)}{\func{f}(y)} = \func{f}(z)$ in $\algebra{T}$
+  \end{center}
+\end{fdefinition}
+
+\begin{fexample}
+\label{ex:algebraic-isomorphism}
+
+Suppose we have two algebraic structures:
+
+\begin{equation*}
+  \algebra{S} = (\set{A}, \opSymbol/) \hskip 2cm \algebra{T} = (\set{B}, \opSymbol/)
+\end{equation*}
+
+where the sets $\set{A}$ and $\set{B}$ are defined like this:
+
+\begin{equation*}
+  \set{A} = \{ a, b, c \} \hskip 2cm \set{B} = \{ 1, 2, 3 \}
+\end{equation*}
+
+And the Cayley tables are defined like this:
+
+\begin{ponder}
+  It is worth pausing for a moment to look at these two Cayley tables. Can you see how they are similar?
+\end{ponder}
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $a$ & $b$ & $c$ \\ \hline \hline
+    $a$          & $a$ & $a$ & $a$ \\ \hline
+    $b$          & $b$ & $b$ & $b$ \\ \hline
+    $c$          & $c$ & $c$ & $c$ \\ \hline
+  \end{tabular}
+  \hskip 2cm
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $1$ & $2$ & $3$ \\ \hline \hline
+    $1$          & $1$ & $1$ & $1$ \\ \hline
+    $2$          & $2$ & $2$ & $2$ \\ \hline
+    $3$          & $3$ & $3$ & $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Now let's define a map $\funcsig{f}{\algebra{S}}{\algebra{T}}$ that looks like this:
+
+\begin{aside}
+  \begin{remark}
+    
+In other words, here is the mapping:
+
+\begin{align*}
+  \func{f}(a) &= 1 \\
+  \func{f}(b) &= 2 \\
+  \func{f}(c) &= 3
+\end{align*}
+
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (A) at (-2.675, 1.75) {$\set{A}$};
+  \draw[color=grey3] (-2.75, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (a) at (-3, 1) [label=left:{$a$}] {};
+  \node[dot] (b) at (-2, 0.5) [label=left:{$b$}] {};
+  \node[dot] (c) at (-3, 0) [label=left:{$c$}] {};
+  
+  \node (B) at (2.675, 1.75) {$\set{B}$};
+  \draw[color=grey3] (2.75, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (1) at (3, 1) [label=right:{$1$}] {};
+  \node[dot] (2) at (2, 0.5) [label=right:{$2$}] {};
+  \node[dot] (3) at (3, 0) [label=right:{$3$}] {};
+
+  \node (f) at (0, -0.5) {$\func{f}$};
+  \draw[->,space,dashed] (a) to (1);
+  \draw[->,space,dashed] (b) to (2);
+  \draw[->,space,dashed] (c) to (3);
+
+\end{diagram}
+
+Is $\func{f}$ a structure-preserving map? To check, we need to make sure that whenever $\op{x}{y} = z$ in $\algebra{S}$, then $\op{\func{f}(x)}{\func{f}(y)} = \func{f}(z)$ in $\algebra{T}$. We could manually check every possible pair of $x$ and $y$. For instance, we could take $a$ and $b$, and check that $\op{a}{b}$ and $\op{\func{f}(a)}{\func{f}(b)}$ correspond. If we look in $\algebra{S}$'s Cayley table, we see that in $\algebra{S}$:
+
+\begin{equation*}
+  \op{a}{b} = a
+\end{equation*}
+
+Since $\func{f}(a) = 1$, $\func{f}(b) = 2$, we would then expect this to be true in $\algebra{T}$:
+
+\begin{equation*}
+  \op{1}{2} = 1
+\end{equation*}
+
+And indeed, if we look in $\algebra{T}$'s Cayley table, we can see that this is so.
+
+It is tedious to check every pair though. There's an easier way. We can look at the two Cayley tables, and make sure that they have the same structure (i.e., corresponding elements appear in corresponding places).
+
+Let's do it. First, since $\func{f}$ maps $a$ to $1$, let's make sure that $a$ and $1$ appear in the same places in their respective Cayley tables. Here they are:
+
+\begin{aside}
+  \begin{remark}
+    To say that the corresponding elements appear in the corresponding positions means both that they live in the same row and column \emph{headers}, and they live in the same \emph{cells}. Suppose $a$ and $1$ were positioned like this:
+    
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $b$ & $c$ & \cellcolor{grey3} $a$  \\ \hline \hline
+    $b$          & \cellcolor{grey3}$a$ & \cellcolor{grey3}$a$ & \cellcolor{grey3}$a$ \\ \hline
+    $c$          & $b$ & $b$ & $b$ \\ \hline
+    \cellcolor{grey3}$a$          & $c$ & $c$ & $c$ \\ \hline
+  \end{tabular}
+\end{center}
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & \cellcolor{grey3} $1$ & $2$ & $3$ \\ \hline \hline
+    \cellcolor{grey3}$1$          & \cellcolor{grey3}$1$ & \cellcolor{grey3}$1$ & \cellcolor{grey3}$1$ \\ \hline
+    $2$          & $2$ & $2$ & $2$ \\ \hline
+    $3$          & $3$ & $3$ & $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+  Then they would \emph{not} correspond (notice how $a$ and $1$ are in different places in the row and column headers).
+    
+  \end{remark}
+\end{aside}
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & \cellcolor{grey3} $a$ & $b$ & $c$ \\ \hline \hline
+    \cellcolor{grey3}$a$          & \cellcolor{grey3}$a$ & \cellcolor{grey3}$a$ & \cellcolor{grey3}$a$ \\ \hline
+    $b$          & $b$ & $b$ & $b$ \\ \hline
+    $c$          & $c$ & $c$ & $c$ \\ \hline
+  \end{tabular}
+  \hskip 2cm
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & \cellcolor{grey3} $1$ & $2$ & $3$ \\ \hline \hline
+    \cellcolor{grey3}$1$          & \cellcolor{grey3}$1$ & \cellcolor{grey3}$1$ & \cellcolor{grey3}$1$ \\ \hline
+    $2$          & $2$ & $2$ & $2$ \\ \hline
+    $3$          & $3$ & $3$ & $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Next, let's check $b$ and $2$:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $a$ & \cellcolor{grey3} $b$ & $c$ \\ \hline \hline
+    $a$          & $a$ & $a$ & $a$ \\ \hline
+    \cellcolor{grey3} $b$          & \cellcolor{grey3} $b$ & \cellcolor{grey3} $b$ & \cellcolor{grey3} $b$ \\ \hline
+    $c$          & $c$ & $c$ & $c$ \\ \hline
+  \end{tabular}
+  \hskip 2cm
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $1$ & \cellcolor{grey3} $2$ & $3$ \\ \hline \hline
+    $1$          & $1$ & $1$ & $1$ \\ \hline
+    \cellcolor{grey3} $2$          & \cellcolor{grey3} $2$ & \cellcolor{grey3} $2$ & \cellcolor{grey3} $2$ \\ \hline
+    $3$          & $3$ & $3$ & $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Finally, let's check $c$ and $3$:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $a$ & $b$ & \cellcolor{grey3} $c$ \\ \hline \hline
+    $a$          & $a$ & $a$ & $a$ \\ \hline
+    $b$          & $b$ & $b$ & $b$ \\ \hline
+    \cellcolor{grey3} $c$          & \cellcolor{grey3} $c$ & \cellcolor{grey3} $c$ & \cellcolor{grey3} $c$ \\ \hline
+  \end{tabular}
+  \hskip 2cm
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $1$ & $2$ & \cellcolor{grey3} $3$ \\ \hline \hline
+    $1$          & $1$ & $1$ & $1$ \\ \hline
+    $2$          & $2$ & $2$ & $2$ \\ \hline
+    \cellcolor{grey3} $3$          & \cellcolor{grey3} $3$ & \cellcolor{grey3} $3$ & \cellcolor{grey3} $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+We can see that in all of these cases, corresponding elements appear in corresponding positions, so $\func{f}$ does indeed preserve the binary operation.
+
+\end{fexample}
+
+\begin{example}
+
+Let's look at an example of a map that fails to preserve the binary operation. Suppose we have two algebraic structures:
+
+\begin{equation*}
+  \algebra{S} = (\set{A}, \opSymbol/) \hskip 2cm \algebra{T} = (\set{B}, \opSymbol/)
+\end{equation*}
+
+where the sets $\set{A}$ and $\set{B}$ are defined as before:
+
+\begin{equation*}
+  \set{A} = \{ a, b, c \} \hskip 2cm \set{B} = \{ 1, 2, 3 \}
+\end{equation*}
+
+but their Cayley tables are defined like this:
+
+\begin{ponder}
+  Just by looking at these two Cayley tables, can you see how they are different in structure?
+\end{ponder}
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $a$ & $b$ & $c$ \\ \hline \hline
+    $a$          & $a$ & $a$ & $a$ \\ \hline
+    $b$          & $b$ & $b$ & $b$ \\ \hline
+    $c$          & $c$ & $c$ & $c$ \\ \hline
+  \end{tabular}
+  \hskip 2cm
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $1$ & $2$ & $3$ \\ \hline \hline
+    $1$          & $1$ & $2$ & $3$ \\ \hline
+    $2$          & $1$ & $2$ & $3$ \\ \hline
+    $3$          & $1$ & $2$ & $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Suppose now that we have a map $\funcsig{f}{\algebra{S}}{\algebra{T}}$ that is defined similar to before, like this:
+
+\begin{aside}
+  \begin{remark}
+    In other words, here is the mapping:
+    
+    \begin{align*}
+      \func{f}(a) &= 1 \\
+      \func{f}(b) &= 2 \\
+      \func{f}(c) &= 3
+    \end{align*}
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (A) at (-2.675, 1.75) {$\set{A}$};
+  \draw[color=grey3] (-2.75, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (a) at (-3, 1) [label=left:{$a$}] {};
+  \node[dot] (b) at (-2, 0.5) [label=left:{$b$}] {};
+  \node[dot] (c) at (-3, 0) [label=left:{$c$}] {};
+  
+  \node (B) at (2.675, 1.75) {$\set{B}$};
+  \draw[color=grey3] (2.75, 0.5) ellipse (1.5cm and 1cm);
+  \node[dot] (1) at (3, 1) [label=right:{$1$}] {};
+  \node[dot] (2) at (2, 0.5) [label=right:{$2$}] {};
+  \node[dot] (3) at (3, 0) [label=right:{$3$}] {};
+
+  \node (f) at (0, -0.5) {$\func{f}$};
+  \draw[->,space,dashed] (a) to (1);
+  \draw[->,space,dashed] (b) to (2);
+  \draw[->,space,dashed] (c) to (3);
+
+\end{diagram}
+
+Is $\func{f}$ a structure-preserving map? To check, let's compare the Cayley tables. First, let's check $a$ and $1$:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & \cellcolor{grey3} $a$ & $b$ & $c$ \\ \hline \hline
+    \cellcolor{grey3} $a$          & \cellcolor{grey3} $a$ & \cellcolor{grey3} $a$ & \cellcolor{grey3} $a$ \\ \hline
+    $b$          & $b$ & $b$ & $b$ \\ \hline
+    $c$          & $c$ & $c$ & $c$ \\ \hline
+  \end{tabular}
+  \hskip 2cm
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & \cellcolor{grey3} $1$ & $2$ & $3$ \\ \hline \hline
+    \cellcolor{grey3} $1$          & \cellcolor{grey3} $1$ & $2$ & $3$ \\ \hline
+    $2$          & \cellcolor{grey3} $1$ & $2$ & $3$ \\ \hline
+    $3$          & \cellcolor{grey3} $1$ & $2$ & $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+We can see immediately that $a$ and $1$ occupy very different positions in their respective Cayley tables. And this is enough to show us that $\func{f}$ does not preserve the binary operation between these two algebraic structures.
+
+Indeed, it is easy to find an example where $\op{x}{y} = z$ in $\algebra{S}$ but $\op{\func{f}(x)}{\func{f}(y)} \not = \func{f}(z)$ in $\algebra{T}$. For instance, in $\algebra{S}$, this holds:
+
+\begin{equation*}
+  \op{a}{b} = a
+\end{equation*}
+
+Since $\func{f}(a) = 1$ and $\func{f}(b) = 2$, we would expect this to hold in $\algebra{T}$:
+
+\begin{equation*}
+  \op{1}{2} = {1}
+\end{equation*}
+
+\begin{ponder}
+  We have shown that $\func{f}$ is not a structure preserving map from $\algebra{S}$ to $\algebra{T}$. Do you think it's possible to construct some other map from $\algebra{S}$ to $\algebra{T}$ that \emph{is} structure preserving? Why or why not?
+\end{ponder}
+
+But it does not hold in $\algebra{T}$. According to $\algebra{T}$'s Cayley table, this is actually what is correct:
+
+\begin{equation*}
+  \op{1}{2} = 2
+\end{equation*}
+
+So for these two algebraic structures, $\func{f}$ is not a structure preserving map.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Algebraic Isomorphisms}
+
+\begin{terminology}
+  Recall that two structures are $\vocab{isomorphic}$ if they have the same structure ``under the hood,'' and differ only on the surface, in the names of their elements. A function that translates one structure to another, and preserves all of the structure, is called an \vocab{isomorphism}. For sets, an isomorphism is simply any bijective function (see \chapterref{ch:function-isomorphism}). For graphs, an isomorphism is a bijective function that preserves all the connections (see \chapterref{ch:graph-isomorphisms}). For algebraic structures, it is a bijective function that preserves the structure of the binary operation.
+\end{terminology}
+
+\newthought{We can now define isomorphisms} for algebraic structures. An \vocab{isomorphism} between algebraic structures is simply a \emph{bijective}, \emph{structure preserving} map. Let's put this down as a definition:
+
+\begin{fdefinition}[Algebraic Isomorphism]
+  \label{def:algebraic-isomorphism}
+  Given two algebraic structures $\algebra{S} = (\set{A}, \opSymbol/)$ and $\algebra{T} = (\set{B}, \opSymbol/)$, we will say that a map $\funcsig{f}{\algebra{S}}{\algebra{T}}$ is an \vocab{isomorphism} under two conditions: (1) $\func{f}$ is a structure preserving map, and (2) $\func{f}$ is bijective.
+\end{fdefinition}
+
+Why do we say that $\func{f}$ must be bijective? We add this condition because constructing a structure preserving map from $\algebra{S}$ to $\algebra{T}$ is not enough to guarantee that $\algebra{S}$ and $\algebra{T}$ have \emph{exactly} the same structure, under the hood. 
+
+After all, if $\algebra{T}$ is bigger than $\algebra{S}$, we still might be able to map $\algebra{S}$ into a smaller part of $\algebra{T}$, and preserve the binary operation in that smaller part of $\algebra{T}$.
+
+But in such a case, even though $\func{f}$ is a structure-preserving map, $\algebra{S}$ and $\algebra{T}$ are clearly not isomorphic. On the contrary, $\algebra{T}$ is bigger, so there are more parts to it! 
+
+\begin{terminology}
+  If we can map an algebraic structure $\algebra{S}$ into a smaller part of a bigger structure $\algebra{T}$ and still preserve the structure of the binary operation in that smaller part of $\algebra{T}$, then we might say that we can \vocab{embed} $\algebra{S}$ in $\algebra{T}$.
+\end{terminology}
+
+If we say that $\func{f}$ must be structure preserving and \emph{also} bijective, then we can guarantee that it will be an isomorphism. For a bijective function can only be constructed between two sets that are exactly the same size. 
+
+Hence, if we can construct a bijective, structure preserving map between $\algebra{S}$ and $\algebra{T}$, then that means their binary operations are parallel, and neither one has more elements than the other. The two structures are exact twins, apart from the names of their elements.
+
+Whenever two algebraic structures are twins like this, we say they are \vocab{isomorphic}, and we denote that like this:
+
+\begin{equation*}
+  \algebra{S} \isomorphic/ \algebra{T}
+\end{equation*}
+
+Let's put this down in a definition.
+
+\begin{terminology}
+  If it is possible to construct an \vocab{isomorphism} between two algebraic structures $\algebra{S}$ and $\algebra{T}$, then we say $\algebra{S}$ and $\algebra{T}$ are \vocab{isomorphic}, and we write that like this: $\algebra{S} \isomorphic/ \algebra{T}$.
+\end{terminology}
+
+\begin{fdefinition}[Isomorphic Algebraic Structures]
+  \label{def:isomorphic-algebraic-structures}
+  Given two algebraic structures $\algebra{S} = (\set{A}, \opSymbol/)$ and $\algebra{T} = (\set{B}, \opSymbol/)$, we will say that $\algebra{S}$ and $\algebra{T}$ are \vocab{isomorphic} when we can construct an isomorphism $\funcsig{f}{\algebra{S}}{\algebra{T}}$ between them. To denote that $\algebra{S}$ and $\algebra{T}$ are isomorphic, we will write this: $\algebra{S} \isomorphic/ \algebra{T}$.
+\end{fdefinition}
+
+\begin{example}
+
+The algebraic structures $\algebra{S}$ and $\algebra{T}$ from \exampleref{ex:algebraic-isomorphism} are isomorphic. As we saw in that example, the function $\func{f}$ is a structure preserving map because it preserves the structure of their Cayley tables. But $\func{f}$ is also bijective: it maps each element from $\set{A}$ to an element in $\set{B}$ in an exact, one-to-one, reversible way. 
+
+Thus, $\func{f}$ is an isomorphism, and because we were able to construct an isomorphism between $\algebra{S}$ and $\algebra{T}$, we can conclude that they are isomorphic: $\algebra{S} \isomorphic/ \algebra{T}$. These two structures are essentially the very same, apart from the names of their elements.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we looked at \vocab{isomorphisms} between algebraic structures.
+
+\begin{itemize}
+
+  \item If we have two algebraic structures $\algebra{S}$ and $\algebra{T}$, we can construct a \vocab{map} (i.e., a \vocab{function}) $\func{f}$ from $\algebra{S}$ to $\algebra{T}$ simply by mapping the carrier set of $\algebra{S}$ to the carrier set of $\algebra{T}$. The signature of $\func{f}$ is this: $\funcsig{f}{\algebra{S}}{\algebra{T}}$.
+  
+  \item A map $\funcsig{f}{\algebra{S}}{\algebra{T}}$ is a \vocab{structure preserving} map if it preserves the binary operation: if $\op{x}{y} = z$ in $\algebra{S}$, then $\op{\func{f}(x)}{\func{f}(y)} \func{f}(z)$ in $\algebra{T}$.
+
+  \item We can check if a map $\funcsig{f}{\algebra{S}}{\algebra{T}}$ is structure preserving by checking the Cayley tables of the two structures. If $\func{f}$ does preserve the structure, then corresponding elements will appear in corresponding positions in the two tables.
+  
+  \item An \vocab{isomorphism} is a bijective, structure preserving map between structures. If we can construct an isomorphism between structures $\algebra{S}$ and $\algebra{T}$, then we may conclude that $\algebra{S}$ and $\algebra{T}$ are \vocab{isomorphic}, i.e., they are essentially the same, apart from the names of their elements. To denote that $\algebra{S}$ and $\algebra{T}$ are isomorphic, we write this: $\algebra{S} \isomorphic/ \algebra{T}$.
+
+\end{itemize}
+
+
+\end{document}

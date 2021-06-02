@@ -1,0 +1,821 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Properties of Relations}
+\label{ch:properties-of-relations}
+
+\newtopic{I}{n \chapterref{ch:relations}}, we looked at \vocab{relations}. A relation $\R{R}$ from a set $\set{A}$ to a set $\set{B}$ is any pairing of elements from $\set{A}$ and $\set{B}$ (where the first item in each pairing comes from $\set{A}$ and the second comes from $\set{B}$). We can construct relations from one set $\set{A}$ to a another set $\set{B}$, but we can also construct relations from a set $\set{A}$ to itself. We might call this latter type of relation a \vocab{self}-relation, because it relates a set to itself. 
+
+\begin{aside}
+  \begin{remark}
+    Not every (self-)relation has reflexivity, symmetry, or transitivity properties. Only some of them do. But they are noteworthy when they are present.
+  \end{remark}
+\end{aside}
+
+Self-relations can have certain properties or characteristics that are noteworthy. In this chapter, we will introduce three special properties that self-relations can have. These properties are called \vocab{reflexivity}, \vocab{symmetry}, and \vocab{transitivity}. Not every self-relation will have these properties, but some do. Since we will be talking about self-relations in this chapter, I will drop the prefix ``self-'' and just say ``relation,'' though of course I mean ``self-relation.''
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Reflexivity}
+
+\begin{terminology}
+  A relation on $\set{A}$ is \vocab{reflexive} if it relates every item in $\set{A}$ to itself.
+\end{terminology}
+
+A relation is \vocab{reflexive} if it relates every item in the domain to itself. Consider the relation ``is the same age as.'' Suppose we have a set of people:
+
+\begin{diagram}
+
+  \node[dot] (Alice) at (-4, 0.5) [label=below:{$\e{Alice}$}] {};
+  \node[dot] (Bob) at (-2.75, -0.5) [label=below:{$\e{Bob}$}] {};
+  \node[dot] (Carol) at (-0.5, -0.25) [label=below:{$\e{Carol}$}] {};
+  \node[dot] (Diane) at (1, 0.25) [label=above:{$\e{Diane}$}] {};
+  \node[dot] (Elie) at (3, -0.25) [label=below:{$\e{Elie}$}] {};
+  \node[dot] (Fiona) at (4, 0.15) [label=above:{$\e{Fiona}$}] {};
+  
+\end{diagram}
+
+Let's add arrows to show who is the same age as who. Let's say that Diane and Carol are the same age, as are Fiona and Elie:
+
+\begin{aside}
+  \begin{remark}
+    If Diane is the same age as Carol, then Carol is the same age as Diane. Hence, there are two arrows between Carol and Diane, one going each way. Likewise for Fiona and Elie.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (Alice) at (-4, 0.5) [label=below:{$\e{Alice}$}] {};
+  \node[dot] (Bob) at (-2.75, -0.5) [label=below:{$\e{Bob}$}] {};
+  \node[dot] (Carol) at (-0.5, -0.25) [label=below:{$\e{Carol}$}] {};
+  \node[dot] (Diane) at (1, 0.25) [label=above:{$\e{Diane}$}] {};
+  \node[dot] (Elie) at (3, -0.25) [label=below:{$\e{Elie}$}] {};
+  \node[dot] (Fiona) at (4, 0.15) [label=above:{$\e{Fiona}$}] {};
+
+  \draw[->,space] (Carol) to[out=45,in=180] (Diane);
+  \draw[->,space] (Diane) to[out=235,in=0] (Carol);
+  \draw[->,space] (Elie) to[out=45,in=180] (Fiona);
+  \draw[->,space] (Fiona) to[out=235,in=0] (Elie);
+  
+\end{diagram}
+
+But also, each person is the same age \emph{as themself}! So, we need to add self-
+loops to each dot:
+
+\begin{aside}
+  \begin{remark}
+    Alice is the same age as Alice (herself), Bob is the same age as Bob (himself), Carol is the same age as Carol, and so on for each person in the set.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (Alice) at (-4, 0.5) [label=below:{$\e{Alice}$}] {};
+  \node[dot] (Bob) at (-2.75, -0.5) [label=below:{$\e{Bob}$}] {};
+  \node[dot] (Carol) at (-0.5, -0.25) [label=below:{$\e{Carol}$}] {};
+  \node[dot] (Diane) at (1, 0.25) [label=above:{$\e{Diane}$}] {};
+  \node[dot] (Elie) at (3, -0.25) [label=below:{$\e{Elie}$}] {};
+  \node[dot] (Fiona) at (4, 0.15) [label=above:{$\e{Fiona}$}] {};
+
+  \draw[->,space] (Alice) to[looseness=25] (Alice);
+  \draw[->,space] (Bob) to[looseness=25] (Bob);
+  \draw[->,space] (Carol) to[looseness=25,out=80,in=165] (Carol);
+  \draw[->,space] (Diane) to[looseness=25,out=270,in=350] (Diane);
+  \draw[->,space] (Elie) to[looseness=25,out=80,in=165] (Elie);
+  \draw[->,space] (Fiona) to[looseness=25,out=270,in=350] (Fiona);
+
+  \draw[->,space] (Carol) to[out=45,in=180] (Diane);
+  \draw[->,space] (Diane) to[out=235,in=0] (Carol);
+  \draw[->,space] (Elie) to[out=45,in=180] (Fiona);
+  \draw[->,space] (Fiona) to[out=235,in=0] (Elie);
+  
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    The word ``reflexive'' means ``refers back to oneself.'' In grammar, a reflexive verb is one whose direct object and subject are the same, e.g., the verb ``kicked'' in the sentence ``John kicked himself.''
+  \end{remark}
+\end{aside}
+
+In this relation, every point is connected to itself. So, if the relation is called $\R{R}$ and the set is called $\set{A}$, then this is true:
+
+\begin{equation*}
+  \R{R}(x, x) \text{ for every } x \in \set{A}
+\end{equation*}
+
+That is to say, for each item $x$ in the set $\set{A}$, the relation $\R{R}$ pairs that $x$ up with itself. Such a relation is a \emph{reflexive} relation.
+
+In pictures, what this means is that at each point $x$, I can travel around a single self-looping arrow to go from $x$ back to $x$.
+
+We can use this observation to write down a formal definition of a reflexive relation. Let's write it out like this:
+
+\begin{fdefinition}[Reflexive relations]
+  \label{def:reflexive-relation}
+  For any set $\set{A}$ and relation $\Rsig{R}{\set{A}}{\set{A}}$, we will say that $\R{R}$ is \vocab{reflexive} if $\R{R}(x, x)$ for every $x$ in $\set{A}$. 
+\end{fdefinition}
+
+\begin{fexample}
+
+Here is an example of a reflexive relation:
+
+\begin{aside}
+  \begin{remark}
+    Notice that this relation is identical to the \vocab{identity function} for $\set{A}$, i.e., $\idfunc{id}{\set{A}}$, because it maps each item to itself. Every identity function can be seen as an example of a reflexive relation.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (0, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (0.5, 0.75) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-0.75, -0.15) [label=left:{$b$}] {};
+  \node[dot] (k3) at (0.25, -0.65) [label=left:{$c$}] {};
+  \draw[color=gray] (0, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (R) at (3, 0) {$\R{R}$};
+  \draw[->,spaced] (k1) to[looseness=55,out=0, in=90] (k1);
+  \draw[->,spaced] (k2) to[looseness=55,out=120, in=230] (k2);
+  \draw[->,spaced] (k3) to[looseness=55,out=310, in=25] (k3);
+
+\end{diagram}
+
+We can see here that each item in $\set{A}$ is related to itself:
+
+\begin{equation*}
+  \R{R}(a, a) \hskip 2cm \R{R}(b, b) \hskip 2cm \R{R} (c, c)
+\end{equation*}
+
+Note, though, that each item has only one arrow coming out of it. 
+
+\end{fexample}
+
+\begin{fexample}
+
+Here is an example of another reflexive relation, which has more arrows: 
+
+\begin{diagram}
+
+  \node (domain) at (0, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (0.5, 0.75) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-0.75, -0.15) [label=left:{$b$}] {};
+  \node[dot] (k3) at (0.25, -0.65) [label=left:{$c$}] {};
+  \draw[color=gray] (0, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (R) at (3, 0) {$\R{S}$};
+  \draw[->,spaced] (k1) to[looseness=55,out=0, in=90] (k1);
+  \draw[->,spaced] (k2) to[looseness=55,out=120, in=230] (k2);
+  \draw[->,spaced] (k3) to[looseness=55,out=310, in=25] (k3);
+  \draw[->,space] (k1) to[out=300,in=55] (k3);
+  \draw[->,space] (k2) to[out=340, in=250] (k1);
+  
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    A reflexive relation can have \vocab{other arrows} besides the reflexive ones (self-loops).
+  \end{remark}
+\end{aside}
+
+Even though this relation has more arrows than the previous one, it is still a reflexive relation, because each item in $\set{A}$ has an arrow that loops back to itself.
+
+\end{fexample}
+
+\begin{example}
+
+Here is a relation that is \emph{not} reflexive:
+
+\begin{aside}
+  \begin{remark}
+    If even a single item in the set is missing a self-loop, then the relation fails to qualify as a reflexive relation.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (domain) at (0, 2) {$\set{A}$}; 
+  \node[dot] (k1) at (0.5, 0.75) [label=left:{$a$}] {};
+  \node[dot] (k2) at (-0.75, -0.15) [label=left:{$b$}] {};
+  \node[dot] (k3) at (0.25, -0.65) [label=left:{$c$}] {};
+  \draw[color=gray] (0, 0) ellipse (1.5cm and 1.5cm);
+
+  \node (R) at (3, 0) {$\R{S}$};
+  \draw[->,spaced] (k2) to[looseness=55,out=120, in=230] (k2);
+  \draw[->,spaced] (k3) to[looseness=55,out=310, in=25] (k3);
+  \draw[->,space] (k1) to[out=300,in=55] (k3);
+  \draw[->,space] (k2) to[out=340, in=250] (k1);
+  
+\end{diagram}
+
+This is not a reflexive relation because although $b$ and $c$ are related to themselves, $a$ is not related to itself. Hence, this fails to be a reflexive relation.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Reflexivity on a Grid}
+
+Recall that we can think of a relation as a \vocab{set of pairs}, which we have selected from the \vocab{product}. We can see this visually if we draw the grid, and highlight the pairs in our relation on the grid. For instance, suppose we have this relation:
+
+\begin{aside}
+  \begin{remark}
+    Recall that the \vocab{product} of two sets is the set of all possible pairings of elements from those two sets. A product is easily represented as a grid.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \R{R} = \{ (0,0), (3, 0), (1, 2), (2, 3) \}
+\end{equation*}
+
+We can depict this on a grid by highlighting the pairs:
+
+\begin{aside}
+  \begin{remark}
+    To depict a relation on a grid, we can highlight just those pairs that are present in the relation at hand.
+  \end{remark}
+\end{aside}
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c |}
+    \hline
+    ~   & $0$      & $1$      & $2$      & $3$      & $\ldots$ \\ \hline
+    $0$ & \textcolor{vocabcolor}{$\mathbf{(0, 0)}$} & $(0, 1)$ & $(0, 2)$ & $(0, 3)$ & $\ldots$ \\ \hline
+    $1$ & $(1, 0)$ & $(1, 1)$ & \textcolor{vocabcolor}{$\mathbf{(1, 2)}$} & $(1, 3)$ & $\ldots$ \\ \hline
+    $2$ & $(2, 0)$ & $(2, 1)$ & $(2, 2)$ & \textcolor{vocabcolor}{$\mathbf{(2, 3)}$} & $\ldots$ \\ \hline
+    $3$ & \textcolor{vocabcolor}{$\mathbf{(3, 0)}$} & $(3, 1)$ & $(3, 2)$ & $(3, 3)$ & $\ldots$ \\ \hline
+    $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ \\ \hline                
+  \end{tabular}
+\end{center}
+
+Reflexive relations are visibly noticeable on a grid, because the \vocab{diagonal} will be highlighted. Why is that? Because the diagonal (from top left to bottom right) is precisely the place where every item is paired with itself. We have $(0, 0)$, then $(1, 1)$, then $(2, 2)$, and so on.
+
+Here is a reflexive relation pictured on the same grid. You can see that the diagonal is highlighted:
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c |}
+    \hline
+    ~   & $0$      & $1$      & $2$      & $3$      & $\ldots$ \\ \hline
+    $0$ & \textcolor{vocabcolor}{$\mathbf{(0, 0)}$} & $(0, 1)$ & $(0, 2)$ & $(0, 3)$ & $\ldots$ \\ \hline
+    $1$ & $(1, 0)$ & \textcolor{vocabcolor}{$\mathbf{(1, 1)}$} & $(1, 2)$ & $(1, 3)$ & $\ldots$ \\ \hline
+    $2$ & $(2, 0)$ & $(2, 1)$ & \textcolor{vocabcolor}{$\mathbf{(2, 2)}$} & $(2, 3)$ & $\ldots$ \\ \hline
+    $3$ & $(3, 0)$ & $(3, 1)$ & $(3, 2)$ & \textcolor{vocabcolor}{$\mathbf{(3, 3)}$} & $\ldots$ \\ \hline
+    $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ \\ \hline                
+  \end{tabular}
+\end{center}
+
+\begin{aside}
+  \begin{remark}
+    A reflexive relation pairs up \vocab{every item} with \vocab{itself}. In a grid, the reflexive pairs are on the diagonal, from the top left to the bottom right.
+  \end{remark}
+\end{aside}
+
+There can of course be other pairings in a reflexive relation too. For example, other pairings can be highlighted as well:
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c |}
+    \hline
+    ~   & $0$      & $1$      & $2$      & $3$      & $\ldots$ \\ \hline
+    $0$ & \textcolor{vocabcolor}{$\mathbf{(0, 0)}$} & $(0, 1)$ & $(0, 2)$ & \textcolor{vocabcolor}{$\mathbf{(0, 3)}$} & $\ldots$ \\ \hline
+    $1$ & $(1, 0)$ & \textcolor{vocabcolor}{$\mathbf{(1, 1)}$} & $(1, 2)$ & $(1, 3)$ & $\ldots$ \\ \hline
+    $2$ & $(2, 0)$ & $(2, 1)$ & \textcolor{vocabcolor}{$\mathbf{(2, 2)}$} & $(2, 3)$ & $\ldots$ \\ \hline
+    $3$ & \textcolor{vocabcolor}{$\mathbf{(3, 0)}$} & $(3, 1)$ & $(3, 2)$ & \textcolor{vocabcolor}{$\mathbf{(3, 3)}$} & $\ldots$ \\ \hline
+    $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ \\ \hline                
+  \end{tabular}
+\end{center}
+
+Nevertheless, regardless of whether other pairings are present or not, if the relation is a \vocab{reflexive} relation, then the \vocab{diagonal} will be highlighted.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Symmetry}
+
+\begin{terminology}
+  A relation on $\set{A}$ is \vocab{symmetric} if every pairing goes both ways.
+\end{terminology}
+
+A relation $\R{R}$ is \vocab{symmetric} if each pairing goes both ways. Consider the relation ``is a sibling of.'' Let's take a small set of people:
+
+\begin{diagram}
+
+  \node[dot] (Gemma) at (-4, 0.5) [label=below:{$\e{Gemma}$}] {};
+  \node[dot] (Hal) at (-2.75, -0.5) [label=below:{$\e{Hal}$}] {};
+  \node[dot] (Imogen) at (-0.5, -0.25) [label=below:{$\e{Imogen}$}] {};
+  \node[dot] (Jerry) at (1, 0.25) [label=above:{$\e{Jerry}$}] {};
+  \node[dot] (Kathy) at (3, -0.25) [label=below:{$\e{Kathy}$}] {};
+  
+\end{diagram}
+
+Let's add some arrows to show that, say, Gemma is a sibling of Imogen, and Jerry is a sibling of Kathy:
+
+\begin{aside}
+  \begin{remark}
+    We can see from the picture that Gemma is a sibling of Imogen, and Jerry is a sibling of Kathy. Hal is not a sibling of any of the others in this set.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (Gemma) at (-4, 0.5) [label=below:{$\e{Gemma}$}] {};
+  \node[dot] (Hal) at (-2.75, -0.5) [label=below:{$\e{Hal}$}] {};
+  \node[dot] (Imogen) at (-0.5, -0.25) [label=below:{$\e{Imogen}$}] {};
+  \node[dot] (Jerry) at (1, 0.25) [label=above:{$\e{Jerry}$}] {};
+  \node[dot] (Kathy) at (3, -0.25) [label=below:{$\e{Kathy}$}] {};
+
+  \draw[->,space] (Gemma) to[out=45,in=135] (Imogen);
+  \draw[->,space] (Jerry) to[out=0,in=135] (Kathy);
+  
+\end{diagram}
+
+Of course, to be a sibling goes both ways. If $x$ is a sibling of $y$, then $y$ is a sibling of $x$. So we need to add arrows going the other way too:
+
+\begin{diagram}
+
+  \node[dot] (Gemma) at (-4, 0.5) [label=below:{$\e{Gemma}$}] {};
+  \node[dot] (Hal) at (-2.75, -0.5) [label=below:{$\e{Hal}$}] {};
+  \node[dot] (Imogen) at (-0.5, -0.25) [label=below:{$\e{Imogen}$}] {};
+  \node[dot] (Jerry) at (1, 0.25) [label=above:{$\e{Jerry}$}] {};
+  \node[dot] (Kathy) at (3, -0.25) [label=below:{$\e{Kathy}$}] {};
+
+  \draw[->,space] (Gemma) to[out=45,in=135] (Imogen);
+  \draw[->,space] (Imogen) to[out=180,in=0] (Gemma);
+  \draw[->,space] (Jerry) to[out=0,in=135] (Kathy);
+  \draw[->,space] (Kathy) to[out=180,in=325] (Jerry);
+  
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    If Gemma is a sibling of Imogen, then Imogen is a sibling of Gemma, so there needs to be two arrows, one for each direction. Likewise for Jerry and Kathy.
+  \end{remark}
+\end{aside}
+
+This relation is \vocab{symmetric}, because where there is an arrow going from a point $x$ to a point $y$, there is \emph{also} an arrow going from a $y$ to $x$. So, if the relation is called $\R{R}$, then this is true:
+
+\begin{equation*}
+  \text{ if } \R{R}(x, y) \text{ then } \R{R}(y, x), \text{ for every $x, y \in \set{A}$ }
+\end{equation*}
+
+In pictures, what this means is that if I can go from a point $x$ to a point $y$ by traveling over a single arrow, then I can get from $y$ back to $x$ by traveling on a single arrow too.
+
+We can use this observation to write down a formal definition for symmetric relations. Let's write it out like this:
+
+\begin{aside}
+  \begin{remark}
+    A symmetric relation doesn't need to connect up every point. The rule here is only that whenever $\R{R}$ \emph{does} connect a point $x$ to a point $y$, then it must \emph{also} connect $y$ to $x$, if it is to be symmetric.
+  \end{remark}
+\end{aside}
+
+\begin{fdefinition}[Symmetric relations]
+  \label{def:symmetric-relations}
+  For any set $\set{A}$ and relation $\Rsig{R}{\set{A}}{\set{A}}$, we will say that $\R{R}$ is \vocab{symmetric} if, for any $x, y$ in $\set{A}$, if $\R{R}(x, y)$ then $\R{R}(y, x)$.
+\end{fdefinition}
+
+Notice that we say \emph{if} the relation connects $x$ to $y$, then it must connect $y$ to $x$. A symmetric relation doesn't have to connect every $x$ to every $y$ in order to be symmetric (e.g,. Hal is not connected to anybody above).
+
+\begin{fexample}
+
+Here is an example of a symmetric relation:
+
+\begin{aside}
+  \begin{remark}
+    Each point $x$ that is connected to a point $y$ also has a connection going the other way. Whenever I can travel across a single arrow to get from $x$ to $y$, I can also travel across a single arrow to get from $y$ to $x$. That's what it means to be ``symmetric.''
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (k1) at (-0.35, 0.75) [label=above left:{$a$}] {};
+  \node[dot] (k2) at (-0.8, -0.3) [label=above left:{$b$}] {};
+  \node[dot] (k3) at (0.25, -0.65) [label=below right:{$c$}] {};
+  \node[dot] (k4) at (0.85, 0.35) [label=below right:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (1.5cm and 1.5cm);
+
+  \draw[->,space] (k1) to[out=15, in=120] (k4);
+  \draw[->,space] (k4) to[out=190, in=310] (k1);
+  \draw[->,space] (k2) to[out=15, in=120] (k3);
+  \draw[->,space] (k3) to[out=190, in=310] (k2);
+  
+\end{diagram}
+
+We can see in the picture that every time there is an arrow going from an element $x$ to an element $y$, there is also an arrow going from $y$ to $x$. Not all dots have arrows between them. For instance, $a$ and $b$ are not connected at all. But, for those arrows that \emph{are} connected, the connection is \vocab{symmetric}.
+
+\end{fexample}
+
+\begin{fexample}
+
+Here is an example of a relation that is \emph{not} symmetric:
+
+\begin{aside}
+  \begin{remark}
+    Some points may have a two-way link, like $a$ and $d$ in this picture. But in order to qualify as a symmetric relation, \emph{every} pairing that there is must be two-way, and in this picture, some pairings are only one-way (e.g., $b$ to $d$, or $c$ to $b$).
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (k1) at (-0.35, 0.75) [label=above left:{$a$}] {};
+  \node[dot] (k2) at (-0.8, -0.3) [label=above left:{$b$}] {};
+  \node[dot] (k3) at (0.25, -0.65) [label=below right:{$c$}] {};
+  \node[dot] (k4) at (0.85, 0.35) [label=below right:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (1.5cm and 1.5cm);
+
+  \draw[->,space] (k1) to[out=15, in=120] (k4);
+  \draw[->,space] (k4) to[out=190, in=310] (k1);
+  \draw[->,space] (k2) to[out=15, in=220] (k4);
+  \draw[->,space] (k3) to[out=190, in=310] (k2);
+  
+\end{diagram}
+
+This is not symmetric, because I can travel across a single arrow to go from $c$ to $b$, but not from $b$ to $c$. Likewise, I can go from $b$ to $d$, but not from $d$ back to $b$.
+
+\end{fexample}
+
+\begin{fexample}
+
+Here is an example of a relation that, perhaps surprisingly, is symmetric:
+
+\begin{diagram}
+
+  \node[dot] (a) at (-4, 0.5) [label=below:{$a$}] {};
+  \node[dot] (b) at (-2.75, -0.5) [label=below:{$b$}] {};
+  \node[dot] (c) at (-0.5, -0.25) [label=below:{$c$}] {};
+
+  \draw[->,space] (a) to[looseness=25] (a);
+  \draw[->,space] (b) to[looseness=25] (b);
+  \draw[->,space] (c) to[looseness=25,out=80,in=165] (c);
+  
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Every \vocab{self-loop} from a point $x$ to itself is \vocab{symmetric}, because you can get from $x$ to $x$, and then again from $x$ back to $x$, by following the same loop twice.
+  \end{remark}
+\end{aside}
+
+Why is this symmetric? The rule says: if I can travel over a single arrow to get from a point $x$ to a point $y$, then I can also travel over a single arrow to get from $y$ to $x$. So, what if we ask about $a$ and $a$? Well, I can get from $a$ to $a$ by traveling around its self-loop, but can I then go the other way (from $a$ back to $a$)? Of course! I can get from $a$ back to $a$ by following the loop again.
+
+\end{fexample}
+
+\begin{fexample}
+
+Here is an example of a relation that is \emph{not} symmetric:
+
+\begin{aside}
+  \begin{remark}
+    In order to show that a relation is \emph{not} symmetric, all you have to do is find \vocab{one case} where you can get from a point $x$ to $y$ by traveling over a single arrow, but not back again from $y$ to $x$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (a) at (-4, 0.5) [label=below:{$a$}] {};
+  \node[dot] (b) at (-2.75, -0.5) [label=below:{$b$}] {};
+  \node[dot] (c) at (-0.5, -0.25) [label=below:{$c$}] {};
+
+  \draw[->,space] (a) to[looseness=25] (a);
+  \draw[->,space] (b) to[looseness=25,out=100,in=0] (b);
+  \draw[->,space] (c) to[looseness=25,out=80,in=165] (c);
+  
+  \draw[->,space] (a) to (b);
+  
+\end{diagram}
+
+This is not symmetric because I can get from $a$ to $b$ by traveling over a single arrow, but I cannot get from $b$ back to $a$.
+
+\end{fexample}
+
+\begin{example}
+
+Consider the earlier example of the ``is the same age as'' relation:
+
+\begin{diagram}
+
+  \node[dot] (Alice) at (-4, 0.5) [label=below:{$\e{Alice}$}] {};
+  \node[dot] (Bob) at (-2.75, -0.5) [label=below:{$\e{Bob}$}] {};
+  \node[dot] (Carol) at (-0.5, -0.25) [label=below:{$\e{Carol}$}] {};
+  \node[dot] (Diane) at (1, 0.25) [label=above:{$\e{Diane}$}] {};
+  \node[dot] (Elie) at (3, -0.25) [label=below:{$\e{Elie}$}] {};
+  \node[dot] (Fiona) at (4, 0.15) [label=above:{$\e{Fiona}$}] {};
+
+  \draw[->,space] (Alice) to[looseness=25] (Alice);
+  \draw[->,space] (Bob) to[looseness=25] (Bob);
+  \draw[->,space] (Carol) to[looseness=25,out=80,in=165] (Carol);
+  \draw[->,space] (Diane) to[looseness=25,out=270,in=350] (Diane);
+  \draw[->,space] (Elie) to[looseness=25,out=80,in=165] (Elie);
+  \draw[->,space] (Fiona) to[looseness=25,out=270,in=350] (Fiona);
+
+  \draw[->,space] (Carol) to[out=45,in=180] (Diane);
+  \draw[->,space] (Diane) to[out=235,in=0] (Carol);
+  \draw[->,space] (Elie) to[out=45,in=180] (Fiona);
+  \draw[->,space] (Fiona) to[out=235,in=0] (Elie);
+  
+\end{diagram}
+
+In this picture, we can see that every connection between distinct dots goes both ways, and of course self-loops qualify as symmetric too.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Symmetry on a Grid}
+
+On a grid, a symmetric relation is easy to spot, because every highlighted pair will be reflected \vocab{across the diagonal}. For instance, if $(0, 2)$ is highlighted on the grid, then $(2, 0)$ will be too, and if $(1, 2)$ is highlighted, then $(2, 1)$ will be too.
+
+\begin{aside}
+  \begin{remark}
+    Notice that if you draw a line down the diagonal (from the top left to the bottom right), you will see that every highlighted pair has a mirror image on the other side of that line. If $(0, 2)$ is highlighted on one side of the line, $(2, 0)$ is highlighted on the other side.
+  \end{remark}
+\end{aside}
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c |}
+    \hline
+    ~   & $0$      & $1$      & $2$      & $3$      & $\ldots$ \\ \hline
+    $0$ & $(0, 0)$ & $(0, 1)$ & \textcolor{vocabcolor}{$\mathbf{(0, 2)}$} & $(0, 3)$ & $\ldots$ \\ \hline
+    $1$ & $(1, 0)$ & $(1, 1)$ & \textcolor{vocabcolor}{$\mathbf{(1, 2)}$} & $(1, 3)$ & $\ldots$ \\ \hline
+    $2$ & \textcolor{vocabcolor}{$\mathbf{(2, 0)}$} & \textcolor{vocabcolor}{$\mathbf{(2, 1)}$} & $(2, 2)$ & \textcolor{vocabcolor}{$\mathbf{(2, 3)}$} & $\ldots$ \\ \hline
+    $3$ & $(3, 0)$ & $(3, 1)$ & \textcolor{vocabcolor}{$\mathbf{(3, 2)}$} & $(3, 3)$ & $\ldots$ \\ \hline
+    $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ \\ \hline                
+  \end{tabular}
+\end{center}
+
+In this grid, notice how every highlighted pair is reflected across the diagonal. That lets us know that the relation depicted here is symmetric. It reflects a mirror image, so to speak, across the diagonal.
+
+Self-loops are allowed too, since they sit right at the diagonal reflection line. For instance:
+
+\begin{aside}
+  \begin{remark}
+    Self-loops count as symmetric, because the mirror image of $(x, x)$ is just $(x, x)$. For instance, the mirror image of $(2, 2)$ is $(2, 2)$.
+  \end{remark}
+\end{aside}
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c |}
+    \hline
+    ~   & $0$      & $1$      & $2$      & $3$      & $\ldots$ \\ \hline
+    $0$ & \textcolor{vocabcolor}{$\mathbf{(0, 0)}$} & $(0, 1)$ & \textcolor{vocabcolor}{$\mathbf{(0, 2)}$} & $(0, 3)$ & $\ldots$ \\ \hline
+    $1$ & $(1, 0)$ & \textcolor{vocabcolor}{$\mathbf{(1, 1)}$} & \textcolor{vocabcolor}{$\mathbf{(1, 2)}$} & $(1, 3)$ & $\ldots$ \\ \hline
+    $2$ & \textcolor{vocabcolor}{$\mathbf{(2, 0)}$} & \textcolor{vocabcolor}{$\mathbf{(2, 1)}$} & \textcolor{vocabcolor}{$\mathbf{(2, 2)}$} & \textcolor{vocabcolor}{$\mathbf{(2, 3)}$} & $\ldots$ \\ \hline
+    $3$ & $(3, 0)$ & $(3, 1)$ & \textcolor{vocabcolor}{$\mathbf{(3, 2)}$} & $(3, 3)$ & $\ldots$ \\ \hline
+    $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ \\ \hline                
+  \end{tabular}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Transitivity}
+
+\begin{terminology}
+  A relation on $\set{A}$ is \vocab{transitive} when, if $x$ is connected to $y$ and $y$ is connected to $z$, then $x$ is connected to $z$ too.
+\end{terminology}
+
+A relation $\R{R}$ is \vocab{transitive} when this holds true of it: if $x$ is connected to $y$ and $y$ is connected to $z$, then $x$ is also connected to $z$. Consider the relation ``is shorter than.'' Suppose we have a small set of people:
+
+\begin{diagram}
+
+  \node[dot] (Lem) at (-4, 0.5) [label=above:{$\e{Lem}$}] {};
+  \node[dot] (Manuel) at (-2.75, -0.5) [label=below:{$\e{Manuel}$}] {};
+  \node[dot] (Naan) at (-0.5, -0.25) [label=below:{$\e{Naan}$}] {};
+  \node[dot] (Ollie) at (1, 0.25) [label=below:{$\e{Ollie}$}] {};
+  \node[dot] (Penny) at (3, -0.25) [label=below:{$\e{Penny}$}] {};
+
+\end{diagram}
+
+Suppose Lem is shorter than Manuel, and Manuel is shorter than Naan:
+
+\begin{aside}
+  \begin{remark}
+    Notice that we have a chain of two arrows here: we have one link $\e{Lem} \mapsto \e{Manuel}$, connected directly to another link $\e{Manuel} \mapsto \e{Naan}$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (Lem) at (-4, 0.5) [label=above:{$\e{Lem}$}] {};
+  \node[dot] (Manuel) at (-2.75, -0.5) [label=below:{$\e{Manuel}$}] {};
+  \node[dot] (Naan) at (-0.5, -0.25) [label=below:{$\e{Naan}$}] {};
+  \node[dot] (Ollie) at (1, 0.25) [label=below:{$\e{Ollie}$}] {};
+  \node[dot] (Penny) at (3, -0.25) [label=below:{$\e{Penny}$}] {};
+
+  \draw[->,space] (Lem) to (Hal);
+  \draw[->,space] (Hal) to (Imogen);
+  
+\end{diagram}
+
+Well, if Lem is shorter than Manuel, and Manuel is shorter than Naan, then Lem must \emph{also} be shorter than Naan. So we need to add an arrow to show that too:
+
+\begin{aside}
+  \begin{remark}
+    Notice that for the two-arrow chain, we connect the start-point up to the end-point. We have $\e{Lem} \mapsto \e{Manuel}$ and $\e{Manuel} \mapsto \e{Naan}$, and then also $\e{Lem} \mapsto \e{Naan}$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (Lem) at (-4, 0.5) [label=above:{$\e{Lem}$}] {};
+  \node[dot] (Manuel) at (-2.75, -0.5) [label=below:{$\e{Manuel}$}] {};
+  \node[dot] (Naan) at (-0.5, -0.25) [label=below:{$\e{Naan}$}] {};
+  \node[dot] (Ollie) at (1, 0.25) [label=below:{$\e{Ollie}$}] {};
+  \node[dot] (Penny) at (3, -0.25) [label=below:{$\e{Penny}$}] {};
+
+  \draw[->,space] (Lem) to (Hal);
+  \draw[->,space] (Hal) to (Imogen);
+  \draw[->,spaced] (Lem) to (Naan);
+  
+\end{diagram}
+
+This is an example of a \vocab{transitive} relation. The basic idea is that the connections propagate up the chain. If Lem is shorter than Manuel, and then Manuel is shorter than Naan, then the connection propagates from Manuel up to Naan too.
+
+We can put it like this:
+
+\begin{equation*}
+  \text{ if } \R{R}(x, y) \text{ and } \R{R}(y, z) \text{ then } \R{R}(x, z), \text{ for any $x, y, z \in \set{A}$ }
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    Whenever we have a two-arrow chain ($x \mapsto y$ and $y \mapsto z$), the start-point $x$ is also connected up to the end-point $z$ (i.e., $x \mapsto z$).
+  \end{remark}
+\end{aside}
+
+If we add more links onto the end of the chain, it continues to propagate, with more and more arrows. For example, suppose that Naan is shorter than Ollie:
+
+\begin{diagram}
+
+  \node[dot] (Lem) at (-4, 0.5) [label=above:{$\e{Lem}$}] {};
+  \node[dot] (Manuel) at (-2.75, -0.5) [label=below:{$\e{Manuel}$}] {};
+  \node[dot] (Naan) at (-0.5, -0.25) [label=below:{$\e{Naan}$}] {};
+  \node[dot] (Ollie) at (1, 0.25) [label=below:{$\e{Ollie}$}] {};
+  \node[dot] (Penny) at (3, -0.25) [label=below:{$\e{Penny}$}] {};
+
+  \draw[->,space] (Lem) to (Hal);
+  \draw[->,space] (Hal) to (Imogen);
+  \draw[->,spaced] (Lem) to (Naan);
+  \draw[->,space] (Naan) to (Ollie);
+  
+\end{diagram}
+
+Well, if that is true, then \emph{Lem} is shorter than Ollie too:
+
+\begin{diagram}
+
+  \node[dot] (Lem) at (-4, 0.5) [label=above:{$\e{Lem}$}] {};
+  \node[dot] (Manuel) at (-2.75, -0.5) [label=below:{$\e{Manuel}$}] {};
+  \node[dot] (Naan) at (-0.5, -0.25) [label=below:{$\e{Naan}$}] {};
+  \node[dot] (Ollie) at (1, 0.25) [label=below:{$\e{Ollie}$}] {};
+  \node[dot] (Penny) at (3, -0.25) [label=below:{$\e{Penny}$}] {};
+
+  \draw[->,space] (Lem) to (Hal);
+  \draw[->,space] (Hal) to (Imogen);
+  \draw[->,spaced] (Lem) to (Naan);
+  \draw[->,space] (Naan) to (Ollie);
+  \draw[->,spaced] (Lem) to (Ollie);
+    
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    A transitive relation propagates up the chain. So each point lower in the chain needs to be connected to each point later in the chain. In this case, Lem needs to be connected to Manuel, Naan, and Ollie; Manuel needs to be connected to Naan and Ollie; and Naan needs to be connected to Ollie. As an exercise, draw an arrow from Ollie to Penny, and then fill in all the other arrows that are needed to propagate everything up the chain.
+  \end{remark}
+\end{aside}
+
+And also, \emph{Manuel} is shorter than Ollie:
+
+\begin{diagram}
+
+  \node[dot] (Lem) at (-4, 0.5) [label=above:{$\e{Lem}$}] {};
+  \node[dot] (Manuel) at (-2.75, -0.5) [label=below:{$\e{Manuel}$}] {};
+  \node[dot] (Naan) at (-0.5, -0.25) [label=below:{$\e{Naan}$}] {};
+  \node[dot] (Ollie) at (1, 0.25) [label=below:{$\e{Ollie}$}] {};
+  \node[dot] (Penny) at (3, -0.25) [label=below:{$\e{Penny}$}] {};
+
+  \draw[->,space] (Lem) to (Hal);
+  \draw[->,space] (Hal) to (Imogen);
+  \draw[->,spaced] (Lem) to (Naan);
+  \draw[->,space] (Naan) to (Ollie);
+  \draw[->,spaced] (Lem) to (Ollie);
+  \draw[->,space] (Manuel) to[out=45,in=155] (Ollie);
+    
+\end{diagram}
+
+If you look carefully at this picture, you will notice that for every two-arrow chain, the start-point is also connected up to the end-point. That's what it means to be transitive. 
+
+Let's write this down as a definition:
+
+\begin{fdefinition}[Transitive relations]
+  \label{def:transitive-relations}
+  For any set $\set{A}$ and relation $\Rsig{R}{\set{A}}{\set{A}}$, we will say that $\R{R}$ is \vocab{transitive} if, for any $x, y, z$ in $\set{A}$, if $\R{R}(x, y)$ and $\R{R}(y, z)$ then $\R{R}(x, z)$.
+\end{fdefinition}
+
+\begin{fexample}
+
+Here is an example of a symmetric relation:
+
+\begin{aside}
+  \begin{remark}
+    There is only one two-arrow chain in this picture: the one made from the arrow from $a$ to $b$ and the arrow from $b$ to $c$. So we only need to check this one two-arrow chain, to figure out if this relation is transitive. If there were other two-arrow chains in the picture, we would have to check each of them, in order to figure out if the relation is transitive. A relation is transitive only if it connects the start-point and end-point of \emph{every} two-arrow chain.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (k1) at (0, 0.85) [label=right:{$a$}] {};
+  \node[dot] (k2) at (-0.8, -0.3) [label=left:{$b$}] {};
+  \node[dot] (k3) at (0.25, -0.75) [label=right:{$c$}] {};
+  \node[dot] (k4) at (0.85, 0.25) [label=below:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (1.5cm and 1.5cm);
+
+  \draw[->,space] (k1) to[out=190, in=100] (k2);
+  \draw[->,space] (k2) to[out=310, in=180] (k3);
+  \draw[->,space] (k1) to[out=210, in=150] (k3);
+  
+\end{diagram}
+
+We can see that there is a two-arrow chain here: $a$ is connected to $b$, and $b$ is connected to $c$. We can also see that the start-point of that chain $a$ is connected to the end-point of that chain $c$. And there are no other two-arrow chains in this picture, so we can conclude that this relation is a transitive relation.
+
+\end{fexample}
+
+\begin{fexample}
+
+Here is another example of a transitive relation:
+
+\begin{diagram}
+
+  \node[dot] (k1) at (0, 0.85) [label=right:{$a$}] {};
+  \node[dot] (k2) at (-0.8, -0.3) [label=left:{$b$}] {};
+  \node[dot] (k3) at (0.25, -0.75) [label=below:{$c$}] {};
+  \node[dot] (k4) at (0.9, 0.25) [label=right:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (1.5cm and 1.5cm);
+
+  \draw[->,space] (k1) to[out=190, in=100] (k2);
+  \draw[->,space] (k2) to[out=310, in=180] (k3);
+  \draw[->,space] (k1) to[out=210, in=150] (k3);
+  \draw[->,space] (k3) to[out=15, in=270] (k4);
+  \draw[->,space] (k2) to[out=340, in=240] (k4);
+  \draw[->,space] (k1) to[out=240, in=210] (k4);
+  
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Note that, in this picture, \emph{every} two-arrow chain has another arrow connecting its start-point with its end-point. That is the defining characteristic of a transitive relation.
+  \end{remark}
+\end{aside}
+
+In this relation, we have \emph{four} two-arrow chains: 
+
+\begin{align*}
+  \text{$a$ to $b$, $b$ to $c$} \hskip 1.5cm 
+  \text{$b$ to $c$, $c$ to $d$} \\
+  \text{$a$ to $b$, $b$ to $d$} \hskip 1.5cm
+  \text{$a$ to $c$, $c$ to $d$}
+\end{align*}
+
+A transitive relation must connect up the start-point and end-point of every two-arrow chain, and we can see that this does that. It connects $a$ to $c$ for the first chain, it connects $b$ to $d$ for the second chain, and it connects $a$ to $d$ for the third and fourth chains.
+
+\end{fexample}
+
+\begin{example}
+
+Here is an example of a relation that is \emph{not} transitive:
+
+\begin{diagram}
+
+  \node[dot] (k1) at (0, 0.85) [label=right:{$a$}] {};
+  \node[dot] (k2) at (-0.8, -0.3) [label=left:{$b$}] {};
+  \node[dot] (k3) at (0.25, -0.75) [label=right:{$c$}] {};
+  \node[dot] (k4) at (0.85, 0.25) [label=below:{$d$}] {};
+  \draw[color=gray] (0, 0) ellipse (1.5cm and 1.5cm);
+
+  \draw[->,space] (k1) to[out=190, in=100] (k2);
+  \draw[->,space] (k2) to[out=310, in=180] (k3);
+  
+\end{diagram}
+
+Here we have a two-arrow chain: $a$ to $b$, $b$ to $c$. However, the start-point $a$ is not connected to the end-point $c$, so this is not a transitive relation.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about three properties or characteristics that self-relations can have: reflexivity, symmetry, and transitivity. 
+
+\begin{itemize}
+
+  \item A relation $\R{R}$ on a set $\set{A}$ is \vocab{reflexive} if it relates each item in $\set{A}$ to itself. That is, it is reflexive if $\R{R}(x, x)$, for every $x \in \set{A}$.
+  
+  \item A relation $\R{R}$ on a set $\set{A}$ is \vocab{symmetric} if every pairing it makes in $\set{A}$ is two-way. That is, it is symmetric if $\R{R}(x, y)$ then $\R{R}(y, x)$, for every $x, y \in \set{A}$ (even if we pick the same point for $x$ and $y$).
+  
+  \item A relation $\R{R}$ on a set $\set{A}$ is \vocab{transitive} if it connects up the start- and end-point of every two-arrow chain. That is, it is transitive if, for every $x, y, z \in \set{A}$, if $\R{R}(x, y)$ and $\R{R}(y, z)$ then $\R{R}(x, z)$.
+
+\end{itemize}
+
+\end{document}

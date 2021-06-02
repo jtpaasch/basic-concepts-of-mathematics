@@ -1,0 +1,609 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Products}
+\label{ch:products}
+
+\newtopic{W}{e learned} in the last chapter how to build the \vocab{powerset} of any set. The powerset is the set of all subsets of the set in question.
+
+In this chapter, we will talk about a further (but very important) way to build a special kind of set out of other sets. This particular kind of set is called a \vocab{product}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Grids}
+
+\newthought{Take any two sets $A$ and $B$}. We can use these two sets to lay out a grid. For example, consider these two sets:
+
+\begin{equation*}
+  A = \{ 1, 2 \} \hskip 2cm B = \{ a, b \}
+\end{equation*}
+
+Let's build a grid from these two sets. To do that, let's put all the items from $A$ down the left side, and let's put all the items from $B$ across the top:
+
+\begin{aside}
+  \begin{remark}
+    By convention, when we build grids, we make the rows grow downwards. But there is no reason we could not let the rows grow upwards, like this:
+    
+    \begin{center}
+      \begin{tabular}{| c | c | c |}
+        \hline
+        2 & ~ & ~ \\
+        \hline
+        1 & ~ & ~ \\
+        \hline
+        ~ & $a$ & $b$ \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{remark}
+\end{aside}
+
+\begin{center}
+  \begin{tabular}{| c | c | c |}
+    \hline
+    ~ & $a$ & $b$ \\
+    \hline
+    1 & ~ & ~ \\
+    \hline
+    2 & ~ & ~ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\noindent
+This gives us a simple 2 $\times$ 2 grid (rows $\times$ columns), which has 4 squares. We can navigate to any one of the four squares by specifying a row (an item from $A$) and a column (an item from $B$). For example, we can put an ``X'' at row 2, column $b$:
+
+\begin{center}
+  \begin{tabular}{| c | c | c |}
+    \hline
+    ~ & $a$ & $b$ \\
+    \hline
+    1 & ~ & ~ \\
+    \hline
+    2 & ~ & X \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\begin{terminology}
+  A \vocab{coordinate} is a pair of the form $(x, y)$, with $x$ replaced by a row, and $y$ replaced by a column. 
+\end{terminology}
+
+If we think of ``(row, column)'' as a \vocab{coordinate} on our grid, then we can say that our ``X'' is located at the coordinate $(2, b)$. This, of course, is very convenient, because it lets us give each square a name. Let's write the coordinate in each square, just so we can see all of their names:
+
+\begin{center}
+  \begin{tabular}{| c | c | c |}
+    \hline
+    ~ & $a$ & $b$ \\
+    \hline
+    1 & $(1, a)$ & $(1, b)$ \\
+    \hline
+    2 & $(2, a)$ & $(2, b)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+If we switch $A$ and $B$, so that $A$ is the columns and $B$ is the rows, we get this: 
+
+\begin{center}
+  \begin{tabular}{| c | c | c |}
+    \hline
+    ~ & $1$ & $2$ \\
+    \hline
+    a & $(a, 1)$ & $(a, 2)$ \\
+    \hline
+    b & $(b, 1)$ & $(b, 2)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+We say the above grid is a 2 $\times$ 2 grid, which we read out loud as ``a two by two grid.'' What we mean by this is that this is a grid with a certain number of rows, and a certain number of columns (2 rows and 2 columns).
+
+\begin{aside}
+  \begin{remark}
+    We often draw grids like a spreadsheet table, with the cells as boxes that you can fill in with your own writing. But we could just as easily think of \vocab{projecting} the items in $A$ and $B$ outwards, as \vocab{lines}:
+    \begin{diagram}
+      \draw[->] (0, 0) -- (4, 0);
+      \draw[->] (0, -1) -- (4, -1);
+      \draw[->] (1.5, 1) -- (1.5, -2);
+      \draw[->] (2.5, 1) -- (2.5, -2);
+      
+      \node (1) at (0, 0) [label=left:1] {};
+      \node (2) at (0, -1) [label=left:2] {};
+      \node (a) at (1.5, 1) [label=above:{$a$}] {};
+      \node (b) at (2.5, 1) [label=above:{$b$}] {};
+    \end{diagram}
+
+    Then, we can see that these line projections make a grid from the crossed lines, and the cells are actually all of the \vocab{points} where the lines cross:
+    
+    \begin{diagram}
+      \draw[->] (0, 0) -- (4, 0);
+      \draw[->] (0, -1) -- (4, -1);
+      \draw[->] (1.5, 1) -- (1.5, -2);
+      \draw[->] (2.5, 1) -- (2.5, -2);
+      
+      \node (1) at (0, 0) [label=left:1] {};
+      \node (2) at (0, -1) [label=left:2] {};
+      \node (a) at (1.5, 1) [label=above:{$a$}] {};
+      \node (b) at (2.5, 1) [label=above:{$b$}] {};
+      
+      \node[dot] (1a) at (1.5, 0) [label=above left:{$(1, a)$}] {};
+      \node[dot] (1b) at (2.5, 0) [label=above right:{$(1, b)$}] {};
+      \node[dot] (2a) at (1.5, -1) [label=below left:{$(2, a)$}] {};
+      \node[dot] (2b) at (2.5, -1) [label=below right:{$(2, b)$}] {};
+    \end{diagram}
+  \end{remark}
+\end{aside}
+
+We get the grid by \vocab{crossing} the rows with the columns, so to speak. That is to say, we extend or \vocab{project} the rows outwards and the columns downwards, so that they cross each other. Each cell in the grid is basically just one point where the two projected rows/columns cross. 
+
+So, when we use the ``times'' symbol in ``2 $\times$ 2,'' we don't exactly mean multiplication from arithmetic. We mean something more like \vocab{cross}. And notice that the ``times'' symbol itself is exactly two crossed lines!
+
+However, we can multiply the number of rows by the number of columns, and that will tell us the total number of cells in our grid. In this case, 2 (rows) times 2 (columns) gives us 4 (cells):
+
+\begin{equation*}
+  \mathsf{rows} \times \mathsf{columns} = \mathsf{cells}
+\end{equation*}
+
+So we can use the ``times'' symbol here to mean plain-old multiplication too, when we want to talk about the number of \emph{cells} (or \emph{points}) in the grid. But, usually, when we are talking about grids, we use the ``times'' symbol to mean ``cross,'' so we can read ``2 $\times$ 2'' as ``2 by 2,'' or ``2 crossed with 2,'' or even more simply, just ``2 cross 2.''
+
+A grid is built from $\mathsf{rows} \times \mathsf{columns}$. To \vocab{name a grid}, we can replace ``$\mathsf{rows}$'' and ``$\mathsf{columns}$'' with the sets we use to build them. So, for instance, we can say
+
+\begin{equation*}
+  A \times B
+\end{equation*}
+
+(read that as ``$A$ cross $B$'') to describe the grid we get when we use $A$ for the rows and $B$ for the columns. Likewise, we can say
+
+\begin{equation*}
+  B \times A
+\end{equation*}
+
+(read that as ``$B$ cross $A$'') to describe the grid we get when we use $B$ for the rows and $A$ for the columns.
+
+\begin{fexample}
+
+Consider the following two sets (which are different in size):
+
+\begin{equation*}
+  C = \{ 1, 2 \} \hskip 2cm D = \{ a, b, c, d \}
+\end{equation*} 
+
+Here is the grid of $C \times D$:
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c |}
+    \hline
+    ~ & $a$ & $b$ & $c$ & $d$ \\
+    \hline
+    1 & $(1, a)$ & $(1, b)$ & $(1, c)$ & $(1, d)$ \\
+    \hline
+    2 & $(2, a)$ & $(2, b)$ & $(2, c)$ & $(2, d)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+This is a grid with 2 rows and 4 columns. How many cells are there in total? There are 8, because $2 \times 4$ is $8$.
+
+\end{fexample}
+
+\begin{example}
+
+If we reverse the rows and columns, we get a different grid, namely $D \times C$:
+
+\begin{aside}
+  \begin{remark}
+    When we build a grid from two sets $C$ and $D$, the \vocab{order matters}: $C \times D$ is not the same grid as $D \times C$.
+  \end{remark}
+\end{aside}
+
+\begin{center}
+  \begin{tabular}{| c | c | c |}
+    \hline
+    ~ & $1$ & $2$ \\
+    \hline
+    a & $(a, 1)$ & $(a, 2)$ \\
+    \hline
+    b & $(b, 1)$ & $(b, 2)$ \\
+    \hline
+    c & $(c, 1)$ & $(c, 2)$ \\
+    \hline
+    d & $(d, 1)$ & $(d, 2)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+Notice how this is also a grid with 8 cells in it, but it is obviously quite different from the $C \times D$ grid.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Products}
+
+\newthought{Take two sets $A$ and $B$}, and build their grid. Next, take all the points in that grid (all the coordinate-pairs), and put them into a set. We call this set the \vocab{product} of $A$ and $B$ (synonymously, we can call it the \vocab{cross product} or the \vocab{Cartesian product} of $A$ and $B$, but these are all just synonyms). As an example, consider the sets $A$ and $B$ from above:
+
+\begin{terminology}
+  The \vocab{product} is also called the \vocab{cross product} or the \vocab{Cartesian product}.
+\end{terminology}
+
+\begin{equation*}
+  A = \{ 1, 2 \} \hskip 2cm B = \{ a, b \}
+\end{equation*}
+
+If we build the grid, and take all of the points (i.e., all of the coordinate pairs), we get these:
+
+\begin{equation*}
+  \begin{split}
+    (1, a)  & \hskip 2cm (1, b) \\
+    (2, a) & \hskip 2cm (2, b)
+  \end{split}
+\end{equation*}
+
+Next, let's put all of these pairs into a set. To do that, we simply list them out, and wrap curly braces around them (set-roster notation):
+
+\begin{equation*}
+  \{ (1, a), (2, a), (1, b), (2, b) \}
+\end{equation*}
+
+This is the \vocab{product} of $A$ and $B$, and we name it the same as its grid:
+
+\begin{aside}
+  \begin{notation}
+    The product of sets $A$ and $B$ is written like this: $\product{A}{B}$. Read this out loud as ``the product of $A$ and $B$.'' You can also read it like this: ``$A$ crossed with $B$,'' or even just ``$A$ cross $B$.''
+  \end{notation}
+\end{aside}
+
+\begin{equation*}
+  \product{A}{B}
+\end{equation*}
+
+Hence, we can specify the product of $A$ and $B$ more fully, like this:
+
+\begin{equation*}
+  \product{A}{B} = \{ (1, a), (1, b), (2, a), (2, b) \}
+\end{equation*}
+
+The product is really just a grid, but stripped down to its bare essentials. We get rid of the pictures and geometrical layout, and all we're left with is the set of coordinate-points. That's the product.
+
+Indeed, if we forget about the grid, and just look at what we see on the page before us here, we can see the following:
+
+\begin{aside}
+  \begin{remark}
+    Each pair has two slots: a first slot, and a second slot. Elements from $A$ go in the first slot, and elements from $B$ go in the second slot.
+  \end{remark}
+\end{aside}
+
+\begin{itemize}
+  \item Each element of the set is a pair. A pair is a sequence of two items: so there is a slot for a first item, and then a slot for a second item.
+  \item The first slot is always filled with an element from $A$, the second with an element from $B$.
+  \item Every possible pairing of an element from $A$ and an element from $B$ are in this set. None have been left out.
+\end{itemize}
+
+\begin{aside}
+  \begin{remark}
+    No possible pair is left out of the product of $A$ and $B$. Every combination that we can get by taking something from $A$ first and something from $B$ second is included in the product. This makes sense if we remember that the product is the set of \emph{all} coordinate-pairs from its grid.
+  \end{remark}
+\end{aside}
+
+With all of that said, we have enough to put together a definition.
+
+\begin{fdefinition}[Products]
+  For any sets $A$ and $B$, we will say that the \vocab{product} of $A$ and $B$ is the set of every pair $(x, y)$ that can be constructed by replacing $x$ with an element from $A$ and by replacing $y$ with an element of $B$. To denote the product of $A$ and $B$, we will write this: $\product{A}{B}$.
+\end{fdefinition}
+
+\begin{example}
+
+What about $\product{A}{A}$? We build this product just as the others. We make the pairs by taking one element from the first set (in this case $A$), and another element from the second set (which in this case is $A$ again). Here are all the possible pairs:
+
+\begin{aside}
+  \begin{remark}
+    It may help to visualize the coordinates of the $\product{A}{A}$ grid:
+    \begin{diagram}
+      \draw[->] (0, 0) -- (4, 0);
+      \draw[->] (0, -1) -- (4, -1);
+      \draw[->] (1.5, 1) -- (1.5, -2);
+      \draw[->] (2.5, 1) -- (2.5, -2);
+      
+      \node (1) at (0, 0) [label=left:1] {};
+      \node (2) at (0, -1) [label=left:2] {};
+      \node (1) at (1.5, 1) [label=above:1] {};
+      \node (2) at (2.5, 1) [label=above:2] {};
+      
+      \node[dot] (1a) at (1.5, 0) [label=above left:{$(1, 1)$}] {};
+      \node[dot] (1b) at (2.5, 0) [label=above right:{$(1, 2)$}] {};
+      \node[dot] (2a) at (1.5, -1) [label=below left:{$(2, 1)$}] {};
+      \node[dot] (2b) at (2.5, -1) [label=below right:{$(2, 2)$}] {};
+    \end{diagram}
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \begin{split}
+    (1, 1)  & \hskip 2cm (1, 2) \\
+    (2, 1) & \hskip 2cm (2, 2)
+  \end{split}
+\end{equation*}
+
+Then we put all of these pairs into a set, to get our product:
+
+\begin{equation*}
+  \product{A}{A} = \{ (1, 1), (1, 2), (2, 1), (2, 2) \}
+\end{equation*}
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Cardinality of Products}
+
+\newthought{How big is a product}? That is to say, what is the cardinality of the product of $A$ and $B$?
+
+\begin{equation*}
+  \cardinality{\product{A}{B}} = \text{ ?? }
+\end{equation*}
+
+We know that the number of coordinate pairs in a grid is:
+
+\begin{equation*}
+  \mathsf{rows} \times \mathsf{columns} = \mathsf{coordinates}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    Recall that the cardinality of a set is the number of items in it. The cardinality of the sets in a grid tell us how many rows or columns there are in the grid, because when we build a grid, we put each element from the first set at the head of its own row, and we put each element from the second set at the head of its own column. Hence, there's going to be as many rows as there are elements in the first set, and there are going to be as many columns as there are elements in the second set.
+  \end{remark}
+\end{aside}
+
+How do we know the number of rows? It's the number of elements in $A$. In other words, it's the \emph{cardinality} of $A$. Likewise for the number of columns: it's the number of elements in $B$, i.e., the \emph{cardinality} of $B$. Hence, we can calculate the cardinality of any product by multiplying the cardinality of the two sets together:
+
+\begin{equation*}
+  \cardinality{\product{A}{B}} = \cardinality{A} \times \cardinality{B}
+\end{equation*}
+
+\begin{example}
+
+Consider these sets:
+
+\begin{equation*}
+  C = \{ 1, 2 \} \hskip 2cm D = \{ a, b, c \}
+\end{equation*}
+
+What is the cardinality of $\product{C}{D}$? The cardinality of $C$ is 2, and the cardinality of $D$ is 3, and 2 times 3 is 6:
+
+\begin{equation*}
+  \cardinality{\product{C}{D}} = \cardinality{C} \times \cardinality{D} \hskip 1cm \text{ i.e., } \hskip 1cm 6 = 2 \times 3
+\end{equation*}
+
+And indeed, that makes sense. If we look at the roster of $\product{C}{D}$ pairs, we can see that there are exactly six pairs:
+
+\begin{equation*}
+  \product{C}{D} = \{ (1, a), (1, b), (1, c), (2, a), (2, b), (2, c) \}
+\end{equation*}
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Structure of Pairs}
+
+\newthought{Let's look at the structure} of the pairs that make up the product of any two sets $A$ and $B$. Each pair is like a container that has two slots, one after the other. Something like this:
+
+\begin{aside}
+  \begin{remark}
+    A pair is container with two slots, where the order matters. The first slot comes first, and the second slot comes second. 
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (lb) at (-2, 0) {$($};
+  \node (sep) at (0, 0) {$,$};
+  \node (rb) at (2, 0) {$)$};
+  
+  \draw (-1.5, -0.25) -- (-1.5, -0.5) -- (-0.5, -0.5) -- (-0.5, -0.25);
+  \draw (0.5, -0.25) -- (0.5, -0.5) -- (1.5, -0.5) -- (1.5, -0.25);
+  
+  \node (item_1_label) at (-1.5, -2) {1st slot};
+  \node (item_2_label) at (1.5, -2) {2nd slot};
+  
+  \draw[->,space] (item_1_label) to (-1, -0.5);
+  \draw[->,space] (item_2_label) to (1, -0.5);
+\end{diagram}
+
+The first slot can only be filled with items taken the first set (i.e., $A$), and the second slot can only be filled with items taken from the second set of the product (i.e., $B$).
+
+\begin{aside}
+  \begin{remark}
+    Each slot can draw its values only from a specific \vocab{source}. E.g., the first slot can only draw from $A$, and the second only from $B$. We can say that each slot can only be filled by values of a certain \vocab{type}. Hence, the first slot can only be filled with values of type $A$, and the second slot with values of type $B$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (lb) at (-2, 0) {$($};
+  \node (sep) at (0, 0) {$,$};
+  \node (rb) at (2, 0) {$)$};
+  
+  \draw (-1.5, -0.25) -- (-1.5, -0.5) -- (-0.5, -0.5) -- (-0.5, -0.25);
+  \draw (0.5, -0.25) -- (0.5, -0.5) -- (1.5, -0.5) -- (1.5, -0.25);
+  
+  \node (item_1_label) at (-1.5, -2) {1st slot};
+  \node (item_2_label) at (1.5, -2) {2nd slot};
+  
+  \draw[->,space] (item_1_label) to (-1, -0.5);
+  \draw[->,space] (item_2_label) to (1, -0.5);
+  
+  \node (item_1_source) at (-3, 1.75) {an item from $A$};
+  \draw[->,space] (item_1_source) to (-1, 0.5);
+  
+  \node (item_2_source) at (3, 1.75) {an item from $B$};
+  \draw[->,space] (item_2_source) to (1, 0.5);
+\end{diagram}
+
+This highlights how the order matters, and how each slot has a specific ``source'' that it can draw elements from. 
+
+In this regard, pairs have quite a bit \vocab{more structure} than a set. Remember that a set has no internal structure. A set is just a bag of items. We don't care about the order they come in, and we don't care about duplicates.
+
+A pair is not like this. A pair does \vocab{have an order}, and the \vocab{source} of values for each slot matters too! A pair for $\product{A}{B}$ is different from one from $\product{B}{A}$, $\product{A}{A}$, or $\product{B}{B}$. So a pair is not just an unstructured \emph{set} of two items. It is a highly structured container in its own right.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tuples}
+\label{sec:tuples}
+
+\begin{terminology}
+  A \vocab{triplet} (synonym: \vocab{triple}) is just like a pair, but it has three slots instead of two.
+\end{terminology}
+
+\newthought{We can make products} out of more than just two sets. We can make the cross product of three sets, or four sets, and so on. The rules for building them are the same, except that we fill in not just two slots, but rather three slots, four slots, and so on.
+
+As an example, let's make a cross product of three sets. Consider these three sets:
+
+\begin{equation*}
+  A = \{ 1, 2 \} \hskip 1cm B = \{ a, b \} \hskip 1cm C = \{ r, s \}
+\end{equation*}
+
+The cross product of $\productThree{A}{B}{C}$ is built by forming all triplets with an element from $A$ first, an element from $B$ second, and an element from $C$ third. Here are all the triplets:
+
+\begin{aside}
+  \begin{remark}
+    Think of making a 3-dimensional grid with $A$, $B$, and $C$. If we think about projecting these sets (one in each of 3 dimensions), so that they make lines that cross, there will be 8 points where the lines cross. Here is a picture, with a few of the points labeled. See if you can label the rest:
+    
+    \begin{diagram}
+      \draw[->,dashed] (1, 1) -- (1, 4.5);
+      \draw[->,dashed] (2, 1.5) -- (2, 5);
+      \draw[->,dashed] (0, 1.25) -- (3, 3.25);
+      \draw[->,dashed] (0, 2.5) -- (3, 4.5);
+      
+      \draw[->,dashed] (3, -0.5) -- (3, 3);
+      \draw[->,dashed] (4, 0) -- (4, 3.5);
+      \draw[->,dashed] (2, -0.25) -- (5, 1.75);
+      \draw[->,dashed] (2, 1) -- (5, 3);
+      
+      \draw[->,dotted] (0, 3.95) -- (4.5, 0.5);
+      \draw[->,dotted] (0, 2.7) -- (4.5, -0.75);
+      \draw[->,dotted] (1.25, 4.4) -- (5.75, 0.95);
+      \draw[->,dotted] (1.25, 3.2) -- (5.75, -0.25);
+      
+      \node (l1) at (0, 0.95) {\textcolor{gray}{$1$}};
+      \node (l2) at (0, 2.25) {\textcolor{gray}{$1$}};
+      \node (l3) at (2, -0.5) {\textcolor{gray}{$2$}};
+      \node (l4) at (2, 0.75) {\textcolor{gray}{$2$}};
+      
+      \node (l5) at (1.2, 1.2) {\textcolor{gray}{$a$}};
+      \node (l6) at (2.2, 1.7) {\textcolor{gray}{$b$}};
+      \node (l7) at (3.2, -0.3) {\textcolor{gray}{$a$}};
+      \node (l8) at (4.2, 0.2) {\textcolor{gray}{$b$}};
+      
+      \node (l9) at (0.2, 2.95) {\textcolor{gray}{$r$}};
+      \node (l10) at (0.2, 4.1) {\textcolor{gray}{$s$}};
+      \node (l11) at (1.25, 3.65) {\textcolor{gray}{$r$}};
+      \node (l12) at (1.25, 4.65) {\textcolor{gray}{$s$}};
+      
+      \node[dot] (1) at (1, 1.95) {};
+      \node[dot] (2) at (1, 3.15) {};
+      \node[dot] (3) at (2, 2.6) {};
+      \node[dot] (4) at (2, 3.8) {};
+      \node (p4) at (2.85, 3.8) {$\mathbf{(1,b,s)}$};
+      
+      \node[dot] (5) at (3, 0.4) {};
+      \node (p1) at (2.15, 0.25) {$\mathbf{(2,a,r)}$};
+      \node[dot] (6) at (3, 1.65) {};
+      \node[dot] (7) at (4, 1.1) {};
+      \node (p7) at (4.85, 1) {$\mathbf{(2,b,r)}$};
+      \node[dot] (8) at (4, 2.25) {};
+      \node (p8) at (4.85, 2.25) {$\mathbf{(2,b,s)}$};
+    \end{diagram}
+  \end{remark}
+\end{aside}
+
+\begin{alignat*}{3}
+  (1, a, r) &\hskip 0.5cm (1, b, r) &\hskip 0.5cm (2, a, r) &\hskip 0.5cm (2, b, r) \\
+  (1, a, s) &\hskip 0.5cm (1, b, s) &\hskip 0.5cm (2, a, s) &\hskip 0.5cm (2, b, s)
+\end{alignat*}
+
+And if we put them into a set, we then have our product $\productThree{A}{B}{C}$:
+
+\begin{align*}
+  \productThree{A}{B}{C} = \{ &(1, a, r), (1, b, r), (2, a, r), (2, b, r), \\
+                              &(1, a, s), (1, b, s), (2, a, s), (2, b, s) \}
+\end{align*}
+
+Note the structure of each of these triplets:
+
+\begin{diagram}
+
+  \node (lb) at (-2, 0) {$($};
+  \node (1_sep) at (0, 0) {$,$};
+  \node (2_sep) at (2, 0) {$,$};
+  \node (rb) at (4, 0) {$)$};
+  
+  \draw (-1.5, -0.25) -- (-1.5, -0.5) -- (-0.5, -0.5) -- (-0.5, -0.25);
+  \draw (0.5, -0.25) -- (0.5, -0.5) -- (1.5, -0.5) -- (1.5, -0.25);
+  \draw (2.5, -0.25) -- (2.5, -0.5) -- (3.5, -0.5) -- (3.5, -0.25);
+  
+  \node (item_1_label) at (-1.5, -2) {1st slot};
+  \node (item_2_label) at (1, -2) {2nd slot};
+  \node (item_3_label) at (3.5, -2) {3rd slot};
+  
+  \draw[->,space] (item_1_label) to (-1, -0.5);
+  \draw[->,space] (item_2_label) to (1, -0.5);
+  \draw[->,space] (item_3_label) to (3, -0.5);
+  
+  \node (item_1_source) at (-3, 1.75) {an item from $A$};
+  \draw[->,space] (item_1_source) to (-1, 0.5);
+  
+  \node (item_2_source) at (1, 1.75) {an item from $B$};
+  \draw[->,space] (item_2_source) to (1, 0.5);
+  
+  \node (item_3_source) at (5, 1.75) {an item from $C$};
+  \draw[->,space] (item_3_source) to (3, 0.5);
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    A product of four sets is the set of all coordinates of a four dimensional grid made from the sets in question. But of course, it is really hard to imagine grids beyond three-dimensions, so it is much easier to think of the product of four sets simply as the set of all possible quartets made from the sets in question.
+  \end{remark}
+\end{aside}
+
+So this is exactly like what we have in pairs, except there are three slots, rather than two slots.
+
+In the same way, we could build a product of four sets. For example, we could build $\productFour{A}{B}{C}{D}$, and that would be a set of quartets. Each quartet would be a sequence of four slots, with a value in the first slot taken from $A$, a value in the second slot taken from $B$, a value in the third slot taken from $C$, and a value in the fourth slot taken from $D$.
+
+\begin{terminology}
+  An \vocab{$n$-tuple} is a sequence of $n$ slots, where $n$ is a positive whole number. We can also call 2-tuples ``\vocab{pairs},'' 3-tuples ``\vocab{triplets}'' (or \vocab{triples}), 4-tuples ``\vocab{quartets}'', 5-tuples ``\vocab{quintets}'' (or quintuples), and so on.
+\end{terminology}
+
+More generally, these sequences of slots are called \vocab{tuples}. If there are two slots, we call it a \vocab{2-tuple}. If there are three slots, we call it a \vocab{3-tuple}. If there are four slots, we call it a \vocab{4-tuple}, and so on for any \vocab{$n$-tuple}, where $n$ is any positive whole number.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about how to cross any number of sets, in order to construct the set of all coordinate-pairs that can be built from them. We call these sets of coordinates the \vocab{product} of the sets we crossed. 
+
+When we construct products, we are basically just constructing grids (in 2, 3, or more dimensions). However, we drop the pictures and lines and other inessential information, and we basically just strip the information down to its bare essentials, namely the set of possible coordinates.
+
+\begin{itemize}
+
+  \item The \vocab{grid} of two sets $A \times B$ is the grid you get by making all the elements of $A$ into rows and all the elements of $B$ into columns. The \vocab{coordinates} of such a grid are all $(\textsf{row}, \textsf{column})$ pairs.
+
+  \item The \vocab{product} of two sets $\product{A}{B}$ is the set of all coordinate-pairs of the grid we would get from $A$ and $B$.
+  
+  \item The \vocab{pairs} of a product $\product{A}{B}$ are each a \vocab{sequence} with \vocab{two slots}. The first slot can only be filled with an element from $A$, and the second slot can only be filled with an element from $B$.
+  
+  \item We can form the \vocab{product of $n$ sets}, where $n$ is a positive whole number. The members of such a product are called \vocab{$n$-tuples}, which are sequences of $n$ slots. 
+
+\end{itemize}
+
+\end{document}

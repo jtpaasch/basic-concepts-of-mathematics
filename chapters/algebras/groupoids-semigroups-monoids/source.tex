@@ -1,0 +1,483 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Groupoids, Semigroups, Monoids}
+\label{ch:groupoids-semigroups-monoids}
+
+\newtopic{I}{n \chapterref{ch:properties-of-operations}}, we looked at some of the properties that binary operations can have. We can use those properties to sort algebraic structures into different types. In this chapter, we will look at three types of algebras: \vocab{groupoids}, \vocab{semigroups}, and \vocab{monoids}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Groupoids}
+
+\newthought{The simplest kind of algebraic structure} is just a base set equipped with a single binary operation. This is called a \vocab{groupoid}.
+
+\begin{fdefinition}[Groupoid]
+  \label{def:groupoid}
+  For any algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ comprised of a carrier set $\set{A}$ and a single binary operation $\opSymbol/$, we will say that $\algebra{S}$ is a \vocab{groupoid}.
+\end{fdefinition}
+
+\begin{terminology}
+  A \vocab{groupoid} is just a carrier set equipped with a single binary operation. 
+\end{terminology}
+
+Most of the examples we have looked at so far have been equipped with only a single binary relation, and so all of those qualify as groupoids.
+
+\begin{fexample}
+
+Suppose we have an algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ where the set $\set{A}$ is defined like this:
+
+\begin{equation*}
+  \set{A} = \{ 1, 2 \}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    A good exercise would be to check whether this groupoid is associative, or commutative. (It is neither, but can you find examples of combinations that prove it?)
+  \end{remark}
+\end{aside}
+
+and the Cayley table is defined like this:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | }
+    \hline
+    $\opSymbol/$ & $1$ & $2$ \\ \hline \hline
+    $1$          & $1$ & $1$ \\ \hline
+    $2$          & $2$ & $1$ \\ \hline
+  \end{tabular}
+\end{center}
+
+This is a \vocab{groupoid} because it is comprised of a carrier set equipped with a single binary operation. 
+
+\end{fexample}
+
+\begin{example}
+\label{ex:subtraction-over-integers}
+
+Consider the integers $\Ints/$ and the binary operation of subtraction (i.e., ``$-$''). Together, these make up an algebraic structure:
+
+\begin{equation*}
+  \algebra{Z} = (\Ints/, -)
+\end{equation*} 
+
+The carrier set is the set of integers:
+
+\begin{equation*}
+  \Ints/ = \{ \ldots, -2, -1, 0, 1, 2, \ldots \}
+\end{equation*}
+
+The Cayley table is infinitely large (since there are infinitely many integers, and we can subtract any two of them). Here is part of it:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c | c | c | c |}
+    \hline
+    $-$    & \ldots   & $-1$   & $0$    & $1$    & $2$    & $3$    & \ldots
+    \\ \hline \hline
+    \vdots & $\ddots$ & \vdots & \vdots & \vdots & \vdots & \vdots & \ldots
+    \\ \hline
+    $-1$   & \ldots   & $0$    & $-1$   & $-2$   & $-3$   & $-4$   & \ldots
+    \\ \hline
+    $0$    & \ldots   & $1$    & $0$    & $-1$   & $-2$   & $-3$   & \ldots
+    \\ \hline
+    $1$    & \ldots   & $2$    & $1$    & $0$    & $-1$   & $-2$   & \ldots
+    \\ \hline
+    $2$    & \ldots   & $3$    & $2$    & $1$    & $0$    & $-1$   & \ldots
+    \\ \hline
+    $3$    & \ldots   & $4$    & $3$    & $2$    & $1$    & $0$    & \ldots
+    \\ \hline
+    \vdots & \vdots   & \vdots & \vdots & \vdots & \vdots & \vdots & $\ddots$
+    \\ \hline
+  \end{tabular}
+\end{center}
+
+\begin{aside}
+  \begin{remark}
+    This Cayley table is too big to memorize, or even write down. One way to cope with this is to come up with some procedure that lets us \emph{calculate} what the answer will be at any point in the table. Then we don't need to write the table down. We can just use our procedure to figure out what the relevant cell would tell us if we \emph{could} look it up in the table.
+    \vskip 0.5cm
+    In school, most children learn some procedure to calculate the answer to simple integer subtraction problems. For instance, they learn how to take away blocks from a bigger pile of blocks. We can look at this as just a way to tell us what the answer is in the Cayley table.
+  \end{remark}
+\end{aside}
+
+Nobody could actually write down such a large table in one place. But let's pretend for a moment that somebody did. We could then forget everything we learned about subtraction, and just look up answers in the Cayley table. Suppose we didn't know how to compute this:
+
+\begin{equation*}
+  2 - (-1) = ??
+\end{equation*}
+
+We could just look it up in the table:
+    
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c | c | c | c |}
+    \hline
+    $-$    & \ldots   & \cellcolor{grey3} $-1$   & $0$    & $1$    & $2$    & $3$    & \ldots
+    \\ \hline \hline
+    \vdots & $\ddots$ & \cellcolor{grey3} \vdots & \vdots & \vdots & \vdots & \vdots & \ldots
+    \\ \hline
+    $-1$   & \ldots   & \cellcolor{grey3} $0$    & $-1$   & $-2$   & $-3$   & $-4$   & \ldots
+    \\ \hline
+    $0$    & \ldots   & \cellcolor{grey3} $1$    & $0$    & $-1$   & $-2$   & $-3$   & \ldots
+    \\ \hline
+    $1$    & \ldots   & \cellcolor{grey3} $2$    & $1$    & $1$    & $-1$   & $-2$   & \ldots
+    \\ \hline
+    \cellcolor{grey3} $2$    & \cellcolor{grey3} \ldots   & \cellcolor{grey3} $\mathbf{3}$    & $2$    & $1$    & $0$    & $-1$   & \ldots
+    \\ \hline
+    $3$    & \ldots   & $4$    & $3$    & $2$    & $1$    & $0$    & \ldots
+    \\ \hline
+    \vdots & \vdots   & \vdots & \vdots & \vdots & \vdots & \vdots & $\ddots$
+    \\ \hline
+  \end{tabular}
+\end{center}
+
+This structure $\algebra{Z} = (\Ints/, -)$ qualifies as a groupoid, because it is comprised of a carrier set and a single binary operation.
+
+\end{example}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Semigroups}
+
+\newthought{Beyond groupoids}, the next simplest type of algebra is called a semigroup. A \vocab{semigroup} is a groupoid, whose binary operation is associative. So, a semigroup is a structure comprised of a carrier set equipped with one binary operation, and that binary operation is associative.
+
+\begin{fdefinition}[Semigroup]
+  \label{def:semigroup}
+  For any algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ comprised of a carrier set $\set{A}$ and a single binary operation $\opSymbol/$, if $\opSymbol/$ is assocative, then we will say that $\algebra{S}$ is a \vocab{semigroup}.
+\end{fdefinition}
+
+\begin{terminology}
+  A structure is a \vocab{semigroup} if it is comprised of a carrier set and a single binary operation that is associative.
+\end{terminology}
+
+A semigroup is also a groupoid, since it satisfies the definition: it is a carrier set equipped with a single binary operation. Since its binary operation is associative, we can also call it an \vocab{associative groupoid}.
+
+\begin{fexample}
+
+Suppose we have an algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ with $\set{A} = \{ 1, 2, 3 \}$ and a Cayley table like this:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $1$ & $2$ & $3$ \\ \hline \hline
+    $1$          & $2$ & $3$ & $1$ \\ \hline
+    $2$          & $3$ & $1$ & $2$ \\ \hline
+    $3$          & $1$ & $2$ & $3$ \\ \hline
+  \end{tabular}
+\end{center}
+
+This is a semigroup, because it satisfies the definition. It is comprised of a base set equipped with a single binary operation, and that binary operation is associative. For instance, you can check that these hold: 
+
+\begin{align*}
+  \op{(\op{1}{2})}{3} = \op{1}{(\op{2}{3})} \hskip 0.25cm &~ \hskip 0.25cm
+  \op{(\op{2}{2})}{1} = \op{2}{(\op{2}{1})} \\
+  \op{(\op{1}{1})}{3} &= \op{1}{(\op{1}{3})}
+\end{align*}
+
+\end{fexample}
+
+\begin{fexample}
+
+Consider the integers $\Ints/$ and the binary operation of addition (i.e., ``$+$''). Together, these make up an algebraic structure:
+
+\begin{equation*}
+  \algebra{Z} = (\Ints/, +)
+\end{equation*} 
+
+The carrier set is the set of integers:
+
+\begin{equation*}
+  \Ints/ = \{ \ldots, -2, -1, 0, 1, 2, \ldots \}
+\end{equation*}
+
+The Cayley table is an infinitely large table (since there are infinitely many integers, and we can add any two of them). Here is part of it:
+
+\begin{aside}
+  \begin{remark}
+    This structure is also \vocab{commutative} (\vocab{abelian}), since the following is always true in this structure:
+    
+    \begin{equation*}
+      x + y = y + x
+    \end{equation*}
+    
+    For instance, ``$4 + 3 = 3 + 4$,'' ``$5 + 2 = 2 + 5,$'' and so on for any other two integers we might add together.
+  \end{remark}
+\end{aside}
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c | c | c | c |}
+    \hline
+    $+$    & \ldots   & $-1$   & $0$    & $1$    & $2$    & $3$    & \ldots
+    \\ \hline \hline
+    \vdots & $\ddots$ & \vdots & \vdots & \vdots & \vdots & \vdots & \ldots
+    \\ \hline
+    $-1$   & \ldots   & $-2$   & $-1$   & $0$    & $1$    & $2$    & \ldots
+    \\ \hline
+    $0$    & \ldots   & $-1$   & $0$    & $1$    & $2$    & $3$    & \ldots
+    \\ \hline
+    $1$    & \ldots   & $-1$   & $1$    & $2$    & $3$    & $4$    & \ldots
+    \\ \hline
+    $2$    & \ldots   & $1$    & $2$    & $3$    & $4$    & $5$    & \ldots
+    \\ \hline
+    $3$    & \ldots   & $2$    & $3$    & $4$    & $5$    & $6$    & \ldots
+    \\ \hline
+    \vdots & \vdots   & \vdots & \vdots & \vdots & \vdots & \vdots & $\ddots$
+    \\ \hline
+  \end{tabular}
+\end{center}
+
+This structure is \vocab{associative}, so it qualifies as a \vocab{semigroup}.
+
+\end{fexample}
+
+\begin{example}
+
+Recall the example of integer subtraction from \exampleref{ex:subtraction-over-integers}:
+
+\begin{equation*}
+  \algebra{Z} = (\Ints/, -)
+\end{equation*} 
+
+Such a structure is \vocab{not associative}. For example:
+
+\begin{equation*}
+  3 - (4 - 2) \not = (3 - 4) - 2
+\end{equation*}
+
+Since it is not associative, this structure does not qualify as a semigroup. It is a groupoid, but it is \emph{not} a semigroup.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Monoids}
+
+\newthought{Beyond semigroups}, there are monoids. A \vocab{monoid} is a semigroup with an identity (unit) element. So, a monoid is a structure comprised of a carrier set equipped with one binary operation, and that binary operation is associative, and it has an identity element.
+
+\begin{fdefinition}[Monoid]
+  \label{def:monoid}
+  For any algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ comprised of a carrier set $\set{A}$ and a single binary operation $\opSymbol/$, if $\opSymbol/$ is associative and it has an identity (unit) element, then we will say that $\algebra{S}$ is a \vocab{monoid}.
+\end{fdefinition}
+
+\begin{terminology}
+  A \vocab{monoid} is comprised of a carrier set and a single binary operation which (1) is associative, and (2) has an identity (unit) element.
+\end{terminology}
+
+Monoids are also groupoids and semigroups, since they satisfy the definitions for those types of algebras too. We can call a monoid an \vocab{associative groupoid with an identity}, or we can call it a \vocab{semigroup with an identity}.
+
+\begin{fexample}
+
+Suppose we have an algebraic structure $\algebra{S} = (\set{A}, \opSymbol/)$ where the set $\set{A}$ is defined like this:
+
+\begin{equation*}
+  \set{A} = \{ \e{on}, \e{off} \}
+\end{equation*}
+
+and the Cayley table is defined like this:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | }
+    \hline
+    $\opSymbol/$ & $\e{on}$  & $\e{off}$ \\ \hline \hline
+    $\e{on}$     & $\e{on}$  & $\e{off}$ \\ \hline
+    $\e{off}$    & $\e{off}$ & $\e{on}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+This is associative. For instance, you can check that these all hold:
+
+\begin{align*}
+  \op{(\op{\e{on}}{\e{off}})}{\e{off}} = \op{\e{on}}{(\op{\e{off}}{\e{off}})} \hskip 0.25cm &~ \hskip 0.25cm
+  \op{(\op{\e{off}}{\e{off}})}{\e{on}} = \op{\e{off}}{(\op{\e{off}}{\e{on}})} \\
+  \op{(\op{\e{on}}{\e{on}})}{\e{off}} &= \op{\e{on}}{(\op{\e{on}}{\e{off}})}
+\end{align*}
+
+It also has an identity element. It's ``$\e{on}$.'' We can see it in the Cayley table:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | }
+    \hline
+    $\opSymbol/$ & $\e{on}$  & $\e{off}$ \\ \hline \hline
+    $\e{on}$     & \cellcolor{grey3} $\e{on}$  & \cellcolor{grey3} $\e{off}$ \\ \hline
+    $\e{off}$    & \cellcolor{grey3} $\e{off}$ & $\e{on}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+\end{fexample}
+
+\begin{fexample}
+\label{ex:nats-addition}
+
+Consider the integers $\Nats/$ and the binary operation of addition (i.e., ``$+$''). Together, these make up an algebraic structure:
+
+\begin{equation*}
+  \algebra{N} = (\Nats/, +)
+\end{equation*} 
+
+The carrier set is the natural numbers:
+
+\begin{equation*}
+  \Nats/ = \{ 0, 1, 2, \ldots \}
+\end{equation*}
+
+The Cayley table is an infinitely large table (since there are infinitely many natural numbers, and we can add any two of them). Here is the start of it:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c | c |}
+    \hline
+    $+$      & $0$ & $1$ & $2$ & $3$ & \ldots \\ \hline \hline
+    $0$      & $0$ & $1$ & $2$ & $3$ & \ldots \\ \hline
+    $1$      & $1$ & $2$ & $3$ & $4$ & \ldots \\ \hline
+    $2$      & $2$ & $3$ & $4$ & $1$ & \ldots \\ \hline
+    $3$      & $3$ & $4$ & $5$ & $6$ & \ldots \\ \hline
+    $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\ddots$  \\ \hline
+  \end{tabular}
+\end{center}
+
+\begin{aside}
+  \begin{remark}
+    Notice that $\algebra{N} = (\Nats/, +)$ has no inverses. There is no number ``$x$'' that I can add to ``$7$'' to get back the identity ``$0$.'' If I had negative numbers at hand, I could add ``$-7$'' to ``$7$'' to get the identity ``$0$.'' But we don't have any negative numbers in this structure. Negative numbers belong to the \vocab{integers}, and this structure is defined only over \vocab{natural numbers}.
+  \end{remark}
+\end{aside}
+
+This is a monoid. It is \vocab{associative}, since it doesn't matter where we put the parentheses, e.g.:
+
+\begin{equation*}
+  4 + (3 + 2) = (4 + 3) + 2 \hskip 1cm 15 + (1 + 9) = (15 + 1) + 9
+\end{equation*}
+
+It also has an \vocab{identity} (\vocab{unit}) element, namely ``$0$,'' since adding $0$ to another number has no effect. For example:
+
+\begin{equation*}
+  7 + 0 = 7 \hskip 2cm 0 + 7 = 7
+\end{equation*}
+
+Since $\algebra{N} = (\Nats/, +)$ is associative and it has an identity, it qualifies as a \vocab{monoid}.
+
+\end{fexample}
+
+\begin{fexample}
+
+Recall the example of integer subtraction from \exampleref{ex:subtraction-over-integers}:
+
+\begin{equation*}
+  \algebra{Z} = (\Ints/, -)
+\end{equation*} 
+
+We already saw that this structure is not associative, but it also has no \vocab{identity} (\vocab{unit}) element. 
+
+It is tempting to think that ``$0$'' is an identity element here, because I can take $0$ away from any number, and that won't have any effect. For instance, in each of these cases, ``$x - 0 = x$'':
+
+\begin{equation*}
+  7 - 0 = 7 \hskip 1.5cm (-3) - 0 = (-3) \hskip 1.5cm 97 - 0 = 97
+\end{equation*}
+
+However, this is true only if ``$0$'' appears on the right side of the subtraction symbol. If we put it on the left side, is not true that ``$0 - x = x$.'' For instance:
+
+\begin{aside}
+  \begin{remark}
+    According to our definition from \chapterref{ch:properties-of-operations}, ``$0$'' would be the \vocab{identity} (\vocab{unit}) element only if both of these were true in the structure:
+    \begin{equation*}
+      x - 0 = x \hskip 1.5cm 0 - x = x
+    \end{equation*} 
+    
+    But they are not both true in the structure. Only ``$x - 0 = x$'' holds in this structure. Technically, we might say that here, ``$0$'' is an identity (unit) element \vocab{on the right}, but not \vocab{on the left}.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  0 - 7 = -7 \hskip 1.5cm 0 - (-3) = 3 \hskip 1.5cm 0 - 97 = (-97)
+\end{equation*}
+
+And of course, if there is no identity element, then this structure cannot have inverses either.
+
+Since $\algebra{Z} = (\Ints/, -)$ fails not only to be associative but also it fails to have an identity (unit) element, it does \emph{not} qualify as a monoid. It is a groupoid, but not a monoid.
+
+\end{fexample}
+
+\begin{example}
+
+Consider the integers $\Ints/$ and the binary operation of multiplication (often written as ``$\times$'' or ``$\mult/$'' but we'll just use the dot ``$\mult/$'' here). Together, these make up an algebraic structure:
+
+\begin{equation*}
+  \algebra{Z} = (\Ints/, \mult/)
+\end{equation*} 
+
+The carrier set is the set of integers:
+
+\begin{equation*}
+  \Ints/ = \{ \ldots, -2, -1, 0, 1, 2, \ldots \}
+\end{equation*}
+
+The Cayley table is an infinitely large table (since there are infinitely many integers, and we can multiply any two of them). Here is part of it:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c | c | c | c |}
+    \hline
+    $\mult/$ & \ldots   & $-1$   & $0$    & $1$    & $2$    & $3$    & \ldots
+    \\ \hline \hline
+    \vdots   & $\ddots$ & \vdots & \vdots & \vdots & \vdots & \vdots & \ldots
+    \\ \hline
+    $-1$     & \ldots   & $1$    & $0$    & $-1$   & $-2$   & $-3$   & \ldots
+    \\ \hline
+    $0$      & \ldots   & $0$    & $0$    & $0$    & $0$    & $0$    & \ldots
+    \\ \hline
+    $1$      & \ldots   & $-1$   & $0$    & $1$    & $2$    & $3$    & \ldots
+    \\ \hline
+    $2$      & \ldots   & $-2$   & $0$    & $2$    & $4$    & $6$    & \ldots
+    \\ \hline
+    $3$      & \ldots   & $-3$   & $0$    & $3$    & $6$    & $9$    & \ldots
+    \\ \hline
+    \vdots   & \vdots   & \vdots & \vdots & \vdots & \vdots & \vdots & $\ddots$
+    \\ \hline
+  \end{tabular}
+\end{center}
+
+
+\begin{aside}
+  \begin{remark}
+    Notice that $\algebra{Z} = (\Ints/, \mult/)$ does \emph{not} have \vocab{inverses}. There is no number $x$ I can multiply ``$5$`` by to get the identity ``$1$.'' If we were dealing with fractions, then I could multiply ``$5$'' by ``$\frac{1}{5}$'' to get the identity ``$1$.'' But we don't have any fractions in this structure. Fractions are \vocab{rational numbers}, and this structure is defined only over \vocab{integers}. 
+  \end{remark}
+\end{aside}
+
+This structure is \vocab{associative}, since it never matters where we put the parentheses. For example:
+
+\begin{equation*}
+  2 \mult/ (5 \mult/ 3) = (2 \mult/ 5) \mult/ 3
+\end{equation*}
+
+It also has an \vocab{identity} (\vocab{unit}) element, namely ``$1$,'' since multiplying any number by ``$1$'' has no effect. For instance:
+
+\begin{equation*}
+  7 \mult/ 1 = 7 \hskip 2cm 1 \mult/ 7 = 7
+\end{equation*}
+
+Since $\algebra{Z} = (\Ints/, \mult/)$ is associative and it has an identity (unit) element, it qualifies as a \vocab{monoid}.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we looked at three different \vocab{types} of algebraic structures: groupoids, semigroups, and monoids.
+
+\begin{itemize}
+
+  \item A \vocab{groupoid} is the simplest algebraic structure. It consists of a carrier set equipped with a single binary operation.
+  
+  \item A \vocab{semigroup} is a groupoid that is \vocab{associative}.
+  
+  \item A \vocab{monoid} is a semigroup that has an \vocab{identity} (unit) element.
+
+\end{itemize}
+
+
+
+\end{document}

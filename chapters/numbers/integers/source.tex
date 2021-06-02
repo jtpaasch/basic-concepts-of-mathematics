@@ -1,0 +1,660 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Integers}
+\label{ch:the-integers}
+
+\begin{ponder}
+  Why do we need negative numbers? What things can you think of that you might need negative numbers for?
+\end{ponder}
+
+\newtopic{I}{n \chapterref{ch:natural-numbers}} we looked at the natural numbers, which we use for counting. In this chapter, we will look at another set of numbers, the \vocab{integers}. The integers include the natural numbers (the positive counting numbers), but they also include the negative numbers. So the integers is made up of both positive and negative counting numbers.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Adding and Multiplying}
+
+\begin{aside}
+  \begin{remark}
+    The natural numbers include only positive numbers, no negative numbers.
+  \end{remark}
+\end{aside}
+
+\newthought{The natural numbers include} no negative numbers. They include \vocab{positive numbers} only. Of course, this makes sense, since the natural numbers are the counting numbers. The process of counting is a process of \emph{increasing} a tally, hence we need nothing more than a starting point, and then whole numbers going up from there.
+
+\begin{terminology}
+  To compute the answer to a problem with the form $m + n = p$, we add the numbers $m$ and $n$ together to get $p$. We call $p$ the \vocab{sum} of $m$ and $n$.
+\end{terminology}
+
+Because of this, the natural numbers are particularly well suited for \vocab{adding} and \vocab{multiplying}. Consider adding $m$ and $n$ to get a sum $p$:
+
+\begin{equation*}
+  m + n = p, \text{ where } m, n, p \in \Nats/
+\end{equation*}
+
+To compute $p$, we count $m$ objects, and then we continue counting $n$ more objects. For instance, to compute 3 + 2, I first count three objects:
+
+\begin{diagram}
+
+  \draw[->] (0, 0) -- (10, 0);
+  \draw (0, 0.1) -- (0, -0.1) {};
+  \draw (1.5, 0.1) -- (1.5, -0.1) {};
+  \draw (3, 0.1) -- (3, -0.1) {};
+  \draw (4.5, 0.1) -- (4.5, -0.1) {};
+  \draw (6, 0.1) -- (6, -0.1) {};
+  \draw (7.5, 0.1) -- (7.5, -0.1) {};
+  \draw (9, 0.1) -- (9, -0.1) {};
+
+  \node (nats) at (-1, 0) {$\Nats/$};
+  \node (0) at (0, -0.5) {0};
+  \node (1) at (1.5, -0.5) {1};
+  \node (2) at (3, -0.5) {2};
+  \node (3) at (4.5, -0.5) {3};
+  \node (4) at (6, -0.5) {4};
+  \node (5) at (7.5, -0.5) {5};
+  \node (6) at (9, -0.5) {6};
+
+  \node at (0.75, 1.25) {$1$};
+  \node at (2.25, 1.25) {$2$};
+  \node at (3.75, 1.25) {$3$};
+
+  \draw[->,spaced] (0, 0) .. controls (0.5, 1) and (1, 1) .. (1.5, 0);
+  \draw[->,spaced] (1.5, 0) .. controls (2, 1) and (2.5, 1) .. (3, 0);
+  \draw[->,spaced] (3, 0) .. controls (3.5, 1) and (4, 1) .. (4.5, 0);
+
+\end{diagram} 
+
+Then I count two more:
+
+\begin{diagram}
+
+  \draw[->] (0, 0) -- (10, 0);
+  \draw (0, 0.1) -- (0, -0.1) {};
+  \draw (1.5, 0.1) -- (1.5, -0.1) {};
+  \draw (3, 0.1) -- (3, -0.1) {};
+  \draw (4.5, 0.1) -- (4.5, -0.1) {};
+  \draw (6, 0.1) -- (6, -0.1) {};
+  \draw (7.5, 0.1) -- (7.5, -0.1) {};
+  \draw (9, 0.1) -- (9, -0.1) {};
+
+  \node (nats) at (-1, 0) {$\Nats/$};
+  \node (0) at (0, -0.5) {0};
+  \node (1) at (1.5, -0.5) {1};
+  \node (2) at (3, -0.5) {2};
+  \node (3) at (4.5, -0.5) {3};
+  \node (4) at (6, -0.5) {4};
+  \node (5) at (7.5, -0.5) {5};
+  \node (6) at (9, -0.5) {6};
+
+  \draw[->,spaced,dashed] (0, 0) .. controls (0.5, 1) and (1, 1) .. (1.5, 0);
+  \draw[->,spaced,dashed] (1.5, 0) .. controls (2, 1) and (2.5, 1) .. (3, 0);
+  \draw[->,spaced,dashed] (3, 0) .. controls (3.5, 1) and (4, 1) .. (4.5, 0);
+  
+  \node at (5.25, 1.25) {$4$};
+  \node at (6.75, 1.25) {$5$};
+  
+  \draw[->,spaced] (4.5, 0) .. controls (5, 1) and (5.5, 1) .. (6, 0);
+  \draw[->,spaced] (6, 0) .. controls (6.5, 1) and (7, 1) .. (7.5, 0);
+
+\end{diagram} 
+
+At the end of my counting, I end up at 5, so the sum of $3$ and $2$ is $5$. 
+
+Multiplying is straightforward too. Consider multiplying $m$ and $n$ to get a product $p$:
+
+\begin{terminology}
+  To compute the answer to a problem with the form $m \mult/ n = p$, we add together $n$ groups of $m$ objects, to get a total of $p$. We call $p$ the \vocab{product} of $m$ and $n$.
+\end{terminology}
+
+\begin{equation*}
+  m \mult/ n = p
+\end{equation*}
+
+To compute this, we add together $n$ groups each containing $m$ objects. For instance, to compute $3 \mult/ 2$, I put together a group of 3 objects:
+
+\begin{diagram}
+
+  \draw[dashed] (1, 0) ellipse (2cm and 1cm);
+  \node[odot] (1) at (0, 0) {};
+  \node[odot] (2) at (1, 0) {};
+  \node[odot] (3) at (2, 0) {};
+  \node (l1) at (1, -1.75) {One group of 3};
+
+\end{diagram}
+
+And then I put together another group of 3 objects:
+
+\begin{aside}
+  \begin{remark}
+    Another way to visualize multiplying 2 and 3 is to make a $2 \times 3$ grid:
+    
+    \begin{diagram}
+      \node at (-1, 0) {\textcolor{gray}{$1$}};
+      \node at (-1, 1) {\textcolor{gray}{$2$}};
+      \node at (0, -1) {\textcolor{gray}{$1$}};
+      \node at (1, -1) {\textcolor{gray}{$2$}};
+      \node at (2, -1) {\textcolor{gray}{$3$}};
+      \node[odot] at (0, 0) {};
+      \node[odot] at (1, 0) {};
+      \node[odot] at (2, 0) {};
+      \node[odot] at (0, 1) {};
+      \node[odot] at (1, 1) {};
+      \node[odot] at (2, 1) {};      
+    \end{diagram}
+    
+    That also gives us two groups of three. They're just stacked vertically:
+    
+    \begin{diagram}
+      \node at (-1, 0) {\textcolor{gray}{$1$}};
+      \node at (-1, 1) {\textcolor{gray}{$2$}};
+      \node at (0, -1) {\textcolor{gray}{$1$}};
+      \node at (1, -1) {\textcolor{gray}{$2$}};
+      \node at (2, -1) {\textcolor{gray}{$3$}};
+      \node[odot] at (0, 0) {};
+      \node[odot] at (1, 0) {};
+      \node[odot] at (2, 0) {};
+      \node[odot] at (0, 1) {};
+      \node[odot] at (1, 1) {};
+      \node[odot] at (2, 1) {};
+      \draw[dashed] (1, 0) ellipse (1.5cm and 0.5cm);
+      \draw[dashed] (1, 1) ellipse (1.5cm and 0.5cm);
+    \end{diagram}    
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw[dashed] (1, 0) ellipse (2cm and 1cm);
+  \node[odot] (1) at (0, 0) {};
+  \node[odot] (2) at (1, 0) {};
+  \node[odot] (3) at (2, 0) {};
+  \node (l1) at (1, -1.75) {One group of 3};
+  
+  \draw[dashed] (6, 0) ellipse (2cm and 1cm);
+  \node[odot] (4) at (5, 0) {};
+  \node[odot] (5) at (6, 0) {};
+  \node[odot] (6) at (7, 0) {};
+  \node (l2) at (6, -1.75) {Another group of 3};
+
+\end{diagram}
+
+Now I have 2 groups of 3 (i.e., I have 2 bags, and each one contains 3 objects). Next, I just need to add them all up. So I count the first group:
+
+\begin{diagram}
+
+  \draw[dashed] (1, 0) ellipse (2cm and 1cm);
+  \node[odot] (1) at (0, 0) {};
+  \node[odot] (2) at (1, 0) {};
+  \node[odot] (3) at (2, 0) {};
+  \node (l1) at (1, -1.75) {One group of 3};
+  
+  \draw[dashed] (6, 0) ellipse (2cm and 1cm);
+  \node[odot] (4) at (5, 0) {};
+  \node[odot] (5) at (6, 0) {};
+  \node[odot] (6) at (7, 0) {};
+  \node (l2) at (6, -1.75) {Another group of 3};
+
+  \node at (-0.75, 1.5) {$1$};
+  \node at (0.5, 1.5) {$2$};
+  \node at (1.5, 1.5) {$3$};
+
+  \draw[->,spaced] (-1.5, 0) .. controls (-1.25, 1.5) and (-0.25, 1.5) .. (0, 0);
+  \draw[->,spaced] (0, 0) .. controls (0.25, 1.5) and (0.75, 1.5) .. (1, 0);
+  \draw[->,spaced] (1, 0) .. controls (1.25, 1.5) and (1.75, 1.5) .. (2, 0);
+
+\end{diagram}
+
+Which brings me up to $3$, and then I continue counting into the second group:
+
+\begin{diagram}
+
+  \draw[dashed] (1, 0) ellipse (2cm and 1cm);
+  \node[odot] (1) at (0, 0) {};
+  \node[odot] (2) at (1, 0) {};
+  \node[odot] (3) at (2, 0) {};
+  \node (l1) at (1, -1.75) {One group of 3};
+  
+  \draw[dashed] (6, 0) ellipse (2cm and 1cm);
+  \node[odot] (4) at (5, 0) {};
+  \node[odot] (5) at (6, 0) {};
+  \node[odot] (6) at (7, 0) {};
+  \node (l2) at (6, -1.75) {Another group of 3};
+
+  \draw[->,spaced,dashed] (-1.5, 0) .. controls (-1.25, 1.5) and (-0.25, 1.5) .. (0, 0);
+  \draw[->,spaced,dashed] (0, 0) .. controls (0.25, 1.5) and (0.75, 1.5) .. (1, 0);
+  \draw[->,spaced,dashed] (1, 0) .. controls (1.25, 1.5) and (1.75, 1.5) .. (2, 0);
+  
+  \node at (3.5, 1.5) {$4$};
+  \node at (5.5, 1.5) {$5$};
+  \node at (6.5, 1.5) {$6$};
+  
+  \draw[->,spaced] (2, 0) .. controls (3, 1.5) and (4, 1.5) .. (5, 0);
+  \draw[->,spaced] (5, 0) .. controls (5.25, 1.5) and (5.75, 1.5) .. (6, 0);
+  \draw[->,spaced] (6, 0) .. controls (6.25, 1.5) and (6.75, 1.5) .. (7, 0);
+
+\end{diagram}
+
+\begin{ponder}
+  Recall from \chapterref{ch:products} that the \vocab{product} of two \vocab{sets} can be represented by drawing a grid. Let $m = \{ 1, 2, 3 \}$ and $n = \{ 1, 2 \}$, and draw a grid of those two sets. What does that tell you about multiplication? Do you see any similarities?
+\end{ponder}
+
+At the end of my counting, I have reached the number $6$, so the product of $3$ and $2$ is $6$.
+
+This makes it clear that adding and multiplying can be done in such a way that they involving little more than counting. Hence, all of this can be done with the natural numbers (i.e., positive numbers), because those are the counting numbers.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Subtraction}
+
+\begin{aside}
+  \begin{remark}
+    The opposite of \vocab{addition} is \vocab{subtraction}. Addition is putting more onto a total tally, while subtraction is taking some away from a total tally.
+  \end{remark}
+\end{aside}
+
+\newthought{What about the opposite of addition}? If addition is just adding more on, then the opposite is taking some away. 
+
+Why would we want to take things away? Well, to mention just one useful thing: it is easy to imagine that, at some point in human history, we realized we could handle bank accounts and credit better by giving people the ability to add and remove quantities from their accounts. So, I can \vocab{pay in} some amount (I can add to my balance), and I can \vocab{pay out} some amount (I can take away from my balance).
+
+When we remove some, that's called \vocab{subtraction}. Consider subtracting $n$ from $m$ to get a difference $p$:
+
+\begin{equation*}
+  m - n = p
+\end{equation*}
+
+Intuitively, we can just think of this as taking away $n$ items from a total tally of $m$. For instance, suppose I want to calculate $3 - 2$. First, I count up to 3:
+
+\begin{terminology}
+  To compute the answer to a problem with the form $m - n = p$, we take away $n$ from $m$ to get $p$. We call $p$ the \vocab{difference} of $m$ and $n$.
+\end{terminology}
+
+\begin{diagram}
+
+  \draw[->] (0, 0) -- (10, 0);
+  \draw (0, 0.1) -- (0, -0.1) {};
+  \draw (1.5, 0.1) -- (1.5, -0.1) {};
+  \draw (3, 0.1) -- (3, -0.1) {};
+  \draw (4.5, 0.1) -- (4.5, -0.1) {};
+  \draw (6, 0.1) -- (6, -0.1) {};
+  \draw (7.5, 0.1) -- (7.5, -0.1) {};
+  \draw (9, 0.1) -- (9, -0.1) {};
+
+  \node (nats) at (-1, 0) {$\Nats/$};
+  \node (0) at (0, -0.5) {0};
+  \node (1) at (1.5, -0.5) {1};
+  \node (2) at (3, -0.5) {2};
+  \node (3) at (4.5, -0.5) {3};
+  \node (4) at (6, -0.5) {4};
+  \node (5) at (7.5, -0.5) {5};
+  \node (6) at (9, -0.5) {6};
+
+  \node at (0.75, 1.25) {$1$};
+  \node at (2.25, 1.25) {$2$};
+  \node at (3.75, 1.25) {$3$};
+
+  \draw[->,spaced] (0, 0) .. controls (0.5, 1) and (1, 1) .. (1.5, 0);
+  \draw[->,spaced] (1.5, 0) .. controls (2, 1) and (2.5, 1) .. (3, 0);
+  \draw[->,spaced] (3, 0) .. controls (3.5, 1) and (4, 1) .. (4.5, 0);
+
+\end{diagram} 
+
+Next, I need to take away $2$. So, I first take away one number (I substract $1$):
+
+\begin{diagram}
+
+  \draw[->] (0, 0) -- (10, 0);
+  \draw (0, 0.1) -- (0, -0.1) {};
+  \draw (1.5, 0.1) -- (1.5, -0.1) {};
+  \draw (3, 0.1) -- (3, -0.1) {};
+  \draw (4.5, 0.1) -- (4.5, -0.1) {};
+  \draw (6, 0.1) -- (6, -0.1) {};
+  \draw (7.5, 0.1) -- (7.5, -0.1) {};
+  \draw (9, 0.1) -- (9, -0.1) {};
+
+  \node (nats) at (-1, 0) {$\Nats/$};
+  \node (0) at (0, -0.5) {0};
+  \node (1) at (1.5, -0.5) {1};
+  \node (2) at (3, -0.5) {2};
+  \node (3) at (4.5, -0.5) {3};
+  \node (4) at (6, -0.5) {4};
+  \node (5) at (7.5, -0.5) {5};
+  \node (6) at (9, -0.5) {6};
+
+  \draw[->,space,dashed] (0, 0) .. controls (0.5, 1) and (1, 1) .. (1.5, 0);
+  \draw[->,space,dashed] (1.5, 0) .. controls (2, 1) and (2.5, 1) .. (3, 0);
+  \draw[->,space,dashed] (3, 0) .. controls (3.5, 1) and (4, 1) .. (4.5, 0);
+  
+  \node at (3.75, 2) {$-1$};
+  \draw[->,spaced] (4.5, 0.1) .. controls (4.25, 1.75) and (3.25, 1.75) .. (3, 0);
+
+\end{diagram} 
+
+\begin{aside}
+  \begin{remark}
+    To signify that we are taking away $1$, we can put a minus sign in front of the ``$1$,'' like this: ``$-1$.'' That symbolizes: ``take away one.'' Likewise, ``$-2$'' symbolizes ``take away two.''
+  \end{remark}
+\end{aside}
+
+Then I take away another number (now I am removing a total of $2$):
+
+\begin{diagram}
+
+  \draw[->] (0, 0) -- (10, 0);
+  \draw (0, 0.1) -- (0, -0.1) {};
+  \draw (1.5, 0.1) -- (1.5, -0.1) {};
+  \draw (3, 0.1) -- (3, -0.1) {};
+  \draw (4.5, 0.1) -- (4.5, -0.1) {};
+  \draw (6, 0.1) -- (6, -0.1) {};
+  \draw (7.5, 0.1) -- (7.5, -0.1) {};
+  \draw (9, 0.1) -- (9, -0.1) {};
+
+  \node (nats) at (-1, 0) {$\Nats/$};
+  \node (0) at (0, -0.5) {0};
+  \node (1) at (1.5, -0.5) {1};
+  \node (2) at (3, -0.5) {2};
+  \node (3) at (4.5, -0.5) {3};
+  \node (4) at (6, -0.5) {4};
+  \node (5) at (7.5, -0.5) {5};
+  \node (6) at (9, -0.5) {6};
+
+  \draw[->,space,dashed] (0, 0) .. controls (0.5, 1) and (1, 1) .. (1.5, 0);
+  \draw[->,space,dashed] (1.5, 0) .. controls (2, 1) and (2.5, 1) .. (3, 0);
+  \draw[->,space,dashed] (3, 0) .. controls (3.5, 1) and (4, 1) .. (4.5, 0);
+  
+  \node at (2.25, 2) {$-2$};
+  
+  \draw[->,spaced,dashed] (4.5, 0.1) .. controls (4.25, 1.75) and (3.25, 1.75) .. (3, 0);
+  \draw[->,spaced] (3, 0.1) .. controls (2.75, 1.75) and (1.75, 1.75) .. (1.5, 0);
+
+\end{diagram} 
+
+At the end of my counting, I have reached $1$, so the difference between $3$ and $2$ is $1$.
+
+This is all well and good, but what happens if I want to take away more than I start with? For instance, how do I calculate $1 - 3$? To do that, I start by counting up to 1:
+
+\begin{diagram}
+
+  \draw[->] (0, 0) -- (10, 0);
+  \draw (0, 0.1) -- (0, -0.1) {};
+  \draw (1.5, 0.1) -- (1.5, -0.1) {};
+  \draw (3, 0.1) -- (3, -0.1) {};
+  \draw (4.5, 0.1) -- (4.5, -0.1) {};
+  \draw (6, 0.1) -- (6, -0.1) {};
+  \draw (7.5, 0.1) -- (7.5, -0.1) {};
+  \draw (9, 0.1) -- (9, -0.1) {};
+
+  \node (nats) at (-1, 0) {$\Nats/$};
+  \node (0) at (0, -0.5) {0};
+  \node (1) at (1.5, -0.5) {1};
+  \node (2) at (3, -0.5) {2};
+  \node (3) at (4.5, -0.5) {3};
+  \node (4) at (6, -0.5) {4};
+  \node (5) at (7.5, -0.5) {5};
+  \node (6) at (9, -0.5) {6};
+
+  \node at (0.75, 1.25) {$1$};
+
+  \draw[->,space] (0, 0) .. controls (0.5, 1) and (1, 1) .. (1.5, 0);
+
+\end{diagram} 
+
+Then I need to take away $3$. So I first take away $1$ (i.e., I subtract $1$):
+
+\begin{diagram}
+
+  \draw[->] (0, 0) -- (10, 0);
+  \draw (0, 0.1) -- (0, -0.1) {};
+  \draw (1.5, 0.1) -- (1.5, -0.1) {};
+  \draw (3, 0.1) -- (3, -0.1) {};
+  \draw (4.5, 0.1) -- (4.5, -0.1) {};
+  \draw (6, 0.1) -- (6, -0.1) {};
+  \draw (7.5, 0.1) -- (7.5, -0.1) {};
+  \draw (9, 0.1) -- (9, -0.1) {};
+
+  \node (nats) at (-1, 0) {$\Nats/$};
+  \node (0) at (0, -0.5) {0};
+  \node (1) at (1.5, -0.5) {1};
+  \node (2) at (3, -0.5) {2};
+  \node (3) at (4.5, -0.5) {3};
+  \node (4) at (6, -0.5) {4};
+  \node (5) at (7.5, -0.5) {5};
+  \node (6) at (9, -0.5) {6};
+
+  \draw[->,space,dashed] (0, 0) .. controls (0.5, 1) and (1, 1) .. (1.5, 0);
+
+  \node at (0.75, 2) {$-1$};
+  \draw[->,spaced] (1.5, 0.1) .. controls (1.25, 1.75) and (0.25, 1.75) .. (0, 0);
+
+\end{diagram}
+
+Then, I need to take away two more. But where can I go from here? How do I take any more away?
+
+\begin{aside}
+  \begin{remark}
+    We have gone back to the initial starting point (zero). How can we take away any more? There is nothing more to take away, because with the natural numbers, there are no \vocab{negative numbers}.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \draw[->] (0, 0) -- (10, 0);
+  \draw (0, 0.1) -- (0, -0.1) {};
+  \draw (1.5, 0.1) -- (1.5, -0.1) {};
+  \draw (3, 0.1) -- (3, -0.1) {};
+  \draw (4.5, 0.1) -- (4.5, -0.1) {};
+  \draw (6, 0.1) -- (6, -0.1) {};
+  \draw (7.5, 0.1) -- (7.5, -0.1) {};
+  \draw (9, 0.1) -- (9, -0.1) {};
+
+  \node (nats) at (-1, 0) {$\Nats/$};
+  \node (0) at (0, -0.5) {0};
+  \node (1) at (1.5, -0.5) {1};
+  \node (2) at (3, -0.5) {2};
+  \node (3) at (4.5, -0.5) {3};
+  \node (4) at (6, -0.5) {4};
+  \node (5) at (7.5, -0.5) {5};
+  \node (6) at (9, -0.5) {6};
+
+  \draw[->,space,dashed] (0, 0) .. controls (0.5, 1) and (1, 1) .. (1.5, 0);
+
+  \draw[->,spaced,dashed] (1.5, 0.1) .. controls (1.25, 1.75) and (0.25, 1.75) .. (0, 0);
+
+  \node at (-1.45, 0.9) {??};
+  \node at (-0.5, 1.85) {??};
+  \draw[->,spaced] (0, 0.1) .. controls (-0.25, 1.75) and (-1.25, 1.75) .. (-1.5, 1);
+
+\end{diagram}
+
+We have gone back to our starting point (zero), and so we can't take away any more. Hence, 1 - 3 actually can't be computed if we use the natural numbers!
+
+If we really want to keep track of financial debts and other matters that involve subtraction, we need to include negative numbers, so that we can keep on going counting backwards when we need to go below zero.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Integers}
+
+\begin{terminology}
+  We write each negative number by putting a minus sign in front of it. So ``$1$'' because ``$-1$,'' ``$2$'' becomes ``$-2$,'' and so on.
+\end{terminology}
+
+\newthought{Let's add the negative numbers} to our set of natural numbers. Here is the set of negative whole numbers:
+
+\begin{equation*}
+  \{ \ldots, -3, -2, -1 \}
+\end{equation*}
+
+Let's union that set with $\Nats/$, so that we can combine those negative numbers and the natural numbers into one big set:
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:operations-on-sets} that the \vocab{union} of a set $\set{A}$ and a set $\set{B}$ is the set we get when we combine all of the elements from both $\set{A}$ and $\set{B}$.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \{ \ldots, -3, -2, -1 \} \cup \Nats/
+\end{equation*}
+
+Or, to write it out the members more explicitly:
+
+\begin{equation*}
+  \{ \ldots, -3, -2, -1, 0, 1, 2, 3, \ldots \}
+\end{equation*}
+
+Is this set identical to the natural numbers? No, it is not. Two sets are equal if they have the same elements, and this set has more elements than $\Nats/$. So this is a \emph{different} set. We call it the \vocab{integers}, and we denote it like this: 
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:the-composition-of-sets} that two sets $\set{A}$ and $\set{B}$ are \vocab{equal} if every element of $\set{A}$ is also in $\set{B}$ and vice versa.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \Ints/
+\end{equation*}
+
+Read that aloud like so: ``the set of integers'' (or, if you like, you can just call it ``Z'').
+
+So, the integers are defined as the set of natural numbers, plus all of the negative numbers too. Hence, we can write it out like this:
+
+\begin{equation*}
+  \Ints/ = \{ \ldots, -3, -2, -1 \} \cup \Nats/
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:the-composition-of-sets} that a set $\set{A}$ is a \vocab{subset} of another set $\set{B}$ if every element of $\set{A}$ is also an element of $\set{B}$. Notice here that $\Nats/$ is a subset of $\Ints/$, since every natural number $n \in \Nats/$ is an element of $\Ints/$ too. Hence: $\Nats/ \subset \Ints/$.
+  \end{remark}
+\end{aside}
+
+Or, to write out the individual members explicitly:
+
+\begin{equation*}
+  \Ints/ = \{ \ldots, -3, -2, -1, 0, 1, 2, 3, \ldots \}
+\end{equation*}
+
+It is convenient to think of the integers as if they live evenly spaced on a number line that extends in both directions:
+
+\begin{diagram}
+
+  \draw[<->] (-1, 0) -- (10, 0);
+  \draw (0, 0.1) -- (0, -0.1) {};
+  \draw (1.5, 0.1) -- (1.5, -0.1) {};
+  \draw (3, 0.1) -- (3, -0.1) {};
+  \draw (4.5, 0.1) -- (4.5, -0.1) {};
+  \draw (6, 0.1) -- (6, -0.1) {};
+  \draw (7.5, 0.1) -- (7.5, -0.1) {};
+  \draw (9, 0.1) -- (9, -0.1) {};
+
+  \node (ints) at (-1.5, 0) {$\Ints/$};
+  \node (-3) at (0, -0.5) {-3};
+  \node (-2) at (1.5, -0.5) {-2};
+  \node (-1) at (3, -0.5) {-1};
+  \node (0) at (4.5, -0.5) {0};
+  \node (1) at (6, -0.5) {1};
+  \node (2) at (7.5, -0.5) {2};
+  \node (3) at (9, -0.5) {3};
+
+\end{diagram} 
+
+\begin{aside}
+  \begin{remark}
+    When thinking about the integers on a number line, be careful: we must jump from each whole number to the next. We cannot move part way in between the tick marks, and get to (say) ``two-and-a-half.'' The integers includes only whole numbers: two, three, negative three, and so on. There are no fractions or parts of numbers in between.
+  \end{remark}
+\end{aside}
+
+Now it is possible to compute our earlier subtraction problem: $1 - 3$. I first count up to $1$:
+
+\begin{diagram}
+
+  \draw[<->] (-1, 0) -- (10, 0);
+  \draw (0, 0.1) -- (0, -0.1) {};
+  \draw (1.5, 0.1) -- (1.5, -0.1) {};
+  \draw (3, 0.1) -- (3, -0.1) {};
+  \draw (4.5, 0.1) -- (4.5, -0.1) {};
+  \draw (6, 0.1) -- (6, -0.1) {};
+  \draw (7.5, 0.1) -- (7.5, -0.1) {};
+  \draw (9, 0.1) -- (9, -0.1) {};
+
+  \node (ints) at (-1.5, 0) {$\Ints/$};
+  \node (-3) at (0, -0.5) {-3};
+  \node (-2) at (1.5, -0.5) {-2};
+  \node (-1) at (3, -0.5) {-1};
+  \node (0) at (4.5, -0.5) {0};
+  \node (1) at (6, -0.5) {1};
+  \node (2) at (7.5, -0.5) {2};
+  \node (3) at (9, -0.5) {3};
+
+  \node at (5.25, 1.25) {$+1$};
+  \draw[->,space] (4.5, 0) .. controls (5, 1) and (5.5, 1) .. (6, 0);
+
+\end{diagram} 
+
+Then I remove $3$ by counting backwards three tick marks:
+
+\begin{diagram}
+
+  \draw[<->] (-1, 0) -- (10, 0);
+  \draw (0, 0.1) -- (0, -0.1) {};
+  \draw (1.5, 0.1) -- (1.5, -0.1) {};
+  \draw (3, 0.1) -- (3, -0.1) {};
+  \draw (4.5, 0.1) -- (4.5, -0.1) {};
+  \draw (6, 0.1) -- (6, -0.1) {};
+  \draw (7.5, 0.1) -- (7.5, -0.1) {};
+  \draw (9, 0.1) -- (9, -0.1) {};
+
+  \node (ints) at (-1.5, 0) {$\Ints/$};
+  \node (-3) at (0, -0.5) {-3};
+  \node (-2) at (1.5, -0.5) {-2};
+  \node (-1) at (3, -0.5) {-1};
+  \node (0) at (4.5, -0.5) {0};
+  \node (1) at (6, -0.5) {1};
+  \node (2) at (7.5, -0.5) {2};
+  \node (3) at (9, -0.5) {3};
+
+  \draw[->,space,dashed] (4.5, 0) .. controls (5, 1) and (5.5, 1) .. (6, 0);
+  
+  \node at (5.25, 1.75) {$-1$};
+  \node at (3.75, 1.75) {$-2$};
+  \node at (2.25, 1.75) {$-3$};
+  \draw[->,spaced] (6, 0.1) .. controls (5.75, 1.75) and (4.75, 1.75) .. (4.5, 0);
+  \draw[->,spaced] (4.5, 0.1) .. controls (4.25, 1.75) and (3.25, 1.75) .. (3, 0);
+  \draw[->,spaced] (3, 0.1) .. controls (2.75, 1.75) and (1.75, 1.75) .. (1.5, 0);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    If there is a need to be clear, \mathers/ often specify which set of numbers they are operating on. It is common to hear a \mather/ say something like this, ``think of addition on $\Nats/$,'' or ``let's take subtraction on $\Ints/$.''
+  \end{remark}
+\end{aside}
+
+At the end of my counting process, I have reached $-2$, so the difference between $1$ and $3$ is negative $2$.
+
+Notice an important fact about subtraction: it matters whether you are using the natural numbers, or the integers. For $\Ints/$, subtraction works as we all expect (we can go into the negative numbers). But for $\Nats/$, subtraction does not always work. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about another set of numbers: the integers.
+
+\begin{itemize}
+
+  \item The \vocab{integers}, which we denote as $\Ints/$, are defined as the union of the natural numbers and all the negative whole numbers. Hence: $\Ints/ = \{ \ldots, -2, -1 \} \cup \Nats/$.
+  
+  \item Hence, $\Ints/$ includes $\Nats/$. That is, $\Nats/$ is a subset of $\Ints/$: $\Nats/ \subset \Ints/$.
+  
+  \item Subtraction works as expected for $\Ints/$, but it cannot be done with $\Nats/$ if the result goes below zero.
+
+\end{itemize}
+
+
+\end{document}

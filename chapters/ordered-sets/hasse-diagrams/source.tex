@@ -1,0 +1,270 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Hasse Diagrams}
+\label{ch:hasse-diagrams}
+
+\newtopic{I}{n this chapter}, we will look at a special way to draw ordered sets. It is a lot more compact than the graphs we have been drawing. These diagrams of ordered sets are called \vocab{Hasse diagrams}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Diagrams}
+
+\begin{terminology}
+  A \vocab{Hasse} diagram is a special kind of diagram that we use to draw ordered sets. In a Hasse diagram, we draw the dots in order from bottom to top, and we connect the dots with lines to show chains.
+\end{terminology}
+
+\newthought{There is a special kind of diagram} that we can use to draw ordered sets. It is called a \vocab{Hasse diagram} (pronounced ``HASS-uh diagram''). 
+
+In a Hasse diagram, we draw chains of dots and lines going upwards. The upwards direction shows the ordering, and the chaining shows which dots are chained.
+
+Because we draw these diagrams with the ordering going upwards, we can always tell if two dots $x$ and $y$ are ordered, just by looking at the diagram. The rule is this: if one dot $x$ is lower than another dot $y$ in a chain, then $\ordered{x}{y}$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Examples}
+
+\begin{fexample}
+
+Suppose we have an ordered set $\struct{S}= (\set{A}, \order/)$, where $\set{A} = \{ 3, 6, 12 \}$, and $\order/$ totally orders these numbers from smallest to biggest. Hence:
+
+\begin{equation*}
+  \ordered{3}{6} \hskip 2cm \ordered{6}{12} \hskip 2cm \ordered{3}{12}
+\end{equation*}
+
+To draw a Hasse diagram, we first draw the dots in order going upwards:
+
+\begin{aside}
+  \begin{remark}
+    We always draw the order going \vocab{upwards}, so we put $3$ at the bottom, and $12$ at the top of the picture.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[odot] (12) at (0, 2) [label=right:$12$] {};
+  \node[odot] (6) at (0, 1) [label=right:$6$] {};
+  \node[odot] (3) at (0, 0) [label=right:$3$] {};
+
+\end{diagram}
+
+Then we draw lines to show the chaining:
+
+\begin{diagram}
+
+  \node[odot] (12) at (0, 2) [label=right:$12$] {};
+  \node[odot] (6) at (0, 1) [label=right:$6$] {};
+  \node[odot] (3) at (0, 0) [label=right:$3$] {};
+
+  \draw (3) to (6);
+  \draw (6) to (12);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    We connect up all items in a \vocab{chain} to show transitivity. So, we draw a line between $3$ and $6$, and then between $6$ and $12$. This also connects up $3$ and $12$, by putting them in the same chain.
+  \end{remark}
+\end{aside}
+
+We can see that we have a single chain here, going from $3$ up through $12$. We also know that any dot lower in the chain is prior to any dot higher in the chain. Hence, we can see just from the picture that $\ordered{3}{6}$, and $\ordered{6}{12}$. Also, we can tell that $\ordered{3}{12}$, because $3$ is lower than $12$ in the same chain.
+
+This Hasse diagram is much simpler than the graphs we have been drawing. The graph drawing has lots more arrows. Look at the two side by side:
+
+\begin{diagram}
+
+  % Graph
+  \node (graph) at (-3, -1) {Graph};
+  \node[dot] (12a) at (-3, 2.5) [label=right:$12$] {};
+  \node[dot] (6a) at (-3, 1.25) [label=right:$6$] {};
+  \node[dot] (3a) at (-3, 0) [label=right:$3$] {};
+
+  \draw[->,space] (3a) to (6a);
+  \draw[->,space] (6a) to (12a);
+  \draw[->,space] (3a) to[out=135,in=225] (12a);
+  \draw[->,space] (3a) to[looseness=30,out=300,in=60] (3a);
+  \draw[->,space] (6a) to[looseness=30,out=300,in=60] (6a);
+  \draw[->,space] (12a) to[looseness=40,out=300,in=60] (12a);
+
+  % Hasse diagram
+  \node (hasse) at (3, -1) {Hasse diagram};
+  \node[odot] (12) at (3, 2.5) [label=right:$12$] {};
+  \node[odot] (6) at (3, 1.25) [label=right:$6$] {};
+  \node[odot] (3) at (3, 0) [label=right:$3$] {};
+
+  \draw (3) to (6);
+  \draw (6) to (12);
+
+\end{diagram}%
+%
+\begin{aside}
+  \begin{remark}
+    With a Hasse diagram of a non-strict order $\order/$, we let the reader fill in the details about reflexivity (each point has a self-loop) and transitivity (lower items are connected to higher items in the same chain).
+  \end{remark}
+\end{aside}
+
+The Hasse diagram is a lot simpler, and it contains the same information. Basically, when we draw a Hasse diagram, we only draw the chains, and we let our readers use their imagination to fill in the self-loops and the other transitive arrows.
+
+\end{fexample}
+
+\begin{fexample}
+
+Let's look at another example. Suppose we have an ordered set $\struct{S} = (\set{A}, \order/)$, where the base set is this:
+
+\begin{equation*}
+  \set{A} = \{ a, b, c, d, e \}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    It is a good idea to try and draw (i) a graph, and (ii) a Hasse diagram of this ordered set on your own. Then compare your drawings with the pictures below.
+  \end{remark}
+\end{aside}
+
+And the (non-strict) ordering is this:
+
+\begin{align*}
+  \order/~~=~\{ &(a, a), (b, b), (c, c), (d, d), (e, e), \\
+                &(a, c), (a, e), (b, d), (b, e), (c, e), (d, e) \}
+\end{align*}
+
+Here is the graph and the Hasse diagram of this ordered set, side by side:
+
+\begin{diagram}
+
+  % Graph
+  \node (graph) at (-3, -1) {Graph};
+  \node[dot] (e1) at (-3, 2) [label=above:$e$] {};
+  \node[dot] (d1) at (-1.5, 1) [label=above right:$d$] {};
+  \node[dot] (c1) at (-4.5, 1) [label=above left:$c$] {};
+  \node[dot] (b1) at (-1.5, 0) [label=right:$b$] {};
+  \node[dot] (a1) at (-4.5, 0) [label=left:$a$] {};
+
+  \draw[->,space] (a1) to[looseness=30,out=240,in=120] (a1);
+  \draw[->,space] (b1) to[looseness=30,out=300,in=60] (b1);
+  \draw[->,space] (c1) to[looseness=30,out=180,in=100] (c1);
+  \draw[->,space] (d1) to[looseness=30,out=0,in=80] (d1);
+  \draw[->,space] (e1) to[looseness=30,out=150,in=30] (e1);
+  \draw[->,space] (a1) to (c1);
+  \draw[->,space] (b1) to (d1);
+  \draw[->,space] (c1) to (e1);
+  \draw[->,space] (d1) to (e1);
+  \draw[->,space] (a1) to (e1);
+  \draw[->,space] (b1) to (e1);
+
+  % Hasse diagram
+  \node (hasse) at (3, -1) {Hasse diagram};
+  \node[odot] (e) at (3, 2) [label=above:$e$] {};
+  \node[odot] (c) at (1.5, 1) [label=above left:$c$] {};
+  \node[odot] (d) at (4.5, 1) [label=above right:$d$] {};
+  \node[odot] (a) at (1.5, 0) [label=left:$a$] {};
+  \node[odot] (b) at (4.5, 0) [label=right:$b$] {};
+
+  \draw (a) to (c);
+  \draw (b) to (d);
+  \draw (c) to (e);
+  \draw (d) to (e);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \sectionref{sec:ordered-sets-definitions} that two points $x$ and $y$ in an ordered set are \vocab{incomparable} if neither $\ordered{x}{y}$ nor $\ordered{y}{x}$. In this diagram, what are all the pairs of incomparable points?
+  \end{remark}
+\end{aside}
+
+Again, it is obvious that the Hasse diagram is simpler, and yet it tells us the same information. For example, we can see that $\ordered{a}{c}$ and $\ordered{c}{e}$, but we can also see that $\ordered{a}{e}$ because $a$ and $e$ are in the same chain, and $a$ is lower than $e$ in the chain. We can also see that, for instance, $a$ and $b$ are \vocab{incomparable}.
+
+\end{fexample}
+
+\begin{example}
+
+Let $\struct{S} = (\set{A}, \order/)$ be an ordered set where the base set $\set{A}$ is defined like this:
+
+\begin{equation*}
+  \set{A} = \{ a, b, c, d, e, j, k, m, n, p, q \}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    Again, it would be a good idea to try and draw a graph and a Hasse diagram of this ordered set on your own, first. Then compare your drawings with the pictures below.
+  \end{remark}
+\end{aside}
+
+And the ordering relation $\order/$ is defined like this:
+
+\begin{align*}
+  \order/~~=~\{ &(a, a), (b, b), (c, c), (d, d), (e, e), (j, j), \\
+                &(k, k), (m, m), (n, n), (p, p), (q, q), \\
+                &(a, b), (a, d), (a, e), (a, k), (a, c), (a, j), \\
+                &(b, d), (b, e), (b, k), (d, k), (e, k), \\
+                &(c, d), (c, j), (c, k), (j, k), \\
+                & (m, n), (m, p), (m, q), (n, p), (n, q) \}
+\end{align*}
+
+The Hasse diagram for this ordered set looks like this:
+
+\begin{diagram}
+
+  \node[odot] (k) at (0, 3) [label=above:{$k$}] {};
+  \node[odot] (j) at (1, 2) [label=right:{$j$}] {};
+  \node[odot] (e) at (-1, 2) [label=left:{$e$}] {};
+  \node[odot] (d) at (0, 2) [label=below:{$d$}] {};
+  \node[odot] (c) at (1, 1) [label=right:{$c$}] {};
+  \node[odot] (b) at (-1, 1) [label=left:{$b$}] {};
+  \node[odot] (a) at (0, 0) [label=below:{$a$}] {};
+
+  \draw (a) to (b);
+  \draw (a) to (c); 
+  \draw (b) to (d);
+  \draw (c) to (d);
+  \draw (b) to (e);
+  \draw (c) to (j);
+  \draw (e) to (k);
+  \draw (j) to (k);
+  \draw (d) to (k);
+  
+  \node[odot] (m) at (-4, 0) [label=left:{$m$}] {};
+  \node[odot] (n) at (-4, 1.5) [label=left:{$n$}] {};
+  \node[odot] (p) at (-4, 3) [label=left:{$p$}] {};
+  \node[odot] (q) at (-3, 3) [label=right:{$q$}] {};
+  
+  \draw (m) to (n);
+  \draw (n) to (p);
+  \draw (n) to (q);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    It is obvious that all of the items in the left piece are \vocab{incomparable} with all of the items in the right piece. But there are incomparable points inside each piece too. Can you find all the dots that are incomparable in the left piece? How about the right piece? 
+  \end{remark}
+\end{aside}
+
+We can see from the picture that this ordered set has quite an odd structure. It actually has two disjoint pieces. None of the items in the left piece are comparable with any in the right piece. We might think of this as an ordering structure that has two parallel ordering tracks.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we looked at \vocab{Hasse diagrams}, which are special ways to draw ordered sets. 
+
+\begin{itemize}
+
+  \item In a Hasse diagram, we draw the items in the base set in order, going upwards, and we connect the dots with lines to show chains.
+  
+  \item The basic rule is this. Suppose $x$ and $y$ are dots in the same chain (i.e., if there is an unbroken chain of dots and lines between them). If $x$ is lower on the chain than $y$, then $x \order/ y$ in the ordering.
+
+  \item We do not draw reflexive self-loops, and transitive arrows. Instead, we let the reader fill these in with their own imagination.
+
+\end{itemize}
+
+\end{document}

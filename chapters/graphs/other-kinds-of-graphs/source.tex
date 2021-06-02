@@ -1,0 +1,196 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Other Kinds of Graphs}
+\label{ch:other-kinds-of-graphs}
+
+\newtopic{I}{n \chapterref{ch:networks} we defined a graph} as a set of objects with some connections. If we add some restrictions on the kinds of connections that we allow, then we can distinguish some further kinds of graphs. In particular, we can distinguish \vocab{simple graphs}, \vocab{multigraphs}, \vocab{pseudographs}, and \vocab{directed graphs}. Usually, we deal with simple graphs, but it's worth knowing about the other types.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Simple Graphs}
+
+A \vocab{simple graph} is a graph with the following properties:
+
+\begin{itemize}
+
+  \item There can be at most only \vocab{one edge} between vertices. In a drawing, that means there can be at most only one line between two points. There cannot be two lines (edges) going between points.
+  
+  \item \vocab{No self-loops} are allowed. 
+
+\end{itemize}
+
+Here is an example of a simple graph:
+
+\begin{diagram}
+
+  \node[dot] (v1) at (0, 0.75) {};
+  \node[dot] (v2) at (3, 0.5) {};
+  \node[dot] (v3) at (-3, 0.25) {};
+  \node[dot] (v4) at (-1.5, -0.25) {};
+  \node[dot] (v5) at (1, -0.3) {};
+
+  \draw (v1) to (v3);
+  \draw (v1) to (v4);
+  \draw (v1) to (v5);
+  \draw (v4) to (v5);
+  \draw (v2) to (v5);
+
+\end{diagram}
+
+We can see that there is at most one edge between any two vertices, and there are no self-loops.
+
+Here is an example of a graph that is not a simple graph:
+
+\begin{diagram}
+
+  \node[dot] (v1) at (0, 0.75) {};
+  \node[dot] (v2) at (3, 0.5) {};
+  \node[dot] (v3) at (-3, 0.25) {};
+  \node[dot] (v4) at (-1.5, -0.25) {};
+  \node[dot] (v5) at (1, -0.3) {};
+
+  \draw (v1) to (v3);
+  \draw (v1) to (v4);
+  \draw (v1) to (v5);
+  \draw (v4) to (v5);
+  \draw (v2) to (v5);
+  \draw (v3) to[looseness=35] (v3);
+
+\end{diagram}
+
+This fails to be a simple graph because it has a self-loop.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Multigraphs}
+
+A \vocab{multigraph} is a graph with the following properties:
+
+\begin{itemize}
+
+  \item There can be \vocab{many edges} between vertices. In a drawing, that means there can be more than one line between two points.
+  
+  \item In some \math/ books, multigraphs are not allowed to have self-loops. In other \math/ books, self-loops are allowed. When reading about graphs, it is always best to check how the authors define multigraphs.
+
+\end{itemize}
+
+Here is an example of a multigraph:
+
+\begin{diagram}
+
+  \node[dot] (v1) at (0.5, 0.75) {};
+  \node[dot] (v2) at (3, 0.5) {};
+  \node[dot] (v3) at (-3, 0.25) {};
+  \node[dot] (v4) at (-2, -0.25) {};
+  \node[dot] (v5) at (1, -0.5) {};
+
+  \draw (v1) to[out=165,in=30] (v3);
+  \draw (v1) to[out=180,in=15] (v3);
+  \draw (v1) to[looseness=1.5,out=350,in=60] (v5);
+  \draw (v1) to (v5);
+  \draw (v4) to[out=15,in=165] (v5);
+  \draw (v4) to[out=345,in=195] (v5);
+  \draw (v4) to[out=320,in=230] (v5);
+  \draw (v2) to (v5);
+
+\end{diagram}
+
+We can see that this graph has more than one edge between some of the points, so it is multigraph.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pseudographs}
+
+A \vocab{pseudograph} is a graph with the following properties:
+
+\begin{itemize}
+  
+  \item \vocab{Self-loops} are allowed.
+  
+  \item In some \math/ books, \vocab{many edges} between vertices are allowed, like multigraphs. But in other \math/ books, pseudographs do not allow multiple edges between the same points. When reading about graphs, it is always best to check how the authors define pseudographs.
+
+\end{itemize}
+
+Here is an example of a pseudograph:
+
+\begin{diagram}
+
+  \node[dot] (v1) at (0.5, 0.75) {};
+  \node[dot] (v2) at (3, 0.5) {};
+  \node[dot] (v3) at (-3, 0.25) {};
+  \node[dot] (v5) at (1, -0.5) {};
+
+  \draw (v3) to[looseness=35,out=120,in=240] (v3);
+  \draw (v1) to[out=165,in=30] (v3);
+  \draw (v1) to[out=180,in=15] (v3);
+  \draw (v1) to (v5);
+  \draw (v3) to[out=345,in=195] (v5);
+  \draw (v3) to[out=320,in=230] (v5);
+  \draw (v2) to (v5);
+  \draw (v2) to[looseness=35,out=60,in=300] (v2);
+
+\end{diagram}
+
+Unlike a simple graph, we can see that this graph has self-loops, so it is a pseudograph.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Directed Graphs}
+
+Usually, when we talk about graphs, the edges represent a two-way connection. If $a$ is connected to $b$, then $b$ is connected to $a$, by the same edge.
+
+However, there are cases where we want the connections to go only one-way. (For instance, maybe we are trying to model all the one-way streets in a city.) When the direction of the edges matter, we draw the edges as arrows, and we call the graph a \vocab{directed graph}. So a directed graph is a graph with this property:
+
+\begin{itemize}
+  \item Each edge goes one-way: one vertex is the \vocab{source}, and the other is the \vocab{destination}, of the edge.
+\end{itemize}
+
+Here is an example of a directed graph:
+
+\begin{diagram}
+
+  \node[dot] (v1) at (0, 0.75) {};
+  \node[dot] (v2) at (3, 0.5) {};
+  \node[dot] (v3) at (-3, 0.25) {};
+  \node[dot] (v4) at (-1.5, -0.25) {};
+  \node[dot] (v5) at (1, -0.3) {};
+
+  \draw[->,space] (v1) to (v3);
+  \draw[<-,space] (v1) to (v4);
+  \draw[->,space] (v1) to (v5);
+  \draw[->,space] (v4) to (v5);
+  \draw[<-,space] (v2) to (v5);
+
+\end{diagram}
+
+Directed graphs can be simple, multi, or pseudo. If they have at most one edge between points and no self-loops, then it's a directed simple graph. If there are multiple edges, it is a directed multigraph. If it allows self-loops as well, then it is a directed pseudograph.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about a few different types of graphs. 
+
+\begin{itemize}
+
+  \item \vocab{Simple graphs} are graphs with no self-loops and at most one connection between any two vertices.
+  
+  \item \vocab{Multigraphs} are graphs that allow more than one connection between any two vertices. Some \math/ books allow multigraphs to have self-loops, but other \math/ books do not. It is always best to check how the authors of whatever book you are reading actually define multigraphs.
+  
+  \item \vocab{Pseudographs} are graphs that allow self-loops. Some \math/ books allow pseudographs to have multiple edges between the same vertices, but other \math/ books do not. It is always best to check how the authors of whatever book you are reading actually define pseudographs.
+  
+  \item \vocab{Directed graphs} are graphs where the direction of the connection matters. We usually draw the connections with arrows instead of lines, so we can indicate which direction the connection goes.
+
+\end{itemize}
+
+
+\end{document}

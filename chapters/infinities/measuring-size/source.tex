@@ -1,0 +1,538 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Measuring Size}
+\label{ch:measuring-size}
+
+\begin{ponder}
+  How do you measure the size of a collection? Do you count it? Or do you compare it to another collection whose size you do know? Can you think of a way to figure out if infinitely large collections are the same size?
+\end{ponder}
+
+\newtopic{H}{ow big is infinity?} Is there even a way to make the idea of infinity and ``how big'' it is precise? Are some infinitely large collections bigger than others? In this chapter, we look at how we can \vocab{compare} the size of infinitely large collections.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Size by Counting}
+
+\newthought{How do we figure out the size} of a set? One way to do it would be to just sit down and count how many objects it has. For instance, suppose I have a set $\set{A}$ that looks like this:
+
+\begin{diagram}
+
+  \node (A) at (3, 1.375) {$\set{A}$};
+  \node[dot] (a) at (3, 0.5) [label=right:{$a$}] {};
+  \node[dot] (b) at (2, 0) [label=right:{$b$}] {};
+  \node[dot] (c) at (3.5, -0.5) [label=right:{$c$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+\end{diagram}
+
+To count this, I would point to one element, and say ``there's one:''
+
+\begin{diagram}
+
+  \node (1) at (-2.75, 0.5) {$1$};
+
+  \node (A) at (3, 1.375) {$\set{A}$};
+  \node[dot] (a) at (3, 0.5) [label=right:{$a$}] {};
+  \node[dot] (b) at (2, 0) [label=right:{$b$}] {};
+  \node[dot] (c) at (3.5, -0.5) [label=right:{$c$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+  \draw[->,space] (1) to (a);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Notice that I could count these objects in a different order, and I'd get the same answer. For instance: 
+    
+    \begin{diagram}
+
+      \node (1) at (0, 0.75) {$1$};
+      \node (2) at (0, 0) {$2$};
+      \node (3) at (0, -0.75) {$3$};
+
+      \node (A) at (3, 1.375) {$\set{A}$};
+      \node[dot] (a) at (3, 0.5) [label=right:{$a$}] {};
+      \node[dot] (b) at (2, 0) [label=right:{$b$}] {};
+      \node[dot] (c) at (3.5, -0.5) [label=right:{$c$}] {};
+      \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+      \draw[->,space] (1) to (b);
+      \draw[->,space] (2) to (a);
+      \draw[->,space] (3) to (c);
+
+    \end{diagram}
+  \end{remark}
+\end{aside}
+
+Then I would point to another element and say, ``there's two'':
+
+\begin{diagram}
+
+  \node (1) at (-2.75, 0.5) {$1$};
+  \node (2) at (-3.75, 0) {$2$};
+
+  \node (A) at (3, 1.375) {$\set{A}$};
+  \node[dot] (a) at (3, 0.5) [label=right:{$a$}] {};
+  \node[dot] (b) at (2, 0) [label=right:{$b$}] {};
+  \node[dot] (c) at (3.5, -0.5) [label=right:{$c$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+  \draw[->,space] (1) to (a);
+  \draw[->,space] (2) to (b);
+
+\end{diagram}
+
+Then I would point to the last element and say, ``there's three'':
+
+\begin{diagram}
+
+  \node (1) at (-2.75, 0.5) {$1$};
+  \node (2) at (-3.75, 0) {$2$};
+  \node (3) at (-2.25, -0.5) {$3$};
+
+  \node (A) at (3, 1.375) {$\set{A}$};
+  \node[dot] (a) at (3, 0.5) [label=right:{$a$}] {};
+  \node[dot] (b) at (2, 0) [label=right:{$b$}] {};
+  \node[dot] (c) at (3.5, -0.5) [label=right:{$c$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+  \draw[->,space] (1) to (a);
+  \draw[->,space] (2) to (b);
+  \draw[->,space] (3) to (c);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:the-size-of-sets} that the size of a set is how many objects it contains. We call the size of a set its \vocab{cardinality}. To denote the size of a set $\set{B}$, we write ``$\cardinality{\set{B}}$.'' To say that the size of $\set{B}$ is $10$ (i.e., to say that $\set{B}$ contains 10 objects), we write ``$\cardinality{\set{B}} = 10$.''
+  \end{remark}
+\end{aside}
+
+With that, I have finished counting, and so I can conclude that the \vocab{size} of $\set{A}$ is $3$. To use the technical terminology, its \vocab{cardinality} is 3:
+
+\begin{equation*}
+  \cardinality{\set{A}} = 3
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{What about infinity?}
+
+\newthought{If we have to count} the elements in a set to figure out its cardinality, what happens when we try to count the elements in an \vocab{infinite} set? 
+
+As an example, let's take the positive integers. Let's call this set $\PositiveInts/$, and say that it includes just the positive integers. Hence it is this:
+
+\begin{equation*}
+  \PositiveInts/ = \{ 1, 2, 3, \ldots ~\}
+\end{equation*}
+
+Suppose we want to determine the cardinality (size) of this set. Can we do it by counting it? Well, if we tried that, we would start at $1$, and we would count that. Then we would go to $2$, and we would count that. Then we would go to $3$, and we would count that. We would keep going. And going. And going.
+
+We would never finish our task of counting, since $\PositiveInts/$ keeps going forever. And if we never finish counting, we will never arrive at any particular \vocab{size} for the set we're trying to count.
+
+The moral of the story here is that if we want to calculate the \vocab{cardinality} of a set, then counting works fine for \vocab{finite sets}. However, it does not work for \vocab{infinite sets}. So how do we handle the size of infinite sets?
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Infinity Is Not a Number}
+
+\newthought{We need to be careful here}. We started by asking about the size of sets, and we looked at an example of a small set, containing only three elements. The size of this set was a particular number. In fact, it was $3$. 
+
+Now, what number is this exactly? Since we counted up to $3$, it must be a counting number (i.e., a natural number $\Nats/$). To be more precise, it is the third counting number that comes after nought. In other words, it is $\s{\s{\s{\nought/}}}$, where ``$3$'' is just the convenient name we use for it. So:
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:natural-numbers} that ``$\s{\s{\s{\nought/}}}$'' is ``the successor of the successor of the successor of nought,'' but since that's such a mouthful, we have a more convenient name for it: 3. 
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \s{\s{\s{\nought/}}} \in \Nats/ \hskip 2cm
+  \text{ i.e. } \hskip 2cm
+  3 \in \Nats/
+\end{equation*}
+
+If you think about it, if we count how many items are in any \vocab{finite} set, we will always end up with a natural number. E.g., try to count a set with 5 items in it, or 13 items in it, or 345,234,023 items in it, and so on. In each case, we count up to a particular natural number.
+
+So, we can say that the \vocab{size} of any finite set will be a \emph{particular} natural number. It will always be a particular element from inside the set of natural numbers.
+
+Let us set down a definition here, so we can be clear about what we mean. Let us agree to the following convention: when we say ``a particular number,'' we mean an individual \vocab{element} from the set of the natural numbers.
+
+\begin{terminology}
+  When we speak of a \vocab{particular number}, we mean some element from the set of natural numbers, i.e., some $n \in \Nats/$.
+\end{terminology}
+
+\begin{fdefinition}[Particular Numbers.]
+  When we speak of \vocab{a particular number}, we mean an element $n$ from the set of natural numbers, i.e., $n \in \Nats/$.
+\end{fdefinition}
+
+With that in mind, let's turn to infinite sets. What about the size of infinite sets? What is the size of, say, $\PositiveInts/$? 
+
+As we saw, we cannot ever \emph{count} the size of $\PositiveInts/$, because there will never be an end to the counting. No matter how big a number we count up to, there will always be one more after that that we could count up to, and then one more after that to count up to, and then \ldots and so on, forever.
+
+So, the size of $\PositiveInts/$ cannot ever be a \vocab{particular number}. And remember, by ``a particular number,'' we mean a member of $\Nats/$. So, the size of $\PositiveInts/$ is \emph{not} a natural number. 
+
+Still, we want to be able to talk about the \emph{size} of $\PositiveInts/$, even though we can't use a natural number to do it. So, let's just invent a special name for this size. Let's call it \vocab{infinity}. 
+
+\begin{terminology}
+  \vocab{Infinity} is a \vocab{size}, not a \vocab{particular number}. Specifically, it refers to the size of a never ending sequence (like $\PositiveInts/$ or $\Nats/$).
+\end{terminology}
+
+The word ``infinity'' is a \vocab{size}, not a \vocab{particular number}. As a tagline, let's just say this:
+
+\begin{center}
+  \emph{Infinity is not a number}
+\end{center}
+
+This tells us that we need to think about infinite sets purely in terms of \emph{size}, without bringing any counting into it. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Comparing for Size}
+
+\begin{aside}
+  \begin{remark}
+    If we merely \vocab{compare} two sets against each other to see if one is bigger, we do not need to count them. We simply pair them up, side by side, and see if there are any extras.
+
+    \begin{itemize}
+
+      \item When a teacher looks out at the classroom, they scan the desks in the room, to see which desks are empty. If all desks are full, then there's the same number of students and desks.
+
+      \item When you set the cutlery and plates out at the dinner table, you scan very quickly to see which plates are missing cutlery. If every plate has an accompanying cutlery, then you have an equal number of plates and cutlery sets.
+
+    \end{itemize}
+  \end{remark}
+\end{aside}
+
+\newthought{There is a way} to think about the sizes of sets, which doesn't involve doing any counting. We can simply \vocab{compare} two sets, and see if one is bigger than the other. 
+
+When we do this, we may not be able to say ``how many'' items there are in each set (because we aren't counting them), but we will be able to say things like ``this set has \emph{more} items than that one,'' or ``these two sets have the \emph{same} number of items.''
+
+The way we do it is this. We pair up the elements from the two sets, one by one, and we see if we can pair them all up. We take one from the first set and one from the second set, and pair those two off. Then we take another from the first set and another from the second set, and pair those two off. We keep going until we've paired off as many as we can. 
+
+When we get to the end of this, if there are any leftovers from one of the sets, then we know that set has \emph{more} items than the other one. If we get to the end and there are no leftovers, then we know the two sets are exactly the \emph{same} size.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Size by Isomorphism}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:kinds-of-functions} and \chapterref{ch:function-isomorphism} that a \vocab{bijective function} is an injective and surjective function, and it can only be constructed between two sets that are exactly the same size. If we can build a bijective function between two sets, then that is an \vocab{isomorphism}. It tells us that the two sets are exactly the same ``under the hood,'' so to speak. They differ only in the surface names of their elements.
+  \end{remark}
+\end{aside}
+
+\newthought{Think about the mechanism of pairing} that we just described. When we try to match up the items in two sets in an exact, one-to-one, reversible way, what do we call that? It's a \vocab{bijective function} (or \vocab{isomorphism}).
+
+Bijective functions can only be constructed between sets that are equal in size. So, if we can construct a bijective function between two sets, then we can conclude that they must be the same size.
+
+Let's put this down as a definition. Let's say that two sets are the \vocab{same size} (or synonymously, \vocab{equinumerous}) if we can construct a \vocab{bijective function} between them.
+
+\begin{terminology}
+  Two sets $\set{A}$ and $\set{B}$ are \vocab{equinumerous} if they have the same \vocab{cardinality} (size). We denote this by writing ``$\cardinality{\set{A}} = \cardinality{\set{B}}$.''
+\end{terminology}
+
+\begin{fdefinition}[Equinumerous sets]
+  \label{def:equinumerosity}
+  For any two sets $\set{A}$ and $\set{B}$, we will say that $\set{A}$ and $\set{B}$ are \vocab{equinumerous} if we can construct a bijective function $\funcsig{f}{\set{A}}{\set{B}}$. In other words, if we can construct a bijective function $\funcsig{f}{\set{A}}{\set{B}}$, then $\cardinality{\set{A}} = \cardinality{\set{B}}$.
+\end{fdefinition}
+
+\begin{fexample}
+\label{ex:measuring-size-non-bijection}
+
+Consider these two sets:
+
+\begin{diagram}
+
+  \node (nats) at (-3, 1.375) {$\set{A}$};
+  \node[dot] (p) at (-2.75, 0.5) [label=left:{$p$}] {};
+  \node[dot] (q) at (-3.75, 0) [label=left:{$q$}] {};
+  \node[dot] (r) at (-2.25, -0.5) [label=left:{$r$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1cm);
+
+  \node (A) at (3, 1.375) {$\set{B}$};
+  \node[dot] (a) at (3.25, 0.5) [label=right:{$a$}] {};
+  \node[dot] (b) at (2, 0.25) [label=right:{$b$}] {};
+  \node[dot] (c) at (2.25, -0.25) [label=right:{$c$}] {};
+  \node[dot] (d) at (3.5, -0.5) [label=right:{$d$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+\end{diagram}
+
+Are these two sets the same size? We will know that they are the same size if we can construct a bijective function between them. Let's try. Let's build an injective function $\func{f}$ from $\set{A}$ to $\set{B}$:
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:kinds-of-functions} that an \vocab{injective function} maps each element from the domain to a \emph{distinct} element in the codomain. It keeps the paths distinct, so to speak, in that each arrow goes to a different place. No two arrows end up at the same place. 
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (nats) at (-3, 1.375) {$\set{A}$};
+  \node[dot] (p) at (-2.75, 0.5) [label=left:{$p$}] {};
+  \node[dot] (q) at (-3.75, 0) [label=left:{$q$}] {};
+  \node[dot] (r) at (-2.25, -0.5) [label=left:{$r$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1cm);
+
+  \node (A) at (3, 1.375) {$\set{B}$};
+  \node[dot] (a) at (3.25, 0.5) [label=right:{$a$}] {};
+  \node[dot] (b) at (2, 0.25) [label=right:{$b$}] {};
+  \node[dot] (c) at (2.25, -0.25) [label=right:{$c$}] {};
+  \node[dot] (d) at (3.5, -0.5) [label=right:{$d$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+  \node (f) at (0, -1) {$\func{f}$};
+  \draw[->,space] (p) to (b);
+  \draw[->,space] (q) to (c);
+  \draw[->,space] (r) to (d);
+
+\end{diagram}
+
+First, let's pair off $p$ and $b$:
+
+\begin{diagram}
+
+  \node (nats) at (-3, 1.375) {$\set{A}$};
+  \node[dot] (p) at (-2.75, 0.5) [label=left:{$p$}] {};
+  \node[dot] (q) at (-3.75, 0) [label=left:{$q$}] {};
+  \node[dot] (r) at (-2.25, -0.5) [label=left:{$r$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1cm);
+
+  \node (A) at (3, 1.375) {$\set{B}$};
+  \node[dot] (a) at (3.25, 0.5) [label=right:{$a$}] {};
+  \node[dot] (b) at (2, 0.25) [label=right:{$b$}] {};
+  \node[dot] (c) at (2.25, -0.25) [label=right:{$c$}] {};
+  \node[dot] (d) at (3.5, -0.5) [label=right:{$d$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+  \node (f) at (0, -1) {$\func{f}$};
+  \draw[->,space] (p) to (b);
+
+\end{diagram}
+
+Next, let's pair off $q$ and $c$:
+
+\begin{diagram}
+
+  \node (nats) at (-3, 1.375) {$\set{A}$};
+  \node[dot] (p) at (-2.75, 0.5) [label=left:{$p$}] {};
+  \node[dot] (q) at (-3.75, 0) [label=left:{$q$}] {};
+  \node[dot] (r) at (-2.25, -0.5) [label=left:{$r$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1cm);
+
+  \node (A) at (3, 1.375) {$\set{B}$};
+  \node[dot] (a) at (3.25, 0.5) [label=right:{$a$}] {};
+  \node[dot] (b) at (2, 0.25) [label=right:{$b$}] {};
+  \node[dot] (c) at (2.25, -0.25) [label=right:{$c$}] {};
+  \node[dot] (d) at (3.5, -0.5) [label=right:{$d$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+  \node (f) at (0, -1) {$\func{f}$};
+  \draw[->,space] (p) to (b);
+  \draw[->,space] (q) to (c);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Can this function be \vocab{surjective}? Recall that a surjective function will cover all of the points in the codomain (every point in $\set{B}$ will have an arrow pointing to it).
+  \end{remark}
+\end{aside}
+
+Finally, let's pair off $r$ and $d$:
+
+\begin{diagram}
+
+  \node (nats) at (-3, 1.375) {$\set{A}$};
+  \node[dot] (p) at (-2.75, 0.5) [label=left:{$p$}] {};
+  \node[dot] (q) at (-3.75, 0) [label=left:{$q$}] {};
+  \node[dot] (r) at (-2.25, -0.5) [label=left:{$r$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1cm);
+
+  \node (A) at (3, 1.375) {$\set{B}$};
+  \node[dot] (a) at (3.25, 0.5) [label=right:{$a$}] {};
+  \node[dot] (b) at (2, 0.25) [label=right:{$b$}] {};
+  \node[dot] (c) at (2.25, -0.25) [label=right:{$c$}] {};
+  \node[dot] (d) at (3.5, -0.5) [label=right:{$d$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+  \node (f) at (0, -1) {$\func{f}$};
+  \draw[->,space] (p) to (b);
+  \draw[->,space] (q) to (c);
+  \draw[->,space] (r) to (d);
+
+\end{diagram}
+
+At this point, we have no more unpaired elements in $\set{A}$, so our function is completed. 
+
+Nevertheless, we haven't covered all of the elements in $\set{B}$. One is untouched (namely, $a$). This is like a classroom with four students and only three desks. We put a student in each desk, but there's one student left over with no place to sit. This tells us that $\set{B}$ is a bigger set than $\set{A}$.
+
+\end{fexample}
+
+\begin{fexample}
+\label{ex:measuring-size-bijection}
+
+As another example, consider these two sets:
+
+\begin{diagram}
+
+  \node (nats) at (-3, 1.375) {$\set{A}$};
+  \node[dot] (p) at (-2.75, 0.5) [label=left:{$p$}] {};
+  \node[dot] (q) at (-3.75, 0) [label=left:{$q$}] {};
+  \node[dot] (r) at (-2.25, -0.5) [label=left:{$r$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1cm);
+
+  \node (A) at (3, 1.375) {$\set{B}$};
+  \node[dot] (a) at (3, 0.5) [label=right:{$a$}] {};
+  \node[dot] (b) at (2, 0) [label=right:{$b$}] {};
+  \node[dot] (c) at (3.5, -0.5) [label=right:{$c$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+\end{diagram}
+
+Can we construct a bijective function from $\set{A}$ to $\set{B}$? Let's try. First, let's pair up $p$ and $a$:
+
+\begin{diagram}
+
+  \node (nats) at (-3, 1.375) {$\set{A}$};
+  \node[dot] (p) at (-2.75, 0.5) [label=left:{$p$}] {};
+  \node[dot] (q) at (-3.75, 0) [label=left:{$q$}] {};
+  \node[dot] (r) at (-2.25, -0.5) [label=left:{$r$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1cm);
+
+  \node (A) at (3, 1.375) {$\set{B}$};
+  \node[dot] (a) at (3, 0.5) [label=right:{$a$}] {};
+  \node[dot] (b) at (2, 0) [label=right:{$b$}] {};
+  \node[dot] (c) at (3.5, -0.5) [label=right:{$c$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+  \node (f) at (0, -1) {$\func{f}$};
+  \draw[->,space] (p) to (a);
+
+\end{diagram}
+
+Next, let's pair up $q$ and $b$:
+
+\begin{diagram}
+
+  \node (nats) at (-3, 1.375) {$\set{A}$};
+  \node[dot] (p) at (-2.75, 0.5) [label=left:{$p$}] {};
+  \node[dot] (q) at (-3.75, 0) [label=left:{$q$}] {};
+  \node[dot] (r) at (-2.25, -0.5) [label=left:{$r$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1cm);
+
+  \node (A) at (3, 1.375) {$\set{B}$};
+  \node[dot] (a) at (3, 0.5) [label=right:{$a$}] {};
+  \node[dot] (b) at (2, 0) [label=right:{$b$}] {};
+  \node[dot] (c) at (3.5, -0.5) [label=right:{$c$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+  \node (f) at (0, -1) {$\func{f}$};
+  \draw[->,space] (p) to (a);
+  \draw[->,space] (q) to (b);
+
+\end{diagram}
+
+Finally, let's pair up $r$ and $c$:
+
+\begin{diagram}
+
+  \node (nats) at (-3, 1.375) {$\set{A}$};
+  \node[dot] (p) at (-2.75, 0.5) [label=left:{$p$}] {};
+  \node[dot] (q) at (-3.75, 0) [label=left:{$q$}] {};
+  \node[dot] (r) at (-2.25, -0.5) [label=left:{$r$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1cm);
+
+  \node (A) at (3, 1.375) {$\set{B}$};
+  \node[dot] (a) at (3, 0.5) [label=right:{$a$}] {};
+  \node[dot] (b) at (2, 0) [label=right:{$b$}] {};
+  \node[dot] (c) at (3.5, -0.5) [label=right:{$c$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+  \node (f) at (0, -1) {$\func{f}$};
+  \draw[->,space] (p) to (a);
+  \draw[->,space] (q) to (b);
+  \draw[->,space] (r) to (c);
+
+\end{diagram}
+
+At this point, we have no more unpaired elements in $\set{A}$, so our function is completed.
+
+\begin{aside}
+  \begin{remark}
+    We have constructed a perfect, one-to-one pairing up of the items in these two sets. And since we can do this, we can conclude that the two sets have exactly the same number of elements. They are \vocab{equinumerous}.
+  \end{remark}
+\end{aside}
+
+Have we constructed a bijective function? Yes, we have. There are no extra items in $\set{B}$ that haven't been paired off. Every single item in $\set{B}$ has been uniquely paired up with an element in $\set{A}$.
+
+Notice that $\func{f}$ is not the only possible bijective function that we could construct here. There are others. For instance:
+
+\begin{diagram}
+
+  \node (nats) at (-3, 1.375) {$\set{A}$};
+  \node[dot] (p) at (-2.75, 0.5) [label=left:{$p$}] {};
+  \node[dot] (q) at (-3.75, 0) [label=left:{$q$}] {};
+  \node[dot] (r) at (-2.25, -0.5) [label=left:{$r$}] {};
+  \draw[color=gray] (-3, 0) ellipse (1.5cm and 1cm);
+
+  \node (A) at (3, 1.375) {$\set{B}$};
+  \node[dot] (a) at (3, 0.5) [label=right:{$a$}] {};
+  \node[dot] (b) at (2, 0) [label=right:{$b$}] {};
+  \node[dot] (c) at (3.5, -0.5) [label=right:{$c$}] {};
+  \draw[color=gray] (3, 0) ellipse (1.5cm and 1cm);
+
+  \node (g) at (0, -1) {$\func{g}$};
+  \draw[->,space] (p) to (b);
+  \draw[->,space] (q) to (c);
+  \draw[->,space] (r) to (a);
+
+\end{diagram}
+
+It doesn't really matter which bijective function we construct. All that matters is whether or not we can construct \emph{one} of them. 
+
+If we \emph{can} construct one (it doesn't matter which), then that tells us the two sets have exactly the same size, since by definition, a bijective function is essentially nothing more than an exact, one-to-one pairing up of the elements in two sets.
+
+\end{fexample}
+
+By comparing examples \exampleref{ex:measuring-size-non-bijection} and \exampleref{ex:measuring-size-bijection}, we can see that we will only be able to construct a bijective function from one set to another if they are equinumerous. If one set contains more items than the other, then we will not be able to build a bijective function between them. 
+
+\begin{aside}
+  \begin{remark}
+    By definition, a bijective function puts two sets in exact, one-to-one alignment, with no leftovers. And that is precisely what it means for two sets to be the same size.
+  \end{remark}
+\end{aside}
+
+This is why building a bijective function between the two sets is enough to let us conclude that the two sets are the same size. Indeed, the bijective function explicates exactly what it means for the two sets to \emph{be} the same size.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we looked at how to compare the sizes of two sets, without actually counting the number of objects contained in them.
+
+\begin{itemize}
+
+  \item If we \vocab{count} the items in a set to determine its size, that works only for \vocab{finite} sets.
+  
+  \item \vocab{Infinity} is not a particular number (an element in $\Nats/$). Rather it is the \vocab{size} of a never-ending sequence like $\PositiveInts/$ or $\Nats/$.
+  
+  \item We can \vocab{compare} sets for size, and we don't need to count them.
+  
+  \item If we can construct a \vocab{bijective} function (i.e., an \vocab{isomorphism}) between two sets, then we know they must be \vocab{equinumerous}.
+
+\end{itemize}
+
+\end{document}

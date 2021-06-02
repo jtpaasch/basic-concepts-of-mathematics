@@ -1,0 +1,696 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Graph Isomorphisms}
+\label{ch:graph-isomorphisms}
+
+\begin{ponder}
+  What do you think it means to say that two graphs have the same ``shape''?
+\end{ponder}
+
+\newtopic{I}{n \chapterref{ch:function-isomorphism}}, we talked about isomorphic sets, and we said that two sets are \vocab{isomorphic} if they have the same shape. The same concept exists for graphs: two graphs are \vocab{isomorphic} if they have the same shape too. In this chapter, we will talk about \vocab{maps} (functions) between graphs, and \vocab{graph isomorphisms}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Mapping Vertices}
+
+\begin{terminology}
+  A \vocab{map} from one graph to another is a function that maps the vertices of the one to vertices of the other.
+\end{terminology}
+
+\newthought{To construct} a \vocab{map} from one graph to another graph, all we need to do is map the vertices of one to the vertices of the other. 
+
+\begin{fexample}
+
+Suppose we have two graphs, called $\graph{G}$ and $\graph{H}$:
+
+\begin{equation*}
+  \graph{G} = \graphsig{\set{V}}{\set{E}}
+  \hskip 2cm
+  \graph{H} = \graphsig{\set{W}}{\set{D}}
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    Since we are talking about two graphs here, we use different names for the vertices and edges, so that we can tell them apart. For $\graph{G}$ we call them $\set{V}$ and $\set{E}$, but for $\graph{H}$ we call them $\set{W}$ and $\set{D}$.
+  \end{remark}
+\end{aside}
+
+Suppose also that for $\graph{G}$, the vertices $\set{V}$ and the edges $\set{E}$ are defined like this:
+
+\begin{align*}
+  \set{V} &= \{ \vertex{1}, \vertex{2}, \vertex{3} \} \\
+  \set{E} &= \{ (\vertex{1}, \vertex{2}), (\vertex{2}, \vertex{3}) \}
+\end{align*}
+
+And suppose that for $\graph{H}$, the vertices $\set{W}$ and edges $\set{D}$ are defined like this:
+
+\begin{align*}
+  \set{W} &= \{ \vertex{5}, \vertex{6}, \vertex{7}, \vertex{8} \} \\
+  \set{D} &= \{ (\vertex{5}, \vertex{7}), (\vertex{6}, \vertex{7}), (\vertex{7}, \vertex{8}) \}
+\end{align*}
+
+\begin{aside}
+  \begin{remark}
+    A good exercise is to try and draw these two graphs yourself, using just the sets of vertices and edges listed above. See if you can make your drawings look different from the drawings here.
+  \end{remark}
+\end{aside}
+
+Let's draw these two graphs:
+
+\begin{diagram}
+
+  \node (G) at (-4, -1) {$\graph{G}$};
+  \node[dot] (v1) at (-5, 1) [label=below left:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (-3, 1) [label=below right:{$\vertex{3}$}] {};
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+
+  \node (H) at (2, -1) {$\graph{H}$};
+  \node[dot] (v5) at (1, 0) [label=below:{$\vertex{5}$}] {};
+  \node[dot] (v6) at (1, 1) [label=above right:{$\vertex{6}$}] {};
+  \node[dot] (v7) at (3, 0) [label=below right:{$\vertex{7}$}] {};
+  \node[dot] (v8) at (3, 1) [label=right:{$\vertex{8}$}] {};
+  \draw (v5) to (v6);
+  \draw (v5) to (v7);
+  \draw (v5) to (v8);
+
+\end{diagram}
+
+Now let's create a mapping (a \vocab{function}) from $\graph{G}$ to $\graph{H}$. Let's call our function $\func{f}$. To create this function, we need to map the vertices of $\graph{G}$ to the vertices of $\graph{H}$. So, all we need to do is go through each vertex of $\graph{G}$, and map it to some vertex of $\graph{H}$. For example, let's define $\func{f}$ like this:
+
+\begin{diagram}
+
+  \node (G) at (-4, -1) {$\graph{G}$};
+  \node[dot] (v1) at (-5, 1) [label=below left:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (-3, 1) [label=below right:{$\vertex{3}$}] {};
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+
+  \node (H) at (2, -1) {$\graph{H}$};
+  \node[dot] (v5) at (1, 0) [label=below:{$\vertex{5}$}] {};
+  \node[dot] (v6) at (1, 1) [label=above right:{$\vertex{6}$}] {};
+  \node[dot] (v7) at (3, 0) [label=below right:{$\vertex{7}$}] {};
+  \node[dot] (v8) at (3, 1) [label=right:{$\vertex{8}$}] {};
+  \draw (v5) to (v6);
+  \draw (v5) to (v7);
+  \draw (v5) to (v8);
+  
+  \node (f) at (-1, -0.5) {$\func{f}$};
+  \draw[->,dashed,spaced] (v1) to[out=45,in=135] (v6);
+  \draw[->,dashed,spaced] (v3) to[out=45,in=135] (v8);
+  \draw[->,dashed,spaced] (v2) to (v5);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:functions} that a \vocab{function} from one set to another set is a mapping that maps each element from the first set to one element from the second set.
+  \end{remark}
+\end{aside}
+
+In other words, here is the mapping:
+
+\begin{equation*}
+  \func{f}(\vertex{1}) = \vertex{6} \hskip 2cm
+  \func{f}(\vertex{2}) = \vertex{5} \hskip 2cm
+  \func{f}(\vertex{3}) = \vertex{8}
+\end{equation*}
+
+Since this function $\func{f}$ maps the graph $\graph{G}$ to the graph $\func{H}$, let's denote the \vocab{signature} of this function like so:
+
+\begin{equation*}
+  \funcsig{f}{\graph{G}}{\graph{H}}
+\end{equation*}
+
+Read that like this: ``the function $\func{f}$ maps the graph $\graph{G}$ to the graph $\graph{H}$,'' or even, ``$\func{f}$ maps $\graph{G}$ to $\graph{H}$.''
+
+\end{fexample}
+
+\begin{example}
+
+Let's construct a different mapping. Let's call this one $\funcsig{g}{\graph{G}}{\graph{H}}$, and define it like this:
+
+\begin{aside}
+  \begin{remark}
+    What is this function as a list of pairings? It is this: $\{ (\vertex{1}, \vertex{8}), (\vertex{2}, \vertex{5}), (\vertex{3}, \vertex{7}) \}$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (G) at (-4, -1) {$\graph{G}$};
+  \node[dot] (v1) at (-5, 1) [label=below left:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (-3, 1) [label=below right:{$\vertex{3}$}] {};
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+
+  \node (H) at (2, -1) {$\graph{H}$};
+  \node[dot] (v5) at (1, 0) [label=below:{$\vertex{5}$}] {};
+  \node[dot] (v6) at (1, 1) [label=above right:{$\vertex{6}$}] {};
+  \node[dot] (v7) at (3, 0) [label=below right:{$\vertex{7}$}] {};
+  \node[dot] (v8) at (3, 1) [label=right:{$\vertex{8}$}] {};
+  \draw (v5) to (v6);
+  \draw (v5) to (v7);
+  \draw (v5) to (v8);
+  
+  \node (g) at (-1, -0.5) {$\func{g}$};
+  \draw[->,dashed,spaced] (v1) to[out=45,in=135] (v8);
+  \draw[->,dashed,spaced] (v3) to[looseness=1.5,out=15,in=45] (v7);
+  \draw[->,dashed,spaced] (v2) to (v5);
+
+\end{diagram}
+
+Here is the mapping:
+
+\begin{equation*}
+  \func{g}(\vertex{1}) = \vertex{8} \hskip 2cm
+  \func{g}(\vertex{2}) = \vertex{5} \hskip 2cm
+  \func{g}(\vertex{3}) = \vertex{7}
+\end{equation*}
+
+This function $\func{g}$ differs from $\func{f}$ because it maps two of the vertices of $\graph{G}$ to different vertices in $\graph{H}$. 
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preserving Structure}
+
+\begin{terminology}
+  A function from one graph to another \vocab{preserves the structure} if it maps connected elements in the first set to connected elements in the second set. It preserves the connections.
+\end{terminology}
+
+\newthought{Not all maps} from $\graph{G}$ to $\graph{H}$ are equal. Some maps \vocab{preserve the structure} of $\graph{G}$ in $\graph{H}$. What this means is that connected vertices from the first graph are mapped to similarly connected vertices in the second graph.
+
+Let's be a little more exact. Consider a function $\funcsig{f}{\graph{G}}{\graph{H}}$. Take any two vertices $x$ and $y$ from $\graph{G}$. The function $\func{f}$ maps $x$ to some vertex in $\graph{H}$ (which we denote as $\func{f}(x)$), and it also maps $y$ to a vertex in $\graph{H}$ (which we denote as $\func{f}(y)$).
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:functions} that if we have a function $\func{f}$ from $\set{A}$ to $\set{B}$, then we denote the element in $\set{B}$ that $\func{f}$ maps $x$ to like this: ``$\func{f}(x)$,'' which we can read as ``the element that $\func{f}$ maps $x$ to,'' or for short, ``$\func{f}$ of $x$.''
+  \end{remark}
+\end{aside}
+
+To say that $\func{f}$ preserves the structure of $\graph{G}$ in $\graph{H}$ is to say that whenever $x$ and $y$ are connected in $\graph{G}$, then $\func{f}$ maps $x$ and $y$ to points $\func{f}(x)$ and $\func{f}(y)$ that are also connected in $\graph{H}$. 
+
+In other words, if the points in $\graph{G}$ are connected, then the points $\func{f}$ maps them to in $\graph{H}$ are connected too. Let's put this down as a definition.
+
+\begin{fdefinition}[Graph structure-preserving functions]
+  \label{def:graph-structure-preserving-functions}
+  For any graphs $\graph{G}$, $\graph{H}$, and for any function $\funcsig{f}{\graph{G}}{\graph{H}}$, we will say that $\func{f}$ is a \vocab{structure-preserving function} if whenever two vertices $x$ and $y$ are connected in $\graph{G}$, $\func{f}(x)$ and $\func{f}(y)$ are connected in $\graph{H}$.
+\end{fdefinition}
+
+\begin{fexample}
+
+Consider $\funcsig{f}{\graph{G}}{\graph{H}}$ again:
+
+\begin{diagram}
+
+  \node (G) at (-4, -1) {$\graph{G}$};
+  \node[dot] (v1) at (-5, 1) [label=below left:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (-3, 1) [label=below right:{$\vertex{3}$}] {};
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+
+  \node (H) at (2, -1) {$\graph{H}$};
+  \node[dot] (v5) at (1, 0) [label=below:{$\vertex{5}$}] {};
+  \node[dot] (v6) at (1, 1) [label=above right:{$\vertex{6}$}] {};
+  \node[dot] (v7) at (3, 0) [label=below right:{$\vertex{7}$}] {};
+  \node[dot] (v8) at (3, 1) [label=right:{$\vertex{8}$}] {};
+  \draw (v5) to (v6);
+  \draw (v5) to (v7);
+  \draw (v5) to (v8);
+  
+  \node (f) at (-1, -0.5) {$\func{f}$};
+  \draw[->,dashed,spaced] (v1) to[out=45,in=135] (v6);
+  \draw[->,dashed,spaced] (v3) to[out=45,in=135] (v8);
+  \draw[->,dashed,spaced] (v2) to (v5);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    To \vocab{prove} that a map from one graph to another \vocab{preserves the structure}, we need to check \vocab{each} connection in the first graph, and confirm that it is preserved by the mapping.
+  \end{remark}
+\end{aside}
+
+Does $\func{f}$ preserve the structure of $\graph{G}$? To determine if this is so, we need to check every connection in $\graph{G}$, and check whether $\func{f}$ preserves it in $\graph{H}$. There are two connections $\graph{G}$ we need to check: the connection of $\vertex{1}$ and $\vertex{2}$, and the connection of $\vertex{2}$ and $\vertex{3}$.
+
+\begin{aside}
+  \begin{remark}
+    In $\graph{G}$, there are two connections: $\vertex{1}\dash\vertex{2}$ and $\vertex{2}\dash\vertex{3}$. We need to check that each one is preserved by $\func{f}$.
+  \end{remark}
+\end{aside}
+
+First let's check $\vertex{1}$ and $\vertex{2}$. Does $\func{f}$ map $\vertex{1}$ and $\vertex{2}$ to points in $\graph{H}$ that are also connected? Yes, it does: $\func{f}$ maps $\vertex{1}$ to $\vertex{6}$ (i.e., $\func{f}(\vertex{1}) = \vertex{6}$), and it maps $\vertex{2}$ to $\vertex{5}$ (i.e., $\func{f}(\vertex{2}) = \vertex{5}$), and $\vertex{5}$ and $\vertex{6}$ are connected in $\graph{H}$, just as $\vertex{1}$ and $\vertex{2}$ are in $\graph{G}$.
+
+Here is the picture with just this part of the mapping highlighted:
+
+\begin{aside}
+  \begin{remark}
+    In the picture, we can see the mapping of the first connection from $\graph{G}$. We can see that $\vertex{1}\dash\vertex{2}$ is mapped to $\vertex{5}\dash\vertex{6}$. If $\vertex{1}$ and $\vertex{2}$ were mapped to points in $\graph{H}$ that weren't connected, then their connection would not \emph{not} be preserved. But here we can see that $\vertex{1}$ and $\vertex{2}$ are mapped to points in $\graph{H}$ that are connected, so their connection is preserved.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (v1) at (-5, 1) [label=below left:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot,color=gray] (v3) at (-3, 1) [label=below right:{\textcolor{gray}{$\vertex{3}$}}] {};
+  \draw (v1) to (v2);
+  \draw[color=lightgray] (v2) to (v3);
+
+  \node[dot] (v5) at (1, 0) [label=below:{$\vertex{5}$}] {};
+  \node[dot] (v6) at (1, 1) [label=above right:{$\vertex{6}$}] {};
+  \node[dot,color=gray] (v7) at (3, 0) [label=below right:{\textcolor{gray}{$\vertex{7}$}}] {};
+  \node[dot,color=gray] (v8) at (3, 1) [label=right:{\textcolor{gray}{$\vertex{8}$}}] {};
+  \draw (v5) to (v6);
+  \draw[color=lightgray] (v5) to (v7);
+  \draw[color=lightgray] (v5) to (v8);
+  
+  \draw[->,dashed,spaced] (v1) to[out=45,in=135] (v6);
+  \draw[->,dashed,spaced,color=gray] (v3) to[out=45,in=135] (v8);
+  \draw[->,dashed,spaced] (v2) to (v5);
+
+\end{diagram}
+
+Now let's check the connection between $\vertex{2}$ and $\vertex{3}$. Does $\func{f}$ preserve this connection too? Yes, it does. Here is the picture with just that part of the mapping highlighted:
+
+\begin{diagram}
+
+  \node[dot,color=gray] (v1) at (-5, 1) [label=below left:{\textcolor{gray}{$\vertex{1}$}}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (-3, 1) [label=below right:{$\vertex{3}$}] {};
+  \draw[color=lightgray] (v1) to (v2);
+  \draw (v2) to (v3);
+
+  \node[dot] (v5) at (1, 0) [label=below:{$\vertex{5}$}] {};
+  \node[dot,color=gray] (v6) at (1, 1) [label=above right:{\textcolor{gray}{$\vertex{6}$}}] {};
+  \node[dot,color=gray] (v7) at (3, 0) [label=below right:{\textcolor{gray}{$\vertex{7}$}}] {};
+  \node[dot] (v8) at (3, 1) [label=right:{$\vertex{8}$}] {};
+  \draw[color=lightgray] (v5) to (v6);
+  \draw[color=lightgray] (v5) to (v7);
+  \draw (v5) to (v8);
+  
+  \draw[->,dashed,spaced,color=gray] (v1) to[out=45,in=135] (v6);
+  \draw[->,dashed,spaced] (v3) to[out=45,in=135] (v8);
+  \draw[->,dashed,spaced] (v2) to (v5);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    In the picture, we can see the mapping of the second connection from $\graph{G}$. We can see that $\vertex{2}\dash\vertex{3}$ is mapped to $\vertex{5}\dash\vertex{8}$, so the connection here is preserved too.
+  \end{remark}
+\end{aside}
+
+We can see here that $\func{f}$ preserves the connection between $\vertex{2}$ and $\vertex{3}$, because it maps those points to $\vertex{5}$ and $\vertex{8}$, which are connected in $\graph{H}$.
+
+We have now checked all the connections in $\graph{G}$, and confirmed that $\func{f}$ preserves each one in $\graph{H}$. Here is a picture of all of the connections, as they are mapped:
+
+\begin{aside}
+  \begin{remark}
+    If you squint, you can see that the highlighted part of $\graph{H}$ has the same structure as $\graph{G}$: both have a ``V''-shape. Notice that not every part of $\graph{H}$ is covered by the mapping. In particular, $\vertex{5}\dash\vertex{7}$ makes for a rogue limb that is not part of the mapping. But that is okay. A structure-preserving map need not map $\graph{G}$ to \emph{every} part of $\graph{H}$ (in other words, it does not need to be \vocab{surjective}). All it needs to do is preserve the structure of $\graph{G}$ in the part of $\graph{H}$ that it does map to. We might say that in this case, our function $\func{f}$ \vocab{embeds} $\graph{G}$ in $\graph{H}$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (v1) at (-5, 1) [label=below left:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (-3, 1) [label=below right:{$\vertex{3}$}] {};
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+
+  \node[dot] (v5) at (1, 0) [label=below:{$\vertex{5}$}] {};
+  \node[dot] (v6) at (1, 1) [label=above right:{$\vertex{6}$}] {};
+  \node[dot,color=gray] (v7) at (3, 0) [label=below right:{\textcolor{gray}{$\vertex{7}$}}] {};
+  \node[dot] (v8) at (3, 1) [label=right:{$\vertex{8}$}] {};
+  \draw (v5) to (v6);
+  \draw[color=lightgray] (v5) to (v7);
+  \draw (v5) to (v8);
+  
+  \draw[->,dashed,spaced] (v1) to[out=45,in=135] (v6);
+  \draw[->,dashed,spaced] (v3) to[out=45,in=135] (v8);
+  \draw[->,dashed,spaced] (v2) to (v5);
+
+\end{diagram}
+
+We can see clearly in this picture that $\func{f}$ preserves the structure of $\graph{G}$. It takes a ``V''-shaped graph $\graph{G}$, and it maps that to a ``V''-shaped portion of $\graph{H}$, preserving the structure. Hence, we may conclude that $\func{f}$ is a \vocab{structure-preserving function}.
+
+\end{fexample}
+
+\begin{fexample}
+
+Consider $\funcsig{g}{\graph{G}}{\graph{H}}$ again:
+
+\begin{diagram}
+
+  \node (G) at (-4, -1) {$\graph{G}$};
+  \node[dot] (v1) at (-5, 1) [label=below left:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (-3, 1) [label=below right:{$\vertex{3}$}] {};
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+
+  \node (H) at (2, -1) {$\graph{H}$};
+  \node[dot] (v5) at (1, 0) [label=below:{$\vertex{5}$}] {};
+  \node[dot] (v6) at (1, 1) [label=above right:{$\vertex{6}$}] {};
+  \node[dot] (v7) at (3, 0) [label=below right:{$\vertex{7}$}] {};
+  \node[dot] (v8) at (3, 1) [label=right:{$\vertex{8}$}] {};
+  \draw (v5) to (v6);
+  \draw (v5) to (v7);
+  \draw (v5) to (v8);
+  
+  \node (g) at (-1, -0.5) {$\func{g}$};
+  \draw[->,dashed,spaced] (v1) to[out=45,in=135] (v8);
+  \draw[->,dashed,spaced] (v3) to[looseness=1.5,out=15,in=45] (v7);
+  \draw[->,dashed,spaced] (v2) to (v5);
+
+\end{diagram}
+
+Is $\func{g}$ a structure-preserving map? Here is the picture, with just the relevant part of the mapping highlighted:
+
+\begin{aside}
+  \begin{remark}
+    Here too we can see that $\graph{g}$ \vocab{embeds} $\graph{G}$ in $\graph{H}$. It takes the ``V''-shape of $\graph{G}$, and it maps it to a ``V''-shaped portion of $\graph{H}$. Notice that $\graph{H}$ is a bigger graph than $\graph{G}$, and it has two ``V''-shapes in it. That is why it is possible to construct two different structure-preserving maps from $\graph{G}$ to $\graph{H}$. It is because there are two ways to embed the ``V''-shape of $\graph{G}$ into $\graph{H}$.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (G) at (-4, -1) {$\graph{G}$};
+  \node[dot] (v1) at (-5, 1) [label=below left:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (-3, 1) [label=below right:{$\vertex{3}$}] {};
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+
+  \node (H) at (2, -1) {$\graph{H}$};
+  \node[dot] (v5) at (1, 0) [label=below:{$\vertex{5}$}] {};
+  \node[dot,color=gray] (v6) at (1, 1) [label=above right:{\textcolor{gray}{$\vertex{6}$}}] {};
+  \node[dot] (v7) at (3, 0) [label=below right:{$\vertex{7}$}] {};
+  \node[dot] (v8) at (3, 1) [label=right:{$\vertex{8}$}] {};
+  \draw[color=lightgray] (v5) to (v6);
+  \draw (v5) to (v7);
+  \draw (v5) to (v8);
+  
+  \node (g) at (-1, -0.5) {$\func{g}$};
+  \draw[->,dashed,spaced] (v1) to[out=45,in=135] (v8);
+  \draw[->,dashed,spaced] (v3) to[looseness=1.5,out=15,in=45] (v7);
+  \draw[->,dashed,spaced] (v2) to (v5);
+
+\end{diagram}
+
+We can see from this that $\func{g}$ does indeed preserve the structure of $\graph{G}$ in $\graph{H}$. This too maps a ``V''-shaped graph $\graph{G}$ to a ``V''-shaped portion of $\graph{H}$. We can confirm this manually, by checking each connection from $\graph{G}$, and confirming that the connection is preserved in $\graph{H}$.
+
+\end{fexample}
+
+\begin{example}
+
+Consider this function $\funcsig{h}{\graph{G}}{\graph{H}}$:
+
+\begin{diagram}
+
+  \node (G) at (-4, -1) {$\graph{G}$};
+  \node[dot] (v1) at (-5, 1) [label=below left:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (-3, 1) [label=below right:{$\vertex{3}$}] {};
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+
+  \node (H) at (2, -1) {$\graph{H}$};
+  \node[dot] (v5) at (1, 0) [label=below:{$\vertex{5}$}] {};
+  \node[dot] (v6) at (1, 1) [label=above right:{$\vertex{6}$}] {};
+  \node[dot] (v7) at (3, 0) [label=below right:{$\vertex{7}$}] {};
+  \node[dot] (v8) at (3, 1) [label=right:{$\vertex{8}$}] {};
+  \draw (v5) to (v6);
+  \draw (v5) to (v7);
+  \draw (v5) to (v8);
+  
+  \node (h) at (-1, -0.5) {$\func{h}$};
+  \draw[->,dashed,spaced] (v1) to[out=45,in=135] (v8);
+  \draw[->,dashed,spaced] (v3) to[looseness=1.5,out=15,in=45] (v7);
+  \draw[->,dashed,spaced] (v2) to (v6);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    What are the pairings of this function? It is this: $\{ (\vertex{1}, \vertex{8}), (\vertex{3}, \vertex{7}), (\vertex{2}, \vertex{6}) \}$.
+  \end{remark}
+\end{aside}
+
+Is $\func{h}$ a structure-preserving map? In order to determine this, we need to check that it preserves every connection from $\graph{G}$. Let's check how it maps $\vertex{1}\dash\vertex{2}$ first:
+
+\begin{diagram}
+
+  \node (G) at (-4, -1) {$\graph{G}$};
+  \node[dot] (v1) at (-5, 1) [label=below left:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot,color=gray] (v3) at (-3, 1) [label=below right:{\textcolor{gray}{$\vertex{3}$}}] {};
+  \draw (v1) to (v2);
+  \draw[color=lightgray] (v2) to (v3);
+
+  \node (H) at (2, -1) {$\graph{H}$};
+  \node[dot,color=gray] (v5) at (1, 0) [label=below:{\textcolor{gray}{$\vertex{5}$}}] {};
+  \node[dot] (v6) at (1, 1) [label=above right:{$\vertex{6}$}] {};
+  \node[dot,color=gray] (v7) at (3, 0) [label=below right:{\textcolor{gray}{$\vertex{7}$}}] {};
+  \node[dot] (v8) at (3, 1) [label=right:{$\vertex{8}$}] {};
+  \draw[color=lightgray] (v5) to (v6);
+  \draw[color=lightgray] (v5) to (v7);
+  \draw[color=lightgray] (v5) to (v8);
+  
+  \node (h) at (-1, -0.5) {$\func{h}$};
+  \draw[->,dashed,spaced] (v1) to[out=45,in=135] (v8);
+  \draw[->,dashed,spaced,color=gray] (v3) to[looseness=1.5,out=15,in=45] (v7);
+  \draw[->,dashed,spaced] (v2) to (v6);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    To \vocab{prove} that a map is \vocab{not} a structure-preserving map, all we need to do is find one connection that it does not preserve. So, since we have now shown that $\vertex{1}\dash\vertex{2}$ is not preserved, we have succeeded in showing that $\func{h}$ is not a structure-preserving map. For the sake of illustration though, we will also look at $\vertex{2}\dash\vertex{3}$, because $\func{h}$ doesn't preserve that connection either. 
+  \end{remark}
+\end{aside}
+
+Does $\func{h}$ preserve the connection between $\vertex{1}$ and $\vertex{2}$? No, it does not. It maps $\vertex{1}$ and $\vertex{2}$ to $\vertex{6}$ and $\vertex{8}$, which are \emph{not} connected in $\graph{H}$. What about $\vertex{2}\dash\vertex{3}$?
+
+\begin{diagram}
+
+  \node (G) at (-4, -1) {$\graph{G}$};
+  \node[dot,color=gray] (v1) at (-5, 1) [label=below left:{\textcolor{gray}{$\vertex{1}$}}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (-3, 1) [label=below right:{$\vertex{3}$}] {};
+  \draw[color=lightgray] (v1) to (v2);
+  \draw (v2) to (v3);
+
+  \node (H) at (2, -1) {$\graph{H}$};
+  \node[dot,color=gray] (v5) at (1, 0) [label=below:{\textcolor{gray}{$\vertex{5}$}}] {};
+  \node[dot] (v6) at (1, 1) [label=above right:{$\vertex{6}$}] {};
+  \node[dot] (v7) at (3, 0) [label=below right:{$\vertex{7}$}] {};
+  \node[dot,color=gray] (v8) at (3, 1) [label=right:{\textcolor{gray}{$\vertex{8}$}}] {};
+  \draw[color=lightgray] (v5) to (v6);
+  \draw[color=lightgray] (v5) to (v7);
+  \draw[color=lightgray] (v5) to (v8);
+  
+  \node (h) at (-1, -0.5) {$\func{h}$};
+  \draw[->,dashed,spaced,color=gray] (v1) to[out=45,in=135] (v8);
+  \draw[->,dashed,spaced] (v3) to[looseness=1.5,out=15,in=45] (v7);
+  \draw[->,dashed,spaced] (v2) to (v6);
+
+\end{diagram}
+
+Does $\func{h}$ preserve the connection between $\vertex{2}$ and $\vertex{3}$? No, it does not. It maps $\vertex{2}$ and $\vertex{3}$ to $\vertex{6}$ and $\vertex{8}$, which are also \emph{not} connected in $\graph{H}$.
+
+So $\func{h}$ fails to preserve the connections from $\graph{G}$, and hence, $\func{h}$ is \vocab{not} a structure-preserving map.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Graph Isomorphisms}
+
+\begin{terminology}
+  A \vocab{graph isomorphism} is a reversible, bijective, structure-preserving map from one graph to another.
+\end{terminology}
+
+\newthought{What is a graph isomorphism?} A \vocab{graph isomorphism} from $\graph{G}$ to $\graph{H}$ is a structure-preserving map from $\graph{G}$ to $\graph{H}$, which is bijective and reversible. That is to say, it puts the vertices of $\graph{G}$ and $\graph{H}$ into a one-to-one correspondence, such that the structure of $\graph{G}$ is exactly mirrored in $\graph{H}$, and vice versa. Let's write this down as a definition:
+
+\begin{fdefinition}[Graph isomorphism]
+  \label{def:graph-isomorphism}
+  For any graphs $\graph{G}$, $\graph{H}$, and for any function $\funcsig{f}{\graph{G}}{\graph{H}}$, we will say that $\func{f}$ is a \vocab{graph isomorphism} if $\func{f}$ is a reversible, bijective, structure-preserving map from $\graph{G}$ to $\graph{H}$.
+\end{fdefinition}
+
+\begin{aside}
+  \begin{remark}
+    Think about what two graphs must be like in order for us to be able to build a reversible, bijective, structure-preserving map between them. First, they must have the \vocab{same number of vertices}. If one had more, we couldn't build a reversible bijection between them. Second, they must have the \vocab{same connections}. If they didn't, then we couldn't build a structure preserving map between them. So basically, the only case where we can build an isomorphism between two graphs is when those two graphs are exactly alike, except for having different vertex names.
+  \end{remark}
+\end{aside}
+
+It is not always possible to construct an isomorphism between two graphs. It it only possible when the two graphs have the same number of vertices, and when they mirror each other's structure. Basically, it is only possible if the two graphs differ only in the \emph{names} of their vertices.
+
+If we can construct an isomorphism between a graph $\graph{G}$ and a graph $\graph{H}$, then we say the two graphs are \vocab{isomorphic}, and we write that like this:
+
+\begin{equation*}
+  \graph{G} \isomorphic/ \graph{H}
+\end{equation*} 
+
+Read that aloud like so: ``the graph $\graph{G}$ is isomorphic to the graph $\graph{H}$,'' or ``the graphs $\graph{G}$ and $\graph{H}$ are isomorphic.'' Let's put this down as a definition too:
+
+\begin{terminology}
+  If we can build a graph isomorphism between two graphs $\graph{G}$ and $\graph{H}$, then those two graphs are \vocab{isomorphic}. We denote that like this: $\graph{G} \isomorphic/ \graph{H}$.
+\end{terminology}
+
+\begin{fdefinition}[Isomorphic graphs]
+  \label{def:isomorphic-graphs}
+  For any graphs $\graph{G}$ and $\graph{H}$, we will say that $\graph{G}$ and $\graph{H}$ are \vocab{isomorphic} if there is a graph isomorphism $\funcsig{f}{\graph{G}}{\graph{H}}$ between them. To denote that they are isomorphic, we will write this: $\graph{G} \isomorphic/ \graph{H}$.
+\end{fdefinition}
+
+\begin{fexample}
+
+Consider $\funcsig{f}{\graph{G}}{\graph{H}}$ again:
+
+\begin{aside}
+  \begin{remark}
+    Although $\func{f}$ preserves the structure of $\graph{G}$ in $\graph{H}$, it does not completely cover $\graph{H}$. There is more to $\graph{H}$ than there is to $\graph{G}$. In particular, there is a rogue limb $\vertex{5}\dash\vertex{7}$ in $\graph{H}$ that $\graph{G}$ has no twin counterpart for. Hence, although we can map the structure of $\graph{G}$ into $\graph{H}$, we cannot \vocab{reverse} it. We cannot embed the structure of $\graph{H}$ back into $\graph{G}$. We can see that this is so simply from the fact that the two graphs have a different number of vertices (their \vocab{order} is different). From that one fact alone, we can deduce that there \vocab{is no isomorphism} between these two graphs (and hence that they are not isomorphic).
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node (G) at (-4, -1) {$\graph{G}$};
+  \node[dot] (v1) at (-5, 1) [label=below left:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (-3, 1) [label=below right:{$\vertex{3}$}] {};
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+
+  \node (H) at (2, -1) {$\graph{H}$};
+  \node[dot] (v5) at (1, 0) [label=below:{$\vertex{5}$}] {};
+  \node[dot] (v6) at (1, 1) [label=above right:{$\vertex{6}$}] {};
+  \node[dot] (v7) at (3, 0) [label=below right:{$\vertex{7}$}] {};
+  \node[dot] (v8) at (3, 1) [label=right:{$\vertex{8}$}] {};
+  \draw (v5) to (v6);
+  \draw (v5) to (v7);
+  \draw (v5) to (v8);
+  
+  \node (f) at (-1, -0.5) {$\func{f}$};
+  \draw[->,dashed,spaced] (v1) to[out=45,in=135] (v6);
+  \draw[->,dashed,spaced] (v3) to[out=45,in=135] (v8);
+  \draw[->,dashed,spaced] (v2) to (v5);
+
+\end{diagram}
+
+Are $\graph{G}$ and $\graph{H}$ isomorphic? The answer is no. The reason is that $\func{f}$ is not bijective and reversible. There is an extra limb in $\graph{H}$ that is not in $\graph{G}$, and so the two graphs clearly don't have \emph{exactly} the same structure. We can embed $\graph{G}$ in $\graph{H}$, but we cannot go the other way around!
+
+\end{fexample}
+
+\begin{example}
+
+Consider this mapping $\funcsig{j}{\graph{G}}{\graph{H}}$:
+
+\begin{diagram}
+
+  \node (G) at (-4, -1) {$\graph{G}$};
+  \node[dot] (v1) at (-5, 1) [label=below left:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (-3, 1) [label=below right:{$\vertex{3}$}] {};
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+
+  \node (H) at (2, -1) {$\graph{H}$};
+  \node[dot] (v5) at (2, 0.75) [label=below right:{$\vertex{5}$}] {};
+  \node[dot] (v6) at (1, -0.25) [label=below:{$\vertex{6}$}] {};
+  \node[dot] (v7) at (3, 1.5) [label=right:{$\vertex{7}$}] {};
+  \draw (v5) to (v6);
+  \draw (v5) to (v7);
+  
+  \node (j) at (-1, -0.5) {$\func{j}$};
+  \draw[->,dashed,spaced] (v1) to[out=45,in=135] (v6);
+  \draw[->,dashed,spaced] (v3) to[out=45,in=135] (v7);
+  \draw[->,dashed,spaced] (v2) to (v5);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Notice that these two graphs have exactly the same number of vertices (they have the same \vocab{order}), and they have the same \vocab{connections}. That is why it is possible to construct an isomorphism between them.
+  \end{remark}
+\end{aside}
+
+This is a graph \vocab{isomorphism}. It is \emph{structure-preserving} (check that it is so for yourself), and it is \vocab{bijective}. It is also reversible, which is clear because we can map the end-points of $\func{j}$ right back to their start-points:
+
+\begin{diagram}
+
+  \node (G) at (-4, -1) {$\graph{G}$};
+  \node[dot] (v1) at (-5, 1) [label=below left:{$\vertex{1}$}] {};
+  \node[dot] (v2) at (-4, 0) [label=below:{$\vertex{2}$}] {};
+  \node[dot] (v3) at (-3, 1) [label=below right:{$\vertex{3}$}] {};
+  \draw (v1) to (v2);
+  \draw (v2) to (v3);
+
+  \node (H) at (2, -1) {$\graph{H}$};
+  \node[dot] (v5) at (2, 0.75) [label=below right:{$\vertex{5}$}] {};
+  \node[dot] (v6) at (1, -0.25) [label=below:{$\vertex{6}$}] {};
+  \node[dot] (v7) at (3, 1.5) [label=right:{$\vertex{7}$}] {};
+  \draw (v5) to (v6);
+  \draw (v5) to (v7);
+  
+  \draw[->,dashed,spaced] (v1) to[out=65,in=115] (v6);
+  \draw[->,dashed,spaced] (v3) to[out=65,in=115] (v7);
+  \draw[->,dashed,spaced] (v2) to[out=10,in=165] (v5);
+
+  \draw[<-,dashed,space] (v1) to[out=45,in=135] (v6);
+  \draw[<-,dashed,space] (v3) to[out=45,in=135] (v7);
+  \draw[<-,dashed,space] (v2) to[out=350,in=185] (v5);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:function-isomorphism} that a function $\func{f}$ is \vocab{reversible} if we can build a second function (which we denote as $\invfunc{f}$) that maps the end-points of $\func{f}$ right back to where they started.
+  \end{remark}
+\end{aside}
+
+This shows that these two graphs have the same shape (and in fact you can see it if you bend back $\vertex{1}$ to make $\graph{G}$ look more like a straight line). The only real difference between them is that their vertices have different names: 
+
+\begin{itemize}
+  \item The left vertex is named $\vertex{1}$ in $\graph{G}$, and $\vertex{6}$ in $\graph{H}$.
+  \item The middle vertex is $\vertex{2}$ $\graph{G}$, and $\vertex{5}$ in $\graph{H}$.
+  \item The right vertex is $\vertex{3}$ in $\graph{G}$, and $\vertex{7}$ in $\graph{H}$.
+\end{itemize}
+
+Since $\func{j}$ is an isomorphism, we may conclude that $\graph{G}$ and $\graph{H}$ are indeed \vocab{isomorphic}. That is, $\graph{G} \isomorphic/ \graph{H}$.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about \vocab{graph isomorphisms}.
+
+\begin{itemize}
+
+  \item A \vocab{map} from a graph $\graph{G}$ to a graph $\graph{H}$ is a function that maps the vertices of $\graph{G}$ to the vertices of $\graph{H}$. To denote the signature of a map $\func{f}$ from a graph $\graph{G}$ to a graph $\graph{H}$, we write this: $\funcsig{f}{\graph{G}}{\graph{H}}$.
+  
+  \item A map $\funcsig{f}{\graph{G}}{\graph{H}}$ is \vocab{structure-preserving} if it preserves the connections of $\graph{G}$ in $\graph{H}$. More exactly, if whenever two vertices $x$ and $y$ are connected in $\graph{G}$, $\func{f}(x)$ and $\func{f}(y)$ in $\graph{H}$ are also connected.
+  
+  \item A structure-preserving map $\funcsig{f}{\graph{G}}{\graph{H}}$ is a \vocab{graph isomorphism} if it is bijective and reversible. If we can construct such an isomorphism from $\graph{G}$ to $\graph{H}$, then that shows us taht $\graph{G}$ and $\graph{H}$ are \vocab{isomorphic}. They are basically mirror images of each other, and they differ only in the names of their vertices.
+
+\end{itemize}
+
+
+\end{document}

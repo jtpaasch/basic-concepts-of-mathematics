@@ -1,0 +1,516 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Orderings}
+\label{ch:orderings}
+
+\newtopic{I}{n this chapter}, we will begin to look at another class of relational structure: \emph{ordered sets}. An \vocab{ordered set} is a structure comprised of two components: (i) a base set, and (ii) an ordering relation.
+
+\begin{ponder}
+  What kinds of ordered sets do you encounter in your daily life? What collections of things is it more convenient to treat as ordered rather than unordered? 
+\end{ponder}
+
+An \vocab{ordering relation} is a relation that puts items in the base set into some kind of order, so that some of the items ``come before'' others (in the arrangement). An ordering relation is another way we can give structure to sets.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ordered Sets}
+
+\newthought{At a high level}, the concept of \vocab{order} amounts to the idea that some items ``come before'' other items. We put some of the items ``behind'' others. For instance, we might arrange the items from ``lesser'' to ``greater,'' or ``earlier'' to ``later,'' or whatever other way we might want to order the items.
+
+\begin{aside}
+  \begin{remark}
+    There are many ways to order things. Smaller to bigger, earlier to later, slower to faster, and so on. At a high level, we can think of all of these different varieties in the same way: they are all instances of arranging some of the items so that they come before others.
+  \end{remark}
+\end{aside}
+
+Let's consider an example. Suppose we have 5 people. Let's call this set of people $\set{A}$, and let's draw a picture of it by representing each person as a point:
+
+\begin{diagram}
+
+  \node[dot] (p1) at (-3, 1) [label=above: ${\e{Alice}}$] {};
+  \node[dot] (p2) at (-1, 1) [label=above: ${\e{Bob}}$] {};
+  \node[dot] (p3) at (1, 1) [label=above: ${\e{Carol}}$] {};
+  \node[dot] (p4) at (3, 1) [label=above: ${\e{Dan}}$] {};
+  \node[dot] (p5) at (-2, 0) [label=below: ${\e{Emon}}$] {};
+  \node[dot] (p6) at (2, 0) [label=below: ${\e{Frida}}$] {};
+
+\end{diagram}
+
+Now let's impose some order onto this set. Let's say that Emon is the son of Alice and Bob, while Frida is the daughter of Carol and Dan. To represent this, let's draw some arrows:
+
+\begin{diagram}
+
+  \node[dot] (p1) at (-3, 1) [label=above: ${\e{Alice}}$] {};
+  \node[dot] (p2) at (-1, 1) [label=above: ${\e{Bob}}$] {};
+  \node[dot] (p3) at (1, 1) [label=above: ${\e{Carol}}$] {};
+  \node[dot] (p4) at (3, 1) [label=above: ${\e{Dan}}$] {};
+  \node[dot] (p5) at (-2, 0) [label=below: ${\e{Emon}}$] {};
+  \node[dot] (p6) at (2, 0) [label=below: ${\e{Frida}}$] {};
+
+  \draw[->,space] (p5) to (p1);
+  \draw[->,space] (p5) to (p2);
+  \draw[->,space] (p6) to (p3);
+  \draw[->,space] (p6) to (p4);
+
+\end{diagram}
+
+Each arrow in the picture represents ``being a descendant of.'' Hence, since we have an arrow from Emon to Alice, that means that Emon is a descendent of Alice. Likewise, since we have an arrow from Emon to Bob, that means Emon is also a descendent of Bob (which of course makes sense, since every child is a descendent of \emph{two} parents).
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:relations} that a \vocab{relation} is just a set of ordered pairs. An ordering relation is precisely that: a set of pairs that tell us which items come before which other items.
+  \end{remark}
+\end{aside}
+
+If we take the set of these arrows all together, we have an ordering \vocab{relation} that we can write down as a set of pairs. To see this, let's call this ordering relation $\R{R}$, and let's start writing out the pairs.
+
+First, to encode the arrow that goes from Emon to Alice, let's write down ``$(\e{Emon}, \e{Alice})$'' to represent that Emon is a descendent of Alice:
+
+\begin{align*}
+  \R{R} = \{ &(\e{Emon}, \e{Alice}) \}
+\end{align*}
+
+Notice that the order matters: the first name is the descendent of the second. If we wrote ``$(\e{Alice}, \e{Emon})$,'' we would be saying that Alice is a descendent of Emon, which is not what we see in the picture. What we see in the picture is that Emon is a descendent of Alice, which is why we drew the arrow from Emon to Alice, and why we write ``$(\e{Emon}, \e{Alice})$.''
+
+\begin{aside}
+  \begin{notation}
+    In general, when we encode an ordering relation as a set of ordered pairs with the shape $(x, y)$, this means that $x$ \vocab{comes before} $y$ in the ordering arrangement.
+  \end{notation}
+\end{aside}
+
+Next, to encode the arrow from Emon to Bob, let's also add ``$(\e{Emon}, \e{Bob})$'' to our list:
+
+\begin{align*}
+  \R{R} = \{ &(\e{Emon}, \e{Alice}), (\e{Emon}, \e{Bob}) \}
+\end{align*}
+
+Finally, let's do the same for Frida and her parents:
+
+\begin{align*}
+  \R{R} = \{ &(\e{Emon}, \e{Alice}), (\e{Emon}, \e{Bob}) \\
+             &(\e{Frida}, \e{Carol}), (\e{Frida}, \e{Dan}) \}
+\end{align*}
+
+Now we have written down exactly the relation we drew in the picture.
+
+\begin{aside}
+  \begin{notation}
+    Actually, \mathers/ use a whole family of \vocab{similar looking symbols} to refer to ordering relations, depending on the context. For instance, the following are fairly common: $\strictorder/$ and $\order/$, $\prec$ and $\preccurlyeq$, $\sqsubset$ and $\sqsubseteq$, and even $\subset$ and $\subseteq$. We will stick to $\strictorder/$, and later we will also use $\order/$. 
+  \end{notation}
+\end{aside}
+
+However, instead of calling this relation $\R{R}$, a \mather/ would prefer to use the ``less than'' symbol --- i.e., ``$\strictorder/$'' as when we write ``$3 \strictorder/ 4$'' (3 is less than 4). This is because the ``less than'' symbol can be used to denote not just the ordering of numbers, but any ordering whatever. Hence, instead of writing $\R{R}$, we can write ``$\strictorder/$'':
+
+\begin{align*}
+  \strictorder/~~=~\{ &(\e{Emon}, \e{Alice}), (\e{Emon}, \e{Bob}) \\
+             &(\e{Frida}, \e{Carol}), (\e{Frida}, \e{Dan}) \}
+\end{align*}
+
+Moreover, to say that Emon is a descendant of Alice, we can just write this:
+
+\begin{equation*}
+  \e{Emon} \strictorder/ \e{Alice}
+\end{equation*}
+
+We can read that aloud like so: ``Emon is a descendant of Alice,'' or even ``Emon precedes Alice in this ordering.'' Similarly, to say that Frida is a descendent of Carol and Frida is a descendent of Bob, we can write this:
+
+\begin{aside}
+  \begin{remark}
+    When we write $\e{Emon} \strictorder/ \e{Alice}$, we can see why the ``less than'' symbol (i.e., ``$\strictorder/$'') is appropriate. It tells us that Emon comes \emph{before} Alice in the ordering at hand (namely, ordering by descendents), just like how ``$3 \strictorder/ 4$'' tell us that $3$ comes \emph{before} $4$ in the ordering at hand (namely, ordering the numbers into bigger and smaller numbers).
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \e{Frida} \strictorder/ \e{Carol} \hskip 2cm \e{Frida} \strictorder/ \e{Bob}
+\end{equation*}
+
+Also, notice that we have a set called ``$\set{A}$,'' and we have a relation ``$\strictorder/$'' which arranges the items in $\set{A}$ into who is a descendent of who. So, we have a \vocab{structure} here. If we were calling the relation $\R{R}$, we would describe our structure like this:
+
+\begin{equation*}
+  \struct{S} = (\set{A}, \R{R})
+\end{equation*}
+
+But since we're referring to the relation as ``$\strictorder/$'' we can instead denote the structure like this:
+
+\begin{terminology}
+  An \vocab{ordered set} is a structure $\struct{S} = (\set{A}, \strictorder/)$ composed of (i) a base set $\set{A}$ and (ii) an ordering relation $\strictorder/$ that arranges items from $\set{A}$ by putting them into an order. 
+\end{terminology}
+
+\begin{equation*}
+  \struct{S} = (\set{A}, \strictorder/)
+\end{equation*}
+
+This structure is called an \emph{ordered set}. An \vocab{ordered set} is any structure that consists of a base set and an ordering relation.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Partial Orders}
+
+\begin{terminology}
+  A \vocab{portially ordered set} is an ordered set \emph{some} of whose elements are ordered. Partially ordered sets are also called \vocab{posets}. A \vocab{totally ordered set} is an ordered set \emph{all} of whose elements are ordered. 
+\end{terminology}
+
+\newthought{An ordering relation} places the items from a base set into an ordering arrangement. In doing so, it will order \emph{some} of the items. We call such an ordering a \vocab{partial order}, because it may not order all of the items in the set. It might arrange only some of them. If it puts all of the elements into the ordering, we say it is a \vocab{total order}.
+
+\Mathers/ have a short-name for a partially ordered set: they call it a \vocab{poset} (pronounced ``POE-set'' or ``PAH-set,'' depending on preference).
+
+As an example of a poset, suppose that $\set{A}$ is a small group from a military unit:
+
+\begin{aside}
+  \begin{remark}
+    The abbreviations ``Gen.,'' ``Lt.,'' and ``Sgt.'' stand for the following ranks: ``General,'' ``Lieutenant,'' and ``Sergeant.'' 
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (p1) at (0, 2) [label=above: $\e{Gen.~Sanchez}$] {};
+  \node[dot] (p2) at (-3, 1) [label=above left: $\e{Lt.~Amir}$] {};
+  \node[dot] (p3) at (3, 1) [label=above right: $\e{Lt.~Hannah}$] {};
+  \node[dot] (p4) at (-3, 0) [label=below: $\e{Sgt.~McTyne}$] {};
+  \node[dot] (p5) at (0, 0) [label=below: $\e{Sgt.~Anbeeka}$] {};
+  \node[dot] (p6) at (3, 0) [label=below: $\e{Sgt.~King}$] {};
+
+\end{diagram}
+
+Let us impose a partial ordering ``$\strictorder/$'' on this set, which represents the chain of command. Let's say that Lieutenants Amir and Hannah each report to General Sanchez:
+
+\begin{diagram}
+
+  \node[dot] (p1) at (0, 2) [label=above: $\e{Gen.~Sanchez}$] {};
+  \node[dot] (p2) at (-3, 1) [label=above left: $\e{Lt.~Amir}$] {};
+  \node[dot] (p3) at (3, 1) [label=above right: $\e{Lt.~Hannah}$] {};
+  \node[dot] (p4) at (-3, 0) [label=below: $\e{Sgt.~McTyne}$] {};
+  \node[dot] (p5) at (0, 0) [label=below: $\e{Sgt.~Anbeeka}$] {};
+  \node[dot] (p6) at (3, 0) [label=below: $\e{Sgt.~King}$] {};
+
+  \draw[->,spaced] (p2) to (p1);
+  \draw[->,spaced] (p3) to (p1);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    A chain of command is a perfectly good example of an ordering relation: some people take orders from others, so some are ``below'' others in the chain. 
+  \end{remark}
+\end{aside}
+
+Let's also say that Sergeants McTyne, Anbeeka, and King each report to Lieutenants Amir and Hannah:
+
+\begin{diagram}
+
+  \node[dot] (p1) at (0, 2) [label=above: $\e{Gen.~Sanchez}$] {};
+  \node[dot] (p2) at (-3, 1) [label=above left: $\e{Lt.~Amir}$] {};
+  \node[dot] (p3) at (3, 1) [label=above right: $\e{Lt.~Hannah}$] {};
+  \node[dot] (p4) at (-3, 0) [label=below: $\e{Sgt.~McTyne}$] {};
+  \node[dot] (p5) at (0, 0) [label=below: $\e{Sgt.~Anbeeka}$] {};
+  \node[dot] (p6) at (3, 0) [label=below: $\e{Sgt.~King}$] {};  
+
+  \draw[->,spaced] (p2) to (p1);
+  \draw[->,spaced] (p3) to (p1);
+  \draw[->,space] (p4) to (p2);
+  \draw[->,spaced] (p4) to (p3);
+  \draw[->,spaced] (p5) to (p2);
+  \draw[->,spaced] (p5) to (p3);
+  \draw[->,spaced] (p6) to (p2);
+  \draw[->,space] (p6) to (p3);
+
+\end{diagram}
+
+And of course, let's also say that Sergeants McTyne, Anbeeka, and King each report to General Sanchez as well:
+
+\begin{aside}
+  \begin{remark}
+    Notice that some of the individuals in this picture report to more than one person. For instance, Sergeant McTyne reports to both Lieutenant Amir and Lieutenant Hannah. But notice also that some people don't have any relation to each other in this ordering. For instance, Sergeant McTyne and Sergeant Anbeeka have no relation: neither one reports to the other or takes orders from the other. So, some of the items in this ordered set are \vocab{incomparable}: they cannot be compared under the ``$\strictorder/$'' relation. 
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (p1) at (0, 2) [label=above: $\e{Gen.~Sanchez}$] {};
+  \node[dot] (p2) at (-3, 1) [label=above left: $\e{Lt.~Amir}$] {};
+  \node[dot] (p3) at (3, 1) [label=above right: $\e{Lt.~Hannah}$] {};
+  \node[dot] (p4) at (-3, 0) [label=below: $\e{Sgt.~McTyne}$] {};
+  \node[dot] (p5) at (0, 0) [label=below: $\e{Sgt.~Anbeeka}$] {};
+  \node[dot] (p6) at (3, 0) [label=below: $\e{Sgt.~King}$] {};  
+
+  \draw[->,spaced] (p2) to (p1);
+  \draw[->,spaced] (p3) to (p1);
+  \draw[->,space] (p4) to (p2);
+  \draw[->,spaced] (p4) to (p3);
+  \draw[->,spaced] (p5) to (p2);
+  \draw[->,spaced] (p5) to (p3);
+  \draw[->,spaced] (p6) to (p2);
+  \draw[->,space] (p6) to (p3);
+  \draw[->,spaced] (p4) to (p1);
+  \draw[->,space] (p5) to (p1);
+  \draw[->,spaced] (p6) to (p1);
+
+\end{diagram}
+
+Now we have drawn in all the arrows that represent the chain of command. Each arrow represents an instance of this ``reports to'' or ``takes orders from'' relation.
+
+For example, Lieutenant Amir reports to (takes orders from) General Sanchez, and Sergeant King reports to (takes orders from) Lieutenant Hannah. Hence, we can write:
+
+\begin{equation*}
+  \e{Lt.~Amir} \strictorder/ \e{Gen.~Sanchez} \hskip 2cm \e{Sgt.~King} \strictorder/ \e{Lt.~Hannah}
+\end{equation*}
+
+Read the one on the left like so: ``Lieutenant Amir reports to General Sanchez,'' or even ``Lieutenant Amir is below General Sanchez in this chain of command.'' Read the one on the right in a similar way.
+
+\begin{aside}
+  \begin{remark}
+    When we write ``$\e{Lt.~Amir} \strictorder/ \e{Gen.~Sanchez}$,'' it is clear again why the ``less than'' symbol (namely ``$\strictorder/$'') is appropriate. It tells as that Lieutenant Amir comes \emph{before} (or is \emph{lower} on the chain than) General Sanchez.
+  \end{remark}
+\end{aside}
+
+Let's write down the full ``chain of command'' relation as a set of pairs. Since Sergeant McTyne reports to Lieutenant Amir, let's write down that pair first:
+
+\begin{equation*}
+  \strictorder/~~=~\{ (\e{Sgt.~McTyne}, \e{Lt.~Amir}) \}
+\end{equation*}
+
+Since Sergeant McTyne reports to Lieutenant Hannah and to General Sanchez as well, let's add those pairings too:
+
+\begin{align*}
+  \strictorder/~~=~\{ &(\e{Sgt.~McTyne}, \e{Lt.~Amir}), (\e{Sgt.~McTyne}, \e{Lt.~Hannah}), \\
+     &(\e{Sgt.~McTyne}, \e{Gen.~Sanchez}) \}
+\end{align*}
+
+If we continue like this and write down all the pairings in our picture, we get this:
+
+\begin{align*}
+  \strictorder/~~=~\{ &(\e{Lt.~Amir}, \e{Gen.~Sanchez}), (\e{Lt.~Hannah}, \e{Gen.~Sanchez}), \\
+     &(\e{Sgt.~McTyne}, \e{Lt.~Amir}), (\e{Sgt.~McTyne}, \e{Lt.~Hannah}), \\
+     &(\e{Sgt.~McTyne}, \e{Gen.~Sanchez}), (\e{Sgt.~Anbeeka}, \e{Lt.~Amir}), \\
+     &(\e{Sgt.~Anbeeka}, \e{Lt.~Hannah}), (\e{Sgt.~Anbeek;}, \e{Gen.~Sanchez}) \\
+     &(\e{Sgt.~King}, \e{Lt.~Amir}), (\e{Sgt.~King}, \e{Lt.~Hannah}), \\
+     &(\e{Sgt.~King}, \e{Gen.~Sanchez}) \}
+\end{align*}
+
+Together, $\set{A}$ and $\strictorder/$ make up a structure, i.e., an ordered set:
+
+\begin{aside}
+  \begin{remark}
+    A \vocab{poset} puts only some of the elements from the base set into the ordering arrangement. It may leave some of the items without any ordering between them at all. Hence, in a partially ordered set, some of the elements in the base set may be \vocab{incomparable}.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \struct{S} = (\set{A}, \strictorder/)
+\end{equation*}
+
+This is a \vocab{partially ordered set} (a poset), because some of the people in the base set don't take orders from some of the others. For instance, neither Lieutenants Amir and Hannah take orders from the other (there is no arrow between them), and likewise, none of the Sergeants take orders from each other either.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Total Orders}
+
+\begin{aside}
+  \begin{remark}
+    In a \vocab{totally ordered set}, every element is placed in the ordering arrangement. What this means is that every two elements are ordered with respect to each other: either the one comes before the other in the arrangement, or the other comes before the latter. There simply are no two elements in a totally ordered set that are \vocab{incomparable}.
+  \end{remark}
+\end{aside}
+
+\newthought{As an example} of a \vocab{totally ordered set}, imagine 5 people standing in line at the ice cream truck. The person at the front of the line is able to order ice cream, and all the others behind them are waiting their turn. 
+
+There is an ordering to this line, which goes as follows. The first person in line does not have to wait for anybody to buy ice cream, the second person in line gets to go after the first person gets their ice cream, the third person in line gets to go after both the first and the second get their ice cream, and so on. 
+
+Let $\set{A}$ be the set of people, and let $\strictorder/$ be the ordering. We can draw this with a picture. First, let's draw the base set:
+
+\begin{aside}
+  \begin{remark}
+    Strictly speaking, we don't need to indicate which side is the back of the line and which side is the front of the line, since it will be obvious once we put in all the ordering arrows. We're just including these markers as hints.
+  \end{remark}
+\end{aside}
+
+\begin{diagram}
+
+  \node[dot] (p1) at (2, 0) [label=below: $p_{1}$] {};
+  \node[dot] (p2) at (1, 0) [label=below: $p_{2}$] {};
+  \node[dot] (p3) at (0, 0) [label=below: $p_{3}$] {};
+  \node[dot] (p4) at (-1, 0) [label=below: $p_{4}$] {};
+  \node[dot] (p5) at (-2, 0) [label=below: $p_{5}$] {};
+
+  \node (back) at (-4, 1) {Back of the line};
+  \draw[->,space,dashed] (back) to[out=270,in=180] (-2.5, 0);
+  \node (front) at (4, 1) {Front of the line};
+  \draw[->,space,dashed] (front) to[out=270,in=0] (2.5, 0);
+
+\end{diagram}
+
+To represent who has to wait for who, let's draw an arrow. For instance, $p_{1}$ is at the front of the line, and $p_{2}$ has to wait for them to get their ice cream, so let's draw an arrow from $p_{2}$ to $p_{1}$ to represent that $p_{2}$ comes behind $p_{1}$ in this ordering:
+
+\begin{diagram}
+
+  \node[dot] (p1) at (2, 0) [label=below: $p_{1}$] {};
+  \node[dot] (p2) at (1, 0) [label=below: $p_{2}$] {};
+  \node[dot] (p3) at (0, 0) [label=below: $p_{3}$] {};
+  \node[dot] (p4) at (-1, 0) [label=below: $p_{4}$] {};
+  \node[dot] (p5) at (-2, 0) [label=below: $p_{5}$] {};
+
+  \node (back) at (-4, 1) {Back of the line};
+  \draw[->,space,dashed] (back) to[out=270,in=180] (-2.5, 0);
+  \node (front) at (4, 1) {Front of the line};
+  \draw[->,space,dashed] (front) to[out=270,in=0] (2.5, 0);
+
+  \draw[->,space] (p2) to (p1);
+
+\end{diagram}
+
+Next, $p_{3}$ has to wait for $p_{2}$ to get their ice cream, so let's put an arrow in to represent that too:
+
+\begin{diagram}
+
+  \node[dot] (p1) at (2, 0) [label=below: $p_{1}$] {};
+  \node[dot] (p2) at (1, 0) [label=below: $p_{2}$] {};
+  \node[dot] (p3) at (0, 0) [label=below: $p_{3}$] {};
+  \node[dot] (p4) at (-1, 0) [label=below: $p_{4}$] {};
+  \node[dot] (p5) at (-2, 0) [label=below: $p_{5}$] {};
+
+  \node (back) at (-4, 1) {Back of the line};
+  \draw[->,space,dashed] (back) to[out=270,in=180] (-2.5, 0);
+  \node (front) at (4, 1) {Front of the line};
+  \draw[->,space,dashed] (front) to[out=270,in=0] (2.5, 0);
+
+  \draw[->,space] (p2) to (p1);
+  \draw[->,space] (p3) to (p2);
+
+\end{diagram}
+
+\begin{aside}
+  \begin{remark}
+    Notice that this ordering is \vocab{transitive}: if $x$ precedes $y$ in the line and $y$ precedes $z$ in the line, then $x$ precedes $z$ too.
+  \end{remark}
+\end{aside}
+
+However, $p_{3}$ also has to wait for $p_{1}$ to get their ice cream too. That's the idea behind waiting in line. Each person gets their turn. So the third person cannot go until \emph{both} the first \emph{and} the second person in line go. Hence, we need another arrow, from $p_{3}$ to $p_{1}$:
+
+\begin{diagram}
+
+  \node[dot] (p1) at (2, 0) [label=below: $p_{1}$] {};
+  \node[dot] (p2) at (1, 0) [label=below: $p_{2}$] {};
+  \node[dot] (p3) at (0, 0) [label=below: $p_{3}$] {};
+  \node[dot] (p4) at (-1, 0) [label=below: $p_{4}$] {};
+  \node[dot] (p5) at (-2, 0) [label=below: $p_{5}$] {};
+
+  \node (back) at (-4, 1) {Back of the line};
+  \draw[->,space,dashed] (back) to[out=270,in=180] (-2.5, 0);
+  \node (front) at (4, 1) {Front of the line};
+  \draw[->,space,dashed] (front) to[out=270,in=0] (2.5, 0);
+
+  \draw[->,space] (p2) to (p1);
+  \draw[->,space] (p3) to (p2);
+  \draw[->,space] (p3) to[out=45,in=135] (p1);
+
+\end{diagram}
+
+In a similar fashion, $p_{4}$ has to wait for everybody in front of them, so $p_{4}$ has to wait for each of $p_{3}$, $p_{2}$, and $p_{1}$ to get their ice cream. Let's draw in those arrows:
+
+\begin{diagram}
+
+  \node[dot] (p1) at (2, 0) [label=below: $p_{1}$] {};
+  \node[dot] (p2) at (1, 0) [label=below: $p_{2}$] {};
+  \node[dot] (p3) at (0, 0) [label=below: $p_{3}$] {};
+  \node[dot] (p4) at (-1, 0) [label=below: $p_{4}$] {};
+  \node[dot] (p5) at (-2, 0) [label=below: $p_{5}$] {};
+
+  \node (back) at (-4, 1) {Back of the line};
+  \draw[->,space,dashed] (back) to[out=270,in=180] (-2.5, 0);
+  \node (front) at (4, 1) {Front of the line};
+  \draw[->,space,dashed] (front) to[out=270,in=0] (2.5, 0);
+
+  \draw[->,space] (p2) to (p1);
+  \draw[->,space] (p3) to (p2);
+  \draw[->,space] (p3) to[out=45,in=135] (p1);
+  \draw[->,space] (p4) to (p3);
+  \draw[->,space] (p4) to[out=45,in=135] (p2);
+  \draw[->,space] (p4) to[out=45,in=135] (p1);
+  
+\end{diagram}
+
+Finally, $p_{5}$ has to wait for each of the people in front of them to get their ice cream too, so:
+
+\begin{aside}
+  \begin{remark}
+    Notice that every two distinct points are related by this ordering. Pick any two distinct points, and you will see that there is an arrow between them. For instance, pick $p_{4}$ and $p_{2}$. There is an arrow between them (it goes from $p_{4}$ to $p_{2}$). The same goes for, say, $p_{5}$ and $p_{3}$, or $p_{5}$ and $p_{2}$, or any other two distinct points in the picture.
+  \end{remark}
+\end{aside}
+
+
+\begin{diagram}
+
+  \node[dot] (p1) at (2, 0) [label=below: $p_{1}$] {};
+  \node[dot] (p2) at (1, 0) [label=below: $p_{2}$] {};
+  \node[dot] (p3) at (0, 0) [label=below: $p_{3}$] {};
+  \node[dot] (p4) at (-1, 0) [label=below: $p_{4}$] {};
+  \node[dot] (p5) at (-2, 0) [label=below: $p_{5}$] {};
+
+  \node (back) at (-4, 1) {Back of the line};
+  \draw[->,space,dashed] (back) to[out=270,in=180] (-2.5, 0);
+  \node (front) at (4, 1) {Front of the line};
+  \draw[->,space,dashed] (front) to[out=270,in=0] (2.5, 0);
+
+  \draw[->,space] (p2) to (p1);
+  \draw[->,space] (p3) to (p2);
+  \draw[->,space] (p3) to[out=45,in=135] (p1);
+  \draw[->,space] (p4) to (p3);
+  \draw[->,space] (p4) to[out=45,in=135] (p2);
+  \draw[->,space] (p4) to[out=45,in=135] (p1);
+  \draw[->,space] (p5) to (p4);
+  \draw[->,space] (p5) to[out=45,in=135] (p3);
+  \draw[->,space] (p5) to[out=45,in=135] (p2);
+  \draw[->,space] (p5) to[out=45,in=135] (p1);
+  
+\end{diagram}
+
+With that, we have drawn in all the arrows that indicate who waits for who. We have an ordered set:
+
+\begin{equation*}
+  \struct{S} = (\set{A}, \strictorder/)
+\end{equation*}
+
+This is a \vocab{total ordering}, because each person is related to every other person in this ordering. That's why there are so many arrows. Each person has to wait for every other person in front of them! Hence, $p_{3}$ stands behind $p_{2}$, but also $p_{1}$:
+
+\begin{terminology}
+  A \vocab{total ordering} is an ordering that orders \emph{all} elements in the base set. When we say it ``orders all elements,'' we mean that there is an arrow between every two points. None of the points are incomparable (i.e., none of them are missing an arrow between them).
+\end{terminology}
+
+\begin{equation*}
+  p_{3} \strictorder/ p_{2} \hskip 2cm p_{3} \strictorder/ p_{1}
+\end{equation*}
+
+And $p_{4}$ stands behind all those in front of them:
+
+\begin{equation*}
+  p_{4} \strictorder/ p_{3} \hskip 2cm p_{4} \strictorder/ p_{2} \hskip 2cm p_{4} \strictorder/ p_{1}
+\end{equation*}
+
+Even $p_{1}$ is related to every other person in the line, since $p_{1}$ stands in front of each of the others.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about \vocab{ordered sets}.
+
+\begin{itemize}
+
+  \item An \vocab{ordered set} is a structure $\struct{S} = (\set{A}, \strictorder/)$ where $\set{A}$ is a set and $\strictorder/$ is a relation that places items from $\set{A}$ into an ordering arrangement. To say that $x$ precedes $y$ in the ordering, we can write this: $x \strictorder/ y$.
+  
+  \item We call an ordered set \vocab{partially ordered} if it orders \emph{some} of the elements (i.e., for at least some $x$ and $y$ from the base set, either $x \strictorder/ y$ or $y \strictorder/ x$). A partially ordered set need not order every element in the base set though. There may be an $x$ and a $y$ that are not \vocab{comparable} (i.e., neither $x \strictorder/ y$ nor $y \strictorder/ x$). Partially ordered sets are also called \vocab{posets}.
+
+  
+  \item We call an ordered set \vocab{totally ordered} if it orders \emph{all} of the elements (i.e., if for every $x$ and $y$ in the base set, either $x \strictorder/ y$ or $y \strictorder/ x$). 
+  
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,252 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Proving Negations}
+\label{ch:proving-negations}
+
+\newtopic{I}{n the last chapter}, we learned how to prove facts that range over the entire collection of objects in our chosen universe. We learned that an \vocab{existential claim} asserts that some fact is true of at least one of the objects in our chosen universe, and we learned that to prove an existential claim, we need to provide a \vocab{witness}.
+
+We then learned that a \vocab{universal claim} asserts that some fact is true of every object in our chosen universe. We learned that we can prove such claims by \vocab{brute force}, which means that we prove the fact about each object in our universe separately. 
+
+Alternatively, we can prove a universal claim by \vocab{universal instantiation}, which means we pick an arbitrary object from our universe and show that the fact holds for that arbitrarily chosen object. Since we picked the object arbitrarily, this means that we have in effect proven that the fact holds for \emph{any} (and hence \emph{every} object in our universe).
+
+\begin{ponder}
+  How might you attempt to prove a negative fact? For example, how might you prove that there is no Santa Claus? How might you prove that when you drop a heavy object, it never floats upward?
+\end{ponder}
+
+So far, we have been dealing with what we might call \emph{positive statements}, i.e., statements which assert that something \emph{is} the case in our chosen universe. However, we can also formulate statements which assert that something is \emph{not} the case in our chosen universe. These kinds of statements are called \vocab{negations}. We might say that negations are statements which assert \emph{negative facts}, i.e., they assert that some particular fact does \emph{not} hold true in our chosen universe.
+
+Of course, if we want to assert that a negation is true in our chosen universe, then we need to prove it, just as we do for any other assertion we want to make about our chosen universe. But how exactly do you prove that something is \emph{not} the case? In this chapter, we will talk about negations, and learn some of the ways to prove that a negation is true in one's chosen universe.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Simple Negations}
+
+\newthought{As we noted a moment ago}, sometimes we want to prove not that something \emph{is} the case in our chosen universe, but rather that something \emph{is not} the case.
+
+\begin{terminology}
+  A \vocab{negation} is a statement that has this shape:
+    
+  \begin{quote}
+    not $\P/$
+  \end{quote}
+    
+  \noindent
+  where ``$\P/$'' is replaced by another statement.
+\end{terminology}
+
+If we have a statement (call it $\P/$), and we want to assert that $\P/$ is not true, we can combine $\P/$ with ``it is not the case that'' (or just ``not'' for short) to formulate a compound statement with this shape:
+
+\begin{quote}
+  not $\P/$ \hskip 1cm (synonymously: it is not the case that $\P/$)
+\end{quote}
+
+\noindent
+Statements with this shape are called \vocab{negations}. The words ``not'' or ``it is not the case that'' are the words that signal or do the negating, and $\P/$ expresses the fact being negated.
+
+In English, ``not'' usually doesn't appear at the front of the sentence. Instead, it is much more common for ``not'' or ``does not'' to appear somewhere in the middle of the sentence (usually before a verbal phrase). For example, we might say: 
+    
+\begin{quote}
+  Alice does not have enough money on her farecard to visit the Sandwich Shop.
+\end{quote}
+    
+Notice that ``does not'' appears before the verbal phrase ``have enough money.'' It is not at the front of the sentence. However, we can usually reword such sentences so that ``It is not the case that \ldots'' does appear at the front of the sentence. Hence, we can reword the aforementioned sentence like this:
+    
+\begin{quote}
+  It is not the case that Alice has enough money on her farecard to visit the Sandwich Shop.
+\end{quote}
+
+\begin{aside}
+  \begin{remark}
+    If you find yourself confused about the meaning of a negation, try to reword it so that ``It is not the case that \ldots'' appears at the front of the sentence. Sometimes, this helps us see more clearly exactly what it is that is being negated.
+  \end{remark}
+\end{aside}
+    
+For our purposes here, it usually does not matter much which way we word the sentence. For most of the cases that we will discuss, either wording has the same meaning.
+
+How do you prove a negation? If the negation is about a particular object in your chosen universe, you can just verify that the negation applies to that object \vocab{directly}. For example, suppose we want to prove that Bob does not have enough money on his farecard to visit the Sandwich Shop and the Museum.
+
+\begin{framed}
+  \begin{theorem}
+    At the start of his journey, Bob does not have enough money on his farecard to visit the Sandwich Shop and the Museum.
+  \end{theorem}
+\end{framed}
+
+\begin{aside}
+  \begin{remark}
+    We could reword our theorem so that it has this form:
+    
+    \begin{quote}
+      It is not the case that, at the start of his journey, Bob has enough money on his farecard to visit the Sandwich Shop and the Museum.
+    \end{quote}
+    
+    \noindent
+    This has the same meaning as what we stated in our theorem.
+  \end{remark}
+\end{aside}
+
+To prove this therem, we can just do the calculation directly, to show that Bob doesn't have enough to reach both the Sandwich Shop and the Museum:
+
+\begin{framed}
+  \begin{proof}
+    At the start of his journey, Bob has \$12.50 on his farecard. It will cost him \$5.00 to get from Campus to Central Station (as proved by Theorem \ref{thm:same-cost-to-central-station}). If he goes to the Sandwich Shop and back, it will cost him another \$10.00 (\$5.00 each way). Since Bob does not have \$15.00 on his farecard, he can't make it to the Sandwich Shop and back. And since he doesn't have enough money to get to the Sandwich Shop and back, he certainly doesn't have enough to then make it to the Museum.
+  \end{proof}
+\end{framed}
+
+Notice that we proved a negative fact here. We didn't prove that Bob \emph{has} enough money to get somewhere. We proved that Bob does \emph{not have} enough money to get somewhere. So, we proved a negation.
+
+But also, notice how we proved it. We showed that this negative fact must be true by showing it directly, with simple calculations. This is the same technique we used to prove Theorem \ref{thm:same-cost-to-central-station}. Simple negations can thus be proved like any other simple fact about our chosen universe. In particular, we can just use \vocab{direct proof} to show that the theorem must be true in our chosen universe.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Brute Force}
+
+\newthought{Now suppose we want to prove a negation} that is a little more complicated than the simple negation we looked at a moment ago. Suppose, for example, that we want to prove that \emph{no student} begins the journey with enough on their farecard to visit the Sandwich Shop, the Coffee Shop, and the Museum. How do we prove this?
+
+One option is that we could do it by \emph{brute force}. That is, we could go through all of the students in our chosen universe, one by one, and show that in each case, the student in question does not have the funds to visit all the stops.
+
+As with brute force and universal claims, this is fine if our universe is small enough. But if our universe is large enough, it becomes tedious to verify the negative fact about each object in our universe. And of course, if our universe has an infinite number of objects in it, then we simply can't use brute force, because we'll never get through all the objects.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Proof by Contradiction}
+
+\newthought{Fortunately, there is another method} we can use to prove negations, which is called \emph{proof by contradiction}. This work for many cases.
+
+\begin{terminology}
+  To perform a \vocab{proof by contradiction}, assume hypothetically that the opposite of what you want to prove, and then show that this leads to a contradiction. Once you have derived a contradiction, you can conclude that the hypothetical assumption you started with must be false, and therefore the original thing that you wanted to prove must be true.
+\end{terminology}
+
+To carry out a \vocab{proof by contradiction}, we do two things. (1) First, we begin by assuming hypothetically that the \emph{opposite} of what we want to prove is true. That is, we start the proof by pretending that the opposite of what we are trying to prove is true. (2) Then, we use pure logic to prove that this leads to a contradiction. In other words, we show that if we pretend that the opposite of what we want to prove is true, we end up in a contradictory state of affairs. If we succeed in doing that --- if we succeed in showing that the opposite of what we want to prove does indeed lead to a contradiction --- then we can conclude that the original thing we wanted to prove must be true.
+
+Why does this work? To see why it works, let's be explicit about each step of the process:
+
+\begin{enumerate}
+
+  \item We start with a hypothetical assumption: namely, the opposite of what we want to prove.
+
+  \item Then, we take a series of steps (using pure logic) to show that this leads to a contradiction.
+  
+  \item When we reach a contradiction, that is a signal that we have taken a wrong step somewhere, because a contradiction cannot ever be true.
+  
+\begin{aside}
+  \begin{remark}
+    One presupposition that underlies proof by contradiction is that a contradiction cannot ever be true. I cannot ever exist and not exist at the same time, you cannot ever be a human and not a human at the same time, etc. \\~\\
+    
+    Another presupposition that underlies proof by contradiction is the idea that if one of a pair of a contradictories is false, then the other must be true. If it is false that I am \emph{not} a human, then it must be the case that I \emph{am} a human.
+  \end{remark}
+\end{aside}
+  
+  \item So, we need to backtrack, and retrace our steps. We must examine each step of our proof, to see where the error is. 
+  
+  \item Since we used nothing but pure logic for each of the intermediate steps in our proof (and assuming that we in fact made no mistakes during each such step in our proof), then we will find that none of those steps are wrong.
+  
+  \item Therefore, the only thing left that could be wrong is the hypothetical assumption we made at the beginning, namely the opposite of what we originally wanted to prove.
+  
+  \item Since \emph{that} can't be true, the \emph{opposite} of it must be true, which is the original thing that we wanted to prove.
+
+\end{enumerate}
+
+Let's do an example. Let us prove that no student has enough money on their farecard to visit the Sandwich Shop, the Coffee Shop, and the Museum.
+
+\begin{framed}
+  \begin{theorem}
+    At the start of the journey, no student has enough money on their farecard to visit the Sandwich Shop, the Coffee Shop, and the Museum.
+  \end{theorem}
+\end{framed}
+
+To prove this, we first assume hypothetically that the opposite is true. What is the opposite? Well, the theorem states that there is \emph{no} student with enough money on their farecard to visit all the stops. So the opposite of that is that \emph{there is} a student with enough money to visit all the stops.
+
+Hence, we will start our proof by pretending that there is such a student, and then we will carefully take steps to show that this leads to a contradiction.
+
+\begin{framed}
+  \begin{proof}
+    I prove the theorem by contradiction.
+    
+    \begin{enumerate}
+    
+      \item Suppose there is a student $a$ who, at the start of the journey, has enough money on their farecard to travel to the Sandwich Shop, the Coffee Shop, and the Museum.
+      
+      \item Student $a$ will spend \$5.00 to get from Campus to Central Station (as proved by Theorem \ref{thm:same-cost-to-central-station}).
+      
+      \item Student $a$ will spend \$10.00 to get from Central Station to the Sandwich Shop and back (\$5.00 each way).
+      
+      \item Student $a$ will spend \$5.00 to get from Central Station to the Coffee Shop and back (\$2.50 each way).
+      
+      \item Student $a$ will spend a minimum of \$2.50 to get from Central Station to the Museum.
+      
+      \item Therefore, at the beginning of the journey, student $a$ would have to have \$22.50 or more on their farecard.
+      
+      \item But at the beginning of the journey, every student has less than \$22.50 on their farecard (as proved by Lemma \ref{lemma:less-than-twenty-two-fifty-on-farecard}).
+      
+    \end{enumerate}
+    
+    \noindent
+    Since (6) and (7) contradict each other, the assumption (1) must be false, and its opposite must be true.
+  \end{proof}
+\end{framed}
+
+Let's go over each step of this carefully. We begin in step (1) by assuming hypothetically the opposite of what we want to prove, namely that there is a student (who we call $a$) who has enough money to visit all the required stops. Then, in steps (2) through (6), we enumerate all the fares required to visit the relevant stops, concluding that student $a$ would have to begin the journey with \$22.50 or more on their farecard. However, we point out in step (7) that every student has less than \$22.50 (which we already proved in Lemma \ref{lemma:less-than-twenty-two-fifty-on-farecard}), and that contradicts (6). This is a contradiction, which simply can't be true. It's an impossible state of affairs. You can't both have less, and not have less, than \$22.50 on your farecard at the beginning of the journey.
+
+So something has gone wrong. We must have made an error, because we ended up in a contradiction, i.e., an impossible state of affairs. We need to go backwards, and check each step in our proof, to find our error. Let's do that:
+
+\begin{itemize}
+
+  \item Let's check step (7) first. Is it correct that every student has less than \$22.50 on their farecard? Yes, that is correct. We proved it in Lemma \ref{lemma:less-than-twenty-two-fifty-on-farecard}, and a cursory glance at the original totals on the farecards reveals that indeed, the most that any student has on their farecard when they begin their journey is \$20.00. So it is correct that every student has less than \$22.50 on their farecard.
+
+  \begin{aside}
+    \begin{remark}
+      This careful process of going backwards through our proof and examining each step is here to show us that each and every step in our proof, except for assumption (1), is firmly grounded in the facts about our chosen universe. The validity of each step is either grounded in some true fact about our chosen universe (like a subway or bus route on the map), or it is grounded in one of the agreed upon laws that govern our universe (like the cost of bus rides, or the arithmetic we use to add up the total costs). So the \emph{only} place we could have gone wrong in this proof is assumption (1). That's the only place where an error could be.
+    \end{remark}
+  \end{aside}
+  
+  \item Since step (7) isn't the problem, let's go backwards, and check step (6). Is it correct that our hypothesized student $a$ would have to begin the journey with \$22.50 or more on their farecard, if they are to visit all of the relevant stops? Yes, that is correct too. This is the correct sum (we can even check it on a calculator).
+  
+  \item Since step (6) isn't the problem, let's go back one more step, and check step (5). Is it correct that \$2.50 is the minimum amount student $a$ would have to spend to get from Central Station to the Museum? Again, this is correct. We can look at the original map to see that there are only two ways to get to the Museum from Central Station: by bus (which costs \$2.50), or by subway (which costs \$5.00), and the \$2.50 option is the cheapest. So step (5) is correct too.
+    
+  \item Okay, then let's check step (4). Is it correct that student $a$ would have to spend \$5.00 to get from Central Station to the Coffee Shop and back? Yes, it is correct. We can see it by checking the map.
+  
+  \item Let's check step (3). Is that correct too? Again, the answer is yes. We can see on the map that student $a$ would have to spend \$5.00 to get from Central Station to the Sandwich Shop, and \$5.00 to get back to Central Station.
+  
+  \item Let's check step (2). Is it correct that student $a$ would have to spend \$5.00 to get from Campus to Central Station? Again, the answer is yes. We proved this already in Theorem \ref{thm:same-cost-to-central-station}, and we can also just look on the map to see that this is correct.
+  
+  \item So that leaves step (1), which we assumed to be true hypothetically to start with. Is this one correct? Here, we must conclude that it cannot be correct, because we just confirmed that all the other steps are logically correct. The only step in our proof that could possibly be wrong is therefore this first hypothetical assumption. So this assumption --- that there \emph{is} a student with enough fare money to visit all the relevant stops --- must be false.
+  
+  \begin{aside}
+    \begin{remark}
+      In effect, a proof by contradiction shows that our assumption (1) is \emph{incompatible} with the other facts of our chosen universe. It shows that it is \emph{impossible} for assumption (1) to be true, \emph{along with} the other facts we know about our universe. That is what the contradiction reveals.
+    \end{remark}
+  \end{aside}
+  
+  \item So, if (1) is false, then the opposite of what it says must be true. Since (1) asserts that there \emph{is} a student with the relevant funds, and that was found to be something that is impossible in our chosen universe, then it follows that the opposite must be true, namely that \emph{no} student has the relevant funds.
+ 
+\end{itemize}
+
+Proof by contradiction always follows this same pattern. We begin by pretending that the opposite of what we want to prove is true, and then we show that this leads to a contradiction. By doing this, we show that the what we pretended at the start is an impossibility in our chosen universe. It is something that is simply incompatible with the facts of our chosen universe. Since it is impossible, and cannot be true, it follows that the opposite must be true, which is what we originally wanted to prove.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+In this chapter, we learned a few techniques for proving negative facts about our chosen universe.
+
+\begin{itemize}
+  
+  \item We learned that a \vocab{negation} is a statement with the form ``not $\P/$'' (or more explicitly, ``it is not the case that $\P/$'').
+  
+  \item We learned that if we want to prove a simple negation, we can just prove it directly, using \vocab{direct proof}.
+  
+  \item We learned that if we want to prove a more general negation, we can use \vocab{brute force}, and show that the negation applies to each object in our universe, one by one.
+  
+  \item Or, we can use \vocab{proof by contradiction}. To perform a proof by contradiction, we begin by pretending that the opposite of what we want to prove is true, and then we show that this leads to a contradiction. Since no contradiction can be true, it follows that what we initially pretended was true is actually impossible in our chosen universe, and therefore the thing we wanted to prove originally must be true.
+
+\end{itemize}
+
+\end{document}

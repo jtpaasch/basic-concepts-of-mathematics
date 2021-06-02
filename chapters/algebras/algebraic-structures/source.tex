@@ -1,0 +1,738 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Algebraic Structures}
+\label{ch:algebraic-structures}
+
+\begin{ponder}
+  If you've done any algebra (say, in school), then think about this: in what ways did the example from \chapterref{ch:algebra-first-example} remind you of doing algebra? 
+\end{ponder}
+
+\newtopic{I}{n \chapterref{ch:algebra-first-example}}, we looked at an example of combining movements to get around a museum. This was an example of an \vocab{algebraic structure}. In this chapter, we will define more precisely what an algebraic structure is.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Binary Operations}
+
+\newthought{In the museum example}, we have a set $\set{A}$ of moves, which contains these four moves:
+
+\begin{equation*}
+  \set{A} = \{ m_{0}, m_{1}, m_{2}, m_{3} \}
+\end{equation*}
+
+We can combine any two of these moves by doing one first and then the other. For instance, we can do $m_{1}$ first, then $m_{2}$. To denote the combination of $m_{1}$ and $m_{2}$, we wrote this:
+
+\begin{equation*}
+  m_{1} \opSymbol/ m_{2}
+\end{equation*}
+
+Every such combination of those four moves turns out to be equal to one of the other moves. We built a Cayley table, so that we can look up what every pair of moves equals:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | c |}
+    \hline
+    $\opSymbol/$ & $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline \hline
+    $m_{0}$    & $m_{0}$ & $m_{1}$ & $m_{2}$ & $m_{3}$ \\ \hline
+    $m_{1}$    & $m_{1}$ & $m_{2}$ & $m_{3}$ & $m_{0}$ \\ \hline
+    $m_{2}$    & $m_{2}$ & $m_{3}$ & $m_{0}$ & $m_{1}$ \\ \hline
+    $m_{3}$    & $m_{3}$ & $m_{0}$ & $m_{1}$ & $m_{2}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Let's now step back a bit and look at what we did. Notice the following:
+
+\begin{aside}
+  \begin{remark}
+    Recall from \chapterref{ch:functions} that a \vocab{function} $\func{f}$ from one set to another maps each item in the first set to one item in the second set.
+  \end{remark}
+\end{aside}
+
+\begin{itemize}
+  \item We took each pair of moves in our set, and we \emph{mapped it} to it another move from our set. For example, we mapped the pair $(m_{1}, m_{2})$ to $m_{3}$.
+  \item \emph{Every pair} of moves in our set has a mapping. There are no two moves from the set that we can't look up in our Cayley table.
+  \item Every pair of moves is mapped to \emph{one} other move in the set, e.g., $m_{1}$ and $m_{2}$ are mapped to $m_{3}$, and to $m_{3}$ only.
+\end{itemize}
+
+\begin{aside}
+  \begin{notation}
+    Recall from \chapterref{ch:products} that the \vocab{product} of a set $\set{A}$ is every pair of elements from $\set{A}$. we write the product of $\set{A}$ like this: $\product{\set{A}}{\set{A}}$.
+  \end{notation}
+\end{aside}
+
+Notice that when we set up our Cayley table for ``$\opSymbol/$,'' we specified a \vocab{function}. The combining operation ``$\opSymbol/$'' is a function that maps \emph{pairs of moves} to \emph{individual moves}. 
+
+\begin{aside}
+  \begin{notation}
+    We write the \vocab{signature} of a function $\func{f}$ from a domain $\set{A}$ to the same codomain $\set{A}$ like this: $\funcsig{f}{\set{A}}{\set{A}}$. In this case, the domain is the product $\product{\set{A}}{\set{A}}$, so it goes from $\product{\set{A}}{\set{A}}$ to $\set{A}$.
+  \end{notation}
+\end{aside}
+
+To see this, we can write out the function in the usual way that we write functions. The function's name/symbol is ``$\opSymbol/$,'' and here is its signature:
+
+\begin{equation*}
+  \funcsig{\opSymbol/}{\product{\set{A}}{\set{A}}}{\set{A}}
+\end{equation*}
+
+Read that like this: ``$\opSymbol/$ is a function that maps pairs of objects from $\set{A}$ to other objects in $\set{A}$.'' We can specify which pairs are mapped to which other objects, by writing it all out in one big function lookup table:
+
+\begin{aside}
+  \begin{remark}
+    The Cayley table contains the same information as this big lookup table here, but the Cayley table is more compact. It takes up much less space, and after you get used to it, it's even easier to use. So, in algebra, we prefer to use Cayley tables instead of writing out bigger tables like this one here. Still, it is instructive to see that the Cayley table specifies the same function.
+  \end{remark}
+\end{aside}
+
+\begin{center}
+  \begin{tabular}{|| c | c || c || c | c || }
+    \hline
+    \multicolumn{5}{| c |}{$\mathbf{\opSymbol/}$} \\ \hline
+    \textbf{Domain} & \textbf{Codomain} & ~ & \textbf{Domain} & \textbf{Codomain} \\ \hline
+    $(m_{0}, m_{0})$ & $m_{0}$ & ~ & $(m_{0}, m_{2})$ & $m_{2}$ \\ \hline
+    $(m_{1}, m_{0})$ & $m_{1}$ & ~ & $(m_{1}, m_{2})$ & $m_{3}$ \\ \hline
+    $(m_{2}, m_{0})$ & $m_{2}$ & ~ & $(m_{2}, m_{2})$ & $m_{0}$ \\ \hline
+    $(m_{3}, m_{0})$ & $m_{3}$ & ~ & $(m_{3}, m_{2})$ & $m_{1}$ \\ \hline
+    $(m_{0}, m_{1})$ & $m_{1}$ & ~ & $(m_{0}, m_{3})$ & $m_{3}$ \\ \hline
+    $(m_{1}, m_{1})$ & $m_{2}$ & ~ & $(m_{1}, m_{3})$ & $m_{0}$ \\ \hline
+    $(m_{2}, m_{1})$ & $m_{3}$ & ~ & $(m_{2}, m_{3})$ & $m_{1}$ \\ \hline
+    $(m_{3}, m_{1})$ & $m_{0}$ & ~ & $(m_{3}, m_{3})$ & $m_{2}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+With this table, we can see that, for example, the function maps the pair $(m_{3}, m_{0})$ to $m_{3}$. With the usual function notation, we would write that like this:
+
+\begin{aside}
+  \begin{notation}
+    Recall from \chapterref{ch:functions} that if a function $\func{f}$ maps $x$ to $y$, we write that like this: $\func{f}(x) = y$. In this case, our function is named ``$\opSymbol/$'' instead of $\func{f}$, and ``$x$'' is a pair of objects, e.g., ``$(m_{3}, m_{0})$.''
+  \end{notation}
+\end{aside}
+
+\begin{equation*}
+  \func{\opSymbol/}{(m_{3}, m_{0})} = m_{3}
+\end{equation*}
+
+In algebra, we usually just write the function's name (i.e., the ``$\opSymbol/$'' symbol) in between ``$m_{3}$'' and ``$m_{0}$,'' like this:
+
+\begin{equation*}
+  \op{m_{3}}{m_{0}} = m_{3}
+\end{equation*}
+
+\begin{aside}
+  \begin{notation}
+    We could write regular addition equations in the same two ways: either as ``$+(3, 5) = 8$'' or as ``$3 + 5 = 8$.'' In \math/, both mean exactly the same thing, they are just different notations.
+  \end{notation}
+\end{aside}
+
+This is just a matter of notational convenience. Both ways of writing this out mean exactly the same thing.
+
+All of this makes it clear that the combining operation ``$\opSymbol/$'' that we defined in \chapterref{ch:algebra-first-example} is nothing more than a function from $\product{\set{A}}{\set{A}}$ to $\set{A}$.
+
+In algebra, we call such a function a \emph{binary operation}. So, if we have a set $\set{A}$, a \vocab{binary operation} is just a function that maps every pair of objects from \set{A} to some other object in \set{A}. Let's write that down as a definition:
+
+\begin{fdefinition}[Binary operations]
+  \label{def:binary-operation}
+  Given a set $\set{A}$, we will say that a \vocab{binary operation} is a function $\funcsig{f}{\product{\set{A}}{\set{A}}}{\set{A}}$ that maps every pair of objects from $\set{A}$ to another object in $\set{A}$. Instead of denoting the function with a letter like ``$\func{f}$,'' we will denote it with a symbol such as ``$\opSymbol/$.'' Instead of writing ``$\opSymbol/(x, y) = z$'' to indicate that $\opSymbol/$ maps the pair $(x, y)$ to $z$, we will write ``$\op{x}{y} = z$.''
+\end{fdefinition}
+
+\begin{fexample}
+\label{ex:a-made-up-binary-operation}
+
+A binary operation needn't be as nice as the one we defined in \chapterref{ch:algebra-first-example}. A binary operation can be \vocab{entirely made up}, if we so desire. Here's an example. Suppose we have a set $\set{B}$ that looks like this:
+
+\begin{equation*}
+  \set{B} = \{ a, b, c \}
+\end{equation*}
+
+Let's make up a binary operation $\opSymbol/$ for $\set{B}$:
+
+\begin{aside}
+  \begin{remark}
+    This version of ``$\opSymbol/$'' is a binary operation because it satisfies the definition. It maps every pair of items from $\set{B}$ to another item in $\set{B}$.
+  \end{remark}
+\end{aside}
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $a$ & $b$ & $c$ \\ \hline \hline
+    $a$          & $b$ & $b$ & $b$ \\ \hline
+    $b$          & $b$ & $b$ & $b$ \\ \hline
+    $c$          & $b$ & $b$ & $b$ \\ \hline
+  \end{tabular}
+\end{center}
+
+This maps every pair of items from our set to $b$! Hence, solving equations are easy, because every combination is mapped to $b$. For instance:
+
+\begin{equation*}
+  \op{a}{b} = b \hskip 2cm 
+  \op{(\op{a}{a})}{c} = b \hskip 2cm 
+  \op{a}{(\op{b}{c})} = b
+\end{equation*}
+
+Also, every combination is going to turn out to be equal, because they all reduce to $b$. For instance:
+
+\begin{equation*}
+  \op{a}{b} = \op{b}{a} \hskip 1.5cm 
+  \op{(\op{a}{a})}{c} = \op{b}{c} \hskip 1.5cm 
+  \op{a}{c} = \op{a}{(\op{b}{c})}
+\end{equation*}
+
+Still, this version of ``$\opSymbol/$'' is a \vocab{binary operation}, because it's a function from $\product{\set{B}}{\set{B}}$ to $\set{B}$.
+
+\end{fexample}
+
+\begin{fexample}
+
+Suppose we have a set $\set{C}$ that contains the primary colors:
+
+\begin{equation*}
+  \set{C} = \{ \e{red}, \e{blue}, \e{yellow} \}
+\end{equation*}
+
+Let's now say that ``$\op{x}{y}$'' means that we mix the colors $x$ and $y$ to make a new color. Let's define this with the following Cayley table:
+
+\begin{aside}
+  \begin{remark}
+    By definition, a binary operation maps pairs of items in a set to other items in the \vocab{same} set. It must point in-house, not out-of-house. In this case, ``$\e{purple}$,'' ``$\e{green}$,'' and ``$\e{orange}$'' are out-of-house. They are not contained in the original set $\set{C}$.
+  \end{remark}
+\end{aside}
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $\e{red}$    & $\e{blue}$   & $\e{yellow}$ \\ \hline \hline
+    $\e{red}$    & $\e{red}$    & $\e{purple}$ & $\e{orange}$ \\ \hline
+    $\e{blue}$   & $\e{purple}$ & $\e{blue}$   & $\e{green}$  \\ \hline
+    $\e{yellow}$ & $\e{orange}$ & $\e{green}$  & $\e{yellow}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Using this table, we can say that red mixed with blue makes purple, or yellow mixed with blue makes green:
+
+\begin{equation*}
+  \op{\e{red}}{\e{blue}} = \e{purple} \hskip 2cm \op{\e{yellow}}{\e{blue}} = \e{green}
+\end{equation*}
+
+Is this version of ``$\opSymbol/$'' a \vocab{binary operation}? The answer is no. It fails to be a binary operation because some of the combinations result in colors that are outside of the original set. None of $\e{purple}$, $\e{green}$, or $\e{orange}$ are in $\set{C}$.
+
+\end{fexample}
+
+\begin{example}
+
+Suppose we have a set $\set{D}$ with the following contents:
+
+\begin{equation*}
+  \set{D} = \{ \e{left}, \e{right}, \e{up}, \e{down} \}
+\end{equation*}
+
+Suppose we want to specify an operation ``$\opSymbol/$'' on $\set{D}$ with this Cayley table:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $\e{left}$  & $\e{right}$ & $\e{up}$    \\ \hline \hline
+    $\e{left}$   & $\e{right}$ & $\e{down}$  & $\e{right}$ \\ \hline
+    $\e{right}$  & $\e{down}$  & $\e{left}$  & $\e{left}$  \\ \hline
+    $\e{down}$   & $\e{left}$  & $\e{right}$ & $\e{up}$    \\ \hline
+  \end{tabular}
+\end{center}
+
+\begin{aside}
+  \begin{remark}
+    By definition, a binary operation must map \emph{every} pair of items from the set to another item in the set. This Cayley table is missing some mappings. For instance, none of these are present: $(\e{up}, \e{left})$, $(\e{up}, \e{right})$, $(\e{up}, \e{up})$, $(\e{left}, \e{down})$, $(\e{right}, \e{down})$, $(\e{down}, \e{down})$.
+  \end{remark}
+\end{aside}
+
+Is this a \vocab{binary operation}? The answer is no, because it doesn't have a mapping for every pair of elements from $\set{D}$. Some mappings are missing.
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Algebraic Structures}
+
+\newthought{With the idea of a binary operation} at hand, we are now ready to define an algebraic structure. An \vocab{algebraic structure} is just a base set along with one or more binary operations that we attach to it. We call the base set the \vocab{carrier set}, because it ``carries'' the binary operation, so to speak.
+
+\begin{terminology}
+  An \vocab{algebraic structure} (or an \vocab{algebra} for short) is a base set equipped with a binary operation. The base set is called the \vocab{carrier set} of the algebra.
+\end{terminology}
+
+For example, if we have a set called ``$\set{A}$'' and a binary operation ``$\opSymbol/$,'' then we can put the two together, into a pair:
+
+\begin{equation*}
+  (\set{A}, \opSymbol/)
+\end{equation*}
+
+Read that out loud like this: ``the pair comprised of the set $\set{A}$ and the binary operation $\opSymbol/$.'' Or, if you like, read it like this: ``the set $\set{A}$ equipped with the binary operation $\opSymbol/$.''
+
+\begin{aside}
+  \begin{remark}
+    When we specify an algebraic structure like this, we of course need to make sure that we also specify what $\set{A}$ and $\opSymbol/$ are. Our dialogue partners always need to know which set and which binary operation we have in mind.
+  \end{remark}
+\end{aside}
+
+This is an algebraic structure, because it is a set that has a binary operation we have attached to it.
+
+\begin{aside}
+  \begin{remark}
+    By attaching a binary operation to a set, we add \vocab{structure} to it: the operation connects pairs in the set to other objects in the set. For instance, suppose we have a set $\set{A} = \{ a, b, c \}$. Without any structure, it's just free-floating dots: 
+  
+    \begin{diagram}
+      \node[dot] (a) at (0, 1) [label=above:{$a$}] {};
+      \node[dot] (b) at (1, 0) [label=right:{$b$}] {};
+      \node[dot] (c) at (-1, 0) [label=left:{$c$}] {};
+    \end{diagram}
+
+    But suppose we attach a binary operation $\opSymbol/$, defined like this:
+  
+    \begin{center}
+      \begin{tabular}{| c || c | c | c | }
+        \hline
+        $\opSymbol/$ & $a$ & $b$ & $c$ \\ \hline \hline
+        $a$          & $a$ & $c$ & $b$ \\ \hline
+        $b$          & $c$ & $b$ & $a$ \\ \hline
+        $c$          & $b$ & $a$ & $c$ \\ \hline
+      \end{tabular}
+    \end{center}
+
+    Because we've added this on, the set now looks something like this:
+  
+    \begin{diagram}
+  
+      \node[dot] (a) at (0, 1.75) [label=above:{$a$}] {};
+      \node[dot] (b) at (1.75, 0) [label=right:{$b$}] {};
+      \node[dot] (c) at (-1.75, 0) [label=left:{$c$}] {};
+  
+      \draw[<->,space] (c) -- (0, 0.75) -- (a);
+      \draw[<-] (1.55, 0.1) to (0, 0.725);
+
+      \draw[<->,spaced] (-1.65, -0.1) -- (0.45, 0.75) -- (1.75, 0.15);
+      \draw[<-] (0.1, 1.6) -- (0.45, 0.75);
+    
+      \draw[<->,spaced] (1.65, -0.1) -- (-0.45, 0.75) -- (-1.75, 0.15);
+      \draw[<-] (-0.1, 1.6) -- (-0.45, 0.75);
+    
+      \draw[<->,spaced] (a) to[looseness=35] (a);
+      \draw[<->,spaced] (b) to[looseness=35,out=45,in=300] (b);
+      \draw[<->,spaced] (c) to[looseness=35,out=135,in=240] (c);
+  
+    \end{diagram}
+    
+    That certainly has more structure than our initial free-floating dots!
+  \end{remark}
+\end{aside}
+
+We can give a name to this algebraic structure. Let's call it $\struct{S}$. We can write that out like this:
+
+\begin{equation*}
+  \struct{S} = (\set{A}, \opSymbol/)
+\end{equation*}
+
+Read that aloud like this: ``the structure $\struct{S}$ is defined as the pair comprised of the set $\set{A}$ and the binary operation $\opSymbol/$.'' Here's another way to read it: ``$\struct{S}$ is an algebraic structure comprised of the carrier set $\set{A}$ equipped with the binary operation $\opSymbol/$.''
+
+An algebraic structure can have more than one binary operation attached to it. For instance, imagine if we had defined another binary operation that we use the symbol ``$\bullet$'' for. Then we could define another algebraic structure $\struct{T}$ that consists of $\set{A}$ and both operations $\opSymbol/$ and $\bullet$. Like this:
+
+\begin{equation*}
+  \struct{T} = (\set{A}, \opSymbol/, \bullet)
+\end{equation*}
+
+Read that aloud like this: ``$\struct{T}$ is an algebraic structure comprised of the carrier set $\set{A}$ equipped with the binary operations $\opSymbol/$ and $\bullet$.''
+
+Let's put these ideas down in a formal definition for algebraic structures.
+
+\begin{fdefinition}[Algebraic structures]
+  \label{def:algebraic-structure}
+  Given a set $\set{A}$ and one or more binary operations $\opSymbol/$, $\bullet$, \ldots, we will say that an \vocab{algebraic structure} (or an \vocab{algebra} for short) is the tuple $(\set{A}, \opSymbol/, \bullet, \ldots)$. We will call the set $\set{A}$ the \vocab{carrier set} of the algebra, and we will use names like $\struct{S}$ and $\struct{T}$ to denote these structures.
+\end{fdefinition}
+
+\begin{example}
+
+Consider again the set and binary operation that we specified in \exampleref{ex:a-made-up-binary-operation} above. We have a set $\set{B}$:
+
+\begin{equation*}
+  \set{B} = \{ a, b, c \}
+\end{equation*}
+
+And we have a binary operation $\opSymbol/$:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c | }
+    \hline
+    $\opSymbol/$ & $a$ & $b$ & $c$ \\ \hline \hline
+    $a$          & $b$ & $b$ & $b$ \\ \hline
+    $b$          & $b$ & $b$ & $b$ \\ \hline
+    $c$          & $b$ & $b$ & $b$ \\ \hline
+  \end{tabular}
+\end{center}
+
+Hence, we can put together an algebraic structure from these two, which we might call ``$\struct{S}$'':
+
+\begin{equation*}
+  \struct{S} = (\set{B}, \opSymbol/)
+\end{equation*}
+
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Two Operations}
+
+\newthought{We have looked at structures} equipped with one binary operation. Let's close this chapter with an example of a structure equipped with \emph{two} operations.
+
+In an electronic circuit, there is a widget called an \vocab{and-gate}. It has two wires coming into it, and one wire coming out of it. Like this:
+
+\begin{circuitdiagram}
+  \draw
+    (0, 0) node[and port] (myand1) {}
+    (myand1.in 1) node[left=0.5cm] (a) {A}
+    (myand1.in 2) node[left=0.5cm] (b) {B}
+    (a) -| (myand1.in 1)
+    (b) -| (myand1.in 2)
+  ;
+  \node (c) at (0.5, 0) {C};
+\end{circuitdiagram}
+
+Here the input wires (the two wires going into the gate) are labeled $A$ and $B$, and the output wire (the wire coming out of the gate) is labeled $C$. 
+
+An and-gate is designed to function in a particular way: if both of its input wires are ``on'' (i.e., if they each have current flowing through them), then the gate will allow the current to pass through, in which case its output wire will have current coming out of it too. Like this:
+
+\begin{circuitdiagram}
+  \draw
+    (0, 0) node[and port] (myand1) {}
+    (myand1.in 1) node[left=0.5cm] (a) {A (\e{on})}
+    (myand1.in 2) node[left=0.5cm] (b) {B (\e{on})}
+    (a) -| (myand1.in 1)
+    (b) -| (myand1.in 2)
+  ;
+  \node (c) at (1, 0) {C (\e{on})};
+\end{circuitdiagram}
+
+However, if one of the input wires is ``off'' (i.e., if it doesn't have current flowing through it), then the and-gate will not allow the current to pass through, in which case its output wire will be ``off.'' Like this:
+
+\begin{circuitdiagram}
+  \draw
+    (0, 0) node[and port] (myand1) {}
+    (myand1.in 1) node[left=0.5cm] (a) {A (\e{on})}
+    (myand1.in 2) node[left=0.5cm] (b) {B (\e{off})}
+    (a) -| (myand1.in 1)
+    (b) -| (myand1.in 2)
+  ;
+  \node (c) at (1, 0) {C (\e{off})};
+\end{circuitdiagram}
+
+So an and-gate only lets current through if \emph{both} of its input wires are ``on.'' 
+
+Another similar widget is called a \vocab{xor-gate} (pronounced ``zore gate''). It also has two input wires and one output wire, but we draw it with a different symbol:
+
+\begin{circuitdiagram}
+  \draw
+    (0, 0) node[xor port] (myxor1) {}
+    (myxor1.in 1) node[left=0.5cm] (d) {D}
+    (myxor1.in 2) node[left=0.5cm] (e) {E}
+    (d) -| (myxor1.in 1)
+    (e) -| (myxor1.in 2)
+  ;
+  \node (f) at (0.5, 0) {F};
+\end{circuitdiagram}
+
+Here the input wires (the two wires going into the gate) are labeled $D$ and $E$, and the output wire (the wire coming out of the gate) is labeled $F$. 
+
+A xor-gate is designed to allow current through only when \emph{one} of its input wires has current flowing through it. Like this:
+
+\begin{circuitdiagram}
+  \draw
+    (0, 0) node[xor port] (myxor1) {}
+    (myxor1.in 1) node[left=0.5cm] (d) {D (\e{on})}
+    (myxor1.in 2) node[left=0.5cm] (e) {E (\e{off})}
+    (d) -| (myxor1.in 1)
+    (e) -| (myxor1.in 2)
+  ;
+  \node (f) at (1, 0) {F (\e{on})};
+\end{circuitdiagram}
+
+If both of the input wires are ``on'' (i.e., they have current flowing through them), then the xor-gate will not allow the current to pass through, in which case its output wire will be ``off.'' Like this:
+
+\begin{circuitdiagram}
+  \draw
+    (0, 0) node[xor port] (myxor1) {}
+    (myxor1.in 1) node[left=0.5cm] (d) {D (\e{on})}
+    (myxor1.in 2) node[left=0.5cm] (e) {E (\e{on})}
+    (d) -| (myxor1.in 1)
+    (e) -| (myxor1.in 2)
+  ;
+  \node (f) at (1, 0) {F (\e{off})};
+\end{circuitdiagram}
+
+So a xor-gate only lets current through when \emph{exactly one} of its input wires is ``on.''
+
+Let's model all of this with algebra. Let's call our carrier set $\Bool/$, and let's say it has only two elements in it:
+
+\begin{equation*}
+  \Bool/ = \{ \e{on}, \e{off} \}
+\end{equation*}
+
+Next, let's model an \vocab{and-gate} as a binary operation called ``$\&$,'' with the following Cayley table:
+
+\begin{center}
+  \begin{tabular}{| c || c | c |}
+    \hline
+    $\&$      & $\e{on}$  & $\e{off}$ \\ \hline \hline
+    $\e{on}$  & $\e{on}$  & $\e{off}$ \\ \hline
+    $\e{off}$ & $\e{off}$ & $\e{off}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+With this, we can express whether the output wire of an and-gate will be on or off, like this:
+
+\begin{aside}
+  \begin{remark}
+    To compute the answer to ``$\e{on}~\&~\e{on}$,'' we look in our Cayley table:
+  
+    \begin{center}
+      \begin{tabular}{| c || c | c |}
+        \hline
+        $\&$      & \cellcolor{grey3} $\e{on}$  & $\e{off}$ \\ \hline \hline
+        \cellcolor{grey3} $\e{on}$  & \cellcolor{grey3} $\e{\mathbf{on}}$  & $\e{off}$ \\ \hline
+        $\e{off}$ & $\e{off}$ & $\e{off}$ \\ \hline
+      \end{tabular}
+    \end{center}
+    
+    So, the answer is ``$\e{on}$.'' Hence, ``$\e{on}~\&~\e{on} = \e{on}$.'' To compute the answer to ``$\e{on}~\&~\e{off}$,'' we can again look in our Cayley table:
+    
+    \begin{center}
+      \begin{tabular}{| c || c | c |}
+        \hline
+        $\&$      & $\e{on}$  & \cellcolor{grey3} $\e{off}$ \\ \hline \hline
+        \cellcolor{grey3} $\e{on}$  & \cellcolor{grey3} $\e{on}$  & \cellcolor{grey3} $\e{\mathbf{off}}$ \\ \hline
+        $\e{off}$ & $\e{off}$ & $\e{off}$ \\ \hline
+      \end{tabular}
+    \end{center}
+    
+    For this, the answer is ``$\e{off}$.'' Hence, ``$\e{on}~\&~\e{off} = \e{off}$.''
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  A~\&~B = C
+\end{equation*}
+
+For instance, if $A$ is $\e{on}$ and $B$ is also $\e{on}$, then $C$ will also be $\e{on}$: 
+
+\begin{equation*}
+  \e{on}~\&~\e{on} = \e{on}
+\end{equation*}
+
+But if either of $A$ or $B$ is $\e{off}$, then $C$ will also be $\e{off}$, for instance:
+
+\begin{equation*}
+  \e{on}~\&~\e{off} = \e{off}
+\end{equation*}
+
+Now, let's model a \vocab{xor-gate} as another binary operation, called ``$\oplus$,'' with the following Cayley table:
+
+\begin{center}
+  \begin{tabular}{| c || c | c |}
+    \hline
+    $\oplus$    & $\e{on}$  & $\e{off}$ \\ \hline \hline
+    $\e{on}$  & $\e{off}$ & $\e{on}$  \\ \hline
+    $\e{off}$ & $\e{on}$  & $\e{off}$ \\ \hline
+  \end{tabular}
+\end{center}
+
+With this, we can express whether the output wire of a xor-gate will be on or off, like this:
+
+\begin{aside}
+  \begin{remark}
+    To compute the answer to ``$\e{on}~\oplus~\e{on}$,'' we look in our Cayley table:
+  
+    \begin{center}
+      \begin{tabular}{| c || c | c |}
+        \hline
+        $\oplus$    & \cellcolor{grey3} $\e{on}$  & $\e{off}$ \\ \hline \hline
+        \cellcolor{grey3} $\e{on}$  & \cellcolor{grey3} $\e{\mathbf{off}}$ & $\e{on}$  \\ \hline
+        $\e{off}$ & $\e{on}$  & $\e{off}$ \\ \hline
+      \end{tabular}
+    \end{center}
+
+    So, the answer is ``$\e{off}$.'' Hence, ``$\e{on}~\oplus~\e{on} = \e{off}$.'' To compute the answer to ``$\e{on}~\oplus~\e{off}$,'' we can again look in our Cayley table:
+    
+    \begin{center}
+      \begin{tabular}{| c || c | c |}
+        \hline
+        $\oplus$    & $\e{on}$  & \cellcolor{grey3} $\e{off}$ \\ \hline \hline
+        \cellcolor{grey3} $\e{on}$  & \cellcolor{grey3} $\e{off}$ & \cellcolor{grey3} $\e{\mathbf{on}}$  \\ \hline
+        $\e{off}$ & $\e{on}$  & $\e{off}$ \\ \hline
+      \end{tabular}
+    \end{center}
+    
+    For this, the answer is ``$\e{on}$.'' Hence, ``$\e{on}~\oplus~\e{off} = \e{on}$.''
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  D~\oplus~E = F
+\end{equation*}
+
+For instance, if $D$ is $\e{on}$ and $E$ is also $\e{on}$, then $F$ will be $\e{off}$: 
+
+\begin{equation*}
+  \e{on}~\oplus~\e{on} = \e{off}
+\end{equation*}
+
+But if one of $D$ or $E$ is $\e{on}$ and the other is $\e{off}$, then $F$ will be $\e{on}$, for instance:
+
+\begin{equation*}
+  \e{on}~\oplus~\e{off} = \e{on}
+\end{equation*}
+
+Let's pack our base set and these two binary operations together, to make an algebraic structure called $\struct{B}$:
+
+\begin{equation*}
+  \struct{B} = (\Bool/, \&, \oplus)
+\end{equation*}
+
+Now consider a more complex circuit:
+
+\begin{circuitdiagram}
+  \draw
+    (0,2) node[and port] (myand) {}
+    (3,1) node[xor port] (myxor) {}
+    (myand.in 1) node[left=.5cm](a) {A}
+    (myand.in 2) node[left = .5cm](b) {B}
+    (myand.out) -| (myxor.in 1)
+    (a) -| (myand.in 1)
+    (b) -| (myand.in 2)
+    (b) node[below=1cm](c){C}
+    (c) -| (myxor.in 2)
+  ;
+  \node (d) at (3.5, 1) {D};
+\end{circuitdiagram}
+
+We can encode this as an equation. In the picture, $A$ and $B$ are combined by an \vocab{and-gate}, so we can represent that like this:
+
+\begin{equation*}
+  A~\&~B
+\end{equation*}
+
+Then the output wire of the and-gate is joined with $C$ by a \vocab{xor-gate}, so we can represent that like this:
+
+\begin{equation*}
+  (A~\&~B)~\oplus~C
+\end{equation*}
+
+Now, let's suppose that, in our circuit, $A$ is $\e{on}$, $B$ is $\e{off}$, and $\e{C}$ is $\e{on}$. What will the output be:
+
+\begin{circuitdiagram}
+  \draw
+    (0,2) node[and port] (myand) {}
+    (3,1) node[xor port] (myxor) {}
+    (myand.in 1) node[left=.5cm](a) {A (\e{on})}
+    (myand.in 2) node[left = .5cm](b) {B (\e{off})}
+    (myand.out) -| (myxor.in 1)
+    (a) -| (myand.in 1)
+    (b) -| (myand.in 2)
+    (b) node[below=1cm](c){C (\e{on})}
+    (c) -| (myxor.in 2)
+  ;
+  \node (d) at (3.5, 1) {??};
+\end{circuitdiagram}
+
+We could work the answer out by hand, by staring at the diagram and thinking it through. But, we can also just plug the inputs into our equation, and then solve that. If we substitute ``$\e{on}$'' for $\e{A}$, ``$\e{off}$'' for $B$, and ``$\e{on}$'' for $\e{C}$, our equation to solve is this:
+
+\begin{aside}
+  \begin{remark}
+    To compute the answer to ``$\e{on}~\&~\e{off}$,'' we look in our Cayley table:
+  
+    \begin{center}
+      \begin{tabular}{| c || c | c |}
+        \hline
+        $\&$      & $\e{on}$  & \cellcolor{grey3} $\e{off}$ \\ \hline \hline
+        \cellcolor{grey3} $\e{on}$  & \cellcolor{grey3} $\e{on}$  & \cellcolor{grey3} $\e{\mathbf{off}}$ \\ \hline
+        $\e{off}$ & $\e{off}$ & $\e{off}$ \\ \hline
+      \end{tabular}
+    \end{center}
+
+    Then, to compute the answer to ``$\e{off}~\oplus~\e{on}$,'' we can again look in our Cayley table:
+    
+    \begin{center}
+      \begin{tabular}{| c || c | c |}
+        \hline
+        $\oplus$    & \cellcolor{grey3} $\e{on}$  & $\e{off}$ \\ \hline \hline
+        $\e{on}$  & \cellcolor{grey3} $\e{off}$ & $\e{on}$  \\ \hline
+        \cellcolor{grey3} $\e{off}$ & \cellcolor{grey3} $\e{\mathbf{on}}$  & $\e{off}$ \\ \hline
+      \end{tabular}
+    \end{center}
+
+    Hence, ``$(\e{on}~\&~\e{off})~\oplus~\e{on}$'' comes out ``$\e{on}$.''
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  (\e{on}~\&~\e{off})~\oplus~\e{on} = ??
+\end{equation*}
+
+We can solve this simply by looking up the answers in our Cayley tables:
+
+\begin{diagram}
+
+  \node at (-4, 0) {$($};
+  \node at (-3.5, 0) {$\e{on}$};
+  \node at (-2.5, 0) {$\&$};
+  \node at (-1.5, 0) {$\e{off}$};
+  \node at (-1, 0) {$)$};
+  \node at (0, 0) {$\oplus$};
+  \node at (1, 0) {$\e{on}$};
+  
+  \draw (-3.75, -0.25) -- (-3.75, -0.5) -- (-1.25, -0.5) -- (-1.25, -0.25);
+  \draw[->] (-2.5, -0.5) -- (-2.5, -1);
+  \node at (-2.5, -1.25) {$\e{off}$};
+  
+  \draw[->,dotted] (0, -0.25) -- (0, -1);
+  \node at (0, -1.25) {$\oplus$};
+  
+  \draw[->,dotted] (1, -0.25) -- (1, -1);
+  \node at (1, -1.25) {$\e{on}$};
+  
+  \draw (-3, -1.5) -- (-3, -1.75) -- (1.5, -1.75) -- (1.5, -1.5);
+  \draw[->] (0, -1.75) -- (0, -2.25);
+  \node at (0, -2.5) {$\e{\mathbf{on}}$};
+
+\end{diagram}
+
+Hence, we can conclude that the output wire in our circuit will be $\e{on}$ (i.e., current will pass through it):
+
+\begin{circuitdiagram}
+  \draw
+    (0,2) node[and port] (myand) {}
+    (3,1) node[xor port] (myxor) {}
+    (myand.in 1) node[left=.5cm](a) {A (\e{on})}
+    (myand.in 2) node[left = .5cm](b) {B (\e{off})}
+    (myand.out) -| (myxor.in 1)
+    (a) -| (myand.in 1)
+    (b) -| (myand.in 2)
+    (b) node[below=1cm](c){C (\e{on})}
+    (c) -| (myxor.in 2)
+  ;
+  \node (d) at (4, 1) {D (\e{on})};
+\end{circuitdiagram}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we looked at \vocab{algebraic structures}.
+
+\begin{itemize}
+
+  \item A \vocab{binary operation} ``$\opSymbol/$'' for a set $\set{A}$ is a function that maps every pair of elements from $\set{A}$ to another element in $\set{A}$. Thus, it has this signature: $\funcsig{\opSymbol/}{\product{\set{A}}{\set{A}}}{\set{A}}$.
+  
+  \item An \vocab{algebraic structure} (or an ``\vocab{algebra}'' for short) is a tuple comprised of a base set and one or more binary operations. We call the base set the \vocab{carrier set} of the algebra.
+
+\end{itemize}
+
+\end{document}

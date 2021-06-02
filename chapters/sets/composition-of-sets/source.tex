@@ -1,0 +1,314 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The Composition of Sets}
+\label{ch:the-composition-of-sets}
+
+\newtopic{I}{n the last chapter}, we learned that a set is a collection of objects. In this chapter, we will look at the composition of sets. By looking at the elements that make up a set, we can compare sets, and also identify them.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Subsets}
+
+\newthought{The elements of one set} can be contained in another set. For example, consider these two sets:
+
+\begin{equation*}
+  C = \{ 1, 2, 3 \} \hskip 1cm D = \{ 1, 2, 3, 4, 5 \}
+\end{equation*}
+
+\begin{terminology}
+  If the elements of one set are contained in another set, the contained set is called the \vocab{subset} and the containing set is called the \vocab{superset}.
+\end{terminology}
+
+Every element of $C$ is also in $D$. When this happens, we say that $C$ is a \vocab{subset} of $D$, and $D$ is a \vocab{superset} of $C$. We symbolize it like this:
+
+\begin{equation*}
+  C \subseteq D
+\end{equation*}
+
+If we want to say that $C$ is \emph{not} a subset of $D$, we write this:
+
+\begin{equation*}
+  C \not \subseteq D
+\end{equation*}
+
+Given any sets $A$ and $B$, to determine if $A$ is a subset of $B$, we must check each element in $A$, and see if it is also in $B$. If we do this, and we find that every element in $A$ is also in $B$, then we conclude that $A$ is a subset of $B$. Let us write this down as a definition.
+
+\begin{aside}
+  \begin{notation}
+    So $A$ is a subset of $B$ when: for every object $x$, if $x \in A$, then $x \in B$.
+  \end{notation}
+\end{aside}
+
+\begin{fdefinition}[Subsets]
+  \label{def:subset}
+  For any two sets $A$ and $B$, we will say that $A$ is a \vocab{subset} of $B$ exactly when every member $x$ of $A$ is also a member of $B$. If $A$ is a subset of $B$, we will denote it like this: $A \subseteq B$. If $A$ is not a subset of $B$, we will denote it like this: $A \not \subseteq B$.
+\end{fdefinition}
+
+As a further example, consider these two sets:
+
+\begin{equation*}
+  E = \{ a, e, f, i \} \hskip 1cm F = \{ a, e, i, o, u \}
+\end{equation*}
+
+Is $E$ a subset of $F$? That is, is the following statement true:
+
+\begin{equation*}
+  E \subseteq F
+\end{equation*}
+
+No, because not every element in $E$ is also in $F$. In particular, $f \in E$, but $f \not \in F$. Hence, $E$ is not a subset of $F$:
+
+\begin{equation*}
+  E \not \subseteq F
+\end{equation*}
+
+Now consider these two sets:
+
+\begin{equation*}
+  G = \{ 10, 20, 30 \} \hskip 1cm H = \{ 10, 20, 30 \}
+\end{equation*}
+
+Is $G$ a subset of $H$? That is, is the following statement true:
+
+\begin{equation*}
+  G \subseteq H
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    A set $A$ can be a subset of another set $B$ even if $A$ and $B$ are the same (i.e., have the same elements).
+  \end{remark}
+\end{aside}
+
+In order to qualify as a subset, every element in the first set needs to be in the other set. That is true here. Every element in $G$ is an element of $H$, so $G$ counts as a subset of $H$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Proper Subsets}
+
+\newthought{If $C \subseteq D$, but $D$ has extra} elements that are not in $C$, we say that $C$ is a \vocab{proper subset} of $D$. We symbolize it like this:
+
+\begin{equation*}
+  C \subset D
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+  If you like, you can think of ``$\subseteq$'' as an analogue of ``$\leq$'' (i.e., less-than or equal-to), and you can think of ``$\subset$'' as an analogue of ``$<$'' (i.e., strictly less-than).
+  \end{remark}
+\end{aside}
+
+If we want to say that $C$ is \emph{not} a proper subset of $D$, we write this:
+
+\begin{equation*}
+  C \not \subset D
+\end{equation*}
+
+A proper subset is strictly smaller than its superset. Its superset has more elements in it. Let's make a definition for this too.
+
+\begin{aside}
+  \begin{remark}
+    So $A$ is a proper subset of $B$ when: for every object $x$, if $x \in A$, then $x \in B$, but there is also at least one $y$ such that $y \in B$ and $y \not \in A$. 
+  \end{remark}
+\end{aside}
+
+\begin{fdefinition}[Proper subsets]
+  \label{def:proper-subset}
+  For any two sets $A$ and $B$, we will say that $A$ is a \vocab{proper subset} of $B$ exactly when every member $x$ of $A$ is also a member of $B$, and there is at least one element $y$ in $B$ that is not in $A$. If $A$ is a proper subset of $B$, we will denote it like this: $A \subset B$. If $A$ is not a proper subset of $B$, we will denote it like this: $A \not \subset B$.
+\end{fdefinition}
+
+As an example, consider these two sets:
+
+\begin{equation*}
+  J = \{ a, b, c \} \hskip 1cm K = \{ a, b, c, d, e \}
+\end{equation*}
+
+Is $J$ a proper subset of $K$? That is to say, is the following statement true:
+
+\begin{equation*}
+  J \subset K
+\end{equation*}
+
+The answer is yes, because every element in $J$ is also in $K$, but $K$ also has some extra elements (namely, $d$ and $e$).
+
+Now consider these two sets:
+
+\begin{equation*}
+  M = \{ 10, 11, 12, 13 \} \hskip 1cm N = \{ 10, 11, 12, 13 \}
+\end{equation*}
+
+Is $M$ a proper subset of $N$? That is to say, is the following statement true:
+
+\begin{equation*}
+  M \subset N
+\end{equation*}
+
+No, because $N$ does not have any extra elements beyond what $M$ has, so $M$ cannot be a \emph{proper} subset of $N$. Hence, this is true instead:
+
+\begin{aside}
+  \begin{remark}
+    If two sets $A$ and $B$ have the same elements, $A \subseteq B$, but $A \not \subset B$.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  M \not \subset N
+\end{equation*}
+
+However, is $M$ a \emph{regular} subset of $N$? That is, is the following statement true: 
+
+\begin{equation*}
+  M \subseteq N
+\end{equation*}
+
+Yes. $M$ may not be a \emph{proper} subset of $N$, but $M$ is a \emph{regular} subset of $N$, because every element of $M$ is also in $N$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Identity}
+\label{sec:set-equality}
+
+\newthought{Two sets are the same} when they have the same elements. As an example, consider these two sets:
+
+\begin{equation*}
+  M = \{ 10, 11, 12, 13 \} \hskip 1cm N = \{ 10, 11, 12, 13 \}
+\end{equation*}
+
+These two sets may have different names, but they are in fact \vocab{identical} sets, because they have the same members. To symbolize that they are identical, we write this:
+
+\begin{aside}
+  \begin{remark}
+    Whether two sets are the same or not is determined by their members. If they have the same members, then they are the same set. And in that case, what we are \emph{really} saying then is that they are \emph{one} set (one and the same set), but they have different \emph{names}.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  M = N
+\end{equation*}
+
+If we want to say they are \emph{not} the same set, we write this:
+
+\begin{equation*}
+  M \not = N
+\end{equation*}
+
+To determine if any two sets $A$ and $B$ are the same, we must first check that every element in $A$ is also in $B$, but then we must also go the other way, and check that every element in $B$ is also in $A$. Let's put this into a definition.
+
+\begin{fdefinition}[Set identity]
+  \label{def:set-identity}
+  For any two sets $A$ and $B$, we will say that $A$ and $B$ are \vocab{identical} sets (or synonymously: they are the \vocab{same} set) exactly when: (1) every member of $A$ is a member of $B$, and (2) every member of $B$ is a member of $A$. If $A$ and $B$ are identical sets, we will denote it like this: $A = B$. If $A$ and $B$ are not identical sets, we will denote it like this: $A \not = B$.
+\end{fdefinition}
+
+\begin{aside}
+  \begin{remark}
+    So $A = B$ when: for any $x$, if $x \in A$ then $x \in B$, and if $x \in B$ then $x \in A$.
+  \end{remark}
+\end{aside}
+
+As a further example, consider these two sets:
+
+\begin{equation*}
+  P = \{ a, 1, 3 \} \hskip 1cm Q = \{ a, 1, 3, b \}
+\end{equation*}
+
+Are these the same set? No, because $Q$ has an element that $P$ does not. Notice that $P$ is a subset of $Q$, because every element in $P$ is in $Q$. Hence, this is a true statement:
+
+\begin{equation*}
+  P \subseteq Q
+\end{equation*}
+
+However, not every element in $Q$ is an element of $P$, so $Q$ is not a subset of $P$. Hence, this is a true statement:
+
+\begin{equation*}
+  Q \not \subseteq P
+\end{equation*}
+
+\begin{aside}
+  \begin{remark}
+    An alternate definition for set equality: $A = B$ exactly when $A \subseteq B$ and $B \subseteq A$.
+  \end{remark}
+\end{aside}
+
+This illustrates that two sets are identical exactly when each is a subset of the other. In fact, we could define set identity using subsets if we like. We could say that two sets are identical exactly when the first is a subset of the second, and the second is a subset of the first. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Duplicates and Order}
+
+\newthought{Duplicates and order do not matter} in sets. To see this, consider the following two sets:
+
+\begin{equation*}
+  \{ c, a, b \} \hskip 1cm \{ a, b, b, c \}
+\end{equation*}
+
+Notice that both of these sets contain elements $a$, $b$, and $c$, but not in the same order, and there is a duplicated ``$b$'' in the second set. Are these the same sets? 
+
+If we apply \defref{def:set-identity} above, it turns out that yes, they are the same. Let's confirm. Is every element from the first set present in the second set? Yes:
+
+\begin{aside}
+  \begin{remark}
+    Remember: to check if two sets are equal, we must check that every element in the first set is contained in the second set, and we must check that every element in the second set is contained in the first set.
+  \end{remark}
+\end{aside}
+
+\begin{itemize}
+  \item As for $c$ in the first set, we can see a $c$ present in the second set.
+  \item As for $a$ in the first set, we can see an $a$ present in the second set.
+  \item As for $b$ in the first set, we can see a $b$ in the second set (in fact, we can see $b$ twice in the second set). 
+\end{itemize}
+  
+\noindent
+Now check the other way. Is every element from the second set in the first set? Yes: 
+
+\begin{itemize}
+  \item As for $a$ in the second set, we can see an $a$ present in the first set too.
+  \item As for the first $b$ in the second set, we can see a $b$ present in the first set.
+  \item As for the second $b$ in the second set, we already know there is a $b$ in the first set, because we just checked this for the first $b$.
+  \item As for $c$ in the second set, we can see a $c$ in the first set too.
+\end{itemize}
+
+\noindent
+So every element contained in the first set is also contained in the second set, and every element contained in the second set is also contained in the first set. Hence, these two sets are identical.
+
+\begin{aside}
+  \begin{remark}
+    It is useful to think of a set as just a bag of elements. The order doesn't matter. We just throw the items in the bag, unorganized. Another way to say this is that a set provides structure only to the \emph{outside} (as a container). It provides no structure \emph{inside} the set.
+  \end{remark}
+\end{aside}
+
+This illustrates that duplicates and order do not matter in sets. Whether or not there are multiple copies of an element makes no difference, and the order does not matter either. 
+
+So when we talk about sets, we aren't really interested in how \emph{many} copies something are in the set, nor are we interested in their \emph{order}. A set is really just a container, with some things in it.
+
+In practice, when we write out sets with set-roster notation, we simply drop any duplicates and do not write them out. Instead of writing $\{ a, b, b, c \}$, we would just write $\{ a, b, c \}$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we learned about the composition of sets. In particular, we learned that:
+
+\begin{itemize}
+
+  \item One set $A$ is a \vocab{subset} of another set $B$ just in case every element of $A$ is also an element of $B$. In symbols: $A \subseteq B$.
+  
+  \item Even if $A$ and $B$ have exactly the same elements, then $A \subseteq B$, because every element in $A$ is also an element of $B$. 
+  
+  \item If $A$ is a subset of $B$, but $B$ has extra elements that $A$ does not have, then $A$ is a \vocab{proper subset} of $B$. In symbols: $A \subset B$.
+  
+  \item If $A$ and $B$ have exactly the same elements, then they are \vocab{identical}. In symbols: $A = B$. 
+  
+  \item To determine if two sets $A$ and $B$ are the same, we must check both ways: we must check that every element of $A$ is also in $B$, and we must check that every element of $B$ is also in $A$.
+
+\end{itemize}
+
+\end{document}
