@@ -1,0 +1,839 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Common Number Encodings}
+\label{ch:number-encodings}
+
+\newtopic{I}{n the last chapter}, we looked at a way to encode or represent numbers by using a small set of digit symbols that we placed into slots. In this chapter, we will look at a family of different number encoding systems that are all based on that same idea.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Octal System}
+
+\newthought{In the last chapter}, we constructed a way to represent numbers using three digit symbols. We can call that system a \vocab{ternary} number encoding system, because ``ternary'' means ``three'' and we used only three digit symbols to write down our numbers.
+
+However, there's no reason that we have to use three digit symbols. We can build the same kind of encoding scheme using (say) eight digit symbols. We can call such an encoding scheme an \vocab{octal} encoding system. 
+
+So let's build such an octal system. Let's suppose that our eight digit symbols are the following:
+
+\begin{equation*}
+  a, b, c, d, e, f, g, h
+\end{equation*}
+
+Let's say that these are in order, so ``$a$'' is the ``zero'' digit, and then ``$b$'' is the next digit up, then ``$c$'' is the next digit up, and so on, until we get to ``$h$.'' The ``$h$'' is the highest digit we can get to, so when we reach ``$h$,'' we need to tick up the next slot to the left to get to a bigger number.
+
+To write ``zero,'' just like before, we set all of our slots to the ``zero'' symbol, which in this system is ``$a$'':
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$a$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {set to};
+  \node at (-1.95, -1.75) {``zero''};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$a$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {set to};
+  \node at (-0.5, -3.25) {``zero''};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$a$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {set to};
+  \node at (1, -1.75) {``zero''};
+  
+  \node at (4, 0.5) {$=$ ``zero''};
+
+\end{diagram}
+
+To write the number ``three'' in this octal sytsem, we tick up the first slot three digits:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$a$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$a$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$d$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {three times};
+  
+  \node at (4, 0.5) {$=$ ``three''};
+
+\end{diagram}
+
+To write ``seven'' we tick up the first digit four more times:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$a$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$a$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$h$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {four more};
+  
+  \node at (4, 0.5) {$=$ ``seven''};
+
+\end{diagram}
+
+So, we write the number ``zero'' as ``$aaa$,'' we write the number ``three'' as ``$aad$,'' and we write the number ``seven'' as ``$aah$.'' 
+
+Now let's do the number ``eight.'' How do we write this in our octal system? We've run out of digits in the first slot, so we need to reset the first slot back to ``zero'' and tick up the next slot to the left:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$a$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$b$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {tick up};
+  \node at (-0.5, -3.25) {one digit};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$a$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``eight''};
+
+\end{diagram}
+
+So to write the number ``eight'' in this octal system, we write ``$aba$.'' Notice that we were able to count up to seven before we needed to reset our first slot. This is because we started with eight digit symbols instead of three. Since we have more digit symbols to use, we can count higher before we have to reset our first slot and tick up the next slot to the left.
+
+To get the number nine in our octal system, we can now just tick up the first symbol one digit:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$a$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$b$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$b$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``nine''};
+
+\end{diagram}
+
+To get to fifteen, we can tick up the first slot seven more times:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$a$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$b$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$h$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {seven more};
+  
+  \node at (4, 0.5) {$=$ ``fifteen''};
+
+\end{diagram}
+
+So, to write ``fifteen'' in this octal system, we write ``$abh$.'' How do we get to ``sixteen''? We are out of digits in the first slot, so we need to reset the first slot back to ``zero'' and then tick up the left slot one digit:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$a$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$c$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {tick up};
+  \node at (-0.5, -3.25) {one digit};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$a$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``sixteen''};
+
+\end{diagram}
+
+You can see how we are doing the same thing that we did with our ternary system, except that we have eight digits to cycle through before we tick up the next slot to the left.  
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Decimal System}
+
+\newthought{We have seen ternary and octal} number representation systems. Let's look at a decimal system. We call it \vocab{decimal} because it uses ten digit symbols. Here they are, in order:
+
+\begin{equation*}
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+\end{equation*}
+
+Let's write the number ``zero.'' To do this, we set each slot to the ``zero'' digit symbol, which in this system is ``0'':
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {set to};
+  \node at (-1.95, -1.75) {``zero''};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$0$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {set to};
+  \node at (-0.5, -3.25) {``zero''};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {set to};
+  \node at (1, -1.75) {``zero''};
+  
+  \node at (4, 0.5) {$=$ ``zero''};
+
+\end{diagram}
+
+To get to the number ``four,'' we tick up the first slot four times:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$0$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$4$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {four times};
+  
+  \node at (4, 0.5) {$=$ ``four''};
+
+\end{diagram}
+
+To get to ``nine,'' we tick up the first slot five more times:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$0$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$9$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {five more};
+  
+  \node at (4, 0.5) {$=$ ``nine''};
+
+\end{diagram}
+
+How do we get to the next number (which is ten)? We've run out of digit symbols to cycle through in the right slot, so we reset the right slot back to ``zero'' and we tick up the next slot to the left:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$1$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {tick up};
+  \node at (-0.5, -3.25) {one digit};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$9$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``ten''};
+
+\end{diagram}
+
+To get to nineteen, we can now tick up the first slot nine times:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$1$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$9$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {nine more};
+  
+  \node at (4, 0.5) {$=$ ``nineteen''};
+
+\end{diagram}
+
+How do we get to twenty? We have run out of digits to cycle through on the right side, so we reset the first slot back to zero and tick up the next slot on the left:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$2$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {tick up};
+  \node at (-0.5, -3.25) {one digit};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``twenty''};
+
+\end{diagram}
+
+When we get to ninety-nine, how do we get to the next number (one hundred)? We reset the first two slots back to zero, and we tick up the next slot on the left:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$1$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {tick up};
+  \node at (-1.95, -1.75) {one digit};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$0$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {reset back};
+  \node at (-0.5, -3.25) {to ``zero''};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``one hundred''};
+
+\end{diagram}
+
+This decimal system is precisely the number system that most people use when we write numbers down. Of course, we usually don't write the zeros on the far left. For example, when we write the number five, we don't write ``005.'' We drop the zeros on the left, and just write ``5.'' Likewise, when we write the number ten, we don't write ``010.'' We drop the zero on the left, and just write ``10.'' 
+
+Still, you can see how this way of writing numbers (this \vocab{decimal} system) is no different than the ternary and octal systems we looked at before, except for the number of digits we have to cycle through. With this decimal system, we cycle through ten digits (zero through nine) before we tick up the next slot to the left. With the octal system, we cycle through eight digits before we tick up the next slot to the left, and with the ternary system, we cycle through three digits before we tick up the next slot to the left.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Hexadecimal System}
+
+\newthought{There is another system} that is often useful for talking about really big numbers. It is the \vocab{hexadecimal} number representation system. Like the ternary, octal, and decimal systems, this one works the same way, but we have \emph{sixteen} digit symbols that we cycle through before we tick up the next slot to the left. Here are the digit symbols that hexadecimal systems use:
+
+\begin{equation*}
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, a, b, c, d, e, f
+\end{equation*}
+
+As you can see, there are sixteen symbols here. The first ten are the same digit symbols used by the decimal system. Then, for the next six symbols, we just use letters from the alphabet. To write ``zero'' with this hexademical system, we set all of our slots to the ``zero'' character (which in this system is ``0''):
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {set to};
+  \node at (-1.95, -1.75) {``zero''};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$0$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {set to};
+  \node at (-0.5, -3.25) {``zero''};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {set to};
+  \node at (1, -1.75) {``zero''};
+  
+  \node at (4, 0.5) {$=$ ``zero''};
+
+\end{diagram}
+
+To count up to 9, we tick up the right slot nine times:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$0$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$9$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {nine times};
+  
+  \node at (4, 0.5) {$=$ ``nine''};
+
+\end{diagram}
+
+To get to the number ten, we tick up the right slot one more digit. The next digit symbol available from our list of digit symbols is ``$a$,'' so this is how we write ``ten'':
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$0$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$a$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``ten''};
+
+\end{diagram}
+
+To get ``eleven,'' we tick up the right slot one more time:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$0$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$b$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``eleven''};
+
+\end{diagram}
+
+And to get up to fifteen, we tick up the right slot four more times:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$0$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$f$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {four more};
+  
+  \node at (4, 0.5) {$=$ ``fifteen''};
+
+\end{diagram}
+
+How do get to sixteen? We have used up all of our digit symbols in the right slot, so we need to reset the far right slot back to ``zero,'' and we tick up the next slot to the left:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$1$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {tick up};
+  \node at (-0.5, -3.25) {one digit};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``sixteen''};
+
+\end{diagram}
+
+So, to write sixteen in the \emph{hexadecimal} system, we write ``$010$.'' Notice that this looks exactly like how we write ten in the \emph{decimal} system. When we work with different number representation systems, it is important that we be clear about which representation system we're using. Otherwise, we might mistake ``$010$'' for ten, when really it was meant to be sixteen.
+
+The hexadecimal system is convenient when we work with big numbers. This is because we have sixteen digits that we can cycle through (rather than only ten in the decimal system), so we can represent bigger numbers with fewer slots. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Binary System}
+
+\newthought{There is also perhaps the simplest system} for representing numbers, which is the \vocab{binary} system. For this, we have only two digit symbols! Usually, we represent them with a ``$0$'' and ``$1$'' but they could be any symbols really.
+
+To write the number zero in our binary encoding system, we fill all the slots with the ``zero'':
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {set to};
+  \node at (-1.95, -1.75) {``zero''};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$0$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {set to};
+  \node at (-0.5, -3.25) {``zero''};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {set to};
+  \node at (1, -1.75) {``zero''};
+  
+  \node at (4, 0.5) {$=$ ``zero''};
+
+\end{diagram}
+
+To get to the number one, tick up the far right slot:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$0$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$1$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``one''};
+
+\end{diagram}
+
+How do we get to two? We've already used up our digits in the right slot, so we need to reset the far right slot back to ``zero,'' and then tick up the slot to the left:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$1$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {tick up};
+  \node at (-0.5, -3.25) {one digit};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``two''};
+
+\end{diagram}
+
+To get to three, we can then tick up the right slot one digit:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$1$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$1$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``three''};
+
+\end{diagram}
+
+To get to four, we've used up our digits, so we need to reset our first and second slot back to zero, and tick up the third slot:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$1$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {tick up};
+  \node at (-1.95, -1.75) {one digit};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$0$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {reset back};
+  \node at (-0.5, -3.25) {to ``zero''};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$0$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``four''};
+
+\end{diagram}
+
+To get to five, we can then tick up the first slot one digit:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$1$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$0$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$1$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``five''};
+
+\end{diagram}
+
+And so on. You can see how the pattern goes. (What is the biggest number we can make with the binary system and only three slots? It is seven: $111$. See if you can work it out on paper.)
+
+You can see from this that because we have such a small number of digit symbols available to us (we only have two digits available to us), we will need many more slots to encode bigger numbers. 
+
+So the binary system is a bit like the opposite of the hexadecimal system. With the hexadecimal system, we use more digits and fewer slots, whereas with the binary system, we use fewer digits and more slots. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we looked at some common number encoding schemes that are all based on the idea of using a small set of digit symbols that we cycle through in slots. In particular, we looked at the \vocab{octal} system, the \vocab{decimal} system, the \vocab{hexadecimal} system, and the \vocab{binary} system.
+
+\end{document}

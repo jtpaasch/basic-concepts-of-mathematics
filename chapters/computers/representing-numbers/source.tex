@@ -1,0 +1,909 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Representing Numbers}
+\label{ch:representing-numbers}
+
+\newtopic{W}{e have an idea} of what the natural numbers are, but if we want to work with them, we need some way to write them down. We need some way to encode them, so that we can store them and transmit them back and forth. In this chapter, we'll look at one particularly efficient way to encode or represent numbers.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tally Systems}
+
+\newthought{One very simple way} to write down numbers is to use a tally system, much like we did with the natural numbers. In a tally system, you write down a number by writing down mark after mark after mark on the page. 
+
+So, to write, say, three, I put down three marks. To write fourteen, I add fourteen marks. To write two hundred and seventy nine, I put down two hundred and seventy nine marks.
+
+Obviously, this way of writing down numbers is inefficient, especially for big numbers. It takes up a lot of space to write down any numbers that are bigger than, say, ten or twenty.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Rotating Systems}
+
+\newthought{There is another way} to write down numbers, which is much more efficient. Basically, we pick a small set of symbols to serve as representatives of digits, and we cycle through them. When we run out of symbols, we add another column or slot to write new digits in, and we cycle through our symbols again.
+
+Let's build a simple example of this kind of system, so we can see how it works. To start, let's decide on a set of symbols that we want to use to represent digits. Let's say that our set of symbols consists of the following:
+
+\begin{equation*}
+  \bigstar, \spadesuit, \clubsuit
+\end{equation*}
+
+These are in order. So, the lowest digit is $\bigstar$ (we'll think of this as representing no digits at all, or ``zero'' digits), the next higher digit is $\spadesuit$, and then the highest digit is $\clubsuit$.
+
+Next, let's lay out an array of slots that we can fill with our digit symbols. The first slot goes on the right, and then we add more slots on the left. We'll start with three slots for now, but we can add more later if we need. Here is our array of slots:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {};
+
+  \draw[color=gray] (-2, -0.25) -- (-2, -0.5) -- (-1, -0.5) -- (-1, -0.25);
+  \draw[->,color=gray] (-1.5, -0.5) -- (-1.5, -1);
+  \node at (-1.5, -1.5) {3rd};
+  \node at (-1.5, -2) {slot};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {};
+
+  \draw[color=gray] (-1, -0.25) -- (-1, -0.5) -- (0, -0.5) -- (0, -0.25);
+  \draw[->,color=gray] (-0.5, -0.5) -- (-0.5, -1);
+  \node at (-0.5, -1.5) {2nd};
+  \node at (-0.5, -2) {slot};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {};
+  
+  \draw[color=gray] (0, -0.25) -- (0, -0.5) -- (1, -0.5) -- (1, -0.25);
+  \draw[->,color=gray] (0.5, -0.5) -- (0.5, -1);
+  \node at (0.5, -1.5) {1st};
+  \node at (0.5, -2) {slot};
+  
+  \draw[<-] (1.5, 0.5) -- (2.5, 0.5);
+  \node at (3.75, 0.5) {start here};
+  
+\end{diagram}
+
+Next, let's fill every slot with our lowest digit symbol (the star), because that digit symbol represents ``zero.'' In other words, let's set all of our slots to ``zero'':
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\bigstar$};
+
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {set to};
+  \node at (-1.95, -1.75) {``zero''};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\bigstar$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -1.75);
+  \node at (-0.5, -2) {set to};
+  \node at (-0.5, -2.5) {``zero''};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\bigstar$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (0.95, -1.25) {set to};
+  \node at (0.95, -1.75) {``zero''};
+  
+  \node at (4, 0.5) {$=$ ``zero''};
+  
+\end{diagram}
+
+This is how we write the number ``zero.'' We have our array of slots, all of which are set to ``zero.''
+
+Now that we know how to write zero, let's write the number one. To do that, we increment the digit in the far right slot. So, we tick the rightmost slot up, by changing it from the star symbol to the next digit symbol, which is the spade symbol:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\bigstar$};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\bigstar$};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (0.5, -1.5) {tick up};
+  \node at (0.5, -2) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``one''};
+
+\end{diagram}
+
+This is how we write the number ``one.'' All of the slots are zero, except for the far right slot, which has ticked its digit up to the spade.
+
+Next, let's write the number two. To do this, we tick up the far slot one more time. So, we change it from the spade, to the next digit symbol, which is the club:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\bigstar$};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\bigstar$};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (0.5, -1.5) {tick up};
+  \node at (0.5, -2) {another digit};
+  
+  \node at (4, 0.5) {$=$ ``two''};
+
+\end{diagram}
+
+Okay, so we know how to write the first three numbers with our system:
+
+\begin{align*}
+  \bigstar~\bigstar~\bigstar   \hskip 1cm &= ``zero'' \\  
+  \bigstar~\bigstar~\spadesuit \hskip 1cm &= ``one'' \\  
+  \bigstar~\bigstar~\clubsuit  \hskip 1cm &= ``two''
+\end{align*}
+
+How do we write the next number (which is the number three)? We've run out of digit symbols to use in the first slot. We can't tick up that first slot any higher. So what do we do next?
+
+What we do is this: we reset the first slot back to ``zero'' (the star symbol), and then we increment the 2nd slot by one digit (so we tick it up to the spade):
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\bigstar$};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\spadesuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {tick up};
+  \node at (-0.5, -3.25) {one digit};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\bigstar$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``three''};
+
+\end{diagram}
+
+That's how we write the number ``three.'' We can't write ``three'' using only the 1st slot, because we've run out of digit symbols. So we have to increment the 2nd slot, and then we can start over in the first slot.
+
+This is what we do whenever we run out of digits in a slot. We just reset that slot back to ``zero,'' and then we increment the slot to the left by one digit symbol. Once we have done that, we can start incrementing our initial slot again. 
+
+Next, let's do the number ``four.'' To do this, we keep the second slot fixed, and we tick up the first slot:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\bigstar$};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\spadesuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``four''};
+
+\end{diagram}
+
+To do ``five,'' we again keep the second slot fixed, and we increment the first slot one more time:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\bigstar$};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\spadesuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``five''};
+
+\end{diagram}
+
+Now we know how to write the first six numbers with our system:
+
+\begin{align*}
+  &\bigstar~\bigstar~\bigstar      &= ``zero''
+  \hskip 2.5cm
+  &\bigstar~\spadesuit~\bigstar    &= ``three'' \\ 
+  &\bigstar~\bigstar~\spadesuit    &= ``one''
+  \hskip 2.5cm
+  &\bigstar~\spadesuit~\spadesuit  &= ``four'' \\ 
+  &\bigstar~\bigstar~\clubsuit     &= ``two''
+  \hskip 2.5cm
+  &\bigstar~\spadesuit~\clubsuit   &= ``five''
+\end{align*}
+
+How do we write the next number (which is the number six)? We've again run out of digit symbols to use in our first slot, so what do we do? At this point, we do much the same thing that we did the last time that we ran out of digit symbols. We ticked up the slot to the left. So, we reset the first slot to ``zero'' and we tick up the second slot one digit:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\bigstar$};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\clubsuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {tick up};
+  \node at (-0.5, -3.25) {one digit};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\bigstar$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``six''};
+
+\end{diagram}
+
+Now we can keep that second slot fixed, and we can cycle through the digits in our first slot again. So, for the next number (seven), we tick up the first slot:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\bigstar$};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\clubsuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``seven''};
+
+\end{diagram}
+
+Then for the next number (eight), we keep the second slot fixed and tick up the first slot:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\bigstar$};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\clubsuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``eight''};
+
+\end{diagram}
+
+How do we write the next number (which is nine)? We've run out of digit symbols to use in the first slot, so we need to increment the slot to the left. But we've also run out of digit symbols to increment in the second slot too. So, we just move over to the next available slot. Hence, we reset the first two slots back to ``zero,'' and then we tick up the third slot: 
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {tick up};
+  \node at (-1.95, -1.75) {one digit};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\bigstar$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {reset back};
+  \node at (-0.5, -3.25) {to ``zero''};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\bigstar$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``nine''};
+
+\end{diagram}
+
+To do the next number (the number ten), we keep the two slots on the left fixed, and we tick up the first slot on the right:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\bigstar$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``ten''};
+
+\end{diagram}
+
+To get to the next number (eleven), we again keep the two slots on the left fixed, and we tick up the first slot on the right:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\bigstar$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``eleven''};
+
+\end{diagram}
+
+How do we do the next number (twelve)? We've used up the digits in the first slot, so we reset it to ``zero,'' and we tick up the second slot one digit:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\spadesuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {tick up};
+  \node at (-0.5, -3.25) {one digit};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\bigstar$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``twelve''};
+
+\end{diagram}
+
+To get thirteen, we keep the left two slots fixed and we tick up the slot on the right:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\spadesuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``thirteen''};
+
+\end{diagram}
+
+To get fourteen, we do the same thing again. We keep the left two slots fixed, and we tick up the slot on the right:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\spadesuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``fourteen''};
+
+\end{diagram}
+
+How do we get fifteen? We reset our first slot (the far right) back to ``zero,'' then we tick up the second slot:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\clubsuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {tick up};
+  \node at (-0.5, -3.25) {one digit};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\bigstar$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``fifteen''};
+
+\end{diagram}
+
+To get sixteen now, we just tick up the digit on the far right:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\clubsuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``sixteen''};
+
+\end{diagram}
+
+For seventeen, we tick up the right digit again:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\clubsuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``seventeen''};
+
+\end{diagram}
+
+How about eighteen? We've used up our digits in the first and second slot, so we need to reset them back to ``zero'' and tick up the far left slot:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {tick up};
+  \node at (-1.95, -1.75) {one digit};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\bigstar$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {reset back};
+  \node at (-0.5, -3.25) {to ``zero''};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\bigstar$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``eighteen''};
+
+\end{diagram}
+
+Now we can increment the 1st slot again. To get nineteen:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\bigstar$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``nineteen''};
+
+\end{diagram}
+
+To get twenty:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\bigstar$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``twenty''};
+
+\end{diagram}
+
+We've run out of digits on the far right side, so to get the next number (twenty-one), we need to reset the 1st slot back to ``zero'' and tick up the second slot:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\spadesuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {tick up};
+  \node at (-0.5, -3.25) {one digit};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\bigstar$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``twenty-one''};
+
+\end{diagram}
+
+To get the next number (twenty-two), we can tick up the first slot:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\spadesuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``twenty-two''};
+
+\end{diagram}
+
+To get the twenty-three, we can tick up the first slot again:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\spadesuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``twenty-three''};
+
+\end{diagram}
+
+How do we get twenty-four? We've run out of digits in the first slot, so we need to reset it back to ``zero'' and tick up the second slot:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\clubsuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {tick up};
+  \node at (-0.5, -3.25) {one digit};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\bigstar$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``twenty-four''};
+
+\end{diagram}
+
+To get twenty-five, we can tick up the first slot:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\clubsuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\spadesuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``twenty-five''};
+
+\end{diagram}
+
+And to get twenty-six, we can tick up the first slot one more time:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {keep this};
+  \node at (-1.95, -1.75) {fixed};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\clubsuit$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {keep this};
+  \node at (-0.5, -3.25) {fixed};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\clubsuit$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {tick up};
+  \node at (1, -1.75) {one digit};
+  
+  \node at (4, 0.5) {$=$ ``twenty-six''};
+
+\end{diagram}
+
+You can see how the pattern goes. To make bigger and bigger numbers, we tick up the far right slot, one digit at a time, until we run out of digits. When we run out of digits, we reset that far right slot back to ``zero,'' and we tick up the slot to the left. Then we can cycle through the digits in the first slot again. We keep repeating this process, to get higher and higher numbers. Whenever we run out of digits in a slot on the right, we just tick up a slot on the left, to get more numbers.
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Cyclic Numbers}
+
+\newthought{Can we use the system} we devised in the last section to make a higher number? For instance, can we encode the next number (twenty-seven) with our digit symbols and our three slots?
+
+The answer is: no, we cannot, with only three slots. In the last section, we incremented each of our three slots to their highest possible digits, and we were able to get up to twenty-six. But if we want to get higher, we need a new slot. To get to a bigger number, we'd need add a fourth slot on the left side. Then we could reset our slots back to ``zero,'' at which point we could start incrementing the far right slot again.
+
+This leads to an important point. Suppose that we \emph{can't} add a fourth slot. For whatever reason, suppose that we only have three slots, and that's it. What happens if we reset the digits back to ``zero''? What number do we get? We get zero:
+
+\begin{diagram}
+
+  \draw (-1, 0) -- (-2, 0) -- (-2, 1) -- (-1, 1);
+  \node at (-1.5, 0.5) {$\bigstar$};
+  
+  \draw[<-,color=gray] (-1.5, -0.25) -- (-1.5, -1);
+  \node at (-1.95, -1.25) {reset back};
+  \node at (-1.95, -1.75) {to ``zero''};
+
+  \draw (0, 0) -- (-1, 0) -- (-1, 1) -- (0, 1);
+  \node at (-0.5, 0.5) {$\bigstar$};
+
+  \draw[<-,color=gray] (-0.5, -0.25) -- (-0.5, -2.5);
+  \node at (-0.5, -2.75) {reset back};
+  \node at (-0.5, -3.25) {to ``zero''};
+
+  \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- (0, 0);
+  \node at (0.5, 0.5) {$\bigstar$};
+  
+  \draw[<-,color=gray] (0.5, -0.25) -- (0.5, -1);
+  \node at (1, -1.25) {reset back};
+  \node at (1, -1.75) {to ``zero''};
+  
+  \node at (4, 0.5) {$=$ ``zero''};
+
+\end{diagram}
+
+So, with three slots and three digit symbols, we can only count up to twenty-six! If we keep cycling our digits after we hit twenty-six, we'll end up resetting our counter back to zero, and start counting upwards again.
+
+If we have a fixed number of slots, we have something like a clock. On a clock, we start at the number one, then we count up to the number twelve, then we start over at again at the number one. In our case, it's just the same, except we start at the number zero, then we go up to the number twenty-six, and then we start over at zero again.
+
+So, if you have a fixed number of slots and can't add new slots on the left when you need to make bigger numbers, you will have clock counting (clock arithmetic). But if you can keep adding new slots on the left side whenever you need, then you can keep getting bigger and bigger numbers, and you won't have clock counting.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we looked at a way to represent numbers, by picking a small set of digit symbols and then cycling through them in slots. 
+
+\begin{itemize}
+
+  \item We start by incrementing the digits on the far right, and whenever we run out of digits in the far right slot, we reset the slot back to ``zero'' and we increment the next slot to the left.
+  
+  \item In this way, we can get bigger and bigger and bigger numbers with only a few digit symbols.
+  
+  \item However, we also saw that, if we can't add more slots, then we end up with a clock-counting (clock arithmetic) system, because at a certain point, our counting will reset back to zero. 
+
+\end{itemize}
+
+\end{document}

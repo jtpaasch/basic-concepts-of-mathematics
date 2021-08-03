@@ -1,0 +1,696 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Irrational Numbers}
+\label{ch:irrational-numbers}
+
+\begin{ponder}
+  Can you think of any numbers that aren't fractions, i.e., numbers that cannot be represented as $\sfrac{p}{q}$?
+\end{ponder}
+
+\newtopic{T}{n this appendix}, we will look at the Greek discovery of \vocab{irrational numbers}, i.e., numbers that are not fractions. 
+
+In ancient Greece, the followers of Pythagoras allegedly believed that every number is either a whole number, or a fraction.
+
+To me, this seems intuitively correct. Pick any point on the number line between 0 and 1. Surely it's some fraction. Perhaps I pick the point exactly half-way between 0 and 1. Well, that's a fraction:
+
+\begin{aside}
+  \begin{diagram}
+    \draw[<->] (-2.5, 0) -- (2.5, 0);
+    \draw (-1, 0.1) -- (-1, -0.1);
+    \node at (-1, -0.5) {$0$};
+    \draw (1, 0.1) -- (1, -0.1);
+    \node at (1, -0.5) {$1$};
+    \node[dot] at (0, 0) {};
+    \node at (0, -0.5) {$\frac{1}{2}$};
+  \end{diagram}
+\end{aside}
+
+\begin{equation*}
+  \sfrac{1}{2}
+\end{equation*}
+
+Or, maybe I pick a point that's exactly one-third of the way between 0 and 1. That's a fraction too:
+
+\begin{aside}
+  \begin{diagram}
+    \draw[<->] (-2.5, 0) -- (2.5, 0);
+    \draw (-1, 0.1) -- (-1, -0.1);
+    \node at (-1, -0.5) {$0$};
+    \draw (1, 0.1) -- (1, -0.1);
+    \node at (1, -0.5) {$1$};
+    \node[dot] at (-0.25, 0) {};
+    \node at (-0.25, -0.5) {$\frac{1}{3}$};
+  \end{diagram}
+\end{aside}
+
+\begin{equation*}
+  \sfrac{1}{3}
+\end{equation*}
+
+Of course, $\sfrac{1}{2}$ and $\sfrac{1}{3}$ are nice, neat fractions. So maybe I don't pick so neatly. Maybe I pick a point at some very odd spot on the line. But surely it's a fraction too, perhaps this: 
+
+\begin{equation*}
+  \sfrac{437}{872,646,772}
+\end{equation*}
+
+To me, it seems that any point I might pick on the line will be a fraction, even if that fraction is some very specific fraction like the one just mentioned.
+
+\begin{terminology}
+  We now know what irrational numbers are. They are \vocab{real numbers} with no repeating pattern in their decimal expansion. As we shall see, the square root of 2 is one example, but so is $\pi$. There are lots of them. Of course, the Greeks didn't understand real numbers yet, so to them, irrational numbers must have seemed like rather mysterious entities.
+\end{terminology}
+
+Yet, it turns out that this is not so! There are points on the number line that are \emph{not} fractions. If we zoom way, way in on the number line, we would find that there are tiny little gaps between the fractions.
+
+According to legend, the ancient Greeks discovered this fact, and they proved it. This must have been quite astonishing. As far as they knew at the time, the only kinds of numbers were whole numbers and fractions. But, they had proof that some numbers are neither! So what kind of number could these other numbers be? 
+
+A fraction is called a \vocab{rational number}, and numbers that are not fractions are therefore called \vocab{irrational numbers}. So, these days, we tend to say that what the Greeks discovered are \emph{irrational numbers}. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The square root of two}
+
+\begin{aside}
+\begin{diagram}
+
+  \draw[color=gray] (0, 0.25) -- (0.25, 0.25) -- (0.25, 0);
+  \draw (0, 0) -- (0, 1) -- (3, 0) -- (0, 0);
+  
+  \node at (1.25, -0.375) {$A$};
+  \node at (-0.5, 0.5) {$B$};
+  \node at (1.5, 0.9) {$C$};
+
+\end{diagram}
+\end{aside}
+
+\newthought{Recall the Pythagorean theorem}, namely that for any right triangle with legs $\Line{A}$ and $\Line{B}$ and hypotenuse $\Line{C}$, the squares of $\Line{A}$, $\Line{B}$, and $\Line{C}$ have a special relationship: the total area of $\Line{A}^{2}$ and $\Line{B}^{2}$ is the same as the total area of $\Line{C}^{2}$. We write that like this:
+
+\begin{equation*}
+  \text{\bf{Pythagorean Theorem}}: \Line{A}^{2} + \Line{B}^{2} = \Line{C}^{2}
+\end{equation*}
+
+Now, suppose we are dealing with a right triangle whose legs are each exactly one unit of length. It doesn't matter what size the unit is. It could be one inch, one meter, on mile, or anything. Whatever the size of one unit, let's imagine a right triangle whose legs are each one unit long:
+
+\begin{diagram}
+
+  \draw[color=gray] (0, 0.25) -- (0.25, 0.25) -- (0.25, 0);
+  \draw (0, 0) -- (0, 3) -- (3, 0) -- (0, 0);
+  
+  \node at (1.5, -0.375) {$1$};
+  \node at (-0.375, 1.5) {$1$};
+  \node at (2, 1.8) {$C??$};
+
+\end{diagram}
+
+What is the length of $\Line{C}$? If we use the Pythagorean Theorem, we can substitute ``$1$'' for ``$\Line{A}$'' and ``$\Line{B}$'':
+
+\begin{aside}
+  \begin{remark}
+    $1^{2}$ is $1 \mult/ 1$, which is $1$, so the equation reduces to this:
+
+    \begin{equation*}
+      1 + 1 = \Line{C}^{2}
+    \end{equation*}
+
+    And, of course, $1 + 1$ is $2$, so we get:
+    
+    \begin{equation*}
+      2 = \Line{C}^{2}
+    \end{equation*}
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  1^{2} + 1^{2} = \Line{C}^{2}
+\end{equation*}
+
+That yields this:
+
+\begin{equation*}
+  2 = \Line{C}^{2}
+\end{equation*}
+
+Now we know the area of the $\Line{C}$-square. But what we want to know is not $\Line{C}^{2}$, but rather just $\Line{C}$. We want to know the length of just one \emph{side} of the $\Line{C}$-square. And to figure that out, we need to ``unsquare'' both sides of the equation:
+
+\begin{aside}
+  \begin{remark}
+    Recall that the square $n^{2}$ of a number $n$ is just $n \mult/ n$. The square root is the opposite of squaring. If $n \mult/ n = m$, then the square root of $\sqrt{m}$ is just $n$. Hence, if you take the square root of a square, you just undo the square, i.e., $\sqrt{n^{2}} = n$. For example, $5^{2} = 25$ and $\sqrt{25} = 5$, so $\sqrt{5^{2}} = 5$.
+  \end{remark}
+\end{aside}
+
+\begin{equation*}
+  \sqrt{2} = \sqrt{\Line{C}^{2}}
+\end{equation*}
+
+The square root of $\Line{C}^{2}$ is just $\Line{C}$, so:
+
+\begin{equation*}
+  \sqrt{2} = \Line{C}
+\end{equation*}
+
+If we flip this equation around so that $\Line{C}$ is on the left side, we have this:
+
+\begin{equation*}
+  \Line{C} = \sqrt{2}
+\end{equation*}
+
+Hence, the length of $\Line{C}$ is going to be the square root of $2$. But what number is that, exactly?
+
+Let's take one of the legs and $\Line{C}$, and let's lay them down side by side:
+
+\begin{diagram}
+
+  \node at (2.175, 1) {$C$};
+  \draw (0, 0.5) -- (4.25, 0.5);
+  \draw (0, 0.6) -- (0, 0.4);
+  \draw (4.25, 0.6) -- (4.25, 0.4);
+  
+  \node at (1.5, -0.5) {$1$ unit};
+  \draw (0, 0) -- (3, 0);
+  \draw (0, 0.1) -- (0, -0.1);
+  \draw (3, 0.1) -- (3, -0.1);
+
+\end{diagram}
+
+We can see that $\Line{C}$ is longer than $1$: 
+
+\begin{diagram}
+
+  \node at (2.175, 1) {$C$};
+  \draw (0, 0.5) -- (4.25, 0.5);
+  \draw (0, 0.6) -- (0, 0.4);
+  \draw (4.25, 0.6) -- (4.25, 0.4);
+  
+  \node at (1.5, -0.5) {$1$ unit};
+  \draw (0, 0) -- (3, 0);
+  \draw (0, 0.1) -- (0, -0.1);
+  \draw (3, 0.1) -- (3, -0.1);
+
+  \draw[dashed] (3, 0.75) -- (3, -0.5);
+
+\end{diagram}
+
+But if we lay another $1$-sized segment down, we can see that $\Line{C}$ is shorter than two of those $1$-sized segments:
+
+\begin{diagram}
+
+  \node at (2.175, 1) {$C$};
+  \draw (0, 0.5) -- (4.25, 0.5);
+  \draw (0, 0.6) -- (0, 0.4);
+  \draw (4.25, 0.6) -- (4.25, 0.4);
+  
+  \node at (1.5, -0.5) {$1$ unit};
+  \draw (0, 0) -- (3, 0);
+  \draw (0, 0.1) -- (0, -0.1);
+  \draw (3, 0.1) -- (3, -0.1);
+
+  \node at (4.5, -0.5) {$1$ unit};
+  \draw (3, 0) -- (6, 0);
+  \draw (6, 0.1) -- (6, -0.1);
+  
+  \draw[dashed] (4.25, 0.75) -- (4.25, -0.25);
+  \node[dot] at (4.25, 0) {};
+
+\end{diagram}
+
+So, we can see that $\Line{C}$ is somewhere between $1$ and $2$ units. Can we calculate it exactly? Well, one thing we can do is divide up that second line segment into 10 pieces, and see where the end of $\Line{C}$ falls:
+
+\begin{diagram}
+
+  \node at (-3, -1.5) {$1$ unit};
+  \draw[color=gray] (-5.9, -0.5) -- (-5.8, -0.75) -- (-0.2, -0.75) -- (-0.1, -0.5);
+  \draw[color=gray] (-3, -0.75) -- (-3, -1);
+  
+  \node at (3, -1.5) {$1$ unit};
+  \draw[color=gray] (0.1, -0.5) -- (0.2, -0.75) -- (5.8, -0.75) -- (5.9, -0.5);
+  \draw[color=gray] (3, -0.75) -- (3, -1);
+  
+  \draw (-6, 0) -- (6, 0);
+  \draw (-6, 0.25) -- (-6, -0.25);
+  \draw (0, 0.25) -- (0, -0.25);
+  \draw (6, 0.25) -- (6, -0.25);
+  
+  \draw (0.6, 0.1) -- (0.6, -0.1);
+  \draw (1.2, 0.1) -- (1.2, -0.1);
+  \draw (1.8, 0.1) -- (1.8, -0.1);
+  \draw (2.4, 0.1) -- (2.4, -0.1);
+  \draw (3.0, 0.1) -- (3.0, -0.1);
+  \draw (3.6, 0.1) -- (3.6, -0.1);
+  \draw (4.2, 0.1) -- (4.2, -0.1);
+  \draw (4.8, 0.1) -- (4.8, -0.1);
+  \draw (5.4, 0.1) -- (5.4, -0.1);
+
+  \draw (-6, 1) -- (2.6, 1);
+  \draw (-6, 1.25) -- (-6, 0.75);
+  \draw (2.6, 1.25) -- (2.6, 0.75);
+  
+  \node at (-1.5, 2.5) {$C$};
+  \draw[color=gray] (-5.9, 1.5) -- (-5.8, 1.75) -- (2.4, 1.75) -- (2.5, 1.5);
+  \draw[color=gray] (-1.5, 1.75) -- (-1.5, 2);
+
+  \draw[dashed] (2.6, 1) -- (2.6, -0.25);
+  \node[dot] at (2.6, 0) {};
+  
+\end{diagram}
+
+We can see that it falls somewhere between the $\sfrac{4}{10}$ mark and the $\sfrac{5}{10}$ mark. So the length of $\Line{C}$ is somewhere in between $1~\sfrac{4}{10}$ and $1~\sfrac{5}{10}$, i.e.:
+
+\begin{equation*}
+  1~\sfrac{4}{10} 
+  \hskip 0.25cm < \hskip 0.25cm
+  \Line{C} 
+  \hskip 0.25cm < \hskip 0.25cm 
+  1~\sfrac{5}{10}
+\end{equation*}
+
+Can we get more precise? Of course. We could zoom in to the stretch of line between $1~\sfrac{4}{10}$ and $1~\sfrac{5}{10}$, then we could divide it into 10 pieces again, and see where the end of $\Line{C}$ falls there. Then we could zoom in again to get more precise, and again to get more precise, and so on.
+
+The ancient Greeks noticed that they could keep getting more and more precise like this, but they never seemed to get to an exact fraction. No matter what level of zoom they got to, the end of $\Line{C}$ always fell \emph{in between} the tick marks.
+
+This raises a question: will we \emph{ever} get to a precise fraction for this number, or will it \emph{always} fall in between the tick marks? Greek mathematicians began to suspect that maybe this particular number never would resolve to an exact fraction. It would always fall between the tick marks.
+
+But how do you prove this? We could try and zoom in a hundred times, or a thousand times, or a million times. Suppose we do this, and suppose that each time we find that the end of $\Line{C}$ falls between tick marks. But does that prove definitively that it \emph{always} will fall between tick marks? 
+
+No, and the reason is this: maybe we just haven't zoomed in enough. Maybe we need to zoom in a gazillion times before we finally get to that tick mark. If we want to be absolutely sure that it never falls on a tick mark, we need to \emph{prove} that it's \emph{impossible} to ever get to tick mark.
+
+That is just what the ancient Greeks did. They proved that the square root of 2 cannot ever fall on a tick mark. And that is surely astonishing. This means that some numbers (like this one, the square root of 2) fall ``between'' the fractions! It means that there are \emph{more} numbers beyond the fractions, that the Greeks didn't know about, which fill in all the gaps!
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Some preliminaries}
+
+\newthought{We will prove} that there are such ``irrational'' numbers. But first, let us establish some preliminaries. To begin, let us accept the following facts as axioms. We could prove these, but we will just take them as given for our purposes here.
+
+\begin{fact}
+  \label{fact:substitution-is-allowed}
+  If we know that some quantity $n$ is equal to some other quantity $m$, then we can substitute $m$ in the place of $n$ wherever we encounter $n$. For instance, if we know that $n = 5 \mult/ x$, and we later come across $n + 6$, then we can substitute $5 \mult/ x$ in for $n$, to get $(5 \mult/ x) + 6$. 
+\end{fact}
+
+\begin{fact}
+  \label{fact:even-ints-definition}
+  If an integer $n$ is even, then it is twice some other integer $k$. Hence, if we have an even integer $n$, we can rewrite it as $2 \mult/ k$. For instance, $10$ is even, and it is twice the amount of $5$. So instead of writing $10$, we can write $2 \mult/ 5$. $26$ is even, and it is twice another integer, namely $13$. Instead of writing $26$, we can write $2 \mult/ 13$.
+\end{fact}
+
+\begin{fact}
+  \label{fact:odd-ints-definition}
+  If an integer $n$ is odd, then it is twice some other integer $k$, plus 1. Hence, if we have an odd integer $n$, we can rewrite it as $(2 \mult/ k) + 1$. For instance, $13$ is odd, and it is twice the amount of $6$, plus 1. So, instead of writing $13$, we can write $(2 \mult/ 6) + 1$.
+\end{fact}
+
+\begin{fact}
+  \label{fact:every-int-is-even-or-odd}
+  Every integer $n$ is either even or odd. It can't be both. It must be one or the other.
+\end{fact}
+  
+\begin{fact}
+  \label{fact:adding-ints-yields-an-int}
+  Adding two integers $n$ and $m$ yields another integer. For example, if we add $5$ and $3$ (both integers), we get $8$ (another integer). Hence, if we see $n + m$, and we know that $n$ and $m$ are integers, then we know that the result of $n + m$ is also an integer.
+\end{fact}
+  
+\begin{fact}
+  \label{fact:multiplying-ints-yields-an-int}
+  Multiplying two integers $n$ and $m$ yields an integer, just as addition does.
+\end{fact}
+
+\begin{fact}
+  \label{fact:basic-algebra}
+  We are allowed to do basic algebraic arithmetic with expressions containing variables. For example, if we have $2 \mult/ (2 \mult/ x)$, we can evaluate that to $4 \mult/ x$, or if we have $(3 \mult/ x) + (2 \mult/ x)$, we can reduce that to $5 \mult/ x$.
+\end{fact}
+
+\begin{fact}
+  \label{fact:balanced-manipulations}
+  We are allowed to manipulate equations, so long as we do the same thing to both sides. We can add the same number to both sides of an equation, we can subtract the same number to both sides of an equation, and so on.
+\end{fact}
+
+\begin{fact}
+  \label{fact:factor-out-two}
+  We can factor out a 2 from various equations. For instance, if we have $6 \mult/ x$, we can factor out $2$ to get $2 \mult/ (3 \mult/ x)$. If we have $(2 \mult/ x) + (2 \mult/ y)$, we can factor out $2$ to get $2 \mult/ (x + y)$. If we have $(4 \mult/ x) + (2 \mult/ y)$, we can factor out $2$ to get $2 \mult/ ((2 \mult/ x) + y)$.
+\end{fact}
+  
+\begin{fact}
+  \label{fact:distribution-is-allowed}
+  If we have $(a + b) \mult/ (c + d)$, we can rewrite that like this: $(a \mult/ c) + (a \mult/ d) + (b \mult/ c) + (b \mult/ d)$.
+\end{fact}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Some lemmas}
+
+\newthought{Let's now prove} a few lemmas that will be useful when we look at the square root of 2. The first lemma is this: if an integer $n$ is even, then its square $n^{2}$ is even too. Let's write this down as a lemma:
+
+\begin{lemma}
+  \label{lemma:if-n-is-even-then-n-squared-is-even}
+  For any integer $n$, if $n$ is even, then $n^{2}$ is even.
+\end{lemma}
+
+\begin{proof}
+
+How do we prove this? We use the facts given above, and logic. So, let us assume that we have some arbitrarily chosen integer $n$, which is even. We don't care which even $n$ it is. We pick it blind-folded, so to speak. All we know is that it is even. What we want to prove is that $n^{2}$ is also even. 
+
+What do we do next? Well, if $n$ is even, then \factref{fact:even-ints-definition} tells us that $n$ is therefore twice some other integer $k$. We don't really care what $k$ is. All we need to know right now is that $n$ is twice some other integer $k$. So, let's rewrite $n$ as twice the amount of $k$:
+
+\begin{equation*}
+  \tag{by \factref{fact:even-ints-definition}}
+  n = 2 \mult/ k
+\end{equation*}
+
+Since $n$ is the same as $2 \mult/ k$, \factref{fact:substitution-is-allowed} tells us that we can substitute $2 \mult/ k$ for $n$, anytime we see $n$. Well, we want to prove that $n^{2}$ is even, and we can see there's an $n$ in there. So, let's substitute ``$2 \mult/ k$'' for ``$n$'' in ``$n^{2}$'': 
+\begin{equation*}
+  \tag{by \factref{fact:substitution-is-allowed}}
+  n^{2} = (2 \mult/ k)^{2}
+\end{equation*}
+
+\factref{fact:basic-algebra} says we can use basic algebraic arithmetic. What is $(2 \mult/ k)^{2}$? Anything squared is just itself multiplied by itself. So, $(2 \mult/ k)^{2}$ is the same as $(2 \mult/ k) \mult/ (2 \mult/ k)$. Hence:
+
+\begin{equation*}
+  \tag{by \factref{fact:basic-algebra}}
+  n^{2} = (2 \mult/ k) \mult/ (2 \mult/ k)
+\end{equation*}
+
+We can do some more basic algebraic arithmetic. What is $(2 \mult/ k) \mult/ (2 \mult/ k)$? It's $4 \mult/ k^{2}$:
+
+\begin{equation*}
+  \tag{by \factref{fact:basic-algebra}}
+  n^{2} = 4 \mult/ k^{2}
+\end{equation*}
+
+We know from \factref{fact:factor-out-two} that we can factor $2$ out from $4 \mult/ k^{2}$, which gives us $2 \mult/ (2 \mult/ k^{2})$:
+
+\begin{equation*}
+  \tag{by \factref{fact:factor-out-two}}
+  n^{2} = 2 \mult/ (2 \mult/ k^{2})
+\end{equation*}
+
+At this point, look at the shape of the right hand side of the equation. We can see here that we have twice some quantity. We have \emph{twice} the amount of whatever quantity ``$(2 \mult/ k^{2})$'' evaluates to: 
+
+\begin{diagram}
+
+  \node at (-2, 0) {$n^{2}~~=$};
+  \node at (0, 0) {$2 \mult/ (2 \mult/ k^{2})$};
+  
+  \draw[->] (-1.5, -1) -- (-0.9, -0.25);
+  \node at (-1.5, -1.25) {twice};
+
+  \draw (-0.15, -0.4) -- (0.65, -0.4);
+  \draw[->] (1, -1.5) -- (0.25, -0.5);
+  \node at (1.5, -1.75) {some quantity};
+
+\end{diagram}
+
+According to \factref{fact:even-ints-definition}, if a quantity is $2$ times some integer, then it's even. Well, if ``$(2 \mult/ k^{2})$'' evaluates to an integer, then that means that $n^{2}$ will evaluate to two times an integer, which means $n^{2}$ will evaluate to an even number. So, is ``$(2 \mult/ k^{2})$'' an integer? 
+
+Yes, it is. We know that $k$ is an integer, because we said above that since $n$ is even, it must be twice some other integer $k$ (by \factref{fact:even-ints-definition}). Further, what's $k^{2}$? It's really just $k \mult/ k$, and we know from \factref{fact:multiplying-ints-yields-an-int} that multiplying one integer by another integer gives us another integer. So, $k \mult/ k$ (i.e., $k^{2}$) is also an integer. And, multiplying 2 (an integer) by $k^{2}$ (an integer), gives us an integer too, again because of \factref{fact:multiplying-ints-yields-an-int}. So ``$(2 \mult/ k^{2})$'' must be an integer.
+
+Hence, with ``$2 \mult/ (2 \mult/ k^{2})$,'' we do indeed have twice an integer. That is to say, we have an expression with the shape of ``$2 \mult/ k$,'' it's just that ``$k$'' is ``$(2 \mult/ k^{2})$.'' So by \factref{fact:even-ints-definition}, we know that this expression therefore represents some even integer:
+
+\begin{equation*}
+  \tag{by \factref{fact:even-ints-definition}}
+  2 \mult/ (2 \mult/ k^{2}) \hskip 0.25cm \text{ is even }
+\end{equation*}
+
+Thus, since $n^{2}$ is equal to ``$2 \mult/ (2 \mult/ k^{2})$,'' we can conclude that $n^{2}$ must be even:
+
+\begin{equation*}
+  n^{2} \hskip 0.25cm \text{ is even }
+\end{equation*}
+
+With that, we have finished our proof. We have shown that if $n$ is even, then $n^{2}$ must also be even.
+
+\end{proof}
+
+Next, let's prove that if an integer $n$ is \emph{odd}, then its square $n^{2}$ will be odd too. Let's put that down as a lemma:
+
+\begin{lemma}
+  \label{lemma:if-n-is-odd-then-n-squared-is-odd}
+  For any integer $n$, if $n$ is odd, then $n^{2}$ is odd.
+\end{lemma}
+
+\begin{proof}
+
+We can prove this lemma much like we did the last one. It's just that in this case, $n$ is odd, so we don't substitute in $2 \mult/ k$. Rather, we substitute in $(2 \mult/ k) + 1$.
+
+So, as before, we begin by picking some arbitrary integer $n$, which is odd. Again, we don't care which odd integer $n$ is. We pick it blind-folded. All we know is that it is odd. 
+
+\factref{fact:odd-ints-definition} tells us that if $n$ is odd, then it must be twice some other integer $k$ plus one. Hence, we know that $n$ can be rewritten as $(2 \mult/ k) + 1$:
+
+\begin{equation*}
+  \tag{by \factref{fact:odd-ints-definition}}
+  n = (2 \mult/ k) + 1
+\end{equation*}
+
+Since we know that $n$ is the same as $(2 \mult/ k) + 1$, \factref{fact:substitution-is-allowed} tells us that we can subsitute $(2 \mult/ k) + 1$ for $n$, anytime we see $n$. We want to prove that $n^{2}$ is odd, and we can see an $n$ in there. So, let's take $n^{2}$, and substitute ``$(2 \mult/ k) + 1$'' in for ``$n$'':
+
+\begin{equation*}
+  \tag{by \factref{fact:substitution-is-allowed}}
+  n^{2} = ((2 \mult/ k) + 1)^{2}
+\end{equation*}
+
+What's $(2k + 1)^{2}$? \factref{fact:basic-algebra} tells us we can do basic algebraic arithmetic on this expression, and anything squared is just itself multiplied by itself. Hence, ``$((2 \mult/ k) + 1)^{2}$'' must be ``$(2 \mult/ k) + 1$'' multiplied by itself:
+
+\begin{equation*}
+  \tag{by \factref{fact:basic-algebra}}
+  n^{2} = ((2 \mult/ k) + 1) \mult/ ((2 \mult/ k) + 1)
+\end{equation*}
+
+What do we do next? We want to do some more algebraic manipulations and calculations. We can see that the right hand side of this expression has the shape of ``$(a + b) \mult/ (c + d)$,'' it's just that ``$a$'' is ``$(2 \mult/ k)$,'' ``$b$'' is ``$1$,'' ``$c$'' is ``$(2 \mult/ k)$,'' and ``$d$'' is ``$1$.'' Well, \factref{fact:distribution-is-allowed} says we can rewrite the right hand side of our equation so that it has the shape ``$(a \mult/ c) + (a \mult/ d) + (b \mult/ c) + (b \mult/ d)$,'' like this:
+
+\begin{align*}
+  \tag{by \factref{fact:distribution-is-allowed}}
+  n^{2} &= ((2 \mult/ k) \mult/ (2 \mult/ k)) \\
+        &+ ((2 \mult/ k) \mult/ 1) \\
+        &+ (1 \mult/ (2 \mult/ k)) \\
+        &+ (1 \mult/ 1)
+\end{align*}
+
+Then, using basic algebraic arithmetic (\factref{fact:basic-algebra}), we can reduce ``$((2 \mult/ k) \mult/ (2 \mult/ k))$'' to ``$4 \mult/ k^{2}$,'' and we can reduce each of ``$((2 \mult/ k) \mult/ 1)$'' and ``$(1 \mult/ (2 \mult/ k))$ to ``$2 \mult/ k$.'' Like this:
+
+\begin{equation*}
+  \tag{by \factref{fact:basic-algebra}}
+  n^{2} = (4 \mult/ k^{2}) + (2 \mult/ k) + (2 \mult/ k) + 1
+\end{equation*}
+
+We can again use basic algebraic arithmetic (\factref{fact:basic-algebra}) to reduce ``$(2 \mult/ k) + (2 \mult/ k)$'' to ``$(4 \mult/ k)$'':
+
+\begin{equation*}
+  \tag{by \factref{fact:basic-algebra}}
+  n^{2} = (4 \mult/ k^{2}) + (4 \mult/ k) + 1
+\end{equation*}
+
+Next, \factref{fact:factor-out-two} tells us that we are allowed to factor out $2$ whenever we have the opportunity, and here we can factor a $2$ out of ``$(4 \mult/ k^{2}) + (4 \mult/ k)$'' to get $2 \mult/ ((2 \mult/ k^{2}) + (2 \mult/ k))$:
+
+\begin{equation*}
+  \tag{by \factref{fact:factor-out-two}}
+  n^{2} = (2 \mult/ ((2 \mult/ k^{2}) + (2 \mult/ k))) + 1
+\end{equation*}
+
+At this point, the right hand side of the equation looks like it has the shape of ``$(2 \mult/ k) + 1$'' except that instead of ``$k$'' we have ``$((2 \mult/ k^{2}) + (2 \mult/ k))$.'' \factref{fact:odd-ints-definition} tells us that if an expression has the shape ``$(2 \mult/ k) + 1$'' for some integer $k$, then it evaluates to an odd number. So, if ``$((2 \mult/ k^{2}) + (2 \mult/ k))$'' evaluates to an integer, then the whole expression ``$(2 \mult/ ((2 \mult/ k^{2}) + (2 \mult/ k))) + 1$'' will evaluate to an \emph{odd} integer.
+
+So, does ``$((2 \mult/ k^{2}) + (2 \mult/ k))$'' evaluate to an integer? The answer is yes. We know that $k$ is an integer, because we said above that since $n$ is odd, it must be twice some other integer $k$ plus one (by \factref{fact:odd-ints-definition}). We also know that $k^{2}$ must be an integer, because $k^{2}$ is just $k \mult/ k$, and multiplying an integer by an integer yields another integer (by \factref{fact:multiplying-ints-yields-an-int}). We also know that $2 \mult/ k^{2}$ must be an integer, because 2 is an integer and $k^{2}$ is an integer, and so multiplying the one by the other must yield an integer (by \factref{fact:multiplying-ints-yields-an-int} again). We know that $2 \mult/ k$ must be an integer as well, because 2 is an integer and $k$ is an integer, and multiplying them together yields an integer. Finally, we know that $((2 \mult/ k^{2}) + (2 \mult/ k))$ must be an integer, because \factref{fact:adding-ints-yields-an-int} tells us that adding an integer ($2 \mult/ k^{2}$) to another integer ($2 \mult/ k$) yields an integer. Hence, the whole expression $((2 \mult/ k^{2}) + (2 \mult/ k))$ must evaluate to an integer. 
+
+So, with ``$(2 \mult/ ((2 \mult/ k^{2}) + (2 \mult/ k))) + 1$,'' we do indeed have something that evaluates to twice an integer plus one. And that means that it must be odd:
+
+\begin{equation*}
+  \tag{by \factref{fact:odd-ints-definition}}
+  (2 \mult/ ((2 \mult/ k^{2}) + (2 \mult/ k))) + 1 \hskip 0.25cm \text{is odd}
+\end{equation*}
+
+Thus, since $n^{2}$ is equal to ``$(2 \mult/ ((2 \mult/ k^{2}) + (2 \mult/ k))) + 1$,'' we can conclude that $n^{2}$ must therefore be odd:
+
+\begin{equation*}
+  n^{2} \hskip 0.25cm \text{ is odd }
+\end{equation*}
+
+With that, we have finished our proof. We have shown that if $n$ is odd, then $n^{2}$ must also be odd.
+
+\end{proof}
+
+Let's prove one more lemma. Let's prove that if an integer $n^{2}$ is even, then $n$ must be even too. We have already proven that if $n$ is even, then its square must be even. But we haven't proved the other direction. We haven't proven that if $n^{2}$ is even, then $n$ must be even. Let's prove that now. First, let's state the lemma:
+
+\begin{lemma}
+  \label{lemma:if-n-squared-is-even-then-n-is-even}
+  For any integer $n$, if $n^{2}$ is even, then $n$ is even.
+\end{lemma}
+
+\begin{proof}
+
+It's easy for us to express the idea of this proof in somewhat casual English prose. We can say: ``well, if $n^{2}$ is even, then $n$ must be even, because if $n$ were odd, then $n^{2}$ would be odd.'' But let's make the steps of such reasoning more explicit. 
+
+This is a proof by contradiction. So first, let's assume the opposite of what we want to prove. We want to prove that whenever $n^{2}$ is even, $n$ must be even too. The opposite of that is a case where $n^{2}$ is even, yet $n$ is odd. So let's assume that this is so:
+
+\begin{equation*}
+  \tag{Assumption}
+  n^{2} \text{ is even} \hskip 0.5cm \text{and} \hskip 0.5cm n \text{ is odd}
+\end{equation*}
+
+Next, we need to show that this is an impossible scenario. We want to show that it is impossible for $n^{2}$ to be even, and yet $n$ to be odd. How do we do that? We derive a contradiction.
+
+Notice that we assumed $n$ is odd. However, we know from \lemmaref{lemma:if-n-is-odd-then-n-squared-is-odd} that if $n$ is odd, then $n^{2}$ must be odd too. Hence:
+
+\begin{equation*}
+  \tag{by \lemmaref{lemma:if-n-is-odd-then-n-squared-is-odd}}
+  n^{2} \text{ is odd}
+\end{equation*}
+
+But we originally assumed that $n^{2}$ is even:
+
+\begin{equation*}
+  \tag{from our Assumption}
+  n^{2} \text{ is even}
+\end{equation*}
+
+\factref{fact:every-int-is-even-or-odd} tells us that every integer must be either even, or odd. Hence, this is a contradiction. $n^{2}$ can't be both even and odd. It must be one or the other.
+
+Thus, it is impossible for $n^{2}$ to be even, and for $n$ to also be odd. Therefore, our original assumption must be wrong. If $n^{2}$ is even, it must be the case that $n$ is even too.
+
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{$\sqrt{2}$ is irrational}
+
+\newthought{We are now ready} to prove that the square root of $2$ is irrational (i.e., that it is not a fraction). Let's put this down as a theorem:
+
+\begin{theorem}
+  \label{theorem:square-root-of-two-is-irrational}
+  $\sqrt{2}$ is irrational.
+\end{theorem}
+
+\begin{proof}
+
+To prove this, let's do a proof by contradiction. That is to say, let's assume the opposite of what we want to prove, and show that it's impossible. 
+
+We're trying to prove that $\sqrt{2}$ is irrational, so the opposite of that is this: $\sqrt{2}$ \emph{is} rational. So, let's assume precisely that: let's assume that $\sqrt{2}$ is a fully reduced fraction. If it's a fully reduced fraction, that means we can write it as $\sfrac{p}{q}$, where $p$ and $q$ are integers, and they have no common divisor that we might use to reduce the fraction further:
+
+\begin{equation*}
+  \tag{Assumption}
+  \sqrt{2} = \frac{p}{q}, \text{ a fully reduced fraction}
+\end{equation*}
+
+Next, let's get rid of the square root sign on the left. \factref{fact:balanced-manipulations} tells us we can manipulate equations, so long as we do the same thing to both sides of the equation. In this case, let's square both sides of the equation:
+
+\begin{equation*}
+  \tag{by \factref{fact:balanced-manipulations}}
+  (\sqrt{2})^{2} = (\frac{p}{q})^{2}
+\end{equation*}
+
+Using basic algebraic arithmetic (\factref{fact:basic-algebra}), we can simplify this further. Squaring a square root just removes the square root, and squaring a fraction squares the top and bottom of the fraction. Like this:
+
+\begin{equation*}
+  \tag{by \factref{fact:basic-algebra}}
+  2 = \frac{p^{2}}{q^{2}}
+\end{equation*}
+
+Next, we can multiply both sides of the equation by $q^{2}$, which is allowed by \factref{fact:balanced-manipulations} because we are doing the same thing to both sides of the equation:
+
+\begin{equation*}
+  \tag{by \factref{fact:balanced-manipulations}}
+  2 \mult/ q^{2} = \frac{p^{2}}{q^{2}} \mult/ q^{2}
+\end{equation*}
+
+We can now use basic algebraic arithmetic (\factref{fact:basic-algebra}). On the right side, $q^{2}$ gets canceled out, so that we are left with:
+
+\begin{equation*}
+  \tag{by \factref{fact:basic-algebra}}
+  2 \mult/ q^{2} = p^{2}
+\end{equation*}
+
+Let's flip the equation around, so that $p^{2}$ is on the left hand side:
+
+\begin{equation*}
+  \tag{by \factref{fact:basic-algebra}}
+  p^{2} = 2 \mult/ q^{2}
+\end{equation*}
+
+Notice now that, on the right hand side, we have $2$ times $q^{2}$. In other words, $p^{2}$ is twice some quantity. This has the shape of an even number $2 \mult/ k$, it's just that instead of $k$, we have $q^{2}$. Hence, if $q^{2}$ evaluates to an integer, then the right hand side of the equation will evaluate to twice an integer, and we can conclude that $p^{2}$ must therefore be even.
+
+So, does $q^{2}$ evaluate to an integer? It does! We know that $q$ is in an integer, because we started by assuming that $p$ and $q$ are integers. Also, $q^{2}$ is just $q \mult/ q$, and \factref{fact:multiplying-ints-yields-an-int} tells us that multiplying an integer by an integer yields an integer. So, $q^{2}$ evaluates to an integer. Hence, $p^{2}$ is twice some integer, and hence $p^{2}$ must be even:
+
+\begin{equation*}
+  \tag{by \factref{fact:even-ints-definition}}
+  p^{2} \text{ is even}
+\end{equation*}
+
+We know from \lemmaref{lemma:if-n-squared-is-even-then-n-is-even} that if $p^{2}$ is even, then $p$ must be even too. Hence, we can write $p$ as twice some integer $r$:
+
+\begin{equation*}
+  \tag{by \lemmaref{lemma:if-n-squared-is-even-then-n-is-even} and \factref{fact:even-ints-definition}}
+  p = 2 \mult/ r
+\end{equation*}
+
+Since $p$ is the same as $2 \mult/ r$, \factref{fact:substitution-is-allowed} tells us that we can substitute $2 \mult/ r$ for $p$, anytime we see $p$. Before, we had $2 \mult/ q^{2} = p^{2}$, and we can see a ``$p$'' in there. Let's substitute $2 \mult/ r$ in for $p$:
+
+\begin{equation*}
+  \tag{by \factref{fact:substitution-is-allowed}}
+  2 \mult/ q^{2} = (2 \mult/ r)^{2}
+\end{equation*}
+
+Next, we can do some basic algebraic arithmetic (\factref{fact:basic-algebra}). What's $(2 \mult/ r)^{2}$? We can reduce it to $4 \mult/ r^{2}$:
+
+\begin{equation*}
+  \tag{by \factref{fact:basic-algebra}}
+  2 \mult/ q^{2} = 4 \mult/ r^{2}
+\end{equation*}
+
+\factref{fact:balanced-manipulations} tells us we can do whatever we want to both sides of an equation, so long as we do the same thing to both sides. So, let's divide both sides of this equation by 2:
+
+\begin{equation*}
+  \tag{by \factref{fact:balanced-manipulations}}
+  \frac{2 \mult/ q^{2}}{2} = \frac{4 \mult/ r^{2}}{2}
+\end{equation*}
+
+Let's use basic algebraic arithmetic to simplify this (\factref{fact:basic-algebra}). On the left side, $2$ gets canceled out, and on the right side, we end up with $2 \mult/ r^{2}$:
+
+\begin{equation*}
+  \tag{by \factref{fact:basic-algebra}}
+  q^{2} = 2 \mult/ r^{2}
+\end{equation*}
+
+Notice now that, on the right hand side of this equation, we have $2$ times $r \mult/ ^{2}$. In other words, we have an expression that has the shape $2 \mult/ k$ again, where $k$ is $r^{2}$. So, if $r^{2}$ evaluates to an integer, then $q^{2}$ will evaluate to twice an integer, and therefore $q^{2}$ will be even. 
+
+So, does $r^{2}$ evaluate to an integer? Again, the answer is yes. We know already that $r$ is an integer, because we deduced that $p$ is even, and that means it is twice some integer $r$. Also, $r^{2}$ is just $r \mult/ r$, and \factref{fact:multiplying-ints-yields-an-int} tells us that multiplying an integer by an integer yields an integer. So, $r^{2}$ evaluates to an integer. 
+
+Hence, $q^{2}$ evaluates to twice some integer, and according to \factref{fact:even-ints-definition}, that means $q^{2}$ must be even:
+
+\begin{equation*}
+  \tag{by \factref{fact:even-ints-definition}}
+  q^{2} \text{ is even}
+\end{equation*}
+
+We also know from \lemmaref{lemma:if-n-squared-is-even-then-n-is-even} that if $q^{2}$ is even, then $q$ must be even too. And according to \factref{fact:even-ints-definition}, if $q$ is even, then that means it is twice some integer $t$:
+
+\begin{equation*}
+  \tag{by \lemmaref{lemma:if-n-squared-is-even-then-n-is-even} and \factref{fact:even-ints-definition}}
+  q = 2 \mult/ t
+\end{equation*}
+
+Since we know that $p = 2 \mult/ r$ and we know that $q = 2 \mult/ t$, \factref{fact:substitution-is-allowed} tells us that we can substitute ``$2 \mult/ r$'' and ``$2 \mult/ t$'' for ``$p$'' and ``$q$'' (respectively), anytime we see ``$p$'' and ``$q$.'' At the beginning, we started by assuming that $\sqrt{2}$ is a fully reduced fraction, $\sfrac{p}{q}$, and we can see a ``$p$'' and a ``$q$'' in there. Let's substitute ``$2 \mult/ r$'' and ``$2 \mult/ t$'':
+
+\begin{equation*}
+  \tag{by \factref{fact:substitution-is-allowed}}
+  \sqrt{2} = \frac{2r}{2t}
+\end{equation*}
+
+What can we say about the fraction on the right hand side of the equation? Notice that it is \emph{not} fully reduced. Why? Because both the top and bottom number of this fraction are even numbers, and so they could be divided by $2$ to reduce the fraction. 
+
+But that contradicts our original assumption. We started by assuming that $\sqrt{2}$ is a fully reduced fraction, and that contradicts what we just deduced: that $\sqrt{2}$ is not a fully reduced fraction.
+
+So, we've ended up in an impossible state of affairs. This scenario is impossible. It cannot be that $\sqrt{2}$ is a fraction.
+
+\end{proof}
+
+That completes our proof. We proved that the square root of two is not a fraction. We did it by assuming that it is a fully reduced fraction, and then we showed that this is impossible. Hence, the square root of two simply cannot be a fraction.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this appendix}, we looked at the ancient Greek discovery of irrational numbers. The Pythagorean theorem tells us that if we have a right triangle with legs that are one unit long, then the hypotenuse should have a length that is the square root of two. But the square root of two does not look to be a fraction, and we proved that in fact it is impossible for it to be a fraction. Hence, the square root of two is a number that falls ``between'' fractions. 
+
+\end{document}

@@ -1,0 +1,1049 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Algebra Tricks}
+\label{ch:algebra-tricks}
+
+\newtopic{P}{erhaps you remember} from algebra classes in school that you can do the same thing to both sides of an equation, or that you can cancel certain things out. In this appendix, we will look at some of these basic computing tricks that we can do with algebra, and we will examine why it is that we can do them.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{There Is Only One Identity}
+
+\newthought{A group or a monoid} has an identity. But can a group or monoid have more than one identity? The answer is no. Every group or monoid has exactly one identity, no more, no less. We can prove this fact, with a proof by contradiction. 
+
+We want to show that there is only one identity, and so we want to start our proof by assuming the opposite of that. Hence, let's start by supposing that there are two distinct identities. Let's call them $e_{1}$ and $e_{2}$.
+
+Recall that an identity is a ``do-nothing'' element. You can combine it with any other element, and you'll get that other element back:
+
+\begin{diagram}
+
+  \node at (-4, 0) {$x$};
+  \draw (-4.5, -0.25) -- (-4.5, -0.5) -- (-3.5, -0.5) -- (-3.5, -0.25);
+  \draw[->] (-4, -0.5) -- (-4, -1);
+  \node at (-4, -1.5) {any};
+  \node at (-4, -2) {element $x$};
+  
+  \node at (-2, 0) {$\opSymbol/$};
+  
+  \node at (0, 0) {$e_{1}$};
+  \draw (-0.5, -0.25) -- (-0.5, -0.5) -- (0.5, -0.5) -- (0.5, -0.25);
+  \draw[->] (0, -0.5) -- (0, -1);
+  \node at (0, -1.5) {a ``do-nothing''};
+  \node at (0, -2) {element};
+
+  \node at (2, 0) {$=$};
+
+  \node at (4, 0) {$x$};
+  \draw (3.5, -0.25) -- (3.5, -0.5) -- (4.5, -0.5) -- (4.5, -0.25);
+  \draw[->] (4, -0.5) -- (4, -1);
+  \node at (4, -1.5) {that same};
+  \node at (4, -2) {element $x$};  
+  
+\end{diagram}
+
+It works the other way around too:
+
+\begin{diagram}
+
+  \node at (-4, 0) {$e_{1}$};
+  \draw (-4.5, -0.25) -- (-4.5, -0.5) -- (-3.5, -0.5) -- (-3.5, -0.25);
+  \draw[->] (-4, -0.5) -- (-4, -1);
+  \node at (-4, -1.5) {a ``do-nothing''};
+  \node at (-4, -2) {identity};
+  
+  \node at (-2, 0) {$\opSymbol/$};
+  
+  \node at (0, 0) {$x$};
+  \draw (-0.5, -0.25) -- (-0.5, -0.5) -- (0.5, -0.5) -- (0.5, -0.25);
+  \draw[->] (0, -0.5) -- (0, -1);
+  \node at (0, -1.5) {any};
+  \node at (0, -2) {element $x$};
+
+  \node at (2, 0) {$=$};
+
+  \node at (4, 0) {$x$};
+  \draw (3.5, -0.25) -- (3.5, -0.5) -- (4.5, -0.5) -- (4.5, -0.25);
+  \draw[->] (4, -0.5) -- (4, -1);
+  \node at (4, -1.5) {that same};
+  \node at (4, -2) {element $x$};  
+  
+\end{diagram}
+
+Well, let's put $e_{2}$ in place of $x$. Since $e_{1}$ is a ``do-nothing'' element, that means it will do nothing, and we will get back $e_{2}$:
+
+\begin{diagram}
+
+  \node at (-4, 0) {$e_{1}$};
+  \draw (-4.5, -0.25) -- (-4.5, -0.5) -- (-3.5, -0.5) -- (-3.5, -0.25);
+  \draw[->] (-4, -0.5) -- (-4, -1);
+  \node at (-4, -1.5) {a ``do-nothing''};
+  \node at (-4, -2) {identity};
+  
+  \node at (-2, 0) {$\opSymbol/$};
+  
+  \node at (0, 0) {$e_{2}$};
+  \draw (-0.5, -0.25) -- (-0.5, -0.5) -- (0.5, -0.5) -- (0.5, -0.25);
+  \draw[->] (0, -0.5) -- (0, -1);
+  \node at (0, -1.5) {the};
+  \node at (0, -2) {element $e_{2}$};
+
+  \node at (2, 0) {$=$};
+
+  \node at (4, 0) {$e_{2}$};
+  \draw (3.5, -0.25) -- (3.5, -0.5) -- (4.5, -0.5) -- (4.5, -0.25);
+  \draw[->] (4, -0.5) -- (4, -1);
+  \node at (4, -1.5) {that same};
+  \node at (4, -2) {element $e_{2}$};  
+  
+\end{diagram}
+
+So we know that $\op{e_{1}}{e_{2}} = e_{2}$. File that little fact away for the time being. We'll return to it in a moment. 
+
+Next, recall that we supposed at the beginning of our proof that $e_{2}$ is an identity too, so that means that it is also a ``do-nothing'' element. Hence, if we combine $e_{2}$ with any element $x$, it will do nothing, and we'll get back $x$:
+
+\begin{diagram}
+
+  \node at (-4, 0) {$x$};
+  \draw (-4.5, -0.25) -- (-4.5, -0.5) -- (-3.5, -0.5) -- (-3.5, -0.25);
+  \draw[->] (-4, -0.5) -- (-4, -1);
+  \node at (-4, -1.5) {any};
+  \node at (-4, -2) {element $x$};
+  
+  \node at (-2, 0) {$\opSymbol/$};
+  
+  \node at (0, 0) {$e_{2}$};
+  \draw (-0.5, -0.25) -- (-0.5, -0.5) -- (0.5, -0.5) -- (0.5, -0.25);
+  \draw[->] (0, -0.5) -- (0, -1);
+  \node at (0, -1.5) {a ``do-nothing''};
+  \node at (0, -2) {element};
+
+  \node at (2, 0) {$=$};
+
+  \node at (4, 0) {$x$};
+  \draw (3.5, -0.25) -- (3.5, -0.5) -- (4.5, -0.5) -- (4.5, -0.25);
+  \draw[->] (4, -0.5) -- (4, -1);
+  \node at (4, -1.5) {that same};
+  \node at (4, -2) {element $x$};  
+  
+\end{diagram}
+
+Let's put $e_{1}$ in place of $x$. Since $e_{2}$ is a ``do-nothing'' element, that means it will do nothing, and we will get back $e_{1}$:
+
+\begin{diagram}
+
+  \node at (-4, 0) {$e_{1}$};
+  \draw (-4.5, -0.25) -- (-4.5, -0.5) -- (-3.5, -0.5) -- (-3.5, -0.25);
+  \draw[->] (-4, -0.5) -- (-4, -1);
+  \node at (-4, -1.5) {the};
+  \node at (-4, -2) {element $e_{1}$};
+  
+  \node at (-2, 0) {$\opSymbol/$};
+  
+  \node at (0, 0) {$e_{2}$};
+  \draw (-0.5, -0.25) -- (-0.5, -0.5) -- (0.5, -0.5) -- (0.5, -0.25);
+  \draw[->] (0, -0.5) -- (0, -1);
+  \node at (0, -1.5) {a ``do-nothing''};
+  \node at (0, -2) {element};
+
+  \node at (2, 0) {$=$};
+
+  \node at (4, 0) {$e_{1}$};
+  \draw (3.5, -0.25) -- (3.5, -0.5) -- (4.5, -0.5) -- (4.5, -0.25);
+  \draw[->] (4, -0.5) -- (4, -1);
+  \node at (4, -1.5) {that same};
+  \node at (4, -2) {element $e_{1}$};  
+  
+\end{diagram}
+
+So we know that $\op{e_{1}}{e_{2}} = e_{1}$. But wait, we also deduced a moment ago that $\op{e_{1}}{e_{2}} = e_{2}$. So, on our current assumptions, $\op{e_{1}}{e_{2}}$ evaluates to $e_{1}$, but it \emph{also} evaluates to $e_{2}$. 
+
+What does this tell us? We know that ``$\opSymbol/$'' is a \vocab{function}, and that means that it will always map ``$\op{e_{1}}{e_{2}}$'' to one and the same result. Hence, since it maps ``$\op{e_{1}}{e_{2}}$'' to both $e_{1}$ and $e_{2}$, that means $e_{1}$ and $e_{2}$ must be one and the same element. 
+
+Hence, $e_{1}$ and $e_{2}$ cannot be two distinct elements after all, which contradicts our original assumption that they are \emph{distinct} identities. So, we have shown that it is impossible for there to be two distinct identities. Therefore, we can conclude that there is only one identity in a group or monoid.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Do the Same on Both Sides}
+
+\newthought{You may remember} from algebra classes in school that we can always do the same thing to both sides of an equation. Let's talk about why this is. 
+
+Suppose we have an algebra defined by the following Cayley table:
+
+\begin{center}
+  \begin{tabular}{| c || c | c | c |}
+    \hline
+    $\opSymbol/$ & $a$ & $b$ & $c$ \\ \hline \hline
+    $a$          & $a$ & $b$ & $c$ \\ \hline
+    $b$          & $b$ & $c$ & $a$ \\ \hline
+    $c$          & $c$ & $a$ & $b$ \\ \hline
+  \end{tabular}
+\end{center}
+
+We can see from this table that if we combine ``$b$'' and ``$c$'' we get ``$a$'':
+
+\begin{equation*}
+  \op{b}{c} = a
+\end{equation*}
+
+We can also see that if we combine ``$c$'' and ``$a$'' we also get ``$a$'':
+
+\begin{equation*}
+  \op{c}{a} = a
+\end{equation*}
+ 
+So, ``$\op{b}{c}$'' and ``$\op{c}{a}$'' evaluate to the same element, namely ``$a$.'' Hence, we can say that these two operations produce \emph{equal} results, which we write like this:
+
+\begin{diagram}
+  \node at (-1.5, 0) {$\op{b}{c}$};
+  \node at (0, -0.05) {$=$};
+  \node at (1.5, 0) {$\op{c}{a}$};
+\end{diagram}
+
+Think about what this equation asserts. It is asserting that both sides of the equation refer to the same element:
+
+\begin{diagram}
+  \node at (-1.5, 0) {$\op{b}{c}$};
+  \node at (0, -0.05) {$=$};
+  \node at (1.5, 0) {$\op{c}{a}$};
+  
+  \draw (-2, -0.25) -- (-2, -0.5) -- (-1, -0.5) -- (-1, -0.25);
+  \draw[->] (-1.5, -0.5) -- (-1.5, -1.15);
+  \node at (-1.5, -1.5) {the};
+  \node at (-1.5, -2) {element $a$};
+  
+  \draw (1, -0.25) -- (1, -0.5) -- (2, -0.5) -- (2, -0.25);
+  \draw[->] (1.5, -0.5) -- (1.5, -1.15);
+  \node at (1.5, -1.5) {the same};
+  \node at (1.5, -2) {element $a$};
+\end{diagram}
+
+Now, suppose that I want to apply (say) a ``$b$'' to both sides of this equation. Like this:
+
+\begin{diagram}
+  \node at (-5, 0) {$b$};
+  \node at (-3.5, 0) {$\opSymbol/$};
+  \node at (-1.5, 0) {$(\op{b}{c})$};
+  
+  \node at (0, -0.05) {$=$};
+  
+  \node at (1.5, 0) {$b$};
+  \node at (3, 0) {$\opSymbol/$};
+  \node at (5, 0) {$(\op{c}{a})$};
+  
+  
+  \draw (-2, -0.3) -- (-2, -0.5) -- (-1, -0.5) -- (-1, -0.3);
+  \draw[->] (-1.5, -0.5) -- (-1.5, -1.15);
+  \node at (-1.5, -1.5) {the};
+  \node at (-1.5, -2) {element $a$};
+  
+  \draw (4.5, -0.3) -- (4.5, -0.5) -- (5.5, -0.5) -- (5.5, -0.3);
+  \draw[->] (5, -0.5) -- (5, -1.15);
+  \node at (5, -1.5) {the same};
+  \node at (5, -2) {element $a$};
+\end{diagram}
+
+Can I do this? Is this a legitimate move? Yes, it is, but let's think about why. 
+
+What I did, was I added a ``$b$'' to both sides of the equation. Hence, on the left hand side of the equation, I am now combining ``$b$'' with the element ``$a$,'' and on the right hand side of the equation, I am now combining ``$b$'' with the same element ``$a$'':
+
+\begin{diagram}
+  \node at (-5, 0) {$b$};
+  \node at (-3.5, 0) {$\opSymbol/$};
+  \node at (-1.5, 0) {$(\op{b}{c})$};
+  
+  \node at (0, -0.05) {$=$};
+  
+  \node at (1.5, 0) {$b$};
+  \node at (3, 0) {$\opSymbol/$};
+  \node at (5, 0) {$(\op{c}{a})$};
+  
+  \draw (-5.25, -0.3) -- (-5.25, -0.5) -- (-4.75, -0.5) -- (-4.75, -0.3);
+  \draw[->] (-5, -0.5) -- (-5, -1.15);
+  \node at (-5, -1.5) {the};
+  \node at (-5, -2) {element $b$};
+  
+  \draw (-2, -0.3) -- (-2, -0.5) -- (-1, -0.5) -- (-1, -0.3);
+  \draw[->] (-1.5, -0.5) -- (-1.5, -1.15);
+  \node at (-1.5, -1.5) {the};
+  \node at (-1.5, -2) {element $a$};
+
+  \draw (1.25, -0.3) -- (1.25, -0.5) -- (1.75, -0.5) -- (1.75, -0.3);
+  \draw[->] (1.5, -0.5) -- (1.5, -1.15);
+  \node at (1.5, -1.5) {the};
+  \node at (1.5, -2) {element $b$};
+  
+  \draw (4.5, -0.3) -- (4.5, -0.5) -- (5.5, -0.5) -- (5.5, -0.3);
+  \draw[->] (5, -0.5) -- (5, -1.15);
+  \node at (5, -1.5) {the same};
+  \node at (5, -2) {element $a$};
+\end{diagram}
+
+Are these two sides equal? Of course! Combining ``$b$'' with ``$a$'' on the left hand side will give me the same value as combining ``$b$'' with ``$a$'' on the right hand side. If we look in the Caley table, we will see that both sides will evaluate to ``$b$.''
+
+Why does it turn out to be equal like this? Because ``$\opSymbol/$'' is a \vocab{binary operation}, which by definition is a \vocab{function}. Because it is a function, we know that it will always map the same pair of elements to the same result.
+
+It doesn't really matter what we have in place of ``$(\op{b}{c})$'' and ``$(\op{c}{a})$.'' Whatever they evaluate to, so long as they evaluate to the same value --- it doesn't matter which element it is, so let's just call it $x$ --- then we're just applying ``$b$'' to that same element $x$:
+
+\begin{diagram}
+  \node at (-5, 0) {$b$};
+  \node at (-3.5, 0) {$\opSymbol/$};
+  \node at (-1.5, 0) {$(\op{b}{c})$};
+  
+  \node at (0, -0.05) {$=$};
+  
+  \node at (1.5, 0) {$b$};
+  \node at (3, 0) {$\opSymbol/$};
+  \node at (5, 0) {$(\op{c}{a})$};
+  
+  \draw (-5.25, -0.3) -- (-5.25, -0.5) -- (-4.75, -0.5) -- (-4.75, -0.3);
+  \draw[->] (-5, -0.5) -- (-5, -1.15);
+  \node at (-5, -1.5) {the};
+  \node at (-5, -2) {element $b$};
+  
+  \draw (-2, -0.3) -- (-2, -0.5) -- (-1, -0.5) -- (-1, -0.3);
+  \draw[->] (-1.5, -0.5) -- (-1.5, -1.15);
+  \node at (-1.5, -1.5) {some};
+  \node at (-1.5, -2) {element $x$};
+
+  \draw (1.25, -0.3) -- (1.25, -0.5) -- (1.75, -0.5) -- (1.75, -0.3);
+  \draw[->] (1.5, -0.5) -- (1.5, -1.15);
+  \node at (1.5, -1.5) {the};
+  \node at (1.5, -2) {element $b$};
+  
+  \draw (4.5, -0.3) -- (4.5, -0.5) -- (5.5, -0.5) -- (5.5, -0.3);
+  \draw[->] (5, -0.5) -- (5, -1.15);
+  \node at (5, -1.5) {the same};
+  \node at (5, -2) {element $x$};
+\end{diagram}
+
+And ``$\op{b}{x}$'' will always equal ``$\op{b}{x}$,'' no matter which element $x$ from our carrier set $x$ happens to be. This is why we can apply ``$b$'' to both sides, and the equation is still a true assertion.
+
+For the same reason, we can apply ``$a$'' or ``$c$'' to both sides of the equation. It needn't be ``$b$.'' It doesn't matter if we apply ``$a$,'' ``$b$,'' or ``$c$'' to both sides of the equation --- and since it doesn't matter which one, let's just call it ``$y$'': 
+
+\begin{diagram}
+  \node at (-5, 0) {$c$};
+  \node at (-3.5, 0) {$\opSymbol/$};
+  \node at (-1.5, 0) {$(\op{b}{c})$};
+  
+  \node at (0, -0.05) {$=$};
+  
+  \node at (1.5, 0) {$c$};
+  \node at (3, 0) {$\opSymbol/$};
+  \node at (5, 0) {$(\op{c}{a})$};
+  
+  \draw (-5.25, -0.3) -- (-5.25, -0.5) -- (-4.75, -0.5) -- (-4.75, -0.3);
+  \draw[->] (-5, -0.5) -- (-5, -1.15);
+  \node at (-5, -1.5) {some};
+  \node at (-5, -2) {element $y$};
+  
+  \draw (-2, -0.3) -- (-2, -0.5) -- (-1, -0.5) -- (-1, -0.3);
+  \draw[->] (-1.5, -0.5) -- (-1.5, -1.15);
+  \node at (-1.5, -1.5) {some};
+  \node at (-1.5, -2) {element $x$};
+
+  \draw (1.25, -0.3) -- (1.25, -0.5) -- (1.75, -0.5) -- (1.75, -0.3);
+  \draw[->] (1.5, -0.5) -- (1.5, -1.15);
+  \node at (1.5, -1.5) {the same};
+  \node at (1.5, -2) {element $y$};
+  
+  \draw (4.5, -0.3) -- (4.5, -0.5) -- (5.5, -0.5) -- (5.5, -0.3);
+  \draw[->] (5, -0.5) -- (5, -1.15);
+  \node at (5, -1.5) {the same};
+  \node at (5, -2) {element $x$};
+\end{diagram}
+
+If ``$(\op{b}{c})$'' and ``$(\op{c}{a})$'' are equal already, then as long as we apply the same value $y$ to both sides of the equation, the fact that ``$\opSymbol/$'' is a function means that it will always give us the same result, so the equation will still be true.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Cancellation}
+
+\newthought{In the last section} we showed why we can apply the same element to both sides of an equation. But we can also cancel out the same thing from both sides of an equation. Suppose we have an equation that looks like this (the names of the elements don't matter, so we'll just use $x$, $y$, and $z$):
+
+\begin{equation*}
+  \op{x}{y} = \op{x}{z}
+\end{equation*}
+
+We can cancel out the ``$x$'' from both sides:
+
+\begin{equation*}
+  \op{\cancel{x}}{y} = \op{\cancel{x}}{z}
+\end{equation*}
+
+And that leaves us with this:
+
+\begin{equation*}
+  y = z
+\end{equation*}
+
+We call this the \vocab{cancellation law} for groups. Let's write the whole idea down more concisely. Let's say that for any $x, y, z$ in our carrier set:
+
+\begin{equation*}
+  \text{ if } \hskip 0.5cm 
+  \op{x}{y} = \op{x}{z} \hskip 0.5cm 
+  \text{ then } \hskip 0.5cm  
+  y = z
+\end{equation*}
+
+Let's show \emph{why} this is true for any group, by proving it. Let's start with what we are given. Let's start by assuming that $\op{x}{y}$ is the same as $\op{x}{z}$:
+
+\begin{diagram}
+
+  \node at (-3, 0) {$x$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$y$};
+  
+  \draw (-3.5, -0.25) -- (-3.5, -0.5) -- (-0.5, -0.5) -- (-0.5, -0.25);
+  \draw[->] (-2, -0.5) -- (-2, -1);
+  \node at (-2, -1.5) {this};
+  \node at (-2, -2) {element};  
+  
+  \node at (1.25, 0) {$=$};
+  
+  \draw (1, -0.25) -- (1, -0.5) -- (1.5, -0.5) -- (1.5, -0.25);
+  \draw[->] (1.25, -0.5) -- (1.25, -1);
+  \node at (1.25, -1.5) {is the};
+  \node at (1.25, -2) {same as};
+
+  \node at (3.5, 0) {$x$};
+  \node at (4.5, 0) {$\opSymbol/$};
+  \node at (5.5, 0) {$z$};
+  
+  \draw (3, -0.25) -- (3, -0.5) -- (6, -0.5) -- (6, -0.25);
+  \draw[->] (4.5, -0.5) -- (4.5, -1);
+  \node at (4.5, -1.5) {this};
+  \node at (4.5, -2) {element};
+
+\end{diagram}
+
+What we want to show is that, whenever this is the case, then it must be the case that $y$ is equal to $z$ too.
+
+First, let's apply the inverse of $x$ to both sides. We can do this because we can apply anything we like to both sides of the equation, so long as we apply the same thing to both sides:
+
+\begin{diagram}
+
+  \node at (-5, 0.1) {$\inverseEl{x}$};
+  \node at (-4, 0) {$\opSymbol/$};
+  \node at (-3.25, 0) {$($};
+  \node at (-3, 0) {$x$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$y$};
+  \node at (-0.75, 0) {$)$};
+  
+  \draw (-5.75, -0.25) -- (-5.75, -0.5) -- (-4.5, -0.5) -- (-4.5, -0.25);
+  \draw[->] (-5, -0.5) -- (-5, -1);
+  \node at (-5, -1.5) {apply the};
+  \node at (-5, -2) {inverse of $x$};
+  
+  \node at (0, 0) {$=$};
+
+  \node at (1.5, 0.1) {$\inverseEl{x}$};
+  \node at (2.5, 0) {$\opSymbol/$};
+  \node at (3.25, 0) {$($};
+  \node at (3.5, 0) {$x$};
+  \node at (4.5, 0) {$\opSymbol/$};
+  \node at (5.5, 0) {$z$};
+  \node at (5.75, 0) {$)$};
+
+  \draw (0.75, -0.25) -- (0.75, -0.5) -- (2, -0.5) -- (2, -0.25);
+  \draw[->] (1.25, -0.5) -- (1.25, -1);
+  \node at (1.25, -1.5) {apply the};
+  \node at (1.25, -2) {inverse of $x$};
+
+\end{diagram}
+
+Next, let's re-arrange the parentheses. We can do this because we know that groups are associative, which means where the parentheses go doesn't matter:
+
+\begin{diagram}
+
+  \node at (-5.5, 0) {$($};
+  \node at (-5, 0.1) {$\inverseEl{x}$};
+  \node at (-4, 0) {$\opSymbol/$};
+  \node at (-3, 0) {$x$};
+  \node at (-2.75, 0) {$)$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$y$};
+  
+  \draw (-5.75, -0.25) -- (-5.75, -0.5) -- (-2.5, -0.5) -- (-2.5, -0.25);
+  \draw[->] (-4, -0.5) -- (-4, -1);
+  \node at (-4, -1.5) {regroup the};
+  \node at (-4, -2) {parentheses};
+  
+  \node at (0, 0) {$=$};
+
+  \node at (1, 0) {$($};
+  \node at (1.5, 0.1) {$\inverseEl{x}$};
+  \node at (2.5, 0) {$\opSymbol/$};
+  \node at (3.5, 0) {$x$};
+  \node at (3.75, 0) {$)$};
+  \node at (4.5, 0) {$\opSymbol/$};
+  \node at (5.5, 0) {$z$};
+
+  \draw (0.75, -0.25) -- (0.75, -0.5) -- (4, -0.5) -- (4, -0.25);
+  \draw[->] (2.5, -0.5) -- (2.5, -1);
+  \node at (2.5, -1.5) {regroup the};
+  \node at (2.5, -2) {parentheses};
+
+\end{diagram}
+
+Next, notice that we are now combining an element $x$ and its inverse $\inverseEl{x}$ on both sides of this equation. And any element combined with its inverse evaluates to the identity element.
+
+\begin{diagram}
+
+  \node at (-5.5, 0) {$($};
+  \node at (-5, 0.1) {$\inverseEl{x}$};
+  \node at (-4, 0) {$\opSymbol/$};
+  \node at (-3, 0) {$x$};
+  \node at (-2.75, 0) {$)$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$y$};
+  
+  \draw (-5.75, -0.25) -- (-5.75, -0.5) -- (-2.5, -0.5) -- (-2.5, -0.25);
+  \draw[->] (-4, -0.5) -- (-4, -1);
+  \node at (-4, -1.5) {evaluates to};
+  \node at (-4, -2) {the identity};
+  
+  \node at (0, 0) {$=$};
+
+  \node at (1, 0) {$($};
+  \node at (1.5, 0.1) {$\inverseEl{x}$};
+  \node at (2.5, 0) {$\opSymbol/$};
+  \node at (3.5, 0) {$x$};
+  \node at (3.75, 0) {$)$};
+  \node at (4.5, 0) {$\opSymbol/$};
+  \node at (5.5, 0) {$z$};
+
+  \draw (0.75, -0.25) -- (0.75, -0.5) -- (4, -0.5) -- (4, -0.25);
+  \draw[->] (2.5, -0.5) -- (2.5, -1);
+  \node at (2.5, -1.5) {evaluates to};
+  \node at (2.5, -2) {the identity};
+
+\end{diagram}
+
+So we can rewrite this. It doesn't matter what the identity element is here, so let's just call it $e$. Hence, we have:
+
+\begin{diagram}
+
+  \node at (-3, 0) {$e$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$y$};
+    
+  \node at (0.75, 0) {$=$};
+
+  \node at (2.5, 0) {$e$};
+  \node at (3.5, 0) {$\opSymbol/$};
+  \node at (4.5, 0) {$z$};
+
+\end{diagram}
+
+Next, notice that now we are combining $y$ with the identity element (on the left hand side of the equation), and we are combining $z$ with the identity element (on the right hand side of the equation). Recall that the identity element is a ``do-nothing'' element. Combining the identity element with any other element just gives us back that other element:
+
+\begin{diagram}
+
+  \node at (-3, 0) {$e$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$y$};
+  
+  \draw (-3.25, -0.25) -- (-3.25, -0.5) -- (-0.75, -0.5) -- (-0.75, -0.25);
+  \draw[->] (-2, -0.5) -- (-2, -1);
+  \node at (-2, -1.5) {this just};
+  \node at (-2, -2) {evaluates to $y$};
+    
+  \node at (0.75, 0) {$=$};
+
+  \node at (2.5, 0) {$e$};
+  \node at (3.5, 0) {$\opSymbol/$};
+  \node at (4.5, 0) {$z$};
+
+  \draw (2.25, -0.25) -- (2.25, -0.5) -- (4.75, -0.5) -- (4.75, -0.25);
+  \draw[->] (3.5, -0.5) -- (3.5, -1);
+  \node at (3.5, -1.5) {this just};
+  \node at (3.5, -2) {evaluates to $z$};
+
+\end{diagram}
+
+So, we can rewrite our equation without the ``$e$,'' to get this:
+
+\begin{diagram}
+  \node at (-1, 0) {$y$};
+  \node at (0, 0) {$=$};
+  \node at (1, 0) {$z$};
+\end{diagram}
+
+Hence, in the end, $y$ must be equal to $z$. And that was exactly what we wanted to prove, so we have completed our proof. 
+
+We have shown that, if $\op{x}{y}$ is equal to $\op{x}{z}$, then $y$ must be equal to $z$ as well, and hence we can just ignore or cancel out the ``$x$'' on both sides of the equation.
+
+We can use exactly the same technique to prove that we can cancel ``$x$'' if it appears on the right side too. That is, we can prove this:
+
+\begin{equation*}
+  \text{if} \hskip 0.5cm 
+  \op{y}{x} = \op{z}{x} \hskip 0.5cm 
+  \text{then} \hskip 0.5cm  
+  y = z
+\end{equation*}
+
+Note, however, that is order to cancel an ``$x$'' from both sides of the equation, the ``$x$s'' must be on the same side of the ``$\opSymbol/$'' symbol: each ``$x$'' must be on the left side of the ``$\opSymbol/$,'' or each ``$x$'' must be on the right side of the ``$\opSymbol/$.'' So:
+
+\begin{equation*}
+  \text{if} \hskip 0.5cm
+  \op{x}{y} = \op{z}{x} \hskip 0.5cm 
+  \text{then it does not follow that} \hskip 0.5cm  
+  y = z
+\end{equation*}
+
+And:
+
+\begin{equation*}
+  \text{if} \hskip 0.5cm 
+  \op{y}{x} = \op{x}{z} \hskip 0.5cm 
+  \text{then it does not follow that} \hskip 0.5cm  
+  y = z
+\end{equation*}
+
+This is because every algebra is not commutative. If the algebra you are working with is commutative, then of course you can flip one side around, and then cancel the $x$s. But if your algebra is not commutative, you cannot flip one side around, and you cannot cancel out the $x$s.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Inverses}
+
+\newthought{If combining two elements} yields an inverse, then those two elements must be inverses of each other. 
+
+Suppose we have two elements --- it doesn't matter which elements they are, so let's just call them $x$ and $y$. Suppose also that when we combine these two elements, we get the identity element --- it doesn't matter what the identity element is either, so let's just call it $e$. Hence, suppose we have this:
+
+\begin{equation*}
+  \op{x}{y} = e
+\end{equation*}
+
+If this is the case, then $x$ and $y$ must be the inverses of each other. That is to say, $y$ must be the inverse of $x$:
+
+\begin{equation*}
+  y = \inverseEl{x}
+\end{equation*} 
+
+And, $x$ must be the inverse of $y$:
+
+\begin{equation*}
+  x = \inverseEl{y}
+\end{equation*}
+
+We can prove that this. Let's start with what we are given, namely that combining $x$ and $y$ yields the identity $e$:
+
+\begin{diagram}
+
+  \node at (-3, 0) {$x$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$y$};
+  
+  \node at (0, 0) {$=$};
+  \node at (1, 0) {$e$};
+
+\end{diagram}
+
+We know that any element combined with its inverse is equal to $e$. So, for example, we know that $x$ combined with $\inverseEl{x}$ is equal to $e$:
+
+\begin{diagram}
+
+  \node at (-3, 0) {$x$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$y$};
+  
+  \node at (0, 0) {$=$};
+  \node at (1, 0) {$e$};
+  
+  \draw (0.5, -0.25) -- (0.5, -0.5) -- (1.5, -0.5) -- (1.5, -0.25);
+  \draw[->] (1, -0.5) -- (1, -1);
+  \node at (1, -1.5) {this is the same};
+  \node at (1, -2) {as $\op{x}{\inverseEl{x}}$};
+
+\end{diagram}
+
+Hence, we can rewrite the equation with $\op{x}{\inverseEl{x}}$ on the right hand side, instead of $e$:
+
+\begin{diagram}
+
+  \node at (-3, 0) {$x$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$y$};
+  
+  \node at (0, 0) {$=$};
+  \node at (1, 0) {$x$};
+  \node at (2, 0) {$\opSymbol/$};
+  \node at (3, 0) {$\inverseEl{x}$};
+
+\end{diagram}
+
+But now notice that $x$ is applied on both sides of the equation. So, we can use the \vocab{cancellation law} to cancel out $x$:
+
+\begin{diagram}
+
+  \node at (-3, 0) {$\cancel{x}$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$y$};
+  
+  \node at (0, 0) {$=$};
+  \node at (1, 0) {$\cancel{x}$};
+  \node at (2, 0) {$\opSymbol/$};
+  \node at (3, 0) {$\inverseEl{x}$};
+
+\end{diagram}
+
+Hence, we are left with just $y$ and $\inverseEl{x}$:
+
+\begin{diagram}
+  \node at (-1, 0) {$y$};
+  \node at (0, 0) {$=$};
+  \node at (1, 0.1) {$\inverseEl{x}$};
+\end{diagram}
+
+Hence, we have deduced that $y$ must be the inverse of $x$. That's one of the things we were trying to prove.
+
+Next, we want to prove that $x$ is the inverse of $y$. To do that, let's go back to where we started, namely that combining $x$ and $y$ yields the identity $e$:
+
+\begin{diagram}
+
+  \node at (-3, 0) {$x$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$y$};
+  
+  \node at (0, 0) {$=$};
+  \node at (1, 0) {$e$};
+
+\end{diagram}
+
+As before, we know that any element combined with its inverse is equal to $e$. So, for example, we know that $\inverseEl{y}$ combined with $y$ is equal to $e$ as well:
+
+\begin{diagram}
+
+  \node at (-3, 0) {$x$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$y$};
+  
+  \node at (0, 0) {$=$};
+  \node at (1, 0) {$e$};
+  
+  \draw (0.5, -0.25) -- (0.5, -0.5) -- (1.5, -0.5) -- (1.5, -0.25);
+  \draw[->] (1, -0.5) -- (1, -1);
+  \node at (1, -1.5) {this is the same};
+  \node at (1, -2) {as $\op{\inverseEl{y}}{y}$};
+
+\end{diagram}
+
+Hence, we can rewrite the equation with $\op{\inverseEl{y}}{y}$ on the right hand side, instead of $e$:
+
+\begin{diagram}
+
+  \node at (-3, 0) {$x$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$y$};
+  
+  \node at (0, 0) {$=$};
+  \node at (1, 0) {$\inverseEl{y}$};
+  \node at (2, 0) {$\opSymbol/$};
+  \node at (3, 0) {$y$};
+
+\end{diagram}
+
+But notice now that $y$ is applied to both sides of the equation. So, we can again use the \vocab{cancellation law} to cancel out the $y$ on both sides:
+
+\begin{diagram}
+
+  \node at (-3, 0) {$x$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$\cancel{y}$};
+  
+  \node at (0, 0) {$=$};
+  \node at (1, 0) {$\inverseEl{y}$};
+  \node at (2, 0) {$\opSymbol/$};
+  \node at (3, 0) {$\cancel{y}$};
+
+\end{diagram}
+
+Hence, we are left with just $x$ and $\inverseEl{y}$:
+
+\begin{diagram}
+  \node at (-1, 0) {$x$};
+  \node at (0, 0) {$=$};
+  \node at (1, 0.1) {$\inverseEl{y}$};
+\end{diagram}
+
+So we have also deduced that $x$ must be the inverse of $y$, just as $y$ must be the inverse of $x$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Inverse of the Inverse}
+
+\newthought{What is the inverse of the inverse}? Take any element, it doesn't matter which, so let's just call it $x$. Then, what is the answer to this:
+
+\begin{equation*}
+  \inverseEl{(\inverseEl{x})} =~??
+\end{equation*}
+
+The answer is $x$. The inverse of the inverse of $x$ is just $x$:
+
+\begin{equation*}
+  \inverseEl{(\inverseEl{x})} =~x
+\end{equation*}
+
+We can prove this. We know that $x$ combined with its inverse $\inverseEl{x}$ is equal to the identity. It doesn't matter which element the identity is, so let's just call it $e$. Hence, we know this:
+
+\begin{diagram}
+
+  \node at (-3, 0) {$x$};
+  \node at (-1, 0) {$\opSymbol/$};
+  \node at (1, 0.1) {$\inverseEl{x}$};
+  \node at (3, 0) {$=$};
+  \node at (5, 0) {$e$};
+
+\end{diagram}
+
+But we know from the last section that if combining two elements yields the identity element, then those two elements must be inverses of each other. Hence, the ``$x$'' on the left hand side of the ``$\opSymbol/$'' symbol must be the inverse of the ``$\inverseEl{x}$'' on the right hand side of the ``$\opSymbol/$'':
+
+
+\begin{diagram}
+
+  \node at (-3, 0) {$x$};
+  \node at (-1, 0) {$\opSymbol/$};
+  \node at (1, 0.1) {$\inverseEl{x}$};
+  \node at (3, 0) {$=$};
+  \node at (5, 0) {$e$};
+  
+  \draw (-3.5, -0.25) -- (-3.5, -0.5) -- (-2.5, -0.5) -- (-2.5, -0.25);
+  \draw[->] (-3, -0.5) -- (-3, -1);
+  \node at (-3, -1.5) {this};
+  \node at (-3, -2) {must be};
+  
+  \draw (0.5, -0.25) -- (0.5, -0.5) -- (1.5, -0.5) -- (1.5, -0.25);
+  \draw[->] (1, -0.5) -- (1, -1);
+  \node at (1, -1.5) {the inverse};
+  \node at (1, -2) {of this};
+
+\end{diagram}
+
+So ``$x$'' is the inverse of ``$\inverseEl{x}$.'' How do we write ``the inverse of $\inverseEl{x}$''? We just add another superscripted ``$-1$,'' like this: ``$\inverseEl{(\inverseEl{x})}$.'' Hence:
+
+\begin{diagram}
+
+  \node at (-1, 0) {$x$};
+  \node at (0.25, 0) {$=$};
+  \node at (2, 0) {$\inverseEl{(\inverseEl{x})}$};
+
+\end{diagram}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Combining Inverses}
+
+\newthought{Take two elements} and combine them. It doesn't matter which elements they are, so let's just call them $x$ and $y$:
+
+\begin{equation*}
+  \op{x}{y}
+\end{equation*}
+
+Now take the inverse of that result:
+
+\begin{equation*}
+  \inverseEl{(\op{x}{y})}
+\end{equation*}
+
+That will evaluate to the same thing as if you combine the inverse of $y$ and the inverse of $x$:
+
+\begin{equation*}
+  \inverseEl{(\op{x}{y})} = \op{\inverseEl{y}}{\inverseEl{x}}
+\end{equation*}
+
+In other words, if you combine two elements and take their inverse, that is the same as combining the inverses of those two elements in reverse order. Let's prove this. 
+
+First, observe that we are claiming that $\op{\inverseEl{y}}{\inverseEl{x}}$ is equal to the inverse of $\op{x}{y}$. Well, the inverse of an element is whatever other element you combine it with to get $e$. So, if $\op{\inverseEl{y}}{\inverseEl{x}}$ is the inverse of $\op{x}{y}$, then we should be able to combine them to get $e$, like this:
+
+\begin{diagram}
+
+  \node at (-4.25, 0) {$($};
+  \node at (-4, 0) {$x$};
+  \node at (-3, 0) {$\opSymbol/$};
+  \node at (-2, 0) {$y$};
+  \node at (-1.75, 0) {$)$};
+  \node at (-1, 0) {$\opSymbol/$};
+  \node at (-0.5, 0) {$($};
+  \node at (0, 0) {$\inverseEl{y}$};
+  \node at (1, 0) {$\opSymbol/$};
+  \node at (2, 0) {$\inverseEl{x}$};
+  \node at (2.5, 0) {$)$};
+  \node at (3.75, 0) {$=$};
+  \node at (5, 0) {$e$};
+  
+  \draw (-4.5, -0.25) -- (-4.5, -0.5) -- (-1.5, -0.5) -- (-1.5, -0.25);
+  \draw[->] (-3, -0.5) -- (-3, -1);
+  \node at (-3, -1.5) {whatever this};
+  \node at (-3, -2) {value is};
+
+  \draw (-0.6, -0.25) -- (-0.6, -0.5) -- (2.6, -0.5) -- (2.6, -0.25);
+  \draw[->] (1, -0.5) -- (1, -1);
+  \node at (1, -1.5) {its alleged};
+  \node at (1, -2) {inverse};
+  
+  \draw (4.5, -0.25) -- (4.5, -0.5) -- (5.5, -0.5) -- (5.5, -0.25);
+  \draw[->] (5, -0.5) -- (5, -1);
+  \node at (5, -1.5) {the identity};
+
+\end{diagram}
+
+So the question is, is this true? Are the two sides of this equation equal? The answer is yes. First, let's move the parentheses around. We can do this because groups are associative, so where the parentheses go doesn't matter:
+
+\begin{diagram}
+
+  \node at (-4, 0) {$x$};
+  \node at (-3, 0) {$\opSymbol/$};
+  \node at (-2.25, 0) {$($};
+  \node at (-2, 0) {$y$};
+  \node at (-1, 0) {$\opSymbol/$};
+  \node at (0, 0.1) {$\inverseEl{y}$};
+  \node at (0.5, 0) {$)$};
+  \node at (1, 0) {$\opSymbol/$};
+  \node at (2, 0.1) {$\inverseEl{x}$};
+  \node at (3.75, 0) {$=$};
+  \node at (5, 0) {$e$};
+  
+  \draw (-2.5, -0.25) -- (-2.5, -0.5) -- (0.75, -0.5) -- (0.75, -0.25);
+  \draw[->] (-1, -0.5) -- (-1, -1);
+  \node at (-1, -1.5) {regroup the};
+  \node at (-1, -2) {parentheses};
+
+\end{diagram}
+
+Inside the parentheses, we now have ``$\op{y}{\inverseEl{y}}$,'' and we know that any element combined with its own inverse evaluates to ``$e$'':
+
+\begin{diagram}
+
+  \node at (-4, 0) {$x$};
+  \node at (-3, 0) {$\opSymbol/$};
+  \node at (-2.25, 0) {$($};
+  \node at (-2, 0) {$y$};
+  \node at (-1, 0) {$\opSymbol/$};
+  \node at (0, 0.1) {$\inverseEl{y}$};
+  \node at (0.5, 0) {$)$};
+  \node at (1, 0) {$\opSymbol/$};
+  \node at (2, 0.1) {$\inverseEl{x}$};
+  \node at (3.75, 0) {$=$};
+  \node at (5, 0) {$e$};
+  
+  \draw (-2.5, -0.25) -- (-2.5, -0.5) -- (0.75, -0.5) -- (0.75, -0.25);
+  \draw[->] (-1, -0.5) -- (-1, -1);
+  \node at (-1, -1.5) {this evaluates to};
+  \node at (-1, -2) {the identity $e$};
+
+\end{diagram}
+
+So, we can rewrite this with ``$e$'' instead of ``$\op{y}{\inverseEl{y}}$'':
+
+\begin{diagram}
+
+  \node at (-3, 0) {$x$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1.25, 0) {$($};
+  \node at (-1, 0) {$e$};
+  \node at (-0.75, 0) {$)$};
+  \node at (0, 0) {$\opSymbol/$};
+  \node at (1, 0.1) {$\inverseEl{x}$};
+  \node at (2.5, 0) {$=$};
+  \node at (4, 0) {$e$};
+
+\end{diagram}
+
+Let's rearrange the parentheses again:
+
+\begin{diagram}
+
+  \node at (-3.25, 0) {$($};
+  \node at (-3, 0) {$x$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$e$};
+  \node at (-0.75, 0) {$)$};
+  \node at (0, 0) {$\opSymbol/$};
+  \node at (1, 0.1) {$\inverseEl{x}$};
+  \node at (2.5, 0) {$=$};
+  \node at (4, 0) {$e$};
+
+  \draw (-3.5, -0.25) -- (-3.5, -0.5) -- (-0.5, -0.5) -- (-0.5, -0.25);
+  \draw[->] (-2, -0.5) -- (-2, -1);
+  \node at (-2, -1.5) {regroup the};
+  \node at (-2, -2) {parentheses};
+
+\end{diagram}
+
+Inside these parentheses, we have ``$\op{x}{e}$.'' Combining any element $x$ with the identity $e$ just yields that same element $x$:
+
+\begin{diagram}
+
+  \node at (-3.25, 0) {$($};
+  \node at (-3, 0) {$x$};
+  \node at (-2, 0) {$\opSymbol/$};
+  \node at (-1, 0) {$e$};
+  \node at (-0.75, 0) {$)$};
+  \node at (0, 0) {$\opSymbol/$};
+  \node at (1, 0.1) {$\inverseEl{x}$};
+  \node at (2.5, 0) {$=$};
+  \node at (4, 0) {$e$};
+
+  \draw (-3.5, -0.25) -- (-3.5, -0.5) -- (-0.5, -0.5) -- (-0.5, -0.25);
+  \draw[->] (-2, -0.5) -- (-2, -1);
+  \node at (-2, -1.5) {this evaluates};
+  \node at (-2, -2) {to $x$};
+
+\end{diagram}
+
+So, we can replace ``$\op{x}{e}$'' with ``$x$'':
+
+\begin{diagram}
+
+  \node at (-1, 0) {$x$};
+  \node at (0, 0) {$\opSymbol/$};
+  \node at (1, 0.1) {$\inverseEl{x}$};
+  \node at (2.5, 0) {$=$};
+  \node at (4, 0) {$e$};
+
+\end{diagram}
+
+Now, on the left side of this equation, we are combining $x$ and its inverse $\inverseEl{x}$. And any element combined with its inverse evaluates to the identity $e$:
+
+\begin{diagram}
+
+  \node at (-1, 0) {$x$};
+  \node at (0, 0) {$\opSymbol/$};
+  \node at (1, 0.1) {$\inverseEl{x}$};
+  \node at (2.5, 0) {$=$};
+  \node at (4, 0) {$e$};
+
+  \draw (-1.25, -0.25) -- (-1.25, -0.5) -- (1.25, -0.5) -- (1.25, -0.25);
+  \draw[->] (0, -0.5) -- (0, -1);
+  \node at (0, -1.5) {this evaluates};
+  \node at (0, -2) {to $e$};
+
+\end{diagram}
+
+So, it turns out that the left side of this equation does indeed evaluate to $e$, just like the right side of the equation. Thus, we have shown that it is in fact true that ``$\op{x}{y}$'' and ``$\op{\inverseEl{y}}{\inverseEl{x}}$'' are inverses, since combining them evaluates to $e$. Hence, we can say that the inverse of ``$\op{x}{y}$'' --- that is to say, ``$\inverseEl{(\op{x}{y})}$'' --- is ``$\op{\inverseEl{y}}{\inverseEl{x}}$'':
+
+\begin{equation*}
+  \inverseEl{(\op{x}{y})} = \op{\inverseEl{y}}{\inverseEl{x}}
+\end{equation*}
+
+And that is what we set out to prove.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this appendix}, we looked at some of the basic algebra tricks many are familiar with, and we showed why they work, by proving them.
+
+\end{document}

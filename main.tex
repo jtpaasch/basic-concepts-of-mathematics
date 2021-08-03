@@ -247,6 +247,7 @@
 \newtheorem{example}{Example}[chapter]
 \newtheorem{notation}{Notation}[chapter]
 \newtheorem{remark}{Remark}[chapter]
+\newtheorem{fact}{Fact}[chapter]
 
 \newenvironment{fdefinition}
   {\begin{framed}\begin{definition}}
@@ -266,6 +267,9 @@
 \newcommand{\sectionref}[1]{Section \ref{#1}}
 \newcommand{\defref}[1]{Definition \ref{#1}}
 \newcommand{\exampleref}[1]{Example \ref{#1}}
+\newcommand{\factref}[1]{Fact \ref{#1}}
+\newcommand{\theoremref}[1]{Theorem \ref{#1}}
+\newcommand{\lemmaref}[1]{Lemma \ref{#1}}
 
 
 % ----------------------------------------------------------
@@ -476,7 +480,7 @@ In \partrefbynum{\thepart}, we discuss four different \vocab{sets of numbers}. W
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\partwithtext{Infinites}{part:infinities}{%
+\partwithtext{Infinities}{part:infinities}{%
 How big is infinity, exactly? And what exactly do we mean by ``infinity''? Are some infinite collections bigger than other infinite collections? Can we even compare the size of different infinite collections?
 \\ \\
 In \partrefbynum{\thepart}, we discuss the idea of infinity as the size of an infinitely large collection. We define a way to \vocab{compare} two infinitely large sets without counting them, so that we can check if they are the same size or not. We define what it means for an infinite set to be \vocab{listable} vs.~\vocab{unlistable}, and we look at some examples.
@@ -484,6 +488,7 @@ In \partrefbynum{\thepart}, we discuss the idea of infinity as the size of an in
 
 \subfile{chapters/infinities/measuring-size/source}
 \subfile{chapters/infinities/listing-infinities/source}
+\subfile{chapters/infinities/listable-infinities/source}
 \subfile{chapters/infinities/unlistable-infinities/source}
 \subfile{chapters/infinities/further-reading/source}
 
@@ -537,9 +542,27 @@ In \partrefbynum{\thepart}, we discuss \vocab{ordered sets}, which are sets that
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\partwithtext{Computers}{part:computers}{%
+Computers seem like incredible machines, given all that they can do. But, have you ever heard that it's all just ones and zeros under the hood? How is that possible? How is it possible that mere ones and zeros could give rise to everything we see computers doing today? 
+
+In \partrefbynum{\thepart}, we discuss how \vocab{computers} actually work, under the hood. We will look at different ways to \vocab{represent numbers}, and we will look at a few common number encodings, including \vocab{hexadecimal} and \vocab{binary} encodings. We will look at the parts and components that are used to build a \vocab{CPU}, and we will look at how it is that a CPU actually \vocab{executes a program}.}
+
+\subfile{chapters/computers/representing-numbers/source}
+\subfile{chapters/computers/common-number-encodings/source}
+\subfile{chapters/computers/parts-of-the-CPU/source}
+\subfile{chapters/computers/running-programs/source}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
 \partwithtext{Appendices}{part:extras}{}
+% \subfile{chapters/extras/bridges-of-konigsberg/source}
+% \subfile{chapters/extras/eulers-formula/source}
+% \subfile{chapters/extras/platonic-solids/source}
 \subfile{chapters/extras/pythagorean-theorem/source}
+\subfile{chapters/extras/irrational-numbers/source}
+\subfile{chapters/extras/algebra-tricks/source}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

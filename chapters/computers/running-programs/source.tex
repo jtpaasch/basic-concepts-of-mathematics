@@ -1,0 +1,3022 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Running Programs}
+\label{ch:running-programs}
+
+\newtopic{I}{n this chapter}, we will look at how a CPU actually runs or ``executes'' computer programs. Again, we will keep things simple, but real computer programs are just beefed up versions of the same thing.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Machine Instructions}
+
+\newthought{Every CPU} is pre-built to understand and execute a small set of instructions. Each instruction is just a sequence of ones and zeros, that the CPU has been pre-built to recognize.
+
+For example, let's take the simple CPU we put together in the last chapter. Recall that it looks like this:
+
+\begin{diagram}
+
+  % The Memory
+
+  \draw (-1.6, -0.1) -- (-1.6, 4.1) -- (4.1, 4.1) -- (4.1, -0.1) -- (-1.6, -0.1);
+  \draw[fill=black]
+    (0.25, -0.1) -- (2.75, -0.1) -- (2.75, -0.7) -- (0.25, -0.7) -- (0.25, -0.1);
+  \node[color=white] at (1.5, -0.4) {\textsf{Memory}};
+
+  \node at (-0.75, 3.75) {\textsf{0000}};
+  \draw (0, 3.5) -- (-1.5, 3.5) -- (-1.5, 4) -- (0, 4);
+  \draw[color=gray] (0.2, 3.5) -- (0.2, 4) -- (0.3, 4) -- (0.3, 3.5) -- (0.2, 3.5);
+  \draw[color=gray] (0.7, 3.5) -- (0.7, 4) -- (0.8, 4) -- (0.8, 3.5) -- (0.7, 3.5);
+  \draw[color=gray] (1.2, 3.5) -- (1.2, 4) -- (1.3, 4) -- (1.3, 3.5) -- (1.2, 3.5);
+  \draw[color=gray] (1.7, 3.5) -- (1.7, 4) -- (1.8, 4) -- (1.8, 3.5) -- (1.7, 3.5);
+  \draw[color=gray] (2.2, 3.5) -- (2.2, 4) -- (2.3, 4) -- (2.3, 3.5) -- (2.2, 3.5);
+  \draw[color=gray] (2.7, 3.5) -- (2.7, 4) -- (2.8, 4) -- (2.8, 3.5) -- (2.7, 3.5);
+  \draw[color=gray] (3.2, 3.5) -- (3.2, 4) -- (3.3, 4) -- (3.3, 3.5) -- (3.2, 3.5);
+  \draw[color=gray] (3.7, 3.5) -- (3.7, 4) -- (3.8, 4) -- (3.8, 3.5) -- (3.7, 3.5);
+  \draw (0, 3.5) -- (0.5, 3.5) -- (0.5, 4) -- (0, 4) -- (0, 3.5);
+  \draw (0.5, 3.5) -- (1, 3.5) -- (1, 4) -- (0.5, 4);
+  \draw (1, 3.5) -- (1.5, 3.5) -- (1.5, 4) -- (1, 4);
+  \draw (1.5, 3.5) -- (2, 3.5) -- (2, 4) -- (1.5, 4);
+  \draw (2, 3.5) -- (2.5, 3.5) -- (2.5, 4) -- (2, 4);
+  \draw (2.5, 3.5) -- (3, 3.5) -- (3, 4) -- (2.5, 4);
+  \draw (3, 3.5) -- (3.5, 3.5) -- (3.5, 4) -- (3, 4);
+  \draw (3.5, 3.5) -- (4, 3.5) -- (4, 4) -- (3.5, 4);
+  
+  \node at (-0.75, 3.25) {\textsf{0001}};
+  \draw (0, 3) -- (-1.5, 3) -- (-1.5, 3.5) -- (0, 3.5);
+  \draw[color=gray] (0.2, 3) -- (0.2, 3.5) -- (0.3, 3.5) -- (0.3, 3) -- (0.2, 3);
+  \draw[color=gray] (0.7, 3) -- (0.7, 3.5) -- (0.8, 3.5) -- (0.8, 3) -- (0.7, 3);
+  \draw[color=gray] (1.2, 3) -- (1.2, 3.5) -- (1.3, 3.5) -- (1.3, 3) -- (1.2, 3);
+  \draw[color=gray] (1.7, 3) -- (1.7, 3.5) -- (1.8, 3.5) -- (1.8, 3) -- (1.7, 3);
+  \draw[color=gray] (2.2, 3) -- (2.2, 3.5) -- (2.3, 3.5) -- (2.3, 3) -- (2.2, 3);
+  \draw[color=gray] (2.7, 3) -- (2.7, 3.5) -- (2.8, 3.5) -- (2.8, 3) -- (2.7, 3);
+  \draw[color=gray] (3.2, 3) -- (3.2, 3.5) -- (3.3, 3.5) -- (3.3, 3) -- (3.2, 3);
+  \draw[color=gray] (3.7, 3) -- (3.7, 3.5) -- (3.8, 3.5) -- (3.8, 3) -- (3.7, 3);
+  \draw (0, 3) -- (0.5, 3) -- (0.5, 3.5) -- (0, 3.5) -- (0, 3);
+  \draw (0.5, 3) -- (1, 3) -- (1, 3.5) -- (0.5, 3.5);
+  \draw (1, 3) -- (1.5, 3) -- (1.5, 3.5) -- (1, 3.5);
+  \draw (1.5, 3) -- (2, 3) -- (2, 3.5) -- (1.5, 3.5);
+  \draw (2, 3) -- (2.5, 3) -- (2.5, 3.5) -- (2, 3.5);
+  \draw (2.5, 3) -- (3, 3) -- (3, 3.5) -- (2.5, 3.5);
+  \draw (3, 3) -- (3.5, 3) -- (3.5, 3.5) -- (3, 3.5);
+  \draw (3.5, 3) -- (4, 3) -- (4, 3.5) -- (3.5, 3.5);
+
+  \node at (-0.75, 2.75) {\textsf{0010}};
+  \draw (0, 2.5) -- (-1.5, 2.5) -- (-1.5, 3) -- (0, 3);
+  \draw[color=gray] (0.2, 2.5) -- (0.2, 3) -- (0.3, 3) -- (0.3, 2.5) -- (0.2, 2.5);
+  \draw[color=gray] (0.7, 2.5) -- (0.7, 3) -- (0.8, 3) -- (0.8, 2.5) -- (0.7, 2.5);
+  \draw[color=gray] (1.2, 2.5) -- (1.2, 3) -- (1.3, 3) -- (1.3, 2.5) -- (1.2, 2.5);
+  \draw[color=gray] (1.7, 2.5) -- (1.7, 3) -- (1.8, 3) -- (1.8, 2.5) -- (1.7, 2.5);
+  \draw[color=gray] (2.2, 2.5) -- (2.2, 3) -- (2.3, 3) -- (2.3, 2.5) -- (2.2, 2.5);
+  \draw[color=gray] (2.7, 2.5) -- (2.7, 3) -- (2.8, 3) -- (2.8, 2.5) -- (2.7, 2.5);
+  \draw[color=gray] (3.2, 2.5) -- (3.2, 3) -- (3.3, 3) -- (3.3, 2.5) -- (3.2, 2.5);
+  \draw[color=gray] (3.7, 2.5) -- (3.7, 3) -- (3.8, 3) -- (3.8, 2.5) -- (3.7, 2.5);
+  \draw (0, 2.5) -- (0.5, 2.5) -- (0.5, 3) -- (0, 3) -- (0, 2.5);
+  \draw (0.5, 2.5) -- (1, 2.5) -- (1, 3) -- (0.5, 3);
+  \draw (1, 2.5) -- (1.5, 2.5) -- (1.5, 3) -- (1, 3);
+  \draw (1.5, 2.5) -- (2, 2.5) -- (2, 3) -- (1.5, 3);
+  \draw (2, 2.5) -- (2.5, 2.5) -- (2.5, 3) -- (2, 3);
+  \draw (2.5, 2.5) -- (3, 2.5) -- (3, 3) -- (2.5, 3);
+  \draw (3, 2.5) -- (3.5, 2.5) -- (3.5, 3) -- (3, 3);
+  \draw (3.5, 2.5) -- (4, 2.5) -- (4, 3) -- (3.5, 3);
+  
+  \node at (-0.75, 2.25) {\textsf{0011}};
+  \draw (0, 2) -- (-1.5, 2) -- (-1.5, 2.5) -- (0, 2.5);
+  \draw[color=gray] (0.2, 2) -- (0.2, 2.5) -- (0.3, 2.5) -- (0.3, 2) -- (0.2, 2);
+  \draw[color=gray] (0.7, 2) -- (0.7, 2.5) -- (0.8, 2.5) -- (0.8, 2) -- (0.7, 2);
+  \draw[color=gray] (1.2, 2) -- (1.2, 2.5) -- (1.3, 2.5) -- (1.3, 2) -- (1.2, 2);
+  \draw[color=gray] (1.7, 2) -- (1.7, 2.5) -- (1.8, 2.5) -- (1.8, 2) -- (1.7, 2);
+  \draw[color=gray] (2.2, 2) -- (2.2, 2.5) -- (2.3, 2.5) -- (2.3, 2) -- (2.2, 2);
+  \draw[color=gray] (2.7, 2) -- (2.7, 2.5) -- (2.8, 2.5) -- (2.8, 2) -- (2.7, 2);
+  \draw[color=gray] (3.2, 2) -- (3.2, 2.5) -- (3.3, 2.5) -- (3.3, 2) -- (3.2, 2);
+  \draw[color=gray] (3.7, 2) -- (3.7, 2.5) -- (3.8, 2.5) -- (3.8, 2) -- (3.7, 2);
+  \draw (0, 2) -- (0.5, 2) -- (0.5, 2.5) -- (0, 2.5) -- (0, 2);
+  \draw (0.5, 2) -- (1, 2) -- (1, 2.5) -- (0.5, 2.5);
+  \draw (1, 2) -- (1.5, 2) -- (1.5, 2.5) -- (1, 2.5);
+  \draw (1.5, 2) -- (2, 2) -- (2, 2.5) -- (1.5, 2.5);
+  \draw (2, 2) -- (2.5, 2) -- (2.5, 2.5) -- (2, 2.5);
+  \draw (2.5, 2) -- (3, 2) -- (3, 2.5) -- (2.5, 2.5);
+  \draw (3, 2) -- (3.5, 2) -- (3.5, 2.5) -- (3, 2.5);
+  \draw (3.5, 2) -- (4, 2) -- (4, 2.5) -- (3.5, 2.5);
+
+  \node at (-0.75, 1.75) {\textsf{0100}};
+  \draw (0, 1.5) -- (-1.5, 1.5) -- (-1.5, 2) -- (0, 2);
+  \draw[color=gray] (0.2, 1.5) -- (0.2, 2) -- (0.3, 2) -- (0.3, 1.5) -- (0.2, 1.5);
+  \draw[color=gray] (0.7, 1.5) -- (0.7, 2) -- (0.8, 2) -- (0.8, 1.5) -- (0.7, 1.5);
+  \draw[color=gray] (1.2, 1.5) -- (1.2, 2) -- (1.3, 2) -- (1.3, 1.5) -- (1.2, 1.5);
+  \draw[color=gray] (1.7, 1.5) -- (1.7, 2) -- (1.8, 2) -- (1.8, 1.5) -- (1.7, 1.5);
+  \draw[color=gray] (2.2, 1.5) -- (2.2, 2) -- (2.3, 2) -- (2.3, 1.5) -- (2.2, 1.5);
+  \draw[color=gray] (2.7, 1.5) -- (2.7, 2) -- (2.8, 2) -- (2.8, 1.5) -- (2.7, 1.5);
+  \draw[color=gray] (3.2, 1.5) -- (3.2, 2) -- (3.3, 2) -- (3.3, 1.5) -- (3.2, 1.5);
+  \draw[color=gray] (3.7, 1.5) -- (3.7, 2) -- (3.8, 2) -- (3.8, 1.5) -- (3.7, 1.5);
+  \draw (0, 1.5) -- (0.5, 1.5) -- (0.5, 2) -- (0, 2) -- (0, 1.5);
+  \draw (0.5, 1.5) -- (1, 1.5) -- (1, 2) -- (0.5, 2);
+  \draw (1, 1.5) -- (1.5, 1.5) -- (1.5, 2) -- (1, 2);
+  \draw (1.5, 1.5) -- (2, 1.5) -- (2, 2) -- (1.5, 2);
+  \draw (2, 1.5) -- (2.5, 1.5) -- (2.5, 2) -- (2, 2);
+  \draw (2.5, 1.5) -- (3, 1.5) -- (3, 2) -- (2.5, 2);
+  \draw (3, 1.5) -- (3.5, 1.5) -- (3.5, 2) -- (3, 2);
+  \draw (3.5, 1.5) -- (4, 1.5) -- (4, 2) -- (3.5, 2);
+  
+  \node at (-0.75, 1.25) {\textsf{0101}};
+  \draw (0, 1) -- (-1.5, 1) -- (-1.5, 1.5) -- (0, 1.5);
+  \draw[color=gray] (0.2, 1) -- (0.2, 1.5) -- (0.3, 1.5) -- (0.3, 1) -- (0.2, 1);
+  \draw[color=gray] (0.7, 1) -- (0.7, 1.5) -- (0.8, 1.5) -- (0.8, 1) -- (0.7, 1);
+  \draw[color=gray] (1.2, 1) -- (1.2, 1.5) -- (1.3, 1.5) -- (1.3, 1) -- (1.2, 1);
+  \draw[color=gray] (1.7, 1) -- (1.7, 1.5) -- (1.8, 1.5) -- (1.8, 1) -- (1.7, 1);
+  \draw[color=gray] (2.2, 1) -- (2.2, 1.5) -- (2.3, 1.5) -- (2.3, 1) -- (2.2, 1);
+  \draw[color=gray] (2.7, 1) -- (2.7, 1.5) -- (2.8, 1.5) -- (2.8, 1) -- (2.7, 1);
+  \draw[color=gray] (3.2, 1) -- (3.2, 1.5) -- (3.3, 1.5) -- (3.3, 1) -- (3.2, 1);
+  \draw[color=gray] (3.7, 1) -- (3.7, 1.5) -- (3.8, 1.5) -- (3.8, 1) -- (3.7, 1);
+  \draw (0, 1) -- (0.5, 1) -- (0.5, 1.5) -- (0, 1.5) -- (0, 1);
+  \draw (0.5, 1) -- (1, 1) -- (1, 1.5) -- (0.5, 1.5);
+  \draw (1, 1) -- (1.5, 1) -- (1.5, 1.5) -- (1, 1.5);
+  \draw (1.5, 1) -- (2, 1) -- (2, 1.5) -- (1.5, 1.5);
+  \draw (2, 1) -- (2.5, 1) -- (2.5, 1.5) -- (2, 1.5);
+  \draw (2.5, 1) -- (3, 1) -- (3, 1.5) -- (2.5, 1.5);
+  \draw (3, 1) -- (3.5, 1) -- (3.5, 1.5) -- (3, 1.5);
+  \draw (3.5, 1) -- (4, 1) -- (4, 1.5) -- (3.5, 1.5);
+
+  \node at (-0.75, 0.75) {\textsf{0110}};
+  \draw (0, 0.5) -- (-1.5, 0.5) -- (-1.5, 1) -- (0, 1);
+  \draw[color=gray] (0.2, 0.5) -- (0.2, 1) -- (0.3, 1) -- (0.3, 0.5) -- (0.2, 0.5);
+  \draw[color=gray] (0.7, 0.5) -- (0.7, 1) -- (0.8, 1) -- (0.8, 0.5) -- (0.7, 0.5);
+  \draw[color=gray] (1.2, 0.5) -- (1.2, 1) -- (1.3, 1) -- (1.3, 0.5) -- (1.2, 0.5);
+  \draw[color=gray] (1.7, 0.5) -- (1.7, 1) -- (1.8, 1) -- (1.8, 0.5) -- (1.7, 0.5);
+  \draw[color=gray] (2.2, 0.5) -- (2.2, 1) -- (2.3, 1) -- (2.3, 0.5) -- (2.2, 0.5);
+  \draw[color=gray] (2.7, 0.5) -- (2.7, 1) -- (2.8, 1) -- (2.8, 0.5) -- (2.7, 0.5);
+  \draw[color=gray] (3.2, 0.5) -- (3.2, 1) -- (3.3, 1) -- (3.3, 0.5) -- (3.2, 0.5);
+  \draw[color=gray] (3.7, 0.5) -- (3.7, 1) -- (3.8, 1) -- (3.8, 0.5) -- (3.7, 0.5);
+  \draw (0, 0.5) -- (0.5, 0.5) -- (0.5, 1) -- (0, 1) -- (0, 0.5);
+  \draw (0.5, 0.5) -- (1, 0.5) -- (1, 1) -- (0.5, 1);
+  \draw (1, 0.5) -- (1.5, 0.5) -- (1.5, 1) -- (1, 1);
+  \draw (1.5, 0.5) -- (2, 0.5) -- (2, 1) -- (1.5, 1);
+  \draw (2, 0.5) -- (2.5, 0.5) -- (2.5, 1) -- (2, 1);
+  \draw (2.5, 0.5) -- (3, 0.5) -- (3, 1) -- (2.5, 1);
+  \draw (3, 0.5) -- (3.5, 0.5) -- (3.5, 1) -- (3, 1);
+  \draw (3.5, 0.5) -- (4, 0.5) -- (4, 1) -- (3.5, 1);
+  
+  \node at (-0.75, 0.25) {\textsf{0111}};
+  \draw (0, 0) -- (-1.5, 0) -- (-1.5, 0.5) -- (0, 0.5);
+  \draw[color=gray] (0.2, 0) -- (0.2, 0.5) -- (0.3, 0.5) -- (0.3, 0) -- (0.2, 0);
+  \draw[color=gray] (0.7, 0) -- (0.7, 0.5) -- (0.8, 0.5) -- (0.8, 0) -- (0.7, 0);
+  \draw[color=gray] (1.2, 0) -- (1.2, 0.5) -- (1.3, 0.5) -- (1.3, 0) -- (1.2, 0);
+  \draw[color=gray] (1.7, 0) -- (1.7, 0.5) -- (1.8, 0.5) -- (1.8, 0) -- (1.7, 0);
+  \draw[color=gray] (2.2, 0) -- (2.2, 0.5) -- (2.3, 0.5) -- (2.3, 0) -- (2.2, 0);
+  \draw[color=gray] (2.7, 0) -- (2.7, 0.5) -- (2.8, 0.5) -- (2.8, 0) -- (2.7, 0);
+  \draw[color=gray] (3.2, 0) -- (3.2, 0.5) -- (3.3, 0.5) -- (3.3, 0) -- (3.2, 0);
+  \draw[color=gray] (3.7, 0) -- (3.7, 0.5) -- (3.8, 0.5) -- (3.8, 0) -- (3.7, 0);
+  \draw (0, 0) -- (0.5, 0) -- (0.5, 0.5) -- (0, 0.5) -- (0, 0);
+  \draw (0.5, 0) -- (1, 0) -- (1, 0.5) -- (0.5, 0.5);
+  \draw (1, 0) -- (1.5, 0) -- (1.5, 0.5) -- (1, 0.5);
+  \draw (1.5, 0) -- (2, 0) -- (2, 0.5) -- (1.5, 0.5);
+  \draw (2, 0) -- (2.5, 0) -- (2.5, 0.5) -- (2, 0.5);
+  \draw (2.5, 0) -- (3, 0) -- (3, 0.5) -- (2.5, 0.5);
+  \draw (3, 0) -- (3.5, 0) -- (3.5, 0.5) -- (3, 0.5);
+  \draw (3.5, 0) -- (4, 0) -- (4, 0.5) -- (3.5, 0.5);
+
+  % The CPU
+
+  \draw (-8.1, -1.1) -- (-8.1, 4.1) -- (-1.65, 4.1) -- (-1.65, -1.1) -- (-8.1, -1.1);
+  \draw[fill=black]
+    (-5.8, -1.1) -- (-4.2, -1.1) -- (-4.2, -1.7) -- (-5.8, -1.7) -- (-5.8, -1.1);
+  \node[color=white] at (-5, -1.4) {\textsf{CPU}};
+
+  \node at (-7.5, 3.75) {\textsf{R0}};
+  \draw (-7, 3.5) -- (-8, 3.5) -- (-8, 4) -- (-7, 4);
+  \draw[color=gray]
+    (-6.7, 3.5) -- (-6.7, 4) -- (-6.8, 4) -- (-6.8, 3.5) -- (-6.7, 3.5);
+  \draw[color=gray]
+    (-6.2, 3.5) -- (-6.2, 4) -- (-6.3, 4) -- (-6.3, 3.5) -- (-6.2, 3.5);
+  \draw[color=gray]
+    (-5.7, 3.5) -- (-5.7, 4) -- (-5.8, 4) -- (-5.8, 3.5) -- (-5.7, 3.5);
+  \draw[color=gray]
+    (-5.2, 3.5) -- (-5.2, 4) -- (-5.3, 4) -- (-5.3, 3.5) -- (-5.2, 3.5);
+  \draw (-7, 3.5) -- (-6.5, 3.5) -- (-6.5, 4) -- (-7, 4) -- (-7, 3.5);
+  \draw (-6.5, 3.5) -- (-6, 3.5) -- (-6, 4) -- (-6.5, 4);
+  \draw (-6, 3.5) -- (-5.5, 3.5) -- (-5.5, 4) -- (-6, 4);
+  \draw (-5.5, 3.5) -- (-5, 3.5) -- (-5, 4) -- (-5.5, 4);
+
+  \node at (-4.25, 3.75) {\textsf{R1}};
+  \draw (-3.75, 3.5) -- (-4.75, 3.5) -- (-4.75, 4) -- (-3.75, 4);
+  \draw[color=gray]
+    (-3.45, 3.5) -- (-3.45, 4) -- (-3.55, 4) -- (-3.55, 3.5) -- (-3.45, 3.5);
+  \draw[color=gray]
+    (-2.95, 3.5) -- (-2.95, 4) -- (-3.05, 4) -- (-3.05, 3.5) -- (-2.95, 3.5);
+  \draw[color=gray]
+    (-2.45, 3.5) -- (-2.45, 4) -- (-2.55, 4) -- (-2.55, 3.5) -- (-2.45, 3.5);
+  \draw[color=gray]
+    (-1.95, 3.5) -- (-1.95, 4) -- (-2.05, 4) -- (-2.05, 3.5) -- (-1.95, 3.5);
+  \draw (-3.75, 3.5) -- (-3.25, 3.5) -- (-3.25, 4) -- (-3.75, 4) -- (-3.75, 3.5);
+  \draw (-3.25, 3.5) -- (-2.75, 3.5) -- (-2.75, 4) -- (-3.25, 4);
+  \draw (-2.75, 3.5) -- (-2.25, 3.5) -- (-2.25, 4) -- (-2.75, 4);
+  \draw (-2.25, 3.5) -- (-1.75, 3.5) -- (-1.75, 4) -- (-2.25, 4);
+
+  \node at (-7.5, 2.75) {\textsf{R2}};
+  \draw (-7, 2.5) -- (-8, 2.5) -- (-8, 3) -- (-7, 3);
+  \draw[color=gray]
+    (-6.7, 2.5) -- (-6.7, 3) -- (-6.8, 3) -- (-6.8, 2.5) -- (-6.7, 2.5);
+  \draw[color=gray]
+    (-6.2, 2.5) -- (-6.2, 3) -- (-6.3, 3) -- (-6.3, 2.5) -- (-6.2, 2.5);
+  \draw[color=gray]
+    (-5.7, 2.5) -- (-5.7, 3) -- (-5.8, 3) -- (-5.8, 2.5) -- (-5.7, 2.5);
+  \draw[color=gray]
+    (-5.2, 2.5) -- (-5.2, 3) -- (-5.3, 3) -- (-5.3, 2.5) -- (-5.2, 2.5);
+  \draw (-7, 2.5) -- (-6.5, 2.5) -- (-6.5, 3) -- (-7, 3) -- (-7, 2.5);
+  \draw (-6.5, 2.5) -- (-6, 2.5) -- (-6, 3) -- (-6.5, 3);
+  \draw (-6, 2.5) -- (-5.5, 2.5) -- (-5.5, 3) -- (-6, 3);
+  \draw (-5.5, 2.5) -- (-5, 2.5) -- (-5, 3) -- (-5.5, 3);
+
+  \node at (-4.25, 2.75) {\textsf{R3}};
+  \draw (-3.75, 2.5) -- (-4.75, 2.5) -- (-4.75, 3) -- (-3.75, 3);
+  \draw[color=gray]
+    (-3.45, 2.5) -- (-3.45, 3) -- (-3.55, 3) -- (-3.55, 2.5) -- (-3.45, 2.5);
+  \draw[color=gray]
+    (-2.95, 2.5) -- (-2.95, 3) -- (-3.05, 3) -- (-3.05, 2.5) -- (-2.95, 2.5);
+  \draw[color=gray]
+    (-2.45, 2.5) -- (-2.45, 3) -- (-2.55, 3) -- (-2.55, 2.5) -- (-2.45, 2.5);
+  \draw[color=gray]
+    (-1.95, 2.5) -- (-1.95, 3) -- (-2.05, 3) -- (-2.05, 2.5) -- (-1.95, 2.5);
+  \draw (-3.75, 2.5) -- (-3.25, 2.5) -- (-3.25, 3) -- (-3.75, 3) -- (-3.75, 2.5);
+  \draw (-3.25, 2.5) -- (-2.75, 2.5) -- (-2.75, 3) -- (-3.25, 3);
+  \draw (-2.75, 2.5) -- (-2.25, 2.5) -- (-2.25, 3) -- (-2.75, 3);
+  \draw (-2.25, 2.5) -- (-1.75, 2.5) -- (-1.75, 3) -- (-2.25, 3);
+
+  \node at (-6, 1) {\textsf{ALU}};
+  \draw (-8, 0) -- (-4, 0) -- (-4, 2) -- (-8, 2) -- (-8, 0);
+  \node at (-3.375, 1.75) {\textsf{O}};
+  \draw (-4, 1.75) -- (-3.75, 1.75);
+  \draw (-3.75, 2) -- (-3, 2) -- (-3, 1.5) -- (-3.75, 1.5) -- (-3.75, 2);
+  \draw[color=gray]
+    (-2.8, 2) -- (-2.8, 1.5) -- (-2.7, 1.5) -- (-2.7, 2) -- (-2.8, 2);
+  \draw (-3, 2) -- (-2.5, 2) -- (-2.5, 1.5) -- (-3, 1.5);
+  \node at (-3.375, 1) {\textsf{N}};
+  \draw (-4, 1) -- (-3.75, 1);
+  \draw (-3.75, 1.25) -- (-3, 1.25) -- (-3, 0.75) -- (-3.75, 0.75) -- (-3.75, 1.25);
+  \draw[color=gray]
+    (-2.8, 1.25) -- (-2.8, 0.75) -- (-2.7, 0.75) -- (-2.7, 1.25) -- (-2.8, 1.25);
+  \draw (-3, 1.25) -- (-2.5, 1.25) -- (-2.5, 0.75) -- (-3, 0.75);
+  \node at (-3.375, 0.25) {\textsf{Z}};
+  \draw (-4, 0.25) -- (-3.75, 0.25);
+  \draw (-3.75, 0.5) -- (-3, 0.5) -- (-3, 0) -- (-3.75, 0) -- (-3.75, 0.5);
+  \draw[color=gray]
+    (-2.8, 0.5) -- (-2.8, 0) -- (-2.7, 0) -- (-2.7, 0.5) -- (-2.8, 0.5);
+  \draw (-3, 0.5) -- (-2.5, 0.5) -- (-2.5, 0) -- (-3, 0);
+
+  \node at (-7.5, -0.75) {\textsf{IP}};
+  \draw (-7, -0.5) -- (-8, -0.5) -- (-8, -1) -- (-7, -1);
+  \draw[color=gray]
+    (-6.7, -0.5) -- (-6.7, -1) -- (-6.8, -1) -- (-6.8, -0.5) -- (-6.7, -0.5);
+  \draw[color=gray]
+    (-6.2, -0.5) -- (-6.2, -1) -- (-6.3, -1) -- (-6.3, -0.5) -- (-6.2, -0.5);
+  \draw[color=gray]
+    (-5.7, -0.5) -- (-5.7, -1) -- (-5.8, -1) -- (-5.8, -0.5) -- (-5.7, -0.5);
+  \draw[color=gray]
+    (-5.2, -0.5) -- (-5.2, -1) -- (-5.3, -1) -- (-5.3, -0.5) -- (-5.2, -0.5);
+  \draw (-7, -0.5) -- (-6.5, -0.5) -- (-6.5, -1) -- (-7, -1) -- (-7, -0.5);
+  \draw (-6.5, -0.5) -- (-6, -0.5) -- (-6, -1) -- (-6.5, -1);
+  \draw (-6, -0.5) -- (-5.5, -0.5) -- (-5.5, -1) -- (-6, -1);
+  \draw (-5.5, -0.5) -- (-5, -0.5) -- (-5, -1) -- (-5.5, -1);
+
+\end{diagram}
+
+Let's suppose that this little CPU has been built to recognize the following 8-bit sequence of ones and zeros:
+
+\begin{diagram}
+
+  \node at (0, 0) {$0$};
+  \node at (1.5, 0) {$0$};
+  \node at (3, 0) {$0$};
+  \node at (4.5, 0) {$1$};
+  \node at (6, 0) {$1$};
+  \node at (7.5, 0) {$0$};  
+  \node at (9, 0) {$0$};
+  \node at (10.5, 0) {$0$};
+
+\end{diagram}
+
+Our CPU interprets this code like so:
+
+\begin{diagram}
+
+  \node at (0, 0) {$0$};
+  \node at (1.5, 0) {$0$};
+  \node at (3, 0) {$0$};
+  \node at (4.5, 0) {$1$};
+  \node at (6, 0) {$1$};
+  \node at (7.5, 0) {$0$};  
+  \node at (9, 0) {$0$};
+  \node at (10.5, 0) {$0$};
+
+  \draw (-0.25, -0.25) -- (-0.25, -0.5) -- (1.75, -0.5) -- (1.75, -0.25);
+  \draw[->] (0.75, -0.5) -- (0.75, -1);
+  \node at (0.75, -1.5) {``$00$'' is};
+  \node at (0.75, -2) {the code};
+  \node at (0.75, -2.5) {for ``add''};
+
+  \draw (2.75, -0.25) -- (2.75, -0.5) -- (4.75, -0.5) -- (4.75, -0.25);
+  \draw[->] (3.75, -0.5) -- (3.75, -1);
+  \node at (3.75, -1.5) {``$01$'' is};
+  \node at (3.75, -2) {register 1};
+  \node at (3.75, -2.5) {(i.e., $R1$)};
+
+  \draw (5.75, -0.25) -- (5.75, -0.5) -- (7.75, -0.5) -- (7.75, -0.25);
+  \draw[->] (6.75, -0.5) -- (6.75, -1);
+  \node at (6.75, -1.5) {``$10$'' is};
+  \node at (6.75, -2) {register 2};
+  \node at (6.75, -2.5) {(i.e., $R2$)};
+
+  \draw (8.75, -0.25) -- (8.75, -0.5) -- (10.75, -0.5) -- (10.75, -0.25);
+  \draw[->] (9.75, -0.5) -- (9.75, -1);
+  \node at (9.75, -1.5) {``$00$'' is};
+  \node at (9.75, -2) {register 0};
+  \node at (9.75, -2.5) {(i.e., $R0$)};
+
+\end{diagram}
+
+Our CPU parses this code by first looking at the initial two digits. If they are $00$, then it says, ``hey, I've been pre-built to recognize `$00$' as the code for `add'.'' Then, once it knows it's going to be adding, it looks at the next two digits to find out which register it should look in for the first number to add. In this case, ``$01$'' is just the number ``one'' (in binary), and so that tells our CPU that it should look in register 1 (i.e., $R1$). Next, our CPU looks at the next two digits of the code to find out which register it should look in to get the next number to add. In this case, ``$10$'' is the number ``two'' (in binary), and so that tells our CPU that it should look in register 2 (i.e., $R2$) for the second number to add. Finally, our CPU looks at the last two digits of the code to find out which register it should put the result in. In this case, ``$00$'' is the number zero, and so it that tells our CPU that it should put the result in register 0 (i.e., $R0$). 
+
+So, this code instructs our CPU to take whatever number is in register 1 ($R1$) and whatever other number is in register 2 ($R2$), then to use the ALU to add those two numbers together (setting the zero, negative, and overflow flags as appropriate), and finally, to put the result in register 0 ($R0)$. 
+
+We might translate this code into a more human readable form, so that it says something like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {\textsf{ADD}};
+  \node at (2, 0) {\textsf{R1}};
+  \node at (4, 0) {\textsf{R2}};
+  \node at (6, 0) {\textsf{R0}};
+
+\end{diagram}
+
+That says the same thing as the binary-coded version earlier: it instructs the CPU to take whatever number is in register $R1$ and whatever number is in $R2$, then add those two numbers together (setting the zero, negative, and overflow flags as appropriate), and then put the result in $R0$. 
+
+\begin{aside}
+  \begin{remark}
+    Every CPU manufacturer builds their CPU to understand different coded instructions, which the manufacturer makes up. There is no ``standard'' set of instructions that every CPU expects, though of course many are very similar. Basically, the coded instructions you give to a particular CPU are like secret codes two spies give to each other. They agreed before hand on what the symbols will mean. So also with CPUs. The manufacturer agreed before hand what the sequences of ones and zeros will mean, and then they build their CPU to execute those instructions.
+  \end{remark}
+\end{aside}
+
+If we want to tell our CPU to add the numbers from R2 and R3, and then put the result in R1, we would follow the same pattern and write a coded instruction that looks like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {$0$};
+  \node at (1.5, 0) {$0$};
+  \node at (3, 0) {$1$};
+  \node at (4.5, 0) {$0$};
+  \node at (6, 0) {$1$};
+  \node at (7.5, 0) {$1$};  
+  \node at (9, 0) {$0$};
+  \node at (10.5, 0) {$1$};
+
+\end{diagram}
+
+Our CPU would interpret that code like so:
+
+\begin{diagram}
+
+  \node at (0, 0) {$0$};
+  \node at (1.5, 0) {$0$};
+  \node at (3, 0) {$1$};
+  \node at (4.5, 0) {$0$};
+  \node at (6, 0) {$1$};
+  \node at (7.5, 0) {$1$};  
+  \node at (9, 0) {$0$};
+  \node at (10.5, 0) {$1$};
+
+  \draw (-0.25, -0.25) -- (-0.25, -0.5) -- (1.75, -0.5) -- (1.75, -0.25);
+  \draw[->] (0.75, -0.5) -- (0.75, -1);
+  \node at (0.75, -1.5) {``$00$'' is};
+  \node at (0.75, -2) {the code};
+  \node at (0.75, -2.5) {for ``add''};
+
+  \draw (2.75, -0.25) -- (2.75, -0.5) -- (4.75, -0.5) -- (4.75, -0.25);
+  \draw[->] (3.75, -0.5) -- (3.75, -1);
+  \node at (3.75, -1.5) {``$10$'' is};
+  \node at (3.75, -2) {register 2};
+  \node at (3.75, -2.5) {(i.e., $R2$)};
+
+  \draw (5.75, -0.25) -- (5.75, -0.5) -- (7.75, -0.5) -- (7.75, -0.25);
+  \draw[->] (6.75, -0.5) -- (6.75, -1);
+  \node at (6.75, -1.5) {``$11$'' is};
+  \node at (6.75, -2) {register 3};
+  \node at (6.75, -2.5) {(i.e., $R3$)};
+
+  \draw (8.75, -0.25) -- (8.75, -0.5) -- (10.75, -0.5) -- (10.75, -0.25);
+  \draw[->] (9.75, -0.5) -- (9.75, -1);
+  \node at (9.75, -1.5) {``$01$'' is};
+  \node at (9.75, -2) {register 1};
+  \node at (9.75, -2.5) {(i.e., $R1$)};
+
+\end{diagram}
+
+To translate that into our more human-readable form, we could write it like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {\textsf{ADD}};
+  \node at (2, 0) {\textsf{R2}};
+  \node at (4, 0) {\textsf{R3}};
+  \node at (6, 0) {\textsf{R1}};
+
+\end{diagram}
+
+Next, let us suppose that our CPU has been built to recognize another kind of instruction, which looks like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {$0$};
+  \node at (1.5, 0) {$1$};
+  \node at (3, 0) {$0$};
+  \node at (4.5, 0) {$1$};
+  \node at (6, 0) {$1$};
+  \node at (7.5, 0) {$1$};  
+  \node at (9, 0) {$1$};
+  \node at (10.5, 0) {$0$};
+
+\end{diagram}
+
+Our CPU interprets that code like so:
+
+\begin{diagram}
+
+  \node at (0, 0) {$0$};
+  \node at (1.5, 0) {$1$};
+  \node at (3, 0) {$0$};
+  \node at (4.5, 0) {$1$};
+  \node at (6, 0) {$1$};
+  \node at (7.5, 0) {$1$};  
+  \node at (9, 0) {$1$};
+  \node at (10.5, 0) {$0$};
+
+  \draw (-0.25, -0.25) -- (-0.25, -0.5) -- (1.75, -0.5) -- (1.75, -0.25);
+  \draw[->] (0.75, -0.5) -- (0.75, -1);
+  \node at (0.75, -1.5) {``$01$'' is};
+  \node at (0.75, -2) {the code};
+  \node at (0.75, -2.5) {for ``load''};
+
+  \draw (2.75, -0.25) -- (2.75, -0.5) -- (7.75, -0.5) -- (7.75, -0.25);
+  \draw[->] (5, -0.5) -- (5, -1);
+  \node at (5, -1.5) {``$1011$'' is};
+  \node at (5, -2) {address $1011$};
+  \node at (5, -2.5) {in memory};
+
+  \draw (8.75, -0.25) -- (8.75, -0.5) -- (10.75, -0.5) -- (10.75, -0.25);
+  \draw[->] (9.75, -0.5) -- (9.75, -1);
+  \node at (9.75, -1.5) {``$10$'' is};
+  \node at (9.75, -2) {register 2};
+  \node at (9.75, -2.5) {(i.e., $R2$)};
+
+\end{diagram}
+
+To parse this code, our CPU again looks at the first two digits in the number. This time, they are ``$01$'' (rather than ``$00$'' as before). So, our CPU says, ``hey, I've been pre-built to recognize `01' as the code for `load' (i.e, pull info out of the memory bank).'' Then, once it knows it's going to be loading something from memory, it looks at the next four digits of the code to find the address of the slot in memory it should fetch. In this case, $1011$ is an address in our memory bank, so that tells our CPU to go to the register at address $1011$, and read whatever number is stored there. Finally, it looks at the last two digits of the code to find out which register it should put that number in. In this case, $10$ is the number two, so that tells our CPU to take the number it has fetched from the memory bank and put it into $R2$.
+
+\begin{aside}
+  \begin{remark}
+    You may notice that $R2$ only has space for 4 bits, yet we are trying to load a number that is 8 bits. What this means is that our CPU will only be able to put 4 of the bits it read into $R2$. This is okay, because our registers can only deal with 4 bits at a time anyway, so the extra information in the memory banks is just extra information that our CPU isn't powerful to use. But if we had a bigger budget (let's say), we could have designed our scratch registers to each hold 8-bits, in which case our CPU would then be able to load all 8-bits stored at any address in the memory bank. 
+  \end{remark}
+\end{aside}
+
+We can translate the binary-coded instruction into a more human-readable form, that looks something like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {\textsf{LOAD}};
+  \node at (2, 0) {\textsf{@1011}};
+  \node at (4, 0) {\textsf{R2}};
+
+\end{diagram}
+
+This says just what the binary-coded version says: it instructs our CPU to load the number it finds at address $1011$ into the register $R2$. 
+
+There are a few more instructions we could discuss, but you get the basic idea from this. Basically, a coded instruction is just a sequence of ones and zeros that our CPU has been pre-built to recognize. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Loading and Running a Program}
+
+\newthought{Let us start} with a very simple program. Let us suppose that we have the following two lines of code:
+
+\begin{center}
+  \begin{tabular}{c c c c c c c c}
+    \hline
+    0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 \\ \hline
+    0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 \\ \hline
+  \end{tabular}
+\end{center}
+
+What do these binary-coded instructions mean? Our CPU will interpret the first line like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {$0$};
+  \node at (1.5, 0) {$0$};
+  \node at (3, 0) {$0$};
+  \node at (4.5, 0) {$1$};
+  \node at (6, 0) {$1$};
+  \node at (7.5, 0) {$0$};  
+  \node at (9, 0) {$0$};
+  \node at (10.5, 0) {$0$};
+
+  \draw (-0.25, -0.25) -- (-0.25, -0.5) -- (1.75, -0.5) -- (1.75, -0.25);
+  \draw[->] (0.75, -0.5) -- (0.75, -1);
+  \node at (0.75, -1.5) {``$00$'' is};
+  \node at (0.75, -2) {the code};
+  \node at (0.75, -2.5) {for ``add''};
+
+  \draw (2.75, -0.25) -- (2.75, -0.5) -- (4.75, -0.5) -- (4.75, -0.25);
+  \draw[->] (3.75, -0.5) -- (3.75, -1);
+  \node at (3.75, -1.5) {``$01$'' is};
+  \node at (3.75, -2) {register 1};
+  \node at (3.75, -2.5) {(i.e., $R1$)};
+
+  \draw (5.75, -0.25) -- (5.75, -0.5) -- (7.75, -0.5) -- (7.75, -0.25);
+  \draw[->] (6.75, -0.5) -- (6.75, -1);
+  \node at (6.75, -1.5) {``$10$'' is};
+  \node at (6.75, -2) {register 2};
+  \node at (6.75, -2.5) {(i.e., $R2$)};
+
+  \draw (8.75, -0.25) -- (8.75, -0.5) -- (10.75, -0.5) -- (10.75, -0.25);
+  \draw[->] (9.75, -0.5) -- (9.75, -1);
+  \node at (9.75, -1.5) {``$00$'' is};
+  \node at (9.75, -2) {register 0};
+  \node at (9.75, -2.5) {(i.e., $R0$)};
+
+\end{diagram}
+
+Which, in our more human-readable form, looks like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {\textsf{ADD}};
+  \node at (2, 0) {\textsf{R1}};
+  \node at (4, 0) {\textsf{R2}};
+  \node at (6, 0) {\textsf{R0}};
+
+\end{diagram}
+
+In other words, this tells our CPU to add whatever numbers are in $R1$ and $R2$, and then put the result in $R0$. 
+
+As for the second line of our code, our CPU will interpret it like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {$0$};
+  \node at (1.5, 0) {$0$};
+  \node at (3, 0) {$0$};
+  \node at (4.5, 0) {$0$};
+  \node at (6, 0) {$0$};
+  \node at (7.5, 0) {$1$};  
+  \node at (9, 0) {$1$};
+  \node at (10.5, 0) {$1$};
+
+  \draw (-0.25, -0.25) -- (-0.25, -0.5) -- (1.75, -0.5) -- (1.75, -0.25);
+  \draw[->] (0.75, -0.5) -- (0.75, -1);
+  \node at (0.75, -1.5) {``$00$'' is};
+  \node at (0.75, -2) {the code};
+  \node at (0.75, -2.5) {for ``add''};
+
+  \draw (2.75, -0.25) -- (2.75, -0.5) -- (4.75, -0.5) -- (4.75, -0.25);
+  \draw[->] (3.75, -0.5) -- (3.75, -1);
+  \node at (3.75, -1.5) {``$00$'' is};
+  \node at (3.75, -2) {register 0};
+  \node at (3.75, -2.5) {(i.e., $R0$)};
+
+  \draw (5.75, -0.25) -- (5.75, -0.5) -- (7.75, -0.5) -- (7.75, -0.25);
+  \draw[->] (6.75, -0.5) -- (6.75, -1);
+  \node at (6.75, -1.5) {``$01$'' is};
+  \node at (6.75, -2) {register 1};
+  \node at (6.75, -2.5) {(i.e., $R1$)};
+
+  \draw (8.75, -0.25) -- (8.75, -0.5) -- (10.75, -0.5) -- (10.75, -0.25);
+  \draw[->] (9.75, -0.5) -- (9.75, -1);
+  \node at (9.75, -1.5) {``$11$'' is};
+  \node at (9.75, -2) {register 3};
+  \node at (9.75, -2.5) {(i.e., $R3$)};
+
+\end{diagram}
+
+Which, in our more human-readable form, looks like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {\textsf{ADD}};
+  \node at (2, 0) {\textsf{R0}};
+  \node at (4, 0) {\textsf{R1}};
+  \node at (6, 0) {\textsf{R3}};
+
+\end{diagram}
+
+In other words, this line of code instructs our computer to add whatever numbers are in R0 and R1, and put the result in R3.
+
+\begin{terminology}
+  The instruction coded in ones and zeros is called \vocab{machine code} because it is the actual code that the machine can interpret. The more human readable version of the code is called \vocab{assembly} code. As you can see, there is a bijective correspondence between the machine version and the assembly version (they are isomorphic). It is very easy to translate back and forth between them.
+\end{terminology}
+
+In human readable form, then, our two lines of code amount to this:
+
+\begin{center}
+  \begin{tabular}{c c c c}
+    \hline
+    ADD & R1 & R2 & R0 \\ \hline
+    ADD & R0 & R1 & R3 \\ \hline
+  \end{tabular}
+\end{center}
+
+To get our program to run this code, we first have to load this code into our computer's memory. To do that, we put each line of our code into the memory bank. So, we put the first line of our binary-code (which is ``$00011000$'') into the register at the first address of memory (namely, address $0000$), and then we put the second line of our binary-code (which is ``$00000111$'') into the register at the second address of memory (namely, address $0001$). Then, our computer looks like this: 
+
+\begin{diagram}
+
+  % The Memory
+
+  \draw (-1.6, -0.1) -- (-1.6, 4.1) -- (4.1, 4.1) -- (4.1, -0.1) -- (-1.6, -0.1);
+  \draw[fill=black]
+    (0.25, -0.1) -- (2.75, -0.1) -- (2.75, -0.7) -- (0.25, -0.7) -- (0.25, -0.1);
+  \node[color=white] at (1.5, -0.4) {\textsf{Memory}};
+
+  \node at (-0.75, 3.75) {\textsf{0000}};
+  \draw (0, 3.5) -- (-1.5, 3.5) -- (-1.5, 4) -- (0, 4);
+  \draw[color=gray] (0.2, 3.5) -- (0.2, 4) -- (0.3, 4) -- (0.3, 3.5) -- (0.2, 3.5);
+  \draw[color=gray] (0.7, 3.5) -- (0.7, 4) -- (0.8, 4) -- (0.8, 3.5) -- (0.7, 3.5);
+  \draw[color=gray] (1.2, 3.5) -- (1.2, 4) -- (1.3, 4) -- (1.3, 3.5) -- (1.2, 3.5);
+  \draw[color=gray,fill=black] (1.7, 3.5) -- (1.7, 4) -- (1.8, 4) -- (1.8, 3.5) -- (1.7, 3.5);
+  \draw[color=gray,fill=black] (2.2, 3.5) -- (2.2, 4) -- (2.3, 4) -- (2.3, 3.5) -- (2.2, 3.5);
+  \draw[color=gray] (2.7, 3.5) -- (2.7, 4) -- (2.8, 4) -- (2.8, 3.5) -- (2.7, 3.5);
+  \draw[color=gray] (3.2, 3.5) -- (3.2, 4) -- (3.3, 4) -- (3.3, 3.5) -- (3.2, 3.5);
+  \draw[color=gray] (3.7, 3.5) -- (3.7, 4) -- (3.8, 4) -- (3.8, 3.5) -- (3.7, 3.5);
+  \draw (0, 3.5) -- (0.5, 3.5) -- (0.5, 4) -- (0, 4) -- (0, 3.5);
+  \draw (0.5, 3.5) -- (1, 3.5) -- (1, 4) -- (0.5, 4);
+  \draw (1, 3.5) -- (1.5, 3.5) -- (1.5, 4) -- (1, 4);
+  \draw (1.5, 3.5) -- (2, 3.5) -- (2, 4) -- (1.5, 4);
+  \draw (2, 3.5) -- (2.5, 3.5) -- (2.5, 4) -- (2, 4);
+  \draw (2.5, 3.5) -- (3, 3.5) -- (3, 4) -- (2.5, 4);
+  \draw (3, 3.5) -- (3.5, 3.5) -- (3.5, 4) -- (3, 4);
+  \draw (3.5, 3.5) -- (4, 3.5) -- (4, 4) -- (3.5, 4);
+  
+  \node at (-0.75, 3.25) {\textsf{0001}};
+  \draw (0, 3) -- (-1.5, 3) -- (-1.5, 3.5) -- (0, 3.5);
+  \draw[color=gray] (0.2, 3) -- (0.2, 3.5) -- (0.3, 3.5) -- (0.3, 3) -- (0.2, 3);
+  \draw[color=gray] (0.7, 3) -- (0.7, 3.5) -- (0.8, 3.5) -- (0.8, 3) -- (0.7, 3);
+  \draw[color=gray] (1.2, 3) -- (1.2, 3.5) -- (1.3, 3.5) -- (1.3, 3) -- (1.2, 3);
+  \draw[color=gray] (1.7, 3) -- (1.7, 3.5) -- (1.8, 3.5) -- (1.8, 3) -- (1.7, 3);
+  \draw[color=gray] (2.2, 3) -- (2.2, 3.5) -- (2.3, 3.5) -- (2.3, 3) -- (2.2, 3);
+  \draw[color=gray,fill=black] (2.7, 3) -- (2.7, 3.5) -- (2.8, 3.5) -- (2.8, 3) -- (2.7, 3);
+  \draw[color=gray,fill=black] (3.2, 3) -- (3.2, 3.5) -- (3.3, 3.5) -- (3.3, 3) -- (3.2, 3);
+  \draw[color=gray,fill=black] (3.7, 3) -- (3.7, 3.5) -- (3.8, 3.5) -- (3.8, 3) -- (3.7, 3);
+  \draw (0, 3) -- (0.5, 3) -- (0.5, 3.5) -- (0, 3.5) -- (0, 3);
+  \draw (0.5, 3) -- (1, 3) -- (1, 3.5) -- (0.5, 3.5);
+  \draw (1, 3) -- (1.5, 3) -- (1.5, 3.5) -- (1, 3.5);
+  \draw (1.5, 3) -- (2, 3) -- (2, 3.5) -- (1.5, 3.5);
+  \draw (2, 3) -- (2.5, 3) -- (2.5, 3.5) -- (2, 3.5);
+  \draw (2.5, 3) -- (3, 3) -- (3, 3.5) -- (2.5, 3.5);
+  \draw (3, 3) -- (3.5, 3) -- (3.5, 3.5) -- (3, 3.5);
+  \draw (3.5, 3) -- (4, 3) -- (4, 3.5) -- (3.5, 3.5);
+
+  \node at (-0.75, 2.75) {\textsf{0010}};
+  \draw (0, 2.5) -- (-1.5, 2.5) -- (-1.5, 3) -- (0, 3);
+  \draw[color=gray] (0.2, 2.5) -- (0.2, 3) -- (0.3, 3) -- (0.3, 2.5) -- (0.2, 2.5);
+  \draw[color=gray] (0.7, 2.5) -- (0.7, 3) -- (0.8, 3) -- (0.8, 2.5) -- (0.7, 2.5);
+  \draw[color=gray] (1.2, 2.5) -- (1.2, 3) -- (1.3, 3) -- (1.3, 2.5) -- (1.2, 2.5);
+  \draw[color=gray] (1.7, 2.5) -- (1.7, 3) -- (1.8, 3) -- (1.8, 2.5) -- (1.7, 2.5);
+  \draw[color=gray] (2.2, 2.5) -- (2.2, 3) -- (2.3, 3) -- (2.3, 2.5) -- (2.2, 2.5);
+  \draw[color=gray] (2.7, 2.5) -- (2.7, 3) -- (2.8, 3) -- (2.8, 2.5) -- (2.7, 2.5);
+  \draw[color=gray] (3.2, 2.5) -- (3.2, 3) -- (3.3, 3) -- (3.3, 2.5) -- (3.2, 2.5);
+  \draw[color=gray] (3.7, 2.5) -- (3.7, 3) -- (3.8, 3) -- (3.8, 2.5) -- (3.7, 2.5);
+  \draw (0, 2.5) -- (0.5, 2.5) -- (0.5, 3) -- (0, 3) -- (0, 2.5);
+  \draw (0.5, 2.5) -- (1, 2.5) -- (1, 3) -- (0.5, 3);
+  \draw (1, 2.5) -- (1.5, 2.5) -- (1.5, 3) -- (1, 3);
+  \draw (1.5, 2.5) -- (2, 2.5) -- (2, 3) -- (1.5, 3);
+  \draw (2, 2.5) -- (2.5, 2.5) -- (2.5, 3) -- (2, 3);
+  \draw (2.5, 2.5) -- (3, 2.5) -- (3, 3) -- (2.5, 3);
+  \draw (3, 2.5) -- (3.5, 2.5) -- (3.5, 3) -- (3, 3);
+  \draw (3.5, 2.5) -- (4, 2.5) -- (4, 3) -- (3.5, 3);
+  
+  \node at (-0.75, 2.25) {\textsf{0011}};
+  \draw (0, 2) -- (-1.5, 2) -- (-1.5, 2.5) -- (0, 2.5);
+  \draw[color=gray] (0.2, 2) -- (0.2, 2.5) -- (0.3, 2.5) -- (0.3, 2) -- (0.2, 2);
+  \draw[color=gray] (0.7, 2) -- (0.7, 2.5) -- (0.8, 2.5) -- (0.8, 2) -- (0.7, 2);
+  \draw[color=gray] (1.2, 2) -- (1.2, 2.5) -- (1.3, 2.5) -- (1.3, 2) -- (1.2, 2);
+  \draw[color=gray] (1.7, 2) -- (1.7, 2.5) -- (1.8, 2.5) -- (1.8, 2) -- (1.7, 2);
+  \draw[color=gray] (2.2, 2) -- (2.2, 2.5) -- (2.3, 2.5) -- (2.3, 2) -- (2.2, 2);
+  \draw[color=gray] (2.7, 2) -- (2.7, 2.5) -- (2.8, 2.5) -- (2.8, 2) -- (2.7, 2);
+  \draw[color=gray] (3.2, 2) -- (3.2, 2.5) -- (3.3, 2.5) -- (3.3, 2) -- (3.2, 2);
+  \draw[color=gray] (3.7, 2) -- (3.7, 2.5) -- (3.8, 2.5) -- (3.8, 2) -- (3.7, 2);
+  \draw (0, 2) -- (0.5, 2) -- (0.5, 2.5) -- (0, 2.5) -- (0, 2);
+  \draw (0.5, 2) -- (1, 2) -- (1, 2.5) -- (0.5, 2.5);
+  \draw (1, 2) -- (1.5, 2) -- (1.5, 2.5) -- (1, 2.5);
+  \draw (1.5, 2) -- (2, 2) -- (2, 2.5) -- (1.5, 2.5);
+  \draw (2, 2) -- (2.5, 2) -- (2.5, 2.5) -- (2, 2.5);
+  \draw (2.5, 2) -- (3, 2) -- (3, 2.5) -- (2.5, 2.5);
+  \draw (3, 2) -- (3.5, 2) -- (3.5, 2.5) -- (3, 2.5);
+  \draw (3.5, 2) -- (4, 2) -- (4, 2.5) -- (3.5, 2.5);
+
+  \node at (-0.75, 1.75) {\textsf{0100}};
+  \draw (0, 1.5) -- (-1.5, 1.5) -- (-1.5, 2) -- (0, 2);
+  \draw[color=gray] (0.2, 1.5) -- (0.2, 2) -- (0.3, 2) -- (0.3, 1.5) -- (0.2, 1.5);
+  \draw[color=gray] (0.7, 1.5) -- (0.7, 2) -- (0.8, 2) -- (0.8, 1.5) -- (0.7, 1.5);
+  \draw[color=gray] (1.2, 1.5) -- (1.2, 2) -- (1.3, 2) -- (1.3, 1.5) -- (1.2, 1.5);
+  \draw[color=gray] (1.7, 1.5) -- (1.7, 2) -- (1.8, 2) -- (1.8, 1.5) -- (1.7, 1.5);
+  \draw[color=gray] (2.2, 1.5) -- (2.2, 2) -- (2.3, 2) -- (2.3, 1.5) -- (2.2, 1.5);
+  \draw[color=gray] (2.7, 1.5) -- (2.7, 2) -- (2.8, 2) -- (2.8, 1.5) -- (2.7, 1.5);
+  \draw[color=gray] (3.2, 1.5) -- (3.2, 2) -- (3.3, 2) -- (3.3, 1.5) -- (3.2, 1.5);
+  \draw[color=gray] (3.7, 1.5) -- (3.7, 2) -- (3.8, 2) -- (3.8, 1.5) -- (3.7, 1.5);
+  \draw (0, 1.5) -- (0.5, 1.5) -- (0.5, 2) -- (0, 2) -- (0, 1.5);
+  \draw (0.5, 1.5) -- (1, 1.5) -- (1, 2) -- (0.5, 2);
+  \draw (1, 1.5) -- (1.5, 1.5) -- (1.5, 2) -- (1, 2);
+  \draw (1.5, 1.5) -- (2, 1.5) -- (2, 2) -- (1.5, 2);
+  \draw (2, 1.5) -- (2.5, 1.5) -- (2.5, 2) -- (2, 2);
+  \draw (2.5, 1.5) -- (3, 1.5) -- (3, 2) -- (2.5, 2);
+  \draw (3, 1.5) -- (3.5, 1.5) -- (3.5, 2) -- (3, 2);
+  \draw (3.5, 1.5) -- (4, 1.5) -- (4, 2) -- (3.5, 2);
+  
+  \node at (-0.75, 1.25) {\textsf{0101}};
+  \draw (0, 1) -- (-1.5, 1) -- (-1.5, 1.5) -- (0, 1.5);
+  \draw[color=gray] (0.2, 1) -- (0.2, 1.5) -- (0.3, 1.5) -- (0.3, 1) -- (0.2, 1);
+  \draw[color=gray] (0.7, 1) -- (0.7, 1.5) -- (0.8, 1.5) -- (0.8, 1) -- (0.7, 1);
+  \draw[color=gray] (1.2, 1) -- (1.2, 1.5) -- (1.3, 1.5) -- (1.3, 1) -- (1.2, 1);
+  \draw[color=gray] (1.7, 1) -- (1.7, 1.5) -- (1.8, 1.5) -- (1.8, 1) -- (1.7, 1);
+  \draw[color=gray] (2.2, 1) -- (2.2, 1.5) -- (2.3, 1.5) -- (2.3, 1) -- (2.2, 1);
+  \draw[color=gray] (2.7, 1) -- (2.7, 1.5) -- (2.8, 1.5) -- (2.8, 1) -- (2.7, 1);
+  \draw[color=gray] (3.2, 1) -- (3.2, 1.5) -- (3.3, 1.5) -- (3.3, 1) -- (3.2, 1);
+  \draw[color=gray] (3.7, 1) -- (3.7, 1.5) -- (3.8, 1.5) -- (3.8, 1) -- (3.7, 1);
+  \draw (0, 1) -- (0.5, 1) -- (0.5, 1.5) -- (0, 1.5) -- (0, 1);
+  \draw (0.5, 1) -- (1, 1) -- (1, 1.5) -- (0.5, 1.5);
+  \draw (1, 1) -- (1.5, 1) -- (1.5, 1.5) -- (1, 1.5);
+  \draw (1.5, 1) -- (2, 1) -- (2, 1.5) -- (1.5, 1.5);
+  \draw (2, 1) -- (2.5, 1) -- (2.5, 1.5) -- (2, 1.5);
+  \draw (2.5, 1) -- (3, 1) -- (3, 1.5) -- (2.5, 1.5);
+  \draw (3, 1) -- (3.5, 1) -- (3.5, 1.5) -- (3, 1.5);
+  \draw (3.5, 1) -- (4, 1) -- (4, 1.5) -- (3.5, 1.5);
+
+  \node at (-0.75, 0.75) {\textsf{0110}};
+  \draw (0, 0.5) -- (-1.5, 0.5) -- (-1.5, 1) -- (0, 1);
+  \draw[color=gray] (0.2, 0.5) -- (0.2, 1) -- (0.3, 1) -- (0.3, 0.5) -- (0.2, 0.5);
+  \draw[color=gray] (0.7, 0.5) -- (0.7, 1) -- (0.8, 1) -- (0.8, 0.5) -- (0.7, 0.5);
+  \draw[color=gray] (1.2, 0.5) -- (1.2, 1) -- (1.3, 1) -- (1.3, 0.5) -- (1.2, 0.5);
+  \draw[color=gray] (1.7, 0.5) -- (1.7, 1) -- (1.8, 1) -- (1.8, 0.5) -- (1.7, 0.5);
+  \draw[color=gray] (2.2, 0.5) -- (2.2, 1) -- (2.3, 1) -- (2.3, 0.5) -- (2.2, 0.5);
+  \draw[color=gray] (2.7, 0.5) -- (2.7, 1) -- (2.8, 1) -- (2.8, 0.5) -- (2.7, 0.5);
+  \draw[color=gray] (3.2, 0.5) -- (3.2, 1) -- (3.3, 1) -- (3.3, 0.5) -- (3.2, 0.5);
+  \draw[color=gray] (3.7, 0.5) -- (3.7, 1) -- (3.8, 1) -- (3.8, 0.5) -- (3.7, 0.5);
+  \draw (0, 0.5) -- (0.5, 0.5) -- (0.5, 1) -- (0, 1) -- (0, 0.5);
+  \draw (0.5, 0.5) -- (1, 0.5) -- (1, 1) -- (0.5, 1);
+  \draw (1, 0.5) -- (1.5, 0.5) -- (1.5, 1) -- (1, 1);
+  \draw (1.5, 0.5) -- (2, 0.5) -- (2, 1) -- (1.5, 1);
+  \draw (2, 0.5) -- (2.5, 0.5) -- (2.5, 1) -- (2, 1);
+  \draw (2.5, 0.5) -- (3, 0.5) -- (3, 1) -- (2.5, 1);
+  \draw (3, 0.5) -- (3.5, 0.5) -- (3.5, 1) -- (3, 1);
+  \draw (3.5, 0.5) -- (4, 0.5) -- (4, 1) -- (3.5, 1);
+  
+  \node at (-0.75, 0.25) {\textsf{0111}};
+  \draw (0, 0) -- (-1.5, 0) -- (-1.5, 0.5) -- (0, 0.5);
+  \draw[color=gray] (0.2, 0) -- (0.2, 0.5) -- (0.3, 0.5) -- (0.3, 0) -- (0.2, 0);
+  \draw[color=gray] (0.7, 0) -- (0.7, 0.5) -- (0.8, 0.5) -- (0.8, 0) -- (0.7, 0);
+  \draw[color=gray] (1.2, 0) -- (1.2, 0.5) -- (1.3, 0.5) -- (1.3, 0) -- (1.2, 0);
+  \draw[color=gray] (1.7, 0) -- (1.7, 0.5) -- (1.8, 0.5) -- (1.8, 0) -- (1.7, 0);
+  \draw[color=gray] (2.2, 0) -- (2.2, 0.5) -- (2.3, 0.5) -- (2.3, 0) -- (2.2, 0);
+  \draw[color=gray] (2.7, 0) -- (2.7, 0.5) -- (2.8, 0.5) -- (2.8, 0) -- (2.7, 0);
+  \draw[color=gray] (3.2, 0) -- (3.2, 0.5) -- (3.3, 0.5) -- (3.3, 0) -- (3.2, 0);
+  \draw[color=gray] (3.7, 0) -- (3.7, 0.5) -- (3.8, 0.5) -- (3.8, 0) -- (3.7, 0);
+  \draw (0, 0) -- (0.5, 0) -- (0.5, 0.5) -- (0, 0.5) -- (0, 0);
+  \draw (0.5, 0) -- (1, 0) -- (1, 0.5) -- (0.5, 0.5);
+  \draw (1, 0) -- (1.5, 0) -- (1.5, 0.5) -- (1, 0.5);
+  \draw (1.5, 0) -- (2, 0) -- (2, 0.5) -- (1.5, 0.5);
+  \draw (2, 0) -- (2.5, 0) -- (2.5, 0.5) -- (2, 0.5);
+  \draw (2.5, 0) -- (3, 0) -- (3, 0.5) -- (2.5, 0.5);
+  \draw (3, 0) -- (3.5, 0) -- (3.5, 0.5) -- (3, 0.5);
+  \draw (3.5, 0) -- (4, 0) -- (4, 0.5) -- (3.5, 0.5);
+
+  % The CPU
+
+  \draw (-8.1, -1.1) -- (-8.1, 4.1) -- (-1.65, 4.1) -- (-1.65, -1.1) -- (-8.1, -1.1);
+  \draw[fill=black]
+    (-5.8, -1.1) -- (-4.2, -1.1) -- (-4.2, -1.7) -- (-5.8, -1.7) -- (-5.8, -1.1);
+  \node[color=white] at (-5, -1.4) {\textsf{CPU}};
+
+  \node at (-7.5, 3.75) {\textsf{R0}};
+  \draw (-7, 3.5) -- (-8, 3.5) -- (-8, 4) -- (-7, 4);
+  \draw[color=gray]
+    (-6.7, 3.5) -- (-6.7, 4) -- (-6.8, 4) -- (-6.8, 3.5) -- (-6.7, 3.5);
+  \draw[color=gray]
+    (-6.2, 3.5) -- (-6.2, 4) -- (-6.3, 4) -- (-6.3, 3.5) -- (-6.2, 3.5);
+  \draw[color=gray]
+    (-5.7, 3.5) -- (-5.7, 4) -- (-5.8, 4) -- (-5.8, 3.5) -- (-5.7, 3.5);
+  \draw[color=gray]
+    (-5.2, 3.5) -- (-5.2, 4) -- (-5.3, 4) -- (-5.3, 3.5) -- (-5.2, 3.5);
+  \draw (-7, 3.5) -- (-6.5, 3.5) -- (-6.5, 4) -- (-7, 4) -- (-7, 3.5);
+  \draw (-6.5, 3.5) -- (-6, 3.5) -- (-6, 4) -- (-6.5, 4);
+  \draw (-6, 3.5) -- (-5.5, 3.5) -- (-5.5, 4) -- (-6, 4);
+  \draw (-5.5, 3.5) -- (-5, 3.5) -- (-5, 4) -- (-5.5, 4);
+
+  \node at (-4.25, 3.75) {\textsf{R1}};
+  \draw (-3.75, 3.5) -- (-4.75, 3.5) -- (-4.75, 4) -- (-3.75, 4);
+  \draw[color=gray]
+    (-3.45, 3.5) -- (-3.45, 4) -- (-3.55, 4) -- (-3.55, 3.5) -- (-3.45, 3.5);
+  \draw[color=gray]
+    (-2.95, 3.5) -- (-2.95, 4) -- (-3.05, 4) -- (-3.05, 3.5) -- (-2.95, 3.5);
+  \draw[color=gray]
+    (-2.45, 3.5) -- (-2.45, 4) -- (-2.55, 4) -- (-2.55, 3.5) -- (-2.45, 3.5);
+  \draw[color=gray]
+    (-1.95, 3.5) -- (-1.95, 4) -- (-2.05, 4) -- (-2.05, 3.5) -- (-1.95, 3.5);
+  \draw (-3.75, 3.5) -- (-3.25, 3.5) -- (-3.25, 4) -- (-3.75, 4) -- (-3.75, 3.5);
+  \draw (-3.25, 3.5) -- (-2.75, 3.5) -- (-2.75, 4) -- (-3.25, 4);
+  \draw (-2.75, 3.5) -- (-2.25, 3.5) -- (-2.25, 4) -- (-2.75, 4);
+  \draw (-2.25, 3.5) -- (-1.75, 3.5) -- (-1.75, 4) -- (-2.25, 4);
+
+  \node at (-7.5, 2.75) {\textsf{R2}};
+  \draw (-7, 2.5) -- (-8, 2.5) -- (-8, 3) -- (-7, 3);
+  \draw[color=gray]
+    (-6.7, 2.5) -- (-6.7, 3) -- (-6.8, 3) -- (-6.8, 2.5) -- (-6.7, 2.5);
+  \draw[color=gray]
+    (-6.2, 2.5) -- (-6.2, 3) -- (-6.3, 3) -- (-6.3, 2.5) -- (-6.2, 2.5);
+  \draw[color=gray]
+    (-5.7, 2.5) -- (-5.7, 3) -- (-5.8, 3) -- (-5.8, 2.5) -- (-5.7, 2.5);
+  \draw[color=gray]
+    (-5.2, 2.5) -- (-5.2, 3) -- (-5.3, 3) -- (-5.3, 2.5) -- (-5.2, 2.5);
+  \draw (-7, 2.5) -- (-6.5, 2.5) -- (-6.5, 3) -- (-7, 3) -- (-7, 2.5);
+  \draw (-6.5, 2.5) -- (-6, 2.5) -- (-6, 3) -- (-6.5, 3);
+  \draw (-6, 2.5) -- (-5.5, 2.5) -- (-5.5, 3) -- (-6, 3);
+  \draw (-5.5, 2.5) -- (-5, 2.5) -- (-5, 3) -- (-5.5, 3);
+
+  \node at (-4.25, 2.75) {\textsf{R3}};
+  \draw (-3.75, 2.5) -- (-4.75, 2.5) -- (-4.75, 3) -- (-3.75, 3);
+  \draw[color=gray]
+    (-3.45, 2.5) -- (-3.45, 3) -- (-3.55, 3) -- (-3.55, 2.5) -- (-3.45, 2.5);
+  \draw[color=gray]
+    (-2.95, 2.5) -- (-2.95, 3) -- (-3.05, 3) -- (-3.05, 2.5) -- (-2.95, 2.5);
+  \draw[color=gray]
+    (-2.45, 2.5) -- (-2.45, 3) -- (-2.55, 3) -- (-2.55, 2.5) -- (-2.45, 2.5);
+  \draw[color=gray]
+    (-1.95, 2.5) -- (-1.95, 3) -- (-2.05, 3) -- (-2.05, 2.5) -- (-1.95, 2.5);
+  \draw (-3.75, 2.5) -- (-3.25, 2.5) -- (-3.25, 3) -- (-3.75, 3) -- (-3.75, 2.5);
+  \draw (-3.25, 2.5) -- (-2.75, 2.5) -- (-2.75, 3) -- (-3.25, 3);
+  \draw (-2.75, 2.5) -- (-2.25, 2.5) -- (-2.25, 3) -- (-2.75, 3);
+  \draw (-2.25, 2.5) -- (-1.75, 2.5) -- (-1.75, 3) -- (-2.25, 3);
+
+  \node at (-6, 1) {\textsf{ALU}};
+  \draw (-8, 0) -- (-4, 0) -- (-4, 2) -- (-8, 2) -- (-8, 0);
+  \node at (-3.375, 1.75) {\textsf{O}};
+  \draw (-4, 1.75) -- (-3.75, 1.75);
+  \draw (-3.75, 2) -- (-3, 2) -- (-3, 1.5) -- (-3.75, 1.5) -- (-3.75, 2);
+  \draw[color=gray]
+    (-2.8, 2) -- (-2.8, 1.5) -- (-2.7, 1.5) -- (-2.7, 2) -- (-2.8, 2);
+  \draw (-3, 2) -- (-2.5, 2) -- (-2.5, 1.5) -- (-3, 1.5);
+  \node at (-3.375, 1) {\textsf{N}};
+  \draw (-4, 1) -- (-3.75, 1);
+  \draw (-3.75, 1.25) -- (-3, 1.25) -- (-3, 0.75) -- (-3.75, 0.75) -- (-3.75, 1.25);
+  \draw[color=gray]
+    (-2.8, 1.25) -- (-2.8, 0.75) -- (-2.7, 0.75) -- (-2.7, 1.25) -- (-2.8, 1.25);
+  \draw (-3, 1.25) -- (-2.5, 1.25) -- (-2.5, 0.75) -- (-3, 0.75);
+  \node at (-3.375, 0.25) {\textsf{Z}};
+  \draw (-4, 0.25) -- (-3.75, 0.25);
+  \draw (-3.75, 0.5) -- (-3, 0.5) -- (-3, 0) -- (-3.75, 0) -- (-3.75, 0.5);
+  \draw[color=gray]
+    (-2.8, 0.5) -- (-2.8, 0) -- (-2.7, 0) -- (-2.7, 0.5) -- (-2.8, 0.5);
+  \draw (-3, 0.5) -- (-2.5, 0.5) -- (-2.5, 0) -- (-3, 0);
+
+  \node at (-7.5, -0.75) {\textsf{IP}};
+  \draw (-7, -0.5) -- (-8, -0.5) -- (-8, -1) -- (-7, -1);
+  \draw[color=gray]
+    (-6.7, -0.5) -- (-6.7, -1) -- (-6.8, -1) -- (-6.8, -0.5) -- (-6.7, -0.5);
+  \draw[color=gray]
+    (-6.2, -0.5) -- (-6.2, -1) -- (-6.3, -1) -- (-6.3, -0.5) -- (-6.2, -0.5);
+  \draw[color=gray]
+    (-5.7, -0.5) -- (-5.7, -1) -- (-5.8, -1) -- (-5.8, -0.5) -- (-5.7, -0.5);
+  \draw[color=gray]
+    (-5.2, -0.5) -- (-5.2, -1) -- (-5.3, -1) -- (-5.3, -0.5) -- (-5.2, -0.5);
+  \draw (-7, -0.5) -- (-6.5, -0.5) -- (-6.5, -1) -- (-7, -1) -- (-7, -0.5);
+  \draw (-6.5, -0.5) -- (-6, -0.5) -- (-6, -1) -- (-6.5, -1);
+  \draw (-6, -0.5) -- (-5.5, -0.5) -- (-5.5, -1) -- (-6, -1);
+  \draw (-5.5, -0.5) -- (-5, -0.5) -- (-5, -1) -- (-5.5, -1);
+
+\end{diagram}
+
+Notice how our two instructions occupy the first two slots in our memory bank.
+
+Now it is time to run the program. When we tell the computer to run the program, it first resets the \vocab{instruction pointer} (the register marked ``\textsf{IP}'' in the CPU) to ``$0000$'' (if it is not already at ``$0000$''). 
+
+The number in the \textsf{IP} register tells our CPU where to find the instruction of code it should execute. Since the \textsf{IP} register has the value ``$0000$,'' that tells our CPU to look in memory at address ``$0000$'' for its first instruction. 
+
+So, our CPU goes to the memory at address ``$0000$'' and it sees the instruction ``$00011000$.'' It pulls that out, and interprets it in the way we described before. Our CPU knows that this instruction tells it to take the numbers in $R1$ and $R2$ and add them together, then put the result in $R0$. So, our CPU does that. It looks in $R1$ and it sees that the number there is $0000$, it looks in $R2$ and it sees that the number there is $0000$, and then it feeds both of those numbers into the ALU. The ALU then adds those two numbers together. The result of adding zero and zero is zero, so the output is $0000$. Since the result of the ALU is zero, it turns on the zero flag. Finally, the CPU takes the result (i.e., $0000$) and puts it into $R0$ (which already has $0000$ in it, so we see no change). 
+
+At this point, our CPU has finished executing the instruction it found in memory at address $0000$. So, it is finished with one round of execution, and it is time to move on. To finish, it increments the \textsf{IP} register by one, so that the CPU is ready to go to the next instruction in memory. Hence, after completing the first instruction, our computer looks like this:
+
+\begin{diagram}
+
+  % The Memory
+
+  \draw (-1.6, -0.1) -- (-1.6, 4.1) -- (4.1, 4.1) -- (4.1, -0.1) -- (-1.6, -0.1);
+  \draw[fill=black]
+    (0.25, -0.1) -- (2.75, -0.1) -- (2.75, -0.7) -- (0.25, -0.7) -- (0.25, -0.1);
+  \node[color=white] at (1.5, -0.4) {\textsf{Memory}};
+
+  \node at (-0.75, 3.75) {\textsf{0000}};
+  \draw (0, 3.5) -- (-1.5, 3.5) -- (-1.5, 4) -- (0, 4);
+  \draw[color=gray] (0.2, 3.5) -- (0.2, 4) -- (0.3, 4) -- (0.3, 3.5) -- (0.2, 3.5);
+  \draw[color=gray] (0.7, 3.5) -- (0.7, 4) -- (0.8, 4) -- (0.8, 3.5) -- (0.7, 3.5);
+  \draw[color=gray] (1.2, 3.5) -- (1.2, 4) -- (1.3, 4) -- (1.3, 3.5) -- (1.2, 3.5);
+  \draw[color=gray,fill=black] (1.7, 3.5) -- (1.7, 4) -- (1.8, 4) -- (1.8, 3.5) -- (1.7, 3.5);
+  \draw[color=gray,fill=black] (2.2, 3.5) -- (2.2, 4) -- (2.3, 4) -- (2.3, 3.5) -- (2.2, 3.5);
+  \draw[color=gray] (2.7, 3.5) -- (2.7, 4) -- (2.8, 4) -- (2.8, 3.5) -- (2.7, 3.5);
+  \draw[color=gray] (3.2, 3.5) -- (3.2, 4) -- (3.3, 4) -- (3.3, 3.5) -- (3.2, 3.5);
+  \draw[color=gray] (3.7, 3.5) -- (3.7, 4) -- (3.8, 4) -- (3.8, 3.5) -- (3.7, 3.5);
+  \draw (0, 3.5) -- (0.5, 3.5) -- (0.5, 4) -- (0, 4) -- (0, 3.5);
+  \draw (0.5, 3.5) -- (1, 3.5) -- (1, 4) -- (0.5, 4);
+  \draw (1, 3.5) -- (1.5, 3.5) -- (1.5, 4) -- (1, 4);
+  \draw (1.5, 3.5) -- (2, 3.5) -- (2, 4) -- (1.5, 4);
+  \draw (2, 3.5) -- (2.5, 3.5) -- (2.5, 4) -- (2, 4);
+  \draw (2.5, 3.5) -- (3, 3.5) -- (3, 4) -- (2.5, 4);
+  \draw (3, 3.5) -- (3.5, 3.5) -- (3.5, 4) -- (3, 4);
+  \draw (3.5, 3.5) -- (4, 3.5) -- (4, 4) -- (3.5, 4);
+  
+  \node at (-0.75, 3.25) {\textsf{0001}};
+  \draw (0, 3) -- (-1.5, 3) -- (-1.5, 3.5) -- (0, 3.5);
+  \draw[color=gray] (0.2, 3) -- (0.2, 3.5) -- (0.3, 3.5) -- (0.3, 3) -- (0.2, 3);
+  \draw[color=gray] (0.7, 3) -- (0.7, 3.5) -- (0.8, 3.5) -- (0.8, 3) -- (0.7, 3);
+  \draw[color=gray] (1.2, 3) -- (1.2, 3.5) -- (1.3, 3.5) -- (1.3, 3) -- (1.2, 3);
+  \draw[color=gray] (1.7, 3) -- (1.7, 3.5) -- (1.8, 3.5) -- (1.8, 3) -- (1.7, 3);
+  \draw[color=gray] (2.2, 3) -- (2.2, 3.5) -- (2.3, 3.5) -- (2.3, 3) -- (2.2, 3);
+  \draw[color=gray,fill=black] (2.7, 3) -- (2.7, 3.5) -- (2.8, 3.5) -- (2.8, 3) -- (2.7, 3);
+  \draw[color=gray,fill=black] (3.2, 3) -- (3.2, 3.5) -- (3.3, 3.5) -- (3.3, 3) -- (3.2, 3);
+  \draw[color=gray,fill=black] (3.7, 3) -- (3.7, 3.5) -- (3.8, 3.5) -- (3.8, 3) -- (3.7, 3);
+  \draw (0, 3) -- (0.5, 3) -- (0.5, 3.5) -- (0, 3.5) -- (0, 3);
+  \draw (0.5, 3) -- (1, 3) -- (1, 3.5) -- (0.5, 3.5);
+  \draw (1, 3) -- (1.5, 3) -- (1.5, 3.5) -- (1, 3.5);
+  \draw (1.5, 3) -- (2, 3) -- (2, 3.5) -- (1.5, 3.5);
+  \draw (2, 3) -- (2.5, 3) -- (2.5, 3.5) -- (2, 3.5);
+  \draw (2.5, 3) -- (3, 3) -- (3, 3.5) -- (2.5, 3.5);
+  \draw (3, 3) -- (3.5, 3) -- (3.5, 3.5) -- (3, 3.5);
+  \draw (3.5, 3) -- (4, 3) -- (4, 3.5) -- (3.5, 3.5);
+
+  \node at (-0.75, 2.75) {\textsf{0010}};
+  \draw (0, 2.5) -- (-1.5, 2.5) -- (-1.5, 3) -- (0, 3);
+  \draw[color=gray] (0.2, 2.5) -- (0.2, 3) -- (0.3, 3) -- (0.3, 2.5) -- (0.2, 2.5);
+  \draw[color=gray] (0.7, 2.5) -- (0.7, 3) -- (0.8, 3) -- (0.8, 2.5) -- (0.7, 2.5);
+  \draw[color=gray] (1.2, 2.5) -- (1.2, 3) -- (1.3, 3) -- (1.3, 2.5) -- (1.2, 2.5);
+  \draw[color=gray] (1.7, 2.5) -- (1.7, 3) -- (1.8, 3) -- (1.8, 2.5) -- (1.7, 2.5);
+  \draw[color=gray] (2.2, 2.5) -- (2.2, 3) -- (2.3, 3) -- (2.3, 2.5) -- (2.2, 2.5);
+  \draw[color=gray] (2.7, 2.5) -- (2.7, 3) -- (2.8, 3) -- (2.8, 2.5) -- (2.7, 2.5);
+  \draw[color=gray] (3.2, 2.5) -- (3.2, 3) -- (3.3, 3) -- (3.3, 2.5) -- (3.2, 2.5);
+  \draw[color=gray] (3.7, 2.5) -- (3.7, 3) -- (3.8, 3) -- (3.8, 2.5) -- (3.7, 2.5);
+  \draw (0, 2.5) -- (0.5, 2.5) -- (0.5, 3) -- (0, 3) -- (0, 2.5);
+  \draw (0.5, 2.5) -- (1, 2.5) -- (1, 3) -- (0.5, 3);
+  \draw (1, 2.5) -- (1.5, 2.5) -- (1.5, 3) -- (1, 3);
+  \draw (1.5, 2.5) -- (2, 2.5) -- (2, 3) -- (1.5, 3);
+  \draw (2, 2.5) -- (2.5, 2.5) -- (2.5, 3) -- (2, 3);
+  \draw (2.5, 2.5) -- (3, 2.5) -- (3, 3) -- (2.5, 3);
+  \draw (3, 2.5) -- (3.5, 2.5) -- (3.5, 3) -- (3, 3);
+  \draw (3.5, 2.5) -- (4, 2.5) -- (4, 3) -- (3.5, 3);
+  
+  \node at (-0.75, 2.25) {\textsf{0011}};
+  \draw (0, 2) -- (-1.5, 2) -- (-1.5, 2.5) -- (0, 2.5);
+  \draw[color=gray] (0.2, 2) -- (0.2, 2.5) -- (0.3, 2.5) -- (0.3, 2) -- (0.2, 2);
+  \draw[color=gray] (0.7, 2) -- (0.7, 2.5) -- (0.8, 2.5) -- (0.8, 2) -- (0.7, 2);
+  \draw[color=gray] (1.2, 2) -- (1.2, 2.5) -- (1.3, 2.5) -- (1.3, 2) -- (1.2, 2);
+  \draw[color=gray] (1.7, 2) -- (1.7, 2.5) -- (1.8, 2.5) -- (1.8, 2) -- (1.7, 2);
+  \draw[color=gray] (2.2, 2) -- (2.2, 2.5) -- (2.3, 2.5) -- (2.3, 2) -- (2.2, 2);
+  \draw[color=gray] (2.7, 2) -- (2.7, 2.5) -- (2.8, 2.5) -- (2.8, 2) -- (2.7, 2);
+  \draw[color=gray] (3.2, 2) -- (3.2, 2.5) -- (3.3, 2.5) -- (3.3, 2) -- (3.2, 2);
+  \draw[color=gray] (3.7, 2) -- (3.7, 2.5) -- (3.8, 2.5) -- (3.8, 2) -- (3.7, 2);
+  \draw (0, 2) -- (0.5, 2) -- (0.5, 2.5) -- (0, 2.5) -- (0, 2);
+  \draw (0.5, 2) -- (1, 2) -- (1, 2.5) -- (0.5, 2.5);
+  \draw (1, 2) -- (1.5, 2) -- (1.5, 2.5) -- (1, 2.5);
+  \draw (1.5, 2) -- (2, 2) -- (2, 2.5) -- (1.5, 2.5);
+  \draw (2, 2) -- (2.5, 2) -- (2.5, 2.5) -- (2, 2.5);
+  \draw (2.5, 2) -- (3, 2) -- (3, 2.5) -- (2.5, 2.5);
+  \draw (3, 2) -- (3.5, 2) -- (3.5, 2.5) -- (3, 2.5);
+  \draw (3.5, 2) -- (4, 2) -- (4, 2.5) -- (3.5, 2.5);
+
+  \node at (-0.75, 1.75) {\textsf{0100}};
+  \draw (0, 1.5) -- (-1.5, 1.5) -- (-1.5, 2) -- (0, 2);
+  \draw[color=gray] (0.2, 1.5) -- (0.2, 2) -- (0.3, 2) -- (0.3, 1.5) -- (0.2, 1.5);
+  \draw[color=gray] (0.7, 1.5) -- (0.7, 2) -- (0.8, 2) -- (0.8, 1.5) -- (0.7, 1.5);
+  \draw[color=gray] (1.2, 1.5) -- (1.2, 2) -- (1.3, 2) -- (1.3, 1.5) -- (1.2, 1.5);
+  \draw[color=gray] (1.7, 1.5) -- (1.7, 2) -- (1.8, 2) -- (1.8, 1.5) -- (1.7, 1.5);
+  \draw[color=gray] (2.2, 1.5) -- (2.2, 2) -- (2.3, 2) -- (2.3, 1.5) -- (2.2, 1.5);
+  \draw[color=gray] (2.7, 1.5) -- (2.7, 2) -- (2.8, 2) -- (2.8, 1.5) -- (2.7, 1.5);
+  \draw[color=gray] (3.2, 1.5) -- (3.2, 2) -- (3.3, 2) -- (3.3, 1.5) -- (3.2, 1.5);
+  \draw[color=gray] (3.7, 1.5) -- (3.7, 2) -- (3.8, 2) -- (3.8, 1.5) -- (3.7, 1.5);
+  \draw (0, 1.5) -- (0.5, 1.5) -- (0.5, 2) -- (0, 2) -- (0, 1.5);
+  \draw (0.5, 1.5) -- (1, 1.5) -- (1, 2) -- (0.5, 2);
+  \draw (1, 1.5) -- (1.5, 1.5) -- (1.5, 2) -- (1, 2);
+  \draw (1.5, 1.5) -- (2, 1.5) -- (2, 2) -- (1.5, 2);
+  \draw (2, 1.5) -- (2.5, 1.5) -- (2.5, 2) -- (2, 2);
+  \draw (2.5, 1.5) -- (3, 1.5) -- (3, 2) -- (2.5, 2);
+  \draw (3, 1.5) -- (3.5, 1.5) -- (3.5, 2) -- (3, 2);
+  \draw (3.5, 1.5) -- (4, 1.5) -- (4, 2) -- (3.5, 2);
+  
+  \node at (-0.75, 1.25) {\textsf{0101}};
+  \draw (0, 1) -- (-1.5, 1) -- (-1.5, 1.5) -- (0, 1.5);
+  \draw[color=gray] (0.2, 1) -- (0.2, 1.5) -- (0.3, 1.5) -- (0.3, 1) -- (0.2, 1);
+  \draw[color=gray] (0.7, 1) -- (0.7, 1.5) -- (0.8, 1.5) -- (0.8, 1) -- (0.7, 1);
+  \draw[color=gray] (1.2, 1) -- (1.2, 1.5) -- (1.3, 1.5) -- (1.3, 1) -- (1.2, 1);
+  \draw[color=gray] (1.7, 1) -- (1.7, 1.5) -- (1.8, 1.5) -- (1.8, 1) -- (1.7, 1);
+  \draw[color=gray] (2.2, 1) -- (2.2, 1.5) -- (2.3, 1.5) -- (2.3, 1) -- (2.2, 1);
+  \draw[color=gray] (2.7, 1) -- (2.7, 1.5) -- (2.8, 1.5) -- (2.8, 1) -- (2.7, 1);
+  \draw[color=gray] (3.2, 1) -- (3.2, 1.5) -- (3.3, 1.5) -- (3.3, 1) -- (3.2, 1);
+  \draw[color=gray] (3.7, 1) -- (3.7, 1.5) -- (3.8, 1.5) -- (3.8, 1) -- (3.7, 1);
+  \draw (0, 1) -- (0.5, 1) -- (0.5, 1.5) -- (0, 1.5) -- (0, 1);
+  \draw (0.5, 1) -- (1, 1) -- (1, 1.5) -- (0.5, 1.5);
+  \draw (1, 1) -- (1.5, 1) -- (1.5, 1.5) -- (1, 1.5);
+  \draw (1.5, 1) -- (2, 1) -- (2, 1.5) -- (1.5, 1.5);
+  \draw (2, 1) -- (2.5, 1) -- (2.5, 1.5) -- (2, 1.5);
+  \draw (2.5, 1) -- (3, 1) -- (3, 1.5) -- (2.5, 1.5);
+  \draw (3, 1) -- (3.5, 1) -- (3.5, 1.5) -- (3, 1.5);
+  \draw (3.5, 1) -- (4, 1) -- (4, 1.5) -- (3.5, 1.5);
+
+  \node at (-0.75, 0.75) {\textsf{0110}};
+  \draw (0, 0.5) -- (-1.5, 0.5) -- (-1.5, 1) -- (0, 1);
+  \draw[color=gray] (0.2, 0.5) -- (0.2, 1) -- (0.3, 1) -- (0.3, 0.5) -- (0.2, 0.5);
+  \draw[color=gray] (0.7, 0.5) -- (0.7, 1) -- (0.8, 1) -- (0.8, 0.5) -- (0.7, 0.5);
+  \draw[color=gray] (1.2, 0.5) -- (1.2, 1) -- (1.3, 1) -- (1.3, 0.5) -- (1.2, 0.5);
+  \draw[color=gray] (1.7, 0.5) -- (1.7, 1) -- (1.8, 1) -- (1.8, 0.5) -- (1.7, 0.5);
+  \draw[color=gray] (2.2, 0.5) -- (2.2, 1) -- (2.3, 1) -- (2.3, 0.5) -- (2.2, 0.5);
+  \draw[color=gray] (2.7, 0.5) -- (2.7, 1) -- (2.8, 1) -- (2.8, 0.5) -- (2.7, 0.5);
+  \draw[color=gray] (3.2, 0.5) -- (3.2, 1) -- (3.3, 1) -- (3.3, 0.5) -- (3.2, 0.5);
+  \draw[color=gray] (3.7, 0.5) -- (3.7, 1) -- (3.8, 1) -- (3.8, 0.5) -- (3.7, 0.5);
+  \draw (0, 0.5) -- (0.5, 0.5) -- (0.5, 1) -- (0, 1) -- (0, 0.5);
+  \draw (0.5, 0.5) -- (1, 0.5) -- (1, 1) -- (0.5, 1);
+  \draw (1, 0.5) -- (1.5, 0.5) -- (1.5, 1) -- (1, 1);
+  \draw (1.5, 0.5) -- (2, 0.5) -- (2, 1) -- (1.5, 1);
+  \draw (2, 0.5) -- (2.5, 0.5) -- (2.5, 1) -- (2, 1);
+  \draw (2.5, 0.5) -- (3, 0.5) -- (3, 1) -- (2.5, 1);
+  \draw (3, 0.5) -- (3.5, 0.5) -- (3.5, 1) -- (3, 1);
+  \draw (3.5, 0.5) -- (4, 0.5) -- (4, 1) -- (3.5, 1);
+  
+  \node at (-0.75, 0.25) {\textsf{0111}};
+  \draw (0, 0) -- (-1.5, 0) -- (-1.5, 0.5) -- (0, 0.5);
+  \draw[color=gray] (0.2, 0) -- (0.2, 0.5) -- (0.3, 0.5) -- (0.3, 0) -- (0.2, 0);
+  \draw[color=gray] (0.7, 0) -- (0.7, 0.5) -- (0.8, 0.5) -- (0.8, 0) -- (0.7, 0);
+  \draw[color=gray] (1.2, 0) -- (1.2, 0.5) -- (1.3, 0.5) -- (1.3, 0) -- (1.2, 0);
+  \draw[color=gray] (1.7, 0) -- (1.7, 0.5) -- (1.8, 0.5) -- (1.8, 0) -- (1.7, 0);
+  \draw[color=gray] (2.2, 0) -- (2.2, 0.5) -- (2.3, 0.5) -- (2.3, 0) -- (2.2, 0);
+  \draw[color=gray] (2.7, 0) -- (2.7, 0.5) -- (2.8, 0.5) -- (2.8, 0) -- (2.7, 0);
+  \draw[color=gray] (3.2, 0) -- (3.2, 0.5) -- (3.3, 0.5) -- (3.3, 0) -- (3.2, 0);
+  \draw[color=gray] (3.7, 0) -- (3.7, 0.5) -- (3.8, 0.5) -- (3.8, 0) -- (3.7, 0);
+  \draw (0, 0) -- (0.5, 0) -- (0.5, 0.5) -- (0, 0.5) -- (0, 0);
+  \draw (0.5, 0) -- (1, 0) -- (1, 0.5) -- (0.5, 0.5);
+  \draw (1, 0) -- (1.5, 0) -- (1.5, 0.5) -- (1, 0.5);
+  \draw (1.5, 0) -- (2, 0) -- (2, 0.5) -- (1.5, 0.5);
+  \draw (2, 0) -- (2.5, 0) -- (2.5, 0.5) -- (2, 0.5);
+  \draw (2.5, 0) -- (3, 0) -- (3, 0.5) -- (2.5, 0.5);
+  \draw (3, 0) -- (3.5, 0) -- (3.5, 0.5) -- (3, 0.5);
+  \draw (3.5, 0) -- (4, 0) -- (4, 0.5) -- (3.5, 0.5);
+
+  % The CPU
+
+  \draw (-8.1, -1.1) -- (-8.1, 4.1) -- (-1.65, 4.1) -- (-1.65, -1.1) -- (-8.1, -1.1);
+  \draw[fill=black]
+    (-5.8, -1.1) -- (-4.2, -1.1) -- (-4.2, -1.7) -- (-5.8, -1.7) -- (-5.8, -1.1);
+  \node[color=white] at (-5, -1.4) {\textsf{CPU}};
+
+  \node at (-7.5, 3.75) {\textsf{R0}};
+  \draw (-7, 3.5) -- (-8, 3.5) -- (-8, 4) -- (-7, 4);
+  \draw[color=gray]
+    (-6.7, 3.5) -- (-6.7, 4) -- (-6.8, 4) -- (-6.8, 3.5) -- (-6.7, 3.5);
+  \draw[color=gray]
+    (-6.2, 3.5) -- (-6.2, 4) -- (-6.3, 4) -- (-6.3, 3.5) -- (-6.2, 3.5);
+  \draw[color=gray]
+    (-5.7, 3.5) -- (-5.7, 4) -- (-5.8, 4) -- (-5.8, 3.5) -- (-5.7, 3.5);
+  \draw[color=gray]
+    (-5.2, 3.5) -- (-5.2, 4) -- (-5.3, 4) -- (-5.3, 3.5) -- (-5.2, 3.5);
+  \draw (-7, 3.5) -- (-6.5, 3.5) -- (-6.5, 4) -- (-7, 4) -- (-7, 3.5);
+  \draw (-6.5, 3.5) -- (-6, 3.5) -- (-6, 4) -- (-6.5, 4);
+  \draw (-6, 3.5) -- (-5.5, 3.5) -- (-5.5, 4) -- (-6, 4);
+  \draw (-5.5, 3.5) -- (-5, 3.5) -- (-5, 4) -- (-5.5, 4);
+
+  \node at (-4.25, 3.75) {\textsf{R1}};
+  \draw (-3.75, 3.5) -- (-4.75, 3.5) -- (-4.75, 4) -- (-3.75, 4);
+  \draw[color=gray]
+    (-3.45, 3.5) -- (-3.45, 4) -- (-3.55, 4) -- (-3.55, 3.5) -- (-3.45, 3.5);
+  \draw[color=gray]
+    (-2.95, 3.5) -- (-2.95, 4) -- (-3.05, 4) -- (-3.05, 3.5) -- (-2.95, 3.5);
+  \draw[color=gray]
+    (-2.45, 3.5) -- (-2.45, 4) -- (-2.55, 4) -- (-2.55, 3.5) -- (-2.45, 3.5);
+  \draw[color=gray]
+    (-1.95, 3.5) -- (-1.95, 4) -- (-2.05, 4) -- (-2.05, 3.5) -- (-1.95, 3.5);
+  \draw (-3.75, 3.5) -- (-3.25, 3.5) -- (-3.25, 4) -- (-3.75, 4) -- (-3.75, 3.5);
+  \draw (-3.25, 3.5) -- (-2.75, 3.5) -- (-2.75, 4) -- (-3.25, 4);
+  \draw (-2.75, 3.5) -- (-2.25, 3.5) -- (-2.25, 4) -- (-2.75, 4);
+  \draw (-2.25, 3.5) -- (-1.75, 3.5) -- (-1.75, 4) -- (-2.25, 4);
+
+  \node at (-7.5, 2.75) {\textsf{R2}};
+  \draw (-7, 2.5) -- (-8, 2.5) -- (-8, 3) -- (-7, 3);
+  \draw[color=gray]
+    (-6.7, 2.5) -- (-6.7, 3) -- (-6.8, 3) -- (-6.8, 2.5) -- (-6.7, 2.5);
+  \draw[color=gray]
+    (-6.2, 2.5) -- (-6.2, 3) -- (-6.3, 3) -- (-6.3, 2.5) -- (-6.2, 2.5);
+  \draw[color=gray]
+    (-5.7, 2.5) -- (-5.7, 3) -- (-5.8, 3) -- (-5.8, 2.5) -- (-5.7, 2.5);
+  \draw[color=gray]
+    (-5.2, 2.5) -- (-5.2, 3) -- (-5.3, 3) -- (-5.3, 2.5) -- (-5.2, 2.5);
+  \draw (-7, 2.5) -- (-6.5, 2.5) -- (-6.5, 3) -- (-7, 3) -- (-7, 2.5);
+  \draw (-6.5, 2.5) -- (-6, 2.5) -- (-6, 3) -- (-6.5, 3);
+  \draw (-6, 2.5) -- (-5.5, 2.5) -- (-5.5, 3) -- (-6, 3);
+  \draw (-5.5, 2.5) -- (-5, 2.5) -- (-5, 3) -- (-5.5, 3);
+
+  \node at (-4.25, 2.75) {\textsf{R3}};
+  \draw (-3.75, 2.5) -- (-4.75, 2.5) -- (-4.75, 3) -- (-3.75, 3);
+  \draw[color=gray]
+    (-3.45, 2.5) -- (-3.45, 3) -- (-3.55, 3) -- (-3.55, 2.5) -- (-3.45, 2.5);
+  \draw[color=gray]
+    (-2.95, 2.5) -- (-2.95, 3) -- (-3.05, 3) -- (-3.05, 2.5) -- (-2.95, 2.5);
+  \draw[color=gray]
+    (-2.45, 2.5) -- (-2.45, 3) -- (-2.55, 3) -- (-2.55, 2.5) -- (-2.45, 2.5);
+  \draw[color=gray]
+    (-1.95, 2.5) -- (-1.95, 3) -- (-2.05, 3) -- (-2.05, 2.5) -- (-1.95, 2.5);
+  \draw (-3.75, 2.5) -- (-3.25, 2.5) -- (-3.25, 3) -- (-3.75, 3) -- (-3.75, 2.5);
+  \draw (-3.25, 2.5) -- (-2.75, 2.5) -- (-2.75, 3) -- (-3.25, 3);
+  \draw (-2.75, 2.5) -- (-2.25, 2.5) -- (-2.25, 3) -- (-2.75, 3);
+  \draw (-2.25, 2.5) -- (-1.75, 2.5) -- (-1.75, 3) -- (-2.25, 3);
+
+  \node at (-6, 1) {\textsf{ALU}};
+  \draw (-8, 0) -- (-4, 0) -- (-4, 2) -- (-8, 2) -- (-8, 0);
+  \node at (-3.375, 1.75) {\textsf{O}};
+  \draw (-4, 1.75) -- (-3.75, 1.75);
+  \draw (-3.75, 2) -- (-3, 2) -- (-3, 1.5) -- (-3.75, 1.5) -- (-3.75, 2);
+  \draw[color=gray]
+    (-2.8, 2) -- (-2.8, 1.5) -- (-2.7, 1.5) -- (-2.7, 2) -- (-2.8, 2);
+  \draw (-3, 2) -- (-2.5, 2) -- (-2.5, 1.5) -- (-3, 1.5);
+  \node at (-3.375, 1) {\textsf{N}};
+  \draw (-4, 1) -- (-3.75, 1);
+  \draw (-3.75, 1.25) -- (-3, 1.25) -- (-3, 0.75) -- (-3.75, 0.75) -- (-3.75, 1.25);
+  \draw[color=gray]
+    (-2.8, 1.25) -- (-2.8, 0.75) -- (-2.7, 0.75) -- (-2.7, 1.25) -- (-2.8, 1.25);
+  \draw (-3, 1.25) -- (-2.5, 1.25) -- (-2.5, 0.75) -- (-3, 0.75);
+  \node at (-3.375, 0.25) {\textsf{Z}};
+  \draw (-4, 0.25) -- (-3.75, 0.25);
+  \draw (-3.75, 0.5) -- (-3, 0.5) -- (-3, 0) -- (-3.75, 0) -- (-3.75, 0.5);
+  \draw[color=gray,fill=black]
+    (-2.8, 0.5) -- (-2.8, 0) -- (-2.7, 0) -- (-2.7, 0.5) -- (-2.8, 0.5);
+  \draw (-3, 0.5) -- (-2.5, 0.5) -- (-2.5, 0) -- (-3, 0);
+
+  \node at (-7.5, -0.75) {\textsf{IP}};
+  \draw (-7, -0.5) -- (-8, -0.5) -- (-8, -1) -- (-7, -1);
+  \draw[color=gray]
+    (-6.7, -0.5) -- (-6.7, -1) -- (-6.8, -1) -- (-6.8, -0.5) -- (-6.7, -0.5);
+  \draw[color=gray]
+    (-6.2, -0.5) -- (-6.2, -1) -- (-6.3, -1) -- (-6.3, -0.5) -- (-6.2, -0.5);
+  \draw[color=gray]
+    (-5.7, -0.5) -- (-5.7, -1) -- (-5.8, -1) -- (-5.8, -0.5) -- (-5.7, -0.5);
+  \draw[color=gray,fill=black]
+    (-5.2, -0.5) -- (-5.2, -1) -- (-5.3, -1) -- (-5.3, -0.5) -- (-5.2, -0.5);
+  \draw (-7, -0.5) -- (-6.5, -0.5) -- (-6.5, -1) -- (-7, -1) -- (-7, -0.5);
+  \draw (-6.5, -0.5) -- (-6, -0.5) -- (-6, -1) -- (-6.5, -1);
+  \draw (-6, -0.5) -- (-5.5, -0.5) -- (-5.5, -1) -- (-6, -1);
+  \draw (-5.5, -0.5) -- (-5, -0.5) -- (-5, -1) -- (-5.5, -1);
+
+\end{diagram}
+
+Notice that $R0$ contains the result of adding $R1$ and $R2$ --- of course, it is just all zeros because the result of adding zero to zero is still zero. But nevertheless, the correct value is present in $R0$. Notice also that the zero flag is turned on, because the result of the ALU's computation was zero. Finally, notice that \textsf{IP} is at $0001$, so that the CPU is ready for the next instruction.
+
+Now the CPU begins round two. For this, it repeats just what it did for round one. It looks in \textsf{IP} for the address in memory where it can find the next instruction, it goes to that address, it executes the instruction there, and then it increments the \textsf{IP} register. 
+
+So, in this case, the \textsf{IP} register says to look at address $0001$ for its next instruction, so it goes there to find $00000111$. As we know, this tells our CPU to take the values in $R0$ and $R1$, and put the result in $R3$. So, it does that. In this case, $R0$ and $R1$ contain zeros, and adding zero to zero results in zero, so the ALU turns on its zero flag (which was already on, so we don't see a change there), and then the CPU puts the resulting zero in $R3$ (which was already zero, so we don't see a change there). Then, the CPU increments the \textsf{IP} register by one, so that it reads $0010$. Hence, after the second round of execution, our computer looks like this:
+
+\begin{diagram}
+
+  % The Memory
+
+  \draw (-1.6, -0.1) -- (-1.6, 4.1) -- (4.1, 4.1) -- (4.1, -0.1) -- (-1.6, -0.1);
+  \draw[fill=black]
+    (0.25, -0.1) -- (2.75, -0.1) -- (2.75, -0.7) -- (0.25, -0.7) -- (0.25, -0.1);
+  \node[color=white] at (1.5, -0.4) {\textsf{Memory}};
+
+  \node at (-0.75, 3.75) {\textsf{0000}};
+  \draw (0, 3.5) -- (-1.5, 3.5) -- (-1.5, 4) -- (0, 4);
+  \draw[color=gray] (0.2, 3.5) -- (0.2, 4) -- (0.3, 4) -- (0.3, 3.5) -- (0.2, 3.5);
+  \draw[color=gray] (0.7, 3.5) -- (0.7, 4) -- (0.8, 4) -- (0.8, 3.5) -- (0.7, 3.5);
+  \draw[color=gray] (1.2, 3.5) -- (1.2, 4) -- (1.3, 4) -- (1.3, 3.5) -- (1.2, 3.5);
+  \draw[color=gray,fill=black] (1.7, 3.5) -- (1.7, 4) -- (1.8, 4) -- (1.8, 3.5) -- (1.7, 3.5);
+  \draw[color=gray,fill=black] (2.2, 3.5) -- (2.2, 4) -- (2.3, 4) -- (2.3, 3.5) -- (2.2, 3.5);
+  \draw[color=gray] (2.7, 3.5) -- (2.7, 4) -- (2.8, 4) -- (2.8, 3.5) -- (2.7, 3.5);
+  \draw[color=gray] (3.2, 3.5) -- (3.2, 4) -- (3.3, 4) -- (3.3, 3.5) -- (3.2, 3.5);
+  \draw[color=gray] (3.7, 3.5) -- (3.7, 4) -- (3.8, 4) -- (3.8, 3.5) -- (3.7, 3.5);
+  \draw (0, 3.5) -- (0.5, 3.5) -- (0.5, 4) -- (0, 4) -- (0, 3.5);
+  \draw (0.5, 3.5) -- (1, 3.5) -- (1, 4) -- (0.5, 4);
+  \draw (1, 3.5) -- (1.5, 3.5) -- (1.5, 4) -- (1, 4);
+  \draw (1.5, 3.5) -- (2, 3.5) -- (2, 4) -- (1.5, 4);
+  \draw (2, 3.5) -- (2.5, 3.5) -- (2.5, 4) -- (2, 4);
+  \draw (2.5, 3.5) -- (3, 3.5) -- (3, 4) -- (2.5, 4);
+  \draw (3, 3.5) -- (3.5, 3.5) -- (3.5, 4) -- (3, 4);
+  \draw (3.5, 3.5) -- (4, 3.5) -- (4, 4) -- (3.5, 4);
+  
+  \node at (-0.75, 3.25) {\textsf{0001}};
+  \draw (0, 3) -- (-1.5, 3) -- (-1.5, 3.5) -- (0, 3.5);
+  \draw[color=gray] (0.2, 3) -- (0.2, 3.5) -- (0.3, 3.5) -- (0.3, 3) -- (0.2, 3);
+  \draw[color=gray] (0.7, 3) -- (0.7, 3.5) -- (0.8, 3.5) -- (0.8, 3) -- (0.7, 3);
+  \draw[color=gray] (1.2, 3) -- (1.2, 3.5) -- (1.3, 3.5) -- (1.3, 3) -- (1.2, 3);
+  \draw[color=gray] (1.7, 3) -- (1.7, 3.5) -- (1.8, 3.5) -- (1.8, 3) -- (1.7, 3);
+  \draw[color=gray] (2.2, 3) -- (2.2, 3.5) -- (2.3, 3.5) -- (2.3, 3) -- (2.2, 3);
+  \draw[color=gray,fill=black] (2.7, 3) -- (2.7, 3.5) -- (2.8, 3.5) -- (2.8, 3) -- (2.7, 3);
+  \draw[color=gray,fill=black] (3.2, 3) -- (3.2, 3.5) -- (3.3, 3.5) -- (3.3, 3) -- (3.2, 3);
+  \draw[color=gray,fill=black] (3.7, 3) -- (3.7, 3.5) -- (3.8, 3.5) -- (3.8, 3) -- (3.7, 3);
+  \draw (0, 3) -- (0.5, 3) -- (0.5, 3.5) -- (0, 3.5) -- (0, 3);
+  \draw (0.5, 3) -- (1, 3) -- (1, 3.5) -- (0.5, 3.5);
+  \draw (1, 3) -- (1.5, 3) -- (1.5, 3.5) -- (1, 3.5);
+  \draw (1.5, 3) -- (2, 3) -- (2, 3.5) -- (1.5, 3.5);
+  \draw (2, 3) -- (2.5, 3) -- (2.5, 3.5) -- (2, 3.5);
+  \draw (2.5, 3) -- (3, 3) -- (3, 3.5) -- (2.5, 3.5);
+  \draw (3, 3) -- (3.5, 3) -- (3.5, 3.5) -- (3, 3.5);
+  \draw (3.5, 3) -- (4, 3) -- (4, 3.5) -- (3.5, 3.5);
+
+  \node at (-0.75, 2.75) {\textsf{0010}};
+  \draw (0, 2.5) -- (-1.5, 2.5) -- (-1.5, 3) -- (0, 3);
+  \draw[color=gray] (0.2, 2.5) -- (0.2, 3) -- (0.3, 3) -- (0.3, 2.5) -- (0.2, 2.5);
+  \draw[color=gray] (0.7, 2.5) -- (0.7, 3) -- (0.8, 3) -- (0.8, 2.5) -- (0.7, 2.5);
+  \draw[color=gray] (1.2, 2.5) -- (1.2, 3) -- (1.3, 3) -- (1.3, 2.5) -- (1.2, 2.5);
+  \draw[color=gray] (1.7, 2.5) -- (1.7, 3) -- (1.8, 3) -- (1.8, 2.5) -- (1.7, 2.5);
+  \draw[color=gray] (2.2, 2.5) -- (2.2, 3) -- (2.3, 3) -- (2.3, 2.5) -- (2.2, 2.5);
+  \draw[color=gray] (2.7, 2.5) -- (2.7, 3) -- (2.8, 3) -- (2.8, 2.5) -- (2.7, 2.5);
+  \draw[color=gray] (3.2, 2.5) -- (3.2, 3) -- (3.3, 3) -- (3.3, 2.5) -- (3.2, 2.5);
+  \draw[color=gray] (3.7, 2.5) -- (3.7, 3) -- (3.8, 3) -- (3.8, 2.5) -- (3.7, 2.5);
+  \draw (0, 2.5) -- (0.5, 2.5) -- (0.5, 3) -- (0, 3) -- (0, 2.5);
+  \draw (0.5, 2.5) -- (1, 2.5) -- (1, 3) -- (0.5, 3);
+  \draw (1, 2.5) -- (1.5, 2.5) -- (1.5, 3) -- (1, 3);
+  \draw (1.5, 2.5) -- (2, 2.5) -- (2, 3) -- (1.5, 3);
+  \draw (2, 2.5) -- (2.5, 2.5) -- (2.5, 3) -- (2, 3);
+  \draw (2.5, 2.5) -- (3, 2.5) -- (3, 3) -- (2.5, 3);
+  \draw (3, 2.5) -- (3.5, 2.5) -- (3.5, 3) -- (3, 3);
+  \draw (3.5, 2.5) -- (4, 2.5) -- (4, 3) -- (3.5, 3);
+  
+  \node at (-0.75, 2.25) {\textsf{0011}};
+  \draw (0, 2) -- (-1.5, 2) -- (-1.5, 2.5) -- (0, 2.5);
+  \draw[color=gray] (0.2, 2) -- (0.2, 2.5) -- (0.3, 2.5) -- (0.3, 2) -- (0.2, 2);
+  \draw[color=gray] (0.7, 2) -- (0.7, 2.5) -- (0.8, 2.5) -- (0.8, 2) -- (0.7, 2);
+  \draw[color=gray] (1.2, 2) -- (1.2, 2.5) -- (1.3, 2.5) -- (1.3, 2) -- (1.2, 2);
+  \draw[color=gray] (1.7, 2) -- (1.7, 2.5) -- (1.8, 2.5) -- (1.8, 2) -- (1.7, 2);
+  \draw[color=gray] (2.2, 2) -- (2.2, 2.5) -- (2.3, 2.5) -- (2.3, 2) -- (2.2, 2);
+  \draw[color=gray] (2.7, 2) -- (2.7, 2.5) -- (2.8, 2.5) -- (2.8, 2) -- (2.7, 2);
+  \draw[color=gray] (3.2, 2) -- (3.2, 2.5) -- (3.3, 2.5) -- (3.3, 2) -- (3.2, 2);
+  \draw[color=gray] (3.7, 2) -- (3.7, 2.5) -- (3.8, 2.5) -- (3.8, 2) -- (3.7, 2);
+  \draw (0, 2) -- (0.5, 2) -- (0.5, 2.5) -- (0, 2.5) -- (0, 2);
+  \draw (0.5, 2) -- (1, 2) -- (1, 2.5) -- (0.5, 2.5);
+  \draw (1, 2) -- (1.5, 2) -- (1.5, 2.5) -- (1, 2.5);
+  \draw (1.5, 2) -- (2, 2) -- (2, 2.5) -- (1.5, 2.5);
+  \draw (2, 2) -- (2.5, 2) -- (2.5, 2.5) -- (2, 2.5);
+  \draw (2.5, 2) -- (3, 2) -- (3, 2.5) -- (2.5, 2.5);
+  \draw (3, 2) -- (3.5, 2) -- (3.5, 2.5) -- (3, 2.5);
+  \draw (3.5, 2) -- (4, 2) -- (4, 2.5) -- (3.5, 2.5);
+
+  \node at (-0.75, 1.75) {\textsf{0100}};
+  \draw (0, 1.5) -- (-1.5, 1.5) -- (-1.5, 2) -- (0, 2);
+  \draw[color=gray] (0.2, 1.5) -- (0.2, 2) -- (0.3, 2) -- (0.3, 1.5) -- (0.2, 1.5);
+  \draw[color=gray] (0.7, 1.5) -- (0.7, 2) -- (0.8, 2) -- (0.8, 1.5) -- (0.7, 1.5);
+  \draw[color=gray] (1.2, 1.5) -- (1.2, 2) -- (1.3, 2) -- (1.3, 1.5) -- (1.2, 1.5);
+  \draw[color=gray] (1.7, 1.5) -- (1.7, 2) -- (1.8, 2) -- (1.8, 1.5) -- (1.7, 1.5);
+  \draw[color=gray] (2.2, 1.5) -- (2.2, 2) -- (2.3, 2) -- (2.3, 1.5) -- (2.2, 1.5);
+  \draw[color=gray] (2.7, 1.5) -- (2.7, 2) -- (2.8, 2) -- (2.8, 1.5) -- (2.7, 1.5);
+  \draw[color=gray] (3.2, 1.5) -- (3.2, 2) -- (3.3, 2) -- (3.3, 1.5) -- (3.2, 1.5);
+  \draw[color=gray] (3.7, 1.5) -- (3.7, 2) -- (3.8, 2) -- (3.8, 1.5) -- (3.7, 1.5);
+  \draw (0, 1.5) -- (0.5, 1.5) -- (0.5, 2) -- (0, 2) -- (0, 1.5);
+  \draw (0.5, 1.5) -- (1, 1.5) -- (1, 2) -- (0.5, 2);
+  \draw (1, 1.5) -- (1.5, 1.5) -- (1.5, 2) -- (1, 2);
+  \draw (1.5, 1.5) -- (2, 1.5) -- (2, 2) -- (1.5, 2);
+  \draw (2, 1.5) -- (2.5, 1.5) -- (2.5, 2) -- (2, 2);
+  \draw (2.5, 1.5) -- (3, 1.5) -- (3, 2) -- (2.5, 2);
+  \draw (3, 1.5) -- (3.5, 1.5) -- (3.5, 2) -- (3, 2);
+  \draw (3.5, 1.5) -- (4, 1.5) -- (4, 2) -- (3.5, 2);
+  
+  \node at (-0.75, 1.25) {\textsf{0101}};
+  \draw (0, 1) -- (-1.5, 1) -- (-1.5, 1.5) -- (0, 1.5);
+  \draw[color=gray] (0.2, 1) -- (0.2, 1.5) -- (0.3, 1.5) -- (0.3, 1) -- (0.2, 1);
+  \draw[color=gray] (0.7, 1) -- (0.7, 1.5) -- (0.8, 1.5) -- (0.8, 1) -- (0.7, 1);
+  \draw[color=gray] (1.2, 1) -- (1.2, 1.5) -- (1.3, 1.5) -- (1.3, 1) -- (1.2, 1);
+  \draw[color=gray] (1.7, 1) -- (1.7, 1.5) -- (1.8, 1.5) -- (1.8, 1) -- (1.7, 1);
+  \draw[color=gray] (2.2, 1) -- (2.2, 1.5) -- (2.3, 1.5) -- (2.3, 1) -- (2.2, 1);
+  \draw[color=gray] (2.7, 1) -- (2.7, 1.5) -- (2.8, 1.5) -- (2.8, 1) -- (2.7, 1);
+  \draw[color=gray] (3.2, 1) -- (3.2, 1.5) -- (3.3, 1.5) -- (3.3, 1) -- (3.2, 1);
+  \draw[color=gray] (3.7, 1) -- (3.7, 1.5) -- (3.8, 1.5) -- (3.8, 1) -- (3.7, 1);
+  \draw (0, 1) -- (0.5, 1) -- (0.5, 1.5) -- (0, 1.5) -- (0, 1);
+  \draw (0.5, 1) -- (1, 1) -- (1, 1.5) -- (0.5, 1.5);
+  \draw (1, 1) -- (1.5, 1) -- (1.5, 1.5) -- (1, 1.5);
+  \draw (1.5, 1) -- (2, 1) -- (2, 1.5) -- (1.5, 1.5);
+  \draw (2, 1) -- (2.5, 1) -- (2.5, 1.5) -- (2, 1.5);
+  \draw (2.5, 1) -- (3, 1) -- (3, 1.5) -- (2.5, 1.5);
+  \draw (3, 1) -- (3.5, 1) -- (3.5, 1.5) -- (3, 1.5);
+  \draw (3.5, 1) -- (4, 1) -- (4, 1.5) -- (3.5, 1.5);
+
+  \node at (-0.75, 0.75) {\textsf{0110}};
+  \draw (0, 0.5) -- (-1.5, 0.5) -- (-1.5, 1) -- (0, 1);
+  \draw[color=gray] (0.2, 0.5) -- (0.2, 1) -- (0.3, 1) -- (0.3, 0.5) -- (0.2, 0.5);
+  \draw[color=gray] (0.7, 0.5) -- (0.7, 1) -- (0.8, 1) -- (0.8, 0.5) -- (0.7, 0.5);
+  \draw[color=gray] (1.2, 0.5) -- (1.2, 1) -- (1.3, 1) -- (1.3, 0.5) -- (1.2, 0.5);
+  \draw[color=gray] (1.7, 0.5) -- (1.7, 1) -- (1.8, 1) -- (1.8, 0.5) -- (1.7, 0.5);
+  \draw[color=gray] (2.2, 0.5) -- (2.2, 1) -- (2.3, 1) -- (2.3, 0.5) -- (2.2, 0.5);
+  \draw[color=gray] (2.7, 0.5) -- (2.7, 1) -- (2.8, 1) -- (2.8, 0.5) -- (2.7, 0.5);
+  \draw[color=gray] (3.2, 0.5) -- (3.2, 1) -- (3.3, 1) -- (3.3, 0.5) -- (3.2, 0.5);
+  \draw[color=gray] (3.7, 0.5) -- (3.7, 1) -- (3.8, 1) -- (3.8, 0.5) -- (3.7, 0.5);
+  \draw (0, 0.5) -- (0.5, 0.5) -- (0.5, 1) -- (0, 1) -- (0, 0.5);
+  \draw (0.5, 0.5) -- (1, 0.5) -- (1, 1) -- (0.5, 1);
+  \draw (1, 0.5) -- (1.5, 0.5) -- (1.5, 1) -- (1, 1);
+  \draw (1.5, 0.5) -- (2, 0.5) -- (2, 1) -- (1.5, 1);
+  \draw (2, 0.5) -- (2.5, 0.5) -- (2.5, 1) -- (2, 1);
+  \draw (2.5, 0.5) -- (3, 0.5) -- (3, 1) -- (2.5, 1);
+  \draw (3, 0.5) -- (3.5, 0.5) -- (3.5, 1) -- (3, 1);
+  \draw (3.5, 0.5) -- (4, 0.5) -- (4, 1) -- (3.5, 1);
+  
+  \node at (-0.75, 0.25) {\textsf{0111}};
+  \draw (0, 0) -- (-1.5, 0) -- (-1.5, 0.5) -- (0, 0.5);
+  \draw[color=gray] (0.2, 0) -- (0.2, 0.5) -- (0.3, 0.5) -- (0.3, 0) -- (0.2, 0);
+  \draw[color=gray] (0.7, 0) -- (0.7, 0.5) -- (0.8, 0.5) -- (0.8, 0) -- (0.7, 0);
+  \draw[color=gray] (1.2, 0) -- (1.2, 0.5) -- (1.3, 0.5) -- (1.3, 0) -- (1.2, 0);
+  \draw[color=gray] (1.7, 0) -- (1.7, 0.5) -- (1.8, 0.5) -- (1.8, 0) -- (1.7, 0);
+  \draw[color=gray] (2.2, 0) -- (2.2, 0.5) -- (2.3, 0.5) -- (2.3, 0) -- (2.2, 0);
+  \draw[color=gray] (2.7, 0) -- (2.7, 0.5) -- (2.8, 0.5) -- (2.8, 0) -- (2.7, 0);
+  \draw[color=gray] (3.2, 0) -- (3.2, 0.5) -- (3.3, 0.5) -- (3.3, 0) -- (3.2, 0);
+  \draw[color=gray] (3.7, 0) -- (3.7, 0.5) -- (3.8, 0.5) -- (3.8, 0) -- (3.7, 0);
+  \draw (0, 0) -- (0.5, 0) -- (0.5, 0.5) -- (0, 0.5) -- (0, 0);
+  \draw (0.5, 0) -- (1, 0) -- (1, 0.5) -- (0.5, 0.5);
+  \draw (1, 0) -- (1.5, 0) -- (1.5, 0.5) -- (1, 0.5);
+  \draw (1.5, 0) -- (2, 0) -- (2, 0.5) -- (1.5, 0.5);
+  \draw (2, 0) -- (2.5, 0) -- (2.5, 0.5) -- (2, 0.5);
+  \draw (2.5, 0) -- (3, 0) -- (3, 0.5) -- (2.5, 0.5);
+  \draw (3, 0) -- (3.5, 0) -- (3.5, 0.5) -- (3, 0.5);
+  \draw (3.5, 0) -- (4, 0) -- (4, 0.5) -- (3.5, 0.5);
+
+  % The CPU
+
+  \draw (-8.1, -1.1) -- (-8.1, 4.1) -- (-1.65, 4.1) -- (-1.65, -1.1) -- (-8.1, -1.1);
+  \draw[fill=black]
+    (-5.8, -1.1) -- (-4.2, -1.1) -- (-4.2, -1.7) -- (-5.8, -1.7) -- (-5.8, -1.1);
+  \node[color=white] at (-5, -1.4) {\textsf{CPU}};
+
+  \node at (-7.5, 3.75) {\textsf{R0}};
+  \draw (-7, 3.5) -- (-8, 3.5) -- (-8, 4) -- (-7, 4);
+  \draw[color=gray]
+    (-6.7, 3.5) -- (-6.7, 4) -- (-6.8, 4) -- (-6.8, 3.5) -- (-6.7, 3.5);
+  \draw[color=gray]
+    (-6.2, 3.5) -- (-6.2, 4) -- (-6.3, 4) -- (-6.3, 3.5) -- (-6.2, 3.5);
+  \draw[color=gray]
+    (-5.7, 3.5) -- (-5.7, 4) -- (-5.8, 4) -- (-5.8, 3.5) -- (-5.7, 3.5);
+  \draw[color=gray]
+    (-5.2, 3.5) -- (-5.2, 4) -- (-5.3, 4) -- (-5.3, 3.5) -- (-5.2, 3.5);
+  \draw (-7, 3.5) -- (-6.5, 3.5) -- (-6.5, 4) -- (-7, 4) -- (-7, 3.5);
+  \draw (-6.5, 3.5) -- (-6, 3.5) -- (-6, 4) -- (-6.5, 4);
+  \draw (-6, 3.5) -- (-5.5, 3.5) -- (-5.5, 4) -- (-6, 4);
+  \draw (-5.5, 3.5) -- (-5, 3.5) -- (-5, 4) -- (-5.5, 4);
+
+  \node at (-4.25, 3.75) {\textsf{R1}};
+  \draw (-3.75, 3.5) -- (-4.75, 3.5) -- (-4.75, 4) -- (-3.75, 4);
+  \draw[color=gray]
+    (-3.45, 3.5) -- (-3.45, 4) -- (-3.55, 4) -- (-3.55, 3.5) -- (-3.45, 3.5);
+  \draw[color=gray]
+    (-2.95, 3.5) -- (-2.95, 4) -- (-3.05, 4) -- (-3.05, 3.5) -- (-2.95, 3.5);
+  \draw[color=gray]
+    (-2.45, 3.5) -- (-2.45, 4) -- (-2.55, 4) -- (-2.55, 3.5) -- (-2.45, 3.5);
+  \draw[color=gray]
+    (-1.95, 3.5) -- (-1.95, 4) -- (-2.05, 4) -- (-2.05, 3.5) -- (-1.95, 3.5);
+  \draw (-3.75, 3.5) -- (-3.25, 3.5) -- (-3.25, 4) -- (-3.75, 4) -- (-3.75, 3.5);
+  \draw (-3.25, 3.5) -- (-2.75, 3.5) -- (-2.75, 4) -- (-3.25, 4);
+  \draw (-2.75, 3.5) -- (-2.25, 3.5) -- (-2.25, 4) -- (-2.75, 4);
+  \draw (-2.25, 3.5) -- (-1.75, 3.5) -- (-1.75, 4) -- (-2.25, 4);
+
+  \node at (-7.5, 2.75) {\textsf{R2}};
+  \draw (-7, 2.5) -- (-8, 2.5) -- (-8, 3) -- (-7, 3);
+  \draw[color=gray]
+    (-6.7, 2.5) -- (-6.7, 3) -- (-6.8, 3) -- (-6.8, 2.5) -- (-6.7, 2.5);
+  \draw[color=gray]
+    (-6.2, 2.5) -- (-6.2, 3) -- (-6.3, 3) -- (-6.3, 2.5) -- (-6.2, 2.5);
+  \draw[color=gray]
+    (-5.7, 2.5) -- (-5.7, 3) -- (-5.8, 3) -- (-5.8, 2.5) -- (-5.7, 2.5);
+  \draw[color=gray]
+    (-5.2, 2.5) -- (-5.2, 3) -- (-5.3, 3) -- (-5.3, 2.5) -- (-5.2, 2.5);
+  \draw (-7, 2.5) -- (-6.5, 2.5) -- (-6.5, 3) -- (-7, 3) -- (-7, 2.5);
+  \draw (-6.5, 2.5) -- (-6, 2.5) -- (-6, 3) -- (-6.5, 3);
+  \draw (-6, 2.5) -- (-5.5, 2.5) -- (-5.5, 3) -- (-6, 3);
+  \draw (-5.5, 2.5) -- (-5, 2.5) -- (-5, 3) -- (-5.5, 3);
+
+  \node at (-4.25, 2.75) {\textsf{R3}};
+  \draw (-3.75, 2.5) -- (-4.75, 2.5) -- (-4.75, 3) -- (-3.75, 3);
+  \draw[color=gray]
+    (-3.45, 2.5) -- (-3.45, 3) -- (-3.55, 3) -- (-3.55, 2.5) -- (-3.45, 2.5);
+  \draw[color=gray]
+    (-2.95, 2.5) -- (-2.95, 3) -- (-3.05, 3) -- (-3.05, 2.5) -- (-2.95, 2.5);
+  \draw[color=gray]
+    (-2.45, 2.5) -- (-2.45, 3) -- (-2.55, 3) -- (-2.55, 2.5) -- (-2.45, 2.5);
+  \draw[color=gray]
+    (-1.95, 2.5) -- (-1.95, 3) -- (-2.05, 3) -- (-2.05, 2.5) -- (-1.95, 2.5);
+  \draw (-3.75, 2.5) -- (-3.25, 2.5) -- (-3.25, 3) -- (-3.75, 3) -- (-3.75, 2.5);
+  \draw (-3.25, 2.5) -- (-2.75, 2.5) -- (-2.75, 3) -- (-3.25, 3);
+  \draw (-2.75, 2.5) -- (-2.25, 2.5) -- (-2.25, 3) -- (-2.75, 3);
+  \draw (-2.25, 2.5) -- (-1.75, 2.5) -- (-1.75, 3) -- (-2.25, 3);
+
+  \node at (-6, 1) {\textsf{ALU}};
+  \draw (-8, 0) -- (-4, 0) -- (-4, 2) -- (-8, 2) -- (-8, 0);
+  \node at (-3.375, 1.75) {\textsf{O}};
+  \draw (-4, 1.75) -- (-3.75, 1.75);
+  \draw (-3.75, 2) -- (-3, 2) -- (-3, 1.5) -- (-3.75, 1.5) -- (-3.75, 2);
+  \draw[color=gray]
+    (-2.8, 2) -- (-2.8, 1.5) -- (-2.7, 1.5) -- (-2.7, 2) -- (-2.8, 2);
+  \draw (-3, 2) -- (-2.5, 2) -- (-2.5, 1.5) -- (-3, 1.5);
+  \node at (-3.375, 1) {\textsf{N}};
+  \draw (-4, 1) -- (-3.75, 1);
+  \draw (-3.75, 1.25) -- (-3, 1.25) -- (-3, 0.75) -- (-3.75, 0.75) -- (-3.75, 1.25);
+  \draw[color=gray]
+    (-2.8, 1.25) -- (-2.8, 0.75) -- (-2.7, 0.75) -- (-2.7, 1.25) -- (-2.8, 1.25);
+  \draw (-3, 1.25) -- (-2.5, 1.25) -- (-2.5, 0.75) -- (-3, 0.75);
+  \node at (-3.375, 0.25) {\textsf{Z}};
+  \draw (-4, 0.25) -- (-3.75, 0.25);
+  \draw (-3.75, 0.5) -- (-3, 0.5) -- (-3, 0) -- (-3.75, 0) -- (-3.75, 0.5);
+  \draw[color=gray,fill=black]
+    (-2.8, 0.5) -- (-2.8, 0) -- (-2.7, 0) -- (-2.7, 0.5) -- (-2.8, 0.5);
+  \draw (-3, 0.5) -- (-2.5, 0.5) -- (-2.5, 0) -- (-3, 0);
+
+  \node at (-7.5, -0.75) {\textsf{IP}};
+  \draw (-7, -0.5) -- (-8, -0.5) -- (-8, -1) -- (-7, -1);
+  \draw[color=gray]
+    (-6.7, -0.5) -- (-6.7, -1) -- (-6.8, -1) -- (-6.8, -0.5) -- (-6.7, -0.5);
+  \draw[color=gray]
+    (-6.2, -0.5) -- (-6.2, -1) -- (-6.3, -1) -- (-6.3, -0.5) -- (-6.2, -0.5);
+  \draw[color=gray,fill=black]
+    (-5.7, -0.5) -- (-5.7, -1) -- (-5.8, -1) -- (-5.8, -0.5) -- (-5.7, -0.5);
+  \draw[color=gray]
+    (-5.2, -0.5) -- (-5.2, -1) -- (-5.3, -1) -- (-5.3, -0.5) -- (-5.2, -0.5);
+  \draw (-7, -0.5) -- (-6.5, -0.5) -- (-6.5, -1) -- (-7, -1) -- (-7, -0.5);
+  \draw (-6.5, -0.5) -- (-6, -0.5) -- (-6, -1) -- (-6.5, -1);
+  \draw (-6, -0.5) -- (-5.5, -0.5) -- (-5.5, -1) -- (-6, -1);
+  \draw (-5.5, -0.5) -- (-5, -0.5) -- (-5, -1) -- (-5.5, -1);
+
+\end{diagram}
+
+Note that $R3$ has zeros in it (which is the correct result of the arithmetic our program performed), the zero flag is on, and the instruction pointer has been incremented. 
+
+At this point, there are no more instructions in memory, so the computer has finished its execution, and we are done. Our program was simple, but our computer executed it, one instruction at a time.
+
+Notice that this program always adds zeros, because all it does is add values stored in the registers, and the registers start with just zeros in them. If we want to add other numbers besides zeros, we need to first load some values into the registers.  We will do that in our next program.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Starting with Values in Memory}
+
+\newthought{Let's look at one more program}. This one is similar to the last one, except we will put some custom values into our memory bank before we start up the program. Then our program can use those values when it runs.
+
+For this second program, let us suppose that we have the following three lines of code:
+
+\begin{center}
+  \begin{tabular}{c c c c c c c c}
+    \hline
+    0 & 1 & 0 & 1 & 1 & 0 & 0 & 1 \\ \hline
+    0 & 1 & 0 & 1 & 1 & 1 & 1 & 0 \\ \hline
+    0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 \\ \hline
+  \end{tabular}
+\end{center}
+
+What do these binary-coded instructions mean? Our CPU will interpret the first line like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {$0$};
+  \node at (1.5, 0) {$1$};
+  \node at (3, 0) {$0$};
+  \node at (4.5, 0) {$1$};
+  \node at (6, 0) {$1$};
+  \node at (7.5, 0) {$0$};  
+  \node at (9, 0) {$0$};
+  \node at (10.5, 0) {$1$};
+
+\end{diagram}
+
+Our CPU interprets that code like so:
+
+\begin{diagram}
+
+  \node at (0, 0) {$0$};
+  \node at (1.5, 0) {$1$};
+  \node at (3, 0) {$0$};
+  \node at (4.5, 0) {$1$};
+  \node at (6, 0) {$1$};
+  \node at (7.5, 0) {$0$};  
+  \node at (9, 0) {$0$};
+  \node at (10.5, 0) {$1$};
+
+  \draw (-0.25, -0.25) -- (-0.25, -0.5) -- (1.75, -0.5) -- (1.75, -0.25);
+  \draw[->] (0.75, -0.5) -- (0.75, -1);
+  \node at (0.75, -1.5) {``$01$'' is};
+  \node at (0.75, -2) {the code};
+  \node at (0.75, -2.5) {for ``load''};
+
+  \draw (2.75, -0.25) -- (2.75, -0.5) -- (7.75, -0.5) -- (7.75, -0.25);
+  \draw[->] (5, -0.5) -- (5, -1);
+  \node at (5, -1.5) {``$0110$'' is};
+  \node at (5, -2) {address $0110$};
+  \node at (5, -2.5) {in memory};
+
+  \draw (8.75, -0.25) -- (8.75, -0.5) -- (10.75, -0.5) -- (10.75, -0.25);
+  \draw[->] (9.75, -0.5) -- (9.75, -1);
+  \node at (9.75, -1.5) {``$01$'' is};
+  \node at (9.75, -2) {register 1};
+  \node at (9.75, -2.5) {(i.e., $R1$)};
+
+\end{diagram}
+
+Which, in our more human-readable form, looks like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {\textsf{LOAD}};
+  \node at (2, 0) {\textsf{@0110}};
+  \node at (4, 0) {\textsf{R1}};
+
+\end{diagram}
+
+In other words, this tells our CPU to read whatever number is stored in memory at address $0110$, and put it in the register $R1$.
+
+As for the second line of our code, our CPU will interpret it like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {$0$};
+  \node at (1.5, 0) {$1$};
+  \node at (3, 0) {$0$};
+  \node at (4.5, 0) {$1$};
+  \node at (6, 0) {$1$};
+  \node at (7.5, 0) {$1$};  
+  \node at (9, 0) {$1$};
+  \node at (10.5, 0) {$0$};
+
+\end{diagram}
+
+Our CPU interprets that code like so:
+
+\begin{diagram}
+
+  \node at (0, 0) {$0$};
+  \node at (1.5, 0) {$1$};
+  \node at (3, 0) {$0$};
+  \node at (4.5, 0) {$1$};
+  \node at (6, 0) {$1$};
+  \node at (7.5, 0) {$1$};  
+  \node at (9, 0) {$1$};
+  \node at (10.5, 0) {$0$};
+
+  \draw (-0.25, -0.25) -- (-0.25, -0.5) -- (1.75, -0.5) -- (1.75, -0.25);
+  \draw[->] (0.75, -0.5) -- (0.75, -1);
+  \node at (0.75, -1.5) {``$01$'' is};
+  \node at (0.75, -2) {the code};
+  \node at (0.75, -2.5) {for ``load''};
+
+  \draw (2.75, -0.25) -- (2.75, -0.5) -- (7.75, -0.5) -- (7.75, -0.25);
+  \draw[->] (5, -0.5) -- (5, -1);
+  \node at (5, -1.5) {``$0110$'' is};
+  \node at (5, -2) {address $0111$};
+  \node at (5, -2.5) {in memory};
+
+  \draw (8.75, -0.25) -- (8.75, -0.5) -- (10.75, -0.5) -- (10.75, -0.25);
+  \draw[->] (9.75, -0.5) -- (9.75, -1);
+  \node at (9.75, -1.5) {``$10$'' is};
+  \node at (9.75, -2) {register 2};
+  \node at (9.75, -2.5) {(i.e., $R2$)};
+
+\end{diagram}
+
+Which, in our more human-readable form, looks like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {\textsf{LOAD}};
+  \node at (2, 0) {\textsf{@0111}};
+  \node at (4, 0) {\textsf{R2}};
+
+\end{diagram}
+
+In other words, this tells our CPU to read whatever number is stored in memory at address $0110$, and put it in the register $R2$.
+
+Our CPU will interpret the third line of code like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {$0$};
+  \node at (1.5, 0) {$0$};
+  \node at (3, 0) {$0$};
+  \node at (4.5, 0) {$1$};
+  \node at (6, 0) {$1$};
+  \node at (7.5, 0) {$0$};  
+  \node at (9, 0) {$0$};
+  \node at (10.5, 0) {$0$};
+
+  \draw (-0.25, -0.25) -- (-0.25, -0.5) -- (1.75, -0.5) -- (1.75, -0.25);
+  \draw[->] (0.75, -0.5) -- (0.75, -1);
+  \node at (0.75, -1.5) {``$00$'' is};
+  \node at (0.75, -2) {the code};
+  \node at (0.75, -2.5) {for ``add''};
+
+  \draw (2.75, -0.25) -- (2.75, -0.5) -- (4.75, -0.5) -- (4.75, -0.25);
+  \draw[->] (3.75, -0.5) -- (3.75, -1);
+  \node at (3.75, -1.5) {``$01$'' is};
+  \node at (3.75, -2) {register 1};
+  \node at (3.75, -2.5) {(i.e., $R1$)};
+
+  \draw (5.75, -0.25) -- (5.75, -0.5) -- (7.75, -0.5) -- (7.75, -0.25);
+  \draw[->] (6.75, -0.5) -- (6.75, -1);
+  \node at (6.75, -1.5) {``$10$'' is};
+  \node at (6.75, -2) {register 2};
+  \node at (6.75, -2.5) {(i.e., $R2$)};
+
+  \draw (8.75, -0.25) -- (8.75, -0.5) -- (10.75, -0.5) -- (10.75, -0.25);
+  \draw[->] (9.75, -0.5) -- (9.75, -1);
+  \node at (9.75, -1.5) {``$00$'' is};
+  \node at (9.75, -2) {register 0};
+  \node at (9.75, -2.5) {(i.e., $R0$)};
+
+\end{diagram}
+
+Which, in our more human-readable form, looks like this:
+
+\begin{diagram}
+
+  \node at (0, 0) {\textsf{ADD}};
+  \node at (2, 0) {\textsf{R1}};
+  \node at (4, 0) {\textsf{R2}};
+  \node at (6, 0) {\textsf{R0}};
+
+\end{diagram}
+
+In other words, this tells our CPU to add whatever numbers are in $R1$ and $R2$, and then put the result in $R0$. 
+
+In human readable form, then, our three lines of code amount to this:
+
+\begin{center}
+  \begin{tabular}{c c c c}
+    \hline
+    LOAD & @0110 & R1 & ~ \\ \hline
+    LOAD & @0111 & R2 & ~ \\ \hline
+    ADD & R1 & R2 & R0 \\ \hline
+  \end{tabular}
+\end{center}
+
+So, our program will first load the value from memory at $0110$ into $R1$, then it will load the value from memory at $0111$ into $R2$, then it will add $R1$ and $R2$ and put the result in $R0$. In effect, this is a little calculator. We put the two numbers we want to add into memory at addresses $0110$ and $0111$, then we run the program, and the result will be in register $R0$.
+
+To get our program to run this code, we first have to load this code into our computer's memory. To do that, we put each line of our code into the memory bank. So, the first three lines of code go in the first three registers in our memory bank. After loading the code into memory, our computer looks like this: 
+
+\begin{diagram}
+
+  % The Memory
+
+  \draw (-1.6, -0.1) -- (-1.6, 4.1) -- (4.1, 4.1) -- (4.1, -0.1) -- (-1.6, -0.1);
+  \draw[fill=black]
+    (0.25, -0.1) -- (2.75, -0.1) -- (2.75, -0.7) -- (0.25, -0.7) -- (0.25, -0.1);
+  \node[color=white] at (1.5, -0.4) {\textsf{Memory}};
+
+  \node at (-0.75, 3.75) {\textsf{0000}};
+  \draw (0, 3.5) -- (-1.5, 3.5) -- (-1.5, 4) -- (0, 4);
+  \draw[color=gray] (0.2, 3.5) -- (0.2, 4) -- (0.3, 4) -- (0.3, 3.5) -- (0.2, 3.5);
+  \draw[color=gray,fill=black] (0.7, 3.5) -- (0.7, 4) -- (0.8, 4) -- (0.8, 3.5) -- (0.7, 3.5);
+  \draw[color=gray] (1.2, 3.5) -- (1.2, 4) -- (1.3, 4) -- (1.3, 3.5) -- (1.2, 3.5);
+  \draw[color=gray,fill=black] (1.7, 3.5) -- (1.7, 4) -- (1.8, 4) -- (1.8, 3.5) -- (1.7, 3.5);
+  \draw[color=gray,fill=black] (2.2, 3.5) -- (2.2, 4) -- (2.3, 4) -- (2.3, 3.5) -- (2.2, 3.5);
+  \draw[color=gray] (2.7, 3.5) -- (2.7, 4) -- (2.8, 4) -- (2.8, 3.5) -- (2.7, 3.5);
+  \draw[color=gray] (3.2, 3.5) -- (3.2, 4) -- (3.3, 4) -- (3.3, 3.5) -- (3.2, 3.5);
+  \draw[color=gray,fill=black] (3.7, 3.5) -- (3.7, 4) -- (3.8, 4) -- (3.8, 3.5) -- (3.7, 3.5);
+  \draw (0, 3.5) -- (0.5, 3.5) -- (0.5, 4) -- (0, 4) -- (0, 3.5);
+  \draw (0.5, 3.5) -- (1, 3.5) -- (1, 4) -- (0.5, 4);
+  \draw (1, 3.5) -- (1.5, 3.5) -- (1.5, 4) -- (1, 4);
+  \draw (1.5, 3.5) -- (2, 3.5) -- (2, 4) -- (1.5, 4);
+  \draw (2, 3.5) -- (2.5, 3.5) -- (2.5, 4) -- (2, 4);
+  \draw (2.5, 3.5) -- (3, 3.5) -- (3, 4) -- (2.5, 4);
+  \draw (3, 3.5) -- (3.5, 3.5) -- (3.5, 4) -- (3, 4);
+  \draw (3.5, 3.5) -- (4, 3.5) -- (4, 4) -- (3.5, 4);
+  
+  \node at (-0.75, 3.25) {\textsf{0001}};
+  \draw (0, 3) -- (-1.5, 3) -- (-1.5, 3.5) -- (0, 3.5);
+  \draw[color=gray] (0.2, 3) -- (0.2, 3.5) -- (0.3, 3.5) -- (0.3, 3) -- (0.2, 3);
+  \draw[color=gray,fill=black] (0.7, 3) -- (0.7, 3.5) -- (0.8, 3.5) -- (0.8, 3) -- (0.7, 3);
+  \draw[color=gray] (1.2, 3) -- (1.2, 3.5) -- (1.3, 3.5) -- (1.3, 3) -- (1.2, 3);
+  \draw[color=gray,fill=black] (1.7, 3) -- (1.7, 3.5) -- (1.8, 3.5) -- (1.8, 3) -- (1.7, 3);
+  \draw[color=gray,fill=black] (2.2, 3) -- (2.2, 3.5) -- (2.3, 3.5) -- (2.3, 3) -- (2.2, 3);
+  \draw[color=gray,fill=black] (2.7, 3) -- (2.7, 3.5) -- (2.8, 3.5) -- (2.8, 3) -- (2.7, 3);
+  \draw[color=gray,fill=black] (3.2, 3) -- (3.2, 3.5) -- (3.3, 3.5) -- (3.3, 3) -- (3.2, 3);
+  \draw[color=gray] (3.7, 3) -- (3.7, 3.5) -- (3.8, 3.5) -- (3.8, 3) -- (3.7, 3);
+  \draw (0, 3) -- (0.5, 3) -- (0.5, 3.5) -- (0, 3.5) -- (0, 3);
+  \draw (0.5, 3) -- (1, 3) -- (1, 3.5) -- (0.5, 3.5);
+  \draw (1, 3) -- (1.5, 3) -- (1.5, 3.5) -- (1, 3.5);
+  \draw (1.5, 3) -- (2, 3) -- (2, 3.5) -- (1.5, 3.5);
+  \draw (2, 3) -- (2.5, 3) -- (2.5, 3.5) -- (2, 3.5);
+  \draw (2.5, 3) -- (3, 3) -- (3, 3.5) -- (2.5, 3.5);
+  \draw (3, 3) -- (3.5, 3) -- (3.5, 3.5) -- (3, 3.5);
+  \draw (3.5, 3) -- (4, 3) -- (4, 3.5) -- (3.5, 3.5);
+
+  \node at (-0.75, 2.75) {\textsf{0010}};
+  \draw (0, 2.5) -- (-1.5, 2.5) -- (-1.5, 3) -- (0, 3);
+  \draw[color=gray] (0.2, 2.5) -- (0.2, 3) -- (0.3, 3) -- (0.3, 2.5) -- (0.2, 2.5);
+  \draw[color=gray] (0.7, 2.5) -- (0.7, 3) -- (0.8, 3) -- (0.8, 2.5) -- (0.7, 2.5);
+  \draw[color=gray] (1.2, 2.5) -- (1.2, 3) -- (1.3, 3) -- (1.3, 2.5) -- (1.2, 2.5);
+  \draw[color=gray,fill=black] (1.7, 2.5) -- (1.7, 3) -- (1.8, 3) -- (1.8, 2.5) -- (1.7, 2.5);
+  \draw[color=gray,fill=black] (2.2, 2.5) -- (2.2, 3) -- (2.3, 3) -- (2.3, 2.5) -- (2.2, 2.5);
+  \draw[color=gray] (2.7, 2.5) -- (2.7, 3) -- (2.8, 3) -- (2.8, 2.5) -- (2.7, 2.5);
+  \draw[color=gray] (3.2, 2.5) -- (3.2, 3) -- (3.3, 3) -- (3.3, 2.5) -- (3.2, 2.5);
+  \draw[color=gray] (3.7, 2.5) -- (3.7, 3) -- (3.8, 3) -- (3.8, 2.5) -- (3.7, 2.5);
+  \draw (0, 2.5) -- (0.5, 2.5) -- (0.5, 3) -- (0, 3) -- (0, 2.5);
+  \draw (0.5, 2.5) -- (1, 2.5) -- (1, 3) -- (0.5, 3);
+  \draw (1, 2.5) -- (1.5, 2.5) -- (1.5, 3) -- (1, 3);
+  \draw (1.5, 2.5) -- (2, 2.5) -- (2, 3) -- (1.5, 3);
+  \draw (2, 2.5) -- (2.5, 2.5) -- (2.5, 3) -- (2, 3);
+  \draw (2.5, 2.5) -- (3, 2.5) -- (3, 3) -- (2.5, 3);
+  \draw (3, 2.5) -- (3.5, 2.5) -- (3.5, 3) -- (3, 3);
+  \draw (3.5, 2.5) -- (4, 2.5) -- (4, 3) -- (3.5, 3);
+  
+  \node at (-0.75, 2.25) {\textsf{0011}};
+  \draw (0, 2) -- (-1.5, 2) -- (-1.5, 2.5) -- (0, 2.5);
+  \draw[color=gray] (0.2, 2) -- (0.2, 2.5) -- (0.3, 2.5) -- (0.3, 2) -- (0.2, 2);
+  \draw[color=gray] (0.7, 2) -- (0.7, 2.5) -- (0.8, 2.5) -- (0.8, 2) -- (0.7, 2);
+  \draw[color=gray] (1.2, 2) -- (1.2, 2.5) -- (1.3, 2.5) -- (1.3, 2) -- (1.2, 2);
+  \draw[color=gray] (1.7, 2) -- (1.7, 2.5) -- (1.8, 2.5) -- (1.8, 2) -- (1.7, 2);
+  \draw[color=gray] (2.2, 2) -- (2.2, 2.5) -- (2.3, 2.5) -- (2.3, 2) -- (2.2, 2);
+  \draw[color=gray] (2.7, 2) -- (2.7, 2.5) -- (2.8, 2.5) -- (2.8, 2) -- (2.7, 2);
+  \draw[color=gray] (3.2, 2) -- (3.2, 2.5) -- (3.3, 2.5) -- (3.3, 2) -- (3.2, 2);
+  \draw[color=gray] (3.7, 2) -- (3.7, 2.5) -- (3.8, 2.5) -- (3.8, 2) -- (3.7, 2);
+  \draw (0, 2) -- (0.5, 2) -- (0.5, 2.5) -- (0, 2.5) -- (0, 2);
+  \draw (0.5, 2) -- (1, 2) -- (1, 2.5) -- (0.5, 2.5);
+  \draw (1, 2) -- (1.5, 2) -- (1.5, 2.5) -- (1, 2.5);
+  \draw (1.5, 2) -- (2, 2) -- (2, 2.5) -- (1.5, 2.5);
+  \draw (2, 2) -- (2.5, 2) -- (2.5, 2.5) -- (2, 2.5);
+  \draw (2.5, 2) -- (3, 2) -- (3, 2.5) -- (2.5, 2.5);
+  \draw (3, 2) -- (3.5, 2) -- (3.5, 2.5) -- (3, 2.5);
+  \draw (3.5, 2) -- (4, 2) -- (4, 2.5) -- (3.5, 2.5);
+
+  \node at (-0.75, 1.75) {\textsf{0100}};
+  \draw (0, 1.5) -- (-1.5, 1.5) -- (-1.5, 2) -- (0, 2);
+  \draw[color=gray] (0.2, 1.5) -- (0.2, 2) -- (0.3, 2) -- (0.3, 1.5) -- (0.2, 1.5);
+  \draw[color=gray] (0.7, 1.5) -- (0.7, 2) -- (0.8, 2) -- (0.8, 1.5) -- (0.7, 1.5);
+  \draw[color=gray] (1.2, 1.5) -- (1.2, 2) -- (1.3, 2) -- (1.3, 1.5) -- (1.2, 1.5);
+  \draw[color=gray] (1.7, 1.5) -- (1.7, 2) -- (1.8, 2) -- (1.8, 1.5) -- (1.7, 1.5);
+  \draw[color=gray] (2.2, 1.5) -- (2.2, 2) -- (2.3, 2) -- (2.3, 1.5) -- (2.2, 1.5);
+  \draw[color=gray] (2.7, 1.5) -- (2.7, 2) -- (2.8, 2) -- (2.8, 1.5) -- (2.7, 1.5);
+  \draw[color=gray] (3.2, 1.5) -- (3.2, 2) -- (3.3, 2) -- (3.3, 1.5) -- (3.2, 1.5);
+  \draw[color=gray] (3.7, 1.5) -- (3.7, 2) -- (3.8, 2) -- (3.8, 1.5) -- (3.7, 1.5);
+  \draw (0, 1.5) -- (0.5, 1.5) -- (0.5, 2) -- (0, 2) -- (0, 1.5);
+  \draw (0.5, 1.5) -- (1, 1.5) -- (1, 2) -- (0.5, 2);
+  \draw (1, 1.5) -- (1.5, 1.5) -- (1.5, 2) -- (1, 2);
+  \draw (1.5, 1.5) -- (2, 1.5) -- (2, 2) -- (1.5, 2);
+  \draw (2, 1.5) -- (2.5, 1.5) -- (2.5, 2) -- (2, 2);
+  \draw (2.5, 1.5) -- (3, 1.5) -- (3, 2) -- (2.5, 2);
+  \draw (3, 1.5) -- (3.5, 1.5) -- (3.5, 2) -- (3, 2);
+  \draw (3.5, 1.5) -- (4, 1.5) -- (4, 2) -- (3.5, 2);
+  
+  \node at (-0.75, 1.25) {\textsf{0101}};
+  \draw (0, 1) -- (-1.5, 1) -- (-1.5, 1.5) -- (0, 1.5);
+  \draw[color=gray] (0.2, 1) -- (0.2, 1.5) -- (0.3, 1.5) -- (0.3, 1) -- (0.2, 1);
+  \draw[color=gray] (0.7, 1) -- (0.7, 1.5) -- (0.8, 1.5) -- (0.8, 1) -- (0.7, 1);
+  \draw[color=gray] (1.2, 1) -- (1.2, 1.5) -- (1.3, 1.5) -- (1.3, 1) -- (1.2, 1);
+  \draw[color=gray] (1.7, 1) -- (1.7, 1.5) -- (1.8, 1.5) -- (1.8, 1) -- (1.7, 1);
+  \draw[color=gray] (2.2, 1) -- (2.2, 1.5) -- (2.3, 1.5) -- (2.3, 1) -- (2.2, 1);
+  \draw[color=gray] (2.7, 1) -- (2.7, 1.5) -- (2.8, 1.5) -- (2.8, 1) -- (2.7, 1);
+  \draw[color=gray] (3.2, 1) -- (3.2, 1.5) -- (3.3, 1.5) -- (3.3, 1) -- (3.2, 1);
+  \draw[color=gray] (3.7, 1) -- (3.7, 1.5) -- (3.8, 1.5) -- (3.8, 1) -- (3.7, 1);
+  \draw (0, 1) -- (0.5, 1) -- (0.5, 1.5) -- (0, 1.5) -- (0, 1);
+  \draw (0.5, 1) -- (1, 1) -- (1, 1.5) -- (0.5, 1.5);
+  \draw (1, 1) -- (1.5, 1) -- (1.5, 1.5) -- (1, 1.5);
+  \draw (1.5, 1) -- (2, 1) -- (2, 1.5) -- (1.5, 1.5);
+  \draw (2, 1) -- (2.5, 1) -- (2.5, 1.5) -- (2, 1.5);
+  \draw (2.5, 1) -- (3, 1) -- (3, 1.5) -- (2.5, 1.5);
+  \draw (3, 1) -- (3.5, 1) -- (3.5, 1.5) -- (3, 1.5);
+  \draw (3.5, 1) -- (4, 1) -- (4, 1.5) -- (3.5, 1.5);
+
+  \node at (-0.75, 0.75) {\textsf{0110}};
+  \draw (0, 0.5) -- (-1.5, 0.5) -- (-1.5, 1) -- (0, 1);
+  \draw[color=gray] (0.2, 0.5) -- (0.2, 1) -- (0.3, 1) -- (0.3, 0.5) -- (0.2, 0.5);
+  \draw[color=gray] (0.7, 0.5) -- (0.7, 1) -- (0.8, 1) -- (0.8, 0.5) -- (0.7, 0.5);
+  \draw[color=gray] (1.2, 0.5) -- (1.2, 1) -- (1.3, 1) -- (1.3, 0.5) -- (1.2, 0.5);
+  \draw[color=gray] (1.7, 0.5) -- (1.7, 1) -- (1.8, 1) -- (1.8, 0.5) -- (1.7, 0.5);
+  \draw[color=gray] (2.2, 0.5) -- (2.2, 1) -- (2.3, 1) -- (2.3, 0.5) -- (2.2, 0.5);
+  \draw[color=gray] (2.7, 0.5) -- (2.7, 1) -- (2.8, 1) -- (2.8, 0.5) -- (2.7, 0.5);
+  \draw[color=gray] (3.2, 0.5) -- (3.2, 1) -- (3.3, 1) -- (3.3, 0.5) -- (3.2, 0.5);
+  \draw[color=gray] (3.7, 0.5) -- (3.7, 1) -- (3.8, 1) -- (3.8, 0.5) -- (3.7, 0.5);
+  \draw (0, 0.5) -- (0.5, 0.5) -- (0.5, 1) -- (0, 1) -- (0, 0.5);
+  \draw (0.5, 0.5) -- (1, 0.5) -- (1, 1) -- (0.5, 1);
+  \draw (1, 0.5) -- (1.5, 0.5) -- (1.5, 1) -- (1, 1);
+  \draw (1.5, 0.5) -- (2, 0.5) -- (2, 1) -- (1.5, 1);
+  \draw (2, 0.5) -- (2.5, 0.5) -- (2.5, 1) -- (2, 1);
+  \draw (2.5, 0.5) -- (3, 0.5) -- (3, 1) -- (2.5, 1);
+  \draw (3, 0.5) -- (3.5, 0.5) -- (3.5, 1) -- (3, 1);
+  \draw (3.5, 0.5) -- (4, 0.5) -- (4, 1) -- (3.5, 1);
+  
+  \node at (-0.75, 0.25) {\textsf{0111}};
+  \draw (0, 0) -- (-1.5, 0) -- (-1.5, 0.5) -- (0, 0.5);
+  \draw[color=gray] (0.2, 0) -- (0.2, 0.5) -- (0.3, 0.5) -- (0.3, 0) -- (0.2, 0);
+  \draw[color=gray] (0.7, 0) -- (0.7, 0.5) -- (0.8, 0.5) -- (0.8, 0) -- (0.7, 0);
+  \draw[color=gray] (1.2, 0) -- (1.2, 0.5) -- (1.3, 0.5) -- (1.3, 0) -- (1.2, 0);
+  \draw[color=gray] (1.7, 0) -- (1.7, 0.5) -- (1.8, 0.5) -- (1.8, 0) -- (1.7, 0);
+  \draw[color=gray] (2.2, 0) -- (2.2, 0.5) -- (2.3, 0.5) -- (2.3, 0) -- (2.2, 0);
+  \draw[color=gray] (2.7, 0) -- (2.7, 0.5) -- (2.8, 0.5) -- (2.8, 0) -- (2.7, 0);
+  \draw[color=gray] (3.2, 0) -- (3.2, 0.5) -- (3.3, 0.5) -- (3.3, 0) -- (3.2, 0);
+  \draw[color=gray] (3.7, 0) -- (3.7, 0.5) -- (3.8, 0.5) -- (3.8, 0) -- (3.7, 0);
+  \draw (0, 0) -- (0.5, 0) -- (0.5, 0.5) -- (0, 0.5) -- (0, 0);
+  \draw (0.5, 0) -- (1, 0) -- (1, 0.5) -- (0.5, 0.5);
+  \draw (1, 0) -- (1.5, 0) -- (1.5, 0.5) -- (1, 0.5);
+  \draw (1.5, 0) -- (2, 0) -- (2, 0.5) -- (1.5, 0.5);
+  \draw (2, 0) -- (2.5, 0) -- (2.5, 0.5) -- (2, 0.5);
+  \draw (2.5, 0) -- (3, 0) -- (3, 0.5) -- (2.5, 0.5);
+  \draw (3, 0) -- (3.5, 0) -- (3.5, 0.5) -- (3, 0.5);
+  \draw (3.5, 0) -- (4, 0) -- (4, 0.5) -- (3.5, 0.5);
+
+  % The CPU
+
+  \draw (-8.1, -1.1) -- (-8.1, 4.1) -- (-1.65, 4.1) -- (-1.65, -1.1) -- (-8.1, -1.1);
+  \draw[fill=black]
+    (-5.8, -1.1) -- (-4.2, -1.1) -- (-4.2, -1.7) -- (-5.8, -1.7) -- (-5.8, -1.1);
+  \node[color=white] at (-5, -1.4) {\textsf{CPU}};
+
+  \node at (-7.5, 3.75) {\textsf{R0}};
+  \draw (-7, 3.5) -- (-8, 3.5) -- (-8, 4) -- (-7, 4);
+  \draw[color=gray]
+    (-6.7, 3.5) -- (-6.7, 4) -- (-6.8, 4) -- (-6.8, 3.5) -- (-6.7, 3.5);
+  \draw[color=gray]
+    (-6.2, 3.5) -- (-6.2, 4) -- (-6.3, 4) -- (-6.3, 3.5) -- (-6.2, 3.5);
+  \draw[color=gray]
+    (-5.7, 3.5) -- (-5.7, 4) -- (-5.8, 4) -- (-5.8, 3.5) -- (-5.7, 3.5);
+  \draw[color=gray]
+    (-5.2, 3.5) -- (-5.2, 4) -- (-5.3, 4) -- (-5.3, 3.5) -- (-5.2, 3.5);
+  \draw (-7, 3.5) -- (-6.5, 3.5) -- (-6.5, 4) -- (-7, 4) -- (-7, 3.5);
+  \draw (-6.5, 3.5) -- (-6, 3.5) -- (-6, 4) -- (-6.5, 4);
+  \draw (-6, 3.5) -- (-5.5, 3.5) -- (-5.5, 4) -- (-6, 4);
+  \draw (-5.5, 3.5) -- (-5, 3.5) -- (-5, 4) -- (-5.5, 4);
+
+  \node at (-4.25, 3.75) {\textsf{R1}};
+  \draw (-3.75, 3.5) -- (-4.75, 3.5) -- (-4.75, 4) -- (-3.75, 4);
+  \draw[color=gray]
+    (-3.45, 3.5) -- (-3.45, 4) -- (-3.55, 4) -- (-3.55, 3.5) -- (-3.45, 3.5);
+  \draw[color=gray]
+    (-2.95, 3.5) -- (-2.95, 4) -- (-3.05, 4) -- (-3.05, 3.5) -- (-2.95, 3.5);
+  \draw[color=gray]
+    (-2.45, 3.5) -- (-2.45, 4) -- (-2.55, 4) -- (-2.55, 3.5) -- (-2.45, 3.5);
+  \draw[color=gray]
+    (-1.95, 3.5) -- (-1.95, 4) -- (-2.05, 4) -- (-2.05, 3.5) -- (-1.95, 3.5);
+  \draw (-3.75, 3.5) -- (-3.25, 3.5) -- (-3.25, 4) -- (-3.75, 4) -- (-3.75, 3.5);
+  \draw (-3.25, 3.5) -- (-2.75, 3.5) -- (-2.75, 4) -- (-3.25, 4);
+  \draw (-2.75, 3.5) -- (-2.25, 3.5) -- (-2.25, 4) -- (-2.75, 4);
+  \draw (-2.25, 3.5) -- (-1.75, 3.5) -- (-1.75, 4) -- (-2.25, 4);
+
+  \node at (-7.5, 2.75) {\textsf{R2}};
+  \draw (-7, 2.5) -- (-8, 2.5) -- (-8, 3) -- (-7, 3);
+  \draw[color=gray]
+    (-6.7, 2.5) -- (-6.7, 3) -- (-6.8, 3) -- (-6.8, 2.5) -- (-6.7, 2.5);
+  \draw[color=gray]
+    (-6.2, 2.5) -- (-6.2, 3) -- (-6.3, 3) -- (-6.3, 2.5) -- (-6.2, 2.5);
+  \draw[color=gray]
+    (-5.7, 2.5) -- (-5.7, 3) -- (-5.8, 3) -- (-5.8, 2.5) -- (-5.7, 2.5);
+  \draw[color=gray]
+    (-5.2, 2.5) -- (-5.2, 3) -- (-5.3, 3) -- (-5.3, 2.5) -- (-5.2, 2.5);
+  \draw (-7, 2.5) -- (-6.5, 2.5) -- (-6.5, 3) -- (-7, 3) -- (-7, 2.5);
+  \draw (-6.5, 2.5) -- (-6, 2.5) -- (-6, 3) -- (-6.5, 3);
+  \draw (-6, 2.5) -- (-5.5, 2.5) -- (-5.5, 3) -- (-6, 3);
+  \draw (-5.5, 2.5) -- (-5, 2.5) -- (-5, 3) -- (-5.5, 3);
+
+  \node at (-4.25, 2.75) {\textsf{R3}};
+  \draw (-3.75, 2.5) -- (-4.75, 2.5) -- (-4.75, 3) -- (-3.75, 3);
+  \draw[color=gray]
+    (-3.45, 2.5) -- (-3.45, 3) -- (-3.55, 3) -- (-3.55, 2.5) -- (-3.45, 2.5);
+  \draw[color=gray]
+    (-2.95, 2.5) -- (-2.95, 3) -- (-3.05, 3) -- (-3.05, 2.5) -- (-2.95, 2.5);
+  \draw[color=gray]
+    (-2.45, 2.5) -- (-2.45, 3) -- (-2.55, 3) -- (-2.55, 2.5) -- (-2.45, 2.5);
+  \draw[color=gray]
+    (-1.95, 2.5) -- (-1.95, 3) -- (-2.05, 3) -- (-2.05, 2.5) -- (-1.95, 2.5);
+  \draw (-3.75, 2.5) -- (-3.25, 2.5) -- (-3.25, 3) -- (-3.75, 3) -- (-3.75, 2.5);
+  \draw (-3.25, 2.5) -- (-2.75, 2.5) -- (-2.75, 3) -- (-3.25, 3);
+  \draw (-2.75, 2.5) -- (-2.25, 2.5) -- (-2.25, 3) -- (-2.75, 3);
+  \draw (-2.25, 2.5) -- (-1.75, 2.5) -- (-1.75, 3) -- (-2.25, 3);
+
+  \node at (-6, 1) {\textsf{ALU}};
+  \draw (-8, 0) -- (-4, 0) -- (-4, 2) -- (-8, 2) -- (-8, 0);
+  \node at (-3.375, 1.75) {\textsf{O}};
+  \draw (-4, 1.75) -- (-3.75, 1.75);
+  \draw (-3.75, 2) -- (-3, 2) -- (-3, 1.5) -- (-3.75, 1.5) -- (-3.75, 2);
+  \draw[color=gray]
+    (-2.8, 2) -- (-2.8, 1.5) -- (-2.7, 1.5) -- (-2.7, 2) -- (-2.8, 2);
+  \draw (-3, 2) -- (-2.5, 2) -- (-2.5, 1.5) -- (-3, 1.5);
+  \node at (-3.375, 1) {\textsf{N}};
+  \draw (-4, 1) -- (-3.75, 1);
+  \draw (-3.75, 1.25) -- (-3, 1.25) -- (-3, 0.75) -- (-3.75, 0.75) -- (-3.75, 1.25);
+  \draw[color=gray]
+    (-2.8, 1.25) -- (-2.8, 0.75) -- (-2.7, 0.75) -- (-2.7, 1.25) -- (-2.8, 1.25);
+  \draw (-3, 1.25) -- (-2.5, 1.25) -- (-2.5, 0.75) -- (-3, 0.75);
+  \node at (-3.375, 0.25) {\textsf{Z}};
+  \draw (-4, 0.25) -- (-3.75, 0.25);
+  \draw (-3.75, 0.5) -- (-3, 0.5) -- (-3, 0) -- (-3.75, 0) -- (-3.75, 0.5);
+  \draw[color=gray]
+    (-2.8, 0.5) -- (-2.8, 0) -- (-2.7, 0) -- (-2.7, 0.5) -- (-2.8, 0.5);
+  \draw (-3, 0.5) -- (-2.5, 0.5) -- (-2.5, 0) -- (-3, 0);
+
+  \node at (-7.5, -0.75) {\textsf{IP}};
+  \draw (-7, -0.5) -- (-8, -0.5) -- (-8, -1) -- (-7, -1);
+  \draw[color=gray]
+    (-6.7, -0.5) -- (-6.7, -1) -- (-6.8, -1) -- (-6.8, -0.5) -- (-6.7, -0.5);
+  \draw[color=gray]
+    (-6.2, -0.5) -- (-6.2, -1) -- (-6.3, -1) -- (-6.3, -0.5) -- (-6.2, -0.5);
+  \draw[color=gray]
+    (-5.7, -0.5) -- (-5.7, -1) -- (-5.8, -1) -- (-5.8, -0.5) -- (-5.7, -0.5);
+  \draw[color=gray]
+    (-5.2, -0.5) -- (-5.2, -1) -- (-5.3, -1) -- (-5.3, -0.5) -- (-5.2, -0.5);
+  \draw (-7, -0.5) -- (-6.5, -0.5) -- (-6.5, -1) -- (-7, -1) -- (-7, -0.5);
+  \draw (-6.5, -0.5) -- (-6, -0.5) -- (-6, -1) -- (-6.5, -1);
+  \draw (-6, -0.5) -- (-5.5, -0.5) -- (-5.5, -1) -- (-6, -1);
+  \draw (-5.5, -0.5) -- (-5, -0.5) -- (-5, -1) -- (-5.5, -1);
+
+\end{diagram}
+
+Notice how our three coded instructions occupy the first three slots in our memory bank.
+
+Before we run our program, let's put some numbers into our memory bank at address $0110$ and $0111$. Let's put the number 2 (in binary: $0010$) at address $0110$, and let's put the number 4 (in binary: $0100$) at address $0111$. When we do that, our computer now looks like this:
+
+\begin{diagram}
+
+  % The Memory
+
+  \draw (-1.6, -0.1) -- (-1.6, 4.1) -- (4.1, 4.1) -- (4.1, -0.1) -- (-1.6, -0.1);
+  \draw[fill=black]
+    (0.25, -0.1) -- (2.75, -0.1) -- (2.75, -0.7) -- (0.25, -0.7) -- (0.25, -0.1);
+  \node[color=white] at (1.5, -0.4) {\textsf{Memory}};
+
+  \node at (-0.75, 3.75) {\textsf{0000}};
+  \draw (0, 3.5) -- (-1.5, 3.5) -- (-1.5, 4) -- (0, 4);
+  \draw[color=gray] (0.2, 3.5) -- (0.2, 4) -- (0.3, 4) -- (0.3, 3.5) -- (0.2, 3.5);
+  \draw[color=gray,fill=black] (0.7, 3.5) -- (0.7, 4) -- (0.8, 4) -- (0.8, 3.5) -- (0.7, 3.5);
+  \draw[color=gray] (1.2, 3.5) -- (1.2, 4) -- (1.3, 4) -- (1.3, 3.5) -- (1.2, 3.5);
+  \draw[color=gray,fill=black] (1.7, 3.5) -- (1.7, 4) -- (1.8, 4) -- (1.8, 3.5) -- (1.7, 3.5);
+  \draw[color=gray,fill=black] (2.2, 3.5) -- (2.2, 4) -- (2.3, 4) -- (2.3, 3.5) -- (2.2, 3.5);
+  \draw[color=gray] (2.7, 3.5) -- (2.7, 4) -- (2.8, 4) -- (2.8, 3.5) -- (2.7, 3.5);
+  \draw[color=gray] (3.2, 3.5) -- (3.2, 4) -- (3.3, 4) -- (3.3, 3.5) -- (3.2, 3.5);
+  \draw[color=gray,fill=black] (3.7, 3.5) -- (3.7, 4) -- (3.8, 4) -- (3.8, 3.5) -- (3.7, 3.5);
+  \draw (0, 3.5) -- (0.5, 3.5) -- (0.5, 4) -- (0, 4) -- (0, 3.5);
+  \draw (0.5, 3.5) -- (1, 3.5) -- (1, 4) -- (0.5, 4);
+  \draw (1, 3.5) -- (1.5, 3.5) -- (1.5, 4) -- (1, 4);
+  \draw (1.5, 3.5) -- (2, 3.5) -- (2, 4) -- (1.5, 4);
+  \draw (2, 3.5) -- (2.5, 3.5) -- (2.5, 4) -- (2, 4);
+  \draw (2.5, 3.5) -- (3, 3.5) -- (3, 4) -- (2.5, 4);
+  \draw (3, 3.5) -- (3.5, 3.5) -- (3.5, 4) -- (3, 4);
+  \draw (3.5, 3.5) -- (4, 3.5) -- (4, 4) -- (3.5, 4);
+  
+  \node at (-0.75, 3.25) {\textsf{0001}};
+  \draw (0, 3) -- (-1.5, 3) -- (-1.5, 3.5) -- (0, 3.5);
+  \draw[color=gray] (0.2, 3) -- (0.2, 3.5) -- (0.3, 3.5) -- (0.3, 3) -- (0.2, 3);
+  \draw[color=gray,fill=black] (0.7, 3) -- (0.7, 3.5) -- (0.8, 3.5) -- (0.8, 3) -- (0.7, 3);
+  \draw[color=gray] (1.2, 3) -- (1.2, 3.5) -- (1.3, 3.5) -- (1.3, 3) -- (1.2, 3);
+  \draw[color=gray,fill=black] (1.7, 3) -- (1.7, 3.5) -- (1.8, 3.5) -- (1.8, 3) -- (1.7, 3);
+  \draw[color=gray,fill=black] (2.2, 3) -- (2.2, 3.5) -- (2.3, 3.5) -- (2.3, 3) -- (2.2, 3);
+  \draw[color=gray,fill=black] (2.7, 3) -- (2.7, 3.5) -- (2.8, 3.5) -- (2.8, 3) -- (2.7, 3);
+  \draw[color=gray,fill=black] (3.2, 3) -- (3.2, 3.5) -- (3.3, 3.5) -- (3.3, 3) -- (3.2, 3);
+  \draw[color=gray] (3.7, 3) -- (3.7, 3.5) -- (3.8, 3.5) -- (3.8, 3) -- (3.7, 3);
+  \draw (0, 3) -- (0.5, 3) -- (0.5, 3.5) -- (0, 3.5) -- (0, 3);
+  \draw (0.5, 3) -- (1, 3) -- (1, 3.5) -- (0.5, 3.5);
+  \draw (1, 3) -- (1.5, 3) -- (1.5, 3.5) -- (1, 3.5);
+  \draw (1.5, 3) -- (2, 3) -- (2, 3.5) -- (1.5, 3.5);
+  \draw (2, 3) -- (2.5, 3) -- (2.5, 3.5) -- (2, 3.5);
+  \draw (2.5, 3) -- (3, 3) -- (3, 3.5) -- (2.5, 3.5);
+  \draw (3, 3) -- (3.5, 3) -- (3.5, 3.5) -- (3, 3.5);
+  \draw (3.5, 3) -- (4, 3) -- (4, 3.5) -- (3.5, 3.5);
+
+  \node at (-0.75, 2.75) {\textsf{0010}};
+  \draw (0, 2.5) -- (-1.5, 2.5) -- (-1.5, 3) -- (0, 3);
+  \draw[color=gray] (0.2, 2.5) -- (0.2, 3) -- (0.3, 3) -- (0.3, 2.5) -- (0.2, 2.5);
+  \draw[color=gray] (0.7, 2.5) -- (0.7, 3) -- (0.8, 3) -- (0.8, 2.5) -- (0.7, 2.5);
+  \draw[color=gray] (1.2, 2.5) -- (1.2, 3) -- (1.3, 3) -- (1.3, 2.5) -- (1.2, 2.5);
+  \draw[color=gray,fill=black] (1.7, 2.5) -- (1.7, 3) -- (1.8, 3) -- (1.8, 2.5) -- (1.7, 2.5);
+  \draw[color=gray,fill=black] (2.2, 2.5) -- (2.2, 3) -- (2.3, 3) -- (2.3, 2.5) -- (2.2, 2.5);
+  \draw[color=gray] (2.7, 2.5) -- (2.7, 3) -- (2.8, 3) -- (2.8, 2.5) -- (2.7, 2.5);
+  \draw[color=gray] (3.2, 2.5) -- (3.2, 3) -- (3.3, 3) -- (3.3, 2.5) -- (3.2, 2.5);
+  \draw[color=gray] (3.7, 2.5) -- (3.7, 3) -- (3.8, 3) -- (3.8, 2.5) -- (3.7, 2.5);
+  \draw (0, 2.5) -- (0.5, 2.5) -- (0.5, 3) -- (0, 3) -- (0, 2.5);
+  \draw (0.5, 2.5) -- (1, 2.5) -- (1, 3) -- (0.5, 3);
+  \draw (1, 2.5) -- (1.5, 2.5) -- (1.5, 3) -- (1, 3);
+  \draw (1.5, 2.5) -- (2, 2.5) -- (2, 3) -- (1.5, 3);
+  \draw (2, 2.5) -- (2.5, 2.5) -- (2.5, 3) -- (2, 3);
+  \draw (2.5, 2.5) -- (3, 2.5) -- (3, 3) -- (2.5, 3);
+  \draw (3, 2.5) -- (3.5, 2.5) -- (3.5, 3) -- (3, 3);
+  \draw (3.5, 2.5) -- (4, 2.5) -- (4, 3) -- (3.5, 3);
+  
+  \node at (-0.75, 2.25) {\textsf{0011}};
+  \draw (0, 2) -- (-1.5, 2) -- (-1.5, 2.5) -- (0, 2.5);
+  \draw[color=gray] (0.2, 2) -- (0.2, 2.5) -- (0.3, 2.5) -- (0.3, 2) -- (0.2, 2);
+  \draw[color=gray] (0.7, 2) -- (0.7, 2.5) -- (0.8, 2.5) -- (0.8, 2) -- (0.7, 2);
+  \draw[color=gray] (1.2, 2) -- (1.2, 2.5) -- (1.3, 2.5) -- (1.3, 2) -- (1.2, 2);
+  \draw[color=gray] (1.7, 2) -- (1.7, 2.5) -- (1.8, 2.5) -- (1.8, 2) -- (1.7, 2);
+  \draw[color=gray] (2.2, 2) -- (2.2, 2.5) -- (2.3, 2.5) -- (2.3, 2) -- (2.2, 2);
+  \draw[color=gray] (2.7, 2) -- (2.7, 2.5) -- (2.8, 2.5) -- (2.8, 2) -- (2.7, 2);
+  \draw[color=gray] (3.2, 2) -- (3.2, 2.5) -- (3.3, 2.5) -- (3.3, 2) -- (3.2, 2);
+  \draw[color=gray] (3.7, 2) -- (3.7, 2.5) -- (3.8, 2.5) -- (3.8, 2) -- (3.7, 2);
+  \draw (0, 2) -- (0.5, 2) -- (0.5, 2.5) -- (0, 2.5) -- (0, 2);
+  \draw (0.5, 2) -- (1, 2) -- (1, 2.5) -- (0.5, 2.5);
+  \draw (1, 2) -- (1.5, 2) -- (1.5, 2.5) -- (1, 2.5);
+  \draw (1.5, 2) -- (2, 2) -- (2, 2.5) -- (1.5, 2.5);
+  \draw (2, 2) -- (2.5, 2) -- (2.5, 2.5) -- (2, 2.5);
+  \draw (2.5, 2) -- (3, 2) -- (3, 2.5) -- (2.5, 2.5);
+  \draw (3, 2) -- (3.5, 2) -- (3.5, 2.5) -- (3, 2.5);
+  \draw (3.5, 2) -- (4, 2) -- (4, 2.5) -- (3.5, 2.5);
+
+  \node at (-0.75, 1.75) {\textsf{0100}};
+  \draw (0, 1.5) -- (-1.5, 1.5) -- (-1.5, 2) -- (0, 2);
+  \draw[color=gray] (0.2, 1.5) -- (0.2, 2) -- (0.3, 2) -- (0.3, 1.5) -- (0.2, 1.5);
+  \draw[color=gray] (0.7, 1.5) -- (0.7, 2) -- (0.8, 2) -- (0.8, 1.5) -- (0.7, 1.5);
+  \draw[color=gray] (1.2, 1.5) -- (1.2, 2) -- (1.3, 2) -- (1.3, 1.5) -- (1.2, 1.5);
+  \draw[color=gray] (1.7, 1.5) -- (1.7, 2) -- (1.8, 2) -- (1.8, 1.5) -- (1.7, 1.5);
+  \draw[color=gray] (2.2, 1.5) -- (2.2, 2) -- (2.3, 2) -- (2.3, 1.5) -- (2.2, 1.5);
+  \draw[color=gray] (2.7, 1.5) -- (2.7, 2) -- (2.8, 2) -- (2.8, 1.5) -- (2.7, 1.5);
+  \draw[color=gray] (3.2, 1.5) -- (3.2, 2) -- (3.3, 2) -- (3.3, 1.5) -- (3.2, 1.5);
+  \draw[color=gray] (3.7, 1.5) -- (3.7, 2) -- (3.8, 2) -- (3.8, 1.5) -- (3.7, 1.5);
+  \draw (0, 1.5) -- (0.5, 1.5) -- (0.5, 2) -- (0, 2) -- (0, 1.5);
+  \draw (0.5, 1.5) -- (1, 1.5) -- (1, 2) -- (0.5, 2);
+  \draw (1, 1.5) -- (1.5, 1.5) -- (1.5, 2) -- (1, 2);
+  \draw (1.5, 1.5) -- (2, 1.5) -- (2, 2) -- (1.5, 2);
+  \draw (2, 1.5) -- (2.5, 1.5) -- (2.5, 2) -- (2, 2);
+  \draw (2.5, 1.5) -- (3, 1.5) -- (3, 2) -- (2.5, 2);
+  \draw (3, 1.5) -- (3.5, 1.5) -- (3.5, 2) -- (3, 2);
+  \draw (3.5, 1.5) -- (4, 1.5) -- (4, 2) -- (3.5, 2);
+  
+  \node at (-0.75, 1.25) {\textsf{0101}};
+  \draw (0, 1) -- (-1.5, 1) -- (-1.5, 1.5) -- (0, 1.5);
+  \draw[color=gray] (0.2, 1) -- (0.2, 1.5) -- (0.3, 1.5) -- (0.3, 1) -- (0.2, 1);
+  \draw[color=gray] (0.7, 1) -- (0.7, 1.5) -- (0.8, 1.5) -- (0.8, 1) -- (0.7, 1);
+  \draw[color=gray] (1.2, 1) -- (1.2, 1.5) -- (1.3, 1.5) -- (1.3, 1) -- (1.2, 1);
+  \draw[color=gray] (1.7, 1) -- (1.7, 1.5) -- (1.8, 1.5) -- (1.8, 1) -- (1.7, 1);
+  \draw[color=gray] (2.2, 1) -- (2.2, 1.5) -- (2.3, 1.5) -- (2.3, 1) -- (2.2, 1);
+  \draw[color=gray] (2.7, 1) -- (2.7, 1.5) -- (2.8, 1.5) -- (2.8, 1) -- (2.7, 1);
+  \draw[color=gray] (3.2, 1) -- (3.2, 1.5) -- (3.3, 1.5) -- (3.3, 1) -- (3.2, 1);
+  \draw[color=gray] (3.7, 1) -- (3.7, 1.5) -- (3.8, 1.5) -- (3.8, 1) -- (3.7, 1);
+  \draw (0, 1) -- (0.5, 1) -- (0.5, 1.5) -- (0, 1.5) -- (0, 1);
+  \draw (0.5, 1) -- (1, 1) -- (1, 1.5) -- (0.5, 1.5);
+  \draw (1, 1) -- (1.5, 1) -- (1.5, 1.5) -- (1, 1.5);
+  \draw (1.5, 1) -- (2, 1) -- (2, 1.5) -- (1.5, 1.5);
+  \draw (2, 1) -- (2.5, 1) -- (2.5, 1.5) -- (2, 1.5);
+  \draw (2.5, 1) -- (3, 1) -- (3, 1.5) -- (2.5, 1.5);
+  \draw (3, 1) -- (3.5, 1) -- (3.5, 1.5) -- (3, 1.5);
+  \draw (3.5, 1) -- (4, 1) -- (4, 1.5) -- (3.5, 1.5);
+
+  \node at (-0.75, 0.75) {\textsf{0110}};
+  \draw (0, 0.5) -- (-1.5, 0.5) -- (-1.5, 1) -- (0, 1);
+  \draw[color=gray] (0.2, 0.5) -- (0.2, 1) -- (0.3, 1) -- (0.3, 0.5) -- (0.2, 0.5);
+  \draw[color=gray] (0.7, 0.5) -- (0.7, 1) -- (0.8, 1) -- (0.8, 0.5) -- (0.7, 0.5);
+  \draw[color=gray] (1.2, 0.5) -- (1.2, 1) -- (1.3, 1) -- (1.3, 0.5) -- (1.2, 0.5);
+  \draw[color=gray] (1.7, 0.5) -- (1.7, 1) -- (1.8, 1) -- (1.8, 0.5) -- (1.7, 0.5);
+  \draw[color=gray] (2.2, 0.5) -- (2.2, 1) -- (2.3, 1) -- (2.3, 0.5) -- (2.2, 0.5);
+  \draw[color=gray] (2.7, 0.5) -- (2.7, 1) -- (2.8, 1) -- (2.8, 0.5) -- (2.7, 0.5);
+  \draw[color=gray,fill=black] (3.2, 0.5) -- (3.2, 1) -- (3.3, 1) -- (3.3, 0.5) -- (3.2, 0.5);
+  \draw[color=gray] (3.7, 0.5) -- (3.7, 1) -- (3.8, 1) -- (3.8, 0.5) -- (3.7, 0.5);
+  \draw (0, 0.5) -- (0.5, 0.5) -- (0.5, 1) -- (0, 1) -- (0, 0.5);
+  \draw (0.5, 0.5) -- (1, 0.5) -- (1, 1) -- (0.5, 1);
+  \draw (1, 0.5) -- (1.5, 0.5) -- (1.5, 1) -- (1, 1);
+  \draw (1.5, 0.5) -- (2, 0.5) -- (2, 1) -- (1.5, 1);
+  \draw (2, 0.5) -- (2.5, 0.5) -- (2.5, 1) -- (2, 1);
+  \draw (2.5, 0.5) -- (3, 0.5) -- (3, 1) -- (2.5, 1);
+  \draw (3, 0.5) -- (3.5, 0.5) -- (3.5, 1) -- (3, 1);
+  \draw (3.5, 0.5) -- (4, 0.5) -- (4, 1) -- (3.5, 1);
+  
+  \node at (-0.75, 0.25) {\textsf{0111}};
+  \draw (0, 0) -- (-1.5, 0) -- (-1.5, 0.5) -- (0, 0.5);
+  \draw[color=gray] (0.2, 0) -- (0.2, 0.5) -- (0.3, 0.5) -- (0.3, 0) -- (0.2, 0);
+  \draw[color=gray] (0.7, 0) -- (0.7, 0.5) -- (0.8, 0.5) -- (0.8, 0) -- (0.7, 0);
+  \draw[color=gray] (1.2, 0) -- (1.2, 0.5) -- (1.3, 0.5) -- (1.3, 0) -- (1.2, 0);
+  \draw[color=gray] (1.7, 0) -- (1.7, 0.5) -- (1.8, 0.5) -- (1.8, 0) -- (1.7, 0);
+  \draw[color=gray] (2.2, 0) -- (2.2, 0.5) -- (2.3, 0.5) -- (2.3, 0) -- (2.2, 0);
+  \draw[color=gray,fill=black] (2.7, 0) -- (2.7, 0.5) -- (2.8, 0.5) -- (2.8, 0) -- (2.7, 0);
+  \draw[color=gray] (3.2, 0) -- (3.2, 0.5) -- (3.3, 0.5) -- (3.3, 0) -- (3.2, 0);
+  \draw[color=gray] (3.7, 0) -- (3.7, 0.5) -- (3.8, 0.5) -- (3.8, 0) -- (3.7, 0);
+  \draw (0, 0) -- (0.5, 0) -- (0.5, 0.5) -- (0, 0.5) -- (0, 0);
+  \draw (0.5, 0) -- (1, 0) -- (1, 0.5) -- (0.5, 0.5);
+  \draw (1, 0) -- (1.5, 0) -- (1.5, 0.5) -- (1, 0.5);
+  \draw (1.5, 0) -- (2, 0) -- (2, 0.5) -- (1.5, 0.5);
+  \draw (2, 0) -- (2.5, 0) -- (2.5, 0.5) -- (2, 0.5);
+  \draw (2.5, 0) -- (3, 0) -- (3, 0.5) -- (2.5, 0.5);
+  \draw (3, 0) -- (3.5, 0) -- (3.5, 0.5) -- (3, 0.5);
+  \draw (3.5, 0) -- (4, 0) -- (4, 0.5) -- (3.5, 0.5);
+
+  % The CPU
+
+  \draw (-8.1, -1.1) -- (-8.1, 4.1) -- (-1.65, 4.1) -- (-1.65, -1.1) -- (-8.1, -1.1);
+  \draw[fill=black]
+    (-5.8, -1.1) -- (-4.2, -1.1) -- (-4.2, -1.7) -- (-5.8, -1.7) -- (-5.8, -1.1);
+  \node[color=white] at (-5, -1.4) {\textsf{CPU}};
+
+  \node at (-7.5, 3.75) {\textsf{R0}};
+  \draw (-7, 3.5) -- (-8, 3.5) -- (-8, 4) -- (-7, 4);
+  \draw[color=gray]
+    (-6.7, 3.5) -- (-6.7, 4) -- (-6.8, 4) -- (-6.8, 3.5) -- (-6.7, 3.5);
+  \draw[color=gray]
+    (-6.2, 3.5) -- (-6.2, 4) -- (-6.3, 4) -- (-6.3, 3.5) -- (-6.2, 3.5);
+  \draw[color=gray]
+    (-5.7, 3.5) -- (-5.7, 4) -- (-5.8, 4) -- (-5.8, 3.5) -- (-5.7, 3.5);
+  \draw[color=gray]
+    (-5.2, 3.5) -- (-5.2, 4) -- (-5.3, 4) -- (-5.3, 3.5) -- (-5.2, 3.5);
+  \draw (-7, 3.5) -- (-6.5, 3.5) -- (-6.5, 4) -- (-7, 4) -- (-7, 3.5);
+  \draw (-6.5, 3.5) -- (-6, 3.5) -- (-6, 4) -- (-6.5, 4);
+  \draw (-6, 3.5) -- (-5.5, 3.5) -- (-5.5, 4) -- (-6, 4);
+  \draw (-5.5, 3.5) -- (-5, 3.5) -- (-5, 4) -- (-5.5, 4);
+
+  \node at (-4.25, 3.75) {\textsf{R1}};
+  \draw (-3.75, 3.5) -- (-4.75, 3.5) -- (-4.75, 4) -- (-3.75, 4);
+  \draw[color=gray]
+    (-3.45, 3.5) -- (-3.45, 4) -- (-3.55, 4) -- (-3.55, 3.5) -- (-3.45, 3.5);
+  \draw[color=gray]
+    (-2.95, 3.5) -- (-2.95, 4) -- (-3.05, 4) -- (-3.05, 3.5) -- (-2.95, 3.5);
+  \draw[color=gray]
+    (-2.45, 3.5) -- (-2.45, 4) -- (-2.55, 4) -- (-2.55, 3.5) -- (-2.45, 3.5);
+  \draw[color=gray]
+    (-1.95, 3.5) -- (-1.95, 4) -- (-2.05, 4) -- (-2.05, 3.5) -- (-1.95, 3.5);
+  \draw (-3.75, 3.5) -- (-3.25, 3.5) -- (-3.25, 4) -- (-3.75, 4) -- (-3.75, 3.5);
+  \draw (-3.25, 3.5) -- (-2.75, 3.5) -- (-2.75, 4) -- (-3.25, 4);
+  \draw (-2.75, 3.5) -- (-2.25, 3.5) -- (-2.25, 4) -- (-2.75, 4);
+  \draw (-2.25, 3.5) -- (-1.75, 3.5) -- (-1.75, 4) -- (-2.25, 4);
+
+  \node at (-7.5, 2.75) {\textsf{R2}};
+  \draw (-7, 2.5) -- (-8, 2.5) -- (-8, 3) -- (-7, 3);
+  \draw[color=gray]
+    (-6.7, 2.5) -- (-6.7, 3) -- (-6.8, 3) -- (-6.8, 2.5) -- (-6.7, 2.5);
+  \draw[color=gray]
+    (-6.2, 2.5) -- (-6.2, 3) -- (-6.3, 3) -- (-6.3, 2.5) -- (-6.2, 2.5);
+  \draw[color=gray]
+    (-5.7, 2.5) -- (-5.7, 3) -- (-5.8, 3) -- (-5.8, 2.5) -- (-5.7, 2.5);
+  \draw[color=gray]
+    (-5.2, 2.5) -- (-5.2, 3) -- (-5.3, 3) -- (-5.3, 2.5) -- (-5.2, 2.5);
+  \draw (-7, 2.5) -- (-6.5, 2.5) -- (-6.5, 3) -- (-7, 3) -- (-7, 2.5);
+  \draw (-6.5, 2.5) -- (-6, 2.5) -- (-6, 3) -- (-6.5, 3);
+  \draw (-6, 2.5) -- (-5.5, 2.5) -- (-5.5, 3) -- (-6, 3);
+  \draw (-5.5, 2.5) -- (-5, 2.5) -- (-5, 3) -- (-5.5, 3);
+
+  \node at (-4.25, 2.75) {\textsf{R3}};
+  \draw (-3.75, 2.5) -- (-4.75, 2.5) -- (-4.75, 3) -- (-3.75, 3);
+  \draw[color=gray]
+    (-3.45, 2.5) -- (-3.45, 3) -- (-3.55, 3) -- (-3.55, 2.5) -- (-3.45, 2.5);
+  \draw[color=gray]
+    (-2.95, 2.5) -- (-2.95, 3) -- (-3.05, 3) -- (-3.05, 2.5) -- (-2.95, 2.5);
+  \draw[color=gray]
+    (-2.45, 2.5) -- (-2.45, 3) -- (-2.55, 3) -- (-2.55, 2.5) -- (-2.45, 2.5);
+  \draw[color=gray]
+    (-1.95, 2.5) -- (-1.95, 3) -- (-2.05, 3) -- (-2.05, 2.5) -- (-1.95, 2.5);
+  \draw (-3.75, 2.5) -- (-3.25, 2.5) -- (-3.25, 3) -- (-3.75, 3) -- (-3.75, 2.5);
+  \draw (-3.25, 2.5) -- (-2.75, 2.5) -- (-2.75, 3) -- (-3.25, 3);
+  \draw (-2.75, 2.5) -- (-2.25, 2.5) -- (-2.25, 3) -- (-2.75, 3);
+  \draw (-2.25, 2.5) -- (-1.75, 2.5) -- (-1.75, 3) -- (-2.25, 3);
+
+  \node at (-6, 1) {\textsf{ALU}};
+  \draw (-8, 0) -- (-4, 0) -- (-4, 2) -- (-8, 2) -- (-8, 0);
+  \node at (-3.375, 1.75) {\textsf{O}};
+  \draw (-4, 1.75) -- (-3.75, 1.75);
+  \draw (-3.75, 2) -- (-3, 2) -- (-3, 1.5) -- (-3.75, 1.5) -- (-3.75, 2);
+  \draw[color=gray]
+    (-2.8, 2) -- (-2.8, 1.5) -- (-2.7, 1.5) -- (-2.7, 2) -- (-2.8, 2);
+  \draw (-3, 2) -- (-2.5, 2) -- (-2.5, 1.5) -- (-3, 1.5);
+  \node at (-3.375, 1) {\textsf{N}};
+  \draw (-4, 1) -- (-3.75, 1);
+  \draw (-3.75, 1.25) -- (-3, 1.25) -- (-3, 0.75) -- (-3.75, 0.75) -- (-3.75, 1.25);
+  \draw[color=gray]
+    (-2.8, 1.25) -- (-2.8, 0.75) -- (-2.7, 0.75) -- (-2.7, 1.25) -- (-2.8, 1.25);
+  \draw (-3, 1.25) -- (-2.5, 1.25) -- (-2.5, 0.75) -- (-3, 0.75);
+  \node at (-3.375, 0.25) {\textsf{Z}};
+  \draw (-4, 0.25) -- (-3.75, 0.25);
+  \draw (-3.75, 0.5) -- (-3, 0.5) -- (-3, 0) -- (-3.75, 0) -- (-3.75, 0.5);
+  \draw[color=gray]
+    (-2.8, 0.5) -- (-2.8, 0) -- (-2.7, 0) -- (-2.7, 0.5) -- (-2.8, 0.5);
+  \draw (-3, 0.5) -- (-2.5, 0.5) -- (-2.5, 0) -- (-3, 0);
+
+  \node at (-7.5, -0.75) {\textsf{IP}};
+  \draw (-7, -0.5) -- (-8, -0.5) -- (-8, -1) -- (-7, -1);
+  \draw[color=gray]
+    (-6.7, -0.5) -- (-6.7, -1) -- (-6.8, -1) -- (-6.8, -0.5) -- (-6.7, -0.5);
+  \draw[color=gray]
+    (-6.2, -0.5) -- (-6.2, -1) -- (-6.3, -1) -- (-6.3, -0.5) -- (-6.2, -0.5);
+  \draw[color=gray]
+    (-5.7, -0.5) -- (-5.7, -1) -- (-5.8, -1) -- (-5.8, -0.5) -- (-5.7, -0.5);
+  \draw[color=gray]
+    (-5.2, -0.5) -- (-5.2, -1) -- (-5.3, -1) -- (-5.3, -0.5) -- (-5.2, -0.5);
+  \draw (-7, -0.5) -- (-6.5, -0.5) -- (-6.5, -1) -- (-7, -1) -- (-7, -0.5);
+  \draw (-6.5, -0.5) -- (-6, -0.5) -- (-6, -1) -- (-6.5, -1);
+  \draw (-6, -0.5) -- (-5.5, -0.5) -- (-5.5, -1) -- (-6, -1);
+  \draw (-5.5, -0.5) -- (-5, -0.5) -- (-5, -1) -- (-5.5, -1);
+
+\end{diagram}
+
+Notice how the register at memory address $0110$ contains the number two and the register at memory address $0111$ contains the number four. When our program runs, it will now have some numbers at these addresses that it can work with.
+
+At this point, we have loaded our program (our coded instructions) into the computer's memory, and we have put some initial values into memory at the addresses $0110$ and $0111$, so that our program has some actual values to work with. Let's now run the program.
+
+The instruction pointer (\textsf{IP}) starts at $0000$, so it first looks in memory at address $0000$ to find its first instruction. There it finds the instruction $01011001$, which tells it to take the value stored in memory at $0110$ and put it in $R1$. So, our CPU does just that: it gets the value $0001$ from memory at address $0110$, and it puts it into the register $R1$. Then, our CPU increments the instruction pointer (\textsf{IP}) to $0001$. Hence, after executing the first instruction, our computer now looks like this:
+
+\begin{diagram}
+
+  % The Memory
+
+  \draw (-1.6, -0.1) -- (-1.6, 4.1) -- (4.1, 4.1) -- (4.1, -0.1) -- (-1.6, -0.1);
+  \draw[fill=black]
+    (0.25, -0.1) -- (2.75, -0.1) -- (2.75, -0.7) -- (0.25, -0.7) -- (0.25, -0.1);
+  \node[color=white] at (1.5, -0.4) {\textsf{Memory}};
+
+  \node at (-0.75, 3.75) {\textsf{0000}};
+  \draw (0, 3.5) -- (-1.5, 3.5) -- (-1.5, 4) -- (0, 4);
+  \draw[color=gray] (0.2, 3.5) -- (0.2, 4) -- (0.3, 4) -- (0.3, 3.5) -- (0.2, 3.5);
+  \draw[color=gray,fill=black] (0.7, 3.5) -- (0.7, 4) -- (0.8, 4) -- (0.8, 3.5) -- (0.7, 3.5);
+  \draw[color=gray] (1.2, 3.5) -- (1.2, 4) -- (1.3, 4) -- (1.3, 3.5) -- (1.2, 3.5);
+  \draw[color=gray,fill=black] (1.7, 3.5) -- (1.7, 4) -- (1.8, 4) -- (1.8, 3.5) -- (1.7, 3.5);
+  \draw[color=gray,fill=black] (2.2, 3.5) -- (2.2, 4) -- (2.3, 4) -- (2.3, 3.5) -- (2.2, 3.5);
+  \draw[color=gray] (2.7, 3.5) -- (2.7, 4) -- (2.8, 4) -- (2.8, 3.5) -- (2.7, 3.5);
+  \draw[color=gray] (3.2, 3.5) -- (3.2, 4) -- (3.3, 4) -- (3.3, 3.5) -- (3.2, 3.5);
+  \draw[color=gray,fill=black] (3.7, 3.5) -- (3.7, 4) -- (3.8, 4) -- (3.8, 3.5) -- (3.7, 3.5);
+  \draw (0, 3.5) -- (0.5, 3.5) -- (0.5, 4) -- (0, 4) -- (0, 3.5);
+  \draw (0.5, 3.5) -- (1, 3.5) -- (1, 4) -- (0.5, 4);
+  \draw (1, 3.5) -- (1.5, 3.5) -- (1.5, 4) -- (1, 4);
+  \draw (1.5, 3.5) -- (2, 3.5) -- (2, 4) -- (1.5, 4);
+  \draw (2, 3.5) -- (2.5, 3.5) -- (2.5, 4) -- (2, 4);
+  \draw (2.5, 3.5) -- (3, 3.5) -- (3, 4) -- (2.5, 4);
+  \draw (3, 3.5) -- (3.5, 3.5) -- (3.5, 4) -- (3, 4);
+  \draw (3.5, 3.5) -- (4, 3.5) -- (4, 4) -- (3.5, 4);
+  
+  \node at (-0.75, 3.25) {\textsf{0001}};
+  \draw (0, 3) -- (-1.5, 3) -- (-1.5, 3.5) -- (0, 3.5);
+  \draw[color=gray] (0.2, 3) -- (0.2, 3.5) -- (0.3, 3.5) -- (0.3, 3) -- (0.2, 3);
+  \draw[color=gray,fill=black] (0.7, 3) -- (0.7, 3.5) -- (0.8, 3.5) -- (0.8, 3) -- (0.7, 3);
+  \draw[color=gray] (1.2, 3) -- (1.2, 3.5) -- (1.3, 3.5) -- (1.3, 3) -- (1.2, 3);
+  \draw[color=gray,fill=black] (1.7, 3) -- (1.7, 3.5) -- (1.8, 3.5) -- (1.8, 3) -- (1.7, 3);
+  \draw[color=gray,fill=black] (2.2, 3) -- (2.2, 3.5) -- (2.3, 3.5) -- (2.3, 3) -- (2.2, 3);
+  \draw[color=gray,fill=black] (2.7, 3) -- (2.7, 3.5) -- (2.8, 3.5) -- (2.8, 3) -- (2.7, 3);
+  \draw[color=gray,fill=black] (3.2, 3) -- (3.2, 3.5) -- (3.3, 3.5) -- (3.3, 3) -- (3.2, 3);
+  \draw[color=gray] (3.7, 3) -- (3.7, 3.5) -- (3.8, 3.5) -- (3.8, 3) -- (3.7, 3);
+  \draw (0, 3) -- (0.5, 3) -- (0.5, 3.5) -- (0, 3.5) -- (0, 3);
+  \draw (0.5, 3) -- (1, 3) -- (1, 3.5) -- (0.5, 3.5);
+  \draw (1, 3) -- (1.5, 3) -- (1.5, 3.5) -- (1, 3.5);
+  \draw (1.5, 3) -- (2, 3) -- (2, 3.5) -- (1.5, 3.5);
+  \draw (2, 3) -- (2.5, 3) -- (2.5, 3.5) -- (2, 3.5);
+  \draw (2.5, 3) -- (3, 3) -- (3, 3.5) -- (2.5, 3.5);
+  \draw (3, 3) -- (3.5, 3) -- (3.5, 3.5) -- (3, 3.5);
+  \draw (3.5, 3) -- (4, 3) -- (4, 3.5) -- (3.5, 3.5);
+
+  \node at (-0.75, 2.75) {\textsf{0010}};
+  \draw (0, 2.5) -- (-1.5, 2.5) -- (-1.5, 3) -- (0, 3);
+  \draw[color=gray] (0.2, 2.5) -- (0.2, 3) -- (0.3, 3) -- (0.3, 2.5) -- (0.2, 2.5);
+  \draw[color=gray] (0.7, 2.5) -- (0.7, 3) -- (0.8, 3) -- (0.8, 2.5) -- (0.7, 2.5);
+  \draw[color=gray] (1.2, 2.5) -- (1.2, 3) -- (1.3, 3) -- (1.3, 2.5) -- (1.2, 2.5);
+  \draw[color=gray,fill=black] (1.7, 2.5) -- (1.7, 3) -- (1.8, 3) -- (1.8, 2.5) -- (1.7, 2.5);
+  \draw[color=gray,fill=black] (2.2, 2.5) -- (2.2, 3) -- (2.3, 3) -- (2.3, 2.5) -- (2.2, 2.5);
+  \draw[color=gray] (2.7, 2.5) -- (2.7, 3) -- (2.8, 3) -- (2.8, 2.5) -- (2.7, 2.5);
+  \draw[color=gray] (3.2, 2.5) -- (3.2, 3) -- (3.3, 3) -- (3.3, 2.5) -- (3.2, 2.5);
+  \draw[color=gray] (3.7, 2.5) -- (3.7, 3) -- (3.8, 3) -- (3.8, 2.5) -- (3.7, 2.5);
+  \draw (0, 2.5) -- (0.5, 2.5) -- (0.5, 3) -- (0, 3) -- (0, 2.5);
+  \draw (0.5, 2.5) -- (1, 2.5) -- (1, 3) -- (0.5, 3);
+  \draw (1, 2.5) -- (1.5, 2.5) -- (1.5, 3) -- (1, 3);
+  \draw (1.5, 2.5) -- (2, 2.5) -- (2, 3) -- (1.5, 3);
+  \draw (2, 2.5) -- (2.5, 2.5) -- (2.5, 3) -- (2, 3);
+  \draw (2.5, 2.5) -- (3, 2.5) -- (3, 3) -- (2.5, 3);
+  \draw (3, 2.5) -- (3.5, 2.5) -- (3.5, 3) -- (3, 3);
+  \draw (3.5, 2.5) -- (4, 2.5) -- (4, 3) -- (3.5, 3);
+  
+  \node at (-0.75, 2.25) {\textsf{0011}};
+  \draw (0, 2) -- (-1.5, 2) -- (-1.5, 2.5) -- (0, 2.5);
+  \draw[color=gray] (0.2, 2) -- (0.2, 2.5) -- (0.3, 2.5) -- (0.3, 2) -- (0.2, 2);
+  \draw[color=gray] (0.7, 2) -- (0.7, 2.5) -- (0.8, 2.5) -- (0.8, 2) -- (0.7, 2);
+  \draw[color=gray] (1.2, 2) -- (1.2, 2.5) -- (1.3, 2.5) -- (1.3, 2) -- (1.2, 2);
+  \draw[color=gray] (1.7, 2) -- (1.7, 2.5) -- (1.8, 2.5) -- (1.8, 2) -- (1.7, 2);
+  \draw[color=gray] (2.2, 2) -- (2.2, 2.5) -- (2.3, 2.5) -- (2.3, 2) -- (2.2, 2);
+  \draw[color=gray] (2.7, 2) -- (2.7, 2.5) -- (2.8, 2.5) -- (2.8, 2) -- (2.7, 2);
+  \draw[color=gray] (3.2, 2) -- (3.2, 2.5) -- (3.3, 2.5) -- (3.3, 2) -- (3.2, 2);
+  \draw[color=gray] (3.7, 2) -- (3.7, 2.5) -- (3.8, 2.5) -- (3.8, 2) -- (3.7, 2);
+  \draw (0, 2) -- (0.5, 2) -- (0.5, 2.5) -- (0, 2.5) -- (0, 2);
+  \draw (0.5, 2) -- (1, 2) -- (1, 2.5) -- (0.5, 2.5);
+  \draw (1, 2) -- (1.5, 2) -- (1.5, 2.5) -- (1, 2.5);
+  \draw (1.5, 2) -- (2, 2) -- (2, 2.5) -- (1.5, 2.5);
+  \draw (2, 2) -- (2.5, 2) -- (2.5, 2.5) -- (2, 2.5);
+  \draw (2.5, 2) -- (3, 2) -- (3, 2.5) -- (2.5, 2.5);
+  \draw (3, 2) -- (3.5, 2) -- (3.5, 2.5) -- (3, 2.5);
+  \draw (3.5, 2) -- (4, 2) -- (4, 2.5) -- (3.5, 2.5);
+
+  \node at (-0.75, 1.75) {\textsf{0100}};
+  \draw (0, 1.5) -- (-1.5, 1.5) -- (-1.5, 2) -- (0, 2);
+  \draw[color=gray] (0.2, 1.5) -- (0.2, 2) -- (0.3, 2) -- (0.3, 1.5) -- (0.2, 1.5);
+  \draw[color=gray] (0.7, 1.5) -- (0.7, 2) -- (0.8, 2) -- (0.8, 1.5) -- (0.7, 1.5);
+  \draw[color=gray] (1.2, 1.5) -- (1.2, 2) -- (1.3, 2) -- (1.3, 1.5) -- (1.2, 1.5);
+  \draw[color=gray] (1.7, 1.5) -- (1.7, 2) -- (1.8, 2) -- (1.8, 1.5) -- (1.7, 1.5);
+  \draw[color=gray] (2.2, 1.5) -- (2.2, 2) -- (2.3, 2) -- (2.3, 1.5) -- (2.2, 1.5);
+  \draw[color=gray] (2.7, 1.5) -- (2.7, 2) -- (2.8, 2) -- (2.8, 1.5) -- (2.7, 1.5);
+  \draw[color=gray] (3.2, 1.5) -- (3.2, 2) -- (3.3, 2) -- (3.3, 1.5) -- (3.2, 1.5);
+  \draw[color=gray] (3.7, 1.5) -- (3.7, 2) -- (3.8, 2) -- (3.8, 1.5) -- (3.7, 1.5);
+  \draw (0, 1.5) -- (0.5, 1.5) -- (0.5, 2) -- (0, 2) -- (0, 1.5);
+  \draw (0.5, 1.5) -- (1, 1.5) -- (1, 2) -- (0.5, 2);
+  \draw (1, 1.5) -- (1.5, 1.5) -- (1.5, 2) -- (1, 2);
+  \draw (1.5, 1.5) -- (2, 1.5) -- (2, 2) -- (1.5, 2);
+  \draw (2, 1.5) -- (2.5, 1.5) -- (2.5, 2) -- (2, 2);
+  \draw (2.5, 1.5) -- (3, 1.5) -- (3, 2) -- (2.5, 2);
+  \draw (3, 1.5) -- (3.5, 1.5) -- (3.5, 2) -- (3, 2);
+  \draw (3.5, 1.5) -- (4, 1.5) -- (4, 2) -- (3.5, 2);
+  
+  \node at (-0.75, 1.25) {\textsf{0101}};
+  \draw (0, 1) -- (-1.5, 1) -- (-1.5, 1.5) -- (0, 1.5);
+  \draw[color=gray] (0.2, 1) -- (0.2, 1.5) -- (0.3, 1.5) -- (0.3, 1) -- (0.2, 1);
+  \draw[color=gray] (0.7, 1) -- (0.7, 1.5) -- (0.8, 1.5) -- (0.8, 1) -- (0.7, 1);
+  \draw[color=gray] (1.2, 1) -- (1.2, 1.5) -- (1.3, 1.5) -- (1.3, 1) -- (1.2, 1);
+  \draw[color=gray] (1.7, 1) -- (1.7, 1.5) -- (1.8, 1.5) -- (1.8, 1) -- (1.7, 1);
+  \draw[color=gray] (2.2, 1) -- (2.2, 1.5) -- (2.3, 1.5) -- (2.3, 1) -- (2.2, 1);
+  \draw[color=gray] (2.7, 1) -- (2.7, 1.5) -- (2.8, 1.5) -- (2.8, 1) -- (2.7, 1);
+  \draw[color=gray] (3.2, 1) -- (3.2, 1.5) -- (3.3, 1.5) -- (3.3, 1) -- (3.2, 1);
+  \draw[color=gray] (3.7, 1) -- (3.7, 1.5) -- (3.8, 1.5) -- (3.8, 1) -- (3.7, 1);
+  \draw (0, 1) -- (0.5, 1) -- (0.5, 1.5) -- (0, 1.5) -- (0, 1);
+  \draw (0.5, 1) -- (1, 1) -- (1, 1.5) -- (0.5, 1.5);
+  \draw (1, 1) -- (1.5, 1) -- (1.5, 1.5) -- (1, 1.5);
+  \draw (1.5, 1) -- (2, 1) -- (2, 1.5) -- (1.5, 1.5);
+  \draw (2, 1) -- (2.5, 1) -- (2.5, 1.5) -- (2, 1.5);
+  \draw (2.5, 1) -- (3, 1) -- (3, 1.5) -- (2.5, 1.5);
+  \draw (3, 1) -- (3.5, 1) -- (3.5, 1.5) -- (3, 1.5);
+  \draw (3.5, 1) -- (4, 1) -- (4, 1.5) -- (3.5, 1.5);
+
+  \node at (-0.75, 0.75) {\textsf{0110}};
+  \draw (0, 0.5) -- (-1.5, 0.5) -- (-1.5, 1) -- (0, 1);
+  \draw[color=gray] (0.2, 0.5) -- (0.2, 1) -- (0.3, 1) -- (0.3, 0.5) -- (0.2, 0.5);
+  \draw[color=gray] (0.7, 0.5) -- (0.7, 1) -- (0.8, 1) -- (0.8, 0.5) -- (0.7, 0.5);
+  \draw[color=gray] (1.2, 0.5) -- (1.2, 1) -- (1.3, 1) -- (1.3, 0.5) -- (1.2, 0.5);
+  \draw[color=gray] (1.7, 0.5) -- (1.7, 1) -- (1.8, 1) -- (1.8, 0.5) -- (1.7, 0.5);
+  \draw[color=gray] (2.2, 0.5) -- (2.2, 1) -- (2.3, 1) -- (2.3, 0.5) -- (2.2, 0.5);
+  \draw[color=gray] (2.7, 0.5) -- (2.7, 1) -- (2.8, 1) -- (2.8, 0.5) -- (2.7, 0.5);
+  \draw[color=gray,fill=black] (3.2, 0.5) -- (3.2, 1) -- (3.3, 1) -- (3.3, 0.5) -- (3.2, 0.5);
+  \draw[color=gray] (3.7, 0.5) -- (3.7, 1) -- (3.8, 1) -- (3.8, 0.5) -- (3.7, 0.5);
+  \draw (0, 0.5) -- (0.5, 0.5) -- (0.5, 1) -- (0, 1) -- (0, 0.5);
+  \draw (0.5, 0.5) -- (1, 0.5) -- (1, 1) -- (0.5, 1);
+  \draw (1, 0.5) -- (1.5, 0.5) -- (1.5, 1) -- (1, 1);
+  \draw (1.5, 0.5) -- (2, 0.5) -- (2, 1) -- (1.5, 1);
+  \draw (2, 0.5) -- (2.5, 0.5) -- (2.5, 1) -- (2, 1);
+  \draw (2.5, 0.5) -- (3, 0.5) -- (3, 1) -- (2.5, 1);
+  \draw (3, 0.5) -- (3.5, 0.5) -- (3.5, 1) -- (3, 1);
+  \draw (3.5, 0.5) -- (4, 0.5) -- (4, 1) -- (3.5, 1);
+  
+  \node at (-0.75, 0.25) {\textsf{0111}};
+  \draw (0, 0) -- (-1.5, 0) -- (-1.5, 0.5) -- (0, 0.5);
+  \draw[color=gray] (0.2, 0) -- (0.2, 0.5) -- (0.3, 0.5) -- (0.3, 0) -- (0.2, 0);
+  \draw[color=gray] (0.7, 0) -- (0.7, 0.5) -- (0.8, 0.5) -- (0.8, 0) -- (0.7, 0);
+  \draw[color=gray] (1.2, 0) -- (1.2, 0.5) -- (1.3, 0.5) -- (1.3, 0) -- (1.2, 0);
+  \draw[color=gray] (1.7, 0) -- (1.7, 0.5) -- (1.8, 0.5) -- (1.8, 0) -- (1.7, 0);
+  \draw[color=gray] (2.2, 0) -- (2.2, 0.5) -- (2.3, 0.5) -- (2.3, 0) -- (2.2, 0);
+  \draw[color=gray,fill=black] (2.7, 0) -- (2.7, 0.5) -- (2.8, 0.5) -- (2.8, 0) -- (2.7, 0);
+  \draw[color=gray] (3.2, 0) -- (3.2, 0.5) -- (3.3, 0.5) -- (3.3, 0) -- (3.2, 0);
+  \draw[color=gray] (3.7, 0) -- (3.7, 0.5) -- (3.8, 0.5) -- (3.8, 0) -- (3.7, 0);
+  \draw (0, 0) -- (0.5, 0) -- (0.5, 0.5) -- (0, 0.5) -- (0, 0);
+  \draw (0.5, 0) -- (1, 0) -- (1, 0.5) -- (0.5, 0.5);
+  \draw (1, 0) -- (1.5, 0) -- (1.5, 0.5) -- (1, 0.5);
+  \draw (1.5, 0) -- (2, 0) -- (2, 0.5) -- (1.5, 0.5);
+  \draw (2, 0) -- (2.5, 0) -- (2.5, 0.5) -- (2, 0.5);
+  \draw (2.5, 0) -- (3, 0) -- (3, 0.5) -- (2.5, 0.5);
+  \draw (3, 0) -- (3.5, 0) -- (3.5, 0.5) -- (3, 0.5);
+  \draw (3.5, 0) -- (4, 0) -- (4, 0.5) -- (3.5, 0.5);
+
+  % The CPU
+
+  \draw (-8.1, -1.1) -- (-8.1, 4.1) -- (-1.65, 4.1) -- (-1.65, -1.1) -- (-8.1, -1.1);
+  \draw[fill=black]
+    (-5.8, -1.1) -- (-4.2, -1.1) -- (-4.2, -1.7) -- (-5.8, -1.7) -- (-5.8, -1.1);
+  \node[color=white] at (-5, -1.4) {\textsf{CPU}};
+
+  \node at (-7.5, 3.75) {\textsf{R0}};
+  \draw (-7, 3.5) -- (-8, 3.5) -- (-8, 4) -- (-7, 4);
+  \draw[color=gray]
+    (-6.7, 3.5) -- (-6.7, 4) -- (-6.8, 4) -- (-6.8, 3.5) -- (-6.7, 3.5);
+  \draw[color=gray]
+    (-6.2, 3.5) -- (-6.2, 4) -- (-6.3, 4) -- (-6.3, 3.5) -- (-6.2, 3.5);
+  \draw[color=gray]
+    (-5.7, 3.5) -- (-5.7, 4) -- (-5.8, 4) -- (-5.8, 3.5) -- (-5.7, 3.5);
+  \draw[color=gray]
+    (-5.2, 3.5) -- (-5.2, 4) -- (-5.3, 4) -- (-5.3, 3.5) -- (-5.2, 3.5);
+  \draw (-7, 3.5) -- (-6.5, 3.5) -- (-6.5, 4) -- (-7, 4) -- (-7, 3.5);
+  \draw (-6.5, 3.5) -- (-6, 3.5) -- (-6, 4) -- (-6.5, 4);
+  \draw (-6, 3.5) -- (-5.5, 3.5) -- (-5.5, 4) -- (-6, 4);
+  \draw (-5.5, 3.5) -- (-5, 3.5) -- (-5, 4) -- (-5.5, 4);
+
+  \node at (-4.25, 3.75) {\textsf{R1}};
+  \draw (-3.75, 3.5) -- (-4.75, 3.5) -- (-4.75, 4) -- (-3.75, 4);
+  \draw[color=gray]
+    (-3.45, 3.5) -- (-3.45, 4) -- (-3.55, 4) -- (-3.55, 3.5) -- (-3.45, 3.5);
+  \draw[color=gray]
+    (-2.95, 3.5) -- (-2.95, 4) -- (-3.05, 4) -- (-3.05, 3.5) -- (-2.95, 3.5);
+  \draw[color=gray,fill=black]
+    (-2.45, 3.5) -- (-2.45, 4) -- (-2.55, 4) -- (-2.55, 3.5) -- (-2.45, 3.5);
+  \draw[color=gray]
+    (-1.95, 3.5) -- (-1.95, 4) -- (-2.05, 4) -- (-2.05, 3.5) -- (-1.95, 3.5);
+  \draw (-3.75, 3.5) -- (-3.25, 3.5) -- (-3.25, 4) -- (-3.75, 4) -- (-3.75, 3.5);
+  \draw (-3.25, 3.5) -- (-2.75, 3.5) -- (-2.75, 4) -- (-3.25, 4);
+  \draw (-2.75, 3.5) -- (-2.25, 3.5) -- (-2.25, 4) -- (-2.75, 4);
+  \draw (-2.25, 3.5) -- (-1.75, 3.5) -- (-1.75, 4) -- (-2.25, 4);
+
+  \node at (-7.5, 2.75) {\textsf{R2}};
+  \draw (-7, 2.5) -- (-8, 2.5) -- (-8, 3) -- (-7, 3);
+  \draw[color=gray]
+    (-6.7, 2.5) -- (-6.7, 3) -- (-6.8, 3) -- (-6.8, 2.5) -- (-6.7, 2.5);
+  \draw[color=gray]
+    (-6.2, 2.5) -- (-6.2, 3) -- (-6.3, 3) -- (-6.3, 2.5) -- (-6.2, 2.5);
+  \draw[color=gray]
+    (-5.7, 2.5) -- (-5.7, 3) -- (-5.8, 3) -- (-5.8, 2.5) -- (-5.7, 2.5);
+  \draw[color=gray]
+    (-5.2, 2.5) -- (-5.2, 3) -- (-5.3, 3) -- (-5.3, 2.5) -- (-5.2, 2.5);
+  \draw (-7, 2.5) -- (-6.5, 2.5) -- (-6.5, 3) -- (-7, 3) -- (-7, 2.5);
+  \draw (-6.5, 2.5) -- (-6, 2.5) -- (-6, 3) -- (-6.5, 3);
+  \draw (-6, 2.5) -- (-5.5, 2.5) -- (-5.5, 3) -- (-6, 3);
+  \draw (-5.5, 2.5) -- (-5, 2.5) -- (-5, 3) -- (-5.5, 3);
+
+  \node at (-4.25, 2.75) {\textsf{R3}};
+  \draw (-3.75, 2.5) -- (-4.75, 2.5) -- (-4.75, 3) -- (-3.75, 3);
+  \draw[color=gray]
+    (-3.45, 2.5) -- (-3.45, 3) -- (-3.55, 3) -- (-3.55, 2.5) -- (-3.45, 2.5);
+  \draw[color=gray]
+    (-2.95, 2.5) -- (-2.95, 3) -- (-3.05, 3) -- (-3.05, 2.5) -- (-2.95, 2.5);
+  \draw[color=gray]
+    (-2.45, 2.5) -- (-2.45, 3) -- (-2.55, 3) -- (-2.55, 2.5) -- (-2.45, 2.5);
+  \draw[color=gray]
+    (-1.95, 2.5) -- (-1.95, 3) -- (-2.05, 3) -- (-2.05, 2.5) -- (-1.95, 2.5);
+  \draw (-3.75, 2.5) -- (-3.25, 2.5) -- (-3.25, 3) -- (-3.75, 3) -- (-3.75, 2.5);
+  \draw (-3.25, 2.5) -- (-2.75, 2.5) -- (-2.75, 3) -- (-3.25, 3);
+  \draw (-2.75, 2.5) -- (-2.25, 2.5) -- (-2.25, 3) -- (-2.75, 3);
+  \draw (-2.25, 2.5) -- (-1.75, 2.5) -- (-1.75, 3) -- (-2.25, 3);
+
+  \node at (-6, 1) {\textsf{ALU}};
+  \draw (-8, 0) -- (-4, 0) -- (-4, 2) -- (-8, 2) -- (-8, 0);
+  \node at (-3.375, 1.75) {\textsf{O}};
+  \draw (-4, 1.75) -- (-3.75, 1.75);
+  \draw (-3.75, 2) -- (-3, 2) -- (-3, 1.5) -- (-3.75, 1.5) -- (-3.75, 2);
+  \draw[color=gray]
+    (-2.8, 2) -- (-2.8, 1.5) -- (-2.7, 1.5) -- (-2.7, 2) -- (-2.8, 2);
+  \draw (-3, 2) -- (-2.5, 2) -- (-2.5, 1.5) -- (-3, 1.5);
+  \node at (-3.375, 1) {\textsf{N}};
+  \draw (-4, 1) -- (-3.75, 1);
+  \draw (-3.75, 1.25) -- (-3, 1.25) -- (-3, 0.75) -- (-3.75, 0.75) -- (-3.75, 1.25);
+  \draw[color=gray]
+    (-2.8, 1.25) -- (-2.8, 0.75) -- (-2.7, 0.75) -- (-2.7, 1.25) -- (-2.8, 1.25);
+  \draw (-3, 1.25) -- (-2.5, 1.25) -- (-2.5, 0.75) -- (-3, 0.75);
+  \node at (-3.375, 0.25) {\textsf{Z}};
+  \draw (-4, 0.25) -- (-3.75, 0.25);
+  \draw (-3.75, 0.5) -- (-3, 0.5) -- (-3, 0) -- (-3.75, 0) -- (-3.75, 0.5);
+  \draw[color=gray]
+    (-2.8, 0.5) -- (-2.8, 0) -- (-2.7, 0) -- (-2.7, 0.5) -- (-2.8, 0.5);
+  \draw (-3, 0.5) -- (-2.5, 0.5) -- (-2.5, 0) -- (-3, 0);
+
+  \node at (-7.5, -0.75) {\textsf{IP}};
+  \draw (-7, -0.5) -- (-8, -0.5) -- (-8, -1) -- (-7, -1);
+  \draw[color=gray]
+    (-6.7, -0.5) -- (-6.7, -1) -- (-6.8, -1) -- (-6.8, -0.5) -- (-6.7, -0.5);
+  \draw[color=gray]
+    (-6.2, -0.5) -- (-6.2, -1) -- (-6.3, -1) -- (-6.3, -0.5) -- (-6.2, -0.5);
+  \draw[color=gray]
+    (-5.7, -0.5) -- (-5.7, -1) -- (-5.8, -1) -- (-5.8, -0.5) -- (-5.7, -0.5);
+  \draw[color=gray,fill=black]
+    (-5.2, -0.5) -- (-5.2, -1) -- (-5.3, -1) -- (-5.3, -0.5) -- (-5.2, -0.5);
+  \draw (-7, -0.5) -- (-6.5, -0.5) -- (-6.5, -1) -- (-7, -1) -- (-7, -0.5);
+  \draw (-6.5, -0.5) -- (-6, -0.5) -- (-6, -1) -- (-6.5, -1);
+  \draw (-6, -0.5) -- (-5.5, -0.5) -- (-5.5, -1) -- (-6, -1);
+  \draw (-5.5, -0.5) -- (-5, -0.5) -- (-5, -1) -- (-5.5, -1);
+
+\end{diagram}
+
+Notice how the register $R1$ contains the number two, and the instruction pointer \textsf{IP} now contains $0001$.
+
+Next, the CPU repeats the same process: it loads an instruction from memory, and executes it. In this case, our CPU follows the instruction pointer \textsf{IP} to address $0001$ for the next instruction, where it sees $01011110$, which tells it to take the value stored in memory at address $0111$, and then put that value in register $R2$. So, our CPU does just that, then it increments the instruction pointer \textsf{IP} to $0010$. Our computer then looks like this:
+
+\begin{diagram}
+
+  % The Memory
+
+  \draw (-1.6, -0.1) -- (-1.6, 4.1) -- (4.1, 4.1) -- (4.1, -0.1) -- (-1.6, -0.1);
+  \draw[fill=black]
+    (0.25, -0.1) -- (2.75, -0.1) -- (2.75, -0.7) -- (0.25, -0.7) -- (0.25, -0.1);
+  \node[color=white] at (1.5, -0.4) {\textsf{Memory}};
+
+  \node at (-0.75, 3.75) {\textsf{0000}};
+  \draw (0, 3.5) -- (-1.5, 3.5) -- (-1.5, 4) -- (0, 4);
+  \draw[color=gray] (0.2, 3.5) -- (0.2, 4) -- (0.3, 4) -- (0.3, 3.5) -- (0.2, 3.5);
+  \draw[color=gray,fill=black] (0.7, 3.5) -- (0.7, 4) -- (0.8, 4) -- (0.8, 3.5) -- (0.7, 3.5);
+  \draw[color=gray] (1.2, 3.5) -- (1.2, 4) -- (1.3, 4) -- (1.3, 3.5) -- (1.2, 3.5);
+  \draw[color=gray,fill=black] (1.7, 3.5) -- (1.7, 4) -- (1.8, 4) -- (1.8, 3.5) -- (1.7, 3.5);
+  \draw[color=gray,fill=black] (2.2, 3.5) -- (2.2, 4) -- (2.3, 4) -- (2.3, 3.5) -- (2.2, 3.5);
+  \draw[color=gray] (2.7, 3.5) -- (2.7, 4) -- (2.8, 4) -- (2.8, 3.5) -- (2.7, 3.5);
+  \draw[color=gray] (3.2, 3.5) -- (3.2, 4) -- (3.3, 4) -- (3.3, 3.5) -- (3.2, 3.5);
+  \draw[color=gray,fill=black] (3.7, 3.5) -- (3.7, 4) -- (3.8, 4) -- (3.8, 3.5) -- (3.7, 3.5);
+  \draw (0, 3.5) -- (0.5, 3.5) -- (0.5, 4) -- (0, 4) -- (0, 3.5);
+  \draw (0.5, 3.5) -- (1, 3.5) -- (1, 4) -- (0.5, 4);
+  \draw (1, 3.5) -- (1.5, 3.5) -- (1.5, 4) -- (1, 4);
+  \draw (1.5, 3.5) -- (2, 3.5) -- (2, 4) -- (1.5, 4);
+  \draw (2, 3.5) -- (2.5, 3.5) -- (2.5, 4) -- (2, 4);
+  \draw (2.5, 3.5) -- (3, 3.5) -- (3, 4) -- (2.5, 4);
+  \draw (3, 3.5) -- (3.5, 3.5) -- (3.5, 4) -- (3, 4);
+  \draw (3.5, 3.5) -- (4, 3.5) -- (4, 4) -- (3.5, 4);
+  
+  \node at (-0.75, 3.25) {\textsf{0001}};
+  \draw (0, 3) -- (-1.5, 3) -- (-1.5, 3.5) -- (0, 3.5);
+  \draw[color=gray] (0.2, 3) -- (0.2, 3.5) -- (0.3, 3.5) -- (0.3, 3) -- (0.2, 3);
+  \draw[color=gray,fill=black] (0.7, 3) -- (0.7, 3.5) -- (0.8, 3.5) -- (0.8, 3) -- (0.7, 3);
+  \draw[color=gray] (1.2, 3) -- (1.2, 3.5) -- (1.3, 3.5) -- (1.3, 3) -- (1.2, 3);
+  \draw[color=gray,fill=black] (1.7, 3) -- (1.7, 3.5) -- (1.8, 3.5) -- (1.8, 3) -- (1.7, 3);
+  \draw[color=gray,fill=black] (2.2, 3) -- (2.2, 3.5) -- (2.3, 3.5) -- (2.3, 3) -- (2.2, 3);
+  \draw[color=gray,fill=black] (2.7, 3) -- (2.7, 3.5) -- (2.8, 3.5) -- (2.8, 3) -- (2.7, 3);
+  \draw[color=gray,fill=black] (3.2, 3) -- (3.2, 3.5) -- (3.3, 3.5) -- (3.3, 3) -- (3.2, 3);
+  \draw[color=gray] (3.7, 3) -- (3.7, 3.5) -- (3.8, 3.5) -- (3.8, 3) -- (3.7, 3);
+  \draw (0, 3) -- (0.5, 3) -- (0.5, 3.5) -- (0, 3.5) -- (0, 3);
+  \draw (0.5, 3) -- (1, 3) -- (1, 3.5) -- (0.5, 3.5);
+  \draw (1, 3) -- (1.5, 3) -- (1.5, 3.5) -- (1, 3.5);
+  \draw (1.5, 3) -- (2, 3) -- (2, 3.5) -- (1.5, 3.5);
+  \draw (2, 3) -- (2.5, 3) -- (2.5, 3.5) -- (2, 3.5);
+  \draw (2.5, 3) -- (3, 3) -- (3, 3.5) -- (2.5, 3.5);
+  \draw (3, 3) -- (3.5, 3) -- (3.5, 3.5) -- (3, 3.5);
+  \draw (3.5, 3) -- (4, 3) -- (4, 3.5) -- (3.5, 3.5);
+
+  \node at (-0.75, 2.75) {\textsf{0010}};
+  \draw (0, 2.5) -- (-1.5, 2.5) -- (-1.5, 3) -- (0, 3);
+  \draw[color=gray] (0.2, 2.5) -- (0.2, 3) -- (0.3, 3) -- (0.3, 2.5) -- (0.2, 2.5);
+  \draw[color=gray] (0.7, 2.5) -- (0.7, 3) -- (0.8, 3) -- (0.8, 2.5) -- (0.7, 2.5);
+  \draw[color=gray] (1.2, 2.5) -- (1.2, 3) -- (1.3, 3) -- (1.3, 2.5) -- (1.2, 2.5);
+  \draw[color=gray,fill=black] (1.7, 2.5) -- (1.7, 3) -- (1.8, 3) -- (1.8, 2.5) -- (1.7, 2.5);
+  \draw[color=gray,fill=black] (2.2, 2.5) -- (2.2, 3) -- (2.3, 3) -- (2.3, 2.5) -- (2.2, 2.5);
+  \draw[color=gray] (2.7, 2.5) -- (2.7, 3) -- (2.8, 3) -- (2.8, 2.5) -- (2.7, 2.5);
+  \draw[color=gray] (3.2, 2.5) -- (3.2, 3) -- (3.3, 3) -- (3.3, 2.5) -- (3.2, 2.5);
+  \draw[color=gray] (3.7, 2.5) -- (3.7, 3) -- (3.8, 3) -- (3.8, 2.5) -- (3.7, 2.5);
+  \draw (0, 2.5) -- (0.5, 2.5) -- (0.5, 3) -- (0, 3) -- (0, 2.5);
+  \draw (0.5, 2.5) -- (1, 2.5) -- (1, 3) -- (0.5, 3);
+  \draw (1, 2.5) -- (1.5, 2.5) -- (1.5, 3) -- (1, 3);
+  \draw (1.5, 2.5) -- (2, 2.5) -- (2, 3) -- (1.5, 3);
+  \draw (2, 2.5) -- (2.5, 2.5) -- (2.5, 3) -- (2, 3);
+  \draw (2.5, 2.5) -- (3, 2.5) -- (3, 3) -- (2.5, 3);
+  \draw (3, 2.5) -- (3.5, 2.5) -- (3.5, 3) -- (3, 3);
+  \draw (3.5, 2.5) -- (4, 2.5) -- (4, 3) -- (3.5, 3);
+  
+  \node at (-0.75, 2.25) {\textsf{0011}};
+  \draw (0, 2) -- (-1.5, 2) -- (-1.5, 2.5) -- (0, 2.5);
+  \draw[color=gray] (0.2, 2) -- (0.2, 2.5) -- (0.3, 2.5) -- (0.3, 2) -- (0.2, 2);
+  \draw[color=gray] (0.7, 2) -- (0.7, 2.5) -- (0.8, 2.5) -- (0.8, 2) -- (0.7, 2);
+  \draw[color=gray] (1.2, 2) -- (1.2, 2.5) -- (1.3, 2.5) -- (1.3, 2) -- (1.2, 2);
+  \draw[color=gray] (1.7, 2) -- (1.7, 2.5) -- (1.8, 2.5) -- (1.8, 2) -- (1.7, 2);
+  \draw[color=gray] (2.2, 2) -- (2.2, 2.5) -- (2.3, 2.5) -- (2.3, 2) -- (2.2, 2);
+  \draw[color=gray] (2.7, 2) -- (2.7, 2.5) -- (2.8, 2.5) -- (2.8, 2) -- (2.7, 2);
+  \draw[color=gray] (3.2, 2) -- (3.2, 2.5) -- (3.3, 2.5) -- (3.3, 2) -- (3.2, 2);
+  \draw[color=gray] (3.7, 2) -- (3.7, 2.5) -- (3.8, 2.5) -- (3.8, 2) -- (3.7, 2);
+  \draw (0, 2) -- (0.5, 2) -- (0.5, 2.5) -- (0, 2.5) -- (0, 2);
+  \draw (0.5, 2) -- (1, 2) -- (1, 2.5) -- (0.5, 2.5);
+  \draw (1, 2) -- (1.5, 2) -- (1.5, 2.5) -- (1, 2.5);
+  \draw (1.5, 2) -- (2, 2) -- (2, 2.5) -- (1.5, 2.5);
+  \draw (2, 2) -- (2.5, 2) -- (2.5, 2.5) -- (2, 2.5);
+  \draw (2.5, 2) -- (3, 2) -- (3, 2.5) -- (2.5, 2.5);
+  \draw (3, 2) -- (3.5, 2) -- (3.5, 2.5) -- (3, 2.5);
+  \draw (3.5, 2) -- (4, 2) -- (4, 2.5) -- (3.5, 2.5);
+
+  \node at (-0.75, 1.75) {\textsf{0100}};
+  \draw (0, 1.5) -- (-1.5, 1.5) -- (-1.5, 2) -- (0, 2);
+  \draw[color=gray] (0.2, 1.5) -- (0.2, 2) -- (0.3, 2) -- (0.3, 1.5) -- (0.2, 1.5);
+  \draw[color=gray] (0.7, 1.5) -- (0.7, 2) -- (0.8, 2) -- (0.8, 1.5) -- (0.7, 1.5);
+  \draw[color=gray] (1.2, 1.5) -- (1.2, 2) -- (1.3, 2) -- (1.3, 1.5) -- (1.2, 1.5);
+  \draw[color=gray] (1.7, 1.5) -- (1.7, 2) -- (1.8, 2) -- (1.8, 1.5) -- (1.7, 1.5);
+  \draw[color=gray] (2.2, 1.5) -- (2.2, 2) -- (2.3, 2) -- (2.3, 1.5) -- (2.2, 1.5);
+  \draw[color=gray] (2.7, 1.5) -- (2.7, 2) -- (2.8, 2) -- (2.8, 1.5) -- (2.7, 1.5);
+  \draw[color=gray] (3.2, 1.5) -- (3.2, 2) -- (3.3, 2) -- (3.3, 1.5) -- (3.2, 1.5);
+  \draw[color=gray] (3.7, 1.5) -- (3.7, 2) -- (3.8, 2) -- (3.8, 1.5) -- (3.7, 1.5);
+  \draw (0, 1.5) -- (0.5, 1.5) -- (0.5, 2) -- (0, 2) -- (0, 1.5);
+  \draw (0.5, 1.5) -- (1, 1.5) -- (1, 2) -- (0.5, 2);
+  \draw (1, 1.5) -- (1.5, 1.5) -- (1.5, 2) -- (1, 2);
+  \draw (1.5, 1.5) -- (2, 1.5) -- (2, 2) -- (1.5, 2);
+  \draw (2, 1.5) -- (2.5, 1.5) -- (2.5, 2) -- (2, 2);
+  \draw (2.5, 1.5) -- (3, 1.5) -- (3, 2) -- (2.5, 2);
+  \draw (3, 1.5) -- (3.5, 1.5) -- (3.5, 2) -- (3, 2);
+  \draw (3.5, 1.5) -- (4, 1.5) -- (4, 2) -- (3.5, 2);
+  
+  \node at (-0.75, 1.25) {\textsf{0101}};
+  \draw (0, 1) -- (-1.5, 1) -- (-1.5, 1.5) -- (0, 1.5);
+  \draw[color=gray] (0.2, 1) -- (0.2, 1.5) -- (0.3, 1.5) -- (0.3, 1) -- (0.2, 1);
+  \draw[color=gray] (0.7, 1) -- (0.7, 1.5) -- (0.8, 1.5) -- (0.8, 1) -- (0.7, 1);
+  \draw[color=gray] (1.2, 1) -- (1.2, 1.5) -- (1.3, 1.5) -- (1.3, 1) -- (1.2, 1);
+  \draw[color=gray] (1.7, 1) -- (1.7, 1.5) -- (1.8, 1.5) -- (1.8, 1) -- (1.7, 1);
+  \draw[color=gray] (2.2, 1) -- (2.2, 1.5) -- (2.3, 1.5) -- (2.3, 1) -- (2.2, 1);
+  \draw[color=gray] (2.7, 1) -- (2.7, 1.5) -- (2.8, 1.5) -- (2.8, 1) -- (2.7, 1);
+  \draw[color=gray] (3.2, 1) -- (3.2, 1.5) -- (3.3, 1.5) -- (3.3, 1) -- (3.2, 1);
+  \draw[color=gray] (3.7, 1) -- (3.7, 1.5) -- (3.8, 1.5) -- (3.8, 1) -- (3.7, 1);
+  \draw (0, 1) -- (0.5, 1) -- (0.5, 1.5) -- (0, 1.5) -- (0, 1);
+  \draw (0.5, 1) -- (1, 1) -- (1, 1.5) -- (0.5, 1.5);
+  \draw (1, 1) -- (1.5, 1) -- (1.5, 1.5) -- (1, 1.5);
+  \draw (1.5, 1) -- (2, 1) -- (2, 1.5) -- (1.5, 1.5);
+  \draw (2, 1) -- (2.5, 1) -- (2.5, 1.5) -- (2, 1.5);
+  \draw (2.5, 1) -- (3, 1) -- (3, 1.5) -- (2.5, 1.5);
+  \draw (3, 1) -- (3.5, 1) -- (3.5, 1.5) -- (3, 1.5);
+  \draw (3.5, 1) -- (4, 1) -- (4, 1.5) -- (3.5, 1.5);
+
+  \node at (-0.75, 0.75) {\textsf{0110}};
+  \draw (0, 0.5) -- (-1.5, 0.5) -- (-1.5, 1) -- (0, 1);
+  \draw[color=gray] (0.2, 0.5) -- (0.2, 1) -- (0.3, 1) -- (0.3, 0.5) -- (0.2, 0.5);
+  \draw[color=gray] (0.7, 0.5) -- (0.7, 1) -- (0.8, 1) -- (0.8, 0.5) -- (0.7, 0.5);
+  \draw[color=gray] (1.2, 0.5) -- (1.2, 1) -- (1.3, 1) -- (1.3, 0.5) -- (1.2, 0.5);
+  \draw[color=gray] (1.7, 0.5) -- (1.7, 1) -- (1.8, 1) -- (1.8, 0.5) -- (1.7, 0.5);
+  \draw[color=gray] (2.2, 0.5) -- (2.2, 1) -- (2.3, 1) -- (2.3, 0.5) -- (2.2, 0.5);
+  \draw[color=gray] (2.7, 0.5) -- (2.7, 1) -- (2.8, 1) -- (2.8, 0.5) -- (2.7, 0.5);
+  \draw[color=gray,fill=black] (3.2, 0.5) -- (3.2, 1) -- (3.3, 1) -- (3.3, 0.5) -- (3.2, 0.5);
+  \draw[color=gray] (3.7, 0.5) -- (3.7, 1) -- (3.8, 1) -- (3.8, 0.5) -- (3.7, 0.5);
+  \draw (0, 0.5) -- (0.5, 0.5) -- (0.5, 1) -- (0, 1) -- (0, 0.5);
+  \draw (0.5, 0.5) -- (1, 0.5) -- (1, 1) -- (0.5, 1);
+  \draw (1, 0.5) -- (1.5, 0.5) -- (1.5, 1) -- (1, 1);
+  \draw (1.5, 0.5) -- (2, 0.5) -- (2, 1) -- (1.5, 1);
+  \draw (2, 0.5) -- (2.5, 0.5) -- (2.5, 1) -- (2, 1);
+  \draw (2.5, 0.5) -- (3, 0.5) -- (3, 1) -- (2.5, 1);
+  \draw (3, 0.5) -- (3.5, 0.5) -- (3.5, 1) -- (3, 1);
+  \draw (3.5, 0.5) -- (4, 0.5) -- (4, 1) -- (3.5, 1);
+  
+  \node at (-0.75, 0.25) {\textsf{0111}};
+  \draw (0, 0) -- (-1.5, 0) -- (-1.5, 0.5) -- (0, 0.5);
+  \draw[color=gray] (0.2, 0) -- (0.2, 0.5) -- (0.3, 0.5) -- (0.3, 0) -- (0.2, 0);
+  \draw[color=gray] (0.7, 0) -- (0.7, 0.5) -- (0.8, 0.5) -- (0.8, 0) -- (0.7, 0);
+  \draw[color=gray] (1.2, 0) -- (1.2, 0.5) -- (1.3, 0.5) -- (1.3, 0) -- (1.2, 0);
+  \draw[color=gray] (1.7, 0) -- (1.7, 0.5) -- (1.8, 0.5) -- (1.8, 0) -- (1.7, 0);
+  \draw[color=gray] (2.2, 0) -- (2.2, 0.5) -- (2.3, 0.5) -- (2.3, 0) -- (2.2, 0);
+  \draw[color=gray,fill=black] (2.7, 0) -- (2.7, 0.5) -- (2.8, 0.5) -- (2.8, 0) -- (2.7, 0);
+  \draw[color=gray] (3.2, 0) -- (3.2, 0.5) -- (3.3, 0.5) -- (3.3, 0) -- (3.2, 0);
+  \draw[color=gray] (3.7, 0) -- (3.7, 0.5) -- (3.8, 0.5) -- (3.8, 0) -- (3.7, 0);
+  \draw (0, 0) -- (0.5, 0) -- (0.5, 0.5) -- (0, 0.5) -- (0, 0);
+  \draw (0.5, 0) -- (1, 0) -- (1, 0.5) -- (0.5, 0.5);
+  \draw (1, 0) -- (1.5, 0) -- (1.5, 0.5) -- (1, 0.5);
+  \draw (1.5, 0) -- (2, 0) -- (2, 0.5) -- (1.5, 0.5);
+  \draw (2, 0) -- (2.5, 0) -- (2.5, 0.5) -- (2, 0.5);
+  \draw (2.5, 0) -- (3, 0) -- (3, 0.5) -- (2.5, 0.5);
+  \draw (3, 0) -- (3.5, 0) -- (3.5, 0.5) -- (3, 0.5);
+  \draw (3.5, 0) -- (4, 0) -- (4, 0.5) -- (3.5, 0.5);
+
+  % The CPU
+
+  \draw (-8.1, -1.1) -- (-8.1, 4.1) -- (-1.65, 4.1) -- (-1.65, -1.1) -- (-8.1, -1.1);
+  \draw[fill=black]
+    (-5.8, -1.1) -- (-4.2, -1.1) -- (-4.2, -1.7) -- (-5.8, -1.7) -- (-5.8, -1.1);
+  \node[color=white] at (-5, -1.4) {\textsf{CPU}};
+
+  \node at (-7.5, 3.75) {\textsf{R0}};
+  \draw (-7, 3.5) -- (-8, 3.5) -- (-8, 4) -- (-7, 4);
+  \draw[color=gray]
+    (-6.7, 3.5) -- (-6.7, 4) -- (-6.8, 4) -- (-6.8, 3.5) -- (-6.7, 3.5);
+  \draw[color=gray]
+    (-6.2, 3.5) -- (-6.2, 4) -- (-6.3, 4) -- (-6.3, 3.5) -- (-6.2, 3.5);
+  \draw[color=gray]
+    (-5.7, 3.5) -- (-5.7, 4) -- (-5.8, 4) -- (-5.8, 3.5) -- (-5.7, 3.5);
+  \draw[color=gray]
+    (-5.2, 3.5) -- (-5.2, 4) -- (-5.3, 4) -- (-5.3, 3.5) -- (-5.2, 3.5);
+  \draw (-7, 3.5) -- (-6.5, 3.5) -- (-6.5, 4) -- (-7, 4) -- (-7, 3.5);
+  \draw (-6.5, 3.5) -- (-6, 3.5) -- (-6, 4) -- (-6.5, 4);
+  \draw (-6, 3.5) -- (-5.5, 3.5) -- (-5.5, 4) -- (-6, 4);
+  \draw (-5.5, 3.5) -- (-5, 3.5) -- (-5, 4) -- (-5.5, 4);
+
+  \node at (-4.25, 3.75) {\textsf{R1}};
+  \draw (-3.75, 3.5) -- (-4.75, 3.5) -- (-4.75, 4) -- (-3.75, 4);
+  \draw[color=gray]
+    (-3.45, 3.5) -- (-3.45, 4) -- (-3.55, 4) -- (-3.55, 3.5) -- (-3.45, 3.5);
+  \draw[color=gray]
+    (-2.95, 3.5) -- (-2.95, 4) -- (-3.05, 4) -- (-3.05, 3.5) -- (-2.95, 3.5);
+  \draw[color=gray,fill=black]
+    (-2.45, 3.5) -- (-2.45, 4) -- (-2.55, 4) -- (-2.55, 3.5) -- (-2.45, 3.5);
+  \draw[color=gray]
+    (-1.95, 3.5) -- (-1.95, 4) -- (-2.05, 4) -- (-2.05, 3.5) -- (-1.95, 3.5);
+  \draw (-3.75, 3.5) -- (-3.25, 3.5) -- (-3.25, 4) -- (-3.75, 4) -- (-3.75, 3.5);
+  \draw (-3.25, 3.5) -- (-2.75, 3.5) -- (-2.75, 4) -- (-3.25, 4);
+  \draw (-2.75, 3.5) -- (-2.25, 3.5) -- (-2.25, 4) -- (-2.75, 4);
+  \draw (-2.25, 3.5) -- (-1.75, 3.5) -- (-1.75, 4) -- (-2.25, 4);
+
+  \node at (-7.5, 2.75) {\textsf{R2}};
+  \draw (-7, 2.5) -- (-8, 2.5) -- (-8, 3) -- (-7, 3);
+  \draw[color=gray]
+    (-6.7, 2.5) -- (-6.7, 3) -- (-6.8, 3) -- (-6.8, 2.5) -- (-6.7, 2.5);
+  \draw[color=gray,fill=black]
+    (-6.2, 2.5) -- (-6.2, 3) -- (-6.3, 3) -- (-6.3, 2.5) -- (-6.2, 2.5);
+  \draw[color=gray]
+    (-5.7, 2.5) -- (-5.7, 3) -- (-5.8, 3) -- (-5.8, 2.5) -- (-5.7, 2.5);
+  \draw[color=gray]
+    (-5.2, 2.5) -- (-5.2, 3) -- (-5.3, 3) -- (-5.3, 2.5) -- (-5.2, 2.5);
+  \draw (-7, 2.5) -- (-6.5, 2.5) -- (-6.5, 3) -- (-7, 3) -- (-7, 2.5);
+  \draw (-6.5, 2.5) -- (-6, 2.5) -- (-6, 3) -- (-6.5, 3);
+  \draw (-6, 2.5) -- (-5.5, 2.5) -- (-5.5, 3) -- (-6, 3);
+  \draw (-5.5, 2.5) -- (-5, 2.5) -- (-5, 3) -- (-5.5, 3);
+
+  \node at (-4.25, 2.75) {\textsf{R3}};
+  \draw (-3.75, 2.5) -- (-4.75, 2.5) -- (-4.75, 3) -- (-3.75, 3);
+  \draw[color=gray]
+    (-3.45, 2.5) -- (-3.45, 3) -- (-3.55, 3) -- (-3.55, 2.5) -- (-3.45, 2.5);
+  \draw[color=gray]
+    (-2.95, 2.5) -- (-2.95, 3) -- (-3.05, 3) -- (-3.05, 2.5) -- (-2.95, 2.5);
+  \draw[color=gray]
+    (-2.45, 2.5) -- (-2.45, 3) -- (-2.55, 3) -- (-2.55, 2.5) -- (-2.45, 2.5);
+  \draw[color=gray]
+    (-1.95, 2.5) -- (-1.95, 3) -- (-2.05, 3) -- (-2.05, 2.5) -- (-1.95, 2.5);
+  \draw (-3.75, 2.5) -- (-3.25, 2.5) -- (-3.25, 3) -- (-3.75, 3) -- (-3.75, 2.5);
+  \draw (-3.25, 2.5) -- (-2.75, 2.5) -- (-2.75, 3) -- (-3.25, 3);
+  \draw (-2.75, 2.5) -- (-2.25, 2.5) -- (-2.25, 3) -- (-2.75, 3);
+  \draw (-2.25, 2.5) -- (-1.75, 2.5) -- (-1.75, 3) -- (-2.25, 3);
+
+  \node at (-6, 1) {\textsf{ALU}};
+  \draw (-8, 0) -- (-4, 0) -- (-4, 2) -- (-8, 2) -- (-8, 0);
+  \node at (-3.375, 1.75) {\textsf{O}};
+  \draw (-4, 1.75) -- (-3.75, 1.75);
+  \draw (-3.75, 2) -- (-3, 2) -- (-3, 1.5) -- (-3.75, 1.5) -- (-3.75, 2);
+  \draw[color=gray]
+    (-2.8, 2) -- (-2.8, 1.5) -- (-2.7, 1.5) -- (-2.7, 2) -- (-2.8, 2);
+  \draw (-3, 2) -- (-2.5, 2) -- (-2.5, 1.5) -- (-3, 1.5);
+  \node at (-3.375, 1) {\textsf{N}};
+  \draw (-4, 1) -- (-3.75, 1);
+  \draw (-3.75, 1.25) -- (-3, 1.25) -- (-3, 0.75) -- (-3.75, 0.75) -- (-3.75, 1.25);
+  \draw[color=gray]
+    (-2.8, 1.25) -- (-2.8, 0.75) -- (-2.7, 0.75) -- (-2.7, 1.25) -- (-2.8, 1.25);
+  \draw (-3, 1.25) -- (-2.5, 1.25) -- (-2.5, 0.75) -- (-3, 0.75);
+  \node at (-3.375, 0.25) {\textsf{Z}};
+  \draw (-4, 0.25) -- (-3.75, 0.25);
+  \draw (-3.75, 0.5) -- (-3, 0.5) -- (-3, 0) -- (-3.75, 0) -- (-3.75, 0.5);
+  \draw[color=gray]
+    (-2.8, 0.5) -- (-2.8, 0) -- (-2.7, 0) -- (-2.7, 0.5) -- (-2.8, 0.5);
+  \draw (-3, 0.5) -- (-2.5, 0.5) -- (-2.5, 0) -- (-3, 0);
+
+  \node at (-7.5, -0.75) {\textsf{IP}};
+  \draw (-7, -0.5) -- (-8, -0.5) -- (-8, -1) -- (-7, -1);
+  \draw[color=gray]
+    (-6.7, -0.5) -- (-6.7, -1) -- (-6.8, -1) -- (-6.8, -0.5) -- (-6.7, -0.5);
+  \draw[color=gray]
+    (-6.2, -0.5) -- (-6.2, -1) -- (-6.3, -1) -- (-6.3, -0.5) -- (-6.2, -0.5);
+  \draw[color=gray,fill=black]
+    (-5.7, -0.5) -- (-5.7, -1) -- (-5.8, -1) -- (-5.8, -0.5) -- (-5.7, -0.5);
+  \draw[color=gray]
+    (-5.2, -0.5) -- (-5.2, -1) -- (-5.3, -1) -- (-5.3, -0.5) -- (-5.2, -0.5);
+  \draw (-7, -0.5) -- (-6.5, -0.5) -- (-6.5, -1) -- (-7, -1) -- (-7, -0.5);
+  \draw (-6.5, -0.5) -- (-6, -0.5) -- (-6, -1) -- (-6.5, -1);
+  \draw (-6, -0.5) -- (-5.5, -0.5) -- (-5.5, -1) -- (-6, -1);
+  \draw (-5.5, -0.5) -- (-5, -0.5) -- (-5, -1) -- (-5.5, -1);
+
+\end{diagram}
+
+Notice that $R2$ now contains the number four (in binary $0100$), and the instruction pointer \textsf{IP} contains $0010$. 
+
+Next, our computer repeats the same procedure again: it follows the instruction pointer \textsf{IP} to memory address $0010$, where it finds the instruction $00011000$, which tells it to add the values in $R1$ and $R2$ and put the result in $R0$. So, our computer does just that: it takes the values from $R1$ and $R2$ (which are two and four respectively), and it feeds them to the ALU to add them. The ALU adds them, and it spits out the number six (in binary: $0110$). No ALU flags needed to be turned on, since no overflow occurred, and the result is not negative, nor is it zero. The CPU then puts the number six into $R0$, and it increments the instruction pointer to $0011$. Our computer now looks like this:
+
+\begin{diagram}
+
+  % The Memory
+
+  \draw (-1.6, -0.1) -- (-1.6, 4.1) -- (4.1, 4.1) -- (4.1, -0.1) -- (-1.6, -0.1);
+  \draw[fill=black]
+    (0.25, -0.1) -- (2.75, -0.1) -- (2.75, -0.7) -- (0.25, -0.7) -- (0.25, -0.1);
+  \node[color=white] at (1.5, -0.4) {\textsf{Memory}};
+
+  \node at (-0.75, 3.75) {\textsf{0000}};
+  \draw (0, 3.5) -- (-1.5, 3.5) -- (-1.5, 4) -- (0, 4);
+  \draw[color=gray] (0.2, 3.5) -- (0.2, 4) -- (0.3, 4) -- (0.3, 3.5) -- (0.2, 3.5);
+  \draw[color=gray,fill=black] (0.7, 3.5) -- (0.7, 4) -- (0.8, 4) -- (0.8, 3.5) -- (0.7, 3.5);
+  \draw[color=gray] (1.2, 3.5) -- (1.2, 4) -- (1.3, 4) -- (1.3, 3.5) -- (1.2, 3.5);
+  \draw[color=gray,fill=black] (1.7, 3.5) -- (1.7, 4) -- (1.8, 4) -- (1.8, 3.5) -- (1.7, 3.5);
+  \draw[color=gray,fill=black] (2.2, 3.5) -- (2.2, 4) -- (2.3, 4) -- (2.3, 3.5) -- (2.2, 3.5);
+  \draw[color=gray] (2.7, 3.5) -- (2.7, 4) -- (2.8, 4) -- (2.8, 3.5) -- (2.7, 3.5);
+  \draw[color=gray] (3.2, 3.5) -- (3.2, 4) -- (3.3, 4) -- (3.3, 3.5) -- (3.2, 3.5);
+  \draw[color=gray,fill=black] (3.7, 3.5) -- (3.7, 4) -- (3.8, 4) -- (3.8, 3.5) -- (3.7, 3.5);
+  \draw (0, 3.5) -- (0.5, 3.5) -- (0.5, 4) -- (0, 4) -- (0, 3.5);
+  \draw (0.5, 3.5) -- (1, 3.5) -- (1, 4) -- (0.5, 4);
+  \draw (1, 3.5) -- (1.5, 3.5) -- (1.5, 4) -- (1, 4);
+  \draw (1.5, 3.5) -- (2, 3.5) -- (2, 4) -- (1.5, 4);
+  \draw (2, 3.5) -- (2.5, 3.5) -- (2.5, 4) -- (2, 4);
+  \draw (2.5, 3.5) -- (3, 3.5) -- (3, 4) -- (2.5, 4);
+  \draw (3, 3.5) -- (3.5, 3.5) -- (3.5, 4) -- (3, 4);
+  \draw (3.5, 3.5) -- (4, 3.5) -- (4, 4) -- (3.5, 4);
+  
+  \node at (-0.75, 3.25) {\textsf{0001}};
+  \draw (0, 3) -- (-1.5, 3) -- (-1.5, 3.5) -- (0, 3.5);
+  \draw[color=gray] (0.2, 3) -- (0.2, 3.5) -- (0.3, 3.5) -- (0.3, 3) -- (0.2, 3);
+  \draw[color=gray,fill=black] (0.7, 3) -- (0.7, 3.5) -- (0.8, 3.5) -- (0.8, 3) -- (0.7, 3);
+  \draw[color=gray] (1.2, 3) -- (1.2, 3.5) -- (1.3, 3.5) -- (1.3, 3) -- (1.2, 3);
+  \draw[color=gray,fill=black] (1.7, 3) -- (1.7, 3.5) -- (1.8, 3.5) -- (1.8, 3) -- (1.7, 3);
+  \draw[color=gray,fill=black] (2.2, 3) -- (2.2, 3.5) -- (2.3, 3.5) -- (2.3, 3) -- (2.2, 3);
+  \draw[color=gray,fill=black] (2.7, 3) -- (2.7, 3.5) -- (2.8, 3.5) -- (2.8, 3) -- (2.7, 3);
+  \draw[color=gray,fill=black] (3.2, 3) -- (3.2, 3.5) -- (3.3, 3.5) -- (3.3, 3) -- (3.2, 3);
+  \draw[color=gray] (3.7, 3) -- (3.7, 3.5) -- (3.8, 3.5) -- (3.8, 3) -- (3.7, 3);
+  \draw (0, 3) -- (0.5, 3) -- (0.5, 3.5) -- (0, 3.5) -- (0, 3);
+  \draw (0.5, 3) -- (1, 3) -- (1, 3.5) -- (0.5, 3.5);
+  \draw (1, 3) -- (1.5, 3) -- (1.5, 3.5) -- (1, 3.5);
+  \draw (1.5, 3) -- (2, 3) -- (2, 3.5) -- (1.5, 3.5);
+  \draw (2, 3) -- (2.5, 3) -- (2.5, 3.5) -- (2, 3.5);
+  \draw (2.5, 3) -- (3, 3) -- (3, 3.5) -- (2.5, 3.5);
+  \draw (3, 3) -- (3.5, 3) -- (3.5, 3.5) -- (3, 3.5);
+  \draw (3.5, 3) -- (4, 3) -- (4, 3.5) -- (3.5, 3.5);
+
+  \node at (-0.75, 2.75) {\textsf{0010}};
+  \draw (0, 2.5) -- (-1.5, 2.5) -- (-1.5, 3) -- (0, 3);
+  \draw[color=gray] (0.2, 2.5) -- (0.2, 3) -- (0.3, 3) -- (0.3, 2.5) -- (0.2, 2.5);
+  \draw[color=gray] (0.7, 2.5) -- (0.7, 3) -- (0.8, 3) -- (0.8, 2.5) -- (0.7, 2.5);
+  \draw[color=gray] (1.2, 2.5) -- (1.2, 3) -- (1.3, 3) -- (1.3, 2.5) -- (1.2, 2.5);
+  \draw[color=gray,fill=black] (1.7, 2.5) -- (1.7, 3) -- (1.8, 3) -- (1.8, 2.5) -- (1.7, 2.5);
+  \draw[color=gray,fill=black] (2.2, 2.5) -- (2.2, 3) -- (2.3, 3) -- (2.3, 2.5) -- (2.2, 2.5);
+  \draw[color=gray] (2.7, 2.5) -- (2.7, 3) -- (2.8, 3) -- (2.8, 2.5) -- (2.7, 2.5);
+  \draw[color=gray] (3.2, 2.5) -- (3.2, 3) -- (3.3, 3) -- (3.3, 2.5) -- (3.2, 2.5);
+  \draw[color=gray] (3.7, 2.5) -- (3.7, 3) -- (3.8, 3) -- (3.8, 2.5) -- (3.7, 2.5);
+  \draw (0, 2.5) -- (0.5, 2.5) -- (0.5, 3) -- (0, 3) -- (0, 2.5);
+  \draw (0.5, 2.5) -- (1, 2.5) -- (1, 3) -- (0.5, 3);
+  \draw (1, 2.5) -- (1.5, 2.5) -- (1.5, 3) -- (1, 3);
+  \draw (1.5, 2.5) -- (2, 2.5) -- (2, 3) -- (1.5, 3);
+  \draw (2, 2.5) -- (2.5, 2.5) -- (2.5, 3) -- (2, 3);
+  \draw (2.5, 2.5) -- (3, 2.5) -- (3, 3) -- (2.5, 3);
+  \draw (3, 2.5) -- (3.5, 2.5) -- (3.5, 3) -- (3, 3);
+  \draw (3.5, 2.5) -- (4, 2.5) -- (4, 3) -- (3.5, 3);
+  
+  \node at (-0.75, 2.25) {\textsf{0011}};
+  \draw (0, 2) -- (-1.5, 2) -- (-1.5, 2.5) -- (0, 2.5);
+  \draw[color=gray] (0.2, 2) -- (0.2, 2.5) -- (0.3, 2.5) -- (0.3, 2) -- (0.2, 2);
+  \draw[color=gray] (0.7, 2) -- (0.7, 2.5) -- (0.8, 2.5) -- (0.8, 2) -- (0.7, 2);
+  \draw[color=gray] (1.2, 2) -- (1.2, 2.5) -- (1.3, 2.5) -- (1.3, 2) -- (1.2, 2);
+  \draw[color=gray] (1.7, 2) -- (1.7, 2.5) -- (1.8, 2.5) -- (1.8, 2) -- (1.7, 2);
+  \draw[color=gray] (2.2, 2) -- (2.2, 2.5) -- (2.3, 2.5) -- (2.3, 2) -- (2.2, 2);
+  \draw[color=gray] (2.7, 2) -- (2.7, 2.5) -- (2.8, 2.5) -- (2.8, 2) -- (2.7, 2);
+  \draw[color=gray] (3.2, 2) -- (3.2, 2.5) -- (3.3, 2.5) -- (3.3, 2) -- (3.2, 2);
+  \draw[color=gray] (3.7, 2) -- (3.7, 2.5) -- (3.8, 2.5) -- (3.8, 2) -- (3.7, 2);
+  \draw (0, 2) -- (0.5, 2) -- (0.5, 2.5) -- (0, 2.5) -- (0, 2);
+  \draw (0.5, 2) -- (1, 2) -- (1, 2.5) -- (0.5, 2.5);
+  \draw (1, 2) -- (1.5, 2) -- (1.5, 2.5) -- (1, 2.5);
+  \draw (1.5, 2) -- (2, 2) -- (2, 2.5) -- (1.5, 2.5);
+  \draw (2, 2) -- (2.5, 2) -- (2.5, 2.5) -- (2, 2.5);
+  \draw (2.5, 2) -- (3, 2) -- (3, 2.5) -- (2.5, 2.5);
+  \draw (3, 2) -- (3.5, 2) -- (3.5, 2.5) -- (3, 2.5);
+  \draw (3.5, 2) -- (4, 2) -- (4, 2.5) -- (3.5, 2.5);
+
+  \node at (-0.75, 1.75) {\textsf{0100}};
+  \draw (0, 1.5) -- (-1.5, 1.5) -- (-1.5, 2) -- (0, 2);
+  \draw[color=gray] (0.2, 1.5) -- (0.2, 2) -- (0.3, 2) -- (0.3, 1.5) -- (0.2, 1.5);
+  \draw[color=gray] (0.7, 1.5) -- (0.7, 2) -- (0.8, 2) -- (0.8, 1.5) -- (0.7, 1.5);
+  \draw[color=gray] (1.2, 1.5) -- (1.2, 2) -- (1.3, 2) -- (1.3, 1.5) -- (1.2, 1.5);
+  \draw[color=gray] (1.7, 1.5) -- (1.7, 2) -- (1.8, 2) -- (1.8, 1.5) -- (1.7, 1.5);
+  \draw[color=gray] (2.2, 1.5) -- (2.2, 2) -- (2.3, 2) -- (2.3, 1.5) -- (2.2, 1.5);
+  \draw[color=gray] (2.7, 1.5) -- (2.7, 2) -- (2.8, 2) -- (2.8, 1.5) -- (2.7, 1.5);
+  \draw[color=gray] (3.2, 1.5) -- (3.2, 2) -- (3.3, 2) -- (3.3, 1.5) -- (3.2, 1.5);
+  \draw[color=gray] (3.7, 1.5) -- (3.7, 2) -- (3.8, 2) -- (3.8, 1.5) -- (3.7, 1.5);
+  \draw (0, 1.5) -- (0.5, 1.5) -- (0.5, 2) -- (0, 2) -- (0, 1.5);
+  \draw (0.5, 1.5) -- (1, 1.5) -- (1, 2) -- (0.5, 2);
+  \draw (1, 1.5) -- (1.5, 1.5) -- (1.5, 2) -- (1, 2);
+  \draw (1.5, 1.5) -- (2, 1.5) -- (2, 2) -- (1.5, 2);
+  \draw (2, 1.5) -- (2.5, 1.5) -- (2.5, 2) -- (2, 2);
+  \draw (2.5, 1.5) -- (3, 1.5) -- (3, 2) -- (2.5, 2);
+  \draw (3, 1.5) -- (3.5, 1.5) -- (3.5, 2) -- (3, 2);
+  \draw (3.5, 1.5) -- (4, 1.5) -- (4, 2) -- (3.5, 2);
+  
+  \node at (-0.75, 1.25) {\textsf{0101}};
+  \draw (0, 1) -- (-1.5, 1) -- (-1.5, 1.5) -- (0, 1.5);
+  \draw[color=gray] (0.2, 1) -- (0.2, 1.5) -- (0.3, 1.5) -- (0.3, 1) -- (0.2, 1);
+  \draw[color=gray] (0.7, 1) -- (0.7, 1.5) -- (0.8, 1.5) -- (0.8, 1) -- (0.7, 1);
+  \draw[color=gray] (1.2, 1) -- (1.2, 1.5) -- (1.3, 1.5) -- (1.3, 1) -- (1.2, 1);
+  \draw[color=gray] (1.7, 1) -- (1.7, 1.5) -- (1.8, 1.5) -- (1.8, 1) -- (1.7, 1);
+  \draw[color=gray] (2.2, 1) -- (2.2, 1.5) -- (2.3, 1.5) -- (2.3, 1) -- (2.2, 1);
+  \draw[color=gray] (2.7, 1) -- (2.7, 1.5) -- (2.8, 1.5) -- (2.8, 1) -- (2.7, 1);
+  \draw[color=gray] (3.2, 1) -- (3.2, 1.5) -- (3.3, 1.5) -- (3.3, 1) -- (3.2, 1);
+  \draw[color=gray] (3.7, 1) -- (3.7, 1.5) -- (3.8, 1.5) -- (3.8, 1) -- (3.7, 1);
+  \draw (0, 1) -- (0.5, 1) -- (0.5, 1.5) -- (0, 1.5) -- (0, 1);
+  \draw (0.5, 1) -- (1, 1) -- (1, 1.5) -- (0.5, 1.5);
+  \draw (1, 1) -- (1.5, 1) -- (1.5, 1.5) -- (1, 1.5);
+  \draw (1.5, 1) -- (2, 1) -- (2, 1.5) -- (1.5, 1.5);
+  \draw (2, 1) -- (2.5, 1) -- (2.5, 1.5) -- (2, 1.5);
+  \draw (2.5, 1) -- (3, 1) -- (3, 1.5) -- (2.5, 1.5);
+  \draw (3, 1) -- (3.5, 1) -- (3.5, 1.5) -- (3, 1.5);
+  \draw (3.5, 1) -- (4, 1) -- (4, 1.5) -- (3.5, 1.5);
+
+  \node at (-0.75, 0.75) {\textsf{0110}};
+  \draw (0, 0.5) -- (-1.5, 0.5) -- (-1.5, 1) -- (0, 1);
+  \draw[color=gray] (0.2, 0.5) -- (0.2, 1) -- (0.3, 1) -- (0.3, 0.5) -- (0.2, 0.5);
+  \draw[color=gray] (0.7, 0.5) -- (0.7, 1) -- (0.8, 1) -- (0.8, 0.5) -- (0.7, 0.5);
+  \draw[color=gray] (1.2, 0.5) -- (1.2, 1) -- (1.3, 1) -- (1.3, 0.5) -- (1.2, 0.5);
+  \draw[color=gray] (1.7, 0.5) -- (1.7, 1) -- (1.8, 1) -- (1.8, 0.5) -- (1.7, 0.5);
+  \draw[color=gray] (2.2, 0.5) -- (2.2, 1) -- (2.3, 1) -- (2.3, 0.5) -- (2.2, 0.5);
+  \draw[color=gray] (2.7, 0.5) -- (2.7, 1) -- (2.8, 1) -- (2.8, 0.5) -- (2.7, 0.5);
+  \draw[color=gray,fill=black] (3.2, 0.5) -- (3.2, 1) -- (3.3, 1) -- (3.3, 0.5) -- (3.2, 0.5);
+  \draw[color=gray] (3.7, 0.5) -- (3.7, 1) -- (3.8, 1) -- (3.8, 0.5) -- (3.7, 0.5);
+  \draw (0, 0.5) -- (0.5, 0.5) -- (0.5, 1) -- (0, 1) -- (0, 0.5);
+  \draw (0.5, 0.5) -- (1, 0.5) -- (1, 1) -- (0.5, 1);
+  \draw (1, 0.5) -- (1.5, 0.5) -- (1.5, 1) -- (1, 1);
+  \draw (1.5, 0.5) -- (2, 0.5) -- (2, 1) -- (1.5, 1);
+  \draw (2, 0.5) -- (2.5, 0.5) -- (2.5, 1) -- (2, 1);
+  \draw (2.5, 0.5) -- (3, 0.5) -- (3, 1) -- (2.5, 1);
+  \draw (3, 0.5) -- (3.5, 0.5) -- (3.5, 1) -- (3, 1);
+  \draw (3.5, 0.5) -- (4, 0.5) -- (4, 1) -- (3.5, 1);
+  
+  \node at (-0.75, 0.25) {\textsf{0111}};
+  \draw (0, 0) -- (-1.5, 0) -- (-1.5, 0.5) -- (0, 0.5);
+  \draw[color=gray] (0.2, 0) -- (0.2, 0.5) -- (0.3, 0.5) -- (0.3, 0) -- (0.2, 0);
+  \draw[color=gray] (0.7, 0) -- (0.7, 0.5) -- (0.8, 0.5) -- (0.8, 0) -- (0.7, 0);
+  \draw[color=gray] (1.2, 0) -- (1.2, 0.5) -- (1.3, 0.5) -- (1.3, 0) -- (1.2, 0);
+  \draw[color=gray] (1.7, 0) -- (1.7, 0.5) -- (1.8, 0.5) -- (1.8, 0) -- (1.7, 0);
+  \draw[color=gray] (2.2, 0) -- (2.2, 0.5) -- (2.3, 0.5) -- (2.3, 0) -- (2.2, 0);
+  \draw[color=gray,fill=black] (2.7, 0) -- (2.7, 0.5) -- (2.8, 0.5) -- (2.8, 0) -- (2.7, 0);
+  \draw[color=gray] (3.2, 0) -- (3.2, 0.5) -- (3.3, 0.5) -- (3.3, 0) -- (3.2, 0);
+  \draw[color=gray] (3.7, 0) -- (3.7, 0.5) -- (3.8, 0.5) -- (3.8, 0) -- (3.7, 0);
+  \draw (0, 0) -- (0.5, 0) -- (0.5, 0.5) -- (0, 0.5) -- (0, 0);
+  \draw (0.5, 0) -- (1, 0) -- (1, 0.5) -- (0.5, 0.5);
+  \draw (1, 0) -- (1.5, 0) -- (1.5, 0.5) -- (1, 0.5);
+  \draw (1.5, 0) -- (2, 0) -- (2, 0.5) -- (1.5, 0.5);
+  \draw (2, 0) -- (2.5, 0) -- (2.5, 0.5) -- (2, 0.5);
+  \draw (2.5, 0) -- (3, 0) -- (3, 0.5) -- (2.5, 0.5);
+  \draw (3, 0) -- (3.5, 0) -- (3.5, 0.5) -- (3, 0.5);
+  \draw (3.5, 0) -- (4, 0) -- (4, 0.5) -- (3.5, 0.5);
+
+  % The CPU
+
+  \draw (-8.1, -1.1) -- (-8.1, 4.1) -- (-1.65, 4.1) -- (-1.65, -1.1) -- (-8.1, -1.1);
+  \draw[fill=black]
+    (-5.8, -1.1) -- (-4.2, -1.1) -- (-4.2, -1.7) -- (-5.8, -1.7) -- (-5.8, -1.1);
+  \node[color=white] at (-5, -1.4) {\textsf{CPU}};
+
+  \node at (-7.5, 3.75) {\textsf{R0}};
+  \draw (-7, 3.5) -- (-8, 3.5) -- (-8, 4) -- (-7, 4);
+  \draw[color=gray]
+    (-6.7, 3.5) -- (-6.7, 4) -- (-6.8, 4) -- (-6.8, 3.5) -- (-6.7, 3.5);
+  \draw[color=gray,fill=black]
+    (-6.2, 3.5) -- (-6.2, 4) -- (-6.3, 4) -- (-6.3, 3.5) -- (-6.2, 3.5);
+  \draw[color=gray,fill=black]
+    (-5.7, 3.5) -- (-5.7, 4) -- (-5.8, 4) -- (-5.8, 3.5) -- (-5.7, 3.5);
+  \draw[color=gray]
+    (-5.2, 3.5) -- (-5.2, 4) -- (-5.3, 4) -- (-5.3, 3.5) -- (-5.2, 3.5);
+  \draw (-7, 3.5) -- (-6.5, 3.5) -- (-6.5, 4) -- (-7, 4) -- (-7, 3.5);
+  \draw (-6.5, 3.5) -- (-6, 3.5) -- (-6, 4) -- (-6.5, 4);
+  \draw (-6, 3.5) -- (-5.5, 3.5) -- (-5.5, 4) -- (-6, 4);
+  \draw (-5.5, 3.5) -- (-5, 3.5) -- (-5, 4) -- (-5.5, 4);
+
+  \node at (-4.25, 3.75) {\textsf{R1}};
+  \draw (-3.75, 3.5) -- (-4.75, 3.5) -- (-4.75, 4) -- (-3.75, 4);
+  \draw[color=gray]
+    (-3.45, 3.5) -- (-3.45, 4) -- (-3.55, 4) -- (-3.55, 3.5) -- (-3.45, 3.5);
+  \draw[color=gray]
+    (-2.95, 3.5) -- (-2.95, 4) -- (-3.05, 4) -- (-3.05, 3.5) -- (-2.95, 3.5);
+  \draw[color=gray,fill=black]
+    (-2.45, 3.5) -- (-2.45, 4) -- (-2.55, 4) -- (-2.55, 3.5) -- (-2.45, 3.5);
+  \draw[color=gray]
+    (-1.95, 3.5) -- (-1.95, 4) -- (-2.05, 4) -- (-2.05, 3.5) -- (-1.95, 3.5);
+  \draw (-3.75, 3.5) -- (-3.25, 3.5) -- (-3.25, 4) -- (-3.75, 4) -- (-3.75, 3.5);
+  \draw (-3.25, 3.5) -- (-2.75, 3.5) -- (-2.75, 4) -- (-3.25, 4);
+  \draw (-2.75, 3.5) -- (-2.25, 3.5) -- (-2.25, 4) -- (-2.75, 4);
+  \draw (-2.25, 3.5) -- (-1.75, 3.5) -- (-1.75, 4) -- (-2.25, 4);
+
+  \node at (-7.5, 2.75) {\textsf{R2}};
+  \draw (-7, 2.5) -- (-8, 2.5) -- (-8, 3) -- (-7, 3);
+  \draw[color=gray]
+    (-6.7, 2.5) -- (-6.7, 3) -- (-6.8, 3) -- (-6.8, 2.5) -- (-6.7, 2.5);
+  \draw[color=gray,fill=black]
+    (-6.2, 2.5) -- (-6.2, 3) -- (-6.3, 3) -- (-6.3, 2.5) -- (-6.2, 2.5);
+  \draw[color=gray]
+    (-5.7, 2.5) -- (-5.7, 3) -- (-5.8, 3) -- (-5.8, 2.5) -- (-5.7, 2.5);
+  \draw[color=gray]
+    (-5.2, 2.5) -- (-5.2, 3) -- (-5.3, 3) -- (-5.3, 2.5) -- (-5.2, 2.5);
+  \draw (-7, 2.5) -- (-6.5, 2.5) -- (-6.5, 3) -- (-7, 3) -- (-7, 2.5);
+  \draw (-6.5, 2.5) -- (-6, 2.5) -- (-6, 3) -- (-6.5, 3);
+  \draw (-6, 2.5) -- (-5.5, 2.5) -- (-5.5, 3) -- (-6, 3);
+  \draw (-5.5, 2.5) -- (-5, 2.5) -- (-5, 3) -- (-5.5, 3);
+
+  \node at (-4.25, 2.75) {\textsf{R3}};
+  \draw (-3.75, 2.5) -- (-4.75, 2.5) -- (-4.75, 3) -- (-3.75, 3);
+  \draw[color=gray]
+    (-3.45, 2.5) -- (-3.45, 3) -- (-3.55, 3) -- (-3.55, 2.5) -- (-3.45, 2.5);
+  \draw[color=gray]
+    (-2.95, 2.5) -- (-2.95, 3) -- (-3.05, 3) -- (-3.05, 2.5) -- (-2.95, 2.5);
+  \draw[color=gray]
+    (-2.45, 2.5) -- (-2.45, 3) -- (-2.55, 3) -- (-2.55, 2.5) -- (-2.45, 2.5);
+  \draw[color=gray]
+    (-1.95, 2.5) -- (-1.95, 3) -- (-2.05, 3) -- (-2.05, 2.5) -- (-1.95, 2.5);
+  \draw (-3.75, 2.5) -- (-3.25, 2.5) -- (-3.25, 3) -- (-3.75, 3) -- (-3.75, 2.5);
+  \draw (-3.25, 2.5) -- (-2.75, 2.5) -- (-2.75, 3) -- (-3.25, 3);
+  \draw (-2.75, 2.5) -- (-2.25, 2.5) -- (-2.25, 3) -- (-2.75, 3);
+  \draw (-2.25, 2.5) -- (-1.75, 2.5) -- (-1.75, 3) -- (-2.25, 3);
+
+  \node at (-6, 1) {\textsf{ALU}};
+  \draw (-8, 0) -- (-4, 0) -- (-4, 2) -- (-8, 2) -- (-8, 0);
+  \node at (-3.375, 1.75) {\textsf{O}};
+  \draw (-4, 1.75) -- (-3.75, 1.75);
+  \draw (-3.75, 2) -- (-3, 2) -- (-3, 1.5) -- (-3.75, 1.5) -- (-3.75, 2);
+  \draw[color=gray]
+    (-2.8, 2) -- (-2.8, 1.5) -- (-2.7, 1.5) -- (-2.7, 2) -- (-2.8, 2);
+  \draw (-3, 2) -- (-2.5, 2) -- (-2.5, 1.5) -- (-3, 1.5);
+  \node at (-3.375, 1) {\textsf{N}};
+  \draw (-4, 1) -- (-3.75, 1);
+  \draw (-3.75, 1.25) -- (-3, 1.25) -- (-3, 0.75) -- (-3.75, 0.75) -- (-3.75, 1.25);
+  \draw[color=gray]
+    (-2.8, 1.25) -- (-2.8, 0.75) -- (-2.7, 0.75) -- (-2.7, 1.25) -- (-2.8, 1.25);
+  \draw (-3, 1.25) -- (-2.5, 1.25) -- (-2.5, 0.75) -- (-3, 0.75);
+  \node at (-3.375, 0.25) {\textsf{Z}};
+  \draw (-4, 0.25) -- (-3.75, 0.25);
+  \draw (-3.75, 0.5) -- (-3, 0.5) -- (-3, 0) -- (-3.75, 0) -- (-3.75, 0.5);
+  \draw[color=gray]
+    (-2.8, 0.5) -- (-2.8, 0) -- (-2.7, 0) -- (-2.7, 0.5) -- (-2.8, 0.5);
+  \draw (-3, 0.5) -- (-2.5, 0.5) -- (-2.5, 0) -- (-3, 0);
+
+  \node at (-7.5, -0.75) {\textsf{IP}};
+  \draw (-7, -0.5) -- (-8, -0.5) -- (-8, -1) -- (-7, -1);
+  \draw[color=gray]
+    (-6.7, -0.5) -- (-6.7, -1) -- (-6.8, -1) -- (-6.8, -0.5) -- (-6.7, -0.5);
+  \draw[color=gray]
+    (-6.2, -0.5) -- (-6.2, -1) -- (-6.3, -1) -- (-6.3, -0.5) -- (-6.2, -0.5);
+  \draw[color=gray,fill=black]
+    (-5.7, -0.5) -- (-5.7, -1) -- (-5.8, -1) -- (-5.8, -0.5) -- (-5.7, -0.5);
+  \draw[color=gray,fill=black]
+    (-5.2, -0.5) -- (-5.2, -1) -- (-5.3, -1) -- (-5.3, -0.5) -- (-5.2, -0.5);
+  \draw (-7, -0.5) -- (-6.5, -0.5) -- (-6.5, -1) -- (-7, -1) -- (-7, -0.5);
+  \draw (-6.5, -0.5) -- (-6, -0.5) -- (-6, -1) -- (-6.5, -1);
+  \draw (-6, -0.5) -- (-5.5, -0.5) -- (-5.5, -1) -- (-6, -1);
+  \draw (-5.5, -0.5) -- (-5, -0.5) -- (-5, -1) -- (-5.5, -1);
+
+\end{diagram}
+
+Notice that $R0$ contains our new sum: the number six $0110$. At this point, there are no more instructions to execute, so our CPU has finished.
+
+We have just used our computer like a little calculator. We put two numbers into memory (at addresses $0110$ and $0111$), then we ran our little program, that loads those numbers up, adds them together, and puts the result in $R0$. We could add two other numbers by putting different numbers in memory (at addresses $0110$ and $0111$) to start. 
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\newthought{In this chapter}, we looked at how our little computer executes programs. We saw that it is pre-built to understand certain kinds of instructions, which are coded as sequences of ones and zeros.
+
+To run a program, we essentially load the instructions into memory, and we put any initial data we might need into memory too. Then we tell the CPU to run the program, at which point it simply runs each instruction in our program, one instruction at a time, until it has finished executing each instruction in our program. 
+
+Everything that we see happening in modern computers does nothing different from what we have done here (although obviously there can be millions of lines of instructions for very complicated tasks). 
+
+\end{document}
