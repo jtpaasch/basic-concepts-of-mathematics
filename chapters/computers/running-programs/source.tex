@@ -1482,21 +1482,6 @@ What do these binary-coded instructions mean? Our CPU will interpret the first l
   \node at (9, 0) {$0$};
   \node at (10.5, 0) {$1$};
 
-\end{diagram}
-
-Our CPU interprets that code like so:
-
-\begin{diagram}
-
-  \node at (0, 0) {$0$};
-  \node at (1.5, 0) {$1$};
-  \node at (3, 0) {$0$};
-  \node at (4.5, 0) {$1$};
-  \node at (6, 0) {$1$};
-  \node at (7.5, 0) {$0$};  
-  \node at (9, 0) {$0$};
-  \node at (10.5, 0) {$1$};
-
   \draw (-0.25, -0.25) -- (-0.25, -0.5) -- (1.75, -0.5) -- (1.75, -0.25);
   \draw[->] (0.75, -0.5) -- (0.75, -1);
   \node at (0.75, -1.5) {``$01$'' is};
@@ -1530,21 +1515,6 @@ Which, in our more human-readable form, looks like this:
 In other words, this tells our CPU to read whatever number is stored in memory at address $0110$, and put it in the register $R1$.
 
 As for the second line of our code, our CPU will interpret it like this:
-
-\begin{diagram}
-
-  \node at (0, 0) {$0$};
-  \node at (1.5, 0) {$1$};
-  \node at (3, 0) {$0$};
-  \node at (4.5, 0) {$1$};
-  \node at (6, 0) {$1$};
-  \node at (7.5, 0) {$1$};  
-  \node at (9, 0) {$1$};
-  \node at (10.5, 0) {$0$};
-
-\end{diagram}
-
-Our CPU interprets that code like so:
 
 \begin{diagram}
 
